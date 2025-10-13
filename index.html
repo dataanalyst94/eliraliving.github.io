@@ -1,147 +1,284 @@
 <!DOCTYPE HTML>
 <!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Phantom by HTML5 UP (customized for ELIRA LIVING)
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
-	<head>
-		<title>ELIRA LIVING</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
-		<!-- Wrapper -->
-		<div id="wrapper">
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ELIRA LIVING — Travel & Home Essentials</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-			<!-- Header -->
-			<header id="header">
-				<div class="inner">
+    <!-- Basic SEO -->
+    <meta name="description" content="Curated travel organizers and custom pillow cases. Three simple products, clear quality, no fuss." />
+    <link rel="canonical" href="https://www.eliraliving.com/" />
 
-					<!-- Logo -->
-					<a href="index.html" class="logo">
-						<span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
-						<span class="title">ELIRA LIVING</span>
-					</a>
+    <!-- Social (Open Graph / Twitter) -->
+    <meta property="og:title" content="ELIRA LIVING — Travel & Home Essentials" />
+    <meta property="og:description" content="Curated travel organizers and custom pillow cases. Three simple products, clear quality, no fuss." />
+    <meta property="og:url" content="https://www.eliraliving.com/" />
+    <meta property="og:image" content="https://www.eliraliving.com/images/hero.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-					<!-- Nav -->
-					<nav>
-						<ul>
-							<li><a href="#menu">Menu</a></li>
-						</ul>
-					</nav>
+    <!-- Favicon (optional: add /images/favicon.png to your repo) -->
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
 
-				</div>
-			</header>
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-			<!-- Menu -->
-			<nav id="menu">
-				<h2>Menu</h2>
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="#products">Products</a></li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
-				<hr />
-				<h3>Language</h3>
-				<ul>
-					<li><a href="/">EN</a></li>
-					<li><a href="/fi/">FI</a></li>
-					<li><a href="/sv/">SV</a></li>
-				</ul>
-			</nav>
+    <!-- ===== UI POLISH & ANIMATIONS (overrides + effects) ===== -->
+    <style>
+      /* Motion safety */
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; }
+        html { scroll-behavior: auto; }
+      }
+      html { scroll-behavior: smooth; }
 
-			<!-- Main -->
-			<div id="main">
-				<div class="inner">
-					<header>
-						<h1>Everyday travel goods that simply work</h1>
-						<p>Curated essentials for tidy packing and cozy living. Three products, clear quality, no fuss.</p>
-						<span class="image main">
-							<img src="images/hero.jpg" alt="ELIRA LIVING hero" />
-						</span>
-					</header>
+      /* Header tightening + small shrink on scroll (CSS part) */
+      #header .logo .symbol img { height: 28px; width: auto; }
+      #header .inner { padding: 1.5rem 0 0; }
+      #header.shrink .inner { padding-top: .5rem; }
+      #header.shrink .logo .symbol img { height: 22px; }
 
-					<section id="products" class="tiles">
+      /* Hero image presence + soft rounded corners */
+      .hero-zoom { overflow: hidden; border-radius: 14px; }
+      .hero-zoom img {
+        width: 100%; height: 360px; object-fit: cover; border-radius: 14px;
+        transform: scale(1.05); opacity: 0;
+        transition: transform 1200ms cubic-bezier(.2,.6,.2,1), opacity 800ms ease;
+      }
+      .page-loaded .hero-zoom img { transform: scale(1.0); opacity: 1; }
+      @media (max-width: 768px){ .hero-zoom img { height: 220px; } }
 
-						<!-- Product 1 -->
-						<article class="style1">
-							<span class="image">
-								<img src="images/travel-hanging-bag.jpg" alt="Travel Hanging Bag" />
-							</span>
-							<a href="travel-hanging-bag.html">
-								<h2>Travel Hanging Bag</h2>
-								<div class="content">
-									<p>Compact organizer with smart compartments for clean, stress free travel.</p>
-								</div>
-							</a>
-						</article>
+      /* Typography + spacing */
+      h1 { font-size: 2.4rem; line-height: 1.15; margin: 0 0 .6rem; }
+      #main .inner > header p { font-size: 1.05rem; color: #666; margin-bottom: 1rem; }
+      #main .inner > header { margin-bottom: 1.2rem; }
 
-						<!-- Product 2 -->
-						<article class="style2">
-							<span class="image">
-								<img src="images/luggage-bag.jpg" alt="Luggage Bag" />
-							</span>
-							<a href="luggage-bag.html">
-								<h2>Luggage Bag</h2>
-								<div class="content">
-									<p>Durable, lightweight luggage designed for smooth trips and easy handling.</p>
-								</div>
-							</a>
-						</article>
+      /* Tiles: uniform images, subtle shadow, hover lift */
+      .tiles article {
+        box-shadow: 0 6px 18px rgba(0,0,0,.06);
+        transform: translateY(0) rotate(0deg);
+        transition: transform 320ms cubic-bezier(.2,.6,.2,1), box-shadow 320ms ease, filter 320ms ease;
+        border-radius: 14px;
+        will-change: transform;
+      }
+      .tiles article:hover {
+        transform: translateY(-6px) rotate(-.25deg);
+        box-shadow: 0 12px 28px rgba(0,0,0,.10);
+        filter: saturate(1.03);
+      }
+      .tiles article .image img {
+        width:100%; height:220px; object-fit:cover; border-radius: 12px;
+      }
+      .tiles article a { border-radius: 12px; }
+      .tiles article h2 { letter-spacing: .08em; }
 
-						<!-- Product 3 -->
-						<article class="style3">
-							<span class="image">
-								<img src="images/customized-pillow-case.jpg" alt="Customized Pillow Case" />
-							</span>
-							<a href="customized-pillow-case.html">
-								<h2>Customized Pillow Case</h2>
-								<div class="content">
-									<p>Personalized pillow cover with your name or design, made to order.</p>
-								</div>
-							</a>
-						</article>
+      /* Tile label bars: better contrast + slight slide */
+      .tiles article a:before {
+        transition: transform 280ms cubic-bezier(.2,.6,.2,1), opacity 280ms ease;
+        transform: translateY(6px);
+        opacity: .95;
+      }
+      .tiles article:hover a:before { transform: translateY(0); opacity: 1; }
+      .tiles article.style1 a:before { background: rgba(233,62,93,.88); }   /* pink */
+      .tiles article.style2 a:before { background: rgba(63,139,201,.88); }  /* blue */
+      .tiles article.style3 a:before { background: rgba(64,170,160,.88); }  /* teal */
 
-					</section>
-				</div>
-			</div>
+      /* Reveal-on-scroll */
+      .reveal { opacity: 0; transform: translateY(18px);
+        transition: opacity 700ms ease, transform 700ms ease; }
+      .reveal.appear { opacity: 1; transform: translateY(0); }
 
-			<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<section id="contact">
-						<h2>Get in touch</h2>
-						<p>Email: <a href="mailto:support@eliraliving.com">support@eliraliving.com</a></p>
-					</section>
+      /* Buttons micro-press */
+      .button, .actions .button, a.button.primary {
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+      .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
+      .button:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(0,0,0,.10); }
 
-					<section>
-						<h2>Follow</h2>
-						<ul class="icons">
-							<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-							<li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-					</section>
+      /* Footer lighten */
+      #footer { background: #f7f7f7; }
+      #footer .inner { padding-top: 2rem; padding-bottom: 2rem; }
+      #footer h2 { font-size: 1rem; letter-spacing: .18em; color:#444; }
+      #footer .icons a { transition: transform 180ms ease, opacity 180ms ease; }
+      #footer .icons a:hover { transform: translateY(-2px); opacity:.9; }
 
-					<ul class="copyright">
-						<li>&copy; ELIRA LIVING. All rights reserved.</li>
-						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</footer>
+      /* Prevent layout shift while images load */
+      img { aspect-ratio: auto; }
+    </style>
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-		</div>
+      <!-- Header -->
+      <header id="header">
+        <div class="inner">
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+          <!-- Logo -->
+          <a href="index.html" class="logo">
+            <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
+            <span class="title">ELIRA LIVING</span>
+          </a>
 
-	</body>
+          <!-- Nav -->
+          <nav>
+            <ul>
+              <li><a href="#menu">Menu</a></li>
+            </ul>
+          </nav>
+
+        </div>
+      </header>
+
+      <!-- Menu -->
+      <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <hr />
+        <h3>Language</h3>
+        <ul>
+          <li><a href="/">EN</a></li>
+          <li><a href="/fi/">FI</a></li>
+          <li><a href="/sv/">SV</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main -->
+      <div id="main">
+        <div class="inner">
+          <header class="reveal">
+            <h1>Everyday travel goods that simply work</h1>
+            <p>Curated essentials for tidy packing and cozy living. Three products, clear quality, no fuss.</p>
+            <span class="image main hero-zoom">
+              <!-- Make sure /images/hero.jpg exists (1600×900 recommended) -->
+              <img src="images/hero.jpg" alt="Travel and home essentials by ELIRA LIVING" />
+            </span>
+          </header>
+
+          <section id="products" class="tiles reveal">
+
+            <!-- Product 1 -->
+            <article class="style1">
+              <span class="image">
+                <img src="images/travel-hanging-bag.jpg" alt="Travel Hanging Bag" />
+              </span>
+              <a href="travel-hanging-bag.html">
+                <h2>Travel Hanging Bag</h2>
+                <div class="content">
+                  <p>Compact organizer with smart compartments for clean, stress-free travel.</p>
+                </div>
+              </a>
+            </article>
+
+            <!-- Product 2 -->
+            <article class="style2">
+              <span class="image">
+                <img src="images/luggage-bag.jpg" alt="Luggage Bag" />
+              </span>
+              <a href="luggage-bag.html">
+                <h2>Luggage Bag</h2>
+                <div class="content">
+                  <p>Durable, lightweight luggage designed for smooth trips and easy handling.</p>
+                </div>
+              </a>
+            </article>
+
+            <!-- Product 3 -->
+            <article class="style3">
+              <span class="image">
+                <img src="images/customized-pillow-case.jpg" alt="Customized Pillow Case" />
+              </span>
+              <a href="customized-pillow-case.html">
+                <h2>Customized Pillow Case</h2>
+                <div class="content">
+                  <p>Personalized pillow cover with your name or design, made to order.</p>
+                </div>
+              </a>
+            </article>
+
+          </section>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="inner">
+          <section id="contact">
+            <h2>Get in touch</h2>
+            <p>Email: <a href="mailto:support@eliraliving.com">support@eliraliving.com</a></p>
+          </section>
+
+          <section>
+            <h2>Follow</h2>
+            <ul class="icons">
+              <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+              <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+              <li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+              <li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+          </section>
+
+          <ul class="copyright">
+            <li>&copy; ELIRA LIVING. All rights reserved.</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+          </ul>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- Scripts (template) -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- ===== UI INTERACTIONS (safe, lightweight) ===== -->
+    <script>
+      // Mark page-loaded for hero zoom-in
+      window.addEventListener('load', function () {
+        document.documentElement.classList.add('page-loaded');
+      });
+
+      // Reveal on scroll (fade-up)
+      (function () {
+        var items = [].slice.call(document.querySelectorAll('.reveal'));
+        if (!('IntersectionObserver' in window) || !items.length) {
+          items.forEach(function (el){ el.classList.add('appear'); });
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('appear');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+        items.forEach(function (el){ io.observe(el); });
+      })();
+
+      // Header shrink on scroll
+      (function () {
+        var header = document.getElementById('header');
+        var last = 0;
+        window.addEventListener('scroll', function () {
+          var y = window.scrollY || window.pageYOffset;
+          if (y > 24 && last <= 24) header.classList.add('shrink');
+          else if (y <= 24 && last > 24) header.classList.remove('shrink');
+          last = y;
+        }, { passive: true });
+      })();
+    </script>
+  </body>
 </html>
