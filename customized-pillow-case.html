@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
-  Product gallery with main image + thumbnails
+  Product gallery with main image + thumbnails (Cloudinary-backed)
 -->
 <html lang="en">
 <head>
@@ -15,7 +15,8 @@
   <meta property="og:title" content="Customized Pillow Case — ELIRA LIVING" />
   <meta property="og:description" content="Browse 28 curated pillow designs. Click thumbnails to preview each style." />
   <meta property="og:url" content="https://www.eliraliving.com/customized-pillow-case.html" />
-  <meta property="og:image" content="https://www.eliraliving.com/images/cushion-01.jpg" />
+  <!-- Use Cloudinary for OG image too -->
+  <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469720/cushion-01_shneuc.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/images/favicon.png" type="image/png" />
 
@@ -25,91 +26,60 @@
 
   <!-- Page UI (gallery layout + animations) -->
   <style>
-    /* Motion safety */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
       html { scroll-behavior: auto; }
     }
     html { scroll-behavior: smooth; }
 
-    /* Keep header behavior consistent */
     #header .logo .symbol img { height: 28px; width: auto; }
     #header .inner { padding: 1.5rem 0 0; }
     #header.shrink .inner { padding-top: .5rem; }
     #header.shrink .logo .symbol img { height: 22px; }
 
-    /* Page hero text */
     .product-header.reveal h1 { margin-bottom: .4rem; }
     .product-header.reveal p  { color:#666; }
 
-    /* Gallery layout: main image left, details right */
     .product-layout {
       display: grid; gap: 28px;
-      grid-template-columns: 1.2fr 1fr; /* main image larger */
-      align-items: start;
+      grid-template-columns: 1.2fr 1fr; align-items: start;
     }
-    @media (max-width: 980px) {
-      .product-layout { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 980px) { .product-layout { grid-template-columns: 1fr; } }
 
-    /* Main image area */
-    .main-image {
-      background:#fff; border-radius: 16px; overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,.08);
-    }
-    .main-image .frame {
-      width:100%; aspect-ratio: 1/1; background:#f5f5f5; position: relative;
-    }
+    .main-image { background:#fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .main-image .frame { width:100%; aspect-ratio: 1/1; background:#f5f5f5; position: relative; }
     .main-image img {
       position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
       opacity:0; transform: scale(1.02);
       transition: opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
-      border-radius: 0; /* keep square */
     }
-    .main-image img.show {
-      opacity:1; transform: scale(1.0);
-    }
+    .main-image img.show { opacity:1; transform: scale(1.0); }
 
-    /* Thumbnails row/grid */
-    .thumbs {
-      margin-top:12px;
-      display:grid; gap:10px;
-      grid-template-columns: repeat(6, 1fr);
-    }
+    .thumbs { margin-top:12px; display:grid; gap:10px; grid-template-columns: repeat(6, 1fr); }
     @media (max-width: 980px) { .thumbs { grid-template-columns: repeat(8, 1fr); overflow-x:auto; white-space:nowrap; } }
     @media (max-width: 600px) { .thumbs { grid-template-columns: repeat(6, 1fr); } }
 
     .thumb {
       position:relative; border:2px solid transparent; border-radius:10px; overflow:hidden;
-      background:#fff; cursor:pointer;
-      transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      background:#fff; cursor:pointer; transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
       box-shadow: 0 3px 10px rgba(0,0,0,.06);
     }
     .thumb:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.10); }
-    .thumb[aria-selected="true"] { border-color:#5da3d6; } /* active */
+    .thumb[aria-selected="true"] { border-color:#5da3d6; }
     .thumb img { width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
 
-    /* Details column */
-    .details {
-      background:#fff; border-radius:16px; padding:20px 22px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.06);
-    }
+    .details { background:#fff; border-radius:16px; padding:20px 22px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
     .details h2 { margin:0 0 .4rem; }
     .details p  { color:#666; margin:0 0 1rem; }
     .meta { display:flex; gap:12px; flex-wrap:wrap; color:#555; margin: .3rem 0 1rem; }
-    .meta .chip {
-      background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em;
-      border:1px solid #e0edf8;
-    }
+    .meta .chip { background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em; border:1px solid #e0edf8; }
 
     .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
     .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
 
-    /* Reveal-on-scroll, consistent with index */
     .reveal { opacity:0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
     .reveal.appear { opacity:1; transform: translateY(0); }
 
-    /* Footer lighten */
     #footer { background:#f7f7f7; }
     #footer .inner { padding-top:2rem; padding-bottom:2rem; }
     #footer h2 { font-size:1rem; letter-spacing:.18em; color:#444; }
@@ -118,26 +88,18 @@
   </style>
 </head>
 <body class="is-preload">
-  <!-- Wrapper -->
   <div id="wrapper">
 
     <!-- Header -->
     <header id="header">
       <div class="inner">
-
-        <!-- Logo -->
         <a href="index.html" class="logo">
           <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
           <span class="title">ELIRA LIVING</span>
         </a>
-
-        <!-- Nav -->
         <nav>
-          <ul>
-            <li><a href="#menu">Menu</a></li>
-          </ul>
+          <ul><li><a href="#menu">Menu</a></li></ul>
         </nav>
-
       </div>
     </header>
 
@@ -162,60 +124,55 @@
     <div id="main">
       <div class="inner">
 
-        <!-- Page header -->
         <header class="product-header reveal">
           <h1>Customized Pillow Case</h1>
           <p>Pick a style from the thumbnails. The large preview updates instantly. Personalization and checkout come next.</p>
         </header>
 
-        <!-- Product Layout -->
         <section class="product-layout reveal" aria-label="Customized Pillow Case gallery">
           <!-- LEFT: Main image + thumbnails -->
           <div>
             <div class="main-image">
               <div class="frame">
-                <!-- Default to style 01 -->
-                <img id="mainImage" src="images/cushion-01.jpg" alt="Customized Pillow Case — Style 01" class="show">
+                <!-- Default to style 01 (Cloudinary, optimized) -->
+                <img id="mainImage" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469720/cushion-01_shneuc.png" alt="Customized Pillow Case — Style 01" class="show">
               </div>
             </div>
 
-            <!-- Thumbnails -->
             <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a style">
-              <!-- Generate 28 thumbs (01..28). Change captions in JS or alt if needed -->
-              <!-- Keep names cushion-01.jpg ... cushion-28.jpg in /images/ -->
-              <!-- We’ll mark aria-selected on the active one -->
-              <button class="thumb" data-index="1" aria-label="Style 01" aria-selected="true"><img loading="lazy" src="images/cushion-01.jpg" alt="Style 01 thumbnail"></button>
-              <button class="thumb" data-index="2" aria-label="Style 02"><img loading="lazy" src="images/cushion-02.jpg" alt="Style 02 thumbnail"></button>
-              <button class="thumb" data-index="3" aria-label="Style 03"><img loading="lazy" src="images/cushion-03.jpg" alt="Style 03 thumbnail"></button>
-              <button class="thumb" data-index="4" aria-label="Style 04"><img loading="lazy" src="images/cushion-04.jpg" alt="Style 04 thumbnail"></button>
-              <button class="thumb" data-index="5" aria-label="Style 05"><img loading="lazy" src="images/cushion-05.jpg" alt="Style 05 thumbnail"></button>
-              <button class="thumb" data-index="6" aria-label="Style 06"><img loading="lazy" src="images/cushion-06.jpg" alt="Style 06 thumbnail"></button>
+              <!-- 28 thumbs using Cloudinary, optimized (w_240) -->
+              <button class="thumb" data-index="1"  aria-label="Style 01" aria-selected="true"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469720/cushion-01_shneuc.png" alt="Style 01 thumbnail"></button>
+              <button class="thumb" data-index="2"  aria-label="Style 02"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469721/cushion-02_ltwurw.png" alt="Style 02 thumbnail"></button>
+              <button class="thumb" data-index="3"  aria-label="Style 03"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469720/cushion-03_jbmuzg.png" alt="Style 03 thumbnail"></button>
+              <button class="thumb" data-index="4"  aria-label="Style 04"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469721/cushion-04_ddde5m.png" alt="Style 04 thumbnail"></button>
+              <button class="thumb" data-index="5"  aria-label="Style 05"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469721/cushion-05_z881fo.png" alt="Style 05 thumbnail"></button>
+              <button class="thumb" data-index="6"  aria-label="Style 06"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469721/cushion-06_tfo1pj.png" alt="Style 06 thumbnail"></button>
 
-              <button class="thumb" data-index="7" aria-label="Style 07"><img loading="lazy" src="images/cushion-07.jpg" alt="Style 07 thumbnail"></button>
-              <button class="thumb" data-index="8" aria-label="Style 08"><img loading="lazy" src="images/cushion-08.jpg" alt="Style 08 thumbnail"></button>
-              <button class="thumb" data-index="9" aria-label="Style 09"><img loading="lazy" src="images/cushion-09.jpg" alt="Style 09 thumbnail"></button>
-              <button class="thumb" data-index="10" aria-label="Style 10"><img loading="lazy" src="images/cushion-10.jpg" alt="Style 10 thumbnail"></button>
-              <button class="thumb" data-index="11" aria-label="Style 11"><img loading="lazy" src="images/cushion-11.jpg" alt="Style 11 thumbnail"></button>
-              <button class="thumb" data-index="12" aria-label="Style 12"><img loading="lazy" src="images/cushion-12.jpg" alt="Style 12 thumbnail"></button>
+              <button class="thumb" data-index="7"  aria-label="Style 07"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469724/cushion-07_iievxw.png" alt="Style 07 thumbnail"></button>
+              <button class="thumb" data-index="8"  aria-label="Style 08"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469725/cushion-08_hkdcsy.png" alt="Style 08 thumbnail"></button>
+              <button class="thumb" data-index="9"  aria-label="Style 09"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469724/cushion-09_m4vc65.png" alt="Style 09 thumbnail"></button>
+              <button class="thumb" data-index="10" aria-label="Style 10"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469711/cushion-10_vh9y9h.png" alt="Style 10 thumbnail"></button>
+              <button class="thumb" data-index="11" aria-label="Style 11"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469710/cushion-11_cnnkha.png" alt="Style 11 thumbnail"></button>
+              <button class="thumb" data-index="12" aria-label="Style 12"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760470060/cushion-12_shfhqw.png" alt="Style 12 thumbnail"></button>
 
-              <button class="thumb" data-index="13" aria-label="Style 13"><img loading="lazy" src="images/cushion-13.jpg" alt="Style 13 thumbnail"></button>
-              <button class="thumb" data-index="14" aria-label="Style 14"><img loading="lazy" src="images/cushion-14.jpg" alt="Style 14 thumbnail"></button>
-              <button class="thumb" data-index="15" aria-label="Style 15"><img loading="lazy" src="images/cushion-15.jpg" alt="Style 15 thumbnail"></button>
-              <button class="thumb" data-index="16" aria-label="Style 16"><img loading="lazy" src="images/cushion-16.jpg" alt="Style 16 thumbnail"></button>
-              <button class="thumb" data-index="17" aria-label="Style 17"><img loading="lazy" src="images/cushion-17.jpg" alt="Style 17 thumbnail"></button>
-              <button class="thumb" data-index="18" aria-label="Style 18"><img loading="lazy" src="images/cushion-18.jpg" alt="Style 18 thumbnail"></button>
+              <button class="thumb" data-index="13" aria-label="Style 13"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469711/cushion-13_pu9fbe.png" alt="Style 13 thumbnail"></button>
+              <button class="thumb" data-index="14" aria-label="Style 14"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469713/cushion-14_kgjs8v.png" alt="Style 14 thumbnail"></button>
+              <button class="thumb" data-index="15" aria-label="Style 15"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469713/cushion-15_btgykl.png" alt="Style 15 thumbnail"></button>
+              <button class="thumb" data-index="16" aria-label="Style 16"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469714/cushion-16_jzpdwm.png" alt="Style 16 thumbnail"></button>
+              <button class="thumb" data-index="17" aria-label="Style 17"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469711/cushion-17_qam2s1.png" alt="Style 17 thumbnail"></button>
+              <button class="thumb" data-index="18" aria-label="Style 18"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469711/cushion-18_ewcunc.png" alt="Style 18 thumbnail"></button>
 
-              <button class="thumb" data-index="19" aria-label="Style 19"><img loading="lazy" src="images/cushion-19.jpg" alt="Style 19 thumbnail"></button>
-              <button class="thumb" data-index="20" aria-label="Style 20"><img loading="lazy" src="images/cushion-20.jpg" alt="Style 20 thumbnail"></button>
-              <button class="thumb" data-index="21" aria-label="Style 21"><img loading="lazy" src="images/cushion-21.jpg" alt="Style 21 thumbnail"></button>
-              <button class="thumb" data-index="22" aria-label="Style 22"><img loading="lazy" src="images/cushion-22.jpg" alt="Style 22 thumbnail"></button>
-              <button class="thumb" data-index="23" aria-label="Style 23"><img loading="lazy" src="images/cushion-23.jpg" alt="Style 23 thumbnail"></button>
-              <button class="thumb" data-index="24" aria-label="Style 24"><img loading="lazy" src="images/cushion-24.jpg" alt="Style 24 thumbnail"></button>
+              <button class="thumb" data-index="19" aria-label="Style 19"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469713/cushion-19_oc1ff8.png" alt="Style 19 thumbnail"></button>
+              <button class="thumb" data-index="20" aria-label="Style 20"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469714/cushion-20_qf6qgt.png" alt="Style 20 thumbnail"></button>
+              <button class="thumb" data-index="21" aria-label="Style 21"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469716/cushion-21_vsdpao.png" alt="Style 21 thumbnail"></button>
+              <button class="thumb" data-index="22" aria-label="Style 22"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469724/cushion-22_uhcrtu.png" alt="Style 22 thumbnail"></button>
+              <button class="thumb" data-index="23" aria-label="Style 23"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469716/cushion-23_mrkj8d.png" alt="Style 23 thumbnail"></button>
+              <button class="thumb" data-index="24" aria-label="Style 24"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469716/cushion-24_x0xhj2.png" alt="Style 24 thumbnail"></button>
 
-              <button class="thumb" data-index="25" aria-label="Style 25"><img loading="lazy" src="images/cushion-25.jpg" alt="Style 25 thumbnail"></button>
-              <button class="thumb" data-index="26" aria-label="Style 26"><img loading="lazy" src="images/cushion-26.jpg" alt="Style 26 thumbnail"></button>
-              <button class="thumb" data-index="27" aria-label="Style 27"><img loading="lazy" src="images/cushion-27.jpg" alt="Style 27 thumbnail"></button>
-              <button class="thumb" data-index="28" aria-label="Style 28"><img loading="lazy" src="images/cushion-28.jpg" alt="Style 28 thumbnail"></button>
+              <button class="thumb" data-index="25" aria-label="Style 25"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469716/cushion-25_f1sat6.png" alt="Style 25 thumbnail"></button>
+              <button class="thumb" data-index="26" aria-label="Style 26"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469718/cushion-26_avac96.png" alt="Style 26 thumbnail"></button>
+              <button class="thumb" data-index="27" aria-label="Style 27"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469718/cushion-27_izblyl.png" alt="Style 27 thumbnail"></button>
+              <button class="thumb" data-index="28" aria-label="Style 28"><img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760469718/cushion-28_uut8m6.png" alt="Style 28 thumbnail"></button>
             </div>
           </div>
 
@@ -230,7 +187,6 @@
             <p id="styleDesc">Modern minimal print. Personalized with your name or text.</p>
 
             <div class="actions">
-              <!-- Placeholder buttons; later wire to Stripe -->
               <a href="#select" class="button primary icon solid fa-check">Select this style</a>
               <a href="index.html#products" class="button">Back to Products</a>
             </div>
@@ -278,7 +234,7 @@
 
   <!-- Page interactions -->
   <script>
-    // Page loaded (for subtle animation timing)
+    // Mark page-loaded for timing
     window.addEventListener('load', function () {
       document.documentElement.classList.add('page-loaded');
     });
@@ -313,56 +269,62 @@
       }, { passive: true });
     })();
 
-    // Gallery: swap main image on thumbnail click + keyboard arrows
+    // --- Cloudinary-based main image swap ---
     (function () {
-      var main = document.getElementById('mainImage');
+      var main  = document.getElementById('mainImage');
       var thumbs = [].slice.call(document.querySelectorAll('.thumb'));
       var title = document.getElementById('styleTitle');
       var desc  = document.getElementById('styleDesc');
 
-      // Optional: per-style captions (edit freely)
+      // Full-size URLs (w_1200) in order 01..28
+      var full = [
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469720/cushion-01_shneuc.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469721/cushion-02_ltwurw.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469720/cushion-03_jbmuzg.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469721/cushion-04_ddde5m.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469721/cushion-05_z881fo.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469721/cushion-06_tfo1pj.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469724/cushion-07_iievxw.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469725/cushion-08_hkdcsy.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469724/cushion-09_m4vc65.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469711/cushion-10_vh9y9h.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469710/cushion-11_cnnkha.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760470060/cushion-12_shfhqw.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469711/cushion-13_pu9fbe.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469713/cushion-14_kgjs8v.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469713/cushion-15_btgykl.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469714/cushion-16_jzpdwm.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469711/cushion-17_qam2s1.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469711/cushion-18_ewcunc.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469713/cushion-19_oc1ff8.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469714/cushion-20_qf6qgt.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469716/cushion-21_vsdpao.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469724/cushion-22_uhcrtu.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469716/cushion-23_mrkj8d.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469716/cushion-24_x0xhj2.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469716/cushion-25_f1sat6.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469718/cushion-26_avac96.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469718/cushion-27_izblyl.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760469718/cushion-28_uut8m6.png'
+      ];
+
+      // Captions (optional)
       var captions = [
-        'Modern minimal print.',
-        'Soft geometric lines.',
-        'Calm botanical.',
-        'Nordic weave.',
-        'Abstract brush.',
-        'Line art.',
-        'Grid texture.',
-        'Soft chevron.',
-        'Leaf motif.',
-        'Mid-century dots.',
-        'Fine herringbone.',
-        'Gentle waves.',
-        'Fine stripes.',
-        'Mosaic print.',
-        'Fabric texture.',
-        'Crosshatch.',
-        'Soft plaid.',
-        'Subtle chequered.',
-        'Art deco hint.',
-        'Muted diamond.',
-        'Cozy knit print.',
-        'Classic tartan.',
-        'Gentle fleck.',
-        'Diagonal stitch.',
-        'Soft lattice.',
-        'Brush plaid.',
-        'Soft zigzag.',
-        'Minimal weave.'
+        'Modern minimal print.','Soft geometric lines.','Calm botanical.','Nordic weave.','Abstract brush.','Line art.',
+        'Grid texture.','Soft chevron.','Leaf motif.','Mid-century dots.','Fine herringbone.','Gentle waves.',
+        'Fine stripes.','Mosaic print.','Fabric texture.','Crosshatch.','Soft plaid.','Subtle chequered.',
+        'Art deco hint.','Muted diamond.','Cozy knit print.','Classic tartan.','Gentle fleck.','Diagonal stitch.',
+        'Soft lattice.','Brush plaid.','Soft zigzag.','Minimal weave.'
       ];
 
       var current = 1;
 
       function setActive(i) {
         current = i;
-        // Update main image with cross-fade
-        var newSrc = 'images/cushion-' + String(i).padStart(2,'0') + '.jpg';
+        var newSrc = full[i-1];
         var newAlt = 'Customized Pillow Case — Style ' + String(i).padStart(2,'0');
 
-        // fade out then in
         main.classList.remove('show');
-        // pre-load to avoid flicker
         var img = new Image();
         img.onload = function(){
           main.src = newSrc; main.alt = newAlt;
@@ -370,23 +332,18 @@
         };
         img.src = newSrc;
 
-        // Active border
-        thumbs.forEach(function(t){ t.setAttribute('aria-selected', 'false'); });
-        var active = thumbs.find(function(t){ return Number(t.dataset.index) === i; });
+        document.querySelectorAll('.thumb').forEach(function(t){ t.setAttribute('aria-selected','false'); });
+        var active = document.querySelector('.thumb[data-index="'+i+'"]');
         if (active) active.setAttribute('aria-selected','true');
 
-        // Update text
-        title.textContent = 'Style ' + String(i).padStart(2,'0');
-        desc.textContent  = (captions[i-1] || 'Customized print.');
+        document.getElementById('styleTitle').textContent = 'Style ' + String(i).padStart(2,'0');
+        document.getElementById('styleDesc').textContent  = captions[i-1] || 'Customized print.';
       }
 
-      thumbs.forEach(function(btn){
-        btn.addEventListener('click', function(){
-          setActive(Number(btn.dataset.index));
-        });
+      document.querySelectorAll('.thumb').forEach(function(btn){
+        btn.addEventListener('click', function(){ setActive(Number(btn.dataset.index)); });
       });
 
-      // Keyboard arrows to navigate
       document.addEventListener('keydown', function(e){
         if (e.key === 'ArrowRight') setActive(((current) % 28) + 1);
         if (e.key === 'ArrowLeft')  setActive(((current + 26) % 28) + 1);
