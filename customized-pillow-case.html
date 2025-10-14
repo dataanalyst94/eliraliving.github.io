@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
-  html5up.net | @ajlkn
-  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Product gallery with main image + thumbnails
 -->
 <html lang="en">
 <head>
@@ -10,24 +9,21 @@
   <title>Customized Pillow Case — ELIRA LIVING</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-  <!-- Basic SEO -->
-  <meta name="description" content="28 customizable pillow case styles. Choose your favorite design and personalize it for your home." />
+  <!-- SEO -->
+  <meta name="description" content="28 customizable pillow case styles. Choose a design from the thumbnails to preview it large, then order." />
   <link rel="canonical" href="https://www.eliraliving.com/customized-pillow-case.html" />
-
-  <!-- Social (Open Graph / Twitter) -->
   <meta property="og:title" content="Customized Pillow Case — ELIRA LIVING" />
-  <meta property="og:description" content="Browse 28 curated pillow designs. Personalized, made to order." />
+  <meta property="og:description" content="Browse 28 curated pillow designs. Click thumbnails to preview each style." />
   <meta property="og:url" content="https://www.eliraliving.com/customized-pillow-case.html" />
-  <meta property="og:image" content="https://www.eliraliving.com/images/hero-pillow.jpg" />
+  <meta property="og:image" content="https://www.eliraliving.com/images/cushion-01.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-
   <link rel="icon" href="/images/favicon.png" type="image/png" />
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/main.css" />
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-  <!-- Page-specific UI polish (animations + gallery + lightbox) -->
+  <!-- Page UI (gallery layout + animations) -->
   <style>
     /* Motion safety */
     @media (prefers-reduced-motion: reduce) {
@@ -36,129 +32,89 @@
     }
     html { scroll-behavior: smooth; }
 
-    /* Header shrink (same as index) */
+    /* Keep header behavior consistent */
     #header .logo .symbol img { height: 28px; width: auto; }
     #header .inner { padding: 1.5rem 0 0; }
     #header.shrink .inner { padding-top: .5rem; }
     #header.shrink .logo .symbol img { height: 22px; }
 
-    /* Hero zoom */
-    .hero-zoom { overflow: hidden; border-radius: 14px; }
-    .hero-zoom img {
-      width: 100%; height: 360px; object-fit: cover; border-radius: 14px;
-      transform: scale(1.05); opacity: 0;
-      transition: transform 1200ms cubic-bezier(.2,.6,.2,1), opacity 800ms ease;
-    }
-    .page-loaded .hero-zoom img { transform: scale(1.0); opacity: 1; }
-    @media (max-width: 768px){ .hero-zoom img { height: 220px; } }
+    /* Page hero text */
+    .product-header.reveal h1 { margin-bottom: .4rem; }
+    .product-header.reveal p  { color:#666; }
 
-    /* Reveal */
-    .reveal { opacity: 0; transform: translateY(18px);
-      transition: opacity 700ms ease, transform 700ms ease; }
-    .reveal.appear { opacity: 1; transform: translateY(0); }
-
-    /* Gallery grid (uniform squares) */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+    /* Gallery layout: main image left, details right */
+    .product-layout {
+      display: grid; gap: 28px;
+      grid-template-columns: 1.2fr 1fr; /* main image larger */
+      align-items: start;
     }
     @media (max-width: 980px) {
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .gallery-grid { grid-template-columns: 1fr; }
+      .product-layout { grid-template-columns: 1fr; }
     }
 
-    .gallery-item {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.06);
-      overflow: hidden;
-      transform: translateY(0) rotate(0deg);
-      transition: transform 320ms cubic-bezier(.2,.6,.2,1), box-shadow 320ms ease, filter 320ms ease;
-      will-change: transform;
+    /* Main image area */
+    .main-image {
+      background:#fff; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
     }
-    .gallery-item:hover {
-      transform: translateY(-6px) rotate(-.25deg);
-      box-shadow: 0 12px 28px rgba(0,0,0,.10);
-      filter: saturate(1.03);
+    .main-image .frame {
+      width:100%; aspect-ratio: 1/1; background:#f5f5f5; position: relative;
     }
-
-    .gallery-item .frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1; /* perfect square */
-      overflow: hidden;
+    .main-image img {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      opacity:0; transform: scale(1.02);
+      transition: opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
+      border-radius: 0; /* keep square */
     }
-    .gallery-item img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-    }
-    .gallery-item .caption {
-      padding: .9rem 1rem 1.1rem;
-    }
-    .gallery-item .caption h3 {
-      margin: 0; font-size: 1.0rem; letter-spacing: .06em;
-    }
-    .gallery-item .caption p {
-      margin: .35rem 0 0; color: #666; font-size: .95rem;
+    .main-image img.show {
+      opacity:1; transform: scale(1.0);
     }
 
-    /* CTA block */
-    .cta {
-      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-      margin: .75rem 0 1.25rem;
+    /* Thumbnails row/grid */
+    .thumbs {
+      margin-top:12px;
+      display:grid; gap:10px;
+      grid-template-columns: repeat(6, 1fr);
     }
-    .cta .button {
-      transition: transform 180ms ease, box-shadow 180ms ease;
-    }
-    .cta .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
+    @media (max-width: 980px) { .thumbs { grid-template-columns: repeat(8, 1fr); overflow-x:auto; white-space:nowrap; } }
+    @media (max-width: 600px) { .thumbs { grid-template-columns: repeat(6, 1fr); } }
 
-    /* Lightbox */
-    .lightbox {
-      position: fixed; inset: 0; background: rgba(0,0,0,.7);
-      display: none; align-items: center; justify-content: center;
-      z-index: 9999; padding: 24px;
+    .thumb {
+      position:relative; border:2px solid transparent; border-radius:10px; overflow:hidden;
+      background:#fff; cursor:pointer;
+      transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,.06);
     }
-    .lightbox.open { display: flex; }
-    .lightbox-inner {
-      position: relative; max-width: 92vw; max-height: 88vh; width: 980px;
-      background: #111; border-radius: 14px; overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
-    }
-    .lightbox-img-wrap {
-      background: #000; display: flex; align-items: center; justify-content: center;
-      width: 100%; height: 64vh;
-    }
-    .lightbox-img {
-      max-width: 100%; max-height: 100%; object-fit: contain; display: block;
-    }
-    .lightbox-caption {
-      padding: 14px 18px; color: #f1f1f1; display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    }
-    .lightbox-caption .title { font-size: 1rem; letter-spacing: .06em; }
-    .lightbox-actions .button { margin-left: 8px; }
+    .thumb:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.10); }
+    .thumb[aria-selected="true"] { border-color:#5da3d6; } /* active */
+    .thumb img { width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
 
-    .lightbox-close, .lightbox-prev, .lightbox-next {
-      position: absolute; top: 12px; background: rgba(255,255,255,.12); color: #fff;
-      border: 0; width: 40px; height: 40px; border-radius: 50%;
-      display: grid; place-items: center; cursor: pointer;
-      transition: background 180ms ease, transform 180ms ease;
+    /* Details column */
+    .details {
+      background:#fff; border-radius:16px; padding:20px 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
     }
-    .lightbox-close { right: 12px; }
-    .lightbox-prev { left: 12px; top: 50%; transform: translateY(-50%); }
-    .lightbox-next { right: 12px; top: 50%; transform: translateY(-50%); }
-    .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
-      background: rgba(255,255,255,.2);
+    .details h2 { margin:0 0 .4rem; }
+    .details p  { color:#666; margin:0 0 1rem; }
+    .meta { display:flex; gap:12px; flex-wrap:wrap; color:#555; margin: .3rem 0 1rem; }
+    .meta .chip {
+      background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em;
+      border:1px solid #e0edf8;
     }
 
-    /* Footer lighten (consistent) */
-    #footer { background: #f7f7f7; }
-    #footer .inner { padding-top: 2rem; padding-bottom: 2rem; }
-    #footer h2 { font-size: 1rem; letter-spacing: .18em; color:#444; }
+    .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
+    .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
 
-    /* Prevent CLS */
-    img { aspect-ratio: auto; }
+    /* Reveal-on-scroll, consistent with index */
+    .reveal { opacity:0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
+    .reveal.appear { opacity:1; transform: translateY(0); }
+
+    /* Footer lighten */
+    #footer { background:#f7f7f7; }
+    #footer .inner { padding-top:2rem; padding-bottom:2rem; }
+    #footer h2 { font-size:1rem; letter-spacing:.18em; color:#444; }
+
+    img { aspect-ratio:auto; }
   </style>
 </head>
 <body class="is-preload">
@@ -206,336 +162,83 @@
     <div id="main">
       <div class="inner">
 
-        <!-- Hero -->
-        <header class="reveal">
+        <!-- Page header -->
+        <header class="product-header reveal">
           <h1>Customized Pillow Case</h1>
-          <p>Choose from 28 curated designs. Personalize with your name or motif, then order in a few clicks.</p>
-          <span class="image main hero-zoom">
-            <!-- Optional hero; add /images/hero-pillow.jpg or keep as-is -->
-            <img src="images/hero-pillow.jpg" alt="Customized pillow case designs — ELIRA LIVING" />
-          </span>
-
-          <div class="cta">
-            <a href="#styles" class="button primary icon solid fa-chevron-down">Browse Styles</a>
-            <a href="index.html#products" class="button">Back to Products</a>
-          </div>
+          <p>Pick a style from the thumbnails. The large preview updates instantly. Personalization and checkout come next.</p>
         </header>
 
-        <!-- Gallery -->
-        <section id="styles" class="reveal">
-          <div class="gallery-grid" role="list">
-            <!-- 28 items -->
-            <!-- Use descriptive captions if you have real names; placeholders below -->
-            <!-- style 01..28 -->
-            <!-- Item 01 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="0" aria-label="Open Style 01">
-                <img loading="lazy" src="images/cushion-01.jpg" alt="Customized Pillow Case — Style 01" />
-              </button>
-              <div class="caption">
-                <h3>Style 01</h3>
-                <p>Modern minimal print.</p>
+        <!-- Product Layout -->
+        <section class="product-layout reveal" aria-label="Customized Pillow Case gallery">
+          <!-- LEFT: Main image + thumbnails -->
+          <div>
+            <div class="main-image">
+              <div class="frame">
+                <!-- Default to style 01 -->
+                <img id="mainImage" src="images/cushion-01.jpg" alt="Customized Pillow Case — Style 01" class="show">
               </div>
-            </article>
+            </div>
 
-            <!-- Item 02 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="1" aria-label="Open Style 02">
-                <img loading="lazy" src="images/cushion-02.jpg" alt="Customized Pillow Case — Style 02" />
-              </button>
-              <div class="caption">
-                <h3>Style 02</h3>
-                <p>Soft geometric lines.</p>
-              </div>
-            </article>
+            <!-- Thumbnails -->
+            <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a style">
+              <!-- Generate 28 thumbs (01..28). Change captions in JS or alt if needed -->
+              <!-- Keep names cushion-01.jpg ... cushion-28.jpg in /images/ -->
+              <!-- We’ll mark aria-selected on the active one -->
+              <button class="thumb" data-index="1" aria-label="Style 01" aria-selected="true"><img loading="lazy" src="images/cushion-01.jpg" alt="Style 01 thumbnail"></button>
+              <button class="thumb" data-index="2" aria-label="Style 02"><img loading="lazy" src="images/cushion-02.jpg" alt="Style 02 thumbnail"></button>
+              <button class="thumb" data-index="3" aria-label="Style 03"><img loading="lazy" src="images/cushion-03.jpg" alt="Style 03 thumbnail"></button>
+              <button class="thumb" data-index="4" aria-label="Style 04"><img loading="lazy" src="images/cushion-04.jpg" alt="Style 04 thumbnail"></button>
+              <button class="thumb" data-index="5" aria-label="Style 05"><img loading="lazy" src="images/cushion-05.jpg" alt="Style 05 thumbnail"></button>
+              <button class="thumb" data-index="6" aria-label="Style 06"><img loading="lazy" src="images/cushion-06.jpg" alt="Style 06 thumbnail"></button>
 
-            <!-- Item 03 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="2" aria-label="Open Style 03">
-                <img loading="lazy" src="images/cushion-03.jpg" alt="Customized Pillow Case — Style 03" />
-              </button>
-              <div class="caption">
-                <h3>Style 03</h3>
-                <p>Calm botanical.</p>
-              </div>
-            </article>
+              <button class="thumb" data-index="7" aria-label="Style 07"><img loading="lazy" src="images/cushion-07.jpg" alt="Style 07 thumbnail"></button>
+              <button class="thumb" data-index="8" aria-label="Style 08"><img loading="lazy" src="images/cushion-08.jpg" alt="Style 08 thumbnail"></button>
+              <button class="thumb" data-index="9" aria-label="Style 09"><img loading="lazy" src="images/cushion-09.jpg" alt="Style 09 thumbnail"></button>
+              <button class="thumb" data-index="10" aria-label="Style 10"><img loading="lazy" src="images/cushion-10.jpg" alt="Style 10 thumbnail"></button>
+              <button class="thumb" data-index="11" aria-label="Style 11"><img loading="lazy" src="images/cushion-11.jpg" alt="Style 11 thumbnail"></button>
+              <button class="thumb" data-index="12" aria-label="Style 12"><img loading="lazy" src="images/cushion-12.jpg" alt="Style 12 thumbnail"></button>
 
-            <!-- Item 04 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="3" aria-label="Open Style 04">
-                <img loading="lazy" src="images/cushion-04.jpg" alt="Customized Pillow Case — Style 04" />
-              </button>
-              <div class="caption">
-                <h3>Style 04</h3>
-                <p>Nordic weave.</p>
-              </div>
-            </article>
+              <button class="thumb" data-index="13" aria-label="Style 13"><img loading="lazy" src="images/cushion-13.jpg" alt="Style 13 thumbnail"></button>
+              <button class="thumb" data-index="14" aria-label="Style 14"><img loading="lazy" src="images/cushion-14.jpg" alt="Style 14 thumbnail"></button>
+              <button class="thumb" data-index="15" aria-label="Style 15"><img loading="lazy" src="images/cushion-15.jpg" alt="Style 15 thumbnail"></button>
+              <button class="thumb" data-index="16" aria-label="Style 16"><img loading="lazy" src="images/cushion-16.jpg" alt="Style 16 thumbnail"></button>
+              <button class="thumb" data-index="17" aria-label="Style 17"><img loading="lazy" src="images/cushion-17.jpg" alt="Style 17 thumbnail"></button>
+              <button class="thumb" data-index="18" aria-label="Style 18"><img loading="lazy" src="images/cushion-18.jpg" alt="Style 18 thumbnail"></button>
 
-            <!-- Item 05 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="4" aria-label="Open Style 05">
-                <img loading="lazy" src="images/cushion-05.jpg" alt="Customized Pillow Case — Style 05" />
-              </button>
-              <div class="caption">
-                <h3>Style 05</h3>
-                <p>Abstract brush.</p>
-              </div>
-            </article>
+              <button class="thumb" data-index="19" aria-label="Style 19"><img loading="lazy" src="images/cushion-19.jpg" alt="Style 19 thumbnail"></button>
+              <button class="thumb" data-index="20" aria-label="Style 20"><img loading="lazy" src="images/cushion-20.jpg" alt="Style 20 thumbnail"></button>
+              <button class="thumb" data-index="21" aria-label="Style 21"><img loading="lazy" src="images/cushion-21.jpg" alt="Style 21 thumbnail"></button>
+              <button class="thumb" data-index="22" aria-label="Style 22"><img loading="lazy" src="images/cushion-22.jpg" alt="Style 22 thumbnail"></button>
+              <button class="thumb" data-index="23" aria-label="Style 23"><img loading="lazy" src="images/cushion-23.jpg" alt="Style 23 thumbnail"></button>
+              <button class="thumb" data-index="24" aria-label="Style 24"><img loading="lazy" src="images/cushion-24.jpg" alt="Style 24 thumbnail"></button>
 
-            <!-- Item 06 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="5" aria-label="Open Style 06">
-                <img loading="lazy" src="images/cushion-06.jpg" alt="Customized Pillow Case — Style 06" />
-              </button>
-              <div class="caption">
-                <h3>Style 06</h3>
-                <p>Line art.</p>
-              </div>
-            </article>
-
-            <!-- Item 07 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="6" aria-label="Open Style 07">
-                <img loading="lazy" src="images/cushion-07.jpg" alt="Customized Pillow Case — Style 07" />
-              </button>
-              <div class="caption">
-                <h3>Style 07</h3>
-                <p>Grid texture.</p>
-              </div>
-            </article>
-
-            <!-- Item 08 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="7" aria-label="Open Style 08">
-                <img loading="lazy" src="images/cushion-08.jpg" alt="Customized Pillow Case — Style 08" />
-              </button>
-              <div class="caption">
-                <h3>Style 08</h3>
-                <p>Soft chevron.</p>
-              </div>
-            </article>
-
-            <!-- Item 09 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="8" aria-label="Open Style 09">
-                <img loading="lazy" src="images/cushion-09.jpg" alt="Customized Pillow Case — Style 09" />
-              </button>
-              <div class="caption">
-                <h3>Style 09</h3>
-                <p>Leaf motif.</p>
-              </div>
-            </article>
-
-            <!-- Item 10 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="9" aria-label="Open Style 10">
-                <img loading="lazy" src="images/cushion-10.jpg" alt="Customized Pillow Case — Style 10" />
-              </button>
-              <div class="caption">
-                <h3>Style 10</h3>
-                <p>Mid-century dots.</p>
-              </div>
-            </article>
-
-            <!-- Item 11 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="10" aria-label="Open Style 11">
-                <img loading="lazy" src="images/cushion-11.jpg" alt="Customized Pillow Case — Style 11" />
-              </button>
-              <div class="caption">
-                <h3>Style 11</h3>
-                <p>Fine herringbone.</p>
-              </div>
-            </article>
-
-            <!-- Item 12 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="11" aria-label="Open Style 12">
-                <img loading="lazy" src="images/cushion-12.jpg" alt="Customized Pillow Case — Style 12" />
-              </button>
-              <div class="caption">
-                <h3>Style 12</h3>
-                <p>Gentle waves.</p>
-              </div>
-            </article>
-
-            <!-- Item 13 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="12" aria-label="Open Style 13">
-                <img loading="lazy" src="images/cushion-13.jpg" alt="Customized Pillow Case — Style 13" />
-              </button>
-              <div class="caption">
-                <h3>Style 13</h3>
-                <p>Fine stripes.</p>
-              </div>
-            </article>
-
-            <!-- Item 14 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="13" aria-label="Open Style 14">
-                <img loading="lazy" src="images/cushion-14.jpg" alt="Customized Pillow Case — Style 14" />
-              </button>
-              <div class="caption">
-                <h3>Style 14</h3>
-                <p>Mosaic print.</p>
-              </div>
-            </article>
-
-            <!-- Item 15 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="14" aria-label="Open Style 15">
-                <img loading="lazy" src="images/cushion-15.jpg" alt="Customized Pillow Case — Style 15" />
-              </button>
-              <div class="caption">
-                <h3>Style 15</h3>
-                <p>Fabric texture.</p>
-              </div>
-            </article>
-
-            <!-- Item 16 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="15" aria-label="Open Style 16">
-                <img loading="lazy" src="images/cushion-16.jpg" alt="Customized Pillow Case — Style 16" />
-              </button>
-              <div class="caption">
-                <h3>Style 16</h3>
-                <p>Crosshatch.</p>
-              </div>
-            </article>
-
-            <!-- Item 17 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="16" aria-label="Open Style 17">
-                <img loading="lazy" src="images/cushion-17.jpg" alt="Customized Pillow Case — Style 17" />
-              </button>
-              <div class="caption">
-                <h3>Style 17</h3>
-                <p>Soft plaid.</p>
-              </div>
-            </article>
-
-            <!-- Item 18 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="17" aria-label="Open Style 18">
-                <img loading="lazy" src="images/cushion-18.jpg" alt="Customized Pillow Case — Style 18" />
-              </button>
-              <div class="caption">
-                <h3>Style 18</h3>
-                <p>Subtle chequered.</p>
-              </div>
-            </article>
-
-            <!-- Item 19 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="18" aria-label="Open Style 19">
-                <img loading="lazy" src="images/cushion-19.jpg" alt="Customized Pillow Case — Style 19" />
-              </button>
-              <div class="caption">
-                <h3>Style 19</h3>
-                <p>Art deco hint.</p>
-              </div>
-            </article>
-
-            <!-- Item 20 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="19" aria-label="Open Style 20">
-                <img loading="lazy" src="images/cushion-20.jpg" alt="Customized Pillow Case — Style 20" />
-              </button>
-              <div class="caption">
-                <h3>Style 20</h3>
-                <p>Muted diamond.</p>
-              </div>
-            </article>
-
-            <!-- Item 21 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="20" aria-label="Open Style 21">
-                <img loading="lazy" src="images/cushion-21.jpg" alt="Customized Pillow Case — Style 21" />
-              </button>
-              <div class="caption">
-                <h3>Style 21</h3>
-                <p>Cozy knit print.</p>
-              </div>
-            </article>
-
-            <!-- Item 22 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="21" aria-label="Open Style 22">
-                <img loading="lazy" src="images/cushion-22.jpg" alt="Customized Pillow Case — Style 22" />
-              </button>
-              <div class="caption">
-                <h3>Style 22</h3>
-                <p>Classic tartan.</p>
-              </div>
-            </article>
-
-            <!-- Item 23 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="22" aria-label="Open Style 23">
-                <img loading="lazy" src="images/cushion-23.jpg" alt="Customized Pillow Case — Style 23" />
-              </button>
-              <div class="caption">
-                <h3>Style 23</h3>
-                <p>Gentle fleck.</p>
-              </div>
-            </article>
-
-            <!-- Item 24 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="23" aria-label="Open Style 24">
-                <img loading="lazy" src="images/cushion-24.jpg" alt="Customized Pillow Case — Style 24" />
-              </button>
-              <div class="caption">
-                <h3>Style 24</h3>
-                <p>Diagonal stitch.</p>
-              </div>
-            </article>
-
-            <!-- Item 25 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="24" aria-label="Open Style 25">
-                <img loading="lazy" src="images/cushion-25.jpg" alt="Customized Pillow Case — Style 25" />
-              </button>
-              <div class="caption">
-                <h3>Style 25</h3>
-                <p>Soft lattice.</p>
-              </div>
-            </article>
-
-            <!-- Item 26 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="25" aria-label="Open Style 26">
-                <img loading="lazy" src="images/cushion-26.jpg" alt="Customized Pillow Case — Style 26" />
-              </button>
-              <div class="caption">
-                <h3>Style 26</h3>
-                <p>Brush plaid.</p>
-              </div>
-            </article>
-
-            <!-- Item 27 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="26" aria-label="Open Style 27">
-                <img loading="lazy" src="images/cushion-27.jpg" alt="Customized Pillow Case — Style 27" />
-              </button>
-              <div class="caption">
-                <h3>Style 27</h3>
-                <p>Soft zigzag.</p>
-              </div>
-            </article>
-
-            <!-- Item 28 -->
-            <article class="gallery-item" role="listitem">
-              <button class="frame open-lightbox" data-index="27" aria-label="Open Style 28">
-                <img loading="lazy" src="images/cushion-28.jpg" alt="Customized Pillow Case — Style 28" />
-              </button>
-              <div class="caption">
-                <h3>Style 28</h3>
-                <p>Minimal weave.</p>
-              </div>
-            </article>
-
+              <button class="thumb" data-index="25" aria-label="Style 25"><img loading="lazy" src="images/cushion-25.jpg" alt="Style 25 thumbnail"></button>
+              <button class="thumb" data-index="26" aria-label="Style 26"><img loading="lazy" src="images/cushion-26.jpg" alt="Style 26 thumbnail"></button>
+              <button class="thumb" data-index="27" aria-label="Style 27"><img loading="lazy" src="images/cushion-27.jpg" alt="Style 27 thumbnail"></button>
+              <button class="thumb" data-index="28" aria-label="Style 28"><img loading="lazy" src="images/cushion-28.jpg" alt="Style 28 thumbnail"></button>
+            </div>
           </div>
+
+          <!-- RIGHT: Details / CTA -->
+          <aside class="details" aria-live="polite">
+            <h2 id="styleTitle">Style 01</h2>
+            <div class="meta">
+              <span class="chip">100% Cotton</span>
+              <span class="chip">45×45 cm</span>
+              <span class="chip">Machine-washable</span>
+            </div>
+            <p id="styleDesc">Modern minimal print. Personalized with your name or text.</p>
+
+            <div class="actions">
+              <!-- Placeholder buttons; later wire to Stripe -->
+              <a href="#select" class="button primary icon solid fa-check">Select this style</a>
+              <a href="index.html#products" class="button">Back to Products</a>
+            </div>
+
+            <hr />
+            <p><strong>How customization works</strong><br>
+              Choose a style above. At checkout you’ll add your name/text. We print and ship from Finland.</p>
+          </aside>
         </section>
 
       </div>
@@ -575,7 +278,7 @@
 
   <!-- Page interactions -->
   <script>
-    // Mark page-loaded for hero zoom-in
+    // Page loaded (for subtle animation timing)
     window.addEventListener('load', function () {
       document.documentElement.classList.add('page-loaded');
     });
@@ -598,7 +301,7 @@
       items.forEach(function (el){ io.observe(el); });
     })();
 
-    // Header shrink on scroll
+    // Header shrink
     (function () {
       var header = document.getElementById('header');
       var last = 0;
@@ -610,82 +313,83 @@
       }, { passive: true });
     })();
 
-    // Lightbox
+    // Gallery: swap main image on thumbnail click + keyboard arrows
     (function () {
-      var items = [].slice.call(document.querySelectorAll('.open-lightbox'));
-      if (!items.length) return;
+      var main = document.getElementById('mainImage');
+      var thumbs = [].slice.call(document.querySelectorAll('.thumb'));
+      var title = document.getElementById('styleTitle');
+      var desc  = document.getElementById('styleDesc');
 
-      var current = 0;
-      var lb = document.createElement('div');
-      lb.className = 'lightbox';
-      lb.setAttribute('role', 'dialog');
-      lb.setAttribute('aria-modal', 'true');
-      lb.innerHTML =
-        '<div class="lightbox-inner">' +
-          '<button class="lightbox-close" aria-label="Close">&times;</button>' +
-          '<button class="lightbox-prev" aria-label="Previous">&#10094;</button>' +
-          '<button class="lightbox-next" aria-label="Next">&#10095;</button>' +
-          '<div class="lightbox-img-wrap"><img class="lightbox-img" alt=""></div>' +
-          '<div class="lightbox-caption">' +
-            '<span class="title"></span>' +
-            '<div class="lightbox-actions">' +
-              '<a href="#" class="button primary small select-style" role="button">Select this style</a>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-      document.body.appendChild(lb);
+      // Optional: per-style captions (edit freely)
+      var captions = [
+        'Modern minimal print.',
+        'Soft geometric lines.',
+        'Calm botanical.',
+        'Nordic weave.',
+        'Abstract brush.',
+        'Line art.',
+        'Grid texture.',
+        'Soft chevron.',
+        'Leaf motif.',
+        'Mid-century dots.',
+        'Fine herringbone.',
+        'Gentle waves.',
+        'Fine stripes.',
+        'Mosaic print.',
+        'Fabric texture.',
+        'Crosshatch.',
+        'Soft plaid.',
+        'Subtle chequered.',
+        'Art deco hint.',
+        'Muted diamond.',
+        'Cozy knit print.',
+        'Classic tartan.',
+        'Gentle fleck.',
+        'Diagonal stitch.',
+        'Soft lattice.',
+        'Brush plaid.',
+        'Soft zigzag.',
+        'Minimal weave.'
+      ];
 
-      var imgEl = lb.querySelector('.lightbox-img');
-      var titleEl = lb.querySelector('.title');
-      var btnClose = lb.querySelector('.lightbox-close');
-      var btnPrev = lb.querySelector('.lightbox-prev');
-      var btnNext = lb.querySelector('.lightbox-next');
-      var btnSelect = lb.querySelector('.select-style');
+      var current = 1;
 
-      function show(i) {
-        current = (i + items.length) % items.length;
-        var button = items[current];
-        var img = button.querySelector('img');
-        var src = img.getAttribute('src');
-        var alt = img.getAttribute('alt') || ('Style ' + (current + 1));
-        imgEl.src = src;
-        imgEl.alt = alt;
-        titleEl.textContent = alt;
-        // Placeholder selection link — later wire to Stripe or a form with style index
-        btnSelect.href = '#style-' + (current + 1);
-        lb.classList.add('open');
-        document.documentElement.style.overflow = 'hidden';
-        btnClose.focus();
+      function setActive(i) {
+        current = i;
+        // Update main image with cross-fade
+        var newSrc = 'images/cushion-' + String(i).padStart(2,'0') + '.jpg';
+        var newAlt = 'Customized Pillow Case — Style ' + String(i).padStart(2,'0');
+
+        // fade out then in
+        main.classList.remove('show');
+        // pre-load to avoid flicker
+        var img = new Image();
+        img.onload = function(){
+          main.src = newSrc; main.alt = newAlt;
+          main.classList.add('show');
+        };
+        img.src = newSrc;
+
+        // Active border
+        thumbs.forEach(function(t){ t.setAttribute('aria-selected', 'false'); });
+        var active = thumbs.find(function(t){ return Number(t.dataset.index) === i; });
+        if (active) active.setAttribute('aria-selected','true');
+
+        // Update text
+        title.textContent = 'Style ' + String(i).padStart(2,'0');
+        desc.textContent  = (captions[i-1] || 'Customized print.');
       }
-      function hide() {
-        lb.classList.remove('open');
-        document.documentElement.style.overflow = '';
-      }
-      function next(n) { show(current + (n || 1)); }
 
-      // Open handlers
-      items.forEach(function (b) {
-        b.addEventListener('click', function (e) {
-          e.preventDefault();
-          var i = parseInt(b.getAttribute('data-index'), 10) || 0;
-          show(i);
+      thumbs.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          setActive(Number(btn.dataset.index));
         });
       });
 
-      // Nav + close
-      btnClose.addEventListener('click', hide);
-      btnPrev.addEventListener('click', function(){ next(-1); });
-      btnNext.addEventListener('click', function(){ next(1); });
-      lb.addEventListener('click', function (e) {
-        if (e.target === lb) hide();
-      });
-
-      // Keyboard
-      document.addEventListener('keydown', function (e) {
-        if (!lb.classList.contains('open')) return;
-        if (e.key === 'Escape') hide();
-        else if (e.key === 'ArrowRight') next(1);
-        else if (e.key === 'ArrowLeft') next(-1);
+      // Keyboard arrows to navigate
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'ArrowRight') setActive(((current) % 28) + 1);
+        if (e.key === 'ArrowLeft')  setActive(((current + 26) % 28) + 1);
       });
     })();
   </script>
