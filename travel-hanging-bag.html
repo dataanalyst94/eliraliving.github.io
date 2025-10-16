@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<!--
+  Phantom by HTML5 UP (customized for ELIRA LIVING)
+  Product gallery with main image + thumbnails (Cloudinary-backed)
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Travel Hanging Bag — ELIRA LIVING</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+  <!-- SEO -->
+  <meta name="description" content="Compact travel hanging bag with smart compartments and a swivel hook. See photos and pick your favorite view." />
+  <link rel="canonical" href="https://www.eliraliving.com/travel-hanging-bag.html" />
+  <meta property="og:title" content="Travel Hanging Bag — ELIRA LIVING" />
+  <meta property="og:description" content="Compact organizer for tidy packing. Water-resistant, easy to hang, multiple compartments." />
+  <meta property="og:url" content="https://www.eliraliving.com/travel-hanging-bag.html" />
+  <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760640148/Travel_bag_-_Final_picture_1_q5cidb.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/images/favicon.png" type="image/png" />
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+  <!-- Page UI (gallery layout + animations) -->
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+    html { scroll-behavior: smooth; }
+
+    #header .logo .symbol img { height: 28px; width: auto; }
+    #header .inner { padding: 1.5rem 0 0; }
+    #header.shrink .inner { padding-top: .5rem; }
+    #header.shrink .logo .symbol img { height: 22px; }
+
+    .product-header.reveal h1 { margin-bottom: .4rem; }
+    .product-header.reveal p  { color:#666; }
+
+    .product-layout {
+      display: grid; gap: 28px;
+      grid-template-columns: 1.2fr 1fr; align-items: start;
+    }
+    @media (max-width: 980px) { .product-layout { grid-template-columns: 1fr; } }
+
+    .main-image { background:#fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .main-image .frame { width:100%; aspect-ratio: 1/1; background:#f5f5f5; position: relative; }
+    .main-image img {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      opacity:0; transform: scale(1.02);
+      transition: opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
+    }
+    .main-image img.show { opacity:1; transform: scale(1.0); }
+
+    .thumbs { margin-top:12px; display:grid; gap:10px; grid-template-columns: repeat(6, 1fr); }
+    @media (max-width: 980px) { .thumbs { grid-template-columns: repeat(6, 1fr); } }
+    @media (max-width: 600px) { .thumbs { grid-template-columns: repeat(5, 1fr); } }
+
+    .thumb {
+      position:relative; border:2px solid transparent; border-radius:10px; overflow:hidden;
+      background:#fff; cursor:pointer; transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,.06);
+    }
+    .thumb:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.10); }
+    .thumb[aria-selected="true"] { border-color:#5da3d6; }
+    .thumb img { width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
+
+    .details { background:#fff; border-radius:16px; padding:20px 22px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+    .details h2 { margin:0 0 .4rem; }
+    .details p  { color:#666; margin:0 0 1rem; }
+    .meta { display:flex; gap:12px; flex-wrap:wrap; color:#555; margin: .3rem 0 1rem; }
+    .meta .chip { background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em; border:1px solid #e0edf8; }
+
+    .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
+    .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
+
+    .reveal { opacity:0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
+    .reveal.appear { opacity:1; transform: translateY(0); }
+
+    #footer { background:#f7f7f7; }
+    #footer .inner { padding-top:2rem; padding-bottom:2rem; }
+    #footer h2 { font-size:1rem; letter-spacing:.18em; color:#444; }
+
+    img { aspect-ratio:auto; }
+  </style>
+</head>
+<body class="is-preload">
+  <div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+      <div class="inner">
+        <a href="index.html" class="logo">
+          <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
+          <span class="title">ELIRA LIVING</span>
+        </a>
+        <nav>
+          <ul><li><a href="#menu">Menu</a></li></ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu" aria-label="Site">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <hr />
+      <h3>Language</h3>
+      <ul>
+        <li><a href="/">EN</a></li>
+        <li><a href="/fi/">FI</a></li>
+        <li><a href="/sv/">SV</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+
+        <header class="product-header reveal">
+          <h1>Travel Hanging Bag</h1>
+          <p>Compact organizer with a swivel hook and smart compartments. See the photos below and pick your favorite view.</p>
+        </header>
+
+        <section class="product-layout reveal" aria-label="Travel Hanging Bag gallery">
+          <!-- LEFT: Main image + thumbnails -->
+          <div>
+            <div class="main-image">
+              <div class="frame">
+                <!-- Default image (Cloudinary, optimized) -->
+                <img id="mainImage" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760640148/Travel_bag_-_Final_picture_1_q5cidb.jpg" alt="Travel Hanging Bag — View 1" class="show">
+              </div>
+            </div>
+
+            <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a view">
+              <button class="thumb" data-index="1" aria-label="View 1" aria-selected="true">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760640148/Travel_bag_-_Final_picture_1_q5cidb.jpg" alt="View 1 thumbnail">
+              </button>
+              <button class="thumb" data-index="2" aria-label="View 2">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760640152/Travel_bag_-_Final_picture_2_hqutak.png" alt="View 2 thumbnail">
+              </button>
+              <button class="thumb" data-index="3" aria-label="View 3">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760640129/Final_3_hlh6kw.png" alt="View 3 thumbnail">
+              </button>
+            </div>
+          </div>
+
+          <!-- RIGHT: Details / CTA -->
+          <aside class="details" aria-live="polite">
+            <h2 id="styleTitle">View 1</h2>
+            <div class="meta">
+              <span class="chip">Water-resistant</span>
+              <span class="chip">Swivel hook</span>
+              <span class="chip">Multiple pockets</span>
+            </div>
+            <p id="styleDesc">Pack toiletries and small essentials neatly. Hang it in seconds and access everything without unpacking.</p>
+
+            <div class="actions">
+              <!-- Placeholder buttons; wire to Stripe later -->
+              <a href="#select" class="button primary icon solid fa-check">Add to cart</a>
+              <a href="index.html#products" class="button">Back to Products</a>
+            </div>
+
+            <hr />
+            <p><strong>Specs</strong><br>
+              Approx. size 24×18×10 cm (when closed). Wipe-clean lining. Zippers and mesh for quick visibility.</p>
+          </aside>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+        <section id="contact">
+          <h2>Get in touch</h2>
+          <p>Email: <a href="mailto:support@eliraliving.com">support@eliraliving.com</a></p>
+        </section>
+        <section>
+          <h2>Follow</h2>
+          <ul class="icons">
+            <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+            <li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+          </ul>
+        </section>
+        <ul class="copyright">
+          <li>&copy; ELIRA LIVING. All rights reserved.</li>
+          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts (template) -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Page interactions -->
+  <script>
+    // Mark page-loaded for timing
+    window.addEventListener('load', function () {
+      document.documentElement.classList.add('page-loaded');
+    });
+
+    // Reveal on scroll
+    (function () {
+      var items = [].slice.call(document.querySelectorAll('.reveal'));
+      if (!('IntersectionObserver' in window) || !items.length) {
+        items.forEach(function (el){ el.classList.add('appear'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      items.forEach(function (el){ io.observe(el); });
+    })();
+
+    // Header shrink
+    (function () {
+      var header = document.getElementById('header');
+      var last = 0;
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY || window.pageYOffset;
+        if (y > 24 && last <= 24) header.classList.add('shrink');
+        else if (y <= 24 && last > 24) header.classList.remove('shrink');
+        last = y;
+      }, { passive: true });
+    })();
+
+    // Cloudinary-based main image swap (3 views)
+    (function () {
+      var main  = document.getElementById('mainImage');
+      var title = document.getElementById('styleTitle');
+      var desc  = document.getElementById('styleDesc');
+
+      var full = [
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760640148/Travel_bag_-_Final_picture_1_q5cidb.jpg',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760640152/Travel_bag_-_Final_picture_2_hqutak.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760640129/Final_3_hlh6kw.png'
+      ];
+
+      var captions = [
+        'Front view with compartments.',
+        'Open layout with hanging hook.',
+        'Packed example / lifestyle view.'
+      ];
+
+      var current = 1;
+
+      function setActive(i) {
+        current = i;
+        var newSrc = full[i-1];
+        var newAlt = 'Travel Hanging Bag — View ' + i;
+
+        main.classList.remove('show');
+        var img = new Image();
+        img.onload = function(){
+          main.src = newSrc; main.alt = newAlt;
+          main.classList.add('show');
+        };
+        img.src = newSrc;
+
+        document.querySelectorAll('.thumb').forEach(function(t){ t.setAttribute('aria-selected','false'); });
+        var active = document.querySelector('.thumb[data-index="'+i+'"]');
+        if (active) active.setAttribute('aria-selected','true');
+
+        title.textContent = 'View ' + i;
+        desc.textContent  = captions[i-1] || 'Detail view.';
+      }
+
+      document.querySelectorAll('.thumb').forEach(function(btn){
+        btn.addEventListener('click', function(){ setActive(Number(btn.dataset.index)); });
+      });
+
+      // Optional keyboard navigation (left/right)
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'ArrowRight') setActive(((current) % 3) + 1);
+        if (e.key === 'ArrowLeft')  setActive(((current + 1) % 3) + 1);
+      });
+    })();
+  </script>
+</body>
+</html>
