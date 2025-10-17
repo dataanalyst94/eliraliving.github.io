@@ -76,8 +76,10 @@
       z-index: 5;
     }
     #header .inner { padding-top: .45rem; padding-bottom: .15rem; }
-    #header .logo .title { letter-spacing: .18em; font-weight: 600; }
-    #header .logo .symbol img { height: 22px; width: auto; }
+
+    /* >>> Make logo white (title + emblem image) */
+    #header .logo .title { letter-spacing: .18em; font-weight: 600; color: #fff !important; }
+    #header .logo .symbol img { height: 22px; width: auto; filter: brightness(0) invert(1); } /* force white */
     #header.shrink .inner { padding-top: .25rem; }
     #header.shrink .logo .symbol img { height: 21px; }
 
@@ -89,7 +91,8 @@
     /* ---------- FULL-BLEED HERO (zoom-proof) ---------- */
     .hero-fullbleed{
       position: relative;
-      /* Escape container: dynamic viewport width prevents zoom seams */
+
+      /* Escape container edges for true full-bleed */
       width: 100dvw;
       margin-left: calc(50% - 50dvw);
       margin-right: calc(50% - 50dvw);
@@ -98,7 +101,15 @@
       overflow: hidden;
       border-radius: 0;
       background: #000;
-      height: clamp(320px, 58vh, 680px);
+
+      /* >>> Use dynamic viewport height on larger screens to keep framing constant across zoom levels */
+      height: clamp(380px, 60vh, 680px);
+    }
+    @media (min-width: 980px){
+      .hero-fullbleed{
+        height: 100dvh;              /* fills the visible viewport at any zoom */
+        min-height: 520px;           /* prevents ultra-short windows from over-cropping */
+      }
     }
 
     .hero-fullbleed video,
@@ -108,6 +119,7 @@
       object-fit: cover;
       object-position: center;
       display: block;
+      will-change: transform;
     }
 
     /* Gradient for legibility */
