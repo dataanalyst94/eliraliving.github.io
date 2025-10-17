@@ -67,12 +67,15 @@
       letter-spacing: .006em;
     }
 
-    /* Header compact luxury */
-    #header .inner { padding-top: 1.1rem; padding-bottom: .4rem; }
+    /* Header compact luxury — tightened to reduce top white area */
+    #header .inner { padding-top: .55rem; padding-bottom: .15rem; }
     #header .logo .title { letter-spacing: .18em; font-weight: 600; }
-    #header .logo .symbol img { height: 28px; width: auto; }
-    #header.shrink .inner { padding-top: .35rem; }
+    #header .logo .symbol img { height: 24px; width: auto; }       /* was 28px */
+    #header.shrink .inner { padding-top: .25rem; }
     #header.shrink .logo .symbol img { height: 22px; }
+
+    /* Remove extra space above main content */
+    #main .inner { padding-top: 0 !important; }
 
     /* ---------- FULL-BLEED HERO ---------- */
     /* Make the hero escape the .inner container and span the entire viewport width */
@@ -82,11 +85,14 @@
       right: 50%;
       margin-left: -50vw;
       margin-right: -50vw;
-      width: 100vw;          /* true full bleed */
-      overflow: hidden;      /* hide any overflow */
-      border-radius: 0;      /* no borders/rounded corners for the video hero */
+      margin-top: 0;              /* keep tight to header */
+      /* If you want it even tighter, uncomment next line */
+      /* margin-top: -6px; */
+      width: 100vw;               /* true full bleed */
+      overflow: hidden;           /* hide any overflow */
+      border-radius: 0;           /* no borders/rounded corners for the video hero */
       box-shadow: none;
-      background: #000;      /* in case video hasn't loaded yet */
+      background: #000;           /* in case video hasn't loaded yet */
       height: clamp(320px, 58vh, 680px);
     }
 
