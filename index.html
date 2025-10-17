@@ -1,299 +1,403 @@
 <!DOCTYPE HTML>
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
-  html5up.net | @ajlkn
-  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Luxury skin + hero overlay + trust band
 -->
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>ELIRA LIVING — Travel & Home Essentials</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<head>
+  <meta charset="utf-8" />
+  <title>ELIRA LIVING — Travel & Home Essentials</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-    <!-- Basic SEO -->
-    <meta name="description" content="Curated travel organizers, bathrobes, and custom pillow cases. Four simple products, clear quality, no fuss." />
-    <link rel="canonical" href="https://www.eliraliving.com/" />
+  <!-- Basic SEO -->
+  <meta name="description" content="Curated travel organizers, bathrobes, and custom pillow cases. Four simple products, clear quality, no fuss." />
+  <link rel="canonical" href="https://www.eliraliving.com/" />
 
-    <!-- Social (Open Graph / Twitter) -->
-    <meta property="og:title" content="ELIRA LIVING — Travel & Home Essentials" />
-    <meta property="og:description" content="Curated travel organizers, bathrobes, and custom pillow cases. Four simple products, clear quality, no fuss." />
-    <meta property="og:url" content="https://www.eliraliving.com/" />
-    <meta property="og:image" content="https://www.eliraliving.com/images/hero.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
+  <!-- Social (Open Graph / Twitter) -->
+  <meta property="og:title" content="ELIRA LIVING — Travel & Home Essentials" />
+  <meta property="og:description" content="Curated travel organizers, bathrobes, and custom pillow cases. Four simple products, clear quality, no fuss." />
+  <meta property="og:url" content="https://www.eliraliving.com/" />
+  <meta property="og:image" content="https://www.eliraliving.com/images/hero.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Favicon (optional: add /images/favicon.png to your repo) -->
-    <link rel="icon" href="/images/favicon.png" type="image/png" />
+  <!-- Favicon -->
+  <link rel="icon" href="/images/favicon.png" type="image/png" />
 
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <!-- Fonts (luxury pairing) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
-    <!-- ===== UI POLISH & ANIMATIONS (overrides + effects) ===== -->
-    <style>
-      /* Motion safety */
-      @media (prefers-reduced-motion: reduce) {
-        * { animation: none !important; transition: none !important; }
-        html { scroll-behavior: auto; }
-      }
-      html { scroll-behavior: smooth; }
+  <!-- Preload hero for snappy paint -->
+  <link rel="preload" as="image" href="images/hero.jpg">
 
-      /* Header tightening + small shrink on scroll (CSS part) */
-      #header .logo .symbol img { height: 28px; width: auto; }
-      #header .inner { padding: 1.5rem 0 0; }
-      #header.shrink .inner { padding-top: .5rem; }
-      #header.shrink .logo .symbol img { height: 22px; }
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-      /* Hero image presence + soft rounded corners */
-      .hero-zoom { overflow: hidden; border-radius: 14px; }
-      .hero-zoom img {
-        width: 100%; height: 360px; object-fit: cover; border-radius: 14px;
-        transform: scale(1.05); opacity: 0;
-        transition: transform 1200ms cubic-bezier(.2,.6,.2,1), opacity 800ms ease;
-      }
-      .page-loaded .hero-zoom img { transform: scale(1.0); opacity: 1; }
-      @media (max-width: 768px){ .hero-zoom img { height: 220px; } }
+  <!-- ===== Luxury Skin + UI Polish ===== -->
+  <style>
+    /* Motion safety */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+    html { scroll-behavior: smooth; }
 
-      /* Typography + spacing */
-      h1 { font-size: 2.4rem; line-height: 1.15; margin: 0 0 .6rem; }
-      #main .inner > header p { font-size: 1.05rem; color: #666; margin-bottom: 1rem; }
-      #main .inner > header { margin-bottom: 1.2rem; }
+    /* ---------- Luxury theme tokens ---------- */
+    :root{
+      --lux-bg: #F8F6F3;
+      --lux-ink:#121212;
+      --lux-muted:#6B6B6B;
+      --lux-border:#E7E1D6;
+      --lux-card:#FFFFFF;
+      --lux-accent:#8A734E;           /* champagne */
+      --lux-shadow: 0 10px 28px rgba(18,18,18,.06);
+      --lux-shadow-lg: 0 18px 50px rgba(18,18,18,.08);
+      --radius-xl: 18px;
+    }
 
-      /* Tiles: uniform images, subtle shadow, hover lift */
-      .tiles article {
-        box-shadow: 0 6px 18px rgba(0,0,0,.06);
-        transform: translateY(0) rotate(0deg);
-        transition: transform 320ms cubic-bezier(.2,.6,.2,1), box-shadow 320ms ease, filter 320ms ease;
-        border-radius: 14px;
-        will-change: transform;
-      }
-      .tiles article:hover {
-        transform: translateY(-6px) rotate(-.25deg);
-        box-shadow: 0 12px 28px rgba(0,0,0,.10);
-        filter: saturate(1.03);
-      }
-      .tiles article .image img {
-        width:100%; height:220px; object-fit:cover; border-radius: 12px;
-      }
-      .tiles article a { border-radius: 12px; }
-      .tiles article h2 { letter-spacing: .08em; }
+    /* Base typography & background */
+    html, body { background: var(--lux-bg); color: var(--lux-ink); }
+    body, p, li, a, input, button {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    h1, h2, h3, .title {
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      letter-spacing: .01em;
+    }
 
-      /* Tile label bars: better contrast + slight slide */
-      .tiles article a:before {
-        transition: transform 280ms cubic-bezier(.2,.6,.2,1), opacity 280ms ease;
-        transform: translateY(6px);
-        opacity: .95;
-      }
-      .tiles article:hover a:before { transform: translateY(0); opacity: 1; }
-      .tiles article.style1 a:before { background: rgba(233,62,93,.88); }   /* pink */
-      .tiles article.style2 a:before { background: rgba(63,139,201,.88); }  /* blue */
-      .tiles article.style3 a:before { background: rgba(64,170,160,.88); }  /* teal */
-      .tiles article.style4 a:before { background: rgba(120,94,240,.88); }  /* purple */
+    /* Header compact luxury */
+    #header .inner { padding-top: 1.1rem; padding-bottom: .4rem; }
+    #header .logo .title { letter-spacing: .18em; font-weight: 600; }
+    #header .logo .symbol img { height: 28px; width: auto; }
+    #header.shrink .inner { padding-top: .35rem; }
+    #header.shrink .logo .symbol img { height: 22px; }
 
-      /* Reveal-on-scroll */
-      .reveal { opacity: 0; transform: translateY(18px);
-        transition: opacity 700ms ease, transform 700ms ease; }
-      .reveal.appear { opacity: 1; transform: translateY(0); }
+    /* ---------- HERO with overlay ---------- */
+    .hero {
+      position: relative; margin-top: .4rem;
+      border-radius: var(--radius-xl);
+      overflow: hidden; box-shadow: var(--lux-shadow);
+    }
+    .hero img {
+      width: 100%; height: 540px; object-fit: cover; display:block;
+      transform: scale(1.05); opacity: 0;
+      transition: transform 1200ms cubic-bezier(.2,.6,.2,1), opacity 800ms ease;
+    }
+    .page-loaded .hero img { transform: scale(1.0); opacity: 1; }
+    @media (max-width: 768px){ .hero img { height: 320px; } }
 
-      /* Buttons micro-press */
-      .button, .actions .button, a.button.primary {
-        transition: transform 180ms ease, box-shadow 180ms ease;
-      }
-      .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
-      .button:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(0,0,0,.10); }
+    .hero::after { /* soft gradient for text legibility */
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.28) 35%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+    }
+    .hero__content {
+      position: absolute; inset: 0; z-index: 2; display:flex; align-items:center;
+      padding: clamp(18px, 5vw, 48px);
+    }
+    .hero__copy {
+      max-width: 680px; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,.25);
+    }
+    .hero__copy h1 {
+      font-size: clamp(2.2rem, 4.2vw, 3.2rem); line-height: 1.08; margin: 0 0 .5rem;
+    }
+    .hero__copy p { margin: 0 0 1rem; font-size: 1.05rem; opacity: .95; }
+    .hero .button.primary {
+      background: var(--lux-accent); border-color: transparent; color:#fff;
+      border-radius: 999px; padding: .8rem 1.2rem;
+      box-shadow: 0 10px 26px rgba(138,115,78,.24);
+    }
 
-      /* Footer lighten */
-      #footer { background: #f7f7f7; }
-      #footer .inner { padding-top: 2rem; padding-bottom: 2rem; }
-      #footer h2 { font-size: 1rem; letter-spacing: .18em; color:#444; }
-      #footer .icons a { transition: transform 180ms ease, opacity 180ms ease; }
-      #footer .icons a:hover { transform: translateY(-2px); opacity:.9; }
+    /* ---------- Trust band ---------- */
+    .trust {
+      margin: 28px 0 8px; background: #fff; border:1px solid var(--lux-border);
+      border-radius: var(--radius-xl); box-shadow: var(--lux-shadow);
+    }
+    .trust__row { display:flex; gap: 22px; padding: 14px clamp(12px, 3vw, 22px); justify-content:center; flex-wrap:wrap; }
+    .trust__item { display:flex; align-items:center; gap:10px; color: var(--lux-ink); }
+    .trust__item svg { width:18px; height:18px; stroke: var(--lux-accent); }
 
-      /* Prevent layout shift while images load */
-      img { aspect-ratio: auto; }
-    </style>
-  </head>
-  <body class="is-preload">
-    <!-- Wrapper -->
-    <div id="wrapper">
+    /* ---------- Luxury tiles ---------- */
+    .tiles.tiles--lux { gap: 2.2rem !important; }
+    .tiles.tiles--lux article {
+      border-radius: var(--radius-xl);
+      box-shadow: var(--lux-shadow);
+      background: var(--lux-card);
+      overflow: hidden;
+      transition: transform 280ms cubic-bezier(.2,.6,.2,1), box-shadow 280ms ease, filter 280ms ease;
+      position: relative;
+    }
+    .tiles.tiles--lux article:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--lux-shadow-lg);
+      filter: saturate(1.03);
+    }
+    .tiles.tiles--lux article .image { margin: 0; }
+    .tiles.tiles--lux article .image img {
+      height: 260px; object-fit: cover; border-radius: 0;
+      transition: transform 600ms cubic-bezier(.2,.6,.2,1);
+      width: 100%;
+    }
+    .tiles.tiles--lux article:hover .image img { transform: scale(1.04); }
 
-      <!-- Header -->
-      <header id="header">
-        <div class="inner">
+    /* Remove Phantom colored label bars; add tasteful overlay */
+    .tiles.tiles--lux article a:before {
+      content: "";
+      position: absolute; left:0; right:0; bottom:0; height: 46%;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.28) 60%, rgba(0,0,0,.45) 100%);
+      opacity: 1; transform: none;
+    }
+    .tiles.tiles--lux article h2 {
+      position: absolute; left: 18px; bottom: 16px; z-index: 2;
+      margin: 0; padding: 6px 10px;
+      color: #fff; font-size: 0.95rem; letter-spacing: .18em; font-weight: 600;
+      background: rgba(18,18,18,.35); backdrop-filter: blur(3px);
+      border: 1px solid rgba(255,255,255,.25); border-radius: 10px;
+    }
+    .tiles.tiles--lux article .content {
+      position: absolute; left: 18px; bottom: 56px; right: 18px; z-index: 2;
+      color: #f0f0f0; font-size: .9rem; line-height: 1.35;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 260ms ease, transform 260ms ease;
+    }
+    .tiles.tiles--lux article:hover .content { opacity: 1; transform: translateY(0); }
 
-          <!-- Logo -->
-          <a href="index.html" class="logo">
-            <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
-            <span class="title">ELIRA LIVING</span>
-          </a>
+    /* Buttons */
+    .button, .actions .button, a.button.primary {
+      border-radius: 999px;
+      padding: .7rem 1.1rem;
+      border: 1px solid var(--lux-border);
+      transition: transform 180ms ease, box-shadow 180ms ease, filter 140ms ease;
+    }
+    .button.primary { background: var(--lux-accent); border-color: transparent; color:#fff; }
+    .button.primary:hover { filter: brightness(1.04); }
+    .button:hover { transform: translateY(-2px); box-shadow: var(--lux-shadow); }
 
-          <!-- Nav -->
-          <nav>
-            <ul>
-              <li><a href="#menu">Menu</a></li>
-            </ul>
-          </nav>
+    /* Section intro */
+    #main .inner > header .lede { color: var(--lux-muted); margin: .75rem 0 0; }
 
-        </div>
-      </header>
+    /* Footer refine */
+    #footer { background: transparent; border-top: 1px solid var(--lux-border); }
+    #footer .inner { padding-top: 2rem; padding-bottom: 2rem; }
+    #footer h2 { font-size: 0.95rem; letter-spacing: .22em; color:#444; }
+    #footer .icons a { transition: transform 180ms ease, opacity 180ms ease; }
+    #footer .icons a:hover { transform: translateY(-2px); opacity:.95; }
 
-      <!-- Menu -->
-      <nav id="menu">
-        <h2>Menu</h2>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <hr />
-        <h3>Language</h3>
-        <ul>
-          <li><a href="/">EN</a></li>
-          <li><a href="/fi/">FI</a></li>
-          <li><a href="/sv/">SV</a></li>
-        </ul>
-      </nav>
+    /* Reveal-on-scroll */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
+    .reveal.appear { opacity: 1; transform: translateY(0); }
 
-      <!-- Main -->
-      <div id="main">
-        <div class="inner">
-          <header class="reveal">
-            <h1>Everyday travel goods that simply work</h1>
-            <p>Curated essentials for tidy packing and cozy living. Four products, clear quality, no fuss.</p>
-            <span class="image main hero-zoom">
-              <!-- Make sure /images/hero.jpg exists (1600×900 recommended) -->
-              <img src="images/hero.jpg" alt="Travel and home essentials by ELIRA LIVING" />
-            </span>
-          </header>
+    /* Links */
+    a { color: var(--lux-ink); }
+    a:hover { color: var(--lux-accent); }
+  </style>
+</head>
+<body class="is-preload">
+  <div id="wrapper">
 
-          <section id="products" class="tiles reveal">
-
-            <!-- Product 1 -->
-            <article class="style1">
-              <span class="image">
-                <img src="images/travel-hanging-bag.jpg" alt="Travel Hanging Bag" />
-              </span>
-              <a href="travel-hanging-bag.html">
-                <h2>Travel Hanging Bag</h2>
-                <div class="content">
-                  <p>Compact organizer with smart compartments for clean, stress-free travel.</p>
-                </div>
-              </a>
-            </article>
-
-            <!-- Product 2 -->
-            <article class="style2">
-              <span class="image">
-                <img src="images/luggage-bag.jpg" alt="Luggage Bag" />
-              </span>
-              <a href="luggage-bag.html">
-                <h2>Luggage Bag</h2>
-                <div class="content">
-                  <p>Durable, lightweight luggage designed for smooth trips and easy handling.</p>
-                </div>
-              </a>
-            </article>
-
-            <!-- Product 3 -->
-            <article class="style3">
-              <span class="image">
-                <img src="images/customized-pillow-case.jpg" alt="Customized Pillow Case" />
-              </span>
-              <a href="customized-pillow-case.html">
-                <h2>Customized Pillow Case</h2>
-                <div class="content">
-                  <p>Personalized pillow cover with your name or design, made to order.</p>
-                </div>
-              </a>
-            </article>
-
-            <!-- Product 4 (NEW) -->
-            <article class="style4">
-              <span class="image">
-                <!-- Replace with your real image or Cloudinary URL -->
-                <img src="images/bathrobe.jpg" alt="Bathrobe" />
-              </span>
-              <a href="bathrobe.html">
-                <h2>Bathrobe</h2>
-                <div class="content">
-                  <p>Plush, absorbent, unisex bathrobe for cozy mornings and relaxed evenings.</p>
-                </div>
-              </a>
-            </article>
-
-          </section>
-        </div>
+    <!-- Header -->
+    <header id="header">
+      <div class="inner">
+        <a href="index.html" class="logo">
+          <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
+          <span class="title">ELIRA LIVING</span>
+        </a>
+        <nav><ul><li><a href="#menu">Menu</a></li></ul></nav>
       </div>
+    </header>
 
-      <!-- Footer -->
-      <footer id="footer">
-        <div class="inner">
-          <section id="contact">
-            <h2>Get in touch</h2>
-            <p>Email: <a href="mailto:support@eliraliving.com">support@eliraliving.com</a></p>
-          </section>
+    <!-- Menu -->
+    <nav id="menu">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <hr />
+      <h3>Language</h3>
+      <ul>
+        <li><a href="/">EN</a></li>
+        <li><a href="/fi/">FI</a></li>
+        <li><a href="/sv/">SV</a></li>
+      </ul>
+    </nav>
 
-          <section>
-            <h2>Follow</h2>
-            <ul class="icons">
-              <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-              <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-              <li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-              <li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-            </ul>
-          </section>
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
 
-          <ul class="copyright">
-            <li>&copy; ELIRA LIVING. All rights reserved.</li>
-            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-          </ul>
-        </div>
-      </footer>
+        <!-- HERO with overlay content -->
+        <section class="hero reveal" aria-label="Brand hero">
+          <img src="images/hero.jpg" alt="Travel and home essentials by ELIRA LIVING">
+          <div class="hero__content">
+            <div class="hero__copy">
+              <h1>Everyday goods for calm, tidy living.</h1>
+              <p class="lede">Designed in Finland. Durable materials, gentle on the eye. Four essentials—no fuss.</p>
+              <div class="actions"><a href="#products" class="button primary">Shop the collection</a></div>
+            </div>
+          </div>
+        </section>
 
+        <!-- TRUST BAND -->
+        <section class="trust reveal" aria-label="Trust and benefits">
+          <div class="trust__row">
+            <div class="trust__item">
+              <!-- Truck icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+                <path d="M3 7h10v8H3zM13 9h5l3 3v3h-8zM5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor"/>
+              </svg>
+              <span>Free shipping over €79</span>
+            </div>
+            <div class="trust__item">
+              <!-- Shield icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+                <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" stroke="currentColor"/>
+              </svg>
+              <span>2-year warranty</span>
+            </div>
+            <div class="trust__item">
+              <!-- Refresh icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+                <path d="M20 12a8 8 0 1 1-2.34-5.66M20 5v5h-5" stroke="currentColor"/>
+              </svg>
+              <span>30-day returns</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRODUCTS -->
+        <header class="reveal">
+          <p class="lede">Explore our bestsellers below.</p>
+        </header>
+
+        <section id="products" class="tiles tiles--lux reveal">
+
+          <!-- Travel Hanging Bag -->
+          <article>
+            <span class="image">
+              <img src="images/travel-hanging-bag.jpg" alt="Travel Hanging Bag">
+            </span>
+            <a href="travel-hanging-bag.html">
+              <h2>TRAVEL HANGING BAG</h2>
+              <div class="content">
+                <p>Compact organizer with smart compartments for clean, stress-free travel.</p>
+              </div>
+            </a>
+          </article>
+
+          <!-- Luggage Bag -->
+          <article>
+            <span class="image">
+              <img src="images/luggage-bag.jpg" alt="Luggage Bag">
+            </span>
+            <a href="luggage-bag.html">
+              <h2>LUGGAGE BAG</h2>
+              <div class="content">
+                <p>Durable, lightweight luggage designed for smooth trips and easy handling.</p>
+              </div>
+            </a>
+          </article>
+
+          <!-- Customized Pillow Case -->
+          <article>
+            <span class="image">
+              <img src="images/customized-pillow-case.jpg" alt="Customized Pillow Case">
+            </span>
+            <a href="customized-pillow-case.html">
+              <h2>CUSTOMIZED PILLOW CASE</h2>
+              <div class="content">
+                <p>Personalized pillow cover with your name or design, made to order.</p>
+              </div>
+            </a>
+          </article>
+
+          <!-- Bathrobe -->
+          <article>
+            <span class="image">
+              <img src="images/bathrobe.jpg" alt="Bathrobe">
+            </span>
+            <a href="bathrobe.html">
+              <h2>BATHROBE</h2>
+              <div class="content">
+                <p>Plush, absorbent, unisex bathrobe for cozy mornings and relaxed evenings.</p>
+              </div>
+            </a>
+          </article>
+
+        </section>
+
+      </div>
     </div>
 
-    <!-- Scripts (template) -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+        <section id="contact">
+          <h2>Get in touch</h2>
+          <p>Email: <a href="mailto:support@eliraliving.com">support@eliraliving.com</a></p>
+        </section>
+        <section>
+          <h2>Follow</h2>
+          <ul class="icons">
+            <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+            <li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+          </ul>
+        </section>
+        <ul class="copyright">
+          <li>&copy; ELIRA LIVING. All rights reserved.</li>
+          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </footer>
 
-    <!-- ===== UI INTERACTIONS (safe, lightweight) ===== -->
-    <script>
-      // Mark page-loaded for hero zoom-in
-      window.addEventListener('load', function () {
-        document.documentElement.classList.add('page-loaded');
-      });
+  </div>
 
-      // Reveal on scroll (fade-up)
-      (function () {
-        var items = [].slice.call(document.querySelectorAll('.reveal'));
-        if (!('IntersectionObserver' in window) || !items.length) {
-          items.forEach(function (el){ el.classList.add('appear'); });
-          return;
-        }
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('appear');
-              io.unobserve(entry.target);
-            }
-          });
-        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
-        items.forEach(function (el){ io.observe(el); });
-      })();
+  <!-- Scripts (template) -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
 
-      // Header shrink on scroll
-      (function () {
-        var header = document.getElementById('header');
-        var last = 0;
-        window.addEventListener('scroll', function () {
-          var y = window.scrollY || window.pageYOffset;
-          if (y > 24 && last <= 24) header.classList.add('shrink');
-          else if (y <= 24 && last > 24) header.classList.remove('shrink');
-          last = y;
-        }, { passive: true });
-      })();
-    </script>
-  </body>
+  <!-- Interactions (reveal + header shrink) -->
+  <script>
+    // Page-loaded (for hero zoom)
+    window.addEventListener('load', function () {
+      document.documentElement.classList.add('page-loaded');
+    });
+
+    // Reveal on scroll
+    (function () {
+      var items = [].slice.call(document.querySelectorAll('.reveal'));
+      if (!('IntersectionObserver' in window) || !items.length) {
+        items.forEach(function (el){ el.classList.add('appear'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      items.forEach(function (el){ io.observe(el); });
+    })();
+
+    // Header shrink on scroll
+    (function () {
+      var header = document.getElementById('header');
+      var last = 0;
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY || window.pageYOffset;
+        if (y > 24 && last <= 24) header.classList.add('shrink');
+        else if (y <= 24 && last > 24) header.classList.remove('shrink');
+        last = y;
+      }, { passive: true });
+    })();
+  </script>
+</body>
 </html>
