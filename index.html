@@ -17,7 +17,6 @@
   <meta property="og:title" content="ELIRA LIVING — Travel & Home Essentials" />
   <meta property="og:description" content="Curated travel organizers, bathrobes, and custom pillow cases. Four simple products, clear quality, no fuss." />
   <meta property="og:url" content="https://www.eliraliving.com/" />
-  <!-- Use poster as the OG image -->
   <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1600/v1760713090/pexels-olly-3756045_chihfn.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -27,7 +26,7 @@
   <!-- Fonts (luxury pairing) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 
-  <!-- Preload hero poster for snappy paint -->
+  <!-- Preload poster for quick paint -->
   <link rel="preload" as="image" href="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1600/v1760713090/pexels-olly-3756045_chihfn.jpg">
 
   <!-- Template CSS -->
@@ -75,74 +74,73 @@
     #header.shrink .inner { padding-top: .35rem; }
     #header.shrink .logo .symbol img { height: 22px; }
 
-    /* ---------- Full-bleed helper ---------- */
-    .full-bleed{
+    /* ---------- FULL-BLEED HERO ---------- */
+    /* Make the hero escape the .inner container and span the entire viewport width */
+    .hero-fullbleed {
       position: relative;
       left: 50%;
       right: 50%;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      width: 100vw;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      width: 100vw;          /* true full bleed */
+      overflow: hidden;      /* hide any overflow */
+      border-radius: 0;      /* no borders/rounded corners for the video hero */
+      box-shadow: none;
+      background: #000;      /* in case video hasn't loaded yet */
+      height: clamp(320px, 58vh, 680px);
     }
 
-    /* ---------- HERO (supports video or image) ---------- */
-    .hero {
-      position: relative;
-      margin-top: .4rem;
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      box-shadow: var(--lux-shadow);
-      height: 540px; /* control block height; media fills it */
-    }
-    @media (max-width: 768px){
-      .hero { height: 320px; }
+    /* The video fills the hero and keeps consistent framing at all zoom levels */
+    .hero-fullbleed video,
+    .hero-fullbleed .hero-poster {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;           /* fill without letterboxing */
+      object-position: center;     /* keep composition centered */
+      display: block;
     }
 
-    .hero__media{ position:absolute; inset:0; overflow:hidden; }
-    .hero__media video, .hero__media img{
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; display:block;
-      transform: scale(1.05); opacity: 0;
-      transition: transform 1200ms cubic-bezier(.2,.6,.2,1), opacity 800ms ease;
-    }
-    .page-loaded .hero__media video,
-    .page-loaded .hero__media img{ transform: scale(1.0); opacity: 1; }
-
-    .hero::after { /* soft gradient for text legibility */
-      content:""; position:absolute; inset:0;
-      background: linear-gradient(90deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.28) 35%, rgba(0,0,0,0) 70%);
+    /* Gradient overlay for text legibility */
+    .hero-fullbleed::after {
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 38%, rgba(0,0,0,0) 70%);
       pointer-events: none;
     }
+
+    /* Overlaid copy block */
     .hero__content {
       position: absolute; inset: 0; z-index: 2; display:flex; align-items:center;
       padding: clamp(18px, 5vw, 48px);
     }
     .hero__copy {
-      max-width: 680px; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,.25);
+      max-width: 820px; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,.25);
     }
     .hero__copy h1 {
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      line-height: 1.05;
-      margin: 0 0 .55rem;
+      font-size: clamp(2.2rem, 5.4vw, 4.2rem);
+      line-height: 1.04;
+      margin: 0 0 .6rem;
       font-weight: 600;
     }
-    .hero__copy p { margin: 0 0 1rem; font-size: 1.05rem; opacity: .95; }
-    .hero .button.primary {
-      display: inline-flex; align-items:center; justify-content:center;
-      background: var(--lux-accent); border-color: transparent; color:#fff;
-      border-radius: 999px; padding: .9rem 1.4rem;
-      box-shadow: 0 10px 26px rgba(138,115,78,.24);
-      letter-spacing: .18em; text-transform: uppercase; font-weight: 600;
-      text-align: center;
-    }
+    .hero__copy p { margin: 0 0 1.1rem; font-size: clamp(1rem, 1.4vw, 1.2rem); opacity: .95; }
 
-    /* If the user prefers less motion or reduced data, hide the video and let the poster show */
-    @media (prefers-reduced-motion: reduce){
-      .hero__media video{ display:none; }
+    /* Buttons — perfectly centered text */
+    .button, .actions .button, a.button.primary {
+      display: inline-flex;               /* ensures perfect centering */
+      align-items: center;                /* vertical center */
+      justify-content: center;            /* horizontal center */
+      text-align: center;                 /* text center */
+      border-radius: 999px;
+      padding: .9rem 1.4rem;
+      border: 1px solid var(--lux-border);
+      transition: transform 180ms ease, box-shadow 180ms ease, filter 140ms ease;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 600;
     }
-    @media (prefers-reduced-data: reduce){
-      .hero__media video{ display:none; }
-    }
+    .button.primary { background: var(--lux-accent); border-color: transparent; color:#fff; }
+    .button.primary:hover { filter: brightness(1.04); }
+    .button:hover { transform: translateY(-2px); box-shadow: var(--lux-shadow); }
 
     /* ---------- Trust band ---------- */
     .trust {
@@ -175,13 +173,11 @@
       width: 100%;
     }
     .tiles.tiles--lux article:hover .image img { transform: scale(1.04); }
-
-    /* Remove Phantom colored label bars; add tasteful overlay */
     .tiles.tiles--lux article a:before {
       content: "";
       position: absolute; left:0; right:0; bottom:0; height: 46%;
       background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.28) 60%, rgba(0,0,0,.45) 100%);
-      opacity: 1; transform: none;
+      opacity: 1;
     }
     .tiles.tiles--lux article h2 {
       position: absolute; left: 18px; bottom: 16px; z-index: 2;
@@ -197,14 +193,6 @@
       transition: opacity 260ms ease, transform 260ms ease;
     }
     .tiles.tiles--lux article:hover .content { opacity: 1; transform: translateY(0); }
-
-    /* Buttons (fallback styles shared elsewhere) */
-    .button, .actions .button, a.button.primary {
-      border: 1px solid var(--lux-border);
-      transition: transform 180ms ease, box-shadow 180ms ease, filter 140ms ease;
-    }
-    .button.primary:hover { filter: brightness(1.04); }
-    .button:hover { transform: translateY(-2px); box-shadow: var(--lux-shadow); }
 
     /* Section intro */
     #main .inner > header .lede { color: var(--lux-muted); margin: .75rem 0 0; }
@@ -223,6 +211,12 @@
     /* Links */
     a { color: var(--lux-ink); }
     a:hover { color: var(--lux-accent); }
+
+    /* Respect "Reduce motion": hide video, show poster */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-fullbleed video { display: none !important; }
+      .hero-fullbleed .hero-poster { display: block !important; opacity: 1 !important; }
+    }
   </style>
 </head>
 <body class="is-preload">
@@ -260,29 +254,30 @@
     <div id="main">
       <div class="inner">
 
-        <!-- HERO — Full-bleed background video -->
-        <section class="hero full-bleed reveal" aria-label="Brand hero">
-          <div class="hero__media" aria-hidden="true">
-            <video
-              autoplay
-              muted
-              playsinline
-              loop
-              preload="metadata"
-              poster="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1600/v1760713090/pexels-olly-3756045_chihfn.jpg"
-            >
-              <source src="https://res.cloudinary.com/dkk8ohmu7/video/upload/v1760725624/9145751-uhd_4096_2160_25fps_imqp8n.mp4" type="video/mp4">
-              <!-- Optional: add a WebM version if you upload one later -->
-            </video>
-          </div>
+        <!-- ===== FULL-BLEED VIDEO HERO ===== -->
+        <section class="hero-fullbleed reveal" aria-label="Brand hero">
+          <!-- Play the Cloudinary video -->
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            poster="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1600/v1760713090/pexels-olly-3756045_chihfn.jpg">
+            <source src="https://res.cloudinary.com/dkk8ohmu7/video/upload/v1760725624/9145751-uhd_4096_2160_25fps_imqp8n.mp4" type="video/mp4" />
+          </video>
 
+          <!-- Poster fallback for no-video / reduce-motion -->
+          <img class="hero-poster" alt="" aria-hidden="true"
+               src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_2000/v1760713090/pexels-olly-3756045_chihfn.jpg"
+               style="opacity:0" />
+
+          <!-- Copy overlay -->
           <div class="hero__content">
             <div class="hero__copy">
               <h1>Everyday goods for calm, tidy living.</h1>
               <p class="lede">Designed in Finland. Durable materials, gentle on the eye. Four essentials—no fuss.</p>
-              <div class="actions">
-                <a href="#products" class="button primary">Shop the collection</a>
-              </div>
+              <div class="actions"><a href="#products" class="button primary">Shop the collection</a></div>
             </div>
           </div>
         </section>
@@ -412,7 +407,7 @@
 
   <!-- Interactions (reveal + header shrink) -->
   <script>
-    // Page-loaded (for hero media zoom-in)
+    // Page-loaded (for subtle transitions)
     window.addEventListener('load', function () {
       document.documentElement.classList.add('page-loaded');
     });
