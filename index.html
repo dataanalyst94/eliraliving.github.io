@@ -223,6 +223,32 @@
       .hero-fullbleed video { display: none !important; }
       .hero-fullbleed .hero-poster { display: block !important; opacity: 1 !important; }
     }
+    /* ===== Kill the extra top white space ===== */
+html, body { margin: 0; padding: 0; }
+
+#wrapper { padding-top: 0 !important; }        /* some skins add top padding */
+#main      { padding-top: 0 !important; }
+#main .inner { padding-top: 0 !important; }
+
+#header {
+  position: absolute;           /* overlay the hero */
+  top: 0; left: 0; right: 0;
+  background: transparent;      /* no header background strip */
+  border: 0; box-shadow: none;
+  margin: 0 !important;
+}
+#header .inner {                 /* tighten header height */
+  padding-top: .4rem !important;
+  padding-bottom: .15rem !important;
+}
+#header .logo .symbol img { height: 22px; }  /* slightly smaller mark */
+
+/* make sure the hero sits flush under the header */
+.hero-fullbleed { 
+  margin-top: 0 !important;
+  /* if you still see a hairline gap on some browsers, nudge it up a touch: */
+  /* margin-top: -6px; */
+}
   </style>
 </head>
 <body class="is-preload">
@@ -450,3 +476,4 @@
   </script>
 </body>
 </html>
+
