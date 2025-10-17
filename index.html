@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
-  Luxury skin + full-bleed video hero + trust band
+  Luxury skin + full-bleed video hero + trust band + floating collage products
 -->
 <html lang="en">
 <head>
@@ -78,7 +78,7 @@
 
     /* Header pinned (logo/menu stay fixed at one spot) */
     #header {
-      position: fixed;                  /* fixed instead of absolute */
+      position: fixed;
       top: 0; left: 0; right: 0;
       background: transparent;
       border: 0; box-shadow: none;
@@ -102,18 +102,13 @@
     /* ---------- FULL-BLEED HERO (zoom-proof, shorter) ---------- */
     .hero-fullbleed{
       position: relative;
-
-      /* true full-bleed horizontally */
       width: 100dvw;
       margin-left: calc(50% - 50dvw);
       margin-right: calc(50% - 50dvw);
       margin-top: 0 !important;
-
       overflow: hidden;
       border-radius: 0;
       background: #000;
-
-      /* ~40% of viewport */
       height: clamp(280px, 40vh, 520px);
     }
     @media (min-width: 980px){
@@ -123,7 +118,6 @@
         max-height: 560px;
       }
     }
-
     .hero-fullbleed video,
     .hero-fullbleed .hero-poster{
       position: absolute; inset: 0;
@@ -176,39 +170,68 @@
     .trust__item { display:flex; align-items:center; gap:10px; color: var(--lux-ink); }
     .trust__item svg { width:18px; height:18px; stroke: var(--lux-accent); }
 
-    /* Product tiles */
-    .tiles.tiles--lux { gap: 2.2rem !important; }
-    .tiles.tiles--lux article {
-      border-radius: var(--radius-xl);
-      box-shadow: var(--lux-shadow);
-      background: var(--lux-card);
-      overflow: hidden;
-      transition: transform 280ms cubic-bezier(.2,.6,.2,1), box-shadow 280ms ease, filter 280ms ease;
+    /* ---------- FLOATING STILL-LIFE COLLAGE (Products) ---------- */
+    .floating-collage{
       position: relative;
+      width: 100dvw;
+      margin-left: calc(50% - 50dvw);
+      margin-right: calc(50% - 50dvw);
+      background: #EDE6DA; /* linen tone */
+      background-image:
+        radial-gradient(1000px 600px at 20% 0%, rgba(0,0,0,.05) 0, rgba(0,0,0,0) 60%),
+        radial-gradient(800px 500px at 100% 100%, rgba(0,0,0,.05) 0, rgba(0,0,0,0) 65%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0, rgba(255,255,255,.04) 2px, rgba(0,0,0,.02) 2px, rgba(0,0,0,.02) 3px);
+      border-top: 1px solid var(--lux-border);
+      border-bottom: 1px solid var(--lux-border);
+      padding: clamp(36px, 7vw, 84px) clamp(16px, 6vw, 72px);
+      overflow: hidden;
     }
-    .tiles.tiles--lux article:hover { transform: translateY(-6px); box-shadow: var(--lux-shadow-lg); filter: saturate(1.03); }
-    .tiles.tiles--lux article .image { margin: 0; }
-    .tiles.tiles--lux article .image img {
-      height: 260px; object-fit: cover; border-radius: 0;
-      transition: transform 600ms cubic-bezier(.2,.6,.2,1); width: 100%;
+
+    .collage{
+      position: relative;
+      max-width: 1280px;
+      margin: 0 auto;
+      min-height: clamp(520px, 56vw, 760px);
     }
-    .tiles.tiles--lux article:hover .image img { transform: scale(1.04); }
-    .tiles.tiles--lux article a:before {
-      content: ""; position: absolute; left:0; right:0; bottom:0; height: 46%;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.28) 60%, rgba(0,0,0,.45) 100%); opacity: 1;
+    .collage figure{
+      position: absolute;
+      margin: 0;
+      transform-origin: center center;
+      transition: transform 600ms cubic-bezier(.2,.6,.2,1), filter 600ms cubic-bezier(.2,.6,.2,1);
     }
-    .tiles.tiles--lux article h2 {
-      position: absolute; left: 18px; bottom: 16px; z-index: 2;
-      margin: 0; padding: 6px 10px; color: #fff; font-size: 0.95rem; letter-spacing: .18em; font-weight: 600;
-      background: rgba(18,18,18,.35); backdrop-filter: blur(3px);
-      border: 1px solid rgba(255,255,255,.25); border-radius: 10px;
+    .collage img{
+      display: block; width: 100%; height: auto;
+      filter: brightness(.98) contrast(1.05);
+      will-change: transform, filter;
     }
-    .tiles.tiles--lux article .content {
-      position: absolute; left: 18px; bottom: 56px; right: 18px; z-index: 2;
-      color: #f0f0f0; font-size: .9rem; line-height: 1.35;
-      opacity: 0; transform: translateY(6px); transition: opacity 260ms ease, transform 260ms ease;
+    .collage figcaption{
+      position: absolute; left: 10px; bottom: 10px;
+      font-family: "Fraunces", Georgia, serif; font-weight: 600;
+      letter-spacing: .12em; font-size: .9rem;
+      color: rgba(18,18,18,.86);
+      background: rgba(255,255,255,.35); backdrop-filter: blur(2px);
+      padding: 6px 10px; border-radius: 10px; border: 1px solid rgba(0,0,0,.08);
     }
-    .tiles.tiles--lux article:hover .content { opacity: 1; transform: translateY(0); }
+
+    /* Hover: soft lift + cinematic tint */
+    .collage figure:hover{
+      transform: translateY(-6px) scale(1.03);
+      filter: brightness(1.05) sepia(.10) contrast(1.06);
+    }
+
+    /* Staggered desktop positions */
+    @media (min-width: 980px){
+      .item-travel{  width: 26%; left: 2%;  top: 8%;  }
+      .item-luggage{ width: 34%; left: 34%; top: 18%; }
+      .item-robe{    width: 28%; right: 4%; top: 6%;  }
+    }
+
+    /* Mobile: stack elegantly */
+    @media (max-width: 979.98px){
+      .collage{ min-height: auto; }
+      .collage figure{ position: relative; width: min(520px, 92vw); margin: 0 auto 32px; }
+      .collage figcaption{ left: 12px; bottom: 12px; }
+    }
 
     /* Section intro */
     #main .inner > header .lede { color: var(--lux-muted); margin: .75rem 0 0; }
@@ -244,8 +267,7 @@
       margin:0 !important; z-index: 60; pointer-events:none;
     }
     /* Neutralize shrink jump altogether */
-    #header .inner,
-    #header.shrink .inner{ padding-top:.45rem; padding-bottom:.15rem; }
+    #header .inner, #header.shrink .inner{ padding-top:.45rem; padding-bottom:.15rem; }
 
     /* Pin the logo to an exact viewport spot */
     #header .logo{
@@ -359,52 +381,43 @@
           </div>
         </section>
 
-        <!-- PRODUCTS -->
+        <!-- PRODUCTS (Floating Still-Life Collage) -->
         <header class="reveal">
           <p class="lede">Explore our bestsellers below.</p>
         </header>
 
-        <section id="products" class="tiles tiles--lux reveal">
+        <section id="products" class="floating-collage reveal" aria-label="Products">
+          <div class="collage" role="list">
+            <!-- Travel Hanging Bag -->
+            <figure class="item-travel" role="listitem">
+              <a href="travel-hanging-bag.html" aria-label="Travel Hanging Bag">
+                <img
+                  src="https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760737686/ChatGPT_Image_Oct_18_2025_12_47_41_AM_qskvhg.png"
+                  alt="Travel hanging bag, floating still-life on beige linen background">
+                <figcaption>TRAVEL HANGING BAG</figcaption>
+              </a>
+            </figure>
 
-          <!-- Travel Hanging Bag -->
-          <article>
-            <span class="image">
-              <img src="https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760737686/ChatGPT_Image_Oct_18_2025_12_47_41_AM_qskvhg.png" alt="Travel Hanging Bag">
-            </span>
-            <a href="travel-hanging-bag.html">
-              <h2>TRAVEL HANGING BAG</h2>
-              <div class="content">
-                <p>Compact organizer with smart compartments for clean, stress-free travel.</p>
-              </div>
-            </a>
-          </article>
+            <!-- Luggage Bag -->
+            <figure class="item-luggage" role="listitem">
+              <a href="luggage-bag.html" aria-label="Luggage Bag">
+                <img
+                  src="https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760738138/ChatGPT_Image_Oct_18_2025_12_55_24_AM_ckzyo9.png"
+                  alt="Luggage bag with extended handle, floating still-life on beige linen background">
+                <figcaption>LUGGAGE BAG</figcaption>
+              </a>
+            </figure>
 
-          <!-- Luggage Bag -->
-          <article>
-            <span class="image">
-              <img src="https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760738138/ChatGPT_Image_Oct_18_2025_12_55_24_AM_ckzyo9.png" alt="Luggage Bag">
-            </span>
-            <a href="luggage-bag.html">
-              <h2>LUGGAGE BAG</h2>
-              <div class="content">
-                <p>Durable, lightweight luggage designed for smooth trips and easy handling.</p>
-              </div>
-            </a>
-          </article>
-
-          <!-- Bathrobe -->
-          <article>
-            <span class="image">
-              <img src="https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760739101/ChatGPT_Image_Oct_18_2025_01_11_32_AM_lvmzd0.png" alt="Bathrobe">
-            </span>
-            <a href="bathrobe.html">
-              <h2>BATHROBE</h2>
-              <div class="content">
-                <p>Plush, absorbent, unisex bathrobe for cozy mornings and relaxed evenings.</p>
-              </div>
-            </a>
-          </article>
-
+            <!-- Bathrobe -->
+            <figure class="item-robe" role="listitem">
+              <a href="bathrobe.html" aria-label="Bathrobe">
+                <img
+                  src="https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760739101/ChatGPT_Image_Oct_18_2025_01_11_32_AM_lvmzd0.png"
+                  alt="Dark blue bathrobe in floating still-life on beige linen background">
+                <figcaption>BATHROBE</figcaption>
+              </a>
+            </figure>
+          </div>
         </section>
 
       </div>
@@ -481,4 +494,3 @@
   </script>
 </body>
 </html>
-
