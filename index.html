@@ -55,66 +55,70 @@
       --radius-xl: 18px;
     }
 
-    /* Base typography & background */
-    html, body { background: var(--lux-bg); color: var(--lux-ink); }
+    /* Base */
+    html, body { background: var(--lux-bg); color: var(--lux-ink); margin:0; padding:0; overflow-x:hidden; }
     body, p, li, a, input, button {
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
     }
     h1, h2, h3, .title {
-      /* Premium display face for headings */
       font-family: "Fraunces", Georgia, "Times New Roman", serif;
       font-variation-settings: "opsz" 96;
       letter-spacing: .006em;
     }
 
-    /* Header compact luxury — tightened to reduce top white area */
-    #header .inner { padding-top: .55rem; padding-bottom: .15rem; }
+    /* Header compact luxury — overlay hero to remove top white band */
+    #header {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      background: transparent;
+      border: 0; box-shadow: none;
+      margin: 0 !important;
+      z-index: 5;
+    }
+    #header .inner { padding-top: .45rem; padding-bottom: .15rem; }
     #header .logo .title { letter-spacing: .18em; font-weight: 600; }
-    #header .logo .symbol img { height: 24px; width: auto; }       /* was 28px */
+    #header .logo .symbol img { height: 22px; width: auto; }
     #header.shrink .inner { padding-top: .25rem; }
-    #header.shrink .logo .symbol img { height: 22px; }
+    #header.shrink .logo .symbol img { height: 21px; }
 
     /* Remove extra space above main content */
+    #wrapper { padding-top: 0 !important; }
+    #main { padding-top: 0 !important; }
     #main .inner { padding-top: 0 !important; }
 
-    /* ---------- FULL-BLEED HERO ---------- */
-    /* Make the hero escape the .inner container and span the entire viewport width */
-    .hero-fullbleed {
+    /* ---------- FULL-BLEED HERO (zoom-proof) ---------- */
+    .hero-fullbleed{
       position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
-      margin-top: 0;              /* keep tight to header */
-      /* If you want it even tighter, uncomment next line */
-      /* margin-top: -6px; */
-      width: 100vw;               /* true full bleed */
-      overflow: hidden;           /* hide any overflow */
-      border-radius: 0;           /* no borders/rounded corners for the video hero */
-      box-shadow: none;
-      background: #000;           /* in case video hasn't loaded yet */
+      /* Escape container: dynamic viewport width prevents zoom seams */
+      width: 100dvw;
+      margin-left: calc(50% - 50dvw);
+      margin-right: calc(50% - 50dvw);
+      margin-top: 0 !important;
+
+      overflow: hidden;
+      border-radius: 0;
+      background: #000;
       height: clamp(320px, 58vh, 680px);
     }
 
-    /* The video fills the hero and keeps consistent framing at all zoom levels */
     .hero-fullbleed video,
-    .hero-fullbleed .hero-poster {
+    .hero-fullbleed .hero-poster{
       position: absolute; inset: 0;
       width: 100%; height: 100%;
-      object-fit: cover;           /* fill without letterboxing */
-      object-position: center;     /* keep composition centered */
+      object-fit: cover;
+      object-position: center;
       display: block;
     }
 
-    /* Gradient overlay for text legibility */
-    .hero-fullbleed::after {
+    /* Gradient for legibility */
+    .hero-fullbleed::after{
       content:"";
       position:absolute; inset:0;
       background: linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 38%, rgba(0,0,0,0) 70%);
       pointer-events: none;
     }
 
-    /* Overlaid copy block */
+    /* Overlay copy */
     .hero__content {
       position: absolute; inset: 0; z-index: 2; display:flex; align-items:center;
       padding: clamp(18px, 5vw, 48px);
@@ -130,34 +134,26 @@
     }
     .hero__copy p { margin: 0 0 1.1rem; font-size: clamp(1rem, 1.4vw, 1.2rem); opacity: .95; }
 
-    /* Buttons — perfectly centered text */
+    /* Buttons */
     .button, .actions .button, a.button.primary {
-      display: inline-flex;               /* ensures perfect centering */
-      align-items: center;                /* vertical center */
-      justify-content: center;            /* horizontal center */
-      text-align: center;                 /* text center */
-      border-radius: 999px;
-      padding: .9rem 1.4rem;
+      display: inline-flex; align-items: center; justify-content: center; text-align: center;
+      border-radius: 999px; padding: .9rem 1.4rem;
       border: 1px solid var(--lux-border);
       transition: transform 180ms ease, box-shadow 180ms ease, filter 140ms ease;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase; font-weight: 600;
     }
     .button.primary { background: var(--lux-accent); border-color: transparent; color:#fff; }
     .button.primary:hover { filter: brightness(1.04); }
     .button:hover { transform: translateY(-2px); box-shadow: var(--lux-shadow); }
 
-    /* ---------- Trust band ---------- */
-    .trust {
-      margin: 28px 0 8px; background: #fff; border:1px solid var(--lux-border);
-      border-radius: var(--radius-xl); box-shadow: var(--lux-shadow);
-    }
+    /* Trust band */
+    .trust { margin: 28px 0 8px; background: #fff; border:1px solid var(--lux-border);
+      border-radius: var(--radius-xl); box-shadow: var(--lux-shadow); }
     .trust__row { display:flex; gap: 22px; padding: 14px clamp(12px, 3vw, 22px); justify-content:center; flex-wrap:wrap; }
     .trust__item { display:flex; align-items:center; gap:10px; color: var(--lux-ink); }
     .trust__item svg { width:18px; height:18px; stroke: var(--lux-accent); }
 
-    /* ---------- Luxury tiles ---------- */
+    /* Product tiles */
     .tiles.tiles--lux { gap: 2.2rem !important; }
     .tiles.tiles--lux article {
       border-radius: var(--radius-xl);
@@ -167,43 +163,34 @@
       transition: transform 280ms cubic-bezier(.2,.6,.2,1), box-shadow 280ms ease, filter 280ms ease;
       position: relative;
     }
-    .tiles.tiles--lux article:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--lux-shadow-lg);
-      filter: saturate(1.03);
-    }
+    .tiles.tiles--lux article:hover { transform: translateY(-6px); box-shadow: var(--lux-shadow-lg); filter: saturate(1.03); }
     .tiles.tiles--lux article .image { margin: 0; }
     .tiles.tiles--lux article .image img {
       height: 260px; object-fit: cover; border-radius: 0;
-      transition: transform 600ms cubic-bezier(.2,.6,.2,1);
-      width: 100%;
+      transition: transform 600ms cubic-bezier(.2,.6,.2,1); width: 100%;
     }
     .tiles.tiles--lux article:hover .image img { transform: scale(1.04); }
     .tiles.tiles--lux article a:before {
-      content: "";
-      position: absolute; left:0; right:0; bottom:0; height: 46%;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.28) 60%, rgba(0,0,0,.45) 100%);
-      opacity: 1;
+      content: ""; position: absolute; left:0; right:0; bottom:0; height: 46%;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.28) 60%, rgba(0,0,0,.45) 100%); opacity: 1;
     }
     .tiles.tiles--lux article h2 {
       position: absolute; left: 18px; bottom: 16px; z-index: 2;
-      margin: 0; padding: 6px 10px;
-      color: #fff; font-size: 0.95rem; letter-spacing: .18em; font-weight: 600;
+      margin: 0; padding: 6px 10px; color: #fff; font-size: 0.95rem; letter-spacing: .18em; font-weight: 600;
       background: rgba(18,18,18,.35); backdrop-filter: blur(3px);
       border: 1px solid rgba(255,255,255,.25); border-radius: 10px;
     }
     .tiles.tiles--lux article .content {
       position: absolute; left: 18px; bottom: 56px; right: 18px; z-index: 2;
       color: #f0f0f0; font-size: .9rem; line-height: 1.35;
-      opacity: 0; transform: translateY(6px);
-      transition: opacity 260ms ease, transform 260ms ease;
+      opacity: 0; transform: translateY(6px); transition: opacity 260ms ease, transform 260ms ease;
     }
     .tiles.tiles--lux article:hover .content { opacity: 1; transform: translateY(0); }
 
     /* Section intro */
     #main .inner > header .lede { color: var(--lux-muted); margin: .75rem 0 0; }
 
-    /* Footer refine */
+    /* Footer */
     #footer { background: transparent; border-top: 1px solid var(--lux-border); }
     #footer .inner { padding-top: 2rem; padding-bottom: 2rem; }
     #footer h2 { font-size: 0.95rem; letter-spacing: .22em; color:#444; }
@@ -214,41 +201,11 @@
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
     .reveal.appear { opacity: 1; transform: translateY(0); }
 
-    /* Links */
-    a { color: var(--lux-ink); }
-    a:hover { color: var(--lux-accent); }
-
     /* Respect "Reduce motion": hide video, show poster */
     @media (prefers-reduced-motion: reduce) {
       .hero-fullbleed video { display: none !important; }
       .hero-fullbleed .hero-poster { display: block !important; opacity: 1 !important; }
     }
-    /* ===== Kill the extra top white space ===== */
-html, body { margin: 0; padding: 0; }
-
-#wrapper { padding-top: 0 !important; }        /* some skins add top padding */
-#main      { padding-top: 0 !important; }
-#main .inner { padding-top: 0 !important; }
-
-#header {
-  position: absolute;           /* overlay the hero */
-  top: 0; left: 0; right: 0;
-  background: transparent;      /* no header background strip */
-  border: 0; box-shadow: none;
-  margin: 0 !important;
-}
-#header .inner {                 /* tighten header height */
-  padding-top: .4rem !important;
-  padding-bottom: .15rem !important;
-}
-#header .logo .symbol img { height: 22px; }  /* slightly smaller mark */
-
-/* make sure the hero sits flush under the header */
-.hero-fullbleed { 
-  margin-top: 0 !important;
-  /* if you still see a hairline gap on some browsers, nudge it up a touch: */
-  /* margin-top: -6px; */
-}
   </style>
 </head>
 <body class="is-preload">
@@ -288,7 +245,6 @@ html, body { margin: 0; padding: 0; }
 
         <!-- ===== FULL-BLEED VIDEO HERO ===== -->
         <section class="hero-fullbleed reveal" aria-label="Brand hero">
-          <!-- Play the Cloudinary video -->
           <video
             autoplay
             muted
@@ -299,7 +255,7 @@ html, body { margin: 0; padding: 0; }
             <source src="https://res.cloudinary.com/dkk8ohmu7/video/upload/v1760725624/9145751-uhd_4096_2160_25fps_imqp8n.mp4" type="video/mp4" />
           </video>
 
-          <!-- Poster fallback for no-video / reduce-motion -->
+          <!-- Poster fallback -->
           <img class="hero-poster" alt="" aria-hidden="true"
                src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_2000/v1760713090/pexels-olly-3756045_chihfn.jpg"
                style="opacity:0" />
@@ -318,21 +274,18 @@ html, body { margin: 0; padding: 0; }
         <section class="trust reveal" aria-label="Trust and benefits">
           <div class="trust__row">
             <div class="trust__item">
-              <!-- Truck icon -->
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
                 <path d="M3 7h10v8H3zM13 9h5l3 3v3h-8zM5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor"/>
               </svg>
               <span>Free shipping over €79</span>
             </div>
             <div class="trust__item">
-              <!-- Shield icon -->
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
                 <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" stroke="currentColor"/>
               </svg>
               <span>2-year warranty</span>
             </div>
             <div class="trust__item">
-              <!-- Refresh icon -->
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
                 <path d="M20 12a8 8 0 1 1-2.34-5.66M20 5v5h-5" stroke="currentColor"/>
               </svg>
@@ -476,4 +429,3 @@ html, body { margin: 0; padding: 0; }
   </script>
 </body>
 </html>
-
