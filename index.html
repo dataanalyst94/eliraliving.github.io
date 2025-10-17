@@ -89,46 +89,43 @@
     #main .inner { padding-top: 0 !important; }
 
     /* ---------- FULL-BLEED HERO (zoom-proof) ---------- */
-    .hero-fullbleed{
-      position: relative;
+/* ---------- FULL-BLEED HERO (zoom-proof, shorter) ---------- */
+.hero-fullbleed{
+  position: relative;
 
-      /* Escape container edges for true full-bleed */
-      width: 100dvw;
-      margin-left: calc(50% - 50dvw);
-      margin-right: calc(50% - 50dvw);
-      margin-top: 0 !important;
+  /* true full-bleed horizontally */
+  width: 100dvw;
+  margin-left: calc(50% - 50dvw);
+  margin-right: calc(50% - 50dvw);
+  margin-top: 0 !important;
 
-      overflow: hidden;
-      border-radius: 0;
-      background: #000;
+  overflow: hidden;
+  border-radius: 0;
+  background: #000;
 
-      /* >>> Use dynamic viewport height on larger screens to keep framing constant across zoom levels */
-      height: clamp(380px, 60vh, 680px);
-    }
-    @media (min-width: 980px){
-      .hero-fullbleed{
-        height: 100dvh;              /* fills the visible viewport at any zoom */
-        min-height: 520px;           /* prevents ultra-short windows from over-cropping */
-      }
-    }
+  /* Shorter by default (mobile/tablet/desktop) */
+  height: clamp(280px, 40vh, 520px);   /* ~40% of viewport */
+}
 
-    .hero-fullbleed video,
-    .hero-fullbleed .hero-poster{
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      will-change: transform;
-    }
+@media (min-width: 980px){
+  .hero-fullbleed{
+    height: 40dvh;                     /* locks to ~40% of visible viewport at any zoom */
+    min-height: 360px;                 /* guardrail for very short windows */
+    max-height: 560px;                 /* optional: prevents absurdly tall on ultrawides */
+  }
+}
 
-    /* Gradient for legibility */
-    .hero-fullbleed::after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 38%, rgba(0,0,0,0) 70%);
-      pointer-events: none;
-    }
+/* Keep these as-is */
+.hero-fullbleed video,
+.hero-fullbleed .hero-poster{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;                   /* fills without squish */
+  object-position: center;             /* prevents top-crop bias */
+  display: block;
+  will-change: transform;
+}
+
 
     /* Overlay copy */
     .hero__content {
@@ -441,3 +438,4 @@
   </script>
 </body>
 </html>
+
