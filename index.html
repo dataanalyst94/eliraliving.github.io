@@ -53,6 +53,16 @@
       --lux-shadow: 0 10px 28px rgba(18,18,18,.06);
       --lux-shadow-lg: 0 18px 50px rgba(18,18,18,.08);
       --radius-xl: 18px;
+
+      /* Pinned hero copy offsets */
+      --hero-x: 28px;
+      --hero-y: 56px;
+    }
+    @media (min-width: 768px){
+      :root{ --hero-x: 42px; --hero-y: 68px; }
+    }
+    @media (min-width: 1280px){
+      :root{ --hero-x: 64px; --hero-y: 88px; }
     }
 
     /* Base */
@@ -66,20 +76,21 @@
       letter-spacing: .006em;
     }
 
-    /* Header compact luxury — overlay hero to remove top white band */
+    /* Header pinned (logo/menu stay fixed at one spot) */
     #header {
-      position: absolute;
+      position: fixed;                  /* fixed instead of absolute */
       top: 0; left: 0; right: 0;
       background: transparent;
       border: 0; box-shadow: none;
       margin: 0 !important;
-      z-index: 5;
+      z-index: 50;
+      pointer-events: none;            /* let hero receive clicks; re-enable on children */
     }
-    #header .inner { padding-top: .45rem; padding-bottom: .15rem; }
+    #header .inner { padding-top: .45rem; padding-bottom: .15rem; pointer-events: auto; }
 
-    /* >>> Make logo white (title + emblem image) */
+    /* White logo */
     #header .logo .title { letter-spacing: .18em; font-weight: 600; color: #fff !important; }
-    #header .logo .symbol img { height: 22px; width: auto; filter: brightness(0) invert(1); } /* force white */
+    #header .logo .symbol img { height: 22px; width: auto; filter: brightness(0) invert(1); }
     #header.shrink .inner { padding-top: .25rem; }
     #header.shrink .logo .symbol img { height: 21px; }
 
@@ -88,60 +99,63 @@
     #main { padding-top: 0 !important; }
     #main .inner { padding-top: 0 !important; }
 
-    /* ---------- FULL-BLEED HERO (zoom-proof) ---------- */
-/* ---------- FULL-BLEED HERO (zoom-proof, shorter) ---------- */
-.hero-fullbleed{
-  position: relative;
+    /* ---------- FULL-BLEED HERO (zoom-proof, shorter) ---------- */
+    .hero-fullbleed{
+      position: relative;
 
-  /* true full-bleed horizontally */
-  width: 100dvw;
-  margin-left: calc(50% - 50dvw);
-  margin-right: calc(50% - 50dvw);
-  margin-top: 0 !important;
+      /* true full-bleed horizontally */
+      width: 100dvw;
+      margin-left: calc(50% - 50dvw);
+      margin-right: calc(50% - 50dvw);
+      margin-top: 0 !important;
 
-  overflow: hidden;
-  border-radius: 0;
-  background: #000;
+      overflow: hidden;
+      border-radius: 0;
+      background: #000;
 
-  /* Shorter by default (mobile/tablet/desktop) */
-  height: clamp(280px, 40vh, 520px);   /* ~40% of viewport */
-}
-
-@media (min-width: 980px){
-  .hero-fullbleed{
-    height: 40dvh;                     /* locks to ~40% of visible viewport at any zoom */
-    min-height: 360px;                 /* guardrail for very short windows */
-    max-height: 560px;                 /* optional: prevents absurdly tall on ultrawides */
-  }
-}
-
-/* Keep these as-is */
-.hero-fullbleed video,
-.hero-fullbleed .hero-poster{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;                   /* fills without squish */
-  object-position: center;             /* prevents top-crop bias */
-  display: block;
-  will-change: transform;
-}
-
-
-    /* Overlay copy */
-    .hero__content {
-      position: absolute; inset: 0; z-index: 2; display:flex; align-items:center;
-      padding: clamp(18px, 5vw, 48px);
+      /* ~40% of viewport */
+      height: clamp(280px, 40vh, 520px);
     }
-    .hero__copy {
-      max-width: 820px; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,.25);
+    @media (min-width: 980px){
+      .hero-fullbleed{
+        height: 40dvh;                  /* locks to ~40% of visible viewport at any zoom */
+        min-height: 360px;
+        max-height: 560px;
+      }
     }
-    .hero__copy h1 {
-      font-size: clamp(2.2rem, 5.4vw, 4.2rem);
+
+    .hero-fullbleed video,
+    .hero-fullbleed .hero-poster{
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;                /* fills without squish */
+      object-position: center;          /* prevents top-crop bias */
+      display: block;
+      will-change: transform;
+    }
+
+    /* Pinned hero copy: anchored to fixed offsets */
+    .hero__content{
+      position: absolute; inset: 0; z-index: 2;
+      display: block; padding: 0;
+      pointer-events: none;            /* avoids overlay eating clicks */
+    }
+    .hero__copy{
+      position: absolute;
+      left: var(--hero-x);
+      bottom: var(--hero-y);
+      max-width: 820px;
+      color: #fff;
+      text-shadow: 0 2px 14px rgba(0,0,0,.25);
+      pointer-events: auto;            /* re-enable for buttons */
+    }
+    .hero__copy h1{
+      font-size: clamp(2rem, 4.6vw, 4rem);
       line-height: 1.04;
       margin: 0 0 .6rem;
       font-weight: 600;
     }
-    .hero__copy p { margin: 0 0 1.1rem; font-size: clamp(1rem, 1.4vw, 1.2rem); opacity: .95; }
+    .hero__copy p{ margin: 0 0 1.1rem; font-size: clamp(1rem, 1.3vw, 1.15rem); opacity: .95; }
 
     /* Buttons */
     .button, .actions .button, a.button.primary {
@@ -424,7 +438,7 @@
       items.forEach(function (el){ io.observe(el); });
     })();
 
-    // Header shrink on scroll
+    // Header shrink on scroll (kept; header is fixed)
     (function () {
       var header = document.getElementById('header');
       var last = 0;
@@ -438,4 +452,3 @@
   </script>
 </body>
 </html>
-
