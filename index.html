@@ -10,12 +10,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
   <!-- Basic SEO -->
-  <meta name="description" content="Curated travel organizers, bathrobes, and custom pillow cases. Four simple products, clear quality, no fuss." />
+  <meta name="description" content="Curated travel organizers, bathrobes, and luggage bags. Three simple products, clear quality, no fuss." />
   <link rel="canonical" href="https://www.eliraliving.com/" />
 
   <!-- Social (Open Graph / Twitter) -->
   <meta property="og:title" content="ELIRA LIVING — Travel & Home Essentials" />
-  <meta property="og:description" content="Curated travel organizers, bathrobes, and custom pillow cases. Four simple products, clear quality, no fuss." />
+  <meta property="og:description" content="Curated travel organizers, bathrobes, and luggage bags. Three simple products, clear quality, no fuss." />
   <meta property="og:url" content="https://www.eliraliving.com/" />
   <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1600/v1760713090/pexels-olly-3756045_chihfn.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -229,48 +229,48 @@
       .hero-fullbleed video { display: none !important; }
       .hero-fullbleed .hero-poster { display: block !important; opacity: 1 !important; }
     }
+
     /* === Pin positions so they never drift on zoom === */
-:root{
-  --logo-top: 16px;
-  --logo-left: 22px;
-  --burger-top: 16px;
-  --burger-right: 22px;
-}
+    :root{
+      --logo-top: 16px;
+      --logo-left: 22px;
+      --burger-top: 16px;
+      --burger-right: 22px;
+    }
+    /* Keep header fixed but let us place children absolutely */
+    #header{
+      position: fixed; top:0; left:0; right:0;
+      background: transparent; border:0; box-shadow:none;
+      margin:0 !important; z-index: 60; pointer-events:none;
+    }
+    /* Neutralize shrink jump altogether */
+    #header .inner,
+    #header.shrink .inner{ padding-top:.45rem; padding-bottom:.15rem; }
 
-/* Keep header fixed but let us place children absolutely */
-#header{
-  position: fixed; top:0; left:0; right:0;
-  background: transparent; border:0; box-shadow:none;
-  margin:0 !important; z-index: 60; pointer-events:none;
-}
-/* Neutralize shrink jump altogether */
-#header .inner,
-#header.shrink .inner{ padding-top:.45rem; padding-bottom:.15rem; }
+    /* Pin the logo to an exact viewport spot */
+    #header .logo{
+      position: fixed;
+      top: var(--logo-top);
+      left: var(--logo-left);
+      z-index: 61;
+      pointer-events: auto;               /* clickable */
+    }
+    /* Make logo white (icon + wordmark) */
+    #header .logo .title{ color:#fff !important; letter-spacing:.18em; font-weight:600; }
+    #header .logo .symbol img{ height:22px; width:auto; filter:brightness(0) invert(1); }
 
-/* Pin the logo to an exact viewport spot */
-#header .logo{
-  position: fixed;
-  top: var(--logo-top);
-  left: var(--logo-left);
-  z-index: 61;
-  pointer-events: auto;               /* clickable */
-}
-/* Make logo white (icon + wordmark) */
-#header .logo .title{ color:#fff !important; letter-spacing:.18em; font-weight:600; }
-#header .logo .symbol img{ height:22px; width:auto; filter:brightness(0) invert(1); }
+    /* Pin the burger/menu trigger to top-right */
+    #header nav{
+      position: fixed;
+      top: var(--burger-top);
+      right: var(--burger-right);
+      z-index: 61;
+      pointer-events: auto;
+    }
+    #header nav a{ color:#fff !important; }
 
-/* Pin the burger/menu trigger to top-right */
-#header nav{
-  position: fixed;
-  top: var(--burger-top);
-  right: var(--burger-right);
-  z-index: 61;
-  pointer-events: auto;
-}
-#header nav a{ color:#fff !important; }
-
-/* Improve stability across DPIs: prevent parent transforms */
-#header, #header *{ transform: none !important; }
+    /* Improve stability across DPIs: prevent parent transforms */
+    #header, #header *{ transform: none !important; }
   </style>
 </head>
 <body class="is-preload">
@@ -329,7 +329,7 @@
           <div class="hero__content">
             <div class="hero__copy">
               <h1>Everyday goods for calm, tidy living.</h1>
-              <p class="lede">Designed in Finland. Durable materials, gentle on the eye. Four essentials—no fuss.</p>
+              <p class="lede">Designed in Finland. Durable materials, gentle on the eye. Three essentials—no fuss.</p>
               <div class="actions"><a href="#products" class="button primary">Shop the collection</a></div>
             </div>
           </div>
@@ -348,13 +348,13 @@
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
                 <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" stroke="currentColor"/>
               </svg>
-              <span>2-year warranty</span>
+              <span>Nordic style</span>
             </div>
             <div class="trust__item">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
                 <path d="M20 12a8 8 0 1 1-2.34-5.66M20 5v5h-5" stroke="currentColor"/>
               </svg>
-              <span>30-day returns</span>
+              <span>14-day returns</span>
             </div>
           </div>
         </section>
@@ -379,7 +379,7 @@
             </a>
           </article>
 
-          <!-- Luggage Bag (Cloudinary image) -->
+          <!-- Luggage Bag -->
           <article>
             <span class="image">
               <img src="https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760724045/ChatGPT_Image_Oct_17_2025_08_59_57_PM_ra1z75.png" alt="Luggage Bag">
@@ -388,19 +388,6 @@
               <h2>LUGGAGE BAG</h2>
               <div class="content">
                 <p>Durable, lightweight luggage designed for smooth trips and easy handling.</p>
-              </div>
-            </a>
-          </article>
-
-          <!-- Customized Pillow Case -->
-          <article>
-            <span class="image">
-              <img src="images/customized-pillow-case.jpg" alt="Customized Pillow Case">
-            </span>
-            <a href="customized-pillow-case.html">
-              <h2>CUSTOMIZED PILLOW CASE</h2>
-              <div class="content">
-                <p>Personalized pillow cover with your name or design, made to order.</p>
               </div>
             </a>
           </article>
@@ -494,6 +481,3 @@
   </script>
 </body>
 </html>
-
-
-
