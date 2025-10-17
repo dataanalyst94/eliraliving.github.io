@@ -229,6 +229,48 @@
       .hero-fullbleed video { display: none !important; }
       .hero-fullbleed .hero-poster { display: block !important; opacity: 1 !important; }
     }
+    /* === Pin positions so they never drift on zoom === */
+:root{
+  --logo-top: 16px;
+  --logo-left: 22px;
+  --burger-top: 16px;
+  --burger-right: 22px;
+}
+
+/* Keep header fixed but let us place children absolutely */
+#header{
+  position: fixed; top:0; left:0; right:0;
+  background: transparent; border:0; box-shadow:none;
+  margin:0 !important; z-index: 60; pointer-events:none;
+}
+/* Neutralize shrink jump altogether */
+#header .inner,
+#header.shrink .inner{ padding-top:.45rem; padding-bottom:.15rem; }
+
+/* Pin the logo to an exact viewport spot */
+#header .logo{
+  position: fixed;
+  top: var(--logo-top);
+  left: var(--logo-left);
+  z-index: 61;
+  pointer-events: auto;               /* clickable */
+}
+/* Make logo white (icon + wordmark) */
+#header .logo .title{ color:#fff !important; letter-spacing:.18em; font-weight:600; }
+#header .logo .symbol img{ height:22px; width:auto; filter:brightness(0) invert(1); }
+
+/* Pin the burger/menu trigger to top-right */
+#header nav{
+  position: fixed;
+  top: var(--burger-top);
+  right: var(--burger-right);
+  z-index: 61;
+  pointer-events: auto;
+}
+#header nav a{ color:#fff !important; }
+
+/* Improve stability across DPIs: prevent parent transforms */
+#header, #header *{ transform: none !important; }
   </style>
 </head>
 <body class="is-preload">
@@ -452,3 +494,4 @@
   </script>
 </body>
 </html>
+
