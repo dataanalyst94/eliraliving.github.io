@@ -17,7 +17,8 @@
   <meta property="og:title" content="ELIRA LIVING — Travel & Home Essentials" />
   <meta property="og:description" content="Curated travel organizers, bathrobes, and custom pillow cases. Four simple products, clear quality, no fuss." />
   <meta property="og:url" content="https://www.eliraliving.com/" />
-  <meta property="og:image" content="https://www.eliraliving.com/images/hero.jpg" />
+  <!-- Use Cloudinary for OG too (1200px wide) -->
+  <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_630/v1760713090/pexels-olly-3756045_chihfn.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Favicon -->
@@ -26,8 +27,8 @@
   <!-- Fonts (luxury pairing) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
-  <!-- Preload hero for snappy paint -->
-  <link rel="preload" as="image" href="images/hero.jpg">
+  <!-- Preload hero for snappy paint (Cloudinary) -->
+  <link rel="preload" as="image" href="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,c_fill,g_auto,w_1920,h_540/v1760713090/pexels-olly-3756045_chihfn.jpg">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/main.css" />
@@ -35,27 +36,24 @@
 
   <!-- ===== Luxury Skin + UI Polish ===== -->
   <style>
-    /* Motion safety */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
       html { scroll-behavior: auto; }
     }
     html { scroll-behavior: smooth; }
 
-    /* ---------- Luxury theme tokens ---------- */
     :root{
       --lux-bg: #F8F6F3;
       --lux-ink:#121212;
       --lux-muted:#6B6B6B;
       --lux-border:#E7E1D6;
       --lux-card:#FFFFFF;
-      --lux-accent:#8A734E;           /* champagne */
+      --lux-accent:#8A734E;
       --lux-shadow: 0 10px 28px rgba(18,18,18,.06);
       --lux-shadow-lg: 0 18px 50px rgba(18,18,18,.08);
       --radius-xl: 18px;
     }
 
-    /* Base typography & background */
     html, body { background: var(--lux-bg); color: var(--lux-ink); }
     body, p, li, a, input, button {
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
@@ -65,14 +63,12 @@
       letter-spacing: .01em;
     }
 
-    /* Header compact luxury */
     #header .inner { padding-top: 1.1rem; padding-bottom: .4rem; }
     #header .logo .title { letter-spacing: .18em; font-weight: 600; }
     #header .logo .symbol img { height: 28px; width: auto; }
     #header.shrink .inner { padding-top: .35rem; }
     #header.shrink .logo .symbol img { height: 22px; }
 
-    /* ---------- HERO with overlay ---------- */
     .hero {
       position: relative; margin-top: .4rem;
       border-radius: var(--radius-xl);
@@ -86,7 +82,7 @@
     .page-loaded .hero img { transform: scale(1.0); opacity: 1; }
     @media (max-width: 768px){ .hero img { height: 320px; } }
 
-    .hero::after { /* soft gradient for text legibility */
+    .hero::after {
       content:""; position:absolute; inset:0;
       background: linear-gradient(90deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.28) 35%, rgba(0,0,0,0) 70%);
       pointer-events: none;
@@ -95,9 +91,7 @@
       position: absolute; inset: 0; z-index: 2; display:flex; align-items:center;
       padding: clamp(18px, 5vw, 48px);
     }
-    .hero__copy {
-      max-width: 680px; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,.25);
-    }
+    .hero__copy { max-width: 680px; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,.25); }
     .hero__copy h1 {
       font-size: clamp(2.2rem, 4.2vw, 3.2rem); line-height: 1.08; margin: 0 0 .5rem;
     }
@@ -108,7 +102,6 @@
       box-shadow: 0 10px 26px rgba(138,115,78,.24);
     }
 
-    /* ---------- Trust band ---------- */
     .trust {
       margin: 28px 0 8px; background: #fff; border:1px solid var(--lux-border);
       border-radius: var(--radius-xl); box-shadow: var(--lux-shadow);
@@ -117,7 +110,6 @@
     .trust__item { display:flex; align-items:center; gap:10px; color: var(--lux-ink); }
     .trust__item svg { width:18px; height:18px; stroke: var(--lux-accent); }
 
-    /* ---------- Luxury tiles ---------- */
     .tiles.tiles--lux { gap: 2.2rem !important; }
     .tiles.tiles--lux article {
       border-radius: var(--radius-xl);
@@ -140,7 +132,6 @@
     }
     .tiles.tiles--lux article:hover .image img { transform: scale(1.04); }
 
-    /* Remove Phantom colored label bars; add tasteful overlay */
     .tiles.tiles--lux article a:before {
       content: "";
       position: absolute; left:0; right:0; bottom:0; height: 46%;
@@ -162,32 +153,25 @@
     }
     .tiles.tiles--lux article:hover .content { opacity: 1; transform: translateY(0); }
 
-    /* Buttons */
     .button, .actions .button, a.button.primary {
-      border-radius: 999px;
-      padding: .7rem 1.1rem;
-      border: 1px solid var(--lux-border);
+      border-radius: 999px; padding: .7rem 1.1rem; border: 1px solid var(--lux-border);
       transition: transform 180ms ease, box-shadow 180ms ease, filter 140ms ease;
     }
     .button.primary { background: var(--lux-accent); border-color: transparent; color:#fff; }
     .button.primary:hover { filter: brightness(1.04); }
     .button:hover { transform: translateY(-2px); box-shadow: var(--lux-shadow); }
 
-    /* Section intro */
     #main .inner > header .lede { color: var(--lux-muted); margin: .75rem 0 0; }
 
-    /* Footer refine */
     #footer { background: transparent; border-top: 1px solid var(--lux-border); }
     #footer .inner { padding-top: 2rem; padding-bottom: 2rem; }
     #footer h2 { font-size: 0.95rem; letter-spacing: .22em; color:#444; }
     #footer .icons a { transition: transform 180ms ease, opacity 180ms ease; }
     #footer .icons a:hover { transform: translateY(-2px); opacity:.95; }
 
-    /* Reveal-on-scroll */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
     .reveal.appear { opacity: 1; transform: translateY(0); }
 
-    /* Links */
     a { color: var(--lux-ink); }
     a:hover { color: var(--lux-accent); }
   </style>
@@ -229,7 +213,16 @@
 
         <!-- HERO with overlay content -->
         <section class="hero reveal" aria-label="Brand hero">
-          <img src="images/hero.jpg" alt="Travel and home essentials by ELIRA LIVING">
+          <img
+            src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,c_fill,g_auto,w_1280,h_540/v1760713090/pexels-olly-3756045_chihfn.jpg"
+            srcset="
+              https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,c_fill,g_auto,w_768,h_320/v1760713090/pexels-olly-3756045_chihfn.jpg 768w,
+              https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,c_fill,g_auto,w_1280,h_540/v1760713090/pexels-olly-3756045_chihfn.jpg 1280w,
+              https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,c_fill,g_auto,w_1920,h_540/v1760713090/pexels-olly-3756045_chihfn.jpg 1920w"
+            sizes="100vw"
+            alt="Travel and home essentials by ELIRA LIVING"
+            width="1920" height="540"
+            fetchpriority="high" decoding="async">
           <div class="hero__content">
             <div class="hero__copy">
               <h1>Everyday goods for calm, tidy living.</h1>
@@ -243,21 +236,18 @@
         <section class="trust reveal" aria-label="Trust and benefits">
           <div class="trust__row">
             <div class="trust__item">
-              <!-- Truck icon -->
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
                 <path d="M3 7h10v8H3zM13 9h5l3 3v3h-8zM5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor"/>
               </svg>
               <span>Free shipping over €79</span>
             </div>
             <div class="trust__item">
-              <!-- Shield icon -->
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
                 <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" stroke="currentColor"/>
               </svg>
               <span>2-year warranty</span>
             </div>
             <div class="trust__item">
-              <!-- Refresh icon -->
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
                 <path d="M20 12a8 8 0 1 1-2.34-5.66M20 5v5h-5" stroke="currentColor"/>
               </svg>
@@ -364,12 +354,10 @@
 
   <!-- Interactions (reveal + header shrink) -->
   <script>
-    // Page-loaded (for hero zoom)
     window.addEventListener('load', function () {
       document.documentElement.classList.add('page-loaded');
     });
 
-    // Reveal on scroll
     (function () {
       var items = [].slice.call(document.querySelectorAll('.reveal'));
       if (!('IntersectionObserver' in window) || !items.length) {
@@ -387,7 +375,6 @@
       items.forEach(function (el){ io.observe(el); });
     })();
 
-    // Header shrink on scroll
     (function () {
       var header = document.getElementById('header');
       var last = 0;
