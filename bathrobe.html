@@ -77,18 +77,18 @@
       width:44px; height:28px; border-radius:999px; border:2px solid #cfcfcf; cursor:pointer; position:relative;
       outline:none; display:inline-flex; align-items:center; justify-content:center; background:#fff;
       box-shadow:inset 0 0 0 4px rgba(255,255,255,.75), 0 1px 2px rgba(0,0,0,.12);
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
     }
+    .swatch:hover{ transform:translateY(-1px); box-shadow:0 3px 10px rgba(0,0,0,.1); }
     .swatch[aria-checked="true"]{ box-shadow:0 0 0 3px rgba(93,163,214,.35), inset 0 0 0 4px rgba(255,255,255,.75); border-color:#5da3d6; }
-   .swatch .dot{
-  width:100%; 
-  height:100%; 
-  border-radius:999px; 
-  display:block;
-  background-position:center;
-  background-repeat:no-repeat;
-  background-size:100% 100%; /* fills the entire oval */
-}
 
+    /* Fill the whole oval: tile the provided narrow strip horizontally */
+    .swatch .dot{
+      width:100%; height:100%; border-radius:999px; display:block;
+      background-position:center;
+      background-repeat:repeat-x;   /* tile left-to-right */
+      background-size:auto 100%;    /* keep native width; full height */
+    }
 
     /* Reveal */
     .reveal{ opacity:0; transform:translateY(18px); transition:opacity 700ms ease, transform 700ms ease; }
@@ -192,7 +192,6 @@
           <ul class="icons">
             <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
             <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
             <li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
           </ul>
         </section>
@@ -265,7 +264,7 @@
       ]
     };
 
-    // explicit SWATCH images (your provided ovals)
+    // explicit SWATCH images (provided ovals)
     var SWATCH_OVALS={
       'black'     :'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786511/Screenshot_2025-10-18_142038_ludra7.png',
       'brown-kids':'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786510/Screenshot_2025-10-18_142027_th4glm.png',
@@ -305,10 +304,9 @@
 
         var dot=document.createElement('span');
         dot.className='dot';
-        // Use your exact oval image; fallback to solid color while it loads
         var ovalUrl = SWATCH_OVALS[c.id];
         if(ovalUrl){ dot.style.backgroundImage='url('+ovalUrl+')'; }
-        dot.style.backgroundColor=c.hex;
+        dot.style.backgroundColor=c.hex; // fallback while loading
         dot.title=c.name;
         btn.appendChild(dot);
 
