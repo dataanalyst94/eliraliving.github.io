@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
-  Bathrobe gallery with color photo swatches + thumbnails (Cloudinary-backed)
+  Bathrobe gallery with pinned header (black), reduced top space, color photo swatches
 -->
 <html lang="en">
 <head>
@@ -24,17 +24,63 @@
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
   <style>
+    /* ===== Pinned header (copied from index style), but BLACK instead of white ===== */
+    :root{
+      --logo-top: 16px;
+      --logo-left: 22px;
+      --burger-top: 16px;
+      --burger-right: 22px;
+    }
+    html { scroll-behavior: smooth; }
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
       html { scroll-behavior: auto; }
     }
-    html { scroll-behavior: smooth; }
 
-    #header .logo .symbol img { height: 28px; width: auto; }
-    #header .inner { padding: 1.5rem 0 0; }
-    #header.shrink .inner { padding-top: .5rem; }
-    #header.shrink .logo .symbol img { height: 22px; }
+    /* Fixed header bar */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: transparent;
+      border: 0; box-shadow: none;
+      margin: 0 !important;
+      z-index: 60;
+      pointer-events: none;
+    }
+    #header .inner { padding-top: .45rem; padding-bottom: .15rem; pointer-events: auto; }
+    /* Same positions as index */
+    #header .logo{
+      position: fixed;
+      top: var(--logo-top);
+      left: var(--logo-left);
+      z-index: 61;
+      pointer-events: auto;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    #header nav{
+      position: fixed;
+      top: var(--burger-top);
+      right: var(--burger-right);
+      z-index: 61;
+      pointer-events: auto;
+    }
+    /* BLACK style (index uses white) */
+    #header .logo .title { letter-spacing:.18em; font-weight:600; color:#222 !important; }
+    #header .logo .symbol img { height:22px; width:auto; filter:none; } /* no invert */
+    #header nav a { color:#222 !important; }
 
+    /* Shrink behavior retained */
+    #header.shrink .inner { padding-top: .25rem; }
+    #header.shrink .logo .symbol img { height:21px; }
+
+    /* ===== Reduce top space on this page =====
+       Move content up; the header is fixed so we only need a small top pad. */
+    #wrapper { padding-top: 0 !important; }
+    #main { padding-top: 0 !important; }
+    #main .inner { padding-top: 72px !important; } /* was large; now ~header clearance */
+    .product-header { margin-top: 6px; }           /* pull the H1 a bit closer */
+
+    /* ===== Product page visuals (unchanged from your working version) ===== */
     .product-header.reveal h1 { margin-bottom: .4rem; }
     .product-header.reveal p  { color:#666; }
 
@@ -53,11 +99,9 @@
       background:#fff;
     }
     .main-image img.show { opacity:1; transform: scale(1.0); }
-    /* Use full-fit for tall product shots we enumerated earlier */
-    .main-image img.contain { object-fit: contain; }
+    .main-image img.contain { object-fit: contain; } /* show full garment for tall shots */
 
     .thumbs { margin-top:12px; display:grid; gap:10px; grid-template-columns: repeat(6, 1fr); }
-    @media (max-width: 980px) { .thumbs { grid-template-columns: repeat(6, 1fr); } }
     @media (max-width: 600px) { .thumbs { grid-template-columns: repeat(5, 1fr); } }
 
     .thumb {
@@ -87,32 +131,30 @@
       background-size: cover; background-position: center; background-repeat: no-repeat;
     }
 
-    .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
-    .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
-
+    /* Reveal */
     .reveal { opacity:0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
     .reveal.appear { opacity:1; transform: translateY(0); }
 
+    /* Footer */
     #footer { background:#f7f7f7; }
     #footer .inner { padding-top:2rem; padding-bottom:2rem; }
     #footer h2 { font-size:1rem; letter-spacing:.18em; color:#444; }
 
-    img { aspect-ratio:auto; }
+    /* Stability */
+    #header, #header *{ transform:none !important; }
   </style>
 </head>
 <body class="is-preload">
   <div id="wrapper">
 
-    <!-- Header -->
+    <!-- Header (pinned, black) -->
     <header id="header">
       <div class="inner">
         <a href="index.html" class="logo">
           <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
           <span class="title">ELIRA LIVING</span>
         </a>
-        <nav>
-          <ul><li><a href="#menu">Menu</a></li></ul>
-        </nav>
+        <nav><ul><li><a href="#menu">Menu</a></li></ul></nav>
       </div>
     </header>
 
@@ -143,6 +185,7 @@
         </header>
 
         <section class="product-layout reveal" aria-label="Bathrobe gallery">
+          <!-- LEFT: Main image + thumbnails -->
           <div>
             <div class="main-image">
               <div class="frame">
@@ -152,19 +195,25 @@
             <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a view"></div>
           </div>
 
+          <!-- RIGHT: Details / CTA -->
           <aside class="details" aria-live="polite">
             <h2 id="styleTitle">Dark Blue — View 1</h2>
+
+            <!-- Color picker -->
             <div class="color-picker" role="radiogroup" aria-label="Choose color"></div>
+
             <div class="meta">
               <span class="chip">Soft & absorbent</span>
               <span class="chip">Unisex fit</span>
               <span class="chip">Machine-washable</span>
             </div>
             <p id="styleDesc">Cozy spa comfort with secure belt and deep pockets. Explore photos for each color.</p>
+
             <div class="actions">
               <a href="#select" class="button primary icon solid fa-check">Add to cart</a>
               <a href="index.html#products" class="button">Back to Products</a>
             </div>
+
             <hr />
             <p><strong>Specs</strong><br>
               Cotton-rich terry. Sizes S–XL. Loop for hanging; reinforced seams. Care: cold wash, gentle cycle.</p>
@@ -199,24 +248,25 @@
 
   </div>
 
-  <!-- Scripts -->
+  <!-- Scripts (template) -->
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/browser.min.js"></script>
   <script src="assets/js/breakpoints.min.js"></script>
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
 
-  <!-- Page interactions -->
+  <!-- Interactions -->
   <script>
-    // Mark page-loaded
-    window.addEventListener('load', () => document.documentElement.classList.add('page-loaded'));
+    // Page-loaded (for subtle transitions)
+    window.addEventListener('load', function () {
+      document.documentElement.classList.add('page-loaded');
+    });
 
     // Reveal on scroll
     (function () {
       var items = [].slice.call(document.querySelectorAll('.reveal'));
-      if (!items.length) return;
-      if (!('IntersectionObserver' in window)) {
-        items.forEach(el => el.classList.add('appear'));
+      if (!('IntersectionObserver' in window) || !items.length) {
+        items.forEach(function (el){ el.classList.add('appear'); });
         return;
       }
       var io = new IntersectionObserver(function (entries) {
@@ -227,12 +277,13 @@
           }
         });
       }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
-      items.forEach(el => io.observe(el));
+      items.forEach(function (el){ io.observe(el); });
     })();
 
-    // Header shrink
+    // Header shrink on scroll (kept)
     (function () {
-      var header = document.getElementById('header'), last = 0;
+      var header = document.getElementById('header');
+      var last = 0;
       window.addEventListener('scroll', function () {
         var y = window.scrollY || window.pageYOffset;
         if (y > 24 && last <= 24) header.classList.add('shrink');
@@ -241,11 +292,10 @@
       }, { passive: true });
     })();
 
-    // ---------- PRODUCT DATA ----------
+    /* ---------- PRODUCT DATA + GALLERY (unchanged from your working file) ---------- */
     var CLOUDINARY_BASE = 'https://res.cloudinary.com/dkk8ohmu7/image/upload/';
     var FULL_TRANSFORM   = 'f_auto,q_auto,w_1200/';
     var THUMB_TRANSFORM  = 'f_auto,q_auto,w_240/';
-    // New: aggressive zoom crop for swatch fabric chips
     var SWATCH_TRANSFORM = 'f_auto,q_auto,c_fill,g_auto,z_1.8,w_60,h_60/';
 
     var PRODUCT = {
@@ -256,16 +306,16 @@
         { id:'dark-brown', name:'Dark Brown', hex:'#4a2d1b',
           publicIds:['v1760782022/Dark_Brown_1._cepnap.png'],
           captions:['Dark Brown — full view'] },
-        { id:'brown',      name:'Brown',      hex:'#7a5633',
+        { id:'brown', name:'Brown', hex:'#7a5633',
           publicIds:['v1760782023/Brown_1._kjvdqs.png','v1760782025/Brown_2._fwsws0.png'],
           captions:['Brown — front','Brown — folded'] },
         { id:'brown-kids', name:'Brown (Kids)', hex:'#6a4b2e',
           publicIds:['v1760782029/Brown_Kid_s_Bathrobe_grupok.png'],
           captions:['Brown (Kids) — front'] },
-        { id:'black',      name:'Black',      hex:'#222222',
+        { id:'black', name:'Black', hex:'#222222',
           publicIds:['v1760782026/Black_1_pogmqf.png','v1760782027/Black_2_n9vshi.png'],
           captions:['Black — full view','Black — alternate angle'] },
-        { id:'beige',      name:'Beige',      hex:'#c7b8a1',
+        { id:'beige', name:'Beige', hex:'#c7b8a1',
           publicIds:['v1760782029/Beige_1._ylffja.png','v1760782026/Beige_2._ri0sjc.png'],
           captions:['Beige — front','Beige — detail'] },
         { id:'dark-green', name:'Dark Green', hex:'#2f6b4f',
@@ -274,115 +324,95 @@
       ]
     };
 
-    function fullUrl(publicId){ return CLOUDINARY_BASE + FULL_TRANSFORM  + publicId; }
-    function thumbUrl(publicId){ return CLOUDINARY_BASE + THUMB_TRANSFORM + publicId; }
-    function swatchUrl(publicId){ return CLOUDINARY_BASE + SWATCH_TRANSFORM + publicId; }
+    function fullUrl(id){ return CLOUDINARY_BASE + FULL_TRANSFORM  + id; }
+    function thumbUrl(id){ return CLOUDINARY_BASE + THUMB_TRANSFORM + id; }
+    function swatchUrl(id){ return CLOUDINARY_BASE + SWATCH_TRANSFORM + id; }
 
-    // Images that should display full-fit in the main viewer
     var NEED_CONTAIN = [
       'Beige_1._ylffja.png','Dark_Green_1._xktrgu.png','Brown_Kid_s_Bathrobe_grupok.png',
       'Black_1_pogmqf.png','Brown_1._kjvdqs.png','Dark_Blue_1._mpj0zr.png','Dark_Brown_1._cepnap.png'
     ];
     function requiresContain(publicId){ var name = publicId.split('/').pop(); return NEED_CONTAIN.indexOf(name) !== -1; }
 
-    var currentColorIndex = 0, currentImageIndex = 0;
-    var mainImg = document.getElementById('mainImage');
-    var thumbsEl = document.getElementById('thumbs');
-    var titleEl  = document.getElementById('styleTitle');
-    var descEl   = document.getElementById('styleDesc');
-    var colorPickerEl = document.querySelector('.color-picker');
+    var currentColorIndex=0,currentImageIndex=0;
+    var mainImg=document.getElementById('mainImage');
+    var thumbsEl=document.getElementById('thumbs');
+    var titleEl=document.getElementById('styleTitle');
+    var descEl=document.getElementById('styleDesc');
+    var colorPickerEl=document.querySelector('.color-picker');
 
-    // Render color photo swatches
-    function renderColorPicker() {
-      colorPickerEl.innerHTML = '';
-      PRODUCT.colors.forEach(function (c, idx) {
-        var btn = document.createElement('button');
-        btn.className = 'swatch';
+    function renderColorPicker(){
+      colorPickerEl.innerHTML='';
+      PRODUCT.colors.forEach(function(c,idx){
+        var btn=document.createElement('button');
+        btn.className='swatch';
         btn.setAttribute('role','radio');
-        btn.setAttribute('aria-label', c.name);
-        btn.setAttribute('aria-checked', idx === currentColorIndex ? 'true' : 'false');
-        btn.dataset.index = idx;
+        btn.setAttribute('aria-label',c.name);
+        btn.setAttribute('aria-checked',idx===currentColorIndex?'true':'false');
+        btn.dataset.index=idx;
 
-        var dot = document.createElement('span');
-        dot.className = 'dot';
-        // Use highly zoomed crop of the first image as the chip texture
-        if (c.publicIds && c.publicIds.length) {
-          dot.style.backgroundImage = 'url(' + swatchUrl(c.publicIds[0]) + ')';
-        }
-        // Fallback color while image loads
-        dot.style.backgroundColor = c.hex;
-        dot.title = c.name;
+        var dot=document.createElement('span');
+        dot.className='dot';
+        if (c.publicIds && c.publicIds.length) dot.style.backgroundImage='url('+swatchUrl(c.publicIds[0])+')';
+        dot.style.backgroundColor=c.hex; /* fallback while loading */
+        dot.title=c.name;
         btn.appendChild(dot);
 
-        btn.addEventListener('click', function(){
-          if (currentColorIndex !== idx) {
-            currentColorIndex = idx;
-            currentImageIndex = 0;
-            updateGallery();
-            updateColorPickA11y();
-          }
+        btn.addEventListener('click',function(){
+          if(currentColorIndex!==idx){ currentColorIndex=idx; currentImageIndex=0; updateGallery(); updateColorPickA11y(); }
         });
 
         colorPickerEl.appendChild(btn);
       });
     }
-    function updateColorPickA11y(){ colorPickerEl.querySelectorAll('.swatch').forEach((b,i)=>b.setAttribute('aria-checked', i===currentColorIndex ? 'true' : 'false')); }
+    function updateColorPickA11y(){ colorPickerEl.querySelectorAll('.swatch').forEach((b,i)=>b.setAttribute('aria-checked', i===currentColorIndex ? 'true':'false')); }
 
-    function renderThumbs(color) {
-      thumbsEl.innerHTML = '';
-      color.publicIds.forEach(function (pid, i) {
-        var btn = document.createElement('button');
-        btn.className = 'thumb';
-        btn.dataset.index = i + 1;
-        btn.setAttribute('aria-label', color.name + ' — View ' + (i+1));
-        if (i === currentImageIndex) btn.setAttribute('aria-selected','true');
+    function renderThumbs(color){
+      thumbsEl.innerHTML='';
+      color.publicIds.forEach(function(pid,i){
+        var btn=document.createElement('button');
+        btn.className='thumb';
+        btn.dataset.index=i+1;
+        btn.setAttribute('aria-label',color.name+' — View '+(i+1));
+        if(i===currentImageIndex) btn.setAttribute('aria-selected','true');
 
-        var img = document.createElement('img');
-        img.loading = 'lazy';
-        img.src = thumbUrl(pid);
-        img.alt = color.name + ' — View ' + (i+1) + ' thumbnail';
-
+        var img=document.createElement('img');
+        img.loading='lazy'; img.src=thumbUrl(pid); img.alt=color.name+' — View '+(i+1)+' thumbnail';
         btn.appendChild(img);
-        btn.addEventListener('click', function(){ setActiveImage(i); });
+        btn.addEventListener('click',function(){ setActiveImage(i); });
         thumbsEl.appendChild(btn);
       });
     }
 
     function setActiveImage(i){
-      var color = PRODUCT.colors[currentColorIndex];
-      currentImageIndex = i;
-
-      var pid   = color.publicIds[i];
-      var newSrc = fullUrl(pid);
-      var newAlt = 'Bathrobe — ' + color.name + ' — View ' + (i+1);
-
+      var color=PRODUCT.colors[currentColorIndex];
+      currentImageIndex=i;
+      var pid=color.publicIds[i];
+      var newSrc=fullUrl(pid);
       mainImg.classList.remove('show');
-      if (requiresContain(pid)) mainImg.classList.add('contain');
-      else                      mainImg.classList.remove('contain');
+      if (requiresContain(pid)) mainImg.classList.add('contain'); else mainImg.classList.remove('contain');
 
-      var img = new Image();
-      img.onload = function(){ mainImg.src = newSrc; mainImg.alt = newAlt; mainImg.classList.add('show'); };
-      img.src = newSrc;
+      var preload=new Image();
+      preload.onload=function(){ mainImg.src=newSrc; mainImg.alt='Bathrobe — '+color.name+' — View '+(i+1); mainImg.classList.add('show'); };
+      preload.src=newSrc;
 
-      titleEl.textContent = color.name + ' — View ' + (i+1);
-      descEl.textContent  = (color.captions && color.captions[i]) ? color.captions[i] : ('Detail view — ' + color.name);
+      titleEl.textContent=color.name+' — View '+(i+1);
+      descEl.textContent=(color.captions&&color.captions[i])?color.captions[i]:('Detail view — '+color.name);
 
       document.querySelectorAll('.thumb').forEach(t=>t.setAttribute('aria-selected','false'));
-      var active = document.querySelector('.thumb[data-index="'+(i+1)+'"]');
-      if (active) active.setAttribute('aria-selected','true');
+      var active=document.querySelector('.thumb[data-index="'+(i+1)+'"]'); if(active) active.setAttribute('aria-selected','true');
     }
 
-    function updateGallery(){ var color = PRODUCT.colors[currentColorIndex]; renderThumbs(color); setActiveImage(0); }
-
+    function updateGallery(){ var color=PRODUCT.colors[currentColorIndex]; renderThumbs(color); setActiveImage(0); }
     (function init(){ renderColorPicker(); updateGallery(); })();
 
-    // Keyboard navigation
+    // Keyboard nav
     document.addEventListener('keydown', function(e){
-      var color = PRODUCT.colors[currentColorIndex]; if (!color) return;
-      if (e.key === 'ArrowRight') setActiveImage((currentImageIndex + 1) % color.publicIds.length);
-      if (e.key === 'ArrowLeft')  setActiveImage((currentImageIndex - 1 + color.publicIds.length) % color.publicIds.length);
-      if (e.key === 'ArrowUp')    { currentColorIndex = (currentColorIndex - 1 + PRODUCT.colors.length) % PRODUCT.colors.length; currentImageIndex = 0; updateGallery(); updateColorPickA11y(); }
-      if (e.key === 'ArrowDown')  { currentColorIndex = (currentColorIndex + 1) % PRODUCT.colors.length; currentImageIndex = 0; updateGallery(); updateColorPickA11y(); }
+      var color=PRODUCT.colors[currentColorIndex]; if(!color) return;
+      if(e.key==='ArrowRight') setActiveImage((currentImageIndex+1)%color.publicIds.length);
+      if(e.key==='ArrowLeft')  setActiveImage((currentImageIndex-1+color.publicIds.length)%color.publicIds.length);
+      if(e.key==='ArrowUp'){ currentColorIndex=(currentColorIndex-1+PRODUCT.colors.length)%PRODUCT.colors.length; currentImageIndex=0; updateGallery(); updateColorPickA11y(); }
+      if(e.key==='ArrowDown'){ currentColorIndex=(currentColorIndex+1)%PRODUCT.colors.length; currentImageIndex=0; updateGallery(); updateColorPickA11y(); }
     });
   </script>
 </body>
