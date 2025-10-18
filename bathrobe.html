@@ -50,8 +50,11 @@
       position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
       opacity:0; transform: scale(1.02);
       transition: opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
+      background:#fff;
     }
     .main-image img.show { opacity:1; transform: scale(1.0); }
+    /* NEW: show full garment for specific images only */
+    .main-image img.contain { object-fit: contain; }
 
     .thumbs { margin-top:12px; display:grid; gap:10px; grid-template-columns: repeat(6, 1fr); }
     @media (max-width: 980px) { .thumbs { grid-template-columns: repeat(6, 1fr); } }
@@ -67,7 +70,7 @@
     .thumb img { width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
 
     .details { background:#fff; border-radius:16px; padding:20px 22px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
-    .details h2 { margin:0 0 .4rem; }
+    .details h2 { margin:0 0 .4rem; letter-spacing:.18em; }
     .details p  { color:#666; margin:0 0 1rem; }
     .meta { display:flex; gap:12px; flex-wrap:wrap; color:#555; margin: .3rem 0 1rem; }
     .meta .chip { background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em; border:1px solid #e0edf8; }
@@ -78,7 +81,7 @@
       outline:none; display:inline-flex; align-items:center; justify-content:center;
     }
     .swatch[aria-checked="true"] { box-shadow: 0 0 0 3px rgba(93,163,214,.35); border-color:#5da3d6; }
-    .swatch .dot { width:20px; height:20px; border-radius:50%; display:block; } /* key fix so color shows */
+    .swatch .dot { width:20px; height:20px; border-radius:50%; display:block; }
 
     .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
     .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
@@ -241,61 +244,48 @@
 
     var PRODUCT = {
       colors: [
-        {
-          id: 'dark-blue', name: 'Dark Blue', hex: '#0e2b4a',
-          publicIds: [
-            'v1760782022/Dark_Blue_1._mpj0zr.png',
-            'v1760782021/Dark_Blue_2._ptxyc4.png'
-          ],
-          captions: ['Dark Blue — full view', 'Dark Blue — alternate angle']
-        },
-        {
-          id: 'dark-brown', name: 'Dark Brown', hex: '#4a2d1b',
+        { id: 'dark-blue', name: 'Dark Blue', hex: '#0e2b4a',
+          publicIds: ['v1760782022/Dark_Blue_1._mpj0zr.png','v1760782021/Dark_Blue_2._ptxyc4.png'],
+          captions: ['Dark Blue — full view','Dark Blue — alternate angle'] },
+        { id: 'dark-brown', name: 'Dark Brown', hex: '#4a2d1b',
           publicIds: ['v1760782022/Dark_Brown_1._cepnap.png'],
-          captions: ['Dark Brown — full view']
-        },
-        {
-          id: 'brown', name: 'Brown', hex: '#7a5633',
-          publicIds: [
-            'v1760782023/Brown_1._kjvdqs.png',
-            'v1760782025/Brown_2._fwsws0.png'
-          ],
-          captions: ['Brown — front', 'Brown — folded']
-        },
-        {
-          id: 'brown-kids', name: 'Brown (Kids)', hex: '#6a4b2e',
+          captions: ['Dark Brown — full view'] },
+        { id: 'brown', name: 'Brown', hex: '#7a5633',
+          publicIds: ['v1760782023/Brown_1._kjvdqs.png','v1760782025/Brown_2._fwsws0.png'],
+          captions: ['Brown — front','Brown — folded'] },
+        { id: 'brown-kids', name: 'Brown (Kids)', hex: '#6a4b2e',
           publicIds: ['v1760782029/Brown_Kid_s_Bathrobe_grupok.png'],
-          captions: ['Brown (Kids) — front']
-        },
-        {
-          id: 'black', name: 'Black', hex: '#222222',
-          publicIds: [
-            'v1760782026/Black_1_pogmqf.png',
-            'v1760782027/Black_2_n9vshi.png'
-          ],
-          captions: ['Black — full view', 'Black — alternate angle']
-        },
-        {
-          id: 'beige', name: 'Beige', hex: '#c7b8a1',
-          publicIds: [
-            'v1760782029/Beige_1._ylffja.png',
-            'v1760782026/Beige_2._ri0sjc.png'
-          ],
-          captions: ['Beige — front', 'Beige — detail']
-        },
-        {
-          id: 'dark-green', name: 'Dark Green', hex: '#2f6b4f',
-          publicIds: [
-            'v1760782029/Dark_Green_1._xktrgu.png',
-            'v1760782028/Darh_Green_2._fs5mgj.png'
-          ],
-          captions: ['Dark Green — front', 'Dark Green — alternate angle']
-        }
+          captions: ['Brown (Kids) — front'] },
+        { id: 'black', name: 'Black', hex: '#222222',
+          publicIds: ['v1760782026/Black_1_pogmqf.png','v1760782027/Black_2_n9vshi.png'],
+          captions: ['Black — full view','Black — alternate angle'] },
+        { id: 'beige', name: 'Beige', hex: '#c7b8a1',
+          publicIds: ['v1760782029/Beige_1._ylffja.png','v1760782026/Beige_2._ri0sjc.png'],
+          captions: ['Beige — front','Beige — detail'] },
+        { id: 'dark-green', name: 'Dark Green', hex: '#2f6b4f',
+          publicIds: ['v1760782029/Dark_Green_1._xktrgu.png','v1760782028/Darh_Green_2._fs5mgj.png'],
+          captions: ['Dark Green — front','Dark Green — alternate angle'] }
       ]
     };
 
     function fullUrl(publicId){ return CLOUDINARY_BASE + FULL_TRANSFORM  + publicId; }
     function thumbUrl(publicId){ return CLOUDINARY_BASE + THUMB_TRANSFORM + publicId; }
+
+    // NEW: image filenames that should use object-fit: contain (show full robe)
+    var NEED_CONTAIN = [
+      'Beige_1._ylffja.png',
+      'Dark_Green_1._xktrgu.png',
+      'Brown_Kid_s_Bathrobe_grupok.png',
+      'Black_1_pogmqf.png',
+      'Brown_1._kjvdqs.png',
+      'Dark_Blue_1._mpj0zr.png',
+      'Dark_Brown_1._cepnap.png'
+    ];
+    function requiresContain(publicId){
+      // publicId looks like "v1760.../Folder/Filename.png"
+      var name = publicId.split('/').pop();
+      return NEED_CONTAIN.indexOf(name) !== -1;
+    }
 
     var currentColorIndex = 0;
     var currentImageIndex = 0;
@@ -368,10 +358,15 @@
       var color = PRODUCT.colors[currentColorIndex];
       currentImageIndex = i;
 
-      var newSrc = fullUrl(color.publicIds[i]);
+      var pid   = color.publicIds[i];
+      var newSrc = fullUrl(pid);
       var newAlt = 'Bathrobe — ' + color.name + ' — View ' + (i+1);
 
       mainImg.classList.remove('show');
+      // Toggle contain/cover based on filename
+      if (requiresContain(pid)) mainImg.classList.add('contain');
+      else                     mainImg.classList.remove('contain');
+
       var img = new Image();
       img.onload = function(){
         mainImg.src = newSrc;
