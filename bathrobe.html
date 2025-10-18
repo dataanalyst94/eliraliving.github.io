@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<!--
+  Phantom by HTML5 UP (customized for ELIRA LIVING)
+  Product gallery with Color switcher + main image + thumbnails (Cloudinary-backed)
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Bathrobe — ELIRA LIVING</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+  <!-- SEO -->
+  <meta name="description" content="Plush, hotel-style bathrobe in five colors. Browse each color’s photo set and pick your favorite." />
+  <link rel="canonical" href="https://www.eliraliving.com/bathrobe.html" />
+  <meta property="og:title" content="Bathrobe — ELIRA LIVING" />
+  <meta property="og:description" content="Plush, hotel-style bathrobe in five colors. Cloud-soft, absorbent, and durable." />
+  <meta property="og:url" content="https://www.eliraliving.com/bathrobe.html" />
+  <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1761000001/bathrobe/green_1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/images/favicon.png" type="image/png" />
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+    html { scroll-behavior: smooth; }
+
+    #header .logo .symbol img { height: 28px; width: auto; }
+    #header .inner { padding: 1.5rem 0 0; }
+    #header.shrink .inner { padding-top: .5rem; }
+    #header.shrink .logo .symbol img { height: 22px; }
+
+    .product-header.reveal h1 { margin-bottom: .4rem; }
+    .product-header.reveal p  { color:#666; }
+
+    .product-layout {
+      display: grid; gap: 28px;
+      grid-template-columns: 1.2fr 1fr; align-items: start;
+    }
+    @media (max-width: 980px) { .product-layout { grid-template-columns: 1fr; } }
+
+    .main-image { background:#fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .main-image .frame { width:100%; aspect-ratio: 1/1; background:#f5f5f5; position: relative; }
+    .main-image img {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      opacity:0; transform: scale(1.02);
+      transition: opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
+    }
+    .main-image img.show { opacity:1; transform: scale(1.0); }
+
+    .thumbs { margin-top:12px; display:grid; gap:10px; grid-template-columns: repeat(6, 1fr); }
+    @media (max-width: 980px) { .thumbs { grid-template-columns: repeat(6, 1fr); } }
+    @media (max-width: 600px) { .thumbs { grid-template-columns: repeat(5, 1fr); } }
+
+    .thumb {
+      position:relative; border:2px solid transparent; border-radius:10px; overflow:hidden;
+      background:#fff; cursor:pointer; transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,.06);
+    }
+    .thumb:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.10); }
+    .thumb[aria-selected="true"] { border-color:#5da3d6; }
+    .thumb img { width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
+
+    .details { background:#fff; border-radius:16px; padding:20px 22px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+    .details h2 { margin:0 0 .4rem; }
+    .details p  { color:#666; margin:0 0 1rem; }
+    .meta { display:flex; gap:12px; flex-wrap:wrap; color:#555; margin: .3rem 0 1rem; }
+    .meta .chip { background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em; border:1px solid #e0edf8; }
+
+    .color-picker { display:flex; gap:10px; align-items:center; margin:.6rem 0 1.2rem; flex-wrap:wrap; }
+    .swatch {
+      width:28px; height:28px; border-radius:50%; border:2px solid #ddd; cursor:pointer; position:relative;
+      outline:none; display:inline-flex; align-items:center; justify-content:center;
+    }
+    .swatch[aria-checked="true"] { box-shadow: 0 0 0 3px rgba(93,163,214,.35); border-color:#5da3d6; }
+    .swatch .dot { width:20px; height:20px; border-radius:50%; }
+
+    .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
+    .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
+
+    .reveal { opacity:0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
+    .reveal.appear { opacity:1; transform: translateY(0); }
+
+    #footer { background:#f7f7f7; }
+    #footer .inner { padding-top:2rem; padding-bottom:2rem; }
+    #footer h2 { font-size:1rem; letter-spacing:.18em; color:#444; }
+
+    img { aspect-ratio:auto; }
+  </style>
+</head>
+<body class="is-preload">
+  <div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+      <div class="inner">
+        <a href="index.html" class="logo">
+          <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
+          <span class="title">ELIRA LIVING</span>
+        </a>
+        <nav>
+          <ul><li><a href="#menu">Menu</a></li></ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu" aria-label="Site">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <hr />
+      <h3>Language</h3>
+      <ul>
+        <li><a href="/">EN</a></li>
+        <li><a href="/fi/">FI</a></li>
+        <li><a href="/sv/">SV</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+
+        <header class="product-header reveal">
+          <h1>Bathrobe</h1>
+          <p>Plush, hotel-style robe in five colors. Switch colors below and browse each one’s photos.</p>
+        </header>
+
+        <section class="product-layout reveal" aria-label="Bathrobe gallery">
+          <div>
+            <div class="main-image">
+              <div class="frame">
+                <img id="mainImage" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1761000001/bathrobe/green_1.jpg" alt="Bathrobe — Green — View 1" class="show">
+              </div>
+            </div>
+
+            <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a view"></div>
+          </div>
+
+          <aside class="details" aria-live="polite">
+            <h2 id="styleTitle">Green — View 1</h2>
+
+            <div class="color-picker" role="radiogroup" aria-label="Choose color"></div>
+
+            <div class="meta">
+              <span class="chip">Soft & absorbent</span>
+              <span class="chip">Unisex fit</span>
+              <span class="chip">Machine-washable</span>
+            </div>
+            <p id="styleDesc">Everyday spa comfort. Cozy weight, secure belt, and deep pockets. Explore photos for each color.</p>
+
+            <div class="actions">
+              <a href="#select" class="button primary icon solid fa-check">Add to cart</a>
+              <a href="index.html#products" class="button">Back to Products</a>
+            </div>
+
+            <hr />
+            <p><strong>Specs</strong><br>
+              Cotton-rich terry. Sizes S–XL. Loop for hanging; reinforced seams. Care: cold wash, gentle cycle.</p>
+          </aside>
+        </section>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+        <section id="contact">
+          <h2>Get in touch</h2>
+          <p>Email: <a href="mailto:support@eliraliving.com">support@eliraliving.com</a></p>
+        </section>
+        <section>
+          <h2>Follow</h2>
+          <ul class="icons">
+            <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+            <li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+          </ul>
+        </section>
+        <ul class="copyright">
+          <li>&copy; ELIRA LIVING. All rights reserved.</li>
+          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Page interactions -->
+  <script>
+    window.addEventListener('load', () => document.documentElement.classList.add('page-loaded'));
+    (function() {
+      var header = document.getElementById('header'), last = 0;
+      window.addEventListener('scroll', () => {
+        var y = window.scrollY || window.pageYOffset;
+        if (y > 24 && last <= 24) header.classList.add('shrink');
+        else if (y <= 24 && last > 24) header.classList.remove('shrink');
+        last = y;
+      }, { passive: true });
+    })();
+
+    var CLOUDINARY_BASE = 'https://res.cloudinary.com/dkk8ohmu7/image/upload/';
+    var FULL_TRANSFORM  = 'f_auto,q_auto,w_1200/';
+    var THUMB_TRANSFORM = 'f_auto,q_auto,w_240/';
+    var PRODUCT = {
+      colors: [
+        { id:'green',name:'Green',hex:'#2f6b4f',publicIds:['v1761000001/bathrobe/green_1.jpg','v1761000001/bathrobe/green_2.jpg','v1761000001/bathrobe/green_3.jpg'],captions:['Green — front','Green — detail','Green — lifestyle'] },
+        { id:'navy',name:'Navy',hex:'#0e2b4a',publicIds:['v1761000002/bathrobe/navy_1.jpg','v1761000002/bathrobe/navy_2.jpg','v1761000002/bathrobe/navy_3.jpg'],captions:['Navy — front','Navy — close-up','Navy — folded'] },
+        { id:'charcoal',name:'Charcoal',hex:'#3a3a3a',publicIds:['v1761000003/bathrobe/charcoal_1.jpg','v1761000003/bathrobe/charcoal_2.jpg'],captions:['Charcoal — front','Charcoal — cuff detail'] },
+        { id:'beige',name:'Beige',hex:'#c7b8a1',publicIds:['v1761000004/bathrobe/beige_1.jpg','v1761000004/bathrobe/beige_2.jpg','v1761000004/bathrobe/beige_3.jpg'],captions:['Beige — front','Beige — loop','Beige — pocket'] },
+        { id:'white',name:'White',hex:'#f2f2f2',publicIds:['v1761000005/bathrobe/white_1.jpg','v1761000005/bathrobe/white_2.jpg'],captions:['White — front','White — texture'] }
+      ]
+    };
+    function fullUrl(id){ return CLOUDINARY_BASE+FULL_TRANSFORM+id; }
+    function thumbUrl(id){ return CLOUDINARY_BASE+THUMB_TRANSFORM+id; }
+    var currentColorIndex=0,currentImageIndex=0;
+    var mainImg=document.getElementById('mainImage'),thumbsEl=document.getElementById('thumbs'),titleEl=document.getElementById('styleTitle'),descEl=document.getElementById('styleDesc'),colorPickerEl=document.querySelector('.color-picker');
+    function renderColorPicker(){
+      colorPickerEl.innerHTML='';
+      PRODUCT.colors.forEach((c,idx)=>{
+        var btn=document.createElement('button');
+        btn.className='swatch';
+        btn.setAttribute('role','radio');
+        btn.setAttribute('aria-label',c.name);
+        btn.setAttribute('aria-checked',idx===currentColorIndex?'true':'false');
+        btn.dataset.index=idx;
+        var dot=document.createElement('span');
+        dot.className='dot';
+        dot.style.background=c.hex;
+        btn.appendChild(dot);
+        btn.addEventListener('click',()=>{
+          if(currentColorIndex!==idx){currentColorIndex=idx;currentImageIndex=0;updateGallery();updateColorPickA11y();}
+        });
+        colorPickerEl.appendChild(btn);
+      });
+    }
+    function updateColorPickA11y(){colorPickerEl.querySelectorAll('.swatch').forEach((b,i)=>b.setAttribute('aria-checked',i===currentColorIndex?'true':'false'));}
+    function renderThumbs(color){
+      thumbsEl.innerHTML='';
+      color.publicIds.forEach((pid,i)=>{
+        var btn=document.createElement('button');
+        btn.className='thumb';
+        btn.dataset.index=i+1;
+        if(i===currentImageIndex)btn.setAttribute('aria-selected','true');
+        var img=document.createElement('img');
+        img.loading='lazy';img.src=thumbUrl(pid);
+        btn.appendChild(img);
+        btn.addEventListener('click',()=>setActiveImage(i));
+        thumbsEl.appendChild(btn);
+      });
+    }
+    function setActiveImage(i){
+      var color=PRODUCT.colors[currentColorIndex];
+      currentImageIndex=i;
+      var newSrc=fullUrl(color.publicIds[i]);
+      mainImg.classList.remove('show');
+      var img=new Image();
+      img.onload=function(){mainImg.src=newSrc;mainImg.classList.add('show');};
+      img.src=newSrc;
+      titleEl.textContent=color.name+' — View '+(i+1);
+      descEl.textContent=color.captions[i]||('Detail view — '+color.name);
+      document.querySelectorAll('.thumb').forEach(t=>t.setAttribute('aria-selected','false'));
+      var active=document.querySelector('.thumb[data-index="'+(i+1)+'"]');
+      if(active)active.setAttribute('aria-selected','true');
+    }
+    function updateGallery(){var color=PRODUCT.colors[currentColorIndex];renderThumbs(color);setActiveImage(0);}
+    (function init(){renderColorPicker();updateGallery();})();
+  </script>
+</body>
+</html>
