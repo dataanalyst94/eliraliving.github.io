@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
-  Product gallery with Color switcher + main image + thumbnails (Cloudinary-backed)
+  Bathrobe gallery with Color switcher + main image + thumbnails (Cloudinary-backed)
 -->
 <html lang="en">
 <head>
@@ -10,12 +10,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
   <!-- SEO -->
-  <meta name="description" content="Plush, hotel-style bathrobe in five colors. Browse each color’s photo set and pick your favorite." />
+  <meta name="description" content="Plush, hotel-style bathrobe in multiple colors. Switch a color and browse its photo set." />
   <link rel="canonical" href="https://www.eliraliving.com/bathrobe.html" />
   <meta property="og:title" content="Bathrobe — ELIRA LIVING" />
-  <meta property="og:description" content="Plush, hotel-style bathrobe in five colors. Cloud-soft, absorbent, and durable." />
+  <meta property="og:description" content="Plush, hotel-style bathrobe in multiple colors. Cloud-soft, absorbent, and durable." />
   <meta property="og:url" content="https://www.eliraliving.com/bathrobe.html" />
-  <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1761000001/bathrobe/green_1.jpg" />
+  <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/images/favicon.png" type="image/png" />
 
@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
+  <!-- Page UI -->
   <style>
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
@@ -132,23 +133,27 @@
 
         <header class="product-header reveal">
           <h1>Bathrobe</h1>
-          <p>Plush, hotel-style robe in five colors. Switch colors below and browse each one’s photos.</p>
+          <p>Switch colors below and browse the photos for each.</p>
         </header>
 
         <section class="product-layout reveal" aria-label="Bathrobe gallery">
+          <!-- LEFT: Main image + thumbnails -->
           <div>
             <div class="main-image">
               <div class="frame">
-                <img id="mainImage" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1761000001/bathrobe/green_1.jpg" alt="Bathrobe — Green — View 1" class="show">
+                <!-- Default image (first color / first view) -->
+                <img id="mainImage" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png" alt="Bathrobe — Dark Blue — View 1" class="show">
               </div>
             </div>
 
             <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a view"></div>
           </div>
 
+          <!-- RIGHT: Details / CTA -->
           <aside class="details" aria-live="polite">
-            <h2 id="styleTitle">Green — View 1</h2>
+            <h2 id="styleTitle">Dark Blue — View 1</h2>
 
+            <!-- Color picker -->
             <div class="color-picker" role="radiogroup" aria-label="Choose color"></div>
 
             <div class="meta">
@@ -156,9 +161,10 @@
               <span class="chip">Unisex fit</span>
               <span class="chip">Machine-washable</span>
             </div>
-            <p id="styleDesc">Everyday spa comfort. Cozy weight, secure belt, and deep pockets. Explore photos for each color.</p>
+            <p id="styleDesc">Cozy spa comfort with secure belt and deep pockets. Explore photos for each color.</p>
 
             <div class="actions">
+              <!-- Placeholder buttons; wire to Stripe later -->
               <a href="#select" class="button primary icon solid fa-check">Add to cart</a>
               <a href="index.html#products" class="button">Back to Products</a>
             </div>
@@ -168,6 +174,7 @@
               Cotton-rich terry. Sizes S–XL. Loop for hanging; reinforced seams. Care: cold wash, gentle cycle.</p>
           </aside>
         </section>
+
       </div>
     </div>
 
@@ -196,7 +203,7 @@
 
   </div>
 
-  <!-- Scripts -->
+  <!-- Scripts (template) -->
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/browser.min.js"></script>
   <script src="assets/js/breakpoints.min.js"></script>
@@ -205,10 +212,14 @@
 
   <!-- Page interactions -->
   <script>
-    window.addEventListener('load', () => document.documentElement.classList.add('page-loaded'));
-    (function() {
-      var header = document.getElementById('header'), last = 0;
-      window.addEventListener('scroll', () => {
+    // Page-loaded mark + header shrink
+    window.addEventListener('load', function () {
+      document.documentElement.classList.add('page-loaded');
+    });
+    (function () {
+      var header = document.getElementById('header');
+      var last = 0;
+      window.addEventListener('scroll', function () {
         var y = window.scrollY || window.pageYOffset;
         if (y > 24 && last <= 24) header.classList.add('shrink');
         else if (y <= 24 && last > 24) header.classList.remove('shrink');
@@ -216,72 +227,203 @@
       }, { passive: true });
     })();
 
+    // ---------- PRODUCT DATA from your URLs ----------
+    // We'll store just the path after `/upload/` so we can prepend transforms for full vs thumb.
     var CLOUDINARY_BASE = 'https://res.cloudinary.com/dkk8ohmu7/image/upload/';
     var FULL_TRANSFORM  = 'f_auto,q_auto,w_1200/';
     var THUMB_TRANSFORM = 'f_auto,q_auto,w_240/';
+
     var PRODUCT = {
       colors: [
-        { id:'green',name:'Green',hex:'#2f6b4f',publicIds:['v1761000001/bathrobe/green_1.jpg','v1761000001/bathrobe/green_2.jpg','v1761000001/bathrobe/green_3.jpg'],captions:['Green — front','Green — detail','Green — lifestyle'] },
-        { id:'navy',name:'Navy',hex:'#0e2b4a',publicIds:['v1761000002/bathrobe/navy_1.jpg','v1761000002/bathrobe/navy_2.jpg','v1761000002/bathrobe/navy_3.jpg'],captions:['Navy — front','Navy — close-up','Navy — folded'] },
-        { id:'charcoal',name:'Charcoal',hex:'#3a3a3a',publicIds:['v1761000003/bathrobe/charcoal_1.jpg','v1761000003/bathrobe/charcoal_2.jpg'],captions:['Charcoal — front','Charcoal — cuff detail'] },
-        { id:'beige',name:'Beige',hex:'#c7b8a1',publicIds:['v1761000004/bathrobe/beige_1.jpg','v1761000004/bathrobe/beige_2.jpg','v1761000004/bathrobe/beige_3.jpg'],captions:['Beige — front','Beige — loop','Beige — pocket'] },
-        { id:'white',name:'White',hex:'#f2f2f2',publicIds:['v1761000005/bathrobe/white_1.jpg','v1761000005/bathrobe/white_2.jpg'],captions:['White — front','White — texture'] }
+        {
+          id: 'dark-blue', name: 'Dark Blue', hex: '#0e2b4a',
+          publicIds: [
+            'v1760782022/Dark_Blue_1._mpj0zr.png',
+            'v1760782021/Dark_Blue_2._ptxyc4.png'
+          ],
+          captions: ['Dark Blue — full view', 'Dark Blue — alternate angle']
+        },
+        {
+          id: 'dark-brown', name: 'Dark Brown', hex: '#4a2d1b',
+          publicIds: [
+            'v1760782022/Dark_Brown_1._cepnap.png'
+          ],
+          captions: ['Dark Brown — full view']
+        },
+        {
+          id: 'brown', name: 'Brown', hex: '#7a5633',
+          publicIds: [
+            'v1760782023/Brown_1._kjvdqs.png',
+            'v1760782025/Brown_2._fwsws0.png',
+            'v1760782029/Brown_Kid_s_Bathrobe_grupok.png'
+          ],
+          captions: ['Brown — front', 'Brown — folded', 'Brown (Kids) — front']
+        },
+        {
+          id: 'black', name: 'Black', hex: '#222222',
+          publicIds: [
+            'v1760782026/Black_1_pogmqf.png',
+            'v1760782027/Black_2_n9vshi.png'
+          ],
+          captions: ['Black — full view', 'Black — alternate angle']
+        },
+        {
+          id: 'beige', name: 'Beige', hex: '#c7b8a1',
+          publicIds: [
+            'v1760782029/Beige_1._ylffja.png',
+            'v1760782026/Beige_2._ri0sjc.png'
+          ],
+          captions: ['Beige — front', 'Beige — detail']
+        },
+        {
+          id: 'dark-green', name: 'Dark Green', hex: '#2f6b4f',
+          publicIds: [
+            'v1760782029/Dark_Green_1._xktrgu.png',
+            'v1760782028/Darh_Green_2._fs5mgj.png' // (filename typo kept as-is)
+          ],
+          captions: ['Dark Green — front', 'Dark Green — alternate angle']
+        }
       ]
     };
-    function fullUrl(id){ return CLOUDINARY_BASE+FULL_TRANSFORM+id; }
-    function thumbUrl(id){ return CLOUDINARY_BASE+THUMB_TRANSFORM+id; }
-    var currentColorIndex=0,currentImageIndex=0;
-    var mainImg=document.getElementById('mainImage'),thumbsEl=document.getElementById('thumbs'),titleEl=document.getElementById('styleTitle'),descEl=document.getElementById('styleDesc'),colorPickerEl=document.querySelector('.color-picker');
-    function renderColorPicker(){
-      colorPickerEl.innerHTML='';
-      PRODUCT.colors.forEach((c,idx)=>{
-        var btn=document.createElement('button');
-        btn.className='swatch';
+
+    // ---------- HELPERS ----------
+    function fullUrl(publicId){ return CLOUDINARY_BASE + FULL_TRANSFORM  + publicId; }
+    function thumbUrl(publicId){ return CLOUDINARY_BASE + THUMB_TRANSFORM + publicId; }
+
+    // ---------- STATE ----------
+    var currentColorIndex = 0;   // default to Dark Blue
+    var currentImageIndex = 0;
+
+    // ---------- ELEMENTS ----------
+    var mainImg = document.getElementById('mainImage');
+    var thumbsEl = document.getElementById('thumbs');
+    var titleEl = document.getElementById('styleTitle');
+    var descEl  = document.getElementById('styleDesc');
+    var colorPickerEl = document.querySelector('.color-picker');
+
+    // ---------- RENDER COLOR SWATCHES ----------
+    function renderColorPicker() {
+      colorPickerEl.innerHTML = '';
+      PRODUCT.colors.forEach(function (c, idx) {
+        var btn = document.createElement('button');
+        btn.className = 'swatch';
         btn.setAttribute('role','radio');
-        btn.setAttribute('aria-label',c.name);
-        btn.setAttribute('aria-checked',idx===currentColorIndex?'true':'false');
-        btn.dataset.index=idx;
-        var dot=document.createElement('span');
-        dot.className='dot';
-        dot.style.background=c.hex;
+        btn.setAttribute('aria-label', c.name);
+        btn.setAttribute('aria-checked', idx === currentColorIndex ? 'true' : 'false');
+        btn.dataset.index = idx;
+
+        var dot = document.createElement('span');
+        dot.className = 'dot';
+        dot.style.background = c.hex;
+        dot.title = c.name;
         btn.appendChild(dot);
-        btn.addEventListener('click',()=>{
-          if(currentColorIndex!==idx){currentColorIndex=idx;currentImageIndex=0;updateGallery();updateColorPickA11y();}
+
+        btn.addEventListener('click', function(){
+          if (currentColorIndex !== idx) {
+            currentColorIndex = idx;
+            currentImageIndex = 0;
+            updateGallery();
+            updateColorPickA11y();
+          }
         });
+
         colorPickerEl.appendChild(btn);
       });
     }
-    function updateColorPickA11y(){colorPickerEl.querySelectorAll('.swatch').forEach((b,i)=>b.setAttribute('aria-checked',i===currentColorIndex?'true':'false'));}
-    function renderThumbs(color){
-      thumbsEl.innerHTML='';
-      color.publicIds.forEach((pid,i)=>{
-        var btn=document.createElement('button');
-        btn.className='thumb';
-        btn.dataset.index=i+1;
-        if(i===currentImageIndex)btn.setAttribute('aria-selected','true');
-        var img=document.createElement('img');
-        img.loading='lazy';img.src=thumbUrl(pid);
+
+    function updateColorPickA11y(){
+      var all = colorPickerEl.querySelectorAll('.swatch');
+      all.forEach(function(b, i){
+        b.setAttribute('aria-checked', i === currentColorIndex ? 'true' : 'false');
+      });
+    }
+
+    // ---------- RENDER THUMBS ----------
+    function renderThumbs(color) {
+      thumbsEl.innerHTML = '';
+      color.publicIds.forEach(function (pid, i) {
+        var btn = document.createElement('button');
+        btn.className = 'thumb';
+        btn.dataset.index = i + 1;
+        btn.setAttribute('aria-label', color.name + ' — View ' + (i+1));
+        if (i === currentImageIndex) btn.setAttribute('aria-selected','true');
+
+        var img = document.createElement('img');
+        img.loading = 'lazy';
+        img.src = thumbUrl(pid);
+        img.alt = color.name + ' — View ' + (i+1) + ' thumbnail';
+
         btn.appendChild(img);
-        btn.addEventListener('click',()=>setActiveImage(i));
+        btn.addEventListener('click', function(){
+          setActiveImage(i);
+        });
         thumbsEl.appendChild(btn);
       });
     }
+
+    // ---------- SET ACTIVE IMAGE ----------
     function setActiveImage(i){
-      var color=PRODUCT.colors[currentColorIndex];
-      currentImageIndex=i;
-      var newSrc=fullUrl(color.publicIds[i]);
+      var color = PRODUCT.colors[currentColorIndex];
+      currentImageIndex = i;
+
+      var newSrc = fullUrl(color.publicIds[i]);
+      var newAlt = 'Bathrobe — ' + color.name + ' — View ' + (i+1);
+
       mainImg.classList.remove('show');
-      var img=new Image();
-      img.onload=function(){mainImg.src=newSrc;mainImg.classList.add('show');};
-      img.src=newSrc;
-      titleEl.textContent=color.name+' — View '+(i+1);
-      descEl.textContent=color.captions[i]||('Detail view — '+color.name);
-      document.querySelectorAll('.thumb').forEach(t=>t.setAttribute('aria-selected','false'));
-      var active=document.querySelector('.thumb[data-index="'+(i+1)+'"]');
-      if(active)active.setAttribute('aria-selected','true');
+      var img = new Image();
+      img.onload = function(){
+        mainImg.src = newSrc;
+        mainImg.alt = newAlt;
+        mainImg.classList.add('show');
+      };
+      img.src = newSrc;
+
+      titleEl.textContent = color.name + ' — View ' + (i+1);
+      descEl.textContent  = (color.captions && color.captions[i]) ? color.captions[i] : ('Detail view — ' + color.name);
+
+      // update selected thumb
+      document.querySelectorAll('.thumb').forEach(function(t){ t.setAttribute('aria-selected','false'); });
+      var active = document.querySelector('.thumb[data-index="'+(i+1)+'"]');
+      if (active) active.setAttribute('aria-selected','true');
     }
-    function updateGallery(){var color=PRODUCT.colors[currentColorIndex];renderThumbs(color);setActiveImage(0);}
-    (function init(){renderColorPicker();updateGallery();})();
+
+    // ---------- UPDATE GALLERY ON COLOR CHANGE ----------
+    function updateGallery(){
+      var color = PRODUCT.colors[currentColorIndex];
+      renderThumbs(color);
+      setActiveImage(0);
+    }
+
+    // ---------- INIT ----------
+    (function init(){
+      renderColorPicker();
+      updateGallery();
+    })();
+
+    // ---------- KEYBOARD NAV ----------
+    document.addEventListener('keydown', function(e){
+      var color = PRODUCT.colors[currentColorIndex];
+      if (!color) return;
+
+      if (e.key === 'ArrowRight') {
+        var next = (currentImageIndex + 1) % color.publicIds.length;
+        setActiveImage(next);
+      }
+      if (e.key === 'ArrowLeft')  {
+        var prev = (currentImageIndex - 1 + color.publicIds.length) % color.publicIds.length;
+        setActiveImage(prev);
+      }
+      if (e.key === 'ArrowUp') {
+        currentColorIndex = (currentColorIndex - 1 + PRODUCT.colors.length) % PRODUCT.colors.length;
+        currentImageIndex = 0;
+        updateGallery(); updateColorPickA11y();
+      }
+      if (e.key === 'ArrowDown') {
+        currentColorIndex = (currentColorIndex + 1) % PRODUCT.colors.length;
+        currentImageIndex = 0;
+        updateGallery(); updateColorPickA11y();
+      }
+    });
   </script>
 </body>
 </html>
