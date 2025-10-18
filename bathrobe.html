@@ -78,7 +78,7 @@
       outline:none; display:inline-flex; align-items:center; justify-content:center;
     }
     .swatch[aria-checked="true"] { box-shadow: 0 0 0 3px rgba(93,163,214,.35); border-color:#5da3d6; }
-    .swatch .dot { width:20px; height:20px; border-radius:50%; }
+    .swatch .dot { width:20px; height:20px; border-radius:50%; display:block; } /* key fix so color shows */
 
     .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
     .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
@@ -201,10 +201,10 @@
 
   <!-- Page interactions -->
   <script>
-    // Mark page-loaded for timing
+    // Mark page-loaded
     window.addEventListener('load', () => document.documentElement.classList.add('page-loaded'));
 
-    // Reveal on scroll (prevents blank page if JS loads fine)
+    // Reveal on scroll
     (function () {
       var items = [].slice.call(document.querySelectorAll('.reveal'));
       if (!items.length) return;
@@ -223,11 +223,6 @@
       items.forEach(el => io.observe(el));
     })();
 
-    // Safety fallback: if reveals still not visible after 1s, force-show.
-    setTimeout(() => {
-      document.querySelectorAll('.reveal:not(.appear)').forEach(el => el.classList.add('appear'));
-    }, 1000);
-
     // Header shrink
     (function () {
       var header = document.getElementById('header'), last = 0;
@@ -239,7 +234,7 @@
       }, { passive: true });
     })();
 
-    // ---------- PRODUCT DATA from your URLs ----------
+    // ---------- PRODUCT DATA ----------
     var CLOUDINARY_BASE = 'https://res.cloudinary.com/dkk8ohmu7/image/upload/';
     var FULL_TRANSFORM  = 'f_auto,q_auto,w_1200/';
     var THUMB_TRANSFORM = 'f_auto,q_auto,w_240/';
@@ -263,10 +258,14 @@
           id: 'brown', name: 'Brown', hex: '#7a5633',
           publicIds: [
             'v1760782023/Brown_1._kjvdqs.png',
-            'v1760782025/Brown_2._fwsws0.png',
-            'v1760782029/Brown_Kid_s_Bathrobe_grupok.png'
+            'v1760782025/Brown_2._fwsws0.png'
           ],
-          captions: ['Brown — front', 'Brown — folded', 'Brown (Kids) — front']
+          captions: ['Brown — front', 'Brown — folded']
+        },
+        {
+          id: 'brown-kids', name: 'Brown (Kids)', hex: '#6a4b2e',
+          publicIds: ['v1760782029/Brown_Kid_s_Bathrobe_grupok.png'],
+          captions: ['Brown (Kids) — front']
         },
         {
           id: 'black', name: 'Black', hex: '#222222',
