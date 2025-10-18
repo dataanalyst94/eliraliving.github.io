@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
-  Bathrobe gallery with Color switcher + main image + thumbnails (Cloudinary-backed)
+  Bathrobe gallery with color photo swatches + thumbnails (Cloudinary-backed)
 -->
 <html lang="en">
 <head>
@@ -53,7 +53,7 @@
       background:#fff;
     }
     .main-image img.show { opacity:1; transform: scale(1.0); }
-    /* NEW: show full garment for specific images only */
+    /* Use full-fit for tall product shots we enumerated earlier */
     .main-image img.contain { object-fit: contain; }
 
     .thumbs { margin-top:12px; display:grid; gap:10px; grid-template-columns: repeat(6, 1fr); }
@@ -77,11 +77,15 @@
 
     .color-picker { display:flex; gap:10px; align-items:center; margin:.6rem 0 1.2rem; flex-wrap:wrap; }
     .swatch {
-      width:28px; height:28px; border-radius:50%; border:2px solid #ddd; cursor:pointer; position:relative;
-      outline:none; display:inline-flex; align-items:center; justify-content:center;
+      width:32px; height:32px; border-radius:50%; border:2px solid #cfcfcf; cursor:pointer; position:relative;
+      outline:none; display:inline-flex; align-items:center; justify-content:center; background:#fff;
+      box-shadow: inset 0 0 0 4px rgba(255,255,255,.75), 0 1px 2px rgba(0,0,0,.12);
     }
-    .swatch[aria-checked="true"] { box-shadow: 0 0 0 3px rgba(93,163,214,.35); border-color:#5da3d6; }
-    .swatch .dot { width:20px; height:20px; border-radius:50%; display:block; }
+    .swatch[aria-checked="true"] { box-shadow: 0 0 0 3px rgba(93,163,214,.35), inset 0 0 0 4px rgba(255,255,255,.75); border-color:#5da3d6; }
+    .swatch .dot {
+      width:100%; height:100%; border-radius:50%; display:block;
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+    }
 
     .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
     .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
@@ -239,63 +243,56 @@
 
     // ---------- PRODUCT DATA ----------
     var CLOUDINARY_BASE = 'https://res.cloudinary.com/dkk8ohmu7/image/upload/';
-    var FULL_TRANSFORM  = 'f_auto,q_auto,w_1200/';
-    var THUMB_TRANSFORM = 'f_auto,q_auto,w_240/';
+    var FULL_TRANSFORM   = 'f_auto,q_auto,w_1200/';
+    var THUMB_TRANSFORM  = 'f_auto,q_auto,w_240/';
+    // New: aggressive zoom crop for swatch fabric chips
+    var SWATCH_TRANSFORM = 'f_auto,q_auto,c_fill,g_auto,z_1.8,w_60,h_60/';
 
     var PRODUCT = {
       colors: [
-        { id: 'dark-blue', name: 'Dark Blue', hex: '#0e2b4a',
-          publicIds: ['v1760782022/Dark_Blue_1._mpj0zr.png','v1760782021/Dark_Blue_2._ptxyc4.png'],
-          captions: ['Dark Blue — full view','Dark Blue — alternate angle'] },
-        { id: 'dark-brown', name: 'Dark Brown', hex: '#4a2d1b',
-          publicIds: ['v1760782022/Dark_Brown_1._cepnap.png'],
-          captions: ['Dark Brown — full view'] },
-        { id: 'brown', name: 'Brown', hex: '#7a5633',
-          publicIds: ['v1760782023/Brown_1._kjvdqs.png','v1760782025/Brown_2._fwsws0.png'],
-          captions: ['Brown — front','Brown — folded'] },
-        { id: 'brown-kids', name: 'Brown (Kids)', hex: '#6a4b2e',
-          publicIds: ['v1760782029/Brown_Kid_s_Bathrobe_grupok.png'],
-          captions: ['Brown (Kids) — front'] },
-        { id: 'black', name: 'Black', hex: '#222222',
-          publicIds: ['v1760782026/Black_1_pogmqf.png','v1760782027/Black_2_n9vshi.png'],
-          captions: ['Black — full view','Black — alternate angle'] },
-        { id: 'beige', name: 'Beige', hex: '#c7b8a1',
-          publicIds: ['v1760782029/Beige_1._ylffja.png','v1760782026/Beige_2._ri0sjc.png'],
-          captions: ['Beige — front','Beige — detail'] },
-        { id: 'dark-green', name: 'Dark Green', hex: '#2f6b4f',
-          publicIds: ['v1760782029/Dark_Green_1._xktrgu.png','v1760782028/Darh_Green_2._fs5mgj.png'],
-          captions: ['Dark Green — front','Dark Green — alternate angle'] }
+        { id:'dark-blue',  name:'Dark Blue',  hex:'#0e2b4a',
+          publicIds:['v1760782022/Dark_Blue_1._mpj0zr.png','v1760782021/Dark_Blue_2._ptxyc4.png'],
+          captions:['Dark Blue — full view','Dark Blue — alternate angle'] },
+        { id:'dark-brown', name:'Dark Brown', hex:'#4a2d1b',
+          publicIds:['v1760782022/Dark_Brown_1._cepnap.png'],
+          captions:['Dark Brown — full view'] },
+        { id:'brown',      name:'Brown',      hex:'#7a5633',
+          publicIds:['v1760782023/Brown_1._kjvdqs.png','v1760782025/Brown_2._fwsws0.png'],
+          captions:['Brown — front','Brown — folded'] },
+        { id:'brown-kids', name:'Brown (Kids)', hex:'#6a4b2e',
+          publicIds:['v1760782029/Brown_Kid_s_Bathrobe_grupok.png'],
+          captions:['Brown (Kids) — front'] },
+        { id:'black',      name:'Black',      hex:'#222222',
+          publicIds:['v1760782026/Black_1_pogmqf.png','v1760782027/Black_2_n9vshi.png'],
+          captions:['Black — full view','Black — alternate angle'] },
+        { id:'beige',      name:'Beige',      hex:'#c7b8a1',
+          publicIds:['v1760782029/Beige_1._ylffja.png','v1760782026/Beige_2._ri0sjc.png'],
+          captions:['Beige — front','Beige — detail'] },
+        { id:'dark-green', name:'Dark Green', hex:'#2f6b4f',
+          publicIds:['v1760782029/Dark_Green_1._xktrgu.png','v1760782028/Darh_Green_2._fs5mgj.png'],
+          captions:['Dark Green — front','Dark Green — alternate angle'] }
       ]
     };
 
     function fullUrl(publicId){ return CLOUDINARY_BASE + FULL_TRANSFORM  + publicId; }
     function thumbUrl(publicId){ return CLOUDINARY_BASE + THUMB_TRANSFORM + publicId; }
+    function swatchUrl(publicId){ return CLOUDINARY_BASE + SWATCH_TRANSFORM + publicId; }
 
-    // NEW: image filenames that should use object-fit: contain (show full robe)
+    // Images that should display full-fit in the main viewer
     var NEED_CONTAIN = [
-      'Beige_1._ylffja.png',
-      'Dark_Green_1._xktrgu.png',
-      'Brown_Kid_s_Bathrobe_grupok.png',
-      'Black_1_pogmqf.png',
-      'Brown_1._kjvdqs.png',
-      'Dark_Blue_1._mpj0zr.png',
-      'Dark_Brown_1._cepnap.png'
+      'Beige_1._ylffja.png','Dark_Green_1._xktrgu.png','Brown_Kid_s_Bathrobe_grupok.png',
+      'Black_1_pogmqf.png','Brown_1._kjvdqs.png','Dark_Blue_1._mpj0zr.png','Dark_Brown_1._cepnap.png'
     ];
-    function requiresContain(publicId){
-      // publicId looks like "v1760.../Folder/Filename.png"
-      var name = publicId.split('/').pop();
-      return NEED_CONTAIN.indexOf(name) !== -1;
-    }
+    function requiresContain(publicId){ var name = publicId.split('/').pop(); return NEED_CONTAIN.indexOf(name) !== -1; }
 
-    var currentColorIndex = 0;
-    var currentImageIndex = 0;
-
+    var currentColorIndex = 0, currentImageIndex = 0;
     var mainImg = document.getElementById('mainImage');
     var thumbsEl = document.getElementById('thumbs');
-    var titleEl = document.getElementById('styleTitle');
-    var descEl  = document.getElementById('styleDesc');
+    var titleEl  = document.getElementById('styleTitle');
+    var descEl   = document.getElementById('styleDesc');
     var colorPickerEl = document.querySelector('.color-picker');
 
+    // Render color photo swatches
     function renderColorPicker() {
       colorPickerEl.innerHTML = '';
       PRODUCT.colors.forEach(function (c, idx) {
@@ -308,7 +305,12 @@
 
         var dot = document.createElement('span');
         dot.className = 'dot';
-        dot.style.background = c.hex;
+        // Use highly zoomed crop of the first image as the chip texture
+        if (c.publicIds && c.publicIds.length) {
+          dot.style.backgroundImage = 'url(' + swatchUrl(c.publicIds[0]) + ')';
+        }
+        // Fallback color while image loads
+        dot.style.backgroundColor = c.hex;
         dot.title = c.name;
         btn.appendChild(dot);
 
@@ -324,13 +326,7 @@
         colorPickerEl.appendChild(btn);
       });
     }
-
-    function updateColorPickA11y(){
-      var all = colorPickerEl.querySelectorAll('.swatch');
-      all.forEach(function(b, i){
-        b.setAttribute('aria-checked', i === currentColorIndex ? 'true' : 'false');
-      });
-    }
+    function updateColorPickA11y(){ colorPickerEl.querySelectorAll('.swatch').forEach((b,i)=>b.setAttribute('aria-checked', i===currentColorIndex ? 'true' : 'false')); }
 
     function renderThumbs(color) {
       thumbsEl.innerHTML = '';
@@ -347,9 +343,7 @@
         img.alt = color.name + ' — View ' + (i+1) + ' thumbnail';
 
         btn.appendChild(img);
-        btn.addEventListener('click', function(){
-          setActiveImage(i);
-        });
+        btn.addEventListener('click', function(){ setActiveImage(i); });
         thumbsEl.appendChild(btn);
       });
     }
@@ -363,42 +357,28 @@
       var newAlt = 'Bathrobe — ' + color.name + ' — View ' + (i+1);
 
       mainImg.classList.remove('show');
-      // Toggle contain/cover based on filename
       if (requiresContain(pid)) mainImg.classList.add('contain');
-      else                     mainImg.classList.remove('contain');
+      else                      mainImg.classList.remove('contain');
 
       var img = new Image();
-      img.onload = function(){
-        mainImg.src = newSrc;
-        mainImg.alt = newAlt;
-        mainImg.classList.add('show');
-      };
+      img.onload = function(){ mainImg.src = newSrc; mainImg.alt = newAlt; mainImg.classList.add('show'); };
       img.src = newSrc;
 
       titleEl.textContent = color.name + ' — View ' + (i+1);
       descEl.textContent  = (color.captions && color.captions[i]) ? color.captions[i] : ('Detail view — ' + color.name);
 
-      document.querySelectorAll('.thumb').forEach(function(t){ t.setAttribute('aria-selected','false'); });
+      document.querySelectorAll('.thumb').forEach(t=>t.setAttribute('aria-selected','false'));
       var active = document.querySelector('.thumb[data-index="'+(i+1)+'"]');
       if (active) active.setAttribute('aria-selected','true');
     }
 
-    function updateGallery(){
-      var color = PRODUCT.colors[currentColorIndex];
-      renderThumbs(color);
-      setActiveImage(0);
-    }
+    function updateGallery(){ var color = PRODUCT.colors[currentColorIndex]; renderThumbs(color); setActiveImage(0); }
 
-    (function init(){
-      renderColorPicker();
-      updateGallery();
-    })();
+    (function init(){ renderColorPicker(); updateGallery(); })();
 
     // Keyboard navigation
     document.addEventListener('keydown', function(e){
-      var color = PRODUCT.colors[currentColorIndex];
-      if (!color) return;
-
+      var color = PRODUCT.colors[currentColorIndex]; if (!color) return;
       if (e.key === 'ArrowRight') setActiveImage((currentImageIndex + 1) % color.publicIds.length);
       if (e.key === 'ArrowLeft')  setActiveImage((currentImageIndex - 1 + color.publicIds.length) % color.publicIds.length);
       if (e.key === 'ArrowUp')    { currentColorIndex = (currentColorIndex - 1 + PRODUCT.colors.length) % PRODUCT.colors.length; currentImageIndex = 0; updateGallery(); updateColorPickA11y(); }
