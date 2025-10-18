@@ -23,7 +23,6 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-  <!-- Page UI -->
   <style>
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
@@ -137,38 +136,28 @@
         </header>
 
         <section class="product-layout reveal" aria-label="Bathrobe gallery">
-          <!-- LEFT: Main image + thumbnails -->
           <div>
             <div class="main-image">
               <div class="frame">
-                <!-- Default image (first color / first view) -->
                 <img id="mainImage" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png" alt="Bathrobe — Dark Blue — View 1" class="show">
               </div>
             </div>
-
             <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a view"></div>
           </div>
 
-          <!-- RIGHT: Details / CTA -->
           <aside class="details" aria-live="polite">
             <h2 id="styleTitle">Dark Blue — View 1</h2>
-
-            <!-- Color picker -->
             <div class="color-picker" role="radiogroup" aria-label="Choose color"></div>
-
             <div class="meta">
               <span class="chip">Soft & absorbent</span>
               <span class="chip">Unisex fit</span>
               <span class="chip">Machine-washable</span>
             </div>
             <p id="styleDesc">Cozy spa comfort with secure belt and deep pockets. Explore photos for each color.</p>
-
             <div class="actions">
-              <!-- Placeholder buttons; wire to Stripe later -->
               <a href="#select" class="button primary icon solid fa-check">Add to cart</a>
               <a href="index.html#products" class="button">Back to Products</a>
             </div>
-
             <hr />
             <p><strong>Specs</strong><br>
               Cotton-rich terry. Sizes S–XL. Loop for hanging; reinforced seams. Care: cold wash, gentle cycle.</p>
@@ -203,7 +192,7 @@
 
   </div>
 
-  <!-- Scripts (template) -->
+  <!-- Scripts -->
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/browser.min.js"></script>
   <script src="assets/js/breakpoints.min.js"></script>
@@ -212,13 +201,36 @@
 
   <!-- Page interactions -->
   <script>
-    // Page-loaded mark + header shrink
-    window.addEventListener('load', function () {
-      document.documentElement.classList.add('page-loaded');
-    });
+    // Mark page-loaded for timing
+    window.addEventListener('load', () => document.documentElement.classList.add('page-loaded'));
+
+    // Reveal on scroll (prevents blank page if JS loads fine)
     (function () {
-      var header = document.getElementById('header');
-      var last = 0;
+      var items = [].slice.call(document.querySelectorAll('.reveal'));
+      if (!items.length) return;
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('appear'));
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      items.forEach(el => io.observe(el));
+    })();
+
+    // Safety fallback: if reveals still not visible after 1s, force-show.
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.appear)').forEach(el => el.classList.add('appear'));
+    }, 1000);
+
+    // Header shrink
+    (function () {
+      var header = document.getElementById('header'), last = 0;
       window.addEventListener('scroll', function () {
         var y = window.scrollY || window.pageYOffset;
         if (y > 24 && last <= 24) header.classList.add('shrink');
@@ -228,7 +240,6 @@
     })();
 
     // ---------- PRODUCT DATA from your URLs ----------
-    // We'll store just the path after `/upload/` so we can prepend transforms for full vs thumb.
     var CLOUDINARY_BASE = 'https://res.cloudinary.com/dkk8ohmu7/image/upload/';
     var FULL_TRANSFORM  = 'f_auto,q_auto,w_1200/';
     var THUMB_TRANSFORM = 'f_auto,q_auto,w_240/';
@@ -245,9 +256,7 @@
         },
         {
           id: 'dark-brown', name: 'Dark Brown', hex: '#4a2d1b',
-          publicIds: [
-            'v1760782022/Dark_Brown_1._cepnap.png'
-          ],
+          publicIds: ['v1760782022/Dark_Brown_1._cepnap.png'],
           captions: ['Dark Brown — full view']
         },
         {
@@ -279,29 +288,25 @@
           id: 'dark-green', name: 'Dark Green', hex: '#2f6b4f',
           publicIds: [
             'v1760782029/Dark_Green_1._xktrgu.png',
-            'v1760782028/Darh_Green_2._fs5mgj.png' // (filename typo kept as-is)
+            'v1760782028/Darh_Green_2._fs5mgj.png'
           ],
           captions: ['Dark Green — front', 'Dark Green — alternate angle']
         }
       ]
     };
 
-    // ---------- HELPERS ----------
     function fullUrl(publicId){ return CLOUDINARY_BASE + FULL_TRANSFORM  + publicId; }
     function thumbUrl(publicId){ return CLOUDINARY_BASE + THUMB_TRANSFORM + publicId; }
 
-    // ---------- STATE ----------
-    var currentColorIndex = 0;   // default to Dark Blue
+    var currentColorIndex = 0;
     var currentImageIndex = 0;
 
-    // ---------- ELEMENTS ----------
     var mainImg = document.getElementById('mainImage');
     var thumbsEl = document.getElementById('thumbs');
     var titleEl = document.getElementById('styleTitle');
     var descEl  = document.getElementById('styleDesc');
     var colorPickerEl = document.querySelector('.color-picker');
 
-    // ---------- RENDER COLOR SWATCHES ----------
     function renderColorPicker() {
       colorPickerEl.innerHTML = '';
       PRODUCT.colors.forEach(function (c, idx) {
@@ -338,7 +343,6 @@
       });
     }
 
-    // ---------- RENDER THUMBS ----------
     function renderThumbs(color) {
       thumbsEl.innerHTML = '';
       color.publicIds.forEach(function (pid, i) {
@@ -361,7 +365,6 @@
       });
     }
 
-    // ---------- SET ACTIVE IMAGE ----------
     function setActiveImage(i){
       var color = PRODUCT.colors[currentColorIndex];
       currentImageIndex = i;
@@ -381,48 +384,31 @@
       titleEl.textContent = color.name + ' — View ' + (i+1);
       descEl.textContent  = (color.captions && color.captions[i]) ? color.captions[i] : ('Detail view — ' + color.name);
 
-      // update selected thumb
       document.querySelectorAll('.thumb').forEach(function(t){ t.setAttribute('aria-selected','false'); });
       var active = document.querySelector('.thumb[data-index="'+(i+1)+'"]');
       if (active) active.setAttribute('aria-selected','true');
     }
 
-    // ---------- UPDATE GALLERY ON COLOR CHANGE ----------
     function updateGallery(){
       var color = PRODUCT.colors[currentColorIndex];
       renderThumbs(color);
       setActiveImage(0);
     }
 
-    // ---------- INIT ----------
     (function init(){
       renderColorPicker();
       updateGallery();
     })();
 
-    // ---------- KEYBOARD NAV ----------
+    // Keyboard navigation
     document.addEventListener('keydown', function(e){
       var color = PRODUCT.colors[currentColorIndex];
       if (!color) return;
 
-      if (e.key === 'ArrowRight') {
-        var next = (currentImageIndex + 1) % color.publicIds.length;
-        setActiveImage(next);
-      }
-      if (e.key === 'ArrowLeft')  {
-        var prev = (currentImageIndex - 1 + color.publicIds.length) % color.publicIds.length;
-        setActiveImage(prev);
-      }
-      if (e.key === 'ArrowUp') {
-        currentColorIndex = (currentColorIndex - 1 + PRODUCT.colors.length) % PRODUCT.colors.length;
-        currentImageIndex = 0;
-        updateGallery(); updateColorPickA11y();
-      }
-      if (e.key === 'ArrowDown') {
-        currentColorIndex = (currentColorIndex + 1) % PRODUCT.colors.length;
-        currentImageIndex = 0;
-        updateGallery(); updateColorPickA11y();
-      }
+      if (e.key === 'ArrowRight') setActiveImage((currentImageIndex + 1) % color.publicIds.length);
+      if (e.key === 'ArrowLeft')  setActiveImage((currentImageIndex - 1 + color.publicIds.length) % color.publicIds.length);
+      if (e.key === 'ArrowUp')    { currentColorIndex = (currentColorIndex - 1 + PRODUCT.colors.length) % PRODUCT.colors.length; currentImageIndex = 0; updateGallery(); updateColorPickA11y(); }
+      if (e.key === 'ArrowDown')  { currentColorIndex = (currentColorIndex + 1) % PRODUCT.colors.length; currentImageIndex = 0; updateGallery(); updateColorPickA11y(); }
     });
   </script>
 </body>
