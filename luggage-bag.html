@@ -2,18 +2,19 @@
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
   Product gallery with main image + thumbnails (Cloudinary-backed)
+  Updated for: CLASSIC WHEELIE SPORTS BAG 96 L
 -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Luggage Bag — ELIRA LIVING</title>
+  <title>Classic Wheelie Sports Bag — 96 L | ELIRA LIVING</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
   <!-- SEO -->
-  <meta name="description" content="Hard-shell carry-on luggage with 360° spinner wheels and TSA lock. Browse photos and pick your favorite view." />
+  <meta name="description" content="Classic Wheelie Sports Bag (96 L) in durable 600D polyester with adjustable pull handle, sturdy wheels, tension straps, inside zipper pocket, removable padded shoulder strap, and a lockable main compartment." />
   <link rel="canonical" href="https://www.eliraliving.com/luggage-bag.html" />
-  <meta property="og:title" content="Luggage Bag — ELIRA LIVING" />
-  <meta property="og:description" content="Durable, lightweight cabin luggage with smart interior and smooth wheels." />
+  <meta property="og:title" content="Classic Wheelie Sports Bag — 96 L" />
+  <meta property="og:description" content="96-liter wheeled sports bag in 600D polyester. Adjustable pull handle, durable wheels, lockable main compartment, and smart interior details." />
   <meta property="og:url" content="https://www.eliraliving.com/luggage-bag.html" />
   <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760798021/ChatGPT_Image_Oct_17_2025_08_59_57_PM_idg137.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -23,93 +24,83 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-  <!-- Bathrobe header/logo replication + page UI -->
+  <!-- Header/logo + page UI (consistent with Bathrobe page) -->
   <style>
-    /* ===== Match Bathrobe header: pinned, black logo/title, same spacing ===== */
     :root{ --logo-top:16px; --logo-left:22px; --burger-top:16px; --burger-right:22px; }
     html { scroll-behavior: smooth; }
     @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} html{scroll-behavior:auto} }
 
-    /* Pinned transparent header; logo + burger positioned like Bathrobe page */
     #header{ position:fixed; top:0; left:0; right:0; background:transparent; border:0; box-shadow:none; margin:0!important; z-index:60; pointer-events:none; }
     #header .inner{ padding-top:.45rem; padding-bottom:.15rem; pointer-events:auto; }
     #header .logo{ position:fixed; top:var(--logo-top); left:var(--logo-left); z-index:61; pointer-events:auto; display:flex; align-items:center; gap:.5rem; }
     #header nav{ position:fixed; top:var(--burger-top); right:var(--burger-right); z-index:61; pointer-events:auto; }
-
-    /* Black logo treatment identical to Bathrobe */
     #header .logo .title{ letter-spacing:.18em; font-weight:600; color:#222!important; }
     #header .logo .symbol img{ height:22px; width:auto; filter:none; }
     #header nav a{ color:#222!important; }
-
-    /* Shrink behavior (same as Bathrobe) */
     #header.shrink .inner{ padding-top:.25rem; }
     #header.shrink .logo .symbol img{ height:21px; }
 
-    /* Reduce top whitespace to match Bathrobe page */
     #wrapper{ padding-top:0!important; }
     #main{ padding-top:0!important; }
-    #main .inner{ padding-top:72px!important; } /* space under pinned header */
+    #main .inner{ padding-top:72px!important; }
     .product-header{ margin-top:6px; }
 
-    /* ===== Page-specific gallery UI ===== */
-    .product-header.reveal h1 { margin-bottom: .4rem; }
-    .product-header.reveal p  { color:#666; }
+    .product-header.reveal h1{ margin-bottom:.4rem; }
+    .product-header.reveal p{ color:#666; }
 
-    .product-layout {
-      display: grid; gap: 28px;
-      grid-template-columns: 1.2fr 1fr; align-items: start;
-    }
-    @media (max-width: 980px) { .product-layout { grid-template-columns: 1fr; } }
+    .product-layout{ display:grid; gap:28px; grid-template-columns:1.2fr 1fr; align-items:start; }
+    @media (max-width:980px){ .product-layout{ grid-template-columns:1fr; } }
 
-    .main-image { background:#fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
-    .main-image .frame { width:100%; aspect-ratio: 1/1; background:#f5f5f5; position: relative; }
-    .main-image img {
+    .main-image{ background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+    .main-image .frame{ width:100%; aspect-ratio:1/1; background:#f5f5f5; position:relative; }
+    .main-image img{
       position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-      opacity:0; transform: scale(1.02);
-      transition: opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
+      opacity:0; transform:scale(1.02);
+      transition:opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
       background:#fff;
     }
-    .main-image img.show { opacity:1; transform: scale(1.0); }
+    .main-image img.show{ opacity:1; transform:scale(1.0); }
 
-    .thumbs { margin-top:12px; display:grid; gap:10px; grid-template-columns: repeat(6, 1fr); }
-    @media (max-width: 980px) { .thumbs { grid-template-columns: repeat(6, 1fr); } }
-    @media (max-width: 600px) { .thumbs { grid-template-columns: repeat(5, 1fr); } }
+    .thumbs{ margin-top:12px; display:grid; gap:10px; grid-template-columns:repeat(6,1fr); }
+    @media (max-width:980px){ .thumbs{ grid-template-columns:repeat(6,1fr); } }
+    @media (max-width:600px){ .thumbs{ grid-template-columns:repeat(5,1fr); } }
 
-    .thumb {
-      position:relative; border:2px solid transparent; border-radius:10px; overflow:hidden;
-      background:#fff; cursor:pointer; transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
-      box-shadow: 0 3px 10px rgba(0,0,0,.06);
-    }
-    .thumb:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.10); }
-    .thumb[aria-selected="true"] { border-color:#5da3d6; }
-    .thumb img { width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
+    .thumb{ position:relative; border:2px solid transparent; border-radius:10px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease; box-shadow:0 3px 10px rgba(0,0,0,.06); }
+    .thumb:hover{ transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.10); }
+    .thumb[aria-selected="true"]{ border-color:#5da3d6; }
+    .thumb img{ width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
 
-    .details { background:#fff; border-radius:16px; padding:20px 22px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
-    .details h2 { margin:0 0 .4rem; }
-    .details p  { color:#666; margin:0 0 1rem; }
-    .meta { display:flex; gap:12px; flex-wrap:wrap; color:#555; margin: .3rem 0 1rem; }
-    .meta .chip { background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em; border:1px solid #e0edf8; }
+    .details{ background:#fff; border-radius:16px; padding:20px 22px; box-shadow:0 8px 24px rgba(0,0,0,.06); }
+    .details h2{ margin:0 0 .4rem; }
+    .details p{ color:#555; margin:.4rem 0 1rem; }
+    .meta{ display:flex; gap:12px; flex-wrap:wrap; color:#555; margin:.3rem 0 1rem; }
+    .meta .chip{ background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em; border:1px solid #e0edf8; }
 
-    .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
-    .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
+    .actions .button{ transition:transform 180ms ease, box-shadow 180ms ease; }
+    .actions .button:hover{ transform:translateY(-2px); box-shadow:0 8px 22px rgba(0,0,0,.10); }
 
-    .reveal { opacity:0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
-    .reveal.appear { opacity:1; transform: translateY(0); }
+    .buy-row{ display:flex; align-items:center; gap:12px; margin:1rem 0 0.75rem; }
+    .qty{ display:flex; align-items:center; border:1px solid #e6e6e6; border-radius:10px; overflow:hidden; }
+    .qty button{ width:36px; height:36px; border:0; background:#fafafa; cursor:pointer; font-size:1.1rem; }
+    .qty input{ width:50px; height:36px; border:0; text-align:center; font-size:1rem; }
 
-    #footer { background:#f7f7f7; }
-    #footer .inner { padding-top:2rem; padding-bottom:2rem; }
-    #footer h2 { font-size:1rem; letter-spacing:.18em; color:#444; }
+    .note{ font-size:.9rem; color:#666; }
 
-    /* Prevent unwanted transforms on header (same as Bathrobe) */
+    .reveal{ opacity:0; transform:translateY(18px); transition:opacity 700ms ease, transform 700ms ease; }
+    .reveal.appear{ opacity:1; transform:translateY(0); }
+
+    #footer{ background:#f7f7f7; }
+    #footer .inner{ padding-top:2rem; padding-bottom:2rem; }
+    #footer h2{ font-size:1rem; letter-spacing:.18em; color:#444; }
+
     #header, #header *{ transform:none!important; }
-
-    img { aspect-ratio:auto; }
+    img{ aspect-ratio:auto; }
   </style>
 </head>
 <body class="is-preload">
   <div id="wrapper">
 
-    <!-- Header (pinned, black like Bathrobe) -->
+    <!-- Header -->
     <header id="header">
       <div class="inner">
         <a href="index.html" class="logo">
@@ -144,34 +135,34 @@
       <div class="inner">
 
         <header class="product-header reveal">
-          <h1>Luggage Bag</h1>
-          <p>Hard-shell carry-on with 360° spinner wheels, TSA lock, and smart interior. See the photos below and pick your favorite view.</p>
+          <h1>Classic Wheelie Sports Bag — 96 L</h1>
+          <p>Spacious 96-liter wheeled sports bag in rugged 600D polyester with an adjustable pull handle, durable wheels, and a lockable main compartment.</p>
         </header>
 
-        <section class="product-layout reveal" aria-label="Luggage Bag gallery">
+        <section class="product-layout reveal" aria-label="Classic Wheelie Sports Bag gallery">
           <!-- LEFT: Main image + thumbnails -->
           <div>
             <div class="main-image">
               <div class="frame">
-                <!-- Default image (Cloudinary, optimized) -->
+                <!-- Default image (placeholder from your Cloudinary until final photos are set) -->
                 <img
                   id="mainImage"
                   src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760798021/ChatGPT_Image_Oct_17_2025_08_59_57_PM_idg137.png"
-                  alt="Luggage Bag — View 1 (front)"
+                  alt="Classic Wheelie Sports Bag — front view"
                   class="show"
                 >
               </div>
             </div>
 
             <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a view">
-              <button class="thumb" data-index="1" aria-label="View 1" aria-selected="true">
-                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760798021/ChatGPT_Image_Oct_17_2025_08_59_57_PM_idg137.png" alt="View 1 thumbnail (front)">
+              <button class="thumb" data-index="1" aria-label="Front view" aria-selected="true">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760798021/ChatGPT_Image_Oct_17_2025_08_59_57_PM_idg137.png" alt="Front view thumbnail">
               </button>
-              <button class="thumb" data-index="2" aria-label="View 2">
-                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760798036/72485.jpg.533x800_q100_background-255_255_255_0_upscale_lpwpxg.jpg" alt="View 2 thumbnail (angle)">
+              <button class="thumb" data-index="2" aria-label="Side / wheel view">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760798036/72485.jpg.533x800_q100_background-255_255_255_0_upscale_lpwpxg.jpg" alt="Side / wheel view thumbnail">
               </button>
-              <button class="thumb" data-index="3" aria-label="View 3">
-                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760798056/72484.jpg.533x800_q100_background-255_255_255_0_upscale_imyg8f.jpg" alt="View 3 thumbnail (open interior)">
+              <button class="thumb" data-index="3" aria-label="Interior view">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760798056/72484.jpg.533x800_q100_background-255_255_255_0_upscale_imyg8f.jpg" alt="Interior view thumbnail">
               </button>
             </div>
           </div>
@@ -180,21 +171,48 @@
           <aside class="details" aria-live="polite">
             <h2 id="styleTitle">View 1</h2>
             <div class="meta">
-              <span class="chip">Hard-shell</span>
-              <span class="chip">360° spinner</span>
-              <span class="chip">TSA lock</span>
+              <span class="chip">96 L capacity</span>
+              <span class="chip">600D polyester</span>
+              <span class="chip">Wheeled + pull handle</span>
+              <span class="chip">Lockable main compartment</span>
             </div>
-            <p id="styleDesc">Durable yet lightweight cabin suitcase with smooth-rolling wheels and organized interior compartments.</p>
 
-            <div class="actions">
-              <!-- Placeholder buttons; wire to Stripe later -->
-              <a href="#select" class="button primary icon solid fa-check">Add to cart</a>
-              <a href="index.html#products" class="button">Back to Products</a>
+            <p id="styleDesc">Roomy and durable: ideal for sports, travel, and weekend hauling with smooth-rolling wheels and a sturdy double-tube pull handle.</p>
+
+            <!-- Quantity + Actions (consistent flow) -->
+            <div class="buy-row">
+              <div class="qty" aria-label="Quantity selector">
+                <button type="button" id="minus" aria-label="Decrease quantity">−</button>
+                <input type="number" id="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity" />
+                <button type="button" id="plus" aria-label="Increase quantity">+</button>
+              </div>
+              <div class="actions">
+                <!-- Wire this to Stripe/cart later -->
+                <a href="#add" id="addToCart" class="button primary icon solid fa-check">Add to cart</a>
+              </div>
             </div>
+            <p class="note">Ships in 1–3 business days. Free returns within 30 days.</p>
 
             <hr />
-            <p><strong>Specs</strong><br>
-              Approx. size 55 × 35 × 23 cm (carry-on). ABS/PC shell, telescopic handle, 360° dual spinner wheels, integrated TSA lock, zippered divider and compression straps.</p>
+            <p><strong>Specs</strong></p>
+            <ul>
+              <li>Material: 600D polyester</li>
+              <li>Size: 75 × 38 × 35 cm</li>
+              <li>Capacity: 96 liters</li>
+              <li>Adjustable double-tube pull handle</li>
+              <li>Durable wheels</li>
+              <li>Tension straps</li>
+              <li>Inside zipper pocket</li>
+              <li>Removable padded shoulder strap</li>
+              <li>Lockable main compartment</li>
+              <li>Country of manufacture: China</li>
+              <li>Customs code: 4202129990</li>
+            </ul>
+
+            <p class="note">Note: Dimensions and capacity are approximate.</p>
+            <div class="actions" style="margin-top:.75rem">
+              <a href="index.html#products" class="button">Back to Products</a>
+            </div>
           </aside>
         </section>
 
@@ -235,7 +253,7 @@
 
   <!-- Page interactions -->
   <script>
-    // Mark page-loaded for timing
+    // Page loaded marker
     window.addEventListener('load', function () {
       document.documentElement.classList.add('page-loaded');
     });
@@ -258,7 +276,7 @@
       items.forEach(function (el){ io.observe(el); });
     })();
 
-    // Header shrink (works with pinned header exactly like Bathrobe)
+    // Header shrink
     (function () {
       var header = document.getElementById('header');
       var last = 0;
@@ -270,7 +288,7 @@
       }, { passive: true });
     })();
 
-    // Cloudinary-based main image swap (3 views)
+    // Gallery swap
     (function () {
       var main  = document.getElementById('mainImage');
       var title = document.getElementById('styleTitle');
@@ -283,9 +301,9 @@
       ];
 
       var captions = [
-        'Front view with sleek hard-shell and telescopic handle.',
-        'Angled view showing spinner wheels and side profile.',
-        'Open interior with divider and compression straps.'
+        'Front view highlighting the spacious 96 L design.',
+        'Side profile showing wheels and adjustable pull handle.',
+        'Interior view with tension straps and zip pocket.'
       ];
 
       var current = 1;
@@ -293,7 +311,7 @@
       function setActive(i) {
         current = i;
         var newSrc = full[i-1];
-        var newAlt = 'Luggage Bag — View ' + i;
+        var newAlt = 'Classic Wheelie Sports Bag — View ' + i;
 
         main.classList.remove('show');
         var img = new Image();
@@ -315,10 +333,35 @@
         btn.addEventListener('click', function(){ setActive(Number(btn.dataset.index)); });
       });
 
-      // Optional keyboard navigation (left/right)
       document.addEventListener('keydown', function(e){
         if (e.key === 'ArrowRight') setActive(((current) % 3) + 1);
         if (e.key === 'ArrowLeft')  setActive(((current + 1) % 3) + 1);
+      });
+    })();
+
+    // Quantity stepper + Add to cart (placeholder)
+    (function(){
+      var minus = document.getElementById('minus');
+      var plus  = document.getElementById('plus');
+      var qty   = document.getElementById('quantity');
+      var add   = document.getElementById('addToCart');
+
+      minus.addEventListener('click', function(){
+        var v = Math.max(1, (parseInt(qty.value,10) || 1) - 1);
+        qty.value = v;
+      });
+      plus.addEventListener('click', function(){
+        var v = Math.max(1, (parseInt(qty.value,10) || 1) + 1);
+        qty.value = v;
+      });
+      qty.addEventListener('input', function(){
+        if (!qty.value || parseInt(qty.value,10) < 1) qty.value = 1;
+      });
+
+      add.addEventListener('click', function(e){
+        // Replace with your cart/Stripe logic
+        e.preventDefault();
+        alert('Added ' + (parseInt(qty.value,10)||1) + ' to cart. (Wire this to Stripe/your cart)');
       });
     })();
   </script>
