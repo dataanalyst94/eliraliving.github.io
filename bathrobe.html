@@ -4,7 +4,7 @@
   Kenno bathrobe — refined layout, elevated typography, top-placed actions,
   centered buttons, larger subheads, CTA that starts moving after a delay and
   travels to the bottom of the details card. Floating CTA overlays content and
-  turns transparent only while scrolled.
+  turns transparent only while scrolled (gold style; gray on hover).
 -->
 <html lang="en">
 <head>
@@ -35,6 +35,7 @@
       --ink-900:#111; --ink-800:#1c1c1c; --ink-700:#2a2a2a; --ink-600:#444; --ink-500:#666; --ink-400:#888;
       --ui-050:#fcfcfc; --ui-100:#fafafa; --ui-200:#f5f5f5; --ui-300:#eee; --ui-400:#e6e6e6;
       --brand:#1d6fa7; --brand-100: rgba(29,111,167,.12);
+      --gold:#C9A227; /* NEW: gold accent for floating CTA */
       --cta-shift: 0px; /* updated by JS */
     }
 
@@ -93,21 +94,32 @@
     .button.icon:before{ margin-right:.5rem; transform:none; }
     .actions-top .button.primary{ box-shadow:0 6px 16px rgba(29,111,167,.18); }
 
-    /* Only the primary CTA moves; make sure it can overlay content when floating */
+    /* Only the primary CTA moves; can overlay content when floating */
     .cta-primary{
       position:relative; z-index:2;
       transform: translateY(var(--cta-shift));
       transition: transform 140ms ease, background-color 140ms ease, color 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
       will-change: transform;
     }
-    /* When scrolled (shift > 0) JS toggles .floating */
+    /* Floating (after it leaves its original spot): gold outline & text/tick */
     .cta-primary.floating{
-      z-index: 999;                        /* sits on top of chips/text/images */
-      background-color: transparent !important; /* transparent fill while scrolling */
-      color: var(--ink-800) !important;    /* ensure good contrast on white */
-      border: 2px solid rgba(0,0,0,.25) !important;
+      z-index: 999;
+      background-color: transparent !important;
+      color: var(--gold) !important;
+      border: 2px solid var(--gold) !important;
       box-shadow: none !important;
     }
+    /* Make sure the Font Awesome tick matches gold when floating */
+    .cta-primary.floating:before{ color: var(--gold) !important; }
+
+    /* Hover while floating: turn button gray with dark content */
+    .cta-primary.floating:hover{
+      background-color: var(--ui-300) !important;   /* gray fill */
+      color: var(--ink-900) !important;             /* dark text */
+      border-color: var(--ui-300) !important;       /* match border to fill */
+      box-shadow: none !important;
+    }
+    .cta-primary.floating:hover:before{ color: var(--ink-900) !important; }
 
     .meta{ display:flex; gap:10px; flex-wrap:wrap; color:var(--ink-600); margin:.2rem 0 1rem; }
     .meta .chip{ background:#f6f9fc; padding:.28rem .55rem; border-radius:999px; font-size:.88rem; border:1px solid #e5eff8; line-height:1.3; white-space:nowrap; }
@@ -147,7 +159,7 @@
       :root { --cta-shift: 0px !important; } /* disable motion on small screens */
       .button{ min-height:44px; padding:0 16px; }
       #product-copy h3{ font-size:1.07rem; }
-      .cta-primary.floating{ background-color:inherit !important; border-width:1px !important; } /* just in case */
+      .cta-primary.floating{ background-color:inherit !important; border-width:1px !important; }
     }
   </style>
 </head>
