@@ -162,6 +162,37 @@
       .thumb{ width:66px; height:66px; }
       #main .inner{ padding-top:72px!important; }
     }
+    /* === 1) Perfectly center the button text (and icon) === */
+.details .button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  line-height: 1 !important;   /* kill tall baseline line-height */
+}
+.details .button.icon:before {
+  margin-right: .5rem;          /* tidy spacing between icon & label */
+  transform: none;              /* keep it vertically centered */
+}
+
+/* === 2) Make subheadings larger than body copy === */
+/* Replace your current `#product-copy h3` rule with this */
+#product-copy h3{
+  margin: 1.2rem 0 .55rem;
+  font-size: 1.12rem;           /* > body (≈1.0–1.02rem) */
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-800);
+  font-variant-caps: all-small-caps;
+}
+
+/* Optional: slightly tighten on small screens */
+@media (max-width: 480px){
+  .details .button{ min-height: 44px; padding: 0 16px; }
+  #product-copy h3{ font-size: 1.07rem; }
+}
   </style>
 </head>
 <body class="is-preload">
