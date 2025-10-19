@@ -9,6 +9,9 @@
   UPDATE: Enforced selection flow:
   1) Color  →  2) Size (S/M/L)  →  3) Quantity
   Size & quantity stay disabled until previous step is chosen.
+
+  FIX: CTA no longer overlaps section headings while floating
+  (adds space beneath actions row while floating).
 -->
 <html lang="en">
 <head>
@@ -98,13 +101,11 @@
     .button.icon:before{ margin-right:.5rem; transform:none; }
     .actions-top .button.primary{ box-shadow:0 6px 16px rgba(29,111,167,.18); }
 
-    /* Disable style */
+    /* Disabled state */
     .button[disabled],
     .pill[disabled],
     .qty button[disabled],
-    .qty input[disabled]{
-      opacity:.5; cursor:not-allowed; pointer-events:none;
-    }
+    .qty input[disabled]{ opacity:.5; cursor:not-allowed; pointer-events:none; }
     .muted{ opacity:.5; }
 
     /* Only the primary CTA moves; can overlay content when floating */
@@ -123,6 +124,8 @@
       box-shadow: none !important;
     }
     .cta-primary.floating:before{ color: var(--gold) !important; }
+
+    /* Hover while floating: turn button gray with dark content */
     .cta-primary.floating:hover{
       background-color: var(--ui-300) !important;
       color: var(--ink-900) !important;
@@ -130,6 +133,11 @@
       box-shadow: none !important;
     }
     .cta-primary.floating:hover:before{ color: var(--ink-900) !important; }
+
+    /* While the CTA is floating, reserve space below actions so it doesn't overlap headings */
+    .actions-top.is-floating{
+      margin-bottom: calc(var(--cta-shift) + 8px);
+    }
 
     .meta{ display:flex; gap:10px; flex-wrap:wrap; color:var(--ink-600); margin:.2rem 0 1rem; }
     .meta .chip{ background:#f6f9fc; padding:.28rem .55rem; border-radius:999px; font-size:.88rem; border:1px solid #e5eff8; line-height:1.3; white-space:nowrap; }
@@ -144,6 +152,9 @@
     /* Subheads larger than body */
     #product-copy h3{ margin:1.2rem 0 .55rem; font-size:1.12rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-800); font-variant-caps:all-small-caps; }
     #product-copy p + h3{ margin-top:1.25rem; }
+
+    /* Step headings spacing */
+    #colorLabel, #sizeLabel, #qtyLabel{ margin-top:.75rem; }
 
     /* Swatches (Color) */
     .color-picker{ display:flex; gap:12px; align-items:center; margin:.25rem 0 .8rem; flex-wrap:wrap; }
@@ -440,7 +451,6 @@
     function disable(elem){ elem.setAttribute('disabled',''); elem.classList.add('muted'); }
 
     function updateCTAEnabled(){
-      // Enable CTA only if color & size selected
       if(selectedColorIndex !== null && selectedSize){
         ctaAdd.removeAttribute('disabled');
       } else {
@@ -463,7 +473,7 @@
         dot.className='dot';
         var ovalUrl = SWATCH_OVALS[c.id];
         if(ovalUrl){ dot.style.backgroundImage='url('+ovalUrl+')'; }
-        dot.style.backgroundColor=c.hex; // fallback
+        dot.style.backgroundColor=c.hex;
         dot.title=c.name;
         btn.appendChild(dot);
 
@@ -471,12 +481,10 @@
           if(selectedColorIndex!==idx){
             selectedColorIndex=idx; currentImageIndex=0;
             updateGallery();
-            // Enable size step now
             document.getElementById('sizeLabel').classList.remove('muted');
             enableSizePicker();
             updateCTAEnabled();
           }
-          // update aria
           colorPickerEl.querySelectorAll('.swatch').forEach((b,i)=>b.setAttribute('aria-checked', i===selectedColorIndex ? 'true' : 'false'));
         });
 
@@ -502,7 +510,6 @@
           selectedSize=size;
           sizePickerEl.querySelectorAll('.pill').forEach(p=>p.setAttribute('aria-checked','false'));
           pill.setAttribute('aria-checked','true');
-          // Enable quantity step
           document.getElementById('qtyLabel').classList.remove('muted');
           qtyMinus.removeAttribute('disabled');
           qtyPlus.removeAttribute('disabled');
@@ -540,15 +547,6 @@
     });
 
     /* ---------- Thumbs / Main image ---------- */
-    function fullUrl(id){ return CLOUDINARY_BASE+FULL_TRANSFORM+id; }
-    function thumbUrl(id){ return CLOUDINARY_BASE+THUMB_TRANSFORM+id; }
-
-    var NEED_CONTAIN=[
-      'Beige_1._ylffja.png','Dark_Green_1._xktrgu.png','Brown_Kid_s_Bathrobe_grupok.png',
-      'Black_1_pogmqf.png','Brown_1._kjvdqs.png','Dark_Blue_1._mpj0zr.png','Dark_Brown_1._cepnap.png'
-    ];
-    function requiresContain(publicId){ var name=publicId.split('/').pop(); return NEED_CONTAIN.indexOf(name)!==-1; }
-
     function renderThumbs(color){
       thumbsEl.innerHTML='';
       color.publicIds.forEach(function(pid,i){
@@ -590,9 +588,7 @@
     }
 
     function updateGallery(){
-      if(selectedColorIndex===null) { // nothing chosen yet; keep initial hero image
-        return;
-      }
+      if(selectedColorIndex===null) { return; }
       var color=PRODUCT.colors[selectedColorIndex];
       renderThumbs(color);
       setActiveImage(0);
@@ -615,18 +611,18 @@
     // Add to cart (demo)
     ctaAdd.addEventListener('click', function(e){
       if(ctaAdd.hasAttribute('disabled')) { e.preventDefault(); return; }
-      // Here you'd send selectedColorIndex, selectedSize, quantity to your cart system
-      alert('Added to cart:\\nColor: '+PRODUCT.colors[selectedColorIndex].name+'\\nSize: '+selectedSize+'\\nQty: '+quantity);
+      alert('Added to cart:\nColor: '+PRODUCT.colors[selectedColorIndex].name+'\nSize: '+selectedSize+'\nQty: '+quantity);
     });
 
-    /* --- CTA motion: starts after a delay, travels to bottom, overlays & turns transparent while moving --- */
+    /* --- CTA motion (revised): Adds spacing while floating; tighter floating trigger --- */
     (function(){
       var root = document.documentElement;
       var details = document.querySelector('.details');
       var cta = document.querySelector('.cta-primary');
-      if(!details || !cta) return;
+      var actions = document.querySelector('.actions-top');
+      if(!details || !cta || !actions) return;
 
-      var delayBeforeMove = 64;
+      var delayBeforeMove = 64;   // px before CTA begins to move
       var startScrollY = 0;
       var maxShift = 0;
 
@@ -642,6 +638,7 @@
         startScrollY = window.scrollY || window.pageYOffset || 0;
         root.style.setProperty('--cta-shift', '0px');
         cta.classList.remove('floating');
+        actions.classList.remove('is-floating');
       }
 
       function onScroll(){
@@ -649,7 +646,10 @@
         var afterDelay = y - delayBeforeMove;
         var shift = Math.min(Math.max(afterDelay, 0), maxShift);
         root.style.setProperty('--cta-shift', shift.toFixed(2) + 'px');
-        if (shift > 0.5) { cta.classList.add('floating'); } else { cta.classList.remove('floating'); }
+
+        var isFloating = shift > 1;
+        cta.classList.toggle('floating', isFloating);
+        actions.classList.toggle('is-floating', isFloating);
       }
 
       computeMaxShift();
