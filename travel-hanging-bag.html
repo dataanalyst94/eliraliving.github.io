@@ -2,18 +2,19 @@
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
   Product gallery with main image + thumbnails (Cloudinary-backed)
+  Updated for: Travel Hanging Bag (Wall-Mounted Toiletry Organizer)
 -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Travel Hanging Bag — ELIRA LIVING</title>
+  <title>Travel Hanging Bag — Wall-Mounted Toiletry Organizer | ELIRA LIVING</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
   <!-- SEO -->
-  <meta name="description" content="Compact travel hanging bag with smart compartments and a swivel hook. See photos and pick your favorite view." />
+  <meta name="description" content="Compact wall-mounted toiletry bag (23×19×9 cm folded). Smart storage with multiple compartments, water-resistant lining, swivel hook for easy hanging. Material: polyester. EAN 7314280147496." />
   <link rel="canonical" href="https://www.eliraliving.com/travel-hanging-bag.html" />
-  <meta property="og:title" content="Travel Hanging Bag — ELIRA LIVING" />
-  <meta property="og:description" content="Compact organizer for tidy packing. Water-resistant, easy to hang, multiple compartments." />
+  <meta property="og:title" content="Travel Hanging Bag — Wall-Mounted Toiletry Organizer" />
+  <meta property="og:description" content="Smart, spacious, and durable hanging toiletry bag with multiple compartments and a swivel hook. Packs small, opens like a wall shelf." />
   <meta property="og:url" content="https://www.eliraliving.com/travel-hanging-bag.html" />
   <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760640148/Travel_bag_-_Final_picture_1_q5cidb.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -23,93 +24,83 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-  <!-- Bathrobe header/logo replication + page UI -->
+  <!-- Header/logo + page UI (consistent across product pages) -->
   <style>
-    /* ===== Match Bathrobe header: pinned, black logo/title, same spacing ===== */
     :root{ --logo-top:16px; --logo-left:22px; --burger-top:16px; --burger-right:22px; }
     html { scroll-behavior: smooth; }
     @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} html{scroll-behavior:auto} }
 
-    /* Pinned transparent header; logo + burger positioned like Bathrobe page */
     #header{ position:fixed; top:0; left:0; right:0; background:transparent; border:0; box-shadow:none; margin:0!important; z-index:60; pointer-events:none; }
     #header .inner{ padding-top:.45rem; padding-bottom:.15rem; pointer-events:auto; }
     #header .logo{ position:fixed; top:var(--logo-top); left:var(--logo-left); z-index:61; pointer-events:auto; display:flex; align-items:center; gap:.5rem; }
     #header nav{ position:fixed; top:var(--burger-top); right:var(--burger-right); z-index:61; pointer-events:auto; }
-
-    /* Black logo treatment identical to Bathrobe */
     #header .logo .title{ letter-spacing:.18em; font-weight:600; color:#222!important; }
     #header .logo .symbol img{ height:22px; width:auto; filter:none; }
     #header nav a{ color:#222!important; }
-
-    /* Shrink behavior (same as Bathrobe) */
     #header.shrink .inner{ padding-top:.25rem; }
     #header.shrink .logo .symbol img{ height:21px; }
 
-    /* Reduce top whitespace to match Bathrobe page */
     #wrapper{ padding-top:0!important; }
     #main{ padding-top:0!important; }
-    #main .inner{ padding-top:72px!important; } /* space under pinned header */
+    #main .inner{ padding-top:72px!important; }
     .product-header{ margin-top:6px; }
 
-    /* ===== Page-specific gallery UI (kept from your original) ===== */
-    .product-header.reveal h1 { margin-bottom: .4rem; }
-    .product-header.reveal p  { color:#666; }
+    .product-header.reveal h1{ margin-bottom:.4rem; }
+    .product-header.reveal p{ color:#666; }
 
-    .product-layout {
-      display: grid; gap: 28px;
-      grid-template-columns: 1.2fr 1fr; align-items: start;
-    }
-    @media (max-width: 980px) { .product-layout { grid-template-columns: 1fr; } }
+    .product-layout{ display:grid; gap:28px; grid-template-columns:1.2fr 1fr; align-items:start; }
+    @media (max-width:980px){ .product-layout{ grid-template-columns:1fr; } }
 
-    .main-image { background:#fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
-    .main-image .frame { width:100%; aspect-ratio: 1/1; background:#f5f5f5; position: relative; }
-    .main-image img {
+    .main-image{ background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+    .main-image .frame{ width:100%; aspect-ratio:1/1; background:#f5f5f5; position:relative; }
+    .main-image img{
       position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-      opacity:0; transform: scale(1.02);
-      transition: opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
+      opacity:0; transform:scale(1.02);
+      transition:opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
       background:#fff;
     }
-    .main-image img.show { opacity:1; transform: scale(1.0); }
+    .main-image img.show{ opacity:1; transform:scale(1.0); }
 
-    .thumbs { margin-top:12px; display:grid; gap:10px; grid-template-columns: repeat(6, 1fr); }
-    @media (max-width: 980px) { .thumbs { grid-template-columns: repeat(6, 1fr); } }
-    @media (max-width: 600px) { .thumbs { grid-template-columns: repeat(5, 1fr); } }
+    .thumbs{ margin-top:12px; display:grid; gap:10px; grid-template-columns:repeat(6,1fr); }
+    @media (max-width:980px){ .thumbs{ grid-template-columns:repeat(6,1fr); } }
+    @media (max-width:600px){ .thumbs{ grid-template-columns:repeat(5,1fr); } }
 
-    .thumb {
-      position:relative; border:2px solid transparent; border-radius:10px; overflow:hidden;
-      background:#fff; cursor:pointer; transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
-      box-shadow: 0 3px 10px rgba(0,0,0,.06);
-    }
-    .thumb:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.10); }
-    .thumb[aria-selected="true"] { border-color:#5da3d6; }
-    .thumb img { width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
+    .thumb{ position:relative; border:2px solid transparent; border-radius:10px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease; box-shadow:0 3px 10px rgba(0,0,0,.06); }
+    .thumb:hover{ transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.10); }
+    .thumb[aria-selected="true"]{ border-color:#5da3d6; }
+    .thumb img{ width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
 
-    .details { background:#fff; border-radius:16px; padding:20px 22px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
-    .details h2 { margin:0 0 .4rem; }
-    .details p  { color:#666; margin:0 0 1rem; }
-    .meta { display:flex; gap:12px; flex-wrap:wrap; color:#555; margin: .3rem 0 1rem; }
-    .meta .chip { background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em; border:1px solid #e0edf8; }
+    .details{ background:#fff; border-radius:16px; padding:20px 22px; box-shadow:0 8px 24px rgba(0,0,0,.06); }
+    .details h2{ margin:0 0 .4rem; }
+    .details p{ color:#555; margin:.4rem 0 1rem; }
+    .meta{ display:flex; gap:12px; flex-wrap:wrap; color:#555; margin:.3rem 0 1rem; }
+    .meta .chip{ background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em; border:1px solid #e0edf8; }
 
-    .actions .button { transition: transform 180ms ease, box-shadow 180ms ease; }
-    .actions .button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
+    .actions .button{ transition:transform 180ms ease, box-shadow 180ms ease; }
+    .actions .button:hover{ transform:translateY(-2px); box-shadow:0 8px 22px rgba(0,0,0,.10); }
 
-    .reveal { opacity:0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
-    .reveal.appear { opacity:1; transform: translateY(0); }
+    .buy-row{ display:flex; align-items:center; gap:12px; margin:1rem 0 .75rem; }
+    .qty{ display:flex; align-items:center; border:1px solid #e6e6e6; border-radius:10px; overflow:hidden; }
+    .qty button{ width:36px; height:36px; border:0; background:#fafafa; cursor:pointer; font-size:1.1rem; }
+    .qty input{ width:50px; height:36px; border:0; text-align:center; font-size:1rem; }
 
-    #footer { background:#f7f7f7; }
-    #footer .inner { padding-top:2rem; padding-bottom:2rem; }
-    #footer h2 { font-size:1rem; letter-spacing:.18em; color:#444; }
+    .note{ font-size:.9rem; color:#666; }
 
-    /* Prevent unwanted transforms on the header (same as Bathrobe) */
+    .reveal{ opacity:0; transform:translateY(18px); transition:opacity 700ms ease, transform 700ms ease; }
+    .reveal.appear{ opacity:1; transform:translateY(0); }
+
+    #footer{ background:#f7f7f7; }
+    #footer .inner{ padding-top:2rem; padding-bottom:2rem; }
+    #footer h2{ font-size:1rem; letter-spacing:.18em; color:#444; }
+
     #header, #header *{ transform:none!important; }
-
-    img { aspect-ratio:auto; }
+    img{ aspect-ratio:auto; }
   </style>
 </head>
 <body class="is-preload">
   <div id="wrapper">
 
-    <!-- Header (pinned, black like Bathrobe) -->
+    <!-- Header -->
     <header id="header">
       <div class="inner">
         <a href="index.html" class="logo">
@@ -145,7 +136,7 @@
 
         <header class="product-header reveal">
           <h1>Travel Hanging Bag</h1>
-          <p>Compact organizer with a swivel hook and smart compartments. See the photos below and pick your favorite view.</p>
+          <p>Packs small; opens like a wall shelf. Smart storage with multiple compartments and a swivel hook for instant hanging.</p>
         </header>
 
         <section class="product-layout reveal" aria-label="Travel Hanging Bag gallery">
@@ -153,7 +144,6 @@
           <div>
             <div class="main-image">
               <div class="frame">
-                <!-- Default image (Cloudinary, optimized) -->
                 <img id="mainImage" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760640148/Travel_bag_-_Final_picture_1_q5cidb.jpg" alt="Travel Hanging Bag — View 1" class="show">
               </div>
             </div>
@@ -177,19 +167,58 @@
             <div class="meta">
               <span class="chip">Water-resistant</span>
               <span class="chip">Swivel hook</span>
-              <span class="chip">Multiple pockets</span>
+              <span class="chip">Multiple compartments</span>
+              <span class="chip">Compact fold</span>
             </div>
-            <p id="styleDesc">Pack toiletries and small essentials neatly. Hang it in seconds and access everything without unpacking.</p>
 
-            <div class="actions">
-              <!-- Placeholder buttons; wire to Stripe later -->
-              <a href="#select" class="button primary icon solid fa-check">Add to cart</a>
-              <a href="index.html#products" class="button">Back to Products</a>
+            <p id="styleDesc">Keep toiletries and small essentials tidy. Hang it anywhere and access everything without unpacking.</p>
+
+            <!-- Quantity + Actions (same flow as other products) -->
+            <div class="buy-row">
+              <div class="qty" aria-label="Quantity selector">
+                <button type="button" id="minus" aria-label="Decrease quantity">−</button>
+                <input type="number" id="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity" />
+                <button type="button" id="plus" aria-label="Increase quantity">+</button>
+              </div>
+              <div class="actions">
+                <a href="#add" id="addToCart" class="button primary icon solid fa-check">Add to cart</a>
+              </div>
             </div>
+            <p class="note">Ships in 1–3 business days. Free returns within 30 days.</p>
 
             <hr />
-            <p><strong>Specs</strong><br>
-              Approx. size 24×18×10 cm (when closed). Wipe-clean lining. Zippers and mesh for quick visibility.</p>
+            <p><strong>Basic product information</strong></p>
+            <p>The wall-mounted toiletry bag is perfect to carry in your suitcase. It packs down small and opens into a practical “wall shelf” where you can easily access all your belongings.</p>
+
+            <p><strong>Key features</strong></p>
+            <ul>
+              <li><strong>Smart storage</strong>: Packs small; hangs open for instant access.</li>
+              <li><strong>Spacious & durable</strong>: Multiple compartments; made to handle damp conditions.</li>
+              <li><strong>Multiple departments</strong>: Mesh and zip pockets for visibility and organization.</li>
+            </ul>
+
+            <p><strong>Specifications</strong></p>
+            <ul>
+              <li>Material: Polyester</li>
+              <li>Size (folded): 23 × 19 × 9 cm</li>
+              <li>Package includes: 1 × toiletry bag</li>
+              <li>Weight incl. packaging: 100 g</li>
+              <li>Type: Cosmetic bag</li>
+              <li>EAN: 7314280147496</li>
+              <li>Manufacturer’s product no.: 65290448</li>
+            </ul>
+
+            <details style="margin-top:.4rem">
+              <summary><strong>Environmental & safety information</strong></summary>
+              <p><em>Responsible party / Manufacturer</em><br>
+              INF Company AB, Lokegatan 5, 263 37 Höganäs, Sweden — <a href="https://inf.se/" target="_blank" rel="noopener">inf.se</a></p>
+              <p><em>Data processing</em><br>
+              No information has been provided indicating that this product processes user data.</p>
+            </details>
+
+            <div class="actions" style="margin-top:.9rem">
+              <a href="index.html#products" class="button">Back to Products</a>
+            </div>
           </aside>
         </section>
 
@@ -230,7 +259,7 @@
 
   <!-- Page interactions -->
   <script>
-    // Mark page-loaded for timing
+    // Page loaded marker
     window.addEventListener('load', function () {
       document.documentElement.classList.add('page-loaded');
     });
@@ -253,7 +282,7 @@
       items.forEach(function (el){ io.observe(el); });
     })();
 
-    // Header shrink (works with pinned header exactly like Bathrobe)
+    // Header shrink
     (function () {
       var header = document.getElementById('header');
       var last = 0;
@@ -265,7 +294,7 @@
       }, { passive: true });
     })();
 
-    // Cloudinary-based main image swap (3 views)
+    // Gallery swap
     (function () {
       var main  = document.getElementById('mainImage');
       var title = document.getElementById('styleTitle');
@@ -310,10 +339,34 @@
         btn.addEventListener('click', function(){ setActive(Number(btn.dataset.index)); });
       });
 
-      // Optional keyboard navigation (left/right)
       document.addEventListener('keydown', function(e){
         if (e.key === 'ArrowRight') setActive(((current) % 3) + 1);
         if (e.key === 'ArrowLeft')  setActive(((current + 1) % 3) + 1);
+      });
+    })();
+
+    // Quantity stepper + Add to cart (placeholder)
+    (function(){
+      var minus = document.getElementById('minus');
+      var plus  = document.getElementById('plus');
+      var qty   = document.getElementById('quantity');
+      var add   = document.getElementById('addToCart');
+
+      minus.addEventListener('click', function(){
+        var v = Math.max(1, (parseInt(qty.value,10) || 1) - 1);
+        qty.value = v;
+      });
+      plus.addEventListener('click', function(){
+        var v = Math.max(1, (parseInt(qty.value,10) || 1) + 1);
+        qty.value = v;
+      });
+      qty.addEventListener('input', function(){
+        if (!qty.value || parseInt(qty.value,10) < 1) qty.value = 1;
+      });
+
+      add.addEventListener('click', function(e){
+        e.preventDefault();
+        alert('Added ' + (parseInt(qty.value,10)||1) + ' to cart. (Connect to Stripe/cart logic)');
       });
     })();
   </script>
