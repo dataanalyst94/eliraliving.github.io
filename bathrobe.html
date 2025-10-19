@@ -3,7 +3,8 @@
   Phantom by HTML5 UP (customized for ELIRA LIVING)
   Kenno bathrobe — refined layout, elevated typography, top-placed actions,
   centered buttons, larger subheads, CTA that starts moving after a delay and
-  travels to the bottom of the details card.
+  travels to the bottom of the details card. Floating CTA overlays content and
+  turns transparent only while scrolled.
 -->
 <html lang="en">
 <head>
@@ -83,7 +84,7 @@
     .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
 
     /* Details card */
-    .details{ position:sticky; top:88px; background:#fff; border-radius:var(--card-r); padding:24px 24px 26px; box-shadow:var(--shadow-1); }
+    .details{ position:sticky; top:88px; background:#fff; border-radius:var(--card-r); padding:24px 24px 26px; box-shadow:var(--shadow-1); overflow:visible; }
     .eyebrow{ margin:0 0 .65rem; color:var(--ink-400); font-size:.9rem; letter-spacing:.16em; text-transform:uppercase; }
 
     /* Actions */
@@ -92,8 +93,21 @@
     .button.icon:before{ margin-right:.5rem; transform:none; }
     .actions-top .button.primary{ box-shadow:0 6px 16px rgba(29,111,167,.18); }
 
-    /* Only the primary CTA moves */
-    .cta-primary{ transform: translateY(var(--cta-shift)); transition: transform 140ms ease; will-change: transform; }
+    /* Only the primary CTA moves; make sure it can overlay content when floating */
+    .cta-primary{
+      position:relative; z-index:2;
+      transform: translateY(var(--cta-shift));
+      transition: transform 140ms ease, background-color 140ms ease, color 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+      will-change: transform;
+    }
+    /* When scrolled (shift > 0) JS toggles .floating */
+    .cta-primary.floating{
+      z-index: 999;                        /* sits on top of chips/text/images */
+      background-color: transparent !important; /* transparent fill while scrolling */
+      color: var(--ink-800) !important;    /* ensure good contrast on white */
+      border: 2px solid rgba(0,0,0,.25) !important;
+      box-shadow: none !important;
+    }
 
     .meta{ display:flex; gap:10px; flex-wrap:wrap; color:var(--ink-600); margin:.2rem 0 1rem; }
     .meta .chip{ background:#f6f9fc; padding:.28rem .55rem; border-radius:999px; font-size:.88rem; border:1px solid #e5eff8; line-height:1.3; white-space:nowrap; }
@@ -133,6 +147,7 @@
       :root { --cta-shift: 0px !important; } /* disable motion on small screens */
       .button{ min-height:44px; padding:0 16px; }
       #product-copy h3{ font-size:1.07rem; }
+      .cta-primary.floating{ background-color:inherit !important; border-width:1px !important; } /* just in case */
     }
   </style>
 </head>
@@ -432,15 +447,14 @@
       if(e.key==='ArrowDown'){ currentColorIndex=(currentColorIndex+1)%PRODUCT.colors.length; currentImageIndex=0; updateGallery(); updateColorPickA11y(); }
     });
 
-    /* --- CTA motion: starts after a delay, then travels to the bottom of details card --- */
+    /* --- CTA motion: starts after a delay, travels to bottom, overlays & turns transparent while moving --- */
     (function(){
       var root = document.documentElement;
       var details = document.querySelector('.details');
       var cta = document.querySelector('.cta-primary');
       if(!details || !cta) return;
 
-      // Tweak this to match when you want the CTA to begin moving (px of scroll).
-      // 24 matches header "shrink" point. 96 feels like the logo’s gentle offset.
+      // When to start moving (px).
       var delayBeforeMove = 64;
 
       var startScrollY = 0;
@@ -457,6 +471,7 @@
         maxShift = Math.max(0, cardHeight - (ctaTopInCard + ctaHeight + padBottom));
         startScrollY = window.scrollY || window.pageYOffset || 0;
         root.style.setProperty('--cta-shift', '0px');
+        cta.classList.remove('floating');
       }
 
       function onScroll(){
@@ -464,6 +479,13 @@
         var afterDelay = y - delayBeforeMove;
         var shift = Math.min(Math.max(afterDelay, 0), maxShift);
         root.style.setProperty('--cta-shift', shift.toFixed(2) + 'px');
+
+        // Toggle floating style (transparent & on top) only when shifting
+        if (shift > 0.5) {
+          cta.classList.add('floating');
+        } else {
+          cta.classList.remove('floating');
+        }
       }
 
       computeMaxShift();
