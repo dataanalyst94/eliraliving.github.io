@@ -1,24 +1,22 @@
 <!DOCTYPE HTML>
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
-  Travel Hanging Bag — refined layout to match Kenno bathrobe page.
-  Enforced selection flow:
-  1) Color  →  2) Quantity
-  Quantity stays disabled until color is chosen.
+  Product gallery with main image + thumbnails (Cloudinary-backed)
+  Updated for: KENNO BATHROBE (matches Wheelie Sports Bag layout)
 -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Travel Hanging Bag — ELIRA LIVING</title>
+  <title>Kenno Bathrobe | ELIRA LIVING</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
   <!-- SEO -->
-  <meta name="description" content="Travel hanging toiletry bag (23 × 19 × 9 cm folded). Packs small; opens like a wall shelf. Multiple compartments, swivel hook, polyester, water-resistant lining. EAN 7314280147496." />
-  <link rel="canonical" href="https://www.eliraliving.com/travel-hanging-bag.html" />
-  <meta property="og:title" content="Travel Hanging Bag — ELIRA LIVING" />
-  <meta property="og:description" content="Smart storage with multiple compartments. Packs small and hangs open for instant access. Polyester, compact fold, swivel hook." />
-  <meta property="og:url" content="https://www.eliraliving.com/travel-hanging-bag.html" />
-  <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760640148/Travel_bag_-_Final_picture_1_q5cidb.jpg" />
+  <meta name="description" content="Kenno bathrobe in a recycled-blend textile (75% cotton, 25% polyester) with chambray-trimmed finishes and coordinating belt. Sizes S, M, L." />
+  <link rel="canonical" href="https://www.eliraliving.com/bathrobe.html" />
+  <meta property="og:title" content="Kenno Bathrobe — ELIRA LIVING" />
+  <meta property="og:description" content="Refined comfort in recycled-blend fabric with chambray trim. S, M, L. Product code RK4KTM." />
+  <meta property="og:url" content="https://www.eliraliving.com/bathrobe.html" />
+  <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/images/favicon.png" type="image/png" />
 
@@ -26,160 +24,79 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
+  <!-- Header/logo + page UI (consistent with Wheelie Bag page) -->
   <style>
-    :root{
-      --page-gutter: 22px;
-      --card-r: 16px;
-      --shadow-1: 0 6px 18px rgba(0,0,0,.07);
-      --shadow-2: 0 10px 30px rgba(0,0,0,.10);
-      --ink-900:#111; --ink-800:#1c1c1c; --ink-700:#2a2a2a; --ink-600:#444; --ink-500:#666; --ink-400:#888;
-      --ui-050:#fcfcfc; --ui-100:#fafafa; --ui-200:#f5f5f5; --ui-300:#eee; --ui-400:#e6e6e6;
-      --brand:#1d6fa7; --brand-100: rgba(29,111,167,.12);
-      --gold:#C9A227;
-      --cta-shift: 0px; /* updated by JS */
-    }
-
-    html { scroll-behavior:smooth; }
+    :root{ --logo-top:16px; --logo-left:22px; --burger-top:16px; --burger-right:22px; }
+    html { scroll-behavior: smooth; }
     @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} html{scroll-behavior:auto} }
 
-    /* Header */
     #header{ position:fixed; top:0; left:0; right:0; background:transparent; border:0; box-shadow:none; margin:0!important; z-index:60; pointer-events:none; }
-    #header .inner{ padding-top:.5rem; padding-bottom:.25rem; pointer-events:auto; }
-    #header .logo{ position:fixed; top:16px; left:22px; z-index:61; display:flex; align-items:center; gap:.55rem; }
-    #header .logo .symbol img{ height:22px; width:auto; }
-    #header .logo .title{ letter-spacing:.12em; font-weight:600; color:var(--ink-900)!important; }
-    #header nav{ position:fixed; top:16px; right:22px; z-index:61; }
-    #header nav a{ color:var(--ink-900)!important; }
+    #header .inner{ padding-top:.45rem; padding-bottom:.15rem; pointer-events:auto; }
+    #header .logo{ position:fixed; top:var(--logo-top); left:var(--logo-left); z-index:61; pointer-events:auto; display:flex; align-items:center; gap:.5rem; }
+    #header nav{ position:fixed; top:var(--burger-top); right:var(--burger-right); z-index:61; pointer-events:auto; }
+    #header .logo .title{ letter-spacing:.18em; font-weight:600; color:#222!important; }
+    #header .logo .symbol img{ height:22px; width:auto; filter:none; }
+    #header nav a{ color:#222!important; }
     #header.shrink .inner{ padding-top:.25rem; }
+    #header.shrink .logo .symbol img{ height:21px; }
 
-    /* Page rhythm */
     #wrapper{ padding-top:0!important; }
     #main{ padding-top:0!important; }
-    #main .inner{ padding-top:78px!important; }
+    #main .inner{ padding-top:72px!important; }
+    .product-header{ margin-top:6px; }
 
-    /* Product header */
-    .product-header{ margin-top:6px; margin-bottom:18px; }
-    .product-header h1{ margin:0 0 .25rem; font-weight:700; letter-spacing:.02em; color:var(--ink-900); line-height:1.2; }
-    .product-header p{ margin:0; color:var(--ink-500); font-size:1.02rem; line-height:1.6; }
+    .product-header.reveal h1{ margin-bottom:.4rem; }
+    .product-header.reveal p{ color:#666; }
 
-    /* Grid */
-    .product-layout{ display:grid; gap:36px; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); align-items:start; }
-    @media (max-width:1100px){ .product-layout{ grid-template-columns:1fr; gap:22px; } }
+    .product-layout{ display:grid; gap:28px; grid-template-columns:1.2fr 1fr; align-items:start; }
+    @media (max-width:980px){ .product-layout{ grid-template-columns:1fr; } }
 
-    /* Image card */
-    .main-image{ background:#fff; border-radius:var(--card-r); overflow:hidden; box-shadow:var(--shadow-1); }
-    .main-image .frame{ width:100%; aspect-ratio:4/5; background:var(--ui-200); position:relative; }
-    .main-image img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.015); transition:opacity 360ms ease, transform 520ms cubic-bezier(.2,.6,.2,1); background:#fff; }
-    .main-image img.show{ opacity:1; transform:scale(1); }
-    .main-image img.contain{ object-fit:contain; background:#fff; }
-
-    /* Thumbs */
-    .thumbs{ margin-top:12px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
-    .thumb{
-      width:72px; height:72px; border:1px solid var(--ui-400); border-radius:12px; overflow:hidden; background:#fff;
-      cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-      box-shadow:0 3px 10px rgba(0,0,0,.05);
-    }
-    .thumb:hover{ transform:translateY(-2px); box-shadow:var(--shadow-1); }
-    .thumb[aria-selected="true"]{ border-color:var(--brand); box-shadow:0 0 0 3px var(--brand-100); }
-    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-    /* Details card */
-    .details{ position:sticky; top:88px; background:#fff; border-radius:var(--card-r); padding:24px 24px 26px; box-shadow:var(--shadow-1); overflow:visible; }
-    .eyebrow{ margin:0 0 .65rem; color:var(--ink-400); font-size:.9rem; letter-spacing:.16em; text-transform:uppercase; }
-
-    /* Actions */
-    .actions-top{ display:flex; gap:10px; flex-wrap:wrap; margin:0 0 14px; }
-    .button{ display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:0 18px; line-height:1 !important; }
-    .button.icon:before{ margin-right:.5rem; transform:none; }
-    .actions-top .button.primary{ box-shadow:0 6px 16px rgba(29,111,167,.18); }
-
-    /* Disabled state */
-    .button[disabled],
-    .pill[disabled],
-    .qty button[disabled],
-    .qty input[disabled]{ opacity:.5; cursor:not-allowed; pointer-events:none; }
-    .muted{ opacity:.5; }
-
-    /* CTA motion + floating style */
-    .cta-primary{
-      position:relative; z-index:2;
-      transform: translateY(var(--cta-shift));
-      transition: transform 140ms ease, background-color 140ms ease, color 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
-      will-change: transform;
-    }
-    .cta-primary.floating{
-      z-index: 999;
-      background-color: transparent !important;
-      color: var(--gold) !important;
-      border: 2px solid var(--gold) !important;
-      box-shadow: none !important;
-    }
-    .cta-primary.floating:hover{
-      background-color: var(--ui-300) !important;
-      color: var(--ink-900) !important;
-      border-color: var(--ui-300) !important;
-      box-shadow: none !important;
-    }
-    .actions-top.is-floating{ margin-bottom: calc(var(--cta-shift) + 8px); }
-
-    .meta{ display:flex; gap:10px; flex-wrap:wrap; color:var(--ink-600); margin:.2rem 0 1rem; }
-    .meta .chip{ background:#f6f9fc; padding:.28rem .55rem; border-radius:999px; font-size:.88rem; border:1px solid #e5eff8; line-height:1.3; white-space:nowrap; }
-
-    /* Editorial body */
-    .details p, .details li{ color:var(--ink-600); line-height:1.75; hyphens:auto; }
-    .details p{ margin:0 0 1rem; }
-    .details ul{ margin:.35rem 0 1.1rem 0; padding-left:0; list-style:none; }
-    .details ul li{ padding-left:1.1rem; position:relative; }
-    .details ul li::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--ink-400); position:absolute; left:0; top:.63rem; }
-
-    /* Subheads */
-    #product-copy h3{ margin:1.2rem 0 .55rem; font-size:1.12rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-800); font-variant-caps:all-small-caps; }
-    #product-copy p + h3{ margin-top:1.25rem; }
-
-    /* Step headings spacing */
-    #colorLabel, #qtyLabel{ margin-top:.75rem; }
-
-    /* Swatches (Color) */
-    .color-picker{ display:flex; gap:12px; align-items:center; margin:.25rem 0 .8rem; flex-wrap:wrap; }
-    .swatch{ width:46px; height:28px; border-radius:999px; border:1px solid var(--ui-400); cursor:pointer; outline:none; display:inline-flex; align-items:center; justify-content:center; background:#fff; box-shadow:inset 0 0 0 4px rgba(255,255,255,.8); transition:border-color .2s ease, box-shadow .2s ease, transform .12s ease; }
-    .swatch:hover{ transform:translateY(-1px); }
-    .swatch[aria-checked="true"]{ box-shadow:0 0 0 3px var(--brand-100), inset 0 0 0 4px rgba(255,255,255,.8); border-color:var(--brand); }
-    .swatch .dot{ width:100%; height:100%; border-radius:999px; display:block; background:#222; }
-
-    /* Quantity */
-    .qty{ display:flex; align-items:center; gap:8px; }
-    .qty button{
-      width:36px; height:36px; border:1px solid var(--ui-400); background:#fff; border-radius:10px;
-      display:inline-flex; align-items:center; justify-content:center; font-weight:700;
-      transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
-      cursor:pointer;
-    }
-    .qty button:hover{ transform:translateY(-1px); box-shadow:var(--shadow-1); }
-    .qty input{
-      width:64px; height:36px; text-align:center; border:1px solid var(--ui-400); border-radius:10px; font-weight:600;
+    .main-image{ background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+    .main-image .frame{ width:100%; aspect-ratio:1/1; background:#f5f5f5; position:relative; }
+    .main-image img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      opacity:0; transform:scale(1.02);
+      transition:opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
       background:#fff;
     }
+    .main-image img.show{ opacity:1; transform:scale(1.0); }
 
-    /* Reveal */
-    .reveal{ opacity:0; transform:translateY(14px); transition:opacity 500ms ease, transform 500ms ease; }
-    .reveal.appear{ opacity:1; transform:translateY(0); }
+    .thumbs{ margin-top:12px; display:grid; gap:10px; grid-template-columns:repeat(6,1fr); }
+    @media (max-width:980px){ .thumbs{ grid-template-columns:repeat(6,1fr); } }
+    @media (max-width:600px){ .thumbs{ grid-template-columns:repeat(5,1fr); } }
 
-    /* Footer */
-    #footer{ background:var(--ui-100); }
+    .thumb{ position:relative; border:2px solid transparent; border-radius:10px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease; box-shadow:0 3px 10px rgba(0,0,0,.06); }
+    .thumb:hover{ transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.10); }
+    .thumb[aria-selected="true"]{ border-color:#5da3d6; }
+    .thumb img{ width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
+
+    .details{ background:#fff; border-radius:16px; padding:20px 22px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+    .details h2{ margin:0 0 .4rem; }
+    .details p{ color:#555; margin:.4rem 0 1rem; }
+    .meta{ display:flex; gap:12px; flex-wrap:wrap; color:#555; margin:.3rem 0 1rem; }
+    .meta .chip{ background:#f2f6fb; padding:.25rem .6rem; border-radius:20px; font-size:.9rem; letter-spacing:.02em; border:1px solid #e0edf8; }
+
+    .actions .button{ transition: transform 180ms ease, box-shadow 180ms ease; }
+    .actions .button:hover{ transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.10); }
+
+    .buy-row{ display:flex; align-items:center; gap:12px; margin:1rem 0 .75rem; }
+    .qty{ display:flex; align-items:center; border:1px solid #e6e6e6; border-radius:10px; overflow:hidden; }
+    .qty button{ width:36px; height:36px; border:0; background:#fafafa; cursor:pointer; font-size:1.1rem; }
+    .qty input{ width:50px; height:36px; border:0; text-align:center; font-size:1rem; }
+
+    .note{ font-size:.9rem; color:#666; }
+
+    .reveal{ opacity:0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
+    .reveal.appear{ opacity:1; transform: translateY(0); }
+
+    #footer{ background:#f7f7f7; }
     #footer .inner{ padding-top:2rem; padding-bottom:2rem; }
-    #footer h2{ font-size:1rem; letter-spacing:.16em; color:var(--ink-700); }
+    #footer h2{ font-size:1rem; letter-spacing:.18em; color:#444; }
 
-    /* Small screens */
-    @media (max-width:1100px){
-      .details{ position:static; padding:20px 18px 22px; }
-      .thumb{ width:66px; height:66px; }
-      #main .inner{ padding-top:72px!important; }
-      :root { --cta-shift: 0px !important; }
-      .button{ min-height:44px; padding:0 16px; }
-      #product-copy h3{ font-size:1.07rem; }
-      .cta-primary.floating{ background-color:inherit !important; border-width:1px !important; }
-    }
+    #header, #header *{ transform:none!important; }
+
+    img{ aspect-ratio:auto; }
+    select{ height:36px; border-radius:10px; border:1px solid #e6e6e6; padding:0 .6rem; }
   </style>
 </head>
 <body class="is-preload">
@@ -192,7 +109,9 @@
           <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
           <span class="title">ELIRA LIVING</span>
         </a>
-        <nav><ul><li><a href="#menu">Menu</a></li></ul></nav>
+        <nav>
+          <ul><li><a href="#menu">Menu</a></li></ul>
+        </nav>
       </div>
     </header>
 
@@ -218,75 +137,90 @@
       <div class="inner">
 
         <header class="product-header reveal">
-          <h1>Travel Hanging Bag</h1>
-          <p>Packs small; opens like a wall shelf. Multiple compartments with a swivel hook for instant, tidy access.</p>
+          <h1>Kenno Bathrobe</h1>
+          <p>Refined comfort in a recycled-blend fabric with chambray-trimmed finishes and a coordinating belt.</p>
         </header>
 
-        <section class="product-layout reveal" aria-label="Travel Hanging Bag gallery">
-          <!-- LEFT -->
+        <section class="product-layout reveal" aria-label="Kenno Bathrobe gallery">
+          <!-- LEFT: Main image + thumbnails -->
           <div>
             <div class="main-image">
               <div class="frame">
-                <img id="mainImage" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760640148/Travel_bag_-_Final_picture_1_q5cidb.jpg" alt="Travel Hanging Bag — View 1" class="show">
+                <img
+                  id="mainImage"
+                  src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png"
+                  alt="Kenno Bathrobe — Dark Blue — View 1"
+                  class="show"
+                >
               </div>
             </div>
-            <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a view"></div>
+
+            <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a view">
+              <button class="thumb" data-index="1" aria-label="Dark Blue view 1" aria-selected="true">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760782022/Dark_Blue_1._mpj0zr.png" alt="Dark Blue thumbnail 1">
+              </button>
+              <button class="thumb" data-index="2" aria-label="Dark Blue view 2">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760782021/Dark_Blue_2._ptxyc4.png" alt="Dark Blue thumbnail 2">
+              </button>
+              <button class="thumb" data-index="3" aria-label="Black view 1">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760782026/Black_1_pogmqf.png" alt="Black thumbnail 1">
+              </button>
+              <button class="thumb" data-index="4" aria-label="Beige view 1">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760782029/Beige_1._ylffja.png" alt="Beige thumbnail 1">
+              </button>
+              <button class="thumb" data-index="5" aria-label="Dark Green view 1">
+                <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760782029/Dark_Green_1._xktrgu.png" alt="Dark Green thumbnail 1">
+              </button>
+            </div>
           </div>
 
-          <!-- RIGHT -->
+          <!-- RIGHT: Details / CTA -->
           <aside class="details" aria-live="polite">
-            <div class="eyebrow" id="styleTitle">TRAVEL HANGING BAG — BLACK — VIEW 1</div>
-
-            <!-- TOP ACTIONS -->
-            <div class="actions-top">
-              <a href="#select" class="button primary icon solid fa-check cta-primary" id="ctaAdd" disabled>Add to cart</a>
-              <a href="index.html#products" class="button">Back to Products</a>
+            <h2 id="styleTitle">View 1</h2>
+            <div class="meta">
+              <span class="chip">Recycled cotton-rich</span>
+              <span class="chip">Chambray trim &amp; belt</span>
+              <span class="chip">Unisex, relaxed drape</span>
+              <span class="chip">Machine-wash 60&nbsp;°C</span>
             </div>
 
-            <!-- Step 1: Color -->
-            <h3 id="colorLabel">Choose Color</h3>
-            <div class="color-picker" role="radiogroup" aria-labelledby="colorLabel"></div>
+            <p id="styleDesc">Soft, durable, and quietly luxurious. A recycled-blend robe that elevates everyday comfort.</p>
 
-            <!-- Step 2: Quantity (locked until color chosen) -->
-            <h3 id="qtyLabel" class="muted">Quantity</h3>
-            <div class="qty" aria-labelledby="qtyLabel">
-              <button type="button" id="qtyMinus" aria-label="Decrease quantity" disabled>−</button>
-              <input id="qtyInput" type="number" value="1" min="1" max="99" disabled aria-live="polite" />
-              <button type="button" id="qtyPlus" aria-label="Increase quantity" disabled>+</button>
+            <!-- Simple options (dropdown keeps layout identical to Wheelie Bag page) -->
+            <label for="size" class="note">Size</label><br>
+            <select id="size" aria-label="Select size">
+              <option value="S" selected>S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+            </select>
+
+            <!-- Quantity + Actions (same placement as Wheelie Bag page) -->
+            <div class="buy-row">
+              <div class="qty" aria-label="Quantity selector">
+                <button type="button" id="minus" aria-label="Decrease quantity">−</button>
+                <input type="number" id="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity" />
+                <button type="button" id="plus" aria-label="Increase quantity">+</button>
+              </div>
+              <div class="actions">
+                <a href="#add" id="addToCart" class="button primary icon solid fa-check">Add to cart</a>
+                <a href="index.html#products" class="button">Back to Products</a>
+              </div>
             </div>
+            <p class="note">Ships in 1–3 business days. Free returns within 30 days.</p>
 
-            <div class="meta" style="margin-top:1rem">
-              <span class="chip">Compact fold</span>
-              <span class="chip">Swivel hook</span>
-              <span class="chip">Multiple compartments</span>
-              <span class="chip">Water-resistant lining</span>
-            </div>
+            <hr />
+            <p><strong>Specs</strong></p>
+            <ul>
+              <li>Material: 75% Cotton, 25% Polyester (recycled-blend)</li>
+              <li>Sizes: S, M, L (relaxed unisex drape)</li>
+              <li>Care: Machine-wash gentle at 60&nbsp;°C; iron medium; avoid tumble drying &amp; dry-cleaning</li>
+              <li>Natural shrinkage: ~5% (reshape while damp)</li>
+              <li>Pattern: Cell</li>
+              <li>Product code: RK4KTM</li>
+              <li>Manufacturer: Relaxed</li>
+            </ul>
 
-            <!-- Product copy -->
-            <article id="product-copy">
-              <h3>Smart Storage</h3>
-              <p>The wall-mounted toiletry bag is perfect for your suitcase. It packs down small and opens into a practical “wall shelf” so you can reach everything without unpacking.</p>
-
-              <h3>Spacious & Durable</h3>
-              <p>Built for real travel: several compartments with mesh and zips for visibility and organisation. Polyester shell handles damp conditions and daily use.</p>
-
-              <h3>Specifications</h3>
-              <ul>
-                <li><strong>Material:</strong> Polyester</li>
-                <li><strong>Size (folded):</strong> 23 × 19 × 9 cm</li>
-                <li><strong>Package includes:</strong> 1 × toiletry bag</li>
-                <li><strong>Weight incl. packaging:</strong> 100 g</li>
-                <li><strong>Type:</strong> Cosmetic bag</li>
-                <li><strong>EAN:</strong> 7314280147496</li>
-                <li><strong>Manufacturer’s product no.:</strong> 65290448</li>
-              </ul>
-
-              <details>
-                <summary><strong>Environmental & Safety Information</strong></summary>
-                <p><em>Manufacturer</em><br>INF Company AB, Lokegatan 5, 263 37 Höganäs, Sweden — <a href="https://inf.se/" target="_blank" rel="noopener">inf.se</a></p>
-                <p><em>Data processing</em><br>No information indicates this product processes user data.</p>
-              </details>
-            </article>
+            <p class="note">Note: Measurements and shrinkage are approximate.</p>
           </aside>
         </section>
 
@@ -305,6 +239,7 @@
           <ul class="icons">
             <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
             <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
             <li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
           </ul>
         </section>
@@ -317,241 +252,130 @@
 
   </div>
 
-  <!-- Scripts -->
+  <!-- Scripts (template) -->
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/browser.min.js"></script>
   <script src="assets/js/breakpoints.min.js"></script>
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
 
+  <!-- Page interactions -->
   <script>
-    window.addEventListener('load', function(){ document.documentElement.classList.add('page-loaded'); });
+    // Page loaded marker
+    window.addEventListener('load', function () {
+      document.documentElement.classList.add('page-loaded');
+    });
 
-    (function(){
-      var items=[].slice.call(document.querySelectorAll('.reveal'));
-      if(!('IntersectionObserver' in window) || !items.length){ items.forEach(el=>el.classList.add('appear')); return; }
-      var io=new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){ if(entry.isIntersecting){ entry.target.classList.add('appear'); io.unobserve(entry.target); } });
-      },{ rootMargin:'0px 0px -10% 0px', threshold:0.15 });
-      items.forEach(el=>io.observe(el));
-    })();
-
-    (function(){
-      var header=document.getElementById('header'), last=0;
-      window.addEventListener('scroll', function(){
-        var y=window.scrollY||window.pageYOffset;
-        if(y>24 && last<=24) header.classList.add('shrink'); else if(y<=24 && last>24) header.classList.remove('shrink');
-        last=y;
-      },{passive:true});
-    })();
-
-    /* ---------- DATA ---------- */
-    var CLOUDINARY_BASE='https://res.cloudinary.com/dkk8ohmu7/image/upload/';
-    var FULL_TRANSFORM ='f_auto,q_auto,w_1200/';
-    var THUMB_TRANSFORM='f_auto,q_auto,w_240/';
-
-    var PRODUCT={
-      colors:[
-        { id:'black', name:'Black', hex:'#222222',
-          publicIds:[
-            'v1760640148/Travel_bag_-_Final_picture_1_q5cidb.jpg',
-            'v1760640152/Travel_bag_-_Final_picture_2_hqutak.png',
-            'v1760640129/Final_3_hlh6kw.png'
-          ],
-          captions:['Front view with compartments','Open layout with hanging hook','Packed example / lifestyle view']
-        }
-      ]
-    };
-
-    function fullUrl(id){ return CLOUDINARY_BASE+FULL_TRANSFORM+id; }
-    function thumbUrl(id){ return CLOUDINARY_BASE+THUMB_TRANSFORM+id; }
-
-    /* ---------------- Selection Flow State ---------------- */
-    var selectedColorIndex = null;
-    var currentImageIndex  = 0;
-    var quantity = 1;
-
-    var mainImg        = document.getElementById('mainImage');
-    var thumbsEl       = document.getElementById('thumbs');
-    var titleEl        = document.getElementById('styleTitle');
-    var colorPickerEl  = document.querySelector('.color-picker');
-    var qtyMinus       = document.getElementById('qtyMinus');
-    var qtyPlus        = document.getElementById('qtyPlus');
-    var qtyInput       = document.getElementById('qtyInput');
-    var ctaAdd         = document.getElementById('ctaAdd');
-
-    function updateCTAEnabled(){
-      if(selectedColorIndex !== null){
-        ctaAdd.removeAttribute('disabled');
-      } else {
-        ctaAdd.setAttribute('disabled','');
+    // Reveal on scroll
+    (function () {
+      var items = [].slice.call(document.querySelectorAll('.reveal'));
+      if (!('IntersectionObserver' in window) || !items.length) {
+        items.forEach(function (el){ el.classList.add('appear'); });
+        return;
       }
-    }
-
-    /* ---------- Color Picker ---------- */
-    function renderColorPicker(){
-      colorPickerEl.innerHTML='';
-      PRODUCT.colors.forEach(function(c,idx){
-        var btn=document.createElement('button');
-        btn.className='swatch';
-        btn.setAttribute('role','radio');
-        btn.setAttribute('aria-label',c.name);
-        btn.setAttribute('aria-checked', (selectedColorIndex===idx) ? 'true' : 'false');
-        btn.dataset.index=idx;
-
-        var dot=document.createElement('span');
-        dot.className='dot';
-        dot.style.backgroundColor=c.hex;
-        dot.title=c.name;
-        btn.appendChild(dot);
-
-        btn.addEventListener('click', function(){
-          if(selectedColorIndex!==idx){
-            selectedColorIndex=idx; currentImageIndex=0;
-            updateGallery();
-            document.getElementById('qtyLabel').classList.remove('muted');
-            qtyMinus.removeAttribute('disabled');
-            qtyPlus.removeAttribute('disabled');
-            qtyInput.removeAttribute('disabled');
-            updateCTAEnabled();
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+            io.unobserve(entry.target);
           }
-          colorPickerEl.querySelectorAll('.swatch').forEach((b,i)=>b.setAttribute('aria-checked', i===selectedColorIndex ? 'true' : 'false'));
         });
-
-        colorPickerEl.appendChild(btn);
-      });
-    }
-
-    /* ---------- Quantity ---------- */
-    qtyMinus.addEventListener('click', function(){
-      var val = Math.max(1, (parseInt(qtyInput.value,10) || 1) - 1);
-      qtyInput.value = val; quantity = val;
-    });
-    qtyPlus.addEventListener('click', function(){
-      var val = Math.min(99, (parseInt(qtyInput.value,10) || 1) + 1);
-      qtyInput.value = val; quantity = val;
-    });
-    qtyInput.addEventListener('input', function(){
-      var v = parseInt(qtyInput.value,10);
-      if(isNaN(v) || v<1) v=1;
-      if(v>99) v=99;
-      qtyInput.value=v; quantity=v;
-    });
-
-    /* ---------- Thumbs / Main image ---------- */
-    function renderThumbs(color){
-      thumbsEl.innerHTML='';
-      color.publicIds.forEach(function(pid,i){
-        var btn=document.createElement('button');
-        btn.className='thumb';
-        btn.dataset.index=i+1;
-        btn.setAttribute('aria-label', color.name+' — View '+(i+1));
-        if(i===currentImageIndex) btn.setAttribute('aria-selected','true');
-
-        var img=document.createElement('img');
-        img.loading='lazy'; img.src=thumbUrl(pid); img.alt=color.name+' — View '+(i+1)+' thumbnail';
-        btn.appendChild(img);
-
-        btn.addEventListener('click', function(){ setActiveImage(i); });
-        thumbsEl.appendChild(btn);
-      });
-    }
-
-    function setActiveImage(i){
-      if(selectedColorIndex===null) return;
-      var color=PRODUCT.colors[selectedColorIndex];
-      currentImageIndex=i;
-      var pid=color.publicIds[i];
-      var newSrc=fullUrl(pid);
-
-      mainImg.classList.remove('show');
-
-      var preload=new Image();
-      preload.onload=function(){
-        mainImg.src=newSrc; mainImg.alt='Travel Hanging Bag — '+color.name+' — View '+(i+1); mainImg.classList.add('show');
-      };
-      preload.src=newSrc;
-
-      titleEl.textContent=('TRAVEL HANGING BAG — '+color.name+' — VIEW '+(i+1)).toUpperCase();
-
-      document.querySelectorAll('.thumb').forEach(t=>t.setAttribute('aria-selected','false'));
-      var active=document.querySelector('.thumb[data-index="'+(i+1)+'"]'); if(active) active.setAttribute('aria-selected','true');
-    }
-
-    function updateGallery(){
-      if(selectedColorIndex===null) { return; }
-      var color=PRODUCT.colors[selectedColorIndex];
-      renderThumbs(color);
-      setActiveImage(0);
-    }
-
-    (function init(){
-      renderColorPicker();
-      updateCTAEnabled();
-      // initial thumbs (optional preview before color pick)
-      renderThumbs(PRODUCT.colors[0]);
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      items.forEach(function (el){ io.observe(el); });
     })();
 
-    // Keyboard navigation for gallery (active only after color chosen)
-    document.addEventListener('keydown', function(e){
-      if(selectedColorIndex===null) return;
-      var color=PRODUCT.colors[selectedColorIndex]; if(!color) return;
-      if(e.key==='ArrowRight') setActiveImage((currentImageIndex+1)%color.publicIds.length);
-      if(e.key==='ArrowLeft')  setActiveImage((currentImageIndex-1+color.publicIds.length)%color.publicIds.length);
-    });
+    // Header shrink
+    (function () {
+      var header = document.getElementById('header');
+      var last = 0;
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY || window.pageYOffset;
+        if (y > 24 && last <= 24) header.classList.add('shrink');
+        else if (y <= 24 && last > 24) header.classList.remove('shrink');
+        last = y;
+      }, { passive: true });
+    })();
 
-    // Add to cart (demo)
-    ctaAdd.addEventListener('click', function(e){
-      if(ctaAdd.hasAttribute('disabled')) { e.preventDefault(); return; }
-      alert('Added to cart:\nColor: '+PRODUCT.colors[selectedColorIndex].name+'\nQty: '+quantity);
-    });
+    // Gallery swap (reuse pattern from Wheelie Bag)
+    (function () {
+      var main  = document.getElementById('mainImage');
+      var title = document.getElementById('styleTitle');
+      var desc  = document.getElementById('styleDesc');
 
-    /* --- CTA motion (same behavior as Kenno) --- */
+      var full = [
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782021/Dark_Blue_2._ptxyc4.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782026/Black_1_pogmqf.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782029/Beige_1._ylffja.png',
+        'https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782029/Dark_Green_1._xktrgu.png'
+      ];
+
+      var captions = [
+        'Dark Blue — front view.',
+        'Dark Blue — alternate angle.',
+        'Black — front view.',
+        'Beige — front view.',
+        'Dark Green — front view.'
+      ];
+
+      var current = 1;
+
+      function setActive(i) {
+        current = i;
+        var newSrc = full[i-1];
+        var newAlt = 'Kenno Bathrobe — View ' + i;
+
+        main.classList.remove('show');
+        var img = new Image();
+        img.onload = function(){
+          main.src = newSrc; main.alt = newAlt;
+          main.classList.add('show');
+        };
+        img.src = newSrc;
+
+        document.querySelectorAll('.thumb').forEach(function(t){ t.setAttribute('aria-selected','false'); });
+        var active = document.querySelector('.thumb[data-index="'+i+'"]');
+        if (active) active.setAttribute('aria-selected','true');
+
+        title.textContent = 'View ' + i;
+        if (desc) desc.textContent  = captions[i-1] || 'Detail view.';
+      }
+
+      document.querySelectorAll('.thumb').forEach(function(btn){
+        btn.addEventListener('click', function(){ setActive(Number(btn.dataset.index)); });
+      });
+
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'ArrowRight') setActive(((current) % full.length) + 1);
+        if (e.key === 'ArrowLeft')  setActive(((current + full.length - 2) % full.length) + 1);
+      });
+    })();
+
+    // Quantity stepper + Add to cart (placeholder)
     (function(){
-      var root = document.documentElement;
-      var details = document.querySelector('.details');
-      var cta = document.querySelector('.cta-primary');
-      var actions = document.querySelector('.actions-top');
-      if(!details || !cta || !actions) return;
+      var minus = document.getElementById('minus');
+      var plus  = document.getElementById('plus');
+      var qty   = document.getElementById('quantity');
+      var add   = document.getElementById('addToCart');
+      var size  = document.getElementById('size');
 
-      var delayBeforeMove = 64;   // px before CTA begins to move
-      var startScrollY = 0;
-      var maxShift = 0;
+      minus.addEventListener('click', function(){
+        var v = Math.max(1, (parseInt(qty.value,10) || 1) - 1);
+        qty.value = v;
+      });
+      plus.addEventListener('click', function(){
+        var v = Math.max(1, (parseInt(qty.value,10) || 1) + 1);
+        qty.value = v;
+      });
+      qty.addEventListener('input', function(){
+        if (!qty.value || parseInt(qty.value,10) < 1) qty.value = 1;
+      });
 
-      function computeMaxShift(){
-        var styles = getComputedStyle(details);
-        var padBottom = parseFloat(styles.paddingBottom) || 0;
-
-        var ctaTopInCard = cta.offsetTop;
-        var cardHeight   = details.clientHeight;
-        var ctaHeight    = cta.offsetHeight;
-
-        maxShift = Math.max(0, cardHeight - (ctaTopInCard + ctaHeight + padBottom));
-        startScrollY = window.scrollY || window.pageYOffset || 0;
-        root.style.setProperty('--cta-shift', '0px');
-        cta.classList.remove('floating');
-        actions.classList.remove('is-floating');
-      }
-
-      function onScroll(){
-        var y = (window.scrollY || window.pageYOffset || 0) - startScrollY;
-        var afterDelay = y - delayBeforeMove;
-        var shift = Math.min(Math.max(afterDelay, 0), maxShift);
-        root.style.setProperty('--cta-shift', shift.toFixed(2) + 'px');
-
-        var isFloating = shift > 1;
-        cta.classList.toggle('floating', isFloating);
-        actions.classList.toggle('is-floating', isFloating);
-      }
-
-      computeMaxShift();
-      onScroll();
-
-      window.addEventListener('scroll', onScroll, { passive:true });
-      window.addEventListener('resize', function(){ computeMaxShift(); onScroll(); });
-
-      var ro = new ResizeObserver(function(){ computeMaxShift(); onScroll(); });
-      ro.observe(details);
+      add.addEventListener('click', function(e){
+        e.preventDefault();
+        var s = size ? size.value : 'S';
+        alert('Added ' + (parseInt(qty.value,10)||1) + ' × Kenno Bathrobe (Size ' + s + ') to cart. (Wire this to Stripe/your cart)');
+      });
     })();
   </script>
 </body>
