@@ -19,21 +19,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
     <!-- SEO -->
-    <meta
-      name="description"
-      content="Kenno bathrobe with chambray-trimmed finishes and belt. Recycled-blend textile (75% cotton, 25% polyester) with lively, soft texture. Sizes S, M, L."
-    />
+    <meta name="description" content="Kenno bathrobe with chambray-trimmed finishes and belt. Recycled-blend textile (75% cotton, 25% polyester) with lively, soft texture. Sizes S, M, L." />
     <link rel="canonical" href="https://www.eliraliving.com/bathrobe.html" />
     <meta property="og:title" content="Kenno Bathrobe — ELIRA LIVING" />
-    <meta
-      property="og:description"
-      content="Refined comfort in recycled-blend fabric with chambray trim. Available in multiple colors. Product code RK4KTM."
-    />
+    <meta property="og:description" content="Refined comfort in recycled-blend fabric with chambray trim. Available in multiple colors. Product code RK4KTM." />
     <meta property="og:url" content="https://www.eliraliving.com/bathrobe.html" />
-    <meta
-      property="og:image"
-      content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png"
-    />
+    <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/images/favicon.png" type="image/png" />
 
@@ -220,7 +211,7 @@
         will-change: transform;
       }
 
-      /* Floating (after it leaves its original spot): gold outline & text/tick */
+      /* Floating style */
       .cta-primary.floating{
         z-index: 999;
         background-color: transparent !important;
@@ -229,8 +220,6 @@
         box-shadow: none !important;
       }
       .cta-primary.floating:before{ color: var(--gold) !important; }
-
-      /* Hover while floating: turn button gray with dark content */
       .cta-primary.floating:hover{
         background-color: var(--ui-300) !important;
         color: var(--ink-900) !important;
@@ -238,8 +227,6 @@
         box-shadow: none !important;
       }
       .cta-primary.floating:hover:before{ color: var(--ink-900) !important; }
-
-      /* While the CTA is floating, reserve space below actions so it doesn't overlap headings */
       .actions-top.is-floating{ margin-bottom: calc(var(--cta-shift) + 8px); }
 
       .meta{
@@ -275,7 +262,7 @@
         top:.63rem;
       }
 
-      /* Subheads larger than body */
+      /* Subheads */
       #product-copy h3{
         margin:1.2rem 0 .55rem;
         font-size:1.12rem;
@@ -287,10 +274,10 @@
       }
       #product-copy p + h3{ margin-top:1.25rem; }
 
-      /* Step headings spacing */
+      /* Step headings */
       #colorLabel, #sizeLabel, #qtyLabel{ margin-top:.75rem; }
 
-      /* Swatches (Color) */
+      /* Swatches */
       .color-picker{
         display:flex;
         gap:12px;
@@ -327,7 +314,7 @@
         background-size:10px 100%!important;
       }
 
-      /* Size pills */
+      /* Size */
       .size-picker{
         display:flex;
         gap:8px;
@@ -382,12 +369,12 @@
       .reveal{ opacity:0; transform:translateY(14px); transition:opacity 500ms ease, transform 500ms ease; }
       .reveal.appear{ opacity:1; transform:translateY(0); }
 
-      /* Footer */
-      #footer{ background:var(--ui-100); }
-      #footer .inner{ padding-top:2rem; padding-bottom:2rem; }
-      #footer h2{ font-size:1rem; letter-spacing:.16em; color:var(--ink-700); }
-
-      /* Small screens */
+      /* Bottom back button helper */
+      .back-to-products-bottom{
+        display:flex;
+        justify-content:center;
+        margin:32px 0 0;
+      }
       @media (max-width:1100px){
         .details{ position:static; padding:20px 18px 22px; }
         .thumb{ width:66px; height:66px; }
@@ -396,7 +383,13 @@
         .button{ min-height:44px; padding:0 16px; }
         #product-copy h3{ font-size:1.07rem; }
         .cta-primary.floating{ background-color:inherit !important; border-width:1px !important; }
+        .back-to-products-bottom .button{ width:100%; max-width:420px; }
       }
+
+      /* Footer */
+      #footer{ background:var(--ui-100); }
+      #footer .inner{ padding-top:2rem; padding-bottom:2rem; }
+      #footer h2{ font-size:1rem; letter-spacing:.16em; color:var(--ink-700); }
     </style>
   </head>
 
@@ -409,11 +402,7 @@
             <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
             <span class="title">ELIRA LIVING</span>
           </a>
-          <nav>
-            <ul>
-              <li><a href="#menu">Menu</a></li>
-            </ul>
-          </nav>
+          <nav><ul><li><a href="#menu">Menu</a></li></ul></nav>
         </div>
       </header>
 
@@ -447,12 +436,7 @@
             <div>
               <div class="main-image">
                 <div class="frame">
-                  <img
-                    id="mainImage"
-                    src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png"
-                    alt="Kenno Bathrobe"
-                    class="show"
-                  />
+                  <img id="mainImage" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1200/v1760782022/Dark_Blue_1._mpj0zr.png" alt="Kenno Bathrobe" class="show" />
                 </div>
               </div>
               <div class="thumbs" id="thumbs" role="listbox" aria-label="Choose a view"></div>
@@ -462,21 +446,21 @@
             <aside class="details" aria-live="polite">
               <div class="eyebrow" id="styleTitle">KENNO — DARK BLUE — VIEW 1</div>
 
-              <!-- TOP ACTIONS -->
+              <!-- TOP ACTIONS (kept in place) -->
               <div class="actions-top">
                 <a href="#select" class="button primary icon solid fa-check cta-primary" id="ctaAdd" disabled>Add to cart</a>
-                <a href="index.html#products" class="button">Back to Products</a>
+                <!-- Back to Products moved to bottom -->
               </div>
 
               <!-- Step 1: Color -->
               <h3 class="muted" id="colorLabel">Choose Color</h3>
               <div class="color-picker" role="radiogroup" aria-labelledby="colorLabel"></div>
 
-              <!-- Step 2: Size (disabled until color is chosen) -->
+              <!-- Step 2: Size -->
               <h3 id="sizeLabel" class="muted">Choose Size</h3>
               <div class="size-picker" role="radiogroup" aria-labelledby="sizeLabel" id="sizePicker"></div>
 
-              <!-- Step 3: Quantity (disabled until size is chosen) -->
+              <!-- Step 3: Quantity -->
               <h3 id="qtyLabel" class="muted">Quantity</h3>
               <div class="qty" aria-labelledby="qtyLabel">
                 <button type="button" id="qtyMinus" aria-label="Decrease quantity" disabled>−</button>
@@ -494,10 +478,7 @@
               <!-- Product copy -->
               <article id="product-copy">
                 <h3>Discover Unrivalled Comfort</h3>
-                <p>
-                  The Kenno bathrobe refines everyday ease into a considered ritual. Chambray-trimmed edges and a coordinating belt frame a silhouette that
-                  feels composed yet effortless. Woven from recycled fibres, the surface reads lively and tactile—soft to the touch and quietly luxurious.
-                </p>
+                <p>The Kenno bathrobe refines everyday ease into a considered ritual. Chambray-trimmed edges and a coordinating belt frame a silhouette that feels composed yet effortless. Woven from recycled fibres, the surface reads lively and tactile—soft to the touch and quietly luxurious.</p>
 
                 <h3>Composition</h3>
                 <p><strong>75% cotton, 25% polyester</strong> (recycled-blend). A responsible fabric that balances plush handfeel with lasting performance.</p>
@@ -506,10 +487,7 @@
                 <p>S, M, L — relaxed unisex drape designed for everyday ease.</p>
 
                 <h3>Care &amp; Longevity</h3>
-                <p>
-                  Launder separately before first wear. Natural shrinkage approx. <strong>5%</strong>. Reshape while damp. Machine-wash gentle at
-                  <strong>60&nbsp;°C</strong>; iron on medium. Avoid tumble drying and dry-cleaning to preserve structure and texture.
-                </p>
+                <p>Launder separately before first wear. Natural shrinkage approx. <strong>5%</strong>. Reshape while damp. Machine-wash gentle at <strong>60&nbsp;°C</strong>; iron on medium. Avoid tumble drying and dry-cleaning to preserve structure and texture.</p>
 
                 <h3>At-a-Glance</h3>
                 <ul>
@@ -523,13 +501,15 @@
                 </ul>
 
                 <h3>Why It Matters</h3>
-                <p>
-                  More than loungewear, Kenno is a small sanctuary. The cotton-rich, recycled construction invites daily use; the clean lines and tailored
-                  details echo the quiet polish of fine spa robes. From sauna to slow evenings, it delivers an enduring sense of “luxury that lasts.”
-                </p>
+                <p>More than loungewear, Kenno is a small sanctuary. The cotton-rich, recycled construction invites daily use; the clean lines and tailored details echo the quiet polish of fine spa robes. From sauna to slow evenings, it delivers an enduring sense of “luxury that lasts.”</p>
               </article>
             </aside>
           </section>
+
+          <!-- Back to Products button moved to the bottom of the page -->
+          <div class="back-to-products-bottom">
+            <a href="index.html#products" class="button" aria-label="Back to Products">Back to Products</a>
+          </div>
         </div>
       </div>
 
@@ -540,7 +520,6 @@
             <h2>Get in touch</h2>
             <p>Email: <a href="mailto:support@eliraliving.com">support@eliraliving.com</a></p>
           </section>
-
           <section>
             <h2>Follow</h2>
             <ul class="icons">
@@ -549,7 +528,6 @@
               <li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
             </ul>
           </section>
-
           <ul class="copyright">
             <li>&copy; ELIRA LIVING. All rights reserved.</li>
             <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
@@ -602,55 +580,13 @@
       var THUMB_TRANSFORM='f_auto,q_auto,w_240/';
       var PRODUCT={
         colors:[
-          {
-            id:'dark-blue',
-            name:'Dark Blue',
-            hex:'#0e2b4a',
-            publicIds:['v1760782022/Dark_Blue_1._mpj0zr.png','v1760782021/Dark_Blue_2._ptxyc4.png'],
-            captions:['Kenno — Dark Blue — full view','Kenno — Dark Blue — alternate angle']
-          },
-          {
-            id:'dark-brown',
-            name:'Dark Brown',
-            hex:'#4a2d1b',
-            publicIds:['v1760782022/Dark_Brown_1._cepnap.png'],
-            captions:['Kenno — Dark Brown — full view']
-          },
-          {
-            id:'brown',
-            name:'Brown',
-            hex:'#7a5633',
-            publicIds:['v1760782023/Brown_1._kjvdqs.png','v1760782025/Brown_2._fwsws0.png'],
-            captions:['Kenno — Brown — front','Kenno — Brown — folded']
-          },
-          {
-            id:'brown-kids',
-            name:'Brown (Kids)',
-            hex:'#6a4b2e',
-            publicIds:['v1760782029/Brown_Kid_s_Bathrobe_grupok.png'],
-            captions:['Kenno — Brown (Kids) — front']
-          },
-          {
-            id:'black',
-            name:'Black',
-            hex:'#222222',
-            publicIds:['v1760782026/Black_1_pogmqf.png','v1760782027/Black_2_n9vshi.png'],
-            captions:['Kenno — Black — full view','Kenno — Black — alternate angle']
-          },
-          {
-            id:'beige',
-            name:'Beige',
-            hex:'#c7b8a1',
-            publicIds:['v1760782029/Beige_1._ylffja.png','v1760782026/Beige_2._ri0sjc.png'],
-            captions:['Kenno — Beige — front','Kenno — Beige — detail']
-          },
-          {
-            id:'dark-green',
-            name:'Dark Green',
-            hex:'#2f6b4f',
-            publicIds:['v1760782029/Dark_Green_1._xktrgu.png','v1760782028/Darh_Green_2._fs5mgj.png'],
-            captions:['Kenno — Dark Green — front','Kenno — Dark Green — alternate angle']
-          }
+          { id:'dark-blue', name:'Dark Blue', hex:'#0e2b4a', publicIds:['v1760782022/Dark_Blue_1._mpj0zr.png','v1760782021/Dark_Blue_2._ptxyc4.png'], captions:['Kenno — Dark Blue — full view','Kenno — Dark Blue — alternate angle'] },
+          { id:'dark-brown', name:'Dark Brown', hex:'#4a2d1b', publicIds:['v1760782022/Dark_Brown_1._cepnap.png'], captions:['Kenno — Dark Brown — full view'] },
+          { id:'brown', name:'Brown', hex:'#7a5633', publicIds:['v1760782023/Brown_1._kjvdqs.png','v1760782025/Brown_2._fwsws0.png'], captions:['Kenno — Brown — front','Kenno — Brown — folded'] },
+          { id:'brown-kids', name:'Brown (Kids)', hex:'#6a4b2e', publicIds:['v1760782029/Brown_Kid_s_Bathrobe_grupok.png'], captions:['Kenno — Brown (Kids) — front'] },
+          { id:'black', name:'Black', hex:'#222222', publicIds:['v1760782026/Black_1_pogmqf.png','v1760782027/Black_2_n9vshi.png'], captions:['Kenno — Black — full view','Kenno — Black — alternate angle'] },
+          { id:'beige', name:'Beige', hex:'#c7b8a1', publicIds:['v1760782029/Beige_1._ylffja.png','v1760782026/Beige_2._ri0sjc.png'], captions:['Kenno — Beige — front','Kenno — Beige — detail'] },
+          { id:'dark-green', name:'Dark Green', hex:'#2f6b4f', publicIds:['v1760782029/Dark_Green_1._xktrgu.png','v1760782028/Darh_Green_2._fs5mgj.png'], captions:['Kenno — Dark Green — front','Kenno — Dark Green — alternate angle'] }
         ]
       };
       var SWATCH_OVALS={
@@ -855,7 +791,7 @@
         updateCTAEnabled();
       })();
 
-      // Keyboard navigation for gallery (active only after color chosen)
+      // Keyboard navigation
       document.addEventListener('keydown', function(e){
         if(selectedColorIndex===null) return;
         var color=PRODUCT.colors[selectedColorIndex];
@@ -874,7 +810,7 @@
         alert('Added to cart:\nColor: '+PRODUCT.colors[selectedColorIndex].name+'\nSize: '+selectedSize+'\nQty: '+quantity);
       });
 
-      /* --- CTA motion (revised): Adds spacing while floating; tighter floating trigger --- */
+      /* --- CTA motion (revised) --- */
       (function(){
         var root = document.documentElement;
         var details = document.querySelector('.details');
@@ -882,7 +818,7 @@
         var actions = document.querySelector('.actions-top');
         if(!details || !cta || !actions) return;
 
-        var delayBeforeMove = 64; // px before CTA begins to move
+        var delayBeforeMove = 64; // px
         var startScrollY = 0;
         var maxShift = 0;
 
