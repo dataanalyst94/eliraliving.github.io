@@ -1,0 +1,334 @@
+<!DOCTYPE HTML>
+<!--
+  ELIRA LIVING — Thank You Page
+  Matches index.html luxury skin (fonts, tokens, pinned header, reveal effects)
+  Auto-populates order summary from URL params:
+    ?order=ELR-1024&email=jane%40mail.com&amount=79&currency=EUR&delivery=3–5%20business%20days
+  Safe for static hosting (no secrets). Print button included.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Thank You — ELIRA LIVING</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+  <!-- Basic SEO -->
+  <meta name="description" content="Thank you for your purchase from ELIRA LIVING." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Social -->
+  <meta property="og:title" content="Thank You — ELIRA LIVING" />
+  <meta property="og:description" content="Your order is confirmed. We’ve emailed your receipt." />
+  <meta property="og:image" content="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_1600/v1760713090/pexels-olly-3756045_chihfn.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/images/favicon.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+  <!-- ===== Luxury Skin tokens (same as index) + page styles ===== -->
+  <style>
+    :root{
+      --lux-bg:#F8F6F3; --lux-ink:#121212; --lux-muted:#6B6B6B; --lux-border:#E7E1D6;
+      --lux-card:#FFFFFF; --lux-accent:#8A734E; --lux-shadow:0 10px 28px rgba(18,18,18,.06);
+      --lux-shadow-lg:0 18px 50px rgba(18,18,18,.08); --radius-xl:18px;
+      --logo-top:16px; --logo-left:22px; --burger-top:16px; --burger-right:22px;
+    }
+    html, body { background:var(--lux-bg); color:var(--lux-ink); margin:0; padding:0; overflow-x:hidden; }
+    body, p, li, a, input, button { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif; }
+    h1, h2, h3, .title {
+      font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 96; letter-spacing:.006em;
+    }
+
+    /* Header pinned (copied from index) */
+    #header{ position:fixed; top:0; left:0; right:0; background:transparent; border:0; box-shadow:none; margin:0!important; z-index:60; pointer-events:none; }
+    #header .inner{ padding-top:.45rem; padding-bottom:.15rem; pointer-events:auto; }
+    #header .logo{ position:fixed; top:var(--logo-top); left:var(--logo-left); z-index:61; pointer-events:auto; }
+    #header .logo .title{ letter-spacing:.18em; font-weight:600; color:#fff!important; }
+    #header .logo .symbol img{ height:22px; width:auto; filter:brightness(0) invert(1); }
+    #header nav{ position:fixed; top:var(--burger-top); right:var(--burger-right); z-index:61; pointer-events:auto; }
+    #header nav a{ color:#fff!important; }
+    #header.shrink .inner{ padding-top:.25rem; }
+    #header, #header *{ transform:none!important; }
+
+    /* Wrapper spacing */
+    #wrapper { padding-top:0!important; }
+    #main { padding-top:0!important; }
+    #main .inner { padding-top:0!important; }
+
+    /* Hero banner (static image, softer height than homepage video) */
+    .hero-thanks{
+      position:relative; width:100dvw; margin-left:calc(50% - 50dvw); margin-right:calc(50% - 50dvw);
+      height:clamp(240px, 36vh, 420px); overflow:hidden; background:#000;
+      display:grid; place-items:end start; padding:0;
+    }
+    .hero-thanks img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; filter:brightness(.62); }
+    .hero-thanks .copy{
+      position:relative; z-index:2; color:#fff; padding: 0 0 clamp(42px,6vh,72px) clamp(18px,4vw,64px);
+      text-shadow:0 2px 14px rgba(0,0,0,.25);
+      max-width:min(920px, 92vw);
+    }
+    .hero-thanks h1{ font-size:clamp(2rem, 4.4vw, 3.6rem); line-height:1.06; margin:0 0 .5rem; font-weight:600; }
+    .hero-thanks p{ margin:.25rem 0 0; font-size:clamp(1rem,1.3vw,1.1rem); opacity:.95; }
+
+    /* Card */
+    .card{
+      background:var(--lux-card); border:1px solid var(--lux-border); border-radius:var(--radius-xl);
+      box-shadow:var(--lux-shadow); padding: clamp(16px, 3vw, 26px);
+    }
+    .stack{ display:grid; gap: clamp(16px, 2.6vw, 24px); }
+
+    /* Summary grid */
+    .summary{
+      display:grid; gap:14px;
+      grid-template-columns: 1fr;
+    }
+    .summary .row{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 0; border-bottom:1px dashed var(--lux-border); }
+    .summary .row:last-child{ border-bottom:0; }
+    .summary .label{ color:var(--lux-muted); }
+    .summary .value{ font-weight:600; }
+
+    /* Actions */
+    .actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .button{
+      display:inline-flex; align-items:center; justify-content:center; text-align:center;
+      border-radius:999px; padding:.9rem 1.4rem; border:1px solid var(--lux-border);
+      letter-spacing:.18em; text-transform:uppercase; font-weight:600;
+      transition: transform 180ms ease, box-shadow 180ms ease, filter 140ms ease;
+      background:#fff;
+    }
+    .button.primary{ background:var(--lux-accent); border-color:transparent; color:#fff; }
+    .button:hover{ transform:translateY(-2px); box-shadow:var(--lux-shadow); }
+    .muted{ color:var(--lux-muted); }
+
+    /* Confetti-ish check burst */
+    .check-burst{
+      width:78px; height:78px; border-radius:999px; display:grid; place-items:center;
+      background: radial-gradient(60% 60% at 50% 40%, #9d8760 0%, #8A734E 60%, #6e5938 100%);
+      box-shadow: 0 10px 24px rgba(18,18,18,.18), inset 0 0 12px rgba(255,255,255,.18);
+      color:#fff;
+      position:relative; overflow:visible;
+    }
+    .check-burst::after, .check-burst::before{
+      content:""; position:absolute; inset:-8px; pointer-events:none;
+      background:
+        repeating-conic-gradient(from 0deg, rgba(255,255,255,.18) 0 6deg, transparent 6deg 12deg);
+      border-radius:999px; mask: radial-gradient(transparent 64%, #000 65%);
+      animation: spin 6s linear infinite;
+    }
+    .check-burst::before{ inset:-14px; opacity:.4; animation-direction: reverse; }
+    @keyframes spin { to{ transform:rotate(360deg); } }
+
+    /* Reveal */
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity 700ms ease, transform 700ms ease; }
+    .reveal.appear { opacity:1; transform:translateY(0); }
+
+    /* Footer */
+    #footer { background:transparent; border-top:1px solid var(--lux-border); }
+    #footer .inner { padding-top:2rem; padding-bottom:2rem; }
+    #footer h2{ font-size:.95rem; letter-spacing:.22em; color:#444; }
+  </style>
+</head>
+<body class="is-preload">
+  <div id="wrapper">
+
+    <!-- Header (same as index) -->
+    <header id="header">
+      <div class="inner">
+        <a href="index.html" class="logo">
+          <span class="symbol"><img src="images/logo.svg" alt="ELIRA LIVING logo" /></span>
+          <span class="title">ELIRA LIVING</span>
+        </a>
+        <nav><ul><li><a href="#menu">Menu</a></li></ul></nav>
+      </div>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <hr />
+      <h3>Language</h3>
+      <ul>
+        <li><a href="/">EN</a></li>
+        <li><a href="/fi/">FI</a></li>
+        <li><a href="/sv/">SV</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+
+        <!-- HERO -->
+        <section class="hero-thanks reveal" aria-label="Order confirmation">
+          <img alt="" aria-hidden="true"
+               src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_2000/v1760713090/pexels-olly-3756045_chihfn.jpg" />
+          <div class="copy">
+            <div class="check-burst" aria-hidden="true">
+              <!-- Simple check icon -->
+              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 6L9 17l-5-5"></path>
+              </svg>
+            </div>
+            <h1>Thank you — your order is confirmed.</h1>
+            <p class="lede">We’ve emailed your receipt and will let you know when your items are on the way.</p>
+          </div>
+        </section>
+
+        <!-- CONTENT -->
+        <section class="stack reveal" aria-label="Order details">
+          <!-- Order summary -->
+          <div class="card">
+            <h2 style="margin-top:0;">Order summary</h2>
+            <div class="summary" role="list">
+              <div class="row" role="listitem">
+                <span class="label">Order #</span>
+                <span class="value" id="orderId">ELR-TEMP</span>
+              </div>
+              <div class="row" role="listitem">
+                <span class="label">Email</span>
+                <span class="value" id="orderEmail">—</span>
+              </div>
+              <div class="row" role="listitem">
+                <span class="label">Total</span>
+                <span class="value" id="orderTotal">—</span>
+              </div>
+              <div class="row" role="listitem">
+                <span class="label">Estimated delivery</span>
+                <span class="value" id="orderDelivery">We’ll share a delivery estimate soon</span>
+              </div>
+            </div>
+            <p class="muted" style="margin-top:12px;">Tip: Save or print this page for your records.</p>
+            <div class="actions" style="margin-top:10px;">
+              <a href="index.html#products" class="button">Continue shopping</a>
+              <button class="button primary" id="printBtn" type="button">Print receipt</button>
+            </div>
+          </div>
+
+          <!-- Next steps / trust -->
+          <div class="card">
+            <h2 style="margin-top:0;">What happens next</h2>
+            <ul style="margin:0; padding-left:18px; line-height:1.7;">
+              <li>You’ll get a confirmation email with your order details.</li>
+              <li>We’ll send a tracking link as soon as the parcel is handed to the carrier.</li>
+              <li>Free shipping over €79, and 14-day returns if something isn’t right.</li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+        <section id="contact">
+          <h2>Get in touch</h2>
+          <p>Email: <a href="mailto:support@eliraliving.com">support@eliraliving.com</a></p>
+        </section>
+        <section>
+          <h2>Follow</h2>
+          <ul class="icons">
+            <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+            <li><a href="mailto:support@eliraliving.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+          </ul>
+        </section>
+        <ul class="copyright">
+          <li>&copy; ELIRA LIVING. All rights reserved.</li>
+          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts (template) -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Interactions (reveal + header shrink) + Order param hydration -->
+  <script>
+    // Page-loaded (for subtle transitions)
+    window.addEventListener('load', function () {
+      document.documentElement.classList.add('page-loaded');
+    });
+
+    // Reveal on scroll (same behavior as index)
+    (function () {
+      var items = [].slice.call(document.querySelectorAll('.reveal'));
+      if (!('IntersectionObserver' in window) || !items.length) {
+        items.forEach(function (el){ el.classList.add('appear'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      items.forEach(function (el){ io.observe(el); });
+    })();
+
+    // Header shrink on scroll
+    (function () {
+      var header = document.getElementById('header');
+      var last = 0;
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY || window.pageYOffset;
+        if (y > 24 && last <= 24) header.classList.add('shrink');
+        else if (y <= 24 && last > 24) header.classList.remove('shrink');
+        last = y;
+      }, { passive: true });
+    })();
+
+    // --- Hydrate summary from URL params (safe, static) ---
+    (function () {
+      var p = new URLSearchParams(window.location.search);
+
+      // Read params with sensible fallbacks
+      var order = p.get('order') || p.get('session') || p.get('order_id') || 'ELR-' + Math.floor(100000 + Math.random()*899999);
+      var email = p.get('email') || '—';
+      var amount = p.get('amount'); // number (e.g., 79 or 79.90)
+      var currency = (p.get('currency') || 'EUR').toUpperCase();
+      var delivery = p.get('delivery') || '3–7 business days';
+
+      // Format total
+      function formatAmt(a, cur){
+        if(!a) return '—';
+        var n = Number(a);
+        if(!isFinite(n)) return '—';
+        return new Intl.NumberFormat(undefined, { style:'currency', currency: cur }).format(n);
+      }
+
+      // Inject
+      document.getElementById('orderId').textContent = order;
+      document.getElementById('orderEmail').textContent = email;
+      document.getElementById('orderTotal').textContent = formatAmt(amount, currency);
+      document.getElementById('orderDelivery').textContent = delivery;
+    })();
+
+    // Print button
+    (function(){
+      var btn = document.getElementById('printBtn');
+      if(btn){ btn.addEventListener('click', function(){ window.print(); }); }
+    })();
+  </script>
+</body>
+</html>
