@@ -277,6 +277,14 @@
 
     /* Improve stability across DPIs: prevent parent transforms */
     #header, #header *{ transform: none !important; }
+    /* Small breathing room between header/logo and hero video */
+:root { --hero-gap: 10px; }
+@media (min-width: 980px){ :root { --hero-gap: 14px; } }
+
+.hero-fullbleed{
+  margin-top: var(--hero-gap) !important;  /* shows the page bg (#F8F6F3) as a thin strip */
+}
+
   </style>
 </head>
 <body class="is-preload">
@@ -484,3 +492,4 @@
   </script>
 </body>
 </html>
+
