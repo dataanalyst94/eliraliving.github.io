@@ -434,15 +434,19 @@
         cursor:pointer;
       }
       .modal__body{
-        background:#000;
+        background:#fff;               /* was #000 */
+        padding:0;
         display:flex;
         align-items:center;
         justify-content:center;
+        max-height:80vh;
       }
       .modal__img{
+        display:block;
         width:100%;
         height:auto;
-        display:block;
+        max-height:80vh;               /* keep inside viewport */
+        object-fit:contain;            /* prevent cropping */
       }
       @media (max-width:720px){
         .modal__dialog{ width:96vw; }
@@ -560,10 +564,10 @@
                 <h3>Why It Matters</h3>
                 <p>More than loungewear, Kenno is a small sanctuary. The cotton-rich, recycled construction invites daily use; the clean lines and tailored details echo the quiet polish of fine spa robes. From sauna to slow evenings, it delivers an enduring sense of “luxury that lasts.”</p>
 
-                <!-- NEW: Button that opens image popup -->
+                <!-- UPDATED: Button text + opens size-chart modal -->
                 <p style="margin-top:.6rem;">
                   <button type="button" class="button" id="openWhyModal" aria-haspopup="dialog" aria-controls="whyModal">
-                    View product photo
+                    View Size Chart
                   </button>
                 </p>
               </article>
@@ -610,7 +614,9 @@
         <div class="modal__body">
           <img
             class="modal__img"
-            alt="Kenno bathrobe product photo"
+            alt="Bathrobe size chart"
+            loading="eager"
+            decoding="async"
             src="https://res.cloudinary.com/df4of6htg/image/upload/v1761858382/Screenshot_2025-10-30_221901_msdehr.png" />
         </div>
       </div>
