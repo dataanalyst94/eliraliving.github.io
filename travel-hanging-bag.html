@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-  <!-- Header/logo + page UI (consistent across product pages) -->
+  <!-- Page UI -->
   <style>
     :root{ --logo-top:16px; --logo-left:22px; --burger-top:16px; --burger-right:22px; }
     html { scroll-behavior: smooth; }
@@ -44,7 +44,6 @@
     #main{ padding-top:0!important; }
     #main .inner{ padding-top:72px!important; }
     .product-header{ margin-top:6px; }
-
     .product-header.reveal h1{ margin-bottom:.4rem; }
     .product-header.reveal p{ color:#666; }
 
@@ -57,7 +56,6 @@
       position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
       opacity:0; transform:scale(1.02);
       transition:opacity 380ms ease, transform 600ms cubic-bezier(.2,.6,.2,1);
-      background:#fff;
     }
     .main-image img.show{ opacity:1; transform:scale(1.0); }
 
@@ -70,11 +68,6 @@
     .thumb[aria-selected="true"]{ border-color:#5da3d6; }
     .thumb img{ width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
 
-    .left-info{ background:#fff; border-radius:16px; padding:18px 20px; margin-top:16px; box-shadow:0 8px 24px rgba(0,0,0,.06); }
-    .left-info h3{ margin:.25rem 0 .5rem; }
-    .left-info ul{ margin:.25rem 0 .8rem .9rem; }
-    .left-info li{ margin:.25rem 0; }
-
     .details{ background:#fff; border-radius:16px; padding:20px 22px; box-shadow:0 8px 24px rgba(0,0,0,.06); }
     .details h2{ margin:0 0 .4rem; }
     .details p{ color:#555; margin:.4rem 0 1rem; }
@@ -86,7 +79,7 @@
 
     .buy-row{ display:flex; align-items:center; gap:12px; margin:1rem 0 .75rem; }
 
-    /* ===== Quantity pill (minus | value | plus) ===== */
+    /* ===== Quantity pill (centered +/-) ===== */
     .qty{
       display:grid;
       grid-template-columns: 40px 56px 40px;
@@ -101,29 +94,17 @@
       height:40px;
       border:0;
       background:#f7f7f7;
-      font-size:18px; /* change to 16px for smaller +/- */
-      line-height:1;
+      font-size:18px;
       color:#444;
       cursor:pointer;
+      display:flex; align-items:center; justify-content:center;  /* center symbols */
       transition:background .15s ease, transform .05s ease;
     }
-    #minus{
-      border-right:1px solid #eaeaea;
-      border-top-left-radius:12px;
-      border-bottom-left-radius:12px;
-    }
-    #plus{
-      border-left:1px solid #eaeaea;
-      border-top-right-radius:12px;
-      border-bottom-right-radius:12px;
-    }
+    #minus{ border-right:1px solid #eaeaea; border-top-left-radius:12px; border-bottom-left-radius:12px; }
+    #plus { border-left:1px solid #eaeaea; border-top-right-radius:12px; border-bottom-right-radius:12px; }
     .qty button:hover{ background:#f1f1f1; }
     .qty button:active{ transform:translateY(1px); }
-    .qty button:focus-visible{
-      outline:2px solid #5da3d6;
-      outline-offset:2px;
-      z-index:1;
-    }
+    .qty button:focus-visible{ outline:2px solid #5da3d6; outline-offset:2px; z-index:1; }
     .qty input{
       width:100%;
       height:40px;
@@ -154,7 +135,7 @@
     #header, #header *{ transform:none!important; }
     img{ aspect-ratio:auto; }
 
-    /* Button hover (darken) */
+    /* Darken add-to-cart on hover */
     #addToCart.button:hover,
     #addToCart.button:focus-visible{
       background:#111 !important;
@@ -162,10 +143,6 @@
       color:#fff !important;
       box-shadow:0 10px 24px rgba(0,0,0,.18) !important;
     }
-
-    /* Supplier info toggle */
-    .supplier-panel{ display:none; background:#fafafa; border:1px solid #eee; border-radius:12px; padding:14px 16px; margin-top:10px; }
-    .supplier-panel p{ margin:.25rem 0; }
   </style>
 </head>
 <body class="is-preload">
@@ -211,7 +188,7 @@
         </header>
 
         <section class="product-layout reveal" aria-label="Travel Hanging Bag gallery">
-          <!-- LEFT: Main image + thumbnails + Key features/specs -->
+          <!-- LEFT: Main image + thumbnails (no extra section below) -->
           <div>
             <div class="main-image">
               <div class="frame">
@@ -230,32 +207,9 @@
                 <img loading="lazy" src="https://res.cloudinary.com/dkk8ohmu7/image/upload/f_auto,q_auto,w_240/v1760640129/Final_3_hlh6kw.png" alt="View 3 thumbnail">
               </button>
             </div>
-
-            <!-- Left info under pictures -->
-            <div class="left-info" aria-label="Key features and specifications">
-              <h3>Key features</h3>
-              <ul>
-                <li><strong>Packed example / lifestyle view</strong> available (see View 2).</li>
-                <li><strong>Open layout with hanging hook</strong> (see View 3).</li>
-                <li><strong>Smart storage</strong>: Packs small; hangs open for instant access.</li>
-                <li><strong>Spacious & durable</strong>: Multiple compartments; made to handle damp conditions.</li>
-                <li><strong>Multiple compartments</strong>: Mesh and zip pockets for visibility and organization.</li>
-              </ul>
-
-              <h3>Specifications</h3>
-              <ul>
-                <li>Material: Polyester</li>
-                <li>Size (folded): 23 × 19 × 9 cm</li>
-                <li>Package includes: 1 × toiletry bag</li>
-                <li>Weight incl. packaging: 100 g</li>
-                <li>Type: Cosmetic bag</li>
-                <li>EAN: 7314280147496</li>
-                <li>Manufacturer’s product no.: 65290448</li>
-              </ul>
-            </div>
           </div>
 
-          <!-- RIGHT: Details / CTA (basic product info only under the button) -->
+          <!-- RIGHT: Details / CTA (now includes features & specs; supplier info removed) -->
           <aside class="details" aria-live="polite">
             <h2 id="styleTitle">View 1</h2>
             <div class="meta">
@@ -265,7 +219,7 @@
               <span class="chip">Compact fold</span>
             </div>
 
-            <p id="styleDesc">Keep toiletries and small essentials tidy. Hang it anywhere and access everything without unpacking.</p>
+            <p id="styleDesc">Packed example / lifestyle view.</p>
 
             <!-- Quantity + Actions -->
             <div class="buy-row">
@@ -287,24 +241,33 @@
 
             <hr />
 
-            <!-- BASIC product info only -->
+            <!-- BASIC product info -->
             <p><strong>Basic product information</strong></p>
             <p>The wall-mounted toiletry bag is perfect to carry in your suitcase. It packs down small and opens into a practical “wall shelf” where you can easily access all your belongings.</p>
 
-            <!-- Supplier transparency -->
-            <p style="margin-top:.75rem"><em>Sourced from:</em> Finnish supplier Info.fi</p>
-            <button type="button" id="supplierBtn" class="button" aria-expanded="false" aria-controls="supplierPanel">Supplier information</button>
-            <div id="supplierPanel" class="supplier-panel" role="region" aria-label="Supplier information">
-              <p><strong>EAN code:</strong> 7314280147496</p>
-              <p><strong>Manufacturer's product number:</strong> 65290448</p>
-              <p><strong>Manufacturing information</strong> includes the address of the product manufacturer and other information about the manufacturer.</p>
-              <p><strong>INF Company AB</strong><br>
-                Lokegatan 5, 263 37 Höganäs, Sweden<br>
-                <a href="https://inf.se/" target="_blank" rel="noopener">https://inf.se/</a>
-              </p>
-            </div>
+            <!-- Key features (moved here) -->
+            <h3 style="margin-top:1rem;">Key features</h3>
+            <ul>
+              <li><strong>Packed example / lifestyle view</strong> (see View 2).</li>
+              <li><strong>Open layout with hanging hook</strong> (see View 3).</li>
+              <li><strong>Smart storage</strong>: Packs small; hangs open for instant access.</li>
+              <li><strong>Spacious & durable</strong>: Multiple compartments; made to handle damp conditions.</li>
+              <li><strong>Multiple compartments</strong>: Mesh and zip pockets for visibility and organization.</li>
+            </ul>
 
-            <!-- Optional: Environmental & safety -->
+            <!-- Specifications (moved here) -->
+            <h3>Specifications</h3>
+            <ul>
+              <li>Material: Polyester</li>
+              <li>Size (folded): 23 × 19 × 9 cm</li>
+              <li>Package includes: 1 × toiletry bag</li>
+              <li>Weight incl. packaging: 100 g</li>
+              <li>Type: Cosmetic bag</li>
+              <li>EAN: 7314280147496</li>
+              <li>Manufacturer’s product no.: 65290448</li>
+            </ul>
+
+            <!-- Optional: keep environmental info collapsed; remove if you prefer -->
             <details style="margin-top:.6rem">
               <summary><strong>Environmental & safety information</strong></summary>
               <p><em>Responsible party / Manufacturer</em><br>
@@ -319,7 +282,7 @@
           </aside>
         </section>
 
-        <!-- Disclaimer (for every product page) -->
+        <!-- Disclaimer -->
         <p style="margin-top:18px; font-size:.9rem; color:#666;">
           <em>Images are illustrative. Actual product may vary slightly from the pictures. (Images are enhanced with artificial intelligence software.)</em>
         </p>
@@ -396,7 +359,7 @@
       }, { passive: true });
     })();
 
-    // Gallery swap (captions for View 2 & 3 switched as requested)
+    // Gallery swap (View 2 = Packed / lifestyle; View 3 = Open with hook)
     (function () {
       var main  = document.getElementById('mainImage');
       var title = document.getElementById('styleTitle');
@@ -469,18 +432,6 @@
       add.addEventListener('click', function(e){
         e.preventDefault();
         alert('Added ' + (parseInt(qty.value,10)||1) + ' to cart. (Connect to Stripe/cart logic)');
-      });
-    })();
-
-    // Supplier info toggle (button shows/hides info)
-    (function(){
-      var btn = document.getElementById('supplierBtn');
-      var panel = document.getElementById('supplierPanel');
-      if(!btn || !panel) return;
-      btn.addEventListener('click', function(){
-        var open = panel.style.display === 'block';
-        panel.style.display = open ? 'none' : 'block';
-        btn.setAttribute('aria-expanded', String(!open));
       });
     })();
   </script>
