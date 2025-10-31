@@ -95,6 +95,25 @@
 
     #header, #header *{ transform:none!important; }
     img{ aspect-ratio:auto; }
+    /* --- Remove pink hover for this page's buttons --- */
+/* Add to cart: keep current base (pink), turn jet black on hover/focus */
+#addToCart.button:hover,
+#addToCart.button:focus-visible{
+  background:#111 !important;
+  border-color:#111 !important;
+  color:#fff !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.18) !important;
+}
+
+/* Back to Products (the one inside .details .actions): jet black on hover/focus */
+.details .actions .button:hover,
+.details .actions .button:focus-visible{
+  background:#111 !important;
+  border-color:#111 !important;
+  color:#fff !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.18) !important;
+}
+
   </style>
 </head>
 <body class="is-preload">
