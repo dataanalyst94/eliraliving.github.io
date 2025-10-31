@@ -111,6 +111,57 @@
       color:#fff !important;
       box-shadow:0 10px 24px rgba(0,0,0,.18) !important;
     }
+    /* Fix quantity stepper layout (all product pages) */
+.qty{
+  display:inline-grid;
+  grid-template-columns:40px 56px 40px; /* btn | input | btn */
+  height:40px;
+  border:1px solid #e6e6e6;
+  border-radius:10px;
+  overflow:hidden;
+  background:#fff;
+  box-sizing:border-box;
+}
+
+/* Reset native button look and join visually */
+.qty button{
+  all:unset;                 /* remove UA styles */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  background:#fafafa;
+  font-size:18px;
+  font-weight:700;
+  line-height:1;
+}
+.qty button:first-child{ border-right:1px solid #e6e6e6; }
+.qty button:last-child{  border-left:1px solid #e6e6e6;  }
+
+/* Input cell */
+.qty input{
+  width:100%;
+  height:100%;
+  border:0;
+  text-align:center;
+  font-weight:600;
+  font-size:16px;
+  background:#fff;
+  box-sizing:border-box;
+}
+
+/* Hide native spinners (Chrome/Edge/Safari) */
+.qty input[type="number"]::-webkit-outer-spin-button,
+.qty input[type="number"]::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0;
+}
+/* Firefox */
+.qty input[type="number"]{
+  -moz-appearance:textfield;
+  appearance:textfield;
+}
+
   </style>
 </head>
 <body class="is-preload">
