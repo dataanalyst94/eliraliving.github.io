@@ -95,6 +95,22 @@
 
     #header, #header *{ transform:none!important; }
     img{ aspect-ratio:auto; }
+
+    /* ===== Remove template pink hover (keep normal pink; hover turns jet-black) ===== */
+    #addToCart.button:hover,
+    #addToCart.button:focus-visible{
+      background:#111 !important;
+      border-color:#111 !important;
+      color:#fff !important;
+      box-shadow:0 10px 24px rgba(0,0,0,.18) !important;
+    }
+    .details .actions .button:hover,
+    .details .actions .button:focus-visible{
+      background:#111 !important;
+      border-color:#111 !important;
+      color:#fff !important;
+      box-shadow:0 10px 24px rgba(0,0,0,.18) !important;
+    }
   </style>
 </head>
 <body class="is-preload">
@@ -173,7 +189,7 @@
 
             <p id="styleDesc">Keep toiletries and small essentials tidy. Hang it anywhere and access everything without unpacking.</p>
 
-            <!-- Quantity + Actions (same flow as other products) -->
+            <!-- Quantity + Actions -->
             <div class="buy-row">
               <div class="qty" aria-label="Quantity selector">
                 <button type="button" id="minus" aria-label="Decrease quantity">−</button>
