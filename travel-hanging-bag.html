@@ -77,52 +77,6 @@
     .actions .button{ transition:transform 180ms ease, box-shadow 180ms ease; }
     .actions .button:hover{ transform:translateY(-2px); box-shadow:0 8px 22px rgba(0,0,0,.10); }
 
-    .buy-row{ display:flex; align-items:center; gap:12px; margin:1rem 0 .75rem; }
-
-    /* ===== Quantity pill (centered +/-) ===== */
-    .qty{
-      display:grid;
-      grid-template-columns: 40px 56px 40px;
-      align-items:center;
-      background:#fff;
-      border:1px solid #e6e6e6;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow: inset 0 1px 0 rgba(0,0,0,.02);
-    }
-    .qty button{
-      height:40px;
-      border:0;
-      background:#f7f7f7;
-      font-size:18px;
-      color:#444;
-      cursor:pointer;
-      display:flex; align-items:center; justify-content:center;  /* center symbols */
-      transition:background .15s ease, transform .05s ease;
-    }
-    #minus{ border-right:1px solid #eaeaea; border-top-left-radius:12px; border-bottom-left-radius:12px; }
-    #plus { border-left:1px solid #eaeaea; border-top-right-radius:12px; border-bottom-right-radius:12px; }
-    .qty button:hover{ background:#f1f1f1; }
-    .qty button:active{ transform:translateY(1px); }
-    .qty button:focus-visible{ outline:2px solid #5da3d6; outline-offset:2px; z-index:1; }
-    .qty input{
-      width:100%;
-      height:40px;
-      border:0;
-      background:#fff;
-      text-align:center;
-      font-size:16px;
-      color:#222;
-      -moz-appearance:textfield;
-    }
-    .qty input:focus{ outline:none; }
-    .qty input::-webkit-outer-spin-button,
-    .qty input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
-    @media (max-width:480px){
-      .qty{ grid-template-columns: 36px 48px 36px; }
-      .qty button, .qty input{ height:36px; }
-    }
-
     .note{ font-size:.9rem; color:#666; }
 
     .reveal{ opacity:0; transform:translateY(18px); transition:opacity 700ms ease, transform 700ms ease; }
@@ -134,15 +88,6 @@
 
     #header, #header *{ transform:none!important; }
     img{ aspect-ratio:auto; }
-
-    /* Darken add-to-cart on hover */
-    #addToCart.button:hover,
-    #addToCart.button:focus-visible{
-      background:#111 !important;
-      border-color:#111 !important;
-      color:#fff !important;
-      box-shadow:0 10px 24px rgba(0,0,0,.18) !important;
-    }
   </style>
 </head>
 <body class="is-preload">
@@ -188,7 +133,7 @@
         </header>
 
         <section class="product-layout reveal" aria-label="Travel Hanging Bag gallery">
-          <!-- LEFT: Main image + thumbnails (no extra section below) -->
+          <!-- LEFT: Main image + thumbnails -->
           <div>
             <div class="main-image">
               <div class="frame">
@@ -209,7 +154,7 @@
             </div>
           </div>
 
-          <!-- RIGHT: Details / CTA (now includes features & specs; supplier info removed) -->
+          <!-- RIGHT: Details / CTA -->
           <aside class="details" aria-live="polite">
             <h2 id="styleTitle">View 1</h2>
             <div class="meta">
@@ -221,16 +166,16 @@
 
             <p id="styleDesc">Packed example / lifestyle view.</p>
 
-            <!-- Quantity + Actions -->
-            <div class="buy-row">
-              <div class="qty" aria-label="Quantity selector">
-                <button type="button" id="minus" aria-label="Decrease quantity">−</button>
-                <input type="number" id="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity" />
-                <button type="button" id="plus" aria-label="Increase quantity">+</button>
-              </div>
-              <div class="actions">
-                <a href="#add" id="addToCart" class="button primary icon solid fa-check">Add to cart</a>
-              </div>
+            <!-- Buy Now -->
+            <div class="actions" style="margin:1rem 0 .75rem;">
+              <a
+                href="https://buy.stripe.com/dRm3cvbv380ofEH37g2Ji05"
+                id="buyNow"
+                class="button primary icon solid fa-shopping-cart"
+                target="_blank"
+                rel="noopener"
+                aria-label="Buy now with Stripe"
+              >Buy Now</a>
             </div>
 
             <!-- Shipping/returns note -->
@@ -245,7 +190,7 @@
             <p><strong>Basic product information</strong></p>
             <p>The wall-mounted toiletry bag is perfect to carry in your suitcase. It packs down small and opens into a practical “wall shelf” where you can easily access all your belongings.</p>
 
-            <!-- Key features (moved here) -->
+            <!-- Key features -->
             <h3 style="margin-top:1rem;">Key features</h3>
             <ul>
               <li><strong>Packed example / lifestyle view</strong> (see View 2).</li>
@@ -255,7 +200,7 @@
               <li><strong>Multiple compartments</strong>: Mesh and zip pockets for visibility and organization.</li>
             </ul>
 
-            <!-- Specifications (moved here) -->
+            <!-- Specifications -->
             <h3>Specifications</h3>
             <ul>
               <li>Material: Polyester</li>
@@ -267,7 +212,6 @@
               <li>Manufacturer’s product no.: 65290448</li>
             </ul>
 
-            <!-- Optional: keep environmental info collapsed; remove if you prefer -->
             <details style="margin-top:.6rem">
               <summary><strong>Environmental & safety information</strong></summary>
               <p><em>Responsible party / Manufacturer</em><br>
@@ -407,31 +351,6 @@
       document.addEventListener('keydown', function(e){
         if (e.key === 'ArrowRight') setActive(((current) % 3) + 1);
         if (e.key === 'ArrowLeft')  setActive(((current + 1) % 3) + 1);
-      });
-    })();
-
-    // Quantity stepper + Add to cart (placeholder)
-    (function(){
-      var minus = document.getElementById('minus');
-      var plus  = document.getElementById('plus');
-      var qty   = document.getElementById('quantity');
-      var add   = document.getElementById('addToCart');
-
-      minus.addEventListener('click', function(){
-        var v = Math.max(1, (parseInt(qty.value,10) || 1) - 1);
-        qty.value = v;
-      });
-      plus.addEventListener('click', function(){
-        var v = Math.max(1, (parseInt(qty.value,10) || 1) + 1);
-        qty.value = v;
-      });
-      qty.addEventListener('input', function(){
-        if (!qty.value || parseInt(qty.value,10) < 1) qty.value = 1;
-      });
-
-      add.addEventListener('click', function(e){
-        e.preventDefault();
-        alert('Added ' + (parseInt(qty.value,10)||1) + ' to cart. (Connect to Stripe/cart logic)');
       });
     })();
   </script>
