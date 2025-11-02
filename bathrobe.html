@@ -1,16 +1,7 @@
 <!DOCTYPE HTML>
 <!--
   Phantom by HTML5 UP (customized for ELIRA LIVING)
-  Kenno bathrobe — refined layout, elevated typography, top-placed actions,
-  centered buttons, larger subheads, CTA that starts moving after a delay and
-  travels to the bottom of the details card. Floating CTA overlays content and
-  turns transparent only while scrolled (gold style; gray on hover).
-
-  UPDATE: Enforced selection flow:
-  1) Color → 2) Size (S/M/L) → 3) Quantity
-  Size & quantity stay disabled until previous step is chosen.
-
-  FIX: CTA no longer overlaps section headings while floating (adds space beneath actions row while floating).
+  Kenno bathrobe — selection-gated CTA
 -->
 <html lang="en">
   <head>
@@ -38,56 +29,18 @@
         --card-r: 16px;
         --shadow-1: 0 6px 18px rgba(0,0,0,.07);
         --shadow-2: 0 10px 30px rgba(0,0,0,.10);
-        --ink-900:#111;
-        --ink-800:#1c1c1c;
-        --ink-700:#2a2a2a;
-        --ink-600:#444;
-        --ink-500:#666;
-        --ink-400:#888;
-        --ui-050:#fcfcfc;
-        --ui-100:#fafafa;
-        --ui-200:#f5f5f5;
-        --ui-300:#eee;
-        --ui-400:#e6e6e6;
-        --brand:#1d6fa7;
-        --brand-100: rgba(29,111,167,.12);
-        --gold:#C9A227;
-        --cta-shift: 0px; /* updated by JS */
+        --ink-900:#111; --ink-800:#1c1c1c; --ink-700:#2a2a2a; --ink-600:#444; --ink-500:#666; --ink-400:#888;
+        --ui-050:#fcfcfc; --ui-100:#fafafa; --ui-200:#f5f5f5; --ui-300:#eee; --ui-400:#e6e6e6;
+        --brand:#1d6fa7; --brand-100: rgba(29,111,167,.12);
+        --gold:#C9A227; --cta-shift: 0px;
       }
-
       html { scroll-behavior:smooth; }
-      @media (prefers-reduced-motion: reduce){
-        *{animation:none!important;transition:none!important}
-        html{scroll-behavior:auto}
-      }
+      @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} html{scroll-behavior:auto} }
 
       /* Header */
-      #header{
-        position:fixed;
-        top:0;
-        left:0;
-        right:0;
-        background:transparent;
-        border:0;
-        box-shadow:none;
-        margin:0!important;
-        z-index:60;
-        pointer-events:none;
-      }
-      #header .inner{
-        padding-top:.5rem;
-        padding-bottom:.25rem;
-        pointer-events:auto;
-      }
-      #header .logo{
-        position:fixed;
-        top:16px;
-        left:22px;
-        z-index:61;
-        display:flex;
-        align-items:center;
-        gap:.55rem;
-      }
+      #header{ position:fixed; top:0; left:0; right:0; background:transparent; border:0; box-shadow:none; margin:0!important; z-index:60; pointer-events:none; }
+      #header .inner{ padding-top:.5rem; padding-bottom:.25rem; pointer-events:auto; }
+      #header .logo{ position:fixed; top:16px; left:22px; z-index:61; display:flex; align-items:center; gap:.55rem; }
       #header .logo .symbol img{ height:22px; width:auto; }
       #header .logo .title{ letter-spacing:.12em; font-weight:600; color:var(--ink-900)!important; }
       #header nav{ position:fixed; top:16px; right:22px; z-index:61; }
@@ -95,99 +48,37 @@
       #header.shrink .inner{ padding-top:.25rem; }
 
       /* Page rhythm */
-      #wrapper{ padding-top:0!important; }
-      #main{ padding-top:0!important; }
+      #wrapper{ padding-top:0!important; }  #main{ padding-top:0!important; }
       #main .inner{ padding-top:78px!important; }
 
       /* Product header */
       .product-header{ margin-top:6px; margin-bottom:18px; }
-      .product-header h1{
-        margin:0 0 .25rem;
-        font-weight:700;
-        letter-spacing:.02em;
-        color:var(--ink-900);
-        line-height:1.2;
-      }
+      .product-header h1{ margin:0 0 .25rem; font-weight:700; letter-spacing:.02em; color:var(--ink-900); line-height:1.2; }
       .product-header p{ margin:0; color:var(--ink-500); font-size:1.02rem; line-height:1.6; }
 
       /* Grid */
-      .product-layout{
-        display:grid;
-        gap:36px;
-        grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
-        align-items:start;
-      }
-      @media (max-width:1100px){
-        .product-layout{ grid-template-columns:1fr; gap:22px; }
-      }
+      .product-layout{ display:grid; gap:36px; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); align-items:start; }
+      @media (max-width:1100px){ .product-layout{ grid-template-columns:1fr; gap:22px; } }
 
       /* Image card */
-      .main-image{
-        background:#fff;
-        border-radius:var(--card-r);
-        overflow:hidden;
-        box-shadow:var(--shadow-1);
-      }
-      .main-image .frame{
-        width:100%;
-        aspect-ratio:4/5;
-        background:var(--ui-200);
-        position:relative;
-      }
-      .main-image img{
-        position:absolute;
-        inset:0;
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        opacity:0;
-        transform:scale(1.015);
-        transition:opacity 360ms ease, transform 520ms cubic-bezier(.2,.6,.2,1);
-        background:#fff;
-      }
+      .main-image{ background:#fff; border-radius:var(--card-r); overflow:hidden; box-shadow:var(--shadow-1); }
+      .main-image .frame{ width:100%; aspect-ratio:4/5; background:var(--ui-200); position:relative; }
+      .main-image img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.015);
+        transition:opacity 360ms ease, transform 520ms cubic-bezier(.2,.6,.2,1); background:#fff; }
       .main-image img.show{ opacity:1; transform:scale(1); }
       .main-image img.contain{ object-fit:contain; background:#fff; }
 
       /* Thumbs */
-      .thumbs{
-        margin-top:12px;
-        display:flex;
-        gap:12px;
-        flex-wrap:wrap;
-        align-items:center;
-      }
-      .thumb{
-        width:72px;
-        height:72px;
-        border:1px solid var(--ui-400);
-        border-radius:12px;
-        overflow:hidden;
-        background:#fff;
-        cursor:pointer;
-        transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-        box-shadow:0 3px 10px rgba(0,0,0,.05);
-      }
+      .thumbs{ margin-top:12px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+      .thumb{ width:72px; height:72px; border:1px solid var(--ui-400); border-radius:12px; overflow:hidden; background:#fff; cursor:pointer;
+        transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease; box-shadow:0 3px 10px rgba(0,0,0,.05); }
       .thumb:hover{ transform:translateY(-2px); box-shadow:var(--shadow-1); }
       .thumb[aria-selected="true"]{ border-color:var(--brand); box-shadow:0 0 0 3px var(--brand-100); }
       .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
 
       /* Details card */
-      .details{
-        position:sticky;
-        top:88px;
-        background:#fff;
-        border-radius:var(--card-r);
-        padding:24px 24px 26px;
-        box-shadow:var(--shadow-1);
-        overflow:visible;
-      }
-      .eyebrow{
-        margin:0 0 .65rem;
-        color:var(--ink-400);
-        font-size:.9rem;
-        letter-spacing:.16em;
-        text-transform:uppercase;
-      }
+      .details{ position:sticky; top:88px; background:#fff; border-radius:var(--card-r); padding:24px 24px 26px; box-shadow:var(--shadow-1); overflow:visible; }
+      .eyebrow{ margin:0 0 .65rem; color:var(--ink-400); font-size:.9rem; letter-spacing:.16em; text-transform:uppercase; }
 
       /* Actions */
       .actions-top{ display:flex; gap:10px; flex-wrap:wrap; margin:0 0 14px; }
@@ -195,191 +86,70 @@
       .button.icon:before{ margin-right:.5rem; transform:none; }
       .actions-top .button.primary{ box-shadow:0 6px 16px rgba(29,111,167,.18); }
 
-      /* Disabled state */
-      .button[disabled],
-      .pill[disabled],
-      .qty button[disabled],
-      .qty input[disabled]{ opacity:.5; cursor:not-allowed; pointer-events:none; }
+      /* Disabled */
+      .button[disabled], .pill[disabled], .qty button[disabled], .qty input[disabled]{ opacity:.5; cursor:not-allowed; pointer-events:none; }
       .muted{ opacity:.5; }
 
-      /* Only the primary CTA moves; can overlay content when floating */
-      .cta-primary{
-        position:relative;
-        z-index:2;
-        transform: translateY(var(--cta-shift));
-        transition: transform 140ms ease, background-color 140ms ease, color 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
-        will-change: transform;
-      }
-
-      /* Floating style */
-      .cta-primary.floating{
-        z-index: 999;
-        background-color: transparent !important;
-        color: var(--gold) !important;
-        border: 2px solid var(--gold) !important;
-        box-shadow: none !important;
-      }
-      .cta-primary.floating:before{ color: var(--gold) !important; }
-      .cta-primary.floating:hover{
-        background-color: var(--ui-300) !important;
-        color: var(--ink-900) !important;
-        border-color: var(--ui-300) !important;
-        box-shadow: none !important;
-      }
-      .cta-primary.floating:hover:before{ color: var(--ink-900) !important; }
+      /* Moving CTA */
+      .cta-primary{ position:relative; z-index:2; transform: translateY(var(--cta-shift));
+        transition: transform 140ms ease, background-color 140ms ease, color 140ms ease, box-shadow 140ms ease, border-color 140ms ease; }
+      .cta-primary.floating{ z-index: 999; background-color: transparent !important; color: var(--gold) !important; border: 2px solid var(--gold) !important; box-shadow: none !important; }
+      .cta-primary.floating:hover{ background-color: var(--ui-300) !important; color: var(--ink-900) !important; border-color: var(--ui-300) !important; box-shadow: none !important; }
       .actions-top.is-floating{ margin-bottom: calc(var(--cta-shift) + 8px); }
 
-      .meta{
-        display:flex;
-        gap:10px;
-        flex-wrap:wrap;
-        color:var(--ink-600);
-        margin:.2rem 0 1rem;
-      }
-      .meta .chip{
-        background:#f6f9fc;
-        padding:.28rem .55rem;
-        border-radius:999px;
-        font-size:.88rem;
-        border:1px solid #e5eff8;
-        line-height:1.3;
-        white-space:nowrap;
-      }
+      .meta{ display:flex; gap:10px; flex-wrap:wrap; color:var(--ink-600); margin:.2rem 0 1rem; }
+      .meta .chip{ background:#f6f9fc; padding:.28rem .55rem; border-radius:999px; font-size:.88rem; border:1px solid #e5eff8; line-height:1.3; white-space:nowrap; }
 
       /* Editorial body */
-      .details p, .details li{ color:var(--ink-600); line-height:1.75; hyphens:auto; }
+      .details p, .details li{ color:var(--ink-600); line-height:1.75; }
       .details p{ margin:0 0 1rem; }
       .details ul{ margin:.35rem 0 1.1rem 0; padding-left:0; list-style:none; }
       .details ul li{ padding-left:1.1rem; position:relative; }
-      .details ul li::before{
-        content:"";
-        width:7px;
-        height:7px;
-        border-radius:50%;
-        background:var(--ink-400);
-        position:absolute;
-        left:0;
-        top:.63rem;
-      }
+      .details ul li::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--ink-400); position:absolute; left:0; top:.63rem; }
 
       /* Subheads */
-      #product-copy h3{
-        margin:1.2rem 0 .55rem;
-        font-size:1.12rem;
-        font-weight:700;
-        letter-spacing:.14em;
-        text-transform:uppercase;
-        color:var(--ink-800);
-        font-variant-caps:all-small-caps;
-      }
+      #product-copy h3{ margin:1.2rem 0 .55rem; font-size:1.12rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-800); font-variant-caps:all-small-caps; }
       #product-copy p + h3{ margin-top:1.25rem; }
 
       /* Step headings */
       #colorLabel, #sizeLabel, #qtyLabel{ margin-top:.75rem; }
 
       /* Swatches */
-      .color-picker{
-        display:flex;
-        gap:12px;
-        align-items:center;
-        margin:.25rem 0 .8rem;
-        flex-wrap:wrap;
-      }
-      .swatch{
-        width:46px;
-        height:28px;
-        border-radius:999px;
-        border:1px solid var(--ui-400);
-        cursor:pointer;
-        outline:none;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        background:#fff;
-        box-shadow:inset 0 0 0 4px rgba(255,255,255,.8);
-        transition:border-color .2s ease, box-shadow .2s ease, transform .12s ease;
-      }
+      .color-picker{ display:flex; gap:12px; align-items:center; margin:.25rem 0 .8rem; flex-wrap:wrap; }
+      .swatch{ width:46px; height:28px; border-radius:999px; border:1px solid var(--ui-400); cursor:pointer; outline:none;
+        display:inline-flex; align-items:center; justify-content:center; background:#fff; box-shadow:inset 0 0 0 4px rgba(255,255,255,.8);
+        transition:border-color .2s ease, box-shadow .2s ease, transform .12s ease; }
       .swatch:hover{ transform:translateY(-1px); }
-      .swatch[aria-checked="true"]{
-        box-shadow:0 0 0 3px var(--brand-100), inset 0 0 0 4px rgba(255,255,255,.8);
-        border-color:var(--brand);
-      }
-      .swatch .dot{
-        width:100%;
-        height:100%;
-        border-radius:999px;
-        display:block;
-        background-position:center!important;
-        background-repeat:repeat-x!important;
-        background-size:10px 100%!important;
-      }
+      .swatch[aria-checked="true"]{ box-shadow:0 0 0 3px var(--brand-100), inset 0 0 0 4px rgba(255,255,255,.8); border-color:var(--brand); }
+      .swatch .dot{ width:100%; height:100%; border-radius:999px; display:block; background-position:center!important; background-repeat:repeat-x!important; background-size:10px 100%!important; }
 
       /* Size */
-      .size-picker{
-        display:flex;
-        gap:8px;
-        flex-wrap:wrap;
-        margin:.35rem 0 .8rem;
-      }
-      .pill{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        min-width:42px;
-        height:36px;
-        padding:0 10px;
-        border-radius:999px;
-        border:1px solid var(--ui-400);
-        background:#fff;
-        cursor:pointer;
-        font-weight:600;
-        letter-spacing:.04em;
-        transition:border-color .2s ease, box-shadow .2s ease, transform .12s ease, background .2s ease, color .2s ease;
-      }
+      .size-picker{ display:flex; gap:8px; flex-wrap:wrap; margin:.35rem 0 .8rem; }
+      .pill{ display:inline-flex; align-items:center; justify-content:center; min-width:42px; height:36px; padding:0 10px; border-radius:999px;
+        border:1px solid var(--ui-400); background:#fff; cursor:pointer; font-weight:600; letter-spacing:.04em;
+        transition:border-color .2s ease, box-shadow .2s ease, transform .12s ease, background .2s ease, color .2s ease; }
       .pill:hover{ transform:translateY(-1px); }
       .pill[aria-checked="true"]{ border-color:var(--brand); box-shadow:0 0 0 3px var(--brand-100); }
 
       /* Quantity */
       .qty{ display:flex; align-items:center; gap:8px; }
-      .qty button{
-        width:36px;
-        height:36px;
-        border:1px solid var(--ui-400);
-        background:#fff;
-        border-radius:10px;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        font-weight:700;
-        transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
-        cursor:pointer;
-      }
+      .qty button{ width:36px; height:36px; border:1px solid var(--ui-400); background:#fff; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; font-weight:700;
+        transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease; cursor:pointer; }
       .qty button:hover{ transform:translateY(-1px); box-shadow:var(--shadow-1); }
-      .qty input{
-        width:64px;
-        height:36px;
-        text-align:center;
-        border:1px solid var(--ui-400);
-        border-radius:10px;
-        font-weight:600;
-        background:#fff;
-      }
+      .qty input{ width:64px; height:36px; text-align:center; border:1px solid var(--ui-400); border-radius:10px; font-weight:600; background:#fff; }
 
       /* Reveal */
       .reveal{ opacity:0; transform:translateY(14px); transition:opacity 500ms ease, transform 500ms ease; }
       .reveal.appear{ opacity:1; transform:translateY(0); }
 
       /* Bottom back button helper */
-      .back-to-products-bottom{
-        display:flex;
-        justify-content:center;
-        margin:32px 0 0;
-      }
+      .back-to-products-bottom{ display:flex; justify-content:center; margin:32px 0 0; }
+
       @media (max-width:1100px){
         .details{ position:static; padding:20px 18px 22px; }
         .thumb{ width:66px; height:66px; }
         #main .inner{ padding-top:72px!important; }
-        :root { --cta-shift: 0px !important; } /* disable motion on small screens */
+        :root { --cta-shift: 0px !important; }
         .button{ min-height:44px; padding:0 16px; }
         #product-copy h3{ font-size:1.07rem; }
         .cta-primary.floating{ background-color:inherit !important; border-width:1px !important; }
@@ -391,79 +161,23 @@
       #footer .inner{ padding-top:2rem; padding-bottom:2rem; }
       #footer h2{ font-size:1rem; letter-spacing:.16em; color:var(--ink-700); }
 
-/* -------- Modal (image popup) -------- */
-.modal{
-  position:fixed; inset:0; display:none; z-index:1000;
-}
-.modal[aria-hidden="false"]{ display:block; }
-.modal__backdrop{
-  position:absolute; inset:0;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:saturate(140%) blur(2px);
-}
-.modal__dialog{
-  position:absolute; left:0; right:0; top:50%;
-  transform:translateY(-50%);
-  width:min(96vw, 980px);
-  max-height:92svh;                 /* visual viewport-aware */
-  background:#fff; border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,.10);
-  overflow:hidden;
-  display:flex; flex-direction:column;   /* NEW */
-}
-.modal__header{
-  flex:0 0 auto;
-  display:flex; justify-content:flex-end; align-items:center;
-  gap:8px; padding:8px;
-  background:#fff; border-bottom:1px solid var(--ui-300);
-}
-.modal__close{
-  border:1px solid var(--ui-400); background:#fff;
-  border-radius:10px; width:38px; height:38px; font-weight:700; cursor:pointer;
-}
-.modal__body{
-  flex:1 1 auto;
-  background:#fff;                  /* was #000 */
-  padding:0; display:flex; align-items:center; justify-content:center;
-  max-height:calc(92svh - 48px);    /* subtract header height */
-  overflow:auto;                    /* allow scroll if needed */
-}
-.modal__img{
-  display:block;
-  max-width:100%;
-  max-height:100%;
-  width:auto; height:auto;
-  object-fit:contain;
-}
-      /* --- Override Add to Cart button color to Jet Black --- */
-.button.primary,
-.actions-top .button.primary {
-  background-color: #000 !important;
-  color: #fff !important;
-  border: none !important;
-  box-shadow: 0 6px 16px rgba(0,0,0,.25) !important;
-}
+      /* Modal */
+      .modal{ position:fixed; inset:0; display:none; z-index:1000; }
+      .modal[aria-hidden="false"]{ display:block; }
+      .modal__backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.55); backdrop-filter:saturate(140%) blur(2px); }
+      .modal__dialog{ position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); width:min(96vw, 980px); max-height:92svh;
+        background:#fff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,.10); overflow:hidden; display:flex; flex-direction:column; }
+      .modal__header{ flex:0 0 auto; display:flex; justify-content:flex-end; align-items:center; gap:8px; padding:8px; background:#fff; border-bottom:1px solid var(--ui-300); }
+      .modal__close{ border:1px solid var(--ui-400); background:#fff; border-radius:10px; width:38px; height:38px; font-weight:700; cursor:pointer; }
+      .modal__body{ flex:1 1 auto; background:#fff; padding:0; display:flex; align-items:center; justify-content:center; max-height:calc(92svh - 48px); overflow:auto; }
+      .modal__img{ display:block; max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
 
-.button.primary:hover,
-.actions-top .button.primary:hover {
-  background-color: #111 !important;
-  color: #fff !important;
-  box-shadow: 0 8px 18px rgba(0,0,0,.35) !important;
-}
-/* --- Keep original button style, but make hover jet black --- */
-.button:hover,
-.button.primary:hover,
-.actions .button:hover {
-  background-color: #000 !important;
-  border-color: #000 !important;
-  color: #fff !important;
-  box-shadow: 0 6px 14px rgba(0,0,0,.25) !important;
-}
+      /* Button color (current look preserved) */
+      .button.primary, .actions-top .button.primary{ background-color:#000 !important; color:#fff !important; border:none !important; box-shadow:0 6px 16px rgba(0,0,0,.25) !important; }
+      .button.primary:hover, .actions-top .button.primary:hover{ background-color:#111 !important; color:#fff !important; box-shadow:0 8px 18px rgba(0,0,0,.35) !important; }
+      .button:hover, .button.primary:hover, .actions .button:hover{ background-color:#000 !important; border-color:#000 !important; color:#fff !important; box-shadow:0 6px 14px rgba(0,0,0,.25) !important; }
 
-
-@media (max-width:720px){
-  .modal__dialog{ width:96vw; }
-}
+      @media (max-width:720px){ .modal__dialog{ width:96vw; } }
     </style>
   </head>
 
@@ -520,10 +234,10 @@
             <aside class="details" aria-live="polite">
               <div class="eyebrow" id="styleTitle">KENNO — DARK BLUE — VIEW 1</div>
 
-              <!-- TOP ACTIONS (kept in place) -->
+              <!-- TOP ACTIONS -->
               <div class="actions-top">
-                <a href="#select" class="button primary icon solid fa-check cta-primary" id="ctaAdd" disabled>Add to cart</a>
-                <!-- Back to Products moved to bottom -->
+                <!-- CHANGED: text + link + id -->
+                <a href="https://buy.stripe.com/bJe8wP42B2G4eAD8rA2Ji07" class="button primary icon solid fa-check cta-primary" id="ctaBuy" disabled>Buy Now</a>
               </div>
 
               <!-- Step 1: Color -->
@@ -549,7 +263,6 @@
                 <span class="chip">Machine-wash 60&nbsp;°C</span>
               </div>
 
-              <!-- Product copy -->
               <article id="product-copy">
                 <h3>Discover Unrivalled Comfort</h3>
                 <p>The Kenno bathrobe refines everyday ease into a considered ritual. Chambray-trimmed edges and a coordinating belt frame a silhouette that feels composed yet effortless. Woven from recycled fibres, the surface reads lively and tactile—soft to the touch and quietly luxurious.</p>
@@ -577,17 +290,13 @@
                 <h3>Why It Matters</h3>
                 <p>More than loungewear, Kenno is a small sanctuary. The cotton-rich, recycled construction invites daily use; the clean lines and tailored details echo the quiet polish of fine spa robes. From sauna to slow evenings, it delivers an enduring sense of “luxury that lasts.”</p>
 
-                <!-- UPDATED: Button text + opens size-chart modal -->
                 <p style="margin-top:.6rem;">
-                  <button type="button" class="button" id="openWhyModal" aria-haspopup="dialog" aria-controls="whyModal">
-                    View Size Chart
-                  </button>
+                  <button type="button" class="button" id="openWhyModal" aria-haspopup="dialog" aria-controls="whyModal">View Size Chart</button>
                 </p>
               </article>
             </aside>
           </section>
 
-          <!-- Back to Products button moved to the bottom of the page -->
           <div class="back-to-products-bottom">
             <a href="index.html#products" class="button" aria-label="Back to Products">Back to Products</a>
           </div>
@@ -617,7 +326,7 @@
       </footer>
     </div>
 
-    <!-- Modal markup -->
+    <!-- Modal -->
     <div class="modal" id="whyModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="whyModalTitle">
       <div class="modal__backdrop" data-close-modal></div>
       <div class="modal__dialog">
@@ -625,12 +334,8 @@
           <button class="modal__close" type="button" id="closeWhyModal" aria-label="Close">×</button>
         </div>
         <div class="modal__body">
-          <img
-            class="modal__img"
-            alt="Bathrobe size chart"
-            loading="eager"
-            decoding="async"
-            src="https://res.cloudinary.com/df4of6htg/image/upload/v1761858382/Screenshot_2025-10-30_221901_msdehr.png" />
+          <img class="modal__img" alt="Bathrobe size chart" loading="eager" decoding="async"
+               src="https://res.cloudinary.com/df4of6htg/image/upload/v1761858382/Screenshot_2025-10-30_221901_msdehr.png" />
         </div>
       </div>
     </div>
@@ -648,16 +353,10 @@
 
       (function(){
         var items=[].slice.call(document.querySelectorAll('.reveal'));
-        if(!('IntersectionObserver' in window) || !items.length){
-          items.forEach(el=>el.classList.add('appear'));
-          return;
-        }
+        if(!('IntersectionObserver' in window) || !items.length){ items.forEach(el=>el.classList.add('appear')); return; }
         var io=new IntersectionObserver(function(entries){
           entries.forEach(function(entry){
-            if(entry.isIntersecting){
-              entry.target.classList.add('appear');
-              io.unobserve(entry.target);
-            }
+            if(entry.isIntersecting){ entry.target.classList.add('appear'); io.unobserve(entry.target); }
           });
         },{ rootMargin:'0px 0px -10% 0px', threshold:0.15 });
         items.forEach(el=>io.observe(el));
@@ -689,49 +388,35 @@
         ]
       };
       var SWATCH_OVALS={
-        'black'     :'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786511/Screenshot_2025-10-18_142038_ludra7.png',
+        'black':'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786511/Screenshot_2025-10-18_142038_ludra7.png',
         'brown-kids':'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786510/Screenshot_2025-10-18_142027_th4glm.png',
-        'brown'     :'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786509/Screenshot_2025-10-18_142017_afzp7j.png',
+        'brown':'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786509/Screenshot_2025-10-18_142017_afzp7j.png',
         'dark-brown':'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786505/Screenshot_2025-10-18_142007_hz4vhj.png',
-        'dark-blue' :'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786505/Screenshot_2025-10-18_141948_twy4ky.png',
+        'dark-blue':'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786505/Screenshot_2025-10-18_141948_twy4ky.png',
         'dark-green':'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786505/Screenshot_2025-10-18_142059_cvn0ue.png',
-        'beige'     :'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786504/Screenshot_2025-10-18_142050_lyvffd.png'
+        'beige':'https://res.cloudinary.com/dkk8ohmu7/image/upload/v1760786504/Screenshot_2025-10-18_142050_lyvffd.png'
       };
       function fullUrl(id){ return CLOUDINARY_BASE+FULL_TRANSFORM+id; }
       function thumbUrl(id){ return CLOUDINARY_BASE+THUMB_TRANSFORM+id; }
-      var NEED_CONTAIN=[
-        'Beige_1._ylffja.png','Dark_Green_1._xktrgu.png','Brown_Kid_s_Bathrobe_grupok.png',
-        'Black_1_pogmqf.png','Brown_1._kjvdqs.png','Dark_Blue_1._mpj0zr.png','Dark_Brown_1._cepnap.png'
-      ];
-      function requiresContain(publicId){
-        var name=publicId.split('/').pop();
-        return NEED_CONTAIN.indexOf(name)!==-1;
-      }
+      var NEED_CONTAIN=['Beige_1._ylffja.png','Dark_Green_1._xktrgu.png','Brown_Kid_s_Bathrobe_grupok.png','Black_1_pogmqf.png','Brown_1._kjvdqs.png','Dark_Blue_1._mpj0zr.png','Dark_Brown_1._cepnap.png'];
+      function requiresContain(publicId){ var name=publicId.split('/').pop(); return NEED_CONTAIN.indexOf(name)!==-1; }
 
       /* ---------------- Selection Flow State ---------------- */
-      var selectedColorIndex = null; // user must pick
-      var currentImageIndex = 0;
-      var selectedSize = null; // 'S' | 'M' | 'L'
-      var quantity = 1;
+      var selectedColorIndex=null, currentImageIndex=0, selectedSize=null, quantity=1;
 
-      var mainImg = document.getElementById('mainImage');
-      var thumbsEl = document.getElementById('thumbs');
-      var titleEl = document.getElementById('styleTitle');
-      var colorPickerEl = document.querySelector('.color-picker');
-      var sizePickerEl = document.getElementById('sizePicker');
-      var qtyMinus = document.getElementById('qtyMinus');
-      var qtyPlus = document.getElementById('qtyPlus');
-      var qtyInput = document.getElementById('qtyInput');
-      var ctaAdd = document.getElementById('ctaAdd');
+      var mainImg=document.getElementById('mainImage');
+      var thumbsEl=document.getElementById('thumbs');
+      var titleEl=document.getElementById('styleTitle');
+      var colorPickerEl=document.querySelector('.color-picker');
+      var sizePickerEl=document.getElementById('sizePicker');
+      var qtyMinus=document.getElementById('qtyMinus');
+      var qtyPlus=document.getElementById('qtyPlus');
+      var qtyInput=document.getElementById('qtyInput');
+      var ctaBuy=document.getElementById('ctaBuy');
 
-      function enable(elem){ elem.removeAttribute('disabled'); elem.classList.remove('muted'); }
-      function disable(elem){ elem.setAttribute('disabled',''); elem.classList.add('muted'); }
       function updateCTAEnabled(){
-        if(selectedColorIndex !== null && selectedSize){
-          ctaAdd.removeAttribute('disabled');
-        } else {
-          ctaAdd.setAttribute('disabled','');
-        }
+        if(selectedColorIndex!==null && selectedSize){ ctaBuy.removeAttribute('disabled'); }
+        else{ ctaBuy.setAttribute('disabled',''); }
       }
 
       /* ---------- Color Picker ---------- */
@@ -739,34 +424,20 @@
         colorPickerEl.innerHTML='';
         PRODUCT.colors.forEach(function(c,idx){
           var btn=document.createElement('button');
-          btn.className='swatch';
-          btn.setAttribute('role','radio');
-          btn.setAttribute('aria-label',c.name);
-          btn.setAttribute('aria-checked', (selectedColorIndex===idx) ? 'true' : 'false');
-          btn.dataset.index=idx;
+          btn.className='swatch'; btn.setAttribute('role','radio'); btn.setAttribute('aria-label',c.name);
+          btn.setAttribute('aria-checked',(selectedColorIndex===idx)?'true':'false'); btn.dataset.index=idx;
 
-          var dot=document.createElement('span');
-          dot.className='dot';
-
-          var ovalUrl = SWATCH_OVALS[c.id];
-          if(ovalUrl){ dot.style.backgroundImage='url('+ovalUrl+')'; }
-          dot.style.backgroundColor=c.hex;
-          dot.title=c.name;
-
-          btn.appendChild(dot);
+          var dot=document.createElement('span'); dot.className='dot';
+          var ovalUrl=SWATCH_OVALS[c.id]; if(ovalUrl){ dot.style.backgroundImage='url('+ovalUrl+')'; }
+          dot.style.backgroundColor=c.hex; dot.title=c.name; btn.appendChild(dot);
 
           btn.addEventListener('click', function(){
             if(selectedColorIndex!==idx){
-              selectedColorIndex=idx;
-              currentImageIndex=0;
-              updateGallery();
-              document.getElementById('sizeLabel').classList.remove('muted');
-              enableSizePicker();
-              updateCTAEnabled();
+              selectedColorIndex=idx; currentImageIndex=0; updateGallery();
+              document.getElementById('sizeLabel').classList.remove('muted'); enableSizePicker(); updateCTAEnabled();
             }
             colorPickerEl.querySelectorAll('.swatch').forEach((b,i)=>b.setAttribute('aria-checked', i===selectedColorIndex ? 'true' : 'false'));
           });
-
           colorPickerEl.appendChild(btn);
         });
       }
@@ -776,220 +447,102 @@
         sizePickerEl.innerHTML='';
         ['S','M','L'].forEach(function(size){
           var pill=document.createElement('button');
-          pill.className='pill';
-          pill.type='button';
-          pill.textContent=size;
-          pill.setAttribute('role','radio');
-          pill.setAttribute('aria-label', size);
-          pill.setAttribute('aria-checked', (selectedSize===size) ? 'true':'false');
-
-          if(disabled) pill.setAttribute('disabled','');
-
+          pill.className='pill'; pill.type='button'; pill.textContent=size; pill.setAttribute('role','radio'); pill.setAttribute('aria-label',size);
+          pill.setAttribute('aria-checked',(selectedSize===size)?'true':'false'); if(disabled) pill.setAttribute('disabled','');
           pill.addEventListener('click', function(){
             if(pill.hasAttribute('disabled')) return;
             selectedSize=size;
             sizePickerEl.querySelectorAll('.pill').forEach(p=>p.setAttribute('aria-checked','false'));
             pill.setAttribute('aria-checked','true');
-
             document.getElementById('qtyLabel').classList.remove('muted');
-            qtyMinus.removeAttribute('disabled');
-            qtyPlus.removeAttribute('disabled');
-            qtyInput.removeAttribute('disabled');
-
+            qtyMinus.removeAttribute('disabled'); qtyPlus.removeAttribute('disabled'); qtyInput.removeAttribute('disabled');
             updateCTAEnabled();
           });
-
           sizePickerEl.appendChild(pill);
         });
       }
-      function disableSizePicker(){
-        renderSizePicker(true);
-        selectedSize=null;
-        document.getElementById('qtyLabel').classList.add('muted');
-        qtyMinus.setAttribute('disabled','');
-        qtyPlus.setAttribute('disabled','');
-        qtyInput.setAttribute('disabled','');
-      }
+      function disableSizePicker(){ renderSizePicker(true); selectedSize=null;
+        document.getElementById('qtyLabel').classList.add('muted'); qtyMinus.setAttribute('disabled',''); qtyPlus.setAttribute('disabled',''); qtyInput.setAttribute('disabled',''); }
       function enableSizePicker(){ renderSizePicker(false); }
 
       /* ---------- Quantity ---------- */
-      qtyMinus.addEventListener('click', function(){
-        var val = Math.max(1, (parseInt(qtyInput.value,10) || 1) - 1);
-        qtyInput.value = val;
-        quantity = val;
-      });
-      qtyPlus.addEventListener('click', function(){
-        var val = Math.min(99, (parseInt(qtyInput.value,10) || 1) + 1);
-        qtyInput.value = val;
-        quantity = val;
-      });
-      qtyInput.addEventListener('input', function(){
-        var v = parseInt(qtyInput.value,10);
-        if(isNaN(v) || v<1) v=1;
-        if(v>99) v=99;
-        qtyInput.value=v;
-        quantity=v;
-      });
+      qtyMinus.addEventListener('click', function(){ var v=Math.max(1,(parseInt(qtyInput.value,10)||1)-1); qtyInput.value=v; quantity=v; });
+      qtyPlus.addEventListener('click', function(){ var v=Math.min(99,(parseInt(qtyInput.value,10)||1)+1); qtyInput.value=v; quantity=v; });
+      qtyInput.addEventListener('input', function(){ var v=parseInt(qtyInput.value,10); if(isNaN(v)||v<1)v=1; if(v>99)v=99; qtyInput.value=v; quantity=v; });
 
       /* ---------- Thumbs / Main image ---------- */
       function renderThumbs(color){
         thumbsEl.innerHTML='';
         color.publicIds.forEach(function(pid,i){
-          var btn=document.createElement('button');
-          btn.className='thumb';
-          btn.dataset.index=i+1;
-          btn.setAttribute('aria-label', color.name+' — View '+(i+1));
-          if(i===currentImageIndex) btn.setAttribute('aria-selected','true');
-
-          var img=document.createElement('img');
-          img.loading='lazy';
-          img.src=thumbUrl(pid);
-          img.alt=color.name+' — View '+(i+1)+' thumbnail';
-          btn.appendChild(img);
-
+          var btn=document.createElement('button'); btn.className='thumb'; btn.dataset.index=i+1;
+          btn.setAttribute('aria-label', color.name+' — View '+(i+1)); if(i===currentImageIndex) btn.setAttribute('aria-selected','true');
+          var img=document.createElement('img'); img.loading='lazy'; img.src=thumbUrl(pid); img.alt=color.name+' — View '+(i+1)+' thumbnail'; btn.appendChild(img);
           btn.addEventListener('click', function(){ setActiveImage(i); });
-
           thumbsEl.appendChild(btn);
         });
       }
       function setActiveImage(i){
         if(selectedColorIndex===null) return;
-        var color=PRODUCT.colors[selectedColorIndex];
-        currentImageIndex=i;
-        var pid=color.publicIds[i];
-        var newSrc=fullUrl(pid);
-
-        mainImg.classList.remove('show');
-        if(requiresContain(pid)) mainImg.classList.add('contain');
-        else mainImg.classList.remove('contain');
-
-        var preload=new Image();
-        preload.onload=function(){
-          mainImg.src=newSrc;
-          mainImg.alt='Kenno Bathrobe — '+color.name+' — View '+(i+1);
-          mainImg.classList.add('show');
-        };
-        preload.src=newSrc;
-
+        var color=PRODUCT.colors[selectedColorIndex]; currentImageIndex=i; var pid=color.publicIds[i]; var newSrc=fullUrl(pid);
+        mainImg.classList.remove('show'); if(requiresContain(pid)) mainImg.classList.add('contain'); else mainImg.classList.remove('contain');
+        var preload=new Image(); preload.onload=function(){ mainImg.src=newSrc; mainImg.alt='Kenno Bathrobe — '+color.name+' — View '+(i+1); mainImg.classList.add('show'); }; preload.src=newSrc;
         titleEl.textContent=('KENNO — '+color.name+' — VIEW '+(i+1)).toUpperCase();
-
         document.querySelectorAll('.thumb').forEach(t=>t.setAttribute('aria-selected','false'));
-        var active=document.querySelector('.thumb[data-index="'+(i+1)+'"]');
-        if(active) active.setAttribute('aria-selected','true');
+        var active=document.querySelector('.thumb[data-index="'+(i+1)+'"]'); if(active) active.setAttribute('aria-selected','true');
       }
-      function updateGallery(){
-        if(selectedColorIndex===null) { return; }
-        var color=PRODUCT.colors[selectedColorIndex];
-        renderThumbs(color);
-        setActiveImage(0);
-      }
+      function updateGallery(){ if(selectedColorIndex===null) return; var color=PRODUCT.colors[selectedColorIndex]; renderThumbs(color); setActiveImage(0); }
 
-      (function init(){
-        renderColorPicker();
-        disableSizePicker(); // locked until color chosen
-        updateCTAEnabled();
-      })();
+      (function init(){ renderColorPicker(); disableSizePicker(); updateCTAEnabled(); })();
 
       // Keyboard navigation
       document.addEventListener('keydown', function(e){
-        if(selectedColorIndex===null) return;
-        var color=PRODUCT.colors[selectedColorIndex];
-        if(!color) return;
-
+        if(selectedColorIndex===null) return; var color=PRODUCT.colors[selectedColorIndex]; if(!color) return;
         if(e.key==='ArrowRight') setActiveImage((currentImageIndex+1)%color.publicIds.length);
-        if(e.key==='ArrowLeft') setActiveImage((currentImageIndex-1+color.publicIds.length)%color.publicIds.length);
+        if(e.key==='ArrowLeft')  setActiveImage((currentImageIndex-1+color.publicIds.length)%color.publicIds.length);
       });
 
-      // Add to cart (demo)
-      ctaAdd.addEventListener('click', function(e){
-        if(ctaAdd.hasAttribute('disabled')) {
-          e.preventDefault();
-          return;
-        }
-        alert('Added to cart:\nColor: '+PRODUCT.colors[selectedColorIndex].name+'\nSize: '+selectedSize+'\nQty: '+quantity);
+      // BUY NOW: prevent navigation until selections complete
+      ctaBuy.addEventListener('click', function(e){
+        if(ctaBuy.hasAttribute('disabled')){ e.preventDefault(); }
+        // else: natural navigation to Stripe Payment Link
       });
 
-      /* --- CTA motion (revised) --- */
+      /* --- CTA motion --- */
       (function(){
-        var root = document.documentElement;
-        var details = document.querySelector('.details');
-        var cta = document.querySelector('.cta-primary');
-        var actions = document.querySelector('.actions-top');
-        if(!details || !cta || !actions) return;
-
-        var delayBeforeMove = 64; // px
-        var startScrollY = 0;
-        var maxShift = 0;
-
+        var root=document.documentElement, details=document.querySelector('.details'), cta=document.querySelector('.cta-primary'), actions=document.querySelector('.actions-top');
+        if(!details||!cta||!actions) return;
+        var delayBeforeMove=64, startScrollY=0, maxShift=0;
         function computeMaxShift(){
-          var styles = getComputedStyle(details);
-          var padBottom = parseFloat(styles.paddingBottom) || 0;
-          var ctaTopInCard = cta.offsetTop;
-          var cardHeight = details.clientHeight;
-          var ctaHeight = cta.offsetHeight;
-
-          maxShift = Math.max(0, cardHeight - (ctaTopInCard + ctaHeight + padBottom));
-          startScrollY = window.scrollY || window.pageYOffset || 0;
-
-          root.style.setProperty('--cta-shift', '0px');
-          cta.classList.remove('floating');
-          actions.classList.remove('is-floating');
+          var styles=getComputedStyle(details), padBottom=parseFloat(styles.paddingBottom)||0;
+          var ctaTopInCard=cta.offsetTop, cardHeight=details.clientHeight, ctaHeight=cta.offsetHeight;
+          maxShift=Math.max(0, cardHeight - (ctaTopInCard + ctaHeight + padBottom));
+          startScrollY=window.scrollY||window.pageYOffset||0;
+          root.style.setProperty('--cta-shift','0px'); cta.classList.remove('floating'); actions.classList.remove('is-floating');
         }
-
         function onScroll(){
-          var y = (window.scrollY || window.pageYOffset || 0) - startScrollY;
-          var afterDelay = y - delayBeforeMove;
-          var shift = Math.min(Math.max(afterDelay, 0), maxShift);
-
-          root.style.setProperty('--cta-shift', shift.toFixed(2) + 'px');
-
-          var isFloating = shift > 1;
-          cta.classList.toggle('floating', isFloating);
-          actions.classList.toggle('is-floating', isFloating);
+          var y=(window.scrollY||window.pageYOffset||0) - startScrollY;
+          var afterDelay=y - delayBeforeMove; var shift=Math.min(Math.max(afterDelay,0), maxShift);
+          root.style.setProperty('--cta-shift', shift.toFixed(2)+'px');
+          var isFloating=shift>1; cta.classList.toggle('floating',isFloating); actions.classList.toggle('is-floating',isFloating);
         }
-
-        computeMaxShift();
-        onScroll();
-
-        window.addEventListener('scroll', onScroll, { passive:true });
-        window.addEventListener('resize', function(){
-          computeMaxShift();
-          onScroll();
-        });
-
-        var ro = new ResizeObserver(function(){
-          computeMaxShift();
-          onScroll();
-        });
-        ro.observe(details);
+        computeMaxShift(); onScroll();
+        window.addEventListener('scroll', onScroll, {passive:true});
+        window.addEventListener('resize', function(){ computeMaxShift(); onScroll(); });
+        var ro=new ResizeObserver(function(){ computeMaxShift(); onScroll(); }); ro.observe(details);
       })();
 
       /* --- Modal wiring --- */
       (function(){
-        var modal = document.getElementById('whyModal');
-        var openBtn = document.getElementById('openWhyModal');
-        var closeBtn = document.getElementById('closeWhyModal');
-        var backdrop = modal.querySelector('[data-close-modal]');
-
-        function openModal(){
-          modal.setAttribute('aria-hidden','false');
-          document.body.style.overflow = 'hidden';
-          closeBtn.focus();
-        }
-        function closeModal(){
-          modal.setAttribute('aria-hidden','true');
-          document.body.style.overflow = '';
-          openBtn.focus();
-        }
-
+        var modal=document.getElementById('whyModal');
+        var openBtn=document.getElementById('openWhyModal');
+        var closeBtn=document.getElementById('closeWhyModal');
+        var backdrop=modal.querySelector('[data-close-modal]');
+        function openModal(){ modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; closeBtn.focus(); }
+        function closeModal(){ modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; openBtn.focus(); }
         openBtn.addEventListener('click', openModal);
         closeBtn.addEventListener('click', closeModal);
         backdrop.addEventListener('click', closeModal);
-        document.addEventListener('keydown', function(e){
-          if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false'){
-            closeModal();
-          }
-        });
+        document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.getAttribute('aria-hidden')==='false'){ closeModal(); }});
       })();
     </script>
   </body>
