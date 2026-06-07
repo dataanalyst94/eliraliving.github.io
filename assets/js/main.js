@@ -340,7 +340,7 @@ function initProduct() {
   if (!root) return;
   const id = new URLSearchParams(location.search).get("id");
   const p = getProduct(id) || PRODUCTS[0];
-  document.title = `${p.name} — Elira Living`;
+  // document.title is managed by seo.js (keyword-rich, localized)
 
   const sel = { variant: "", add: 0 };
   const variants = p.shades

@@ -3,3 +3,5 @@ Allow: /
 Disallow: /cart.html
 Disallow: /success.html
 Disallow: /cancel.html
+
+Sitemap: https://eliraliving.com/sitemap.xml
