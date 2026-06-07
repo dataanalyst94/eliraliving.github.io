@@ -28,8 +28,8 @@
 const PRICES = {
   "sensitive-moisturizing-cream": 1990,
   "radiant-glow-cleanser": 2599,
-  "purifying-toner": 1890,        // PROVISIONAL — confirm with owner
-  "sensitive-scalp-shampoo": 1690 // PROVISIONAL — confirm with owner
+  "purifying-toner": 2400,
+  "sensitive-scalp-shampoo": 2300
 };
 
 const FREE_SHIPPING_THRESHOLD = 3900; // €39.00

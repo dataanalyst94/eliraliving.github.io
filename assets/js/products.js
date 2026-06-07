@@ -39,7 +39,7 @@ const PRODUCTS = [
   {
     id: "purifying-toner",
     name: "Purifying Toner",
-    category: "skincare", gender: "unisex", price: 1890, badge: "new",
+    category: "skincare", gender: "unisex", price: 2400, badge: "new",
     size: "200 ml",
     desc: {
       de: "Klärendes Gesichtswasser, das Poren reinigt und fettige Mischhaut ausgleicht — für ein frisches, geschmeidiges Hautgefühl. Ohne Parfüm, COSMOS Natural.",
@@ -54,7 +54,7 @@ const PRODUCTS = [
   {
     id: "sensitive-scalp-shampoo",
     name: "Sensitive Scalp Shampoo",
-    category: "haircare", gender: "unisex", price: 1690, badge: "new",
+    category: "haircare", gender: "unisex", price: 2300, badge: "new",
     size: "400 ml",
     desc: {
       de: "Sanftes, beruhigendes Shampoo für empfindliche Kopfhaut und alle Haartypen. Dermatologisch getestet, COSMOS Natural.",
