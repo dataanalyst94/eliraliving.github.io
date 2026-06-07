@@ -1,0 +1,24 @@
+/* Legal / policy page typography — Elira Living */
+.legal-prose { color: var(--ink-soft); }
+.legal-prose h1 { font-size: clamp(2.4rem, 6vw, 3.4rem); line-height: 1.05; margin-bottom: .4rem; color: var(--ink); }
+.legal-prose h2 { font-family: 'Bodoni Moda', Georgia, serif; font-size: 1.5rem; margin-top: 2.4rem; margin-bottom: .6rem; color: var(--ink); }
+.legal-prose h3 { font-weight: 600; margin-top: 1.6rem; margin-bottom: .4rem; color: var(--ink); }
+.legal-prose p, .legal-prose li { line-height: 1.75; font-size: 1rem; }
+.legal-prose p { margin-bottom: 1rem; }
+.legal-prose ul { list-style: disc; padding-left: 1.4rem; margin-bottom: 1.2rem; }
+.legal-prose ol { list-style: decimal; padding-left: 1.4rem; margin-bottom: 1.2rem; }
+.legal-prose li { margin-bottom: .4rem; }
+.legal-prose a { color: var(--clay-700); }
+.legal-prose code {
+  background: var(--stone); padding: .1rem .4rem; font-size: .85em;
+  border-radius: 3px; color: var(--clay-700); font-family: ui-monospace, monospace;
+}
+.legal-prose strong { color: var(--ink); }
+.legal-banner {
+  background: #FBEFE7; border: 1px solid var(--clay); color: var(--clay-700);
+  padding: 1rem 1.2rem; font-size: .9rem; line-height: 1.6; margin-bottom: 2.5rem;
+}
+.legal-banner code { background: rgba(181,94,60,.12); }
+.legal-prose table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; }
+.legal-prose th, .legal-prose td { border: 1px solid var(--line); padding: .6rem .8rem; text-align: left; font-size: .92rem; }
+.legal-prose th { background: var(--stone); font-weight: 600; }
