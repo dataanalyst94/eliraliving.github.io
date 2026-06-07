@@ -22,3 +22,4 @@
 .legal-prose table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; }
 .legal-prose th, .legal-prose td { border: 1px solid var(--line); padding: .6rem .8rem; text-align: left; font-size: .92rem; }
 .legal-prose th { background: var(--stone); font-weight: 600; }
+.legal-disclaimer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); font-size: .82rem; color: var(--muted); line-height: 1.6; }

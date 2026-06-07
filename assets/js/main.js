@@ -83,9 +83,8 @@ function headerHTML() {
 
     <div class="hidden md:flex items-center gap-8 text-[15px]">
       <a href="shop.html" class="nav-link" ${cur('shop')} data-i18n="nav.shop"></a>
-      <a href="shop.html?gender=women" class="nav-link" data-i18n="nav.women"></a>
-      <a href="shop.html?gender=men" class="nav-link" data-i18n="nav.men"></a>
-      <a href="shop.html?gender=unisex" class="nav-link" data-i18n="nav.unisex"></a>
+      <a href="shop.html?category=skincare" class="nav-link" data-i18n="nav.skincare"></a>
+      <a href="shop.html?category=haircare" class="nav-link" data-i18n="nav.haircare"></a>
       <a href="about.html" class="nav-link" ${cur('about')} data-i18n="nav.about"></a>
     </div>
 
@@ -118,9 +117,8 @@ function mobileMenuHTML() {
     </div>
     <nav class="flex flex-col gap-6 font-display text-3xl">
       <a href="shop.html" data-i18n="nav.shop"></a>
-      <a href="shop.html?gender=women" data-i18n="nav.women"></a>
-      <a href="shop.html?gender=men" data-i18n="nav.men"></a>
-      <a href="shop.html?gender=unisex" data-i18n="nav.unisex"></a>
+      <a href="shop.html?category=skincare" data-i18n="nav.skincare"></a>
+      <a href="shop.html?category=haircare" data-i18n="nav.haircare"></a>
       <a href="about.html" data-i18n="nav.about"></a>
     </nav>
     <div class="mt-auto text-sm text-[color:var(--muted)]" data-i18n="foot.tag"></div>
@@ -161,9 +159,8 @@ function footerHTML() {
       <div>
         <h3 class="kicker mb-4" data-i18n="foot.shop"></h3>
         <ul class="space-y-2.5 text-sm">
-          <li><a href="shop.html?gender=women" class="link-underline" data-i18n="nav.women"></a></li>
-          <li><a href="shop.html?gender=men" class="link-underline" data-i18n="nav.men"></a></li>
-          <li><a href="shop.html?gender=unisex" class="link-underline" data-i18n="nav.unisex"></a></li>
+          <li><a href="shop.html?category=skincare" class="link-underline" data-i18n="nav.skincare"></a></li>
+          <li><a href="shop.html?category=haircare" class="link-underline" data-i18n="nav.haircare"></a></li>
           <li><a href="shop.html" class="link-underline" data-i18n="nav.shop"></a></li>
         </ul>
       </div>
@@ -172,7 +169,7 @@ function footerHTML() {
         <ul class="space-y-2.5 text-sm">
           <li><a href="withdrawal.html" class="link-underline" data-i18n="foot.shipping"></a></li>
           <li><a href="terms.html" class="link-underline" data-i18n="foot.faq"></a></li>
-          <li><a href="mailto:hello@elira-living.com" class="link-underline" data-i18n="foot.contact"></a></li>
+          <li><a href="mailto:support@eliraliving.com" class="link-underline" data-i18n="foot.contact"></a></li>
         </ul>
       </div>
       <div>
@@ -298,8 +295,7 @@ function mountShell() {
 function initHome() {
   const grid = document.querySelector("[data-bestsellers]");
   if (grid) {
-    const best = PRODUCTS.filter(p => p.badge === "bestseller").slice(0, 4);
-    grid.innerHTML = best.map((p, i) =>
+    grid.innerHTML = PRODUCTS.map((p, i) =>
       `<div class="reveal reveal-delay-${(i % 4) + 1}">${productCardHTML(p)}</div>`).join("");
   }
 }
@@ -309,13 +305,12 @@ function initShop() {
   if (!grid) return;
   const params = new URLSearchParams(location.search);
   const state = {
-    gender: params.get("gender") || "all",
     category: params.get("category") || "all",
     sort: "featured"
   };
 
   const render = () => {
-    let list = getProducts({ category: state.category, gender: state.gender });
+    let list = getProducts({ category: state.category });
     if (state.sort === "priceAsc") list = [...list].sort((a, b) => a.price - b.price);
     if (state.sort === "priceDesc") list = [...list].sort((a, b) => b.price - a.price);
     if (state.sort === "name") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
@@ -328,14 +323,10 @@ function initShop() {
       : `<p class="col-span-full text-center py-20 text-[color:var(--muted)]">${I18nState.t("shop.empty")}</p>`;
     initReveal();
 
-    document.querySelectorAll("[data-filter-gender]").forEach(b =>
-      b.setAttribute("aria-pressed", b.getAttribute("data-filter-gender") === state.gender));
     document.querySelectorAll("[data-filter-cat]").forEach(b =>
       b.setAttribute("aria-pressed", b.getAttribute("data-filter-cat") === state.category));
   };
 
-  document.querySelectorAll("[data-filter-gender]").forEach(b =>
-    b.addEventListener("click", () => { state.gender = b.getAttribute("data-filter-gender"); render(); }));
   document.querySelectorAll("[data-filter-cat]").forEach(b =>
     b.addEventListener("click", () => { state.category = b.getAttribute("data-filter-cat"); render(); }));
   document.querySelector("[data-sort]")?.addEventListener("change", e => { state.sort = e.target.value; render(); });
@@ -397,6 +388,7 @@ function initProduct() {
       <h1 class="font-display text-4xl md:text-5xl mt-3 leading-[1.05]">${p.name}</h1>
       <div class="font-display text-2xl mt-4" data-price>${priceEl()}</div>
       <p class="mt-5 text-[15px] leading-relaxed text-[color:var(--ink-soft)] max-w-prose">${productDesc(p)}</p>
+      ${p.features && p.features.length ? `<div class="flex flex-wrap gap-2 mt-5">${p.features.map(f => `<span class="tag">${f}</span>`).join("")}</div>` : ""}
       ${variantBlock()}
       <div class="mt-7 flex items-center gap-4">
         <div class="inline-flex items-center border border-[color:var(--line)]">

@@ -26,18 +26,10 @@
    ========================================================================= */
 
 const PRICES = {
-  "lumiere-serum-foundation": 3800,
-  "noir-volumising-mascara": 2400,
-  "velvet-matte-lip": 2200,
-  "second-skin-tinted-balm": 2600,
-  "halo-cream-blush": 2800,
-  "architect-brow-gel": 1900,
-  "glow-ritual-face-oil": 4200,
-  "neroli-eau-de-parfum": 7900,
-  "matte-shadow-quad": 3400,
-  "sculpt-contour-stick": 2900,
-  "pro-blend-brush": 2100,
-  "overnight-recovery-cream": 4800
+  "sensitive-moisturizing-cream": 1990,
+  "radiant-glow-cleanser": 2599,
+  "purifying-toner": 1890,        // PROVISIONAL — confirm with owner
+  "sensitive-scalp-shampoo": 1690 // PROVISIONAL — confirm with owner
 };
 
 const FREE_SHIPPING_THRESHOLD = 3900; // €39.00

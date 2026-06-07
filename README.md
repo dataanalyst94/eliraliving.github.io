@@ -14,8 +14,8 @@ with **real Stripe payments** wired in.
 
 - **Homepage** — animated hero, brand marquee, category grid, bestsellers,
   editorial story, value pillars, newsletter.
-- **Shop** (`shop.html`) — live filtering by person (women/men/unisex) and
-  category, plus sorting. Deep-linkable: `shop.html?gender=men&category=skin`.
+- **Shop** (`shop.html`) — live filtering by category (Skincare / Haircare)
+  plus sorting. Deep-linkable: `shop.html?category=skincare`.
 - **Product page** (`product.html?id=…`) — gallery, shade/size selector with
   live price, quantity, add-to-cart, buy-now, ingredients & shipping accordions,
   related products.

@@ -32,14 +32,17 @@
           </div>
         </div>
         <div class="relative">
-          <div class="aspect-[4/5] overflow-hidden bg-gradient-to-br from-[#E8C8A8] via-[#D9A982] to-[#A86A45]">
-            <img src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=1100&q=80"
-              alt="Elira Living model with natural editorial makeup"
+          <div class="aspect-[4/5] overflow-hidden bg-gradient-to-br from-[#DCEAD9] via-[#AEC3A8] to-[#7E9A86]">
+            <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1100&q=80"
+              alt="Elira Living natural skincare and haircare"
               class="kenburns w-full h-full object-cover" onerror="this.style.display='none'" />
           </div>
-          <div class="absolute -bottom-6 -left-6 hidden md:block bg-[color:var(--cream)] border border-[color:var(--line)] px-6 py-4 shadow-[var(--shadow-md)]">
-            <div class="font-display text-3xl leading-none">12k+</div>
-            <div class="text-xs text-[color:var(--muted)] mt-1" data-i18n="about.stat3"></div>
+          <div class="absolute -bottom-6 -left-6 hidden md:flex items-center gap-3 bg-[color:var(--cream)] border border-[color:var(--line)] px-5 py-4 shadow-[var(--shadow-md)]">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.3"><path d="M12 2C7 6 5 9 5 13a7 7 0 0 0 14 0c0-4-2-7-7-11Z"/><path d="M12 9v8"/></svg>
+            <div>
+              <div class="font-display text-xl leading-none" data-i18n="hero.badge1"></div>
+              <div class="text-xs text-[color:var(--muted)] mt-1" data-i18n="hero.badge2"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -50,13 +53,15 @@
       <div class="marquee py-4">
         <div class="marquee__track font-display text-2xl md:text-3xl">
           <span class="mx-10" data-i18n="marq.vegan"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
-          <span class="mx-10" data-i18n="marq.cruelty"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
+          <span class="mx-10" data-i18n="marq.cosmos"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
           <span class="mx-10" data-i18n="marq.made"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
           <span class="mx-10" data-i18n="marq.derm"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
-          <span class="mx-10" data-i18n="marq.refill"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
-          <span class="mx-10" data-i18n="marq.vegan"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
           <span class="mx-10" data-i18n="marq.cruelty"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
+          <span class="mx-10" data-i18n="marq.fragrance"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
+          <span class="mx-10" data-i18n="marq.vegan"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
+          <span class="mx-10" data-i18n="marq.cosmos"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
           <span class="mx-10" data-i18n="marq.made"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
+          <span class="mx-10" data-i18n="marq.derm"></span><span class="mx-2 text-[color:var(--clay)]">✦</span>
         </div>
       </div>
     </section>
@@ -70,29 +75,19 @@
         </div>
         <a href="shop.html" class="hidden md:inline-block link-underline text-sm" data-i18n="best.viewall"></a>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-        <a href="shop.html?category=face" class="reveal reveal-delay-1 group relative aspect-[3/4] overflow-hidden flex items-end p-4" style="background:linear-gradient(135deg,#E8C8A8,#C98F63)">
-          <span class="font-display text-2xl text-[color:var(--ink)] relative z-10" data-i18n="cat.face"></span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
+        <a href="shop.html?category=skincare" class="reveal reveal-delay-1 group relative aspect-[16/10] md:aspect-[16/11] overflow-hidden flex items-end p-7" style="background:linear-gradient(135deg,#D8E6D6,#7E9A86)">
+          <div class="relative z-10">
+            <span class="block font-display text-3xl md:text-4xl text-[color:var(--ink)]" data-i18n="cat.skincare"></span>
+            <span class="block text-sm text-[color:var(--ink)]/70 mt-1 link-underline" data-i18n="best.viewall"></span>
+          </div>
           <span class="absolute inset-0 bg-[color:var(--ink)] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
         </a>
-        <a href="shop.html?category=eyes" class="reveal reveal-delay-1 group relative aspect-[3/4] overflow-hidden flex items-end p-4" style="background:linear-gradient(135deg,#9A8E7E,#3A332A)">
-          <span class="font-display text-2xl text-[color:var(--cream)] relative z-10" data-i18n="cat.eyes"></span>
-          <span class="absolute inset-0 bg-[color:var(--cream)] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-        </a>
-        <a href="shop.html?category=lips" class="reveal reveal-delay-2 group relative aspect-[3/4] overflow-hidden flex items-end p-4" style="background:linear-gradient(135deg,#C98173,#8C3B2E)">
-          <span class="font-display text-2xl text-[color:var(--cream)] relative z-10" data-i18n="cat.lips"></span>
-          <span class="absolute inset-0 bg-[color:var(--cream)] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-        </a>
-        <a href="shop.html?category=skin" class="reveal reveal-delay-2 group relative aspect-[3/4] overflow-hidden flex items-end p-4" style="background:linear-gradient(135deg,#CFE0CE,#7E9A86)">
-          <span class="font-display text-2xl text-[color:var(--ink)] relative z-10" data-i18n="cat.skin"></span>
-          <span class="absolute inset-0 bg-[color:var(--ink)] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-        </a>
-        <a href="shop.html?category=fragrance" class="reveal reveal-delay-3 group relative aspect-[3/4] overflow-hidden flex items-end p-4" style="background:linear-gradient(135deg,#E4D9C4,#B89B6E)">
-          <span class="font-display text-2xl text-[color:var(--ink)] relative z-10" data-i18n="cat.fragrance"></span>
-          <span class="absolute inset-0 bg-[color:var(--ink)] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-        </a>
-        <a href="shop.html?category=tools" class="reveal reveal-delay-3 group relative aspect-[3/4] overflow-hidden flex items-end p-4" style="background:linear-gradient(135deg,#D7CFC2,#9A8C78)">
-          <span class="font-display text-2xl text-[color:var(--ink)] relative z-10" data-i18n="cat.tools"></span>
+        <a href="shop.html?category=haircare" class="reveal reveal-delay-2 group relative aspect-[16/10] md:aspect-[16/11] overflow-hidden flex items-end p-7" style="background:linear-gradient(135deg,#EDE3D0,#B89B6E)">
+          <div class="relative z-10">
+            <span class="block font-display text-3xl md:text-4xl text-[color:var(--ink)]" data-i18n="cat.haircare"></span>
+            <span class="block text-sm text-[color:var(--ink)]/70 mt-1 link-underline" data-i18n="best.viewall"></span>
+          </div>
           <span class="absolute inset-0 bg-[color:var(--ink)] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
         </a>
       </div>
@@ -115,9 +110,9 @@
     <section class="bg-[color:var(--ink)] text-[color:var(--cream)] relative z-10 overflow-hidden">
       <div class="max-w-7xl mx-auto px-5 md:px-8 py-24 md:py-32 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div class="reveal order-2 lg:order-1">
-          <div class="aspect-[5/6] overflow-hidden bg-gradient-to-br from-[#8C3B2E] to-[#3A332A]">
-            <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=1100&q=80"
-              alt="Elira Living editorial portrait" class="w-full h-full object-cover" onerror="this.style.display='none'" />
+          <div class="aspect-[5/6] overflow-hidden bg-gradient-to-br from-[#5E6B52] to-[#2C322A]">
+            <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=1100&q=80"
+              alt="Elira Living natural skincare ingredients" class="w-full h-full object-cover" onerror="this.style.display='none'" />
           </div>
         </div>
         <div class="reveal reveal-delay-1 order-1 lg:order-2">
@@ -148,7 +143,7 @@
           <p class="text-sm text-[color:var(--muted)] mt-2 leading-relaxed" data-i18n="value.2.d"></p>
         </div>
         <div class="bg-[color:var(--paper)] p-7 reveal reveal-delay-2">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" class="text-[color:var(--clay-700)]"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" class="text-[color:var(--clay-700)]"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
           <h3 class="font-display text-xl mt-4" data-i18n="value.3.t"></h3>
           <p class="text-sm text-[color:var(--muted)] mt-2 leading-relaxed" data-i18n="value.3.d"></p>
         </div>
