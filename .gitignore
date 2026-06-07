@@ -15,3 +15,10 @@ checkout-worker/.wrangler/
 .DS_Store
 Thumbs.db
 *.log
+
+# Product images: commit only the optimized web versions, not the raw originals
+assets/img/*
+!assets/img/cream.jpg
+!assets/img/cleanser.jpg
+!assets/img/toner.jpg
+!assets/img/shampoo.jpg

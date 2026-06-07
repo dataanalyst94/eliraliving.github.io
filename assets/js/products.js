@@ -2,7 +2,6 @@
    ELIRA LIVING — Product catalogue.
    Natural-certified (ECOCERT COSMOS) skincare & haircare. Vegan.
    Prices in EUR cents. category: "skincare" | "haircare"
-   NOTE: toner & shampoo prices are PROVISIONAL — confirm with owner.
    ========================================================================= */
 
 const PRODUCTS = [
@@ -19,7 +18,7 @@ const PRODUCTS = [
     features: ["Vegan", "COSMOS Organic", "Fragrance-free", "Sensitive skin"],
     sizes: [{ name: "50 ml", add: 0 }],
     ingredients: "Vegan · ECOCERT COSMOS Organic certified · Fragrance-free. Full INCI is printed on the product packaging.",
-    img: "", priceId: "", paymentLink: ""
+    img: "assets/img/cream.jpg", priceId: "", paymentLink: ""
   },
   {
     id: "radiant-glow-cleanser",
@@ -34,7 +33,7 @@ const PRODUCTS = [
     features: ["Vegan", "COSMOS Natural", "Daily use", "All skin types"],
     sizes: [{ name: "145 ml", add: 0 }],
     ingredients: "Vegan · ECOCERT COSMOS Natural certified. Full INCI is printed on the product packaging.",
-    img: "", priceId: "", paymentLink: ""
+    img: "assets/img/cleanser.jpg", priceId: "", paymentLink: ""
   },
   {
     id: "purifying-toner",
@@ -49,7 +48,7 @@ const PRODUCTS = [
     features: ["Vegan", "COSMOS Natural", "Fragrance-free", "Oily / combination"],
     sizes: [{ name: "200 ml", add: 0 }],
     ingredients: "Aqua, Alcohol, Lavandula Angustifolia (Lavender) Flower Water*, Glycerin**, Betaine, Propanediol, Acorus Calamus (Sweet Flag) Root Extract*, Cucumis Sativus (Cucumber) Fruit Extract*, Salicylic Acid, Benzyl Alcohol, Sodium Benzoate, Potassium Sorbate, Rhamnose, Glucose, Glucuronic Acid.  *from organic farming  **made using organic ingredients · 99% natural origin · ECOCERT COSMOS Natural.",
-    img: "", priceId: "", paymentLink: ""
+    img: "assets/img/toner.jpg", priceId: "", paymentLink: ""
   },
   {
     id: "sensitive-scalp-shampoo",
@@ -64,7 +63,7 @@ const PRODUCTS = [
     features: ["Vegan", "COSMOS Natural", "Dermatologically tested", "All hair types"],
     sizes: [{ name: "400 ml", add: 0 }],
     ingredients: "Aqua, Sodium Coco-Sulfate, Cocamidopropyl Betaine, Coco-Glucoside, Betaine, Glyceryl Oleate, Prunus Domestica (Plum) Fruit Extract*, Sodium Chloride, Citric Acid, Parfum, Benzyl Alcohol, Hydrolyzed Wheat Protein, Tilia Cordata (Linden) Flower Extract*, Sodium Benzoate, Potassium Sorbate, Jasminum Officinale (Jasmin) Extract, Leuconostoc/Radish Root Ferment Filtrate.  *from organic farming · 98% natural origin · ECOCERT COSMOS Natural.",
-    img: "", priceId: "", paymentLink: ""
+    img: "assets/img/shampoo.jpg", priceId: "", paymentLink: ""
   }
 ];
 
