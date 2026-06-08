@@ -1,157 +1,119 @@
-# Elira Living — Cosmetics for every face
+# Elira Living — natural skincare & haircare storefront
 
-A production-grade, editorial-minimal **e-commerce storefront** for a unisex
-(men's + women's) cosmetics brand selling in **Germany & the Netherlands**.
-Built as a fast, dependency-light static site so it hosts **free on GitHub Pages**,
-with **real Stripe payments** wired in.
-
-> Aesthetic: warm ivory paper · near-black ink · terracotta accent ·
-> Bodoni Moda × Jost · trilingual **DE / NL / EN** · EUR.
+A trilingual (**EN / DE / NL**), dark "nature-luxe" e-commerce site for **Elira Living**,
+a Finnish small business (toiminimi) selling vegan, ECOCERT COSMOS–certified skincare
+& haircare into **Germany & the Netherlands**. Static, generated, and SEO-first —
+hosts free on GitHub Pages with real Stripe payments via a Cloudflare Worker.
 
 ---
 
-## ✨ What's included
+## 🏗 Architecture (important)
 
-- **Homepage** — animated hero, brand marquee, category grid, bestsellers,
-  editorial story, value pillars, newsletter.
-- **Shop** (`shop.html`) — live filtering by category (Skincare / Haircare)
-  plus sorting. Deep-linkable: `shop.html?category=skincare`.
-- **Product page** (`product.html?id=…`) — gallery, shade/size selector with
-  live price, quantity, add-to-cart, buy-now, ingredients & shipping accordions,
-  related products.
-- **Cart** — slide-out drawer on every page **and** a full `cart.html`, with a
-  free-shipping progress bar (€39 threshold), quantities, and totals.
-- **Stripe checkout** — two modes (see below). `success.html` / `cancel.html`
-  return pages included.
-- **Trilingual i18n** — DE/NL/EN with auto-detection, persisted choice, and
-  locale-aware € formatting (`Intl.NumberFormat`).
-- **Accessible & responsive** — keyboard nav, focus rings, `prefers-reduced-motion`,
-  44px touch targets, alt text, semantic landmarks. Tested at 375 / 768 / 1024 / 1440.
-- **No broken images** — every product falls back to an on-brand generated SVG
-  tile if a photo fails to load (so it looks intentional even offline).
-
-## 🗂 Structure
+The site is built by a **static site generator** so every page exists as real,
+pre-rendered, localized HTML (best for SEO) while data stays DRY.
 
 ```
 elira-living/
-├── index.html  shop.html  product.html  cart.html  about.html
-├── success.html  cancel.html
+├── build.js                      ← generator: templates × languages → /en /de /nl
 ├── assets/
-│   ├── css/styles.css        ← design tokens + animations
-│   └── js/
-│       ├── i18n.js           ← DE/NL/EN dictionary + € formatting
-│       ├── products.js       ← product catalogue (edit me)
-│       ├── cart.js           ← cart engine (localStorage)
-│       ├── stripe.js         ← checkout config (edit me)
-│       └── main.js           ← app shell, animations, page logic
-├── checkout-worker/          ← optional free Stripe serverless endpoint
-│   ├── worker.js  wrangler.toml
-├── .nojekyll  robots.txt  README.md
+│   ├── data/catalog.js           ← ⭐ CENTRAL DATA: SKUs, prices, images, sizes, badges
+│   │                                (language-agnostic — edit once, applies everywhere)
+│   ├── content/
+│   │   ├── en.js  de.js  nl.js    ← ⭐ LANGUAGE FILES: UI strings, product names,
+│   │   │                            descriptions, ingredient notes, page copy & meta
+│   ├── css/  app.css (dark system) · home.css (immersive homepage)
+│   ├── js/   app.js (cart, filters, language switch, checkout, animations)
+│   └── img/  optimized product photos + og-image
+├── en/  de/  nl/                  ← GENERATED static pages (do not edit by hand)
+│   ├── index.html  shop.html  about.html  cart.html
+│   ├── products/<sku>.html
+│   └── impressum/privacy/terms/withdrawal/success/cancel .html
+├── index.html                    ← root: redirects to /en, /de or /nl (browser language)
+├── sitemap.xml                   ← GENERATED (all langs, hreflang alternates)
+├── robots.txt  .nojekyll
+└── checkout-worker/              ← Stripe Cloudflare Worker (worker.js, wrangler.toml)
 ```
+
+### The golden rule
+- **Prices, images, SKUs** → edit **`assets/data/catalog.js`** only. One change updates
+  EN, DE and NL automatically. (Mirror price changes in `checkout-worker/worker.js` —
+  the server re-prices for security.)
+- **Any text / translation** → edit **`assets/content/<lang>.js`**.
+- Then **rebuild**:
+
+```bash
+node build.js
+```
+
+This regenerates `/en /de /nl` and `sitemap.xml`. Never hand-edit files inside
+`en/`, `de/`, `nl/` — they're overwritten on every build.
+
+---
+
+## 🌍 SEO
+
+Every generated page has, per language:
+- localized `<title>`, `<meta description>`, `<meta keywords>`, `<html lang>`
+- `rel="canonical"` + **hreflang** alternates (en/de/nl/x-default)
+- Open Graph + Twitter Card (with a 1200×630 share image)
+- **JSON-LD**: `Organization`, `WebSite`, and on product pages `Product`
+  (name, SKU, price, availability, brand) + `BreadcrumbList`
+- `sitemap.xml` lists all language URLs with hreflang; `robots.txt` points to it
+
+Because content is pre-rendered (not JS-injected), search engines and social
+scrapers see fully-localized HTML — the proper way to do multilingual SEO.
 
 ---
 
 ## 🚀 Run locally
 
-It's static — just serve the folder:
+Static — serve the folder root:
 
 ```bash
-# Python (already installed on this machine)
-python -m http.server 8080
-# → open http://localhost:8080
+python -m http.server 8137
+# open http://localhost:8137  → redirects to /en/ (or your browser language)
 ```
 
-(Opening `index.html` via `file://` mostly works, but a local server is
-recommended so query-string routing and fetch behave normally.)
+## ☁️ Deploy (GitHub Pages → eliraliving.com)
+
+1. Push the repo. Enable **Settings → Pages → Deploy from branch (main / root)**.
+2. The root `index.html` redirects visitors to their language folder.
+3. Absolute `/assets/...` paths assume the site is served at the **domain root**
+   (custom domain `eliraliving.com` or a user/org `*.github.io` site). For a
+   project page served under a subpath, paths would need a prefix.
 
 ---
 
-## 🌍 Deploy free on GitHub Pages
+## 💳 Payments (Stripe via Cloudflare Worker)
 
-1. Create a GitHub repo and push the contents of `elira-living/` to it.
-2. **Settings → Pages → Build and deployment → Source: Deploy from a branch**,
-   pick `main` / root.
-3. Your site goes live at `https://<user>.github.io/<repo>/`.
-   The included `.nojekyll` ensures all assets are served correctly.
-
-> Custom domain (e.g. `neroli.eu`)? Add it under Settings → Pages and point a
-> CNAME at GitHub. Recommended for a real brand + cleaner Stripe URLs.
-
----
-
-## 💳 Going live with Stripe
-
-GitHub Pages is **static** — it can't safely hold your Stripe *secret* key.
-Two supported paths, both keep the site free on Pages:
-
-### Mode 1 — Payment Links (zero backend, fastest)
-Best to launch *today*; single-product checkout.
-1. In the Stripe Dashboard create a **Payment Link** for each product.
-2. Paste each link into `assets/js/products.js` → `paymentLink: "https://buy.stripe.com/…"`.
-3. In `assets/js/stripe.js` set `mode: "payment_links"`.
-4. "Buy now" on a product redirects straight to Stripe's hosted, PCI-compliant page.
-
-### Mode 2 — Combined cart checkout (recommended) ⭐
-One Stripe Checkout Session for the whole cart, via a **free Cloudflare Worker**.
-Prices are re-validated server-side (no tampering). Site stays on Pages.
+Unchanged and live. The cart `Checkout` button POSTs to the Worker
+(`elira-checkout.elira-living.workers.dev`), which creates a Stripe Checkout Session
+using its own server-side price map. After any price change:
 
 ```bash
 cd checkout-worker
-npm i -g wrangler          # one-time
-wrangler login
-wrangler deploy
-wrangler secret put STRIPE_SECRET_KEY     # paste your sk_live_… (or sk_test_…)
-wrangler secret put ALLOW_ORIGIN          # optional: https://<user>.github.io
+# update the PRICES map to match catalog.js, then:
+npx wrangler deploy
 ```
 
-Then in `assets/js/stripe.js`:
-```js
-mode: "checkout_session",
-checkoutEndpoint: "https://elira-checkout.<you>.workers.dev"
-```
-
-> Prefer Vercel/Netlify Functions or Supabase Edge Functions? The same request
-> contract works — POST `{ items, locale, successUrl, cancelUrl }`, return
-> `{ url }`. Port `worker.js` accordingly.
-
-**Test cards:** use `4242 4242 4242 4242`, any future expiry/CVC, in Stripe
-*test mode* before switching to live keys. Enable iDEAL, Klarna, SEPA and cards
-in **Dashboard → Settings → Payment methods** (great for DE & NL).
-
-> ⚠️ Until you configure Stripe, checkout runs in a friendly **demo mode** and
-> shows a toast instead of charging.
+Lock the Worker to your domain once live: `npx wrangler secret put ALLOW_ORIGIN`
+→ `https://eliraliving.com`.
 
 ---
 
-## 🛠 Customising
+## ✅ Status & remaining content tasks
 
-| Want to… | Edit |
-|---|---|
-| Add/replace products, prices, shades | `assets/js/products.js` (+ mirror prices in `checkout-worker/worker.js`) |
-| Use your own photos | Drop files in `assets/img/` and set each product's `img` |
-| Change colours / type | CSS variables at the top of `assets/css/styles.css` |
-| Edit translations | `assets/js/i18n.js` |
-| Free-shipping threshold | `FREE_SHIPPING_THRESHOLD` in `cart.js` **and** `worker.js` |
+- ✅ Trilingual SSG, dark nature-luxe theme, immersive scroll homepage (GSAP + Lenis)
+- ✅ 4 products with central catalog + per-language content, real photos
+- ✅ Full SEO (meta, hreflang, JSON-LD, sitemap), legal pages with real business data
+- ✅ Cart, drawer, live Stripe checkout, language switching across /en /de /nl
 
-### Product images
-The build ships with Unsplash placeholders + an automatic on-brand SVG fallback.
-For a real store, replace them with your own product photography (ideally 4:5,
-WebP, ~900px) in `assets/img/` for best quality and licensing.
+**To finish before launch:**
+- **Legal pages** are currently English (with localized titles). German & Dutch
+  legally-binding translations should be added to `content/<lang>.js` / the legal
+  templates in `build.js` and reviewed by a professional.
+- **Product galleries** — only a primary photo per product is wired; add more angles
+  to `catalog.js → images[]` (and extend the product template) when ready.
+- Confirm **EU distance-selling VAT** thresholds with a Finnish tax adviser as sales grow.
 
-### Note on Tailwind
-This uses the Tailwind **Play CDN** for a zero-build workflow (ideal for quick
-Pages hosting). For a fully optimised production bundle, compile Tailwind with
-the CLI and drop the CDN `<script>` — see https://tailwindcss.com/docs/installation.
-
----
-
-## ♿ Compliance reminders for DE/NL
-
-A real EU shop needs: **Impressum**, **Datenschutz/Privacy (GDPR)**, **AGB/Terms**,
-**Widerruf/right-of-withdrawal**, a **cookie/consent** banner if you add analytics,
-and clear VAT-inclusive pricing. Footer links are stubbed (`#`) — wire them to
-your legal pages before launch.
-
----
-
-*Built with the ui-ux-pro-max design system. Vegan-friendly pixels only. 🌱*
+*Vegan-friendly pixels only. 🌱*

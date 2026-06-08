@@ -1,75 +1,273 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://eliraliving.com/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/"/>
+    <loc>https://eliraliving.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
   <url>
-    <loc>https://eliraliving.com/shop.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/shop.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/shop.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/shop.html?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/shop.html"/>
+    <loc>https://eliraliving.com/en/shop.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/shop.html"/>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://eliraliving.com/product.html?id=sensitive-moisturizing-cream</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/product.html?id=sensitive-moisturizing-cream"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/product.html?id=sensitive-moisturizing-cream&amp;lang=de"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/product.html?id=sensitive-moisturizing-cream&amp;lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/product.html?id=sensitive-moisturizing-cream"/>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://eliraliving.com/product.html?id=radiant-glow-cleanser</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/product.html?id=radiant-glow-cleanser"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/product.html?id=radiant-glow-cleanser&amp;lang=de"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/product.html?id=radiant-glow-cleanser&amp;lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/product.html?id=radiant-glow-cleanser"/>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://eliraliving.com/product.html?id=purifying-toner</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/product.html?id=purifying-toner"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/product.html?id=purifying-toner&amp;lang=de"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/product.html?id=purifying-toner&amp;lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/product.html?id=purifying-toner"/>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://eliraliving.com/product.html?id=sensitive-scalp-shampoo</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/product.html?id=sensitive-scalp-shampoo"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/product.html?id=sensitive-scalp-shampoo&amp;lang=de"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/product.html?id=sensitive-scalp-shampoo&amp;lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/product.html?id=sensitive-scalp-shampoo"/>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://eliraliving.com/about.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/about.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/about.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/about.html?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/about.html"/>
+    <loc>https://eliraliving.com/en/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/about.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/about.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/about.html"/>
     <priority>0.6</priority>
   </url>
-
-  <url><loc>https://eliraliving.com/impressum.html</loc><priority>0.2</priority></url>
-  <url><loc>https://eliraliving.com/privacy.html</loc><priority>0.2</priority></url>
-  <url><loc>https://eliraliving.com/terms.html</loc><priority>0.2</priority></url>
-  <url><loc>https://eliraliving.com/withdrawal.html</loc><priority>0.2</priority></url>
-
+  <url>
+    <loc>https://eliraliving.com/en/impressum.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/impressum.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/en/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/privacy.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/en/terms.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/terms.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/en/withdrawal.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/withdrawal.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/withdrawal.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/withdrawal.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/withdrawal.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/en/products/sensitive-moisturizing-cream.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/sensitive-moisturizing-cream.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/sensitive-moisturizing-cream.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/sensitive-moisturizing-cream.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/sensitive-moisturizing-cream.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/en/products/radiant-glow-cleanser.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/radiant-glow-cleanser.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/radiant-glow-cleanser.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/radiant-glow-cleanser.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/radiant-glow-cleanser.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/en/products/purifying-toner.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/purifying-toner.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/purifying-toner.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/purifying-toner.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/purifying-toner.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/en/products/sensitive-scalp-shampoo.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/sensitive-scalp-shampoo.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/sensitive-scalp-shampoo.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/sensitive-scalp-shampoo.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/sensitive-scalp-shampoo.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/shop.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/shop.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/about.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/about.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/about.html"/>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/impressum.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/impressum.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/privacy.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/terms.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/terms.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/withdrawal.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/withdrawal.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/withdrawal.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/withdrawal.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/withdrawal.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/products/sensitive-moisturizing-cream.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/sensitive-moisturizing-cream.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/sensitive-moisturizing-cream.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/sensitive-moisturizing-cream.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/sensitive-moisturizing-cream.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/products/radiant-glow-cleanser.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/radiant-glow-cleanser.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/radiant-glow-cleanser.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/radiant-glow-cleanser.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/radiant-glow-cleanser.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/products/purifying-toner.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/purifying-toner.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/purifying-toner.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/purifying-toner.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/purifying-toner.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/de/products/sensitive-scalp-shampoo.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/sensitive-scalp-shampoo.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/sensitive-scalp-shampoo.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/sensitive-scalp-shampoo.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/sensitive-scalp-shampoo.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/shop.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/shop.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/shop.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/about.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/about.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/about.html"/>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/impressum.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/impressum.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/privacy.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/terms.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/terms.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/withdrawal.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/withdrawal.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/withdrawal.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/withdrawal.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/withdrawal.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/products/sensitive-moisturizing-cream.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/sensitive-moisturizing-cream.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/sensitive-moisturizing-cream.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/sensitive-moisturizing-cream.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/sensitive-moisturizing-cream.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/products/radiant-glow-cleanser.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/radiant-glow-cleanser.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/radiant-glow-cleanser.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/radiant-glow-cleanser.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/radiant-glow-cleanser.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/products/purifying-toner.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/purifying-toner.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/purifying-toner.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/purifying-toner.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/purifying-toner.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/products/sensitive-scalp-shampoo.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/products/sensitive-scalp-shampoo.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/products/sensitive-scalp-shampoo.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/products/sensitive-scalp-shampoo.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/products/sensitive-scalp-shampoo.html"/>
+    <priority>0.8</priority>
+  </url>
 </urlset>
