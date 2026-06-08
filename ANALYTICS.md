@@ -1,163 +1,100 @@
 # Elira Living — Tracking & Analytics
 
-Everything is built. This doc tells you **which IDs to collect** and **exactly where each one goes**, then how to configure the tags inside GTM.
+**Status: built, wired with your real IDs, and verified firing end-to-end.**
 
-> ⚖️ **GDPR / EU first:** you sell into DE & NL, so marketing pixels legally need
-> **consent before firing**. The site ships with **Google Consent Mode v2** defaulting
-> to *denied*. You must add a cookie-consent banner (a CMP like Cookiebot, Usercentrics,
-> CookieYes, or Iubenda) and call `EliraConsent.update({analytics:true, ads:true})` when
-> the user accepts. On `localhost` consent is auto-granted so you can test. **Do not run
-> ads to EU traffic until the banner is live.**
-
----
-
-## 1. The IDs you need to collect — and where each goes
-
-| # | ID / value | Looks like | Paste it here |
-|---|---|---|---|
-| 1 | **GTM Container ID** | `GTM-XXXXXXX` | `assets/data/analytics-config.js` → `GTM_ID`, then run `node build.js` |
-| 2 | **Tracking Worker URL** | `https://elira-tracking.<you>.workers.dev` | `assets/data/analytics-config.js` → `TRACKING_ENDPOINT`, then `node build.js` |
-| 3 | **GA4 Measurement ID** | `G-XXXXXXXXXX` | GTM UI (GA4 tags) **and** Worker secret `GA4_MEASUREMENT_ID` |
-| 4 | **GA4 API Secret** | random string | Worker secret `GA4_API_SECRET` |
-| 5 | **Meta Pixel ID** | `1234567890` | GTM UI (Meta tags) **and** Worker secret `META_PIXEL_ID` |
-| 6 | **Meta CAPI Token** | long token | Worker secret `META_CAPI_TOKEN` |
-| 7 | **TikTok Pixel ID** | `C9XXXXXXXXXX` | GTM UI (TikTok tags) |
-| 8 | **Google Ads Conversion ID** | `AW-XXXXXXXXX` | GTM UI (Ads conversion tag) |
-| 9 | **Google Ads Conversion Label** | `abcdEFGhIJ` | GTM UI (Ads conversion tag) |
-| 10 | **Stripe Webhook Secret** | `whsec_…` | Worker secret `STRIPE_WEBHOOK_SECRET` (optional, see §5) |
-
-> **The ONLY two values that go in the website code are #1 and #2** (one config file).
-> Everything else is entered in the GTM UI or as Cloudflare Worker secrets.
+> ⚖️ **GDPR / EU — READ THIS.** You sell into DE & NL, so marketing pixels legally need
+> **consent before they fire**. The site ships with **Google Consent Mode v2** (default
+> *denied*) and only loads Meta/TikTok **after** ad consent. You MUST add a cookie-consent
+> banner (a CMP: Cookiebot, Usercentrics, CookieYes, Iubenda…) and call
+> `EliraConsent.update({analytics:true, ads:true})` when the visitor accepts (and
+> `{analytics:false, ads:false}` if they decline). On `localhost` consent is auto-granted
+> so you can test. **Do not run ads to EU traffic until the banner is live.**
 
 ---
 
-## 2. Where the code already pushes events (the dataLayer "contract")
+## Your IDs (already installed)
 
-The site pushes GA4-standard e-commerce events to `window.dataLayer`. GTM reads these.
-Verified firing across the funnel:
+All of these are in **`assets/data/analytics-config.js`** and baked into every page (`node build.js`):
 
-| Funnel step | dataLayer `event` | When it fires | Key data (`ecommerce.*`) |
-|---|---|---|---|
-| Product view | `view_item` | product page load | `currency`, `value`, `items[]` |
-| Add to cart | `add_to_cart` | any add-to-cart / quick-add | `currency`, `value`, `items[]` |
-| Begin checkout | `begin_checkout` | "Checkout" click (before Stripe) | `currency`, `value`, `items[]` |
-| Purchase | `purchase` | success page after payment | `transaction_id`, `currency`, `value`, `items[]` |
+| Platform | ID | Status |
+|---|---|---|
+| Google Tag Manager | `GTM-NGL5C9TL` | ✅ loads on every page |
+| GA4 | `G-TCKTDT6E7T` | ✅ fires (direct) |
+| Meta Pixel | `2382778145481273` | ✅ fires (direct, after consent) |
+| TikTok Pixel | `D8JB7MJC77U2SBB696UG` | ✅ fires (direct, after consent) |
+| Google Ads | `AW-18223383471` / label `RwObCOePgrscEK-Hy_FD` | ✅ purchase conversion fires |
 
-Each push also carries a top-level **`event_id`** (used for pixel ↔ server de-duplication).
-`page_view` is handled automatically by the GA4 config tag and the pixel base tags (All Pages).
+### How it's wired (important)
+Configuring tags *inside* the GTM web UI can only be done in your GTM account, so to make
+tracking **work immediately** each platform fires **directly from the site** (`fire: "direct"`
+in the config). **GTM still loads** on every page for future management.
 
-`items[]` shape: `{ item_id (SKU), item_name, item_category, price, quantity }`.
-
----
-
-## 3. Configure GTM (one-time, ~30 min)
-
-Create the container at **tagmanager.google.com**, put its ID in step 1 above, rebuild.
-Then inside GTM:
-
-### A. Variables → New → Data Layer Variable
-- `DLV - value` → `ecommerce.value`
-- `DLV - currency` → `ecommerce.currency`
-- `DLV - transaction_id` → `ecommerce.transaction_id`
-- `DLV - event_id` → `event_id`
-- `DLV - items` → `ecommerce.items`
-- **Custom JavaScript** `JS - content_ids`:
-  ```js
-  function(){ var i=({{DLV - items}}||[]); return i.map(function(x){return x.item_id;}); }
-  ```
-- **Custom JavaScript** `JS - meta_contents`:
-  ```js
-  function(){ return ({{DLV - items}}||[]).map(function(x){return {id:x.item_id,quantity:x.quantity,item_price:x.price};}); }
-  ```
-- Also enable the built-in **Ecommerce** variables.
-
-### B. Triggers → New → Custom Event
-Create one per event name (exact match): `view_item`, `add_to_cart`, `begin_checkout`, `purchase`.
-(Use the built-in **All Pages** trigger for base/page-view tags.)
-
-### C. Tags
-
-**GA4 (full e-commerce)**
-1. **GA4 Configuration** — Measurement ID `G-XXXXXXXXXX` (#3). Trigger: All Pages.
-2. **GA4 Event** ×4 — Event Name = `view_item` / `add_to_cart` / `begin_checkout` / `purchase`.
-   In each: *More Settings → Ecommerce → Send Ecommerce data → Data source: Data Layer.*
-   For purchase, also set Transaction ID = `{{DLV - transaction_id}}`. Trigger = matching Custom Event.
-
-**Meta Pixel (#5)** — Custom HTML tags
-1. **Meta Base** (All Pages): standard `fbq('init','PIXEL_ID'); fbq('track','PageView');`
-2. **Meta ViewContent / AddToCart / InitiateCheckout / Purchase** (one per trigger):
-   ```html
-   <script>fbq('track','Purchase',
-     {value:{{DLV - value}},currency:{{DLV - currency}},content_type:'product',
-      content_ids:{{JS - content_ids}},contents:{{JS - meta_contents}}},
-     {eventID:'{{DLV - event_id}}'});</script>
-   ```
-   (Swap `Purchase` for `ViewContent`/`AddToCart`/`InitiateCheckout` on the other triggers.
-   The `eventID` is what de-duplicates against the server CAPI events.)
-
-**TikTok Pixel (#7)** — Custom HTML tags
-1. **TikTok Base** (All Pages): standard TikTok loader + `ttq.load('PIXEL_ID'); ttq.page();`
-2. **TikTok events**: `ttq.track('ViewContent'|'AddToCart'|'InitiateCheckout'|'CompletePayment',
-   {value:{{DLV - value}}, currency:{{DLV - currency}}, content_id:{{JS - content_ids}}});`
-
-**Google Ads (#8/#9)**
-1. **Conversion Linker** — trigger All Pages.
-2. **Google Ads Conversion Tracking** — Conversion ID `AW-XXXXXXXXX`, Label, Value =
-   `{{DLV - value}}`, Currency = `{{DLV - currency}}`, Transaction ID = `{{DLV - transaction_id}}`.
-   Trigger: `purchase`.
-
-### D. Consent
-In GTM, open each marketing tag → **Consent Settings** → require `ad_storage` (Meta/TikTok/Ads)
-or `analytics_storage` (GA4). The site already sets Consent Mode defaults to denied; your CMP
-calls `EliraConsent.update(...)` to grant.
-
-Then **Submit / Publish** the container.
+If you later build a platform's tags inside GTM, flip that platform to `"gtm"` in
+`analytics-config.js` → `fire` and run `node build.js`. That stops the site firing it
+directly so you don't double-count. The dataLayer pushes happen either way, so your GTM
+tags will have everything they need.
 
 ---
 
-## 4. Deploy the server-side tracking Worker
+## The events (verified)
+
+| Funnel step | dataLayer `event` | GA4 | Meta | TikTok | Google Ads |
+|---|---|---|---|---|---|
+| Product view | `view_item` | view_item | ViewContent | ViewContent | — |
+| Add to cart | `add_to_cart` | add_to_cart | AddToCart | AddToCart | — |
+| Begin checkout | `begin_checkout` | begin_checkout | InitiateCheckout | InitiateCheckout | — |
+| Purchase | `purchase` | purchase | Purchase | CompletePayment | ✅ conversion |
+
+Every event carries **value + currency (EUR) + items** (SKU, name, category, price, qty) and a
+shared **`event_id`**. For Purchase the `event_id` = the **Stripe session id**, so the browser
+pixel and the server (CAPI / Stripe webhook) **de-duplicate** automatically.
+
+---
+
+## Server-side backup (still to deploy — needs your keys)
+
+The `tracking-worker/` mirrors events to **Meta Conversions API** + **GA4 Measurement Protocol**
+(resilient to ad blockers / iOS). Deploy it, then paste its URL into
+`analytics-config.js` → `TRACKING_ENDPOINT` and rebuild.
 
 ```bash
 cd tracking-worker
 npx wrangler deploy
-npx wrangler secret put META_PIXEL_ID
-npx wrangler secret put META_CAPI_TOKEN
-npx wrangler secret put GA4_MEASUREMENT_ID
-npx wrangler secret put GA4_API_SECRET
+npx wrangler secret put META_PIXEL_ID          # 2382778145481273
+npx wrangler secret put META_CAPI_TOKEN        # from Meta Events Manager → Conversions API
+npx wrangler secret put GA4_MEASUREMENT_ID     # G-TCKTDT6E7T
+npx wrangler secret put GA4_API_SECRET         # GA4 Admin → Data Streams → Measurement Protocol API secrets
 npx wrangler secret put ALLOW_ORIGIN           # https://eliraliving.com
 ```
-Copy the deployed URL into `analytics-config.js` → `TRACKING_ENDPOINT`, then `node build.js`.
-Now `add_to_cart`, `begin_checkout` and `purchase` are mirrored to **Meta CAPI + GA4 MP**
-server-side (resilient to ad blockers / iOS), de-duplicated by `event_id`.
 
-## 5. (Recommended) Stripe webhook = bullet-proof Purchase
-
-In the **Stripe Dashboard → Developers → Webhooks → Add endpoint**:
-- URL: `https://elira-tracking.<you>.workers.dev/stripe-webhook`
-- Event: `checkout.session.completed`
-- Copy the signing secret → `npx wrangler secret put STRIPE_WEBHOOK_SECRET`
-
-Now a Purchase is sent to Meta CAPI the moment Stripe **confirms payment** (not just when the
-buyer lands on the success page), with the hashed customer email for high match quality —
-de-duplicated against the browser pixel via the Stripe session id.
+**Bullet-proof purchase (recommended):** Stripe Dashboard → Developers → Webhooks → Add endpoint
+→ `https://elira-tracking.<you>.workers.dev/stripe-webhook`, event `checkout.session.completed`,
+then `npx wrangler secret put STRIPE_WEBHOOK_SECRET`. Now a Purchase is sent to Meta CAPI the
+moment Stripe confirms payment (with hashed email), deduped via the session id.
 
 ---
 
-## 6. Verify everything
+## Verify
 
-- **Console (dev):** on `localhost` every event logs as `[Elira Analytics] view_item …` etc.
-- **GTM Preview** (Tag Assistant): click through product → add to cart → checkout → success and
-  watch each tag fire on the matching event.
-- **GA4 → Admin → DebugView**: see `view_item`/`add_to_cart`/`begin_checkout`/`purchase` live.
-- **Meta Events Manager → Test Events**: see browser + server events and confirm they
-  **de-duplicate** (same `event_id`).
+- **Dev console** (localhost): every event logs `[Elira Analytics] view_item …` etc.
+- **GA4 → Admin → DebugView**: watch view_item → add_to_cart → begin_checkout → purchase.
+- **Meta Events Manager → Test Events** (+ confirm browser/server dedupe by `event_id`).
 - **TikTok Events Manager → Test Event**.
-- **Google Ads → Conversions**: status turns to "Recording" after the first test purchase.
+- **Google Ads → Conversions**: "Recording" after the first test purchase.
+- **GTM Preview** (Tag Assistant): see the dataLayer events; build tags here when ready.
+
+Test card (Stripe test mode): `4242 4242 4242 4242`.
 
 ---
 
-### Files involved
-- `assets/data/analytics-config.js` — your IDs (GTM + Worker URL)
-- `assets/js/analytics.js` — dataLayer events, consent, server mirror, dev logging
+## What's left (your tasks)
+
+1. **Add a consent banner (CMP)** and wire it to `EliraConsent.update(...)` — *required for EU ads.*
+2. **Deploy `tracking-worker`** + paste `TRACKING_ENDPOINT` for server-side resilience.
+3. (Optional) **Move pixels into GTM** and flip `fire.<platform>` to `"gtm"`.
+
+### Files
+- `assets/data/analytics-config.js` — your IDs + per-platform fire mode
+- `assets/js/analytics.js` — dataLayer + direct pixels + consent + server mirror + dev logging
 - `build.js` — bakes GTM + Consent Mode into every page (`node build.js` to apply)
 - `tracking-worker/` — Meta CAPI + GA4 MP + Stripe webhook
