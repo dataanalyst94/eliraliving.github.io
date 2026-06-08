@@ -22,8 +22,8 @@
     GOOGLE_ADS_ID: "AW-18223383471",
     GOOGLE_ADS_PURCHASE_LABEL: "RwObCOePgrscEK-Hy_FD",
 
-    // Server-side backup (deploy tracking-worker, then paste its URL + rebuild)
-    TRACKING_ENDPOINT: "",      // e.g. "https://elira-tracking.<you>.workers.dev"
+    // Server-side backup (Meta CAPI + GA4 Measurement Protocol)
+    TRACKING_ENDPOINT: "https://elira-tracking.elira-living.workers.dev",
 
     fire: { ga4: "direct", meta: "direct", tiktok: "direct", googleAds: "direct" },
 
