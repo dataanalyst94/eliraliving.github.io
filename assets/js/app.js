@@ -48,6 +48,7 @@
       const ex = items.find(i => i.key === key);
       if (ex) ex.qty += qty; else items.push({ key, id, name: pname(id), variant, unitPrice: price, qty });
       this.write(items);
+      if (window.EliraAnalytics) window.EliraAnalytics.addToCart(id, qty, variant);
     },
     setQty(key, qty) { const items = this.read(); const it = items.find(i => i.key === key); if (it) { it.qty = Math.max(1, qty); this.write(items); } },
     remove(key) { this.write(this.read().filter(i => i.key !== key)); },
@@ -132,6 +133,11 @@
   async function checkout() {
     const items = Cart.read(); if (!items.length) return;
     if (!STRIPE.endpoint) { showToast("Demo mode — Stripe not configured.", 3500); return; }
+    // Analytics: begin_checkout / InitiateCheckout (+ stores a pending-purchase snapshot for the success page)
+    if (window.EliraAnalytics) {
+      const gaItems = items.map(i => { const p = CAT.getProduct(i.id) || {}; return { item_id: p.sku || i.id, item_name: pname(i.id), item_category: t("cat." + p.category), price: +(i.unitPrice / 100).toFixed(2), quantity: i.qty }; });
+      window.EliraAnalytics.beginCheckout(gaItems, +(Cart.total() / 100).toFixed(2));
+    }
     try {
       Cart.setLoading(true);
       const origin = location.origin;
@@ -140,7 +146,7 @@
         body: JSON.stringify({
           locale: LANG,
           items: items.map(i => ({ id: i.id, name: i.name, variant: i.variant, amount: i.unitPrice, quantity: i.qty, priceId: (CAT.getProduct(i.id) || {}).priceId || "" })),
-          successUrl: origin + langPrefix + "/success.html",
+          successUrl: origin + langPrefix + "/success.html?session_id={CHECKOUT_SESSION_ID}",
           cancelUrl: origin + langPrefix + "/cancel.html"
         })
       });

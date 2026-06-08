@@ -8,6 +8,18 @@ const path = require("path");
 const ROOT = __dirname;
 const CAT = require("./assets/data/catalog.js");
 const CONTENT = { en: require("./assets/content/en.js"), de: require("./assets/content/de.js"), nl: require("./assets/content/nl.js") };
+const TRACK = require("./assets/data/analytics-config.js");
+
+// Google Consent Mode v2 default (denied) + GTM loader — baked into every page.
+function gtmHead() {
+  const consent = `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});</script>`;
+  if (!TRACK.GTM_ID) return consent + `\n  <!-- GTM not configured: set GTM_ID in assets/data/analytics-config.js and run: node build.js -->`;
+  return consent + `\n  <!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${TRACK.GTM_ID}');</script><!-- End Google Tag Manager -->`;
+}
+function gtmBody() {
+  if (!TRACK.GTM_ID) return "";
+  return `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${TRACK.GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`;
+}
 
 const BASE = CAT.CONFIG.baseUrl;
 const OG = BASE + "/assets/img/og-image.jpg";
@@ -55,6 +67,7 @@ function head(L, o) {
   return `<!DOCTYPE html>
 <html lang="${L}">
 <head>
+  ${gtmHead()}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escA(o.title)}</title>
@@ -157,11 +170,14 @@ function scripts(L, o) {
   return `<script>window.LANG=${JSON.stringify(L)};</script>
 <script src="/assets/data/catalog.js"></script>
 <script src="/assets/content/${L}.js"></script>
+<script src="/assets/data/analytics-config.js"></script>
+<script src="/assets/js/analytics.js"></script>
 ${libs}<script src="/assets/js/app.js"></script>`;
 }
 
 function shell(L, o, bodyHtml) {
-  return head(L, o) + `\n<body data-page="${o.bodyPage}">\n` + header(L, o.current) + "\n" + bodyHtml + "\n" + footer(L) + "\n" + drawerMenu(L) + "\n" + scripts(L, o) + "\n</body>\n</html>\n";
+  const inline = o.inlineData ? `<script>${o.inlineData}</script>\n` : "";
+  return head(L, o) + `\n<body data-page="${o.bodyPage}">\n` + gtmBody() + "\n" + header(L, o.current) + "\n" + bodyHtml + "\n" + footer(L) + "\n" + drawerMenu(L) + "\n" + inline + scripts(L, o) + "\n</body>\n</html>\n";
 }
 
 function card(L, p) {
@@ -359,7 +375,7 @@ function renderProduct(L, p) {
     <div class="grid-products">${related.map(r => card(L, r)).join("\n")}</div>
   </section>
 </div></main>`;
-  return shell(L, { page: "product", p, bodyPage: "product", title, description, ogType: "product", image: BASE + p.image, keywords: [pname(L, p.id), t(L, "cat." + p.category), "Elira Living", "vegan", "COSMOS", "ECOCERT"].join(", "), ld: [ldOrg(), ldProduct(L, p), ldBreadcrumb(L, p)] }, body);
+  return shell(L, { page: "product", p, bodyPage: "product", title, description, ogType: "product", image: BASE + p.image, inlineData: `window.ELIRA_PAGE={type:"product",id:${JSON.stringify(p.id)}};`, keywords: [pname(L, p.id), t(L, "cat." + p.category), "Elira Living", "vegan", "COSMOS", "ECOCERT"].join(", "), ld: [ldOrg(), ldProduct(L, p), ldBreadcrumb(L, p)] }, body);
 }
 
 /* ---- PAGE: ABOUT ------------------------------------------------------- */
