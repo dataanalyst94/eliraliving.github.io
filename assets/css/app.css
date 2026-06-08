@@ -172,6 +172,21 @@ input[type=email]:focus,input[type=text]:focus{ outline:none; border-color:var(-
 @media(min-width:1024px){ .pdp-grid{ grid-template-columns:1fr 1fr; gap:4rem; } }
 .footer ul{ list-style:none; padding:0; margin:0; }
 
+/* Cookie consent banner */
+.cc{ position:fixed; left:0; right:0; bottom:0; z-index:90; display:none; padding:1rem; }
+.cc.show{ display:block; }
+.cc-card{ max-width:46rem; margin:0 auto; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow-lg); padding:1.25rem 1.4rem; outline:none; }
+.cc-title{ font-size:1.2rem; margin-bottom:.4rem; }
+.cc-body{ font-size:.85rem; color:var(--ink-soft); line-height:1.6; margin:0 0 1rem; }
+.cc-body a{ color:var(--gold); }
+.cc-prefs{ display:flex; flex-direction:column; gap:.6rem; margin:0 0 1rem; border-top:1px solid var(--line); padding-top:1rem; }
+.cc-opt{ display:flex; gap:.6rem; align-items:flex-start; font-size:.82rem; color:var(--ink-soft); line-height:1.5; cursor:pointer; }
+.cc-opt input{ margin-top:.15rem; accent-color:var(--gold); width:16px; height:16px; flex:none; }
+.cc-opt strong{ color:var(--ink); font-weight:600; }
+.cc-actions{ display:flex; flex-wrap:wrap; gap:.6rem; justify-content:flex-end; }
+.cc-actions .btn{ padding:.7rem 1.3rem; font-size:.9rem; }
+@media(max-width:560px){ .cc-actions{ justify-content:stretch; } .cc-actions .btn{ flex:1 1 auto; } }
+
 :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 

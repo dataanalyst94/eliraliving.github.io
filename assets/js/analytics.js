@@ -61,8 +61,9 @@
   function loadAdPixels() { loadMeta(); loadTikTok(); }
 
   /* ---- Consent Mode v2 ------------------------------------------------- */
+  const CONSENT_VERSION = 1;
   const Consent = {
-    update(state) {
+    update(state, persist) {
       const s = state || {};
       gtag("consent", "update", {
         analytics_storage: s.analytics ? "granted" : "denied",
@@ -70,15 +71,18 @@
         ad_user_data: s.ads ? "granted" : "denied",
         ad_personalization: s.ads ? "granted" : "denied"
       });
-      try { localStorage.setItem("elira_consent", JSON.stringify(s)); } catch (e) {}
+      if (persist !== false) { try { localStorage.setItem("elira_consent", JSON.stringify({ analytics: !!s.analytics, ads: !!s.ads, v: CONSENT_VERSION, ts: Date.now() })); } catch (e) {} }
+      if (s.analytics) loadGoogle();
       if (s.ads) loadAdPixels();
-      log("consent updated", s);
+      log("consent updated", s, persist === false ? "(not persisted)" : "");
     },
+    saved() { try { const s = JSON.parse(localStorage.getItem("elira_consent")); return (s && s.v === CONSENT_VERSION) ? s : null; } catch (e) { return null; } },
     load() {
       loadGoogle(); // Google tag uses Consent Mode (safe to load; cookies gated by consent)
-      if (DEBUG) { this.update({ analytics: true, ads: true }); return; }
-      try { const s = JSON.parse(localStorage.getItem("elira_consent")); if (s) this.update(s); } catch (e) {}
-    }
+      if (DEBUG) { this.update({ analytics: true, ads: true }, false); return; } // grant for dev, but keep the banner visible
+      const s = this.saved(); if (s) this.update(s, false);
+    },
+    open() { /* replaced by the consent banner once loaded */ }
   };
   window.EliraConsent = Consent;
 
