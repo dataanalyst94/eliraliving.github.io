@@ -9,6 +9,7 @@ const ROOT = __dirname;
 const CAT = require("./assets/data/catalog.js");
 const CONTENT = { en: require("./assets/content/en.js"), de: require("./assets/content/de.js"), nl: require("./assets/content/nl.js") };
 const TRACK = require("./assets/data/analytics-config.js");
+const { LEGAL, DISCLAIMER } = require("./assets/data/legal-content.js");
 
 // Google Consent Mode v2 default (denied) + GTM loader — baked into every page.
 function gtmHead() {
@@ -431,56 +432,23 @@ function renderSimple(L, page, titleKey, leadKey, ctaKey, ctaHref, icon) {
   return shell(L, { page, bodyPage: page, title: meta(L)[page].title, description: t(L, leadKey), noindex: true }, body);
 }
 
-/* ---- PAGE: LEGAL ------------------------------------------------------- */
-function legalShell(L, page, titleText, subtitle, inner) {
+/* ---- PAGE: LEGAL (localised content from assets/data/legal-content.js) - */
+function legalPage(L, type) {
+  const d = (LEGAL[L] && LEGAL[L][type]) || LEGAL.en[type];
+  const inner = d.body.replace(/{{withdrawalUrl}}/g, url("withdrawal", L));
+  const disclaimer = DISCLAIMER[L] || DISCLAIMER.en;
   const body = `<main class="page-main"><article class="container legal-prose" style="padding-bottom:6rem">
-  <h1 class="font-display">${titleText}</h1>
-  <p class="muted">${subtitle}</p>
+  <h1 class="font-display">${d.title}</h1>
+  <p class="muted">${d.subtitle}</p>
   ${inner}
-  <p class="legal-disclaimer">${L === "en" ? "" : "(English reference version — localised text coming soon.) "}This notice reflects the information provided by the business. Please have it reviewed by a qualified adviser. Last updated: June 2026.</p>
+  <p class="legal-disclaimer">${disclaimer}</p>
 </article></main>`;
-  return shell(L, { page, bodyPage: "legal", title: meta(L)[page].title, description: titleText + " — Elira Living.", noindex: false, ld: [ldOrg()] }, body);
+  return shell(L, { page: type, bodyPage: "legal", title: meta(L)[type].title, description: d.title + " — Elira Living.", noindex: false, ld: [ldOrg()] }, body);
 }
-function renderImpressum(L) {
-  return legalShell(L, "impressum", "Impressum", "Legal notice / Anbieterkennzeichnung (§ 5 DDG)", `
-  <h2>Service provider / Diensteanbieter</h2><p><strong>Elira Living</strong> (sole proprietorship / toiminimi)<br>Owner: Zeerak Ata<br>Lapinrinne 1b<br>00180 Helsinki<br>Finland</p>
-  <h2>Contact</h2><p>Phone: +358 41 7408294<br>E-mail: <a href="mailto:support@eliraliving.com" class="link-underline">support@eliraliving.com</a></p>
-  <h2>Business ID (Y-tunnus)</h2><p>3526013-6 — registered in the Finnish Trade Register (PRH).</p>
-  <h2>VAT</h2><p>Elira Living is a small business and is <strong>not currently registered for VAT</strong>; no VAT identification number is held and VAT is not shown separately.</p>
-  <h2>Packaging register (LUCID)</h2><p>Registration number under the German Packaging Act (VerpackG): <strong>DE1454291180935</strong></p>
-  <h2>Online dispute resolution</h2><p>EU ODR platform: <a href="https://ec.europa.eu/consumers/odr/" class="link-underline" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a>. We are not obliged or willing to participate in consumer arbitration.</p>`);
-}
-function renderPrivacy(L) {
-  return legalShell(L, "privacy", "Privacy Policy", "How we handle your personal data under the GDPR", `
-  <h2>1. Controller</h2><p><strong>Elira Living</strong> (owner: Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland · <a href="mailto:support@eliraliving.com" class="link-underline">support@eliraliving.com</a> · Business ID 3526013-6.</p>
-  <h2>2. What we collect</h2><ul><li><strong>Order &amp; payment data</strong> — name, address, email, order contents. Card details go directly to Stripe and are never stored on our servers.</li><li><strong>Newsletter</strong> — your email, if you subscribe.</li><li><strong>Technical data</strong> — IP, browser, pages visited (hosting/checkout providers).</li><li><strong>Local storage</strong> — cart &amp; language, stored in your browser only.</li></ul>
-  <h2>3. Legal bases (Art. 6 GDPR)</h2><ul><li>Art. 6(1)(b) — performance of the purchase contract.</li><li>Art. 6(1)(c) — legal obligations (tax/accounting).</li><li>Art. 6(1)(a) — consent (newsletter).</li><li>Art. 6(1)(f) — legitimate interests (secure shop).</li></ul>
-  <h2>4. Recipients &amp; processors</h2><ul><li><strong>Stripe Payments Europe, Ltd.</strong> (Dublin) — payments. <a href="https://stripe.com/privacy" class="link-underline" target="_blank" rel="noopener">Privacy</a>.</li><li><strong>Fulfilment partner</strong> in Latvia (EU) — name &amp; delivery address.</li><li><strong>Hosting</strong> — GitHub Pages + a Cloudflare Worker. SCCs apply to any EEA transfer.</li></ul>
-  <h2>5. Cookies</h2><p>Only essential local storage (cart &amp; language). No advertising/analytics cookies. Adding any will require a consent banner first.</p>
-  <h2>6. Retention</h2><p>Order/accounting data for statutory periods under Finnish bookkeeping law (generally 6 years). Newsletter until you unsubscribe.</p>
-  <h2>7. Your rights</h2><p>Access, rectification, erasure, restriction, portability, objection, and withdrawal of consent — email <a href="mailto:support@eliraliving.com" class="link-underline">support@eliraliving.com</a>. Lead authority: Finnish Data Protection Ombudsman (<a href="https://tietosuoja.fi/en" class="link-underline" target="_blank" rel="noopener">tietosuoja.fi</a>). DE/NL customers may also contact their national authority.</p>`);
-}
-function renderTerms(L) {
-  return legalShell(L, "terms", "Terms &amp; Conditions", "General terms of sale for consumers", `
-  <h2>1. Seller</h2><p>Elira Living (owner: Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland — Business ID 3526013-6. <a href="mailto:support@eliraliving.com" class="link-underline">support@eliraliving.com</a>.</p>
-  <h2>2. Scope</h2><p>These terms apply to all consumer orders placed via this shop. We currently ship to <strong>Germany</strong> and the <strong>Netherlands</strong>.</p>
-  <h2>3. Contract</h2><p>Product display is not a binding offer. Completing payment at Stripe checkout places a binding order; the contract forms on our confirmation or dispatch.</p>
-  <h2>4. Prices &amp; VAT</h2><p>All prices are total prices in Euro. As a small business we are not currently VAT-registered, so VAT is not shown separately.</p>
-  <h2>5. Shipping</h2><p>Free over €39; otherwise €4.95. Dispatched from within the EU (currently Latvia). Delivery 3–7 working days.</p>
-  <h2>6. Payment</h2><p>Securely via Stripe (card, iDEAL, Klarna, SEPA). Due immediately on order.</p>
-  <h2>7. Right of withdrawal</h2><p>14-day statutory right — see the <a href="${url("withdrawal", L)}" class="link-underline">Right of Withdrawal</a> page.</p>
-  <h2>8. Cosmetics &amp; hygiene</h2><p>Sealed cosmetics unsealed after delivery are excluded from withdrawal where permitted by law.</p>
-  <h2>9. Governing law</h2><p>Finnish law applies, without prejudice to mandatory consumer rights of your country of residence. EU ODR: <a href="https://ec.europa.eu/consumers/odr/" class="link-underline" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>`);
-}
-function renderWithdrawal(L) {
-  return legalShell(L, "withdrawal", "Right of Withdrawal", "Your 14-day right to cancel · model form", `
-  <h2>Right of withdrawal</h2><p>You may withdraw within 14 days without giving a reason, from the day you take possession of the goods.</p>
-  <p>Inform us: <strong>Elira Living</strong> (Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland · <a href="mailto:support@eliraliving.com" class="link-underline">support@eliraliving.com</a>, by a clear statement.</p>
-  <h2>Consequences</h2><p>We reimburse all payments including standard delivery within 14 days of being informed, via Stripe. We may withhold until goods are returned. You bear the direct cost of return.</p>
-  <h3>Returns address</h3><p>Elira Living — Returns<br>Lapinrinne 1B, 606<br>00180 Helsinki, Finland</p>
-  <h2>Exclusions</h2><p>Sealed cosmetics (toners, shampoos) unsealed after delivery are excluded for hygiene reasons.</p>
-  <h2>Model withdrawal form</h2><table><tr><td>To Elira Living, Lapinrinne 1b, 00180 Helsinki, Finland — support@eliraliving.com:<br><br>I/We hereby withdraw from my/our contract of sale of the following goods:<br>____________________<br><br>Ordered/received on: ________ · Name: ________ · Address: ________ · Date: ________</td></tr></table>`);
-}
+const renderImpressum = (L) => legalPage(L, "impressum");
+const renderPrivacy = (L) => legalPage(L, "privacy");
+const renderTerms = (L) => legalPage(L, "terms");
+const renderWithdrawal = (L) => legalPage(L, "withdrawal");
 
 /* ---- WRITE ------------------------------------------------------------- */
 function write(rel, html) {
