@@ -11,6 +11,7 @@ const CONTENT = { en: require("./assets/content/en.js"), de: require("./assets/c
 const TRACK = require("./assets/data/analytics-config.js");
 const { LEGAL, DISCLAIMER } = require("./assets/data/legal-content.js");
 const { USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE } = require("./assets/data/faq-content.js");
+const { BLOG_UI, POSTS } = require("./assets/data/blog-content.js");
 const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen" };
 const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik" };
 
@@ -50,6 +51,8 @@ function url(page, L, p) {
     case "shop": return P + "/shop.html";
     case "about": return P + "/about.html";
     case "ingredients": return P + "/ingredients.html";
+    case "blog": return P + "/blog/";
+    case "post": return P + "/blog/" + p.slug + ".html";
     case "cart": return P + "/cart.html";
     case "success": return P + "/success.html";
     case "cancel": return P + "/cancel.html";
@@ -115,6 +118,7 @@ function header(L, current) {
     <a href="${P}/shop.html" class="nav-link" ${cur("shop")}>${T(L, "nav.shop")}</a>
     <a href="${P}/shop.html?category=skincare" class="nav-link">${T(L, "nav.skincare")}</a>
     <a href="${P}/shop.html?category=haircare" class="nav-link">${T(L, "nav.haircare")}</a>
+    <a href="${P}/blog/" class="nav-link" ${cur("blog")}>${esc(BLOG_UI[L].nav)}</a>
     <a href="${P}/about.html" class="nav-link" ${cur("about")}>${T(L, "nav.about")}</a>
   </nav>
   <div class="nav-actions">
@@ -135,7 +139,7 @@ function footer(L) {
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.help")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
       ${li(P + "/withdrawal.html", T(L, "foot.shipping"))}${li(P + "/terms.html", T(L, "foot.faq"))}${li("mailto:support@eliraliving.com", T(L, "foot.contact"))}</ul></div>
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.company")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
-      ${li(P + "/about.html", T(L, "foot.about"))}${li(P + "/ingredients.html", esc(INGREDIENTS_PAGE[L].title))}${li(P + "/privacy.html", T(L, "foot.privacy"))}${li(P + "/impressum.html", T(L, "foot.imprint"))}</ul></div>
+      ${li(P + "/about.html", T(L, "foot.about"))}${li(P + "/blog/", esc(BLOG_UI[L].nav))}${li(P + "/ingredients.html", esc(INGREDIENTS_PAGE[L].title))}${li(P + "/privacy.html", T(L, "foot.privacy"))}${li(P + "/impressum.html", T(L, "foot.imprint"))}</ul></div>
   </div>
   <div style="margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;font-size:.75rem" class="muted">
     <div>© <span data-year></span> Elira Living · ${T(L, "foot.rights")}</div>
@@ -164,7 +168,7 @@ function drawerMenu(L) {
 <div class="mobile-menu" data-mobile-menu>
   <div style="display:flex;justify-content:space-between;align-items:center"><span class="font-display" style="font-size:1.5rem">Elira Living</span>
     <button class="icon-btn" data-menu-close aria-label="Close"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-  <nav><a href="${P}/shop.html">${T(L, "nav.shop")}</a><a href="${P}/shop.html?category=skincare">${T(L, "nav.skincare")}</a><a href="${P}/shop.html?category=haircare">${T(L, "nav.haircare")}</a><a href="${P}/about.html">${T(L, "nav.about")}</a></nav>
+  <nav><a href="${P}/shop.html">${T(L, "nav.shop")}</a><a href="${P}/shop.html?category=skincare">${T(L, "nav.skincare")}</a><a href="${P}/shop.html?category=haircare">${T(L, "nav.haircare")}</a><a href="${P}/blog/">${esc(BLOG_UI[L].nav)}</a><a href="${P}/about.html">${T(L, "nav.about")}</a></nav>
   <div class="muted" style="margin-top:auto;font-size:.875rem">${T(L, "foot.tag")}</div>
 </div>`;
 }
@@ -217,6 +221,24 @@ function ldBreadcrumb(L, p) {
 }
 function ldFAQ(faqs) {
   return JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) });
+}
+function ldArticle(L, post, c) {
+  return JSON.stringify({
+    "@context": "https://schema.org", "@type": "BlogPosting",
+    headline: c.title, description: c.description,
+    image: [BASE + post.image], inLanguage: L,
+    datePublished: post.date, dateModified: post.updated || post.date,
+    author: { "@type": "Organization", name: "Elira Living", url: BASE + "/" },
+    publisher: { "@type": "Organization", name: "Elira Living", logo: { "@type": "ImageObject", url: OG } },
+    mainEntityOfPage: { "@type": "WebPage", "@id": BASE + url("post", L, post) }
+  });
+}
+function ldPostBreadcrumb(L, post, c) {
+  return JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: BLOG_UI[L].crumbHome, item: BASE + url("home", L) },
+    { "@type": "ListItem", position: 2, name: BLOG_UI[L].nav, item: BASE + url("blog", L) },
+    { "@type": "ListItem", position: 3, name: c.title, item: BASE + url("post", L, post) }
+  ] });
 }
 
 /* ---- PAGE: HOME -------------------------------------------------------- */
@@ -453,6 +475,109 @@ function renderIngredients(L) {
   return shell(L, { page: "ingredients", bodyPage: "legal", title: ip.title + " | Elira Living", description: meta[L], keywords: "ingredients, INCI, natural skincare ingredients, vegan, ECOCERT COSMOS, salicylic acid, lavender water, Elira Living", ld: [ldOrg(), ldWebsite(L)] }, body);
 }
 
+/* ---- PAGE: BLOG / JOURNAL (Phase 1 — SEO content engine) -------------- */
+const slugify = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
+function blogDate(L, iso) {
+  const d = new Date(iso + "T00:00:00Z");
+  if (isNaN(d)) return iso;
+  return new Intl.DateTimeFormat(LOCALES[L], { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }).format(d);
+}
+function postContent(L, post) { return post.i18n[L] || post.i18n.en; }
+
+function productCallout(L, id) {
+  const p = CAT.getProduct(id);
+  if (!p) return "";
+  const purl = url("product", L, p);
+  return `<aside class="blog-product" style="display:flex;gap:1.25rem;align-items:center;border:1px solid var(--line);background:var(--surface);padding:1.25rem;margin:2rem 0">
+  <a href="${purl}" style="flex:0 0 auto" aria-label="${escA(pname(L, p.id))}"><img src="${p.image}" alt="${escA(pname(L, p.id))}" loading="lazy" style="width:84px;height:105px;object-fit:cover;border:1px solid var(--line)"></a>
+  <div style="flex:1;min-width:0">
+    <div class="kicker" style="margin-bottom:.3rem">${T(L, "cat." + p.category)}</div>
+    <a href="${purl}" class="font-display link-underline" style="font-size:1.15rem;display:inline-block;line-height:1.2">${esc(pname(L, p.id))}</a>
+    <p class="muted" style="font-size:.85rem;margin:.45rem 0 .8rem;line-height:1.5">${esc(pdesc(L, p.id))}</p>
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <span class="font-display">${fmt(L, p.price)}</span>
+      <a href="${purl}" class="btn btn-outline" style="padding:.4rem 1.1rem;font-size:.78rem">${esc(BLOG_UI[L].learn)}</a>
+    </div>
+  </div>
+</aside>`;
+}
+function renderBody(L, blocks) {
+  return (blocks || []).map(b => {
+    switch (b.type) {
+      case "h2": return `<h2 class="font-display" id="${slugify(b.text)}" style="font-size:clamp(1.5rem,3.2vw,2.1rem);margin:2.5rem 0 1rem;line-height:1.15">${esc(b.text)}</h2>`;
+      case "h3": return `<h3 class="font-display" style="font-size:1.25rem;margin:1.75rem 0 .75rem">${esc(b.text)}</h3>`;
+      case "ul": return `<ul style="margin:1rem 0 1.25rem;padding-left:1.2rem;display:flex;flex-direction:column;gap:.5rem;color:var(--ink-soft)">${(b.items || []).map(i => `<li>${esc(i)}</li>`).join("")}</ul>`;
+      case "ol": return `<ol style="margin:1rem 0 1.25rem;padding-left:1.4rem;display:flex;flex-direction:column;gap:.5rem;color:var(--ink-soft)">${(b.items || []).map(i => `<li>${esc(i)}</li>`).join("")}</ol>`;
+      case "quote": return `<blockquote style="margin:1.75rem 0;padding:.5rem 0 .5rem 1.25rem;border-left:2px solid var(--gold);font-style:italic;color:var(--ink-soft)">${esc(b.text)}</blockquote>`;
+      case "product": return productCallout(L, b.id);
+      case "p": default: return `<p style="margin:0 0 1.15rem;line-height:1.75;color:var(--ink-soft)">${esc(b.text)}</p>`;
+    }
+  }).join("\n");
+}
+function blogCard(L, post) {
+  const c = postContent(L, post);
+  const purl = url("post", L, post);
+  return `<article class="blog-card reveal" style="display:flex;flex-direction:column">
+  <a href="${purl}" aria-label="${escA(c.title)}"><div style="aspect-ratio:16/10;overflow:hidden;border:1px solid var(--line);background:var(--stone)"><img src="${post.image}" alt="${escA(c.title)}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover"></div></a>
+  <div style="padding-top:1.1rem;display:flex;flex-direction:column;flex:1">
+    <div class="kicker" style="margin-bottom:.5rem">${T(L, "cat." + post.category)} · ${esc(blogDate(L, post.date))}</div>
+    <a href="${purl}" class="font-display link-underline" style="font-size:1.35rem;line-height:1.2">${esc(c.title)}</a>
+    <p class="muted" style="margin:.6rem 0 1rem;font-size:.9rem;line-height:1.6">${esc(c.excerpt)}</p>
+    <a href="${purl}" class="link-underline" style="margin-top:auto;font-size:.85rem;color:var(--gold)">${esc(BLOG_UI[L].readMore)} →</a>
+  </div>
+</article>`;
+}
+function renderBlogIndex(L) {
+  const ui = BLOG_UI[L];
+  const cards = POSTS.length
+    ? `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2.5rem 2rem;margin-top:3.5rem">${POSTS.map(p => blogCard(L, p)).join("\n")}</div>`
+    : `<p class="muted" style="margin-top:3rem">${esc(ui.empty)}</p>`;
+  const itemList = JSON.stringify({ "@context": "https://schema.org", "@type": "ItemList", itemListElement: POSTS.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: BASE + url("post", L, p), name: postContent(L, p).title })) });
+  const body = `<main class="page-main"><div class="container" style="padding-bottom:6rem">
+  <div style="max-width:42rem" class="reveal in">
+    <div class="kicker" style="margin-bottom:.5rem">${esc(ui.kicker)}</div>
+    <h1 class="font-display" style="font-size:clamp(2.6rem,6vw,4rem);line-height:1.02">${esc(ui.heading)}</h1>
+    <p class="muted" style="margin-top:1rem;font-size:1.05rem">${esc(ui.lead)}</p>
+  </div>
+  ${cards}
+</div></main>`;
+  return shell(L, { page: "blog", bodyPage: "blog", current: "blog", title: ui.indexTitle, description: ui.indexDescription, keywords: ui.indexKeywords, ld: [ldOrg(), ldWebsite(L), itemList] }, body);
+}
+function renderPost(L, post) {
+  const c = postContent(L, post);
+  const ui = BLOG_UI[L];
+  const title = c.title + " | Elira Living";
+  const faqs = c.faq || [];
+  const related = (post.related || []).map(id => CAT.getProduct(id)).filter(Boolean);
+  const crumbs = `<nav aria-label="Breadcrumb" class="muted" style="font-size:.8rem;margin-bottom:1.5rem"><a href="${url("home", L)}" class="link-underline">${esc(ui.crumbHome)}</a> / <a href="${url("blog", L)}" class="link-underline">${esc(ui.nav)}</a></nav>`;
+  const metaLine = `<div class="kicker" style="margin-top:1rem">${T(L, "cat." + post.category)} · ${esc(blogDate(L, post.date))} · ${c.readMins || 5} ${esc(ui.minRead)}</div>`;
+  const faqSection = faqs.length ? `<section style="margin-top:4rem;max-width:44rem">
+    <h2 class="font-display" style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1.5rem">${esc(ui.faqHeading)}</h2>
+    <div>${faqs.map(f => `<details class="acc"><summary><span style="font-weight:500;color:var(--ink)">${esc(f.q)}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(f.a)}</p></details>`).join("\n")}</div>
+  </section>` : "";
+  const relatedSection = related.length ? `<section style="margin-top:4.5rem">
+    <h2 class="font-display reveal" style="font-size:clamp(1.5rem,3.5vw,2.1rem);margin-bottom:2rem">${esc(ui.related)}</h2>
+    <div class="grid-products">${related.map(r => card(L, r)).join("\n")}</div>
+  </section>` : "";
+  const body = `<main class="page-main"><article class="container" style="padding-bottom:6rem">
+  <div style="max-width:44rem">
+    ${crumbs}
+    <h1 class="font-display" style="font-size:clamp(2.2rem,5.5vw,3.4rem);line-height:1.05">${esc(c.title)}</h1>
+    ${metaLine}
+  </div>
+  <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line);margin:2rem 0 2.5rem;max-width:60rem" class="reveal"><img src="${post.image}" alt="${escA(c.title)}" style="width:100%;height:100%;object-fit:cover"></div>
+  <div class="blog-prose" style="max-width:44rem;font-size:1.05rem">
+    ${renderBody(L, c.body)}
+  </div>
+  ${faqSection}
+  ${relatedSection}
+  <div style="margin-top:3.5rem"><a href="${url("blog", L)}" class="link-underline" style="color:var(--gold)">← ${esc(ui.back)}</a></div>
+</article></main>`;
+  const ld = [ldOrg(), ldArticle(L, post, c), ldPostBreadcrumb(L, post, c)];
+  if (faqs.length) ld.push(ldFAQ(faqs));
+  return shell(L, { page: "post", p: post, bodyPage: "blog", title, description: c.description, keywords: c.keywords, ogType: "article", image: BASE + post.image, ld }, body);
+}
+
 /* ---- PAGE: CART / SUCCESS / CANCEL ------------------------------------ */
 function renderCart(L) {
   const body = `<main class="page-main"><div class="container" style="padding-bottom:6rem">
@@ -505,6 +630,8 @@ function build() {
     write(`${L}/shop.html`, renderShop(L)); count++;
     write(`${L}/about.html`, renderAbout(L)); count++;
     write(`${L}/ingredients.html`, renderIngredients(L)); count++;
+    write(`${L}/blog/index.html`, renderBlogIndex(L)); count++;
+    POSTS.forEach(post => { write(`${L}/blog/${post.slug}.html`, renderPost(L, post)); count++; });
     write(`${L}/cart.html`, renderCart(L)); count++;
     const okIcon = `<div style="width:4rem;height:4rem;margin:0 auto;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></svg></div>`;
     write(`${L}/success.html`, renderSimple(L, "success", "success.title", "success.lead", "success.cta", "/" + L + "/shop.html", okIcon)); count++;
@@ -549,9 +676,11 @@ function writeSitemap() {
       { page: "shop", pr: "0.9", cf: "weekly" },
       { page: "about", pr: "0.6" },
       { page: "ingredients", pr: "0.7" },
+      { page: "blog", pr: "0.7", cf: "weekly" },
       { page: "impressum", pr: "0.2" }, { page: "privacy", pr: "0.2" }, { page: "terms", pr: "0.2" }, { page: "withdrawal", pr: "0.2" }
     ];
     CAT.PRODUCTS.forEach(p => list.push({ page: "product", p, pr: "0.8" }));
+    POSTS.forEach(post => list.push({ page: "post", p: post, pr: "0.6" }));
     return list;
   };
   let urls = "";
@@ -568,6 +697,7 @@ function writeSitemap() {
 /* ---- llms.txt (AI crawler brand facts) -------------------------------- */
 function writeLlms() {
   const products = CAT.PRODUCTS.map(p => `- ${CONTENT.en.products[p.id].name} (${p.size}, ${fmt("en", p.price)}): ${CONTENT.en.products[p.id].desc} ${BASE}${url("product", "en", p)}`).join("\n");
+  const articles = POSTS.map(p => `- ${p.i18n.en.title}: ${p.i18n.en.excerpt} ${BASE}${url("post", "en", p)}`).join("\n");
   const txt = `# Elira Living
 
 > Elira Living is a Finnish small business (toiminimi) selling vegan, ECOCERT COSMOS-certified natural skincare and haircare. Made in the EU, shipped to Germany and the Netherlands. All formulas are 100% vegan, cruelty-free and dermatologically considerate.
@@ -587,9 +717,13 @@ function writeLlms() {
 ## Products
 ${products}
 
+## Articles (expert guides — The Elira Journal)
+${articles || "- (none yet)"}
+
 ## Key pages
 - Shop: ${BASE}/en/shop.html (also /de/ and /nl/)
 - Ingredients (what's inside & why): ${BASE}/en/ingredients.html
+- Journal / guides: ${BASE}/en/blog/ (also /de/ and /nl/)
 - About / brand story: ${BASE}/en/about.html
 - Sitemap: ${BASE}/sitemap.xml
 

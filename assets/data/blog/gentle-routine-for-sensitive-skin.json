@@ -1,0 +1,127 @@
+{
+  "slug": "gentle-routine-for-sensitive-skin",
+  "category": "skincare",
+  "image": "/assets/img/cream.jpg",
+  "date": "2026-05-20",
+  "updated": "2026-06-01",
+  "related": ["radiant-glow-cleanser", "purifying-toner", "sensitive-moisturizing-cream"],
+  "i18n": {
+    "en": {
+      "title": "A Gentle Skincare Routine for Sensitive Skin (4 Simple Steps)",
+      "description": "How to build a calm, effective routine for sensitive, reactive skin using gentle, vegan and fragrance-free products. A simple 4-step morning and evening guide.",
+      "keywords": "sensitive skin routine, skincare for sensitive skin, fragrance-free skincare, vegan skincare routine, gentle skincare, calm reactive skin, natural skincare sensitive skin",
+      "excerpt": "If your skin stings, flushes or reacts easily, the answer is usually fewer, gentler steps — not more. Here is a simple, fragrance-free routine that calms and strengthens sensitive skin.",
+      "readMins": 6,
+      "body": [
+        { "type": "p", "text": "Sensitive skin doesn't need a ten-step routine. In fact, the more products you layer on reactive skin, the more chances it has to flare. The goal is a short, predictable routine built around gentle, fragrance-free formulas that clean, balance and protect without stripping your skin's natural barrier." },
+        { "type": "p", "text": "Below is a simple four-step routine — two steps in the morning, the same plus an extra cleanse in the evening — that works for most people with sensitive, easily-irritated or redness-prone skin." },
+        { "type": "h2", "text": "What makes skin \"sensitive\"?" },
+        { "type": "p", "text": "Sensitive skin usually means a weakened skin barrier: the outer layer loses water more easily and lets irritants in. Triggers include harsh surfactants, high concentrations of active acids, alcohol-heavy products and, very often, added fragrance. The fix is not a single miracle product — it is consistency and restraint." },
+        { "type": "h2", "text": "The 4-step routine" },
+        { "type": "h3", "text": "1. Cleanse gently" },
+        { "type": "p", "text": "Use a mild, non-stripping cleanser morning and evening. Your skin should feel clean and comfortable afterwards — never tight or squeaky. Massage onto damp skin, then rinse with lukewarm (not hot) water." },
+        { "type": "product", "id": "radiant-glow-cleanser" },
+        { "type": "h3", "text": "2. Tone only if it suits you" },
+        { "type": "p", "text": "A toner is optional for sensitive skin. If yours is also oily or breakout-prone in places, a gentle clarifying toner can help keep pores clear — but apply it sparingly and skip it on days your skin feels reactive." },
+        { "type": "product", "id": "purifying-toner" },
+        { "type": "h3", "text": "3. Moisturise to rebuild the barrier" },
+        { "type": "p", "text": "This is the most important step for sensitive skin. A fragrance-free moisturiser locks in hydration and helps repair the barrier so your skin is less reactive over time. Apply as the last step, morning and evening." },
+        { "type": "product", "id": "sensitive-moisturizing-cream" },
+        { "type": "h3", "text": "4. Protect during the day" },
+        { "type": "p", "text": "Finish your morning routine with a broad-spectrum SPF. UV exposure is one of the biggest triggers of redness and long-term sensitivity, so daily sun protection does more for calm skin than almost anything else." },
+        { "type": "h2", "text": "Habits that calm sensitive skin" },
+        { "type": "ul", "items": [
+          "Patch-test new products on your inner arm for a few days before using them on your face.",
+          "Introduce one new product at a time, so you can tell what your skin likes.",
+          "Choose fragrance-free formulas — added perfume is a common irritant.",
+          "Use lukewarm water and pat (don't rub) skin dry.",
+          "Be consistent: barrier repair happens over weeks, not days."
+        ]},
+        { "type": "p", "text": "Every Elira Living formula is vegan, ECOCERT COSMOS certified and made in the EU, with fragrance-free options chosen specifically for reactive skin. If you are unsure where to start, the cleanser and moisturiser alone make a complete, gentle routine." }
+      ],
+      "faq": [
+        { "q": "How many products does sensitive skin really need?", "a": "For most people, a gentle cleanser, a fragrance-free moisturiser and a daytime SPF are enough. Add a toner or treatment only if your skin tolerates it — fewer steps usually mean fewer reactions." },
+        { "q": "Should I avoid fragrance in my skincare?", "a": "If your skin is sensitive or reactive, yes. Added fragrance is one of the most common causes of irritation, which is why our Sensitive Moisturizing Cream is completely fragrance-free." },
+        { "q": "How long before I see calmer skin?", "a": "Barrier repair is gradual. With a simple, consistent routine most people notice less tightness and redness within two to four weeks." }
+      ]
+    },
+    "de": {
+      "title": "Eine sanfte Pflegeroutine für empfindliche Haut (4 einfache Schritte)",
+      "description": "So baust du eine ruhige, wirksame Routine für empfindliche, reaktive Haut auf — mit milden, veganen und parfümfreien Produkten. Eine einfache 4-Schritte-Anleitung.",
+      "keywords": "empfindliche Haut Routine, Pflege für empfindliche Haut, parfümfreie Hautpflege, vegane Pflegeroutine, sanfte Hautpflege, gereizte Haut beruhigen, Naturkosmetik empfindliche Haut",
+      "excerpt": "Wenn deine Haut spannt, rötet oder schnell reagiert, sind weniger und mildere Schritte meist die Lösung — nicht mehr. Hier ist eine einfache, parfümfreie Routine, die empfindliche Haut beruhigt und stärkt.",
+      "readMins": 6,
+      "body": [
+        { "type": "p", "text": "Empfindliche Haut braucht keine Zehn-Schritte-Routine. Im Gegenteil: Je mehr Produkte du auf reaktive Haut schichtest, desto mehr Gelegenheiten hat sie zu reagieren. Das Ziel ist eine kurze, verlässliche Routine aus milden, parfümfreien Formeln, die reinigen, ausgleichen und schützen, ohne die natürliche Hautbarriere zu strapazieren." },
+        { "type": "p", "text": "Unten findest du eine einfache Vier-Schritte-Routine — morgens zwei Schritte, abends dieselben plus eine zusätzliche Reinigung — die für die meisten mit empfindlicher, schnell gereizter oder zu Rötungen neigender Haut funktioniert." },
+        { "type": "h2", "text": "Was macht Haut „empfindlich“?" },
+        { "type": "p", "text": "Empfindliche Haut bedeutet meist eine geschwächte Hautbarriere: Die äußere Schicht verliert leichter Feuchtigkeit und lässt Reizstoffe durch. Auslöser sind aggressive Tenside, hohe Konzentrationen aktiver Säuren, alkoholreiche Produkte und sehr oft zugesetztes Parfüm. Die Lösung ist kein einzelnes Wunderprodukt — sondern Beständigkeit und Zurückhaltung." },
+        { "type": "h2", "text": "Die 4-Schritte-Routine" },
+        { "type": "h3", "text": "1. Sanft reinigen" },
+        { "type": "p", "text": "Verwende morgens und abends einen milden, nicht austrocknenden Reiniger. Danach sollte sich die Haut sauber und angenehm anfühlen — nie spannend. Auf die feuchte Haut einmassieren und mit lauwarmem (nicht heißem) Wasser abspülen." },
+        { "type": "product", "id": "radiant-glow-cleanser" },
+        { "type": "h3", "text": "2. Nur tonisieren, wenn es passt" },
+        { "type": "p", "text": "Ein Gesichtswasser ist bei empfindlicher Haut optional. Wenn deine Haut stellenweise auch fettig oder unrein ist, kann ein mildes klärendes Gesichtswasser die Poren frei halten — sparsam auftragen und an reaktiven Tagen weglassen." },
+        { "type": "product", "id": "purifying-toner" },
+        { "type": "h3", "text": "3. Mit Feuchtigkeit die Barriere stärken" },
+        { "type": "p", "text": "Das ist der wichtigste Schritt für empfindliche Haut. Eine parfümfreie Feuchtigkeitscreme schließt Feuchtigkeit ein und hilft, die Barriere zu reparieren, sodass die Haut mit der Zeit weniger reagiert. Morgens und abends als letzten Schritt auftragen." },
+        { "type": "product", "id": "sensitive-moisturizing-cream" },
+        { "type": "h3", "text": "4. Tagsüber schützen" },
+        { "type": "p", "text": "Schließe deine Morgenroutine mit einem Breitband-LSF ab. UV-Strahlung ist einer der größten Auslöser von Rötungen und langfristiger Empfindlichkeit — täglicher Sonnenschutz tut beruhigter Haut mehr Gutes als fast alles andere." },
+        { "type": "h2", "text": "Gewohnheiten, die empfindliche Haut beruhigen" },
+        { "type": "ul", "items": [
+          "Teste neue Produkte einige Tage an der Innenseite des Arms, bevor du sie im Gesicht verwendest.",
+          "Führe immer nur ein neues Produkt gleichzeitig ein, um zu erkennen, was deine Haut verträgt.",
+          "Wähle parfümfreie Formeln — zugesetztes Parfüm reizt häufig.",
+          "Verwende lauwarmes Wasser und tupfe die Haut trocken (nicht reiben).",
+          "Bleib beständig: Barrierereparatur geschieht über Wochen, nicht Tage."
+        ]},
+        { "type": "p", "text": "Jede Elira Living-Formel ist vegan, ECOCERT COSMOS zertifiziert und in der EU hergestellt, mit parfümfreien Optionen speziell für reaktive Haut. Wenn du nicht weißt, wo du anfangen sollst: Reiniger und Feuchtigkeitscreme allein ergeben bereits eine vollständige, sanfte Routine." }
+      ],
+      "faq": [
+        { "q": "Wie viele Produkte braucht empfindliche Haut wirklich?", "a": "Für die meisten reichen ein milder Reiniger, eine parfümfreie Feuchtigkeitscreme und ein LSF für tagsüber. Ein Gesichtswasser oder eine Pflege nur ergänzen, wenn die Haut es verträgt — weniger Schritte bedeuten meist weniger Reaktionen." },
+        { "q": "Sollte ich Parfüm in der Hautpflege meiden?", "a": "Bei empfindlicher oder reaktiver Haut ja. Zugesetztes Parfüm ist eine der häufigsten Ursachen für Irritationen — deshalb ist unsere Sensitive Moisturizing Cream vollständig parfümfrei." },
+        { "q": "Wie lange dauert es, bis die Haut ruhiger wird?", "a": "Barrierereparatur verläuft allmählich. Mit einer einfachen, beständigen Routine bemerken die meisten innerhalb von zwei bis vier Wochen weniger Spannungsgefühl und Rötungen." }
+      ]
+    },
+    "nl": {
+      "title": "Een milde verzorgingsroutine voor de gevoelige huid (4 simpele stappen)",
+      "description": "Zo bouw je een kalme, effectieve routine op voor de gevoelige, reactieve huid met milde, veganistische en parfumvrije producten. Een eenvoudige 4-stappengids.",
+      "keywords": "gevoelige huid routine, verzorging gevoelige huid, parfumvrije huidverzorging, veganistische routine, milde huidverzorging, geïrriteerde huid kalmeren, natuurlijke huidverzorging gevoelige huid",
+      "excerpt": "Als je huid prikt, snel rood wordt of reageert, is het antwoord meestal minder en mildere stappen — niet meer. Hier is een eenvoudige, parfumvrije routine die de gevoelige huid kalmeert en versterkt.",
+      "readMins": 6,
+      "body": [
+        { "type": "p", "text": "De gevoelige huid heeft geen routine van tien stappen nodig. Sterker nog: hoe meer producten je op een reactieve huid laagt, hoe meer kans op irritatie. Het doel is een korte, voorspelbare routine met milde, parfumvrije formules die reinigen, balanceren en beschermen zonder de natuurlijke huidbarrière aan te tasten." },
+        { "type": "p", "text": "Hieronder vind je een eenvoudige routine van vier stappen — twee stappen ’s ochtends, dezelfde plus een extra reiniging ’s avonds — die werkt voor de meeste mensen met een gevoelige, snel geïrriteerde of roodheidgevoelige huid." },
+        { "type": "h2", "text": "Wat maakt een huid „gevoelig“?" },
+        { "type": "p", "text": "Een gevoelige huid betekent meestal een verzwakte huidbarrière: de buitenste laag verliest sneller vocht en laat irriterende stoffen door. Triggers zijn agressieve reinigers, hoge concentraties actieve zuren, alcoholrijke producten en heel vaak toegevoegd parfum. De oplossing is geen wonderproduct — maar consistentie en terughoudendheid." },
+        { "type": "h2", "text": "De routine in 4 stappen" },
+        { "type": "h3", "text": "1. Reinig mild" },
+        { "type": "p", "text": "Gebruik ’s ochtends en ’s avonds een milde, niet-uitdrogende reiniger. Je huid hoort daarna schoon en comfortabel te voelen — nooit strak. Masseer op de vochtige huid en spoel af met lauw (niet heet) water." },
+        { "type": "product", "id": "radiant-glow-cleanser" },
+        { "type": "h3", "text": "2. Tonifieer alleen als het past" },
+        { "type": "p", "text": "Een toner is optioneel voor de gevoelige huid. Is jouw huid plaatselijk ook vet of onzuiver, dan kan een milde zuiverende toner de poriën vrijhouden — breng spaarzaam aan en sla hem over op dagen dat je huid reactief aanvoelt." },
+        { "type": "product", "id": "purifying-toner" },
+        { "type": "h3", "text": "3. Hydrateer om de barrière te herstellen" },
+        { "type": "p", "text": "Dit is de belangrijkste stap voor de gevoelige huid. Een parfumvrije moisturizer sluit hydratatie in en helpt de barrière te herstellen, zodat je huid na verloop van tijd minder reageert. Breng aan als laatste stap, ’s ochtends en ’s avonds." },
+        { "type": "product", "id": "sensitive-moisturizing-cream" },
+        { "type": "h3", "text": "4. Bescherm overdag" },
+        { "type": "p", "text": "Sluit je ochtendroutine af met een breedspectrum-SPF. UV-blootstelling is een van de grootste triggers van roodheid en langdurige gevoeligheid, dus dagelijkse zonbescherming doet meer voor een kalme huid dan bijna iets anders." },
+        { "type": "h2", "text": "Gewoonten die de gevoelige huid kalmeren" },
+        { "type": "ul", "items": [
+          "Test nieuwe producten een paar dagen op de binnenkant van je arm voordat je ze op je gezicht gebruikt.",
+          "Introduceer één nieuw product tegelijk, zodat je weet wat je huid prettig vindt.",
+          "Kies parfumvrije formules — toegevoegd parfum irriteert vaak.",
+          "Gebruik lauw water en dep (wrijf niet) de huid droog.",
+          "Wees consistent: barrièreherstel gebeurt over weken, niet dagen."
+        ]},
+        { "type": "p", "text": "Elke Elira Living-formule is veganistisch, ECOCERT COSMOS-gecertificeerd en gemaakt in de EU, met parfumvrije opties speciaal voor de reactieve huid. Weet je niet waar te beginnen, dan vormen alleen de reiniger en de moisturizer al een complete, milde routine." }
+      ],
+      "faq": [
+        { "q": "Hoeveel producten heeft de gevoelige huid echt nodig?", "a": "Voor de meeste mensen zijn een milde reiniger, een parfumvrije moisturizer en een SPF voor overdag genoeg. Voeg een toner of behandeling alleen toe als je huid het verdraagt — minder stappen betekent meestal minder reacties." },
+        { "q": "Moet ik parfum in mijn huidverzorging vermijden?", "a": "Bij een gevoelige of reactieve huid wel. Toegevoegd parfum is een van de meest voorkomende oorzaken van irritatie, daarom is onze Sensitive Moisturizing Cream volledig parfumvrij." },
+        { "q": "Hoelang duurt het voordat mijn huid kalmer is?", "a": "Barrièreherstel verloopt geleidelijk. Met een eenvoudige, consistente routine merken de meeste mensen binnen twee tot vier weken minder strakheid en roodheid." }
+      ]
+    }
+  }
+}

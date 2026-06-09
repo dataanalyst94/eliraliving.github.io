@@ -1,0 +1,14 @@
+{
+  "name": "elira-living",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Elira Living — trilingual static storefront + SEO content engine.",
+  "scripts": {
+    "build": "node build.js",
+    "gen:blog": "node tools/gen-blog.js",
+    "serve": "npx --yes http-server . -p 8099 -c-1"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest"
+  }
+}

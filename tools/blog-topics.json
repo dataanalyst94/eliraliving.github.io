@@ -1,0 +1,22 @@
+[
+  { "topic": "Fragrance-free vs unscented skincare: what's the difference?", "category": "skincare", "related": ["sensitive-moisturizing-cream"] },
+  { "topic": "How to tell if your skin barrier is damaged (and how to repair it)", "category": "skincare", "related": ["sensitive-moisturizing-cream", "radiant-glow-cleanser"] },
+  { "topic": "What does ECOCERT COSMOS certification actually mean?", "category": "skincare", "related": ["purifying-toner"] },
+  { "topic": "Do you really need a toner? A simple guide for oily and combination skin", "category": "skincare", "related": ["purifying-toner"] },
+  { "topic": "Salicylic acid for beginners: how to use a BHA without irritation", "category": "skincare", "related": ["purifying-toner"] },
+  { "topic": "Is vegan skincare better for sensitive skin?", "category": "skincare", "related": ["sensitive-moisturizing-cream", "radiant-glow-cleanser"] },
+  { "topic": "Morning vs evening skincare routine: what changes and why", "category": "skincare", "related": ["radiant-glow-cleanser", "sensitive-moisturizing-cream"] },
+  { "topic": "How to choose a gentle facial cleanser for everyday use", "category": "skincare", "related": ["radiant-glow-cleanser"] },
+  { "topic": "Why is my skin tight after cleansing? Causes and gentle fixes", "category": "skincare", "related": ["radiant-glow-cleanser", "sensitive-moisturizing-cream"] },
+  { "topic": "Combination skin explained: how to balance oily and dry areas", "category": "skincare", "related": ["purifying-toner", "sensitive-moisturizing-cream"] },
+  { "topic": "How to layer natural skincare products in the right order", "category": "skincare", "related": ["radiant-glow-cleanser", "purifying-toner", "sensitive-moisturizing-cream"] },
+  { "topic": "Glycerin in skincare: what this humectant does for your skin", "category": "skincare", "related": ["purifying-toner", "sensitive-moisturizing-cream"] },
+  { "topic": "How to patch-test a new skincare product the right way", "category": "skincare", "related": ["sensitive-moisturizing-cream"] },
+  { "topic": "What is clean beauty, and how do you spot greenwashing?", "category": "skincare", "related": ["purifying-toner"] },
+  { "topic": "How often should you really wash your hair?", "category": "haircare", "related": ["sensitive-scalp-shampoo"] },
+  { "topic": "Sulfates in shampoo: what they do and when to choose a gentler option", "category": "haircare", "related": ["sensitive-scalp-shampoo"] },
+  { "topic": "Dry, flaky scalp vs dandruff: how to tell them apart", "category": "haircare", "related": ["sensitive-scalp-shampoo"] },
+  { "topic": "How to soothe a scalp irritated by hard water", "category": "haircare", "related": ["sensitive-scalp-shampoo"] },
+  { "topic": "Switching to a natural shampoo: what to expect in the first few weeks", "category": "haircare", "related": ["sensitive-scalp-shampoo"] },
+  { "topic": "Is climate-neutral delivery actually better for the planet?", "category": "skincare", "related": ["purifying-toner"] }
+]

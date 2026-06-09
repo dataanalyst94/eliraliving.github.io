@@ -1,0 +1,111 @@
+{
+  "slug": "caring-for-a-sensitive-scalp",
+  "category": "haircare",
+  "image": "/assets/img/shampoo.jpg",
+  "date": "2026-05-28",
+  "related": ["sensitive-scalp-shampoo"],
+  "i18n": {
+    "en": {
+      "title": "How to Care for a Sensitive, Itchy Scalp",
+      "description": "An itchy, tight or flaky scalp is usually a sign of irritation, not poor hygiene. Here is how to calm a sensitive scalp with gentler washing habits and a mild, vegan shampoo.",
+      "keywords": "sensitive scalp, itchy scalp remedy, gentle shampoo, vegan shampoo sensitive scalp, scalp care routine, soothe irritated scalp, dermatologically tested shampoo",
+      "excerpt": "An itchy, tight or flaky scalp is rarely about washing too little. More often it's irritation from harsh cleansers and over-washing. Here's how to calm it.",
+      "readMins": 5,
+      "body": [
+        { "type": "p", "text": "If your scalp itches, tightens or flakes after washing, it's easy to assume you're not cleaning it enough. Usually it's the opposite: harsh detergents and frequent hot-water washing strip the scalp's protective layer, leaving it dry and reactive. The fix is gentler products and gentler habits." },
+        { "type": "h2", "text": "What irritates a sensitive scalp" },
+        { "type": "p", "text": "The scalp is skin too, with the same barrier that can be worn down. Common triggers are strong sulfates, added fragrance, very hot water, scratching with nails, and washing so often that the scalp never recovers. Stress and weather changes can make all of this worse." },
+        { "type": "h2", "text": "A gentle scalp routine" },
+        { "type": "h3", "text": "Choose a mild, low-irritant shampoo" },
+        { "type": "p", "text": "Look for a shampoo built on gentle cleansers and free from heavy fragrance — ideally dermatologically tested for sensitive scalps. It should leave hair clean without that tight, stripped feeling afterwards." },
+        { "type": "product", "id": "sensitive-scalp-shampoo" },
+        { "type": "h3", "text": "Wash with technique, not force" },
+        { "type": "ul", "items": [
+          "Use lukewarm water — hot water dries and irritates the scalp.",
+          "Massage with your fingertips, never your nails.",
+          "Focus the lather on the scalp; let it rinse through the lengths.",
+          "Rinse thoroughly — residue can itch as much as dryness.",
+          "Don't over-wash; let your scalp tell you how often it needs cleansing."
+        ]},
+        { "type": "h3", "text": "Be patient and consistent" },
+        { "type": "p", "text": "A reactive scalp calms down gradually as its barrier recovers. Stick with one gentle shampoo for a few weeks rather than switching products at the first itch — constant change is itself a trigger." },
+        { "type": "h2", "text": "When to see a professional" },
+        { "type": "p", "text": "Most sensitive scalps respond well to gentler care. But if you have persistent intense itching, painful patches, sores or sudden hair loss, see a doctor or dermatologist — those can point to a condition that needs treatment beyond a change of shampoo." },
+        { "type": "p", "text": "Our Sensitive Scalp Shampoo is vegan, ECOCERT COSMOS Natural certified, dermatologically tested and gentle enough for frequent use — designed for exactly this kind of delicate, easily-irritated scalp." }
+      ],
+      "faq": [
+        { "q": "Why is my scalp itchy even though I wash my hair often?", "a": "Frequent washing with harsh shampoo can strip the scalp's barrier and cause dryness and itching. Switching to a milder, fragrance-light shampoo and washing a little less often usually helps." },
+        { "q": "Can I use a gentle shampoo every day?", "a": "Yes — a mild, dermatologically tested shampoo like ours is gentle enough for frequent use. Let your scalp guide how often you actually need to wash." },
+        { "q": "Is a vegan shampoo better for a sensitive scalp?", "a": "What matters most is mild cleansers and minimal irritants. Our vegan, COSMOS-certified formula is built around gentle, cleanly sourced ingredients chosen for sensitive scalps." }
+      ]
+    },
+    "de": {
+      "title": "So pflegst du eine empfindliche, juckende Kopfhaut",
+      "description": "Eine juckende, spannende oder schuppende Kopfhaut ist meist ein Zeichen von Irritation, nicht von mangelnder Hygiene. So beruhigst du empfindliche Kopfhaut mit sanfteren Waschgewohnheiten und einem milden, veganen Shampoo.",
+      "keywords": "empfindliche Kopfhaut, juckende Kopfhaut Hilfe, mildes Shampoo, veganes Shampoo empfindliche Kopfhaut, Kopfhautpflege, gereizte Kopfhaut beruhigen, dermatologisch getestetes Shampoo",
+      "excerpt": "Eine juckende, spannende oder schuppende Kopfhaut liegt selten an zu seltenem Waschen. Häufiger ist es Irritation durch aggressive Reiniger und zu häufiges Waschen. So beruhigst du sie.",
+      "readMins": 5,
+      "body": [
+        { "type": "p", "text": "Wenn die Kopfhaut nach dem Waschen juckt, spannt oder schuppt, denkt man schnell, man reinige sie nicht genug. Meist ist das Gegenteil der Fall: Aggressive Tenside und häufiges Waschen mit heißem Wasser tragen die Schutzschicht der Kopfhaut ab und machen sie trocken und reaktiv. Die Lösung sind sanftere Produkte und sanftere Gewohnheiten." },
+        { "type": "h2", "text": "Was empfindliche Kopfhaut reizt" },
+        { "type": "p", "text": "Die Kopfhaut ist ebenfalls Haut, mit derselben Barriere, die strapaziert werden kann. Häufige Auslöser sind starke Sulfate, zugesetztes Parfüm, sehr heißes Wasser, Kratzen mit den Nägeln und so häufiges Waschen, dass sich die Kopfhaut nie erholt. Stress und Wetterwechsel verschlimmern das zusätzlich." },
+        { "type": "h2", "text": "Eine sanfte Kopfhautroutine" },
+        { "type": "h3", "text": "Wähle ein mildes, reizarmes Shampoo" },
+        { "type": "p", "text": "Achte auf ein Shampoo auf Basis milder Reinigungssubstanzen, ohne schweres Parfüm — idealerweise dermatologisch für empfindliche Kopfhaut getestet. Es sollte das Haar reinigen, ohne das spannende, ausgetrocknete Gefühl danach." },
+        { "type": "product", "id": "sensitive-scalp-shampoo" },
+        { "type": "h3", "text": "Wasche mit Technik, nicht mit Druck" },
+        { "type": "ul", "items": [
+          "Verwende lauwarmes Wasser — heißes Wasser trocknet die Kopfhaut aus und reizt sie.",
+          "Massiere mit den Fingerkuppen, nie mit den Nägeln.",
+          "Schäume vor allem die Kopfhaut ein; lass den Schaum durch die Längen laufen.",
+          "Gründlich ausspülen — Rückstände können genauso jucken wie Trockenheit.",
+          "Nicht zu oft waschen; lass deine Kopfhaut entscheiden, wie häufig sie Reinigung braucht."
+        ]},
+        { "type": "h3", "text": "Sei geduldig und beständig" },
+        { "type": "p", "text": "Eine reaktive Kopfhaut beruhigt sich allmählich, während sich ihre Barriere erholt. Bleib einige Wochen bei einem milden Shampoo, statt beim ersten Jucken das Produkt zu wechseln — ständiger Wechsel ist selbst ein Auslöser." },
+        { "type": "h2", "text": "Wann du fachlichen Rat suchen solltest" },
+        { "type": "p", "text": "Die meisten empfindlichen Kopfhäute sprechen gut auf sanftere Pflege an. Bei anhaltendem starkem Juckreiz, schmerzhaften Stellen, Wunden oder plötzlichem Haarausfall solltest du jedoch eine Ärztin oder Hautärztin aufsuchen — das kann auf eine Erkrankung hindeuten, die mehr als einen Shampoowechsel erfordert." },
+        { "type": "p", "text": "Unser Sensitive Scalp Shampoo ist vegan, ECOCERT COSMOS Natural zertifiziert, dermatologisch getestet und mild genug für die häufige Anwendung — entwickelt für genau diese empfindliche, schnell gereizte Kopfhaut." }
+      ],
+      "faq": [
+        { "q": "Warum juckt meine Kopfhaut, obwohl ich oft Haare wasche?", "a": "Häufiges Waschen mit aggressivem Shampoo kann die Barriere der Kopfhaut abtragen und zu Trockenheit und Juckreiz führen. Ein milderes, parfümarmes Shampoo und etwas seltener waschen hilft meist." },
+        { "q": "Kann ich ein mildes Shampoo täglich verwenden?", "a": "Ja — ein mildes, dermatologisch getestetes Shampoo wie unseres ist mild genug für die häufige Anwendung. Lass deine Kopfhaut entscheiden, wie oft du wirklich waschen musst." },
+        { "q": "Ist ein veganes Shampoo besser für empfindliche Kopfhaut?", "a": "Am wichtigsten sind milde Reinigungssubstanzen und wenige Reizstoffe. Unsere vegane, COSMOS-zertifizierte Formel basiert auf sanften, sauber gewonnenen Inhaltsstoffen für empfindliche Kopfhaut." }
+      ]
+    },
+    "nl": {
+      "title": "Hoe verzorg je een gevoelige, jeukende hoofdhuid",
+      "description": "Een jeukende, strakke of schilferende hoofdhuid is meestal een teken van irritatie, niet van slechte hygiëne. Zo kalmeer je een gevoelige hoofdhuid met mildere wasgewoonten en een milde, veganistische shampoo.",
+      "keywords": "gevoelige hoofdhuid, jeukende hoofdhuid oplossing, milde shampoo, veganistische shampoo gevoelige hoofdhuid, hoofdhuidverzorging, geïrriteerde hoofdhuid kalmeren, dermatologisch geteste shampoo",
+      "excerpt": "Een jeukende, strakke of schilferende hoofdhuid komt zelden door te weinig wassen. Vaker is het irritatie door agressieve reinigers en te vaak wassen. Zo kalmeer je hem.",
+      "readMins": 5,
+      "body": [
+        { "type": "p", "text": "Als je hoofdhuid na het wassen jeukt, trekt of schilfert, denk je al snel dat je hem niet genoeg reinigt. Meestal is het omgekeerd: agressieve reinigers en vaak wassen met heet water tasten de beschermlaag van de hoofdhuid aan, waardoor hij droog en reactief wordt. De oplossing is mildere producten en mildere gewoonten." },
+        { "type": "h2", "text": "Wat een gevoelige hoofdhuid irriteert" },
+        { "type": "p", "text": "De hoofdhuid is ook huid, met dezelfde barrière die aangetast kan raken. Veelvoorkomende triggers zijn sterke sulfaten, toegevoegd parfum, heel heet water, krabben met je nagels en zo vaak wassen dat de hoofdhuid nooit herstelt. Stress en weersveranderingen maken dit erger." },
+        { "type": "h2", "text": "Een milde hoofdhuidroutine" },
+        { "type": "h3", "text": "Kies een milde, weinig irriterende shampoo" },
+        { "type": "p", "text": "Let op een shampoo op basis van milde reinigers en zonder zwaar parfum — idealiter dermatologisch getest voor de gevoelige hoofdhuid. Hij hoort het haar te reinigen zonder dat strakke, uitgedroogde gevoel achteraf." },
+        { "type": "product", "id": "sensitive-scalp-shampoo" },
+        { "type": "h3", "text": "Was met techniek, niet met kracht" },
+        { "type": "ul", "items": [
+          "Gebruik lauw water — heet water droogt de hoofdhuid uit en irriteert.",
+          "Masseer met je vingertoppen, nooit met je nagels.",
+          "Schuim vooral de hoofdhuid in; laat het schuim door de lengtes spoelen.",
+          "Spoel grondig — restjes kunnen net zo jeuken als droogte.",
+          "Was niet te vaak; laat je hoofdhuid bepalen hoe vaak hij reiniging nodig heeft."
+        ]},
+        { "type": "h3", "text": "Wees geduldig en consistent" },
+        { "type": "p", "text": "Een reactieve hoofdhuid kalmeert geleidelijk terwijl de barrière herstelt. Blijf een paar weken bij één milde shampoo in plaats van bij de eerste jeuk te wisselen — voortdurend wisselen is zelf een trigger." },
+        { "type": "h2", "text": "Wanneer naar een professional" },
+        { "type": "p", "text": "De meeste gevoelige hoofdhuiden reageren goed op mildere verzorging. Maar bij aanhoudende hevige jeuk, pijnlijke plekken, wondjes of plotseling haarverlies: raadpleeg een arts of dermatoloog — dat kan wijzen op een aandoening die meer vraagt dan een andere shampoo." },
+        { "type": "p", "text": "Onze Sensitive Scalp Shampoo is veganistisch, ECOCERT COSMOS Natural-gecertificeerd, dermatologisch getest en mild genoeg voor frequent gebruik — ontworpen voor precies deze gevoelige, snel geïrriteerde hoofdhuid." }
+      ],
+      "faq": [
+        { "q": "Waarom jeukt mijn hoofdhuid terwijl ik mijn haar vaak was?", "a": "Vaak wassen met agressieve shampoo kan de barrière van de hoofdhuid aantasten en droogte en jeuk veroorzaken. Overstappen op een mildere, parfumarme shampoo en iets minder vaak wassen helpt meestal." },
+        { "q": "Kan ik elke dag een milde shampoo gebruiken?", "a": "Ja — een milde, dermatologisch geteste shampoo zoals de onze is mild genoeg voor frequent gebruik. Laat je hoofdhuid bepalen hoe vaak je echt moet wassen." },
+        { "q": "Is een veganistische shampoo beter voor de gevoelige hoofdhuid?", "a": "Het belangrijkste zijn milde reinigers en weinig irriterende stoffen. Onze veganistische, COSMOS-gecertificeerde formule is opgebouwd rond milde, zuiver gewonnen ingrediënten voor de gevoelige hoofdhuid." }
+      ]
+    }
+  }
+}
