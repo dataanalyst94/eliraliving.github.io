@@ -10,6 +10,9 @@ const CAT = require("./assets/data/catalog.js");
 const CONTENT = { en: require("./assets/content/en.js"), de: require("./assets/content/de.js"), nl: require("./assets/content/nl.js") };
 const TRACK = require("./assets/data/analytics-config.js");
 const { LEGAL, DISCLAIMER } = require("./assets/data/legal-content.js");
+const { USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE } = require("./assets/data/faq-content.js");
+const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen" };
+const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik" };
 
 // Google Consent Mode v2 default (denied) + GTM loader — baked into every page.
 function gtmHead() {
@@ -46,6 +49,7 @@ function url(page, L, p) {
     case "home": return P + "/";
     case "shop": return P + "/shop.html";
     case "about": return P + "/about.html";
+    case "ingredients": return P + "/ingredients.html";
     case "cart": return P + "/cart.html";
     case "success": return P + "/success.html";
     case "cancel": return P + "/cancel.html";
@@ -131,7 +135,7 @@ function footer(L) {
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.help")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
       ${li(P + "/withdrawal.html", T(L, "foot.shipping"))}${li(P + "/terms.html", T(L, "foot.faq"))}${li("mailto:support@eliraliving.com", T(L, "foot.contact"))}</ul></div>
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.company")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
-      ${li(P + "/about.html", T(L, "foot.about"))}${li(P + "/privacy.html", T(L, "foot.privacy"))}${li(P + "/impressum.html", T(L, "foot.imprint"))}</ul></div>
+      ${li(P + "/about.html", T(L, "foot.about"))}${li(P + "/ingredients.html", esc(INGREDIENTS_PAGE[L].title))}${li(P + "/privacy.html", T(L, "foot.privacy"))}${li(P + "/impressum.html", T(L, "foot.imprint"))}</ul></div>
   </div>
   <div style="margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;font-size:.75rem" class="muted">
     <div>© <span data-year></span> Elira Living · ${T(L, "foot.rights")}</div>
@@ -210,6 +214,9 @@ function ldBreadcrumb(L, p) {
     { "@type": "ListItem", position: 2, name: t(L, "cat." + p.category), item: BASE + url("shop", L) + "?category=" + p.category },
     { "@type": "ListItem", position: 3, name: pname(L, p.id), item: BASE + url("product", L, p) }
   ] });
+}
+function ldFAQ(faqs) {
+  return JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) });
 }
 
 /* ---- PAGE: HOME -------------------------------------------------------- */
@@ -353,6 +360,8 @@ function renderProduct(L, p) {
   const description = pdesc(L, p.id) + " " + m.productShippingNote;
   const related = CAT.PRODUCTS.filter(x => x.id !== p.id).slice(0, 4);
   const features = (CAT.getProduct(p.id).featureKeys || []).map(k => `<span class="tag">${esc(feat(L, k))}</span>`).join("");
+  const faqs = (PRODUCT_FAQ[p.id] && (PRODUCT_FAQ[p.id][L] || PRODUCT_FAQ[p.id].en)) || [];
+  const usage = (USAGE[p.id] && (USAGE[p.id][L] || USAGE[p.id].en)) || "";
   const body = `<main class="page-main" data-product="${p.id}"><div class="container" style="padding-bottom:6rem">
   <a href="${url("shop", L)}" class="link-underline muted" style="display:inline-block;font-size:.875rem;margin-bottom:2rem">← ${T(L, "pdp.back")}</a>
   <div class="pdp-grid">
@@ -370,17 +379,22 @@ function renderProduct(L, p) {
       </div>
       <button class="btn btn-outline btn-block" style="margin-top:.75rem" data-buy>${T(L, "pdp.buy")}</button>
       <div style="margin-top:2.25rem">
-        <details class="acc" open><summary><span class="kicker">${T(L, "pdp.ingredients")}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(ping(L, p.id))}</p></details>
+        <details class="acc" open><summary><span class="kicker">${T(L, "pdp.ingredients")}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(ping(L, p.id))} <a href="${url("ingredients", L)}" ${'class="link-underline"'}>${esc(INGREDIENTS_PAGE[L].title)} →</a></p></details>
+        <details class="acc"><summary><span class="kicker">${USE_H[L]}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(usage)}</p></details>
         <details class="acc"><summary><span class="kicker">${T(L, "pdp.shipping")}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${T(L, "pdp.shippingText")}</p></details>
       </div>
     </div>
   </div>
-  <section style="margin-top:6rem">
+  <section style="margin-top:5rem;max-width:46rem">
+    <h2 class="font-display" style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1.5rem">${FAQ_H[L]}</h2>
+    <div>${faqs.map(f => `<details class="acc"><summary><span style="font-weight:500;color:var(--ink)">${esc(f.q)}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(f.a)}</p></details>`).join("\n")}</div>
+  </section>
+  <section style="margin-top:5rem">
     <h2 class="font-display reveal" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:2rem">${T(L, "pdp.related")}</h2>
     <div class="grid-products">${related.map(r => card(L, r)).join("\n")}</div>
   </section>
 </div></main>`;
-  return shell(L, { page: "product", p, bodyPage: "product", title, description, ogType: "product", image: BASE + p.image, inlineData: `window.ELIRA_PAGE={type:"product",id:${JSON.stringify(p.id)}};`, keywords: [pname(L, p.id), t(L, "cat." + p.category), "Elira Living", "vegan", "COSMOS", "ECOCERT"].join(", "), ld: [ldOrg(), ldProduct(L, p), ldBreadcrumb(L, p)] }, body);
+  return shell(L, { page: "product", p, bodyPage: "product", title, description, ogType: "product", image: BASE + p.image, inlineData: `window.ELIRA_PAGE={type:"product",id:${JSON.stringify(p.id)}};`, keywords: [pname(L, p.id), t(L, "cat." + p.category), "Elira Living", "vegan", "COSMOS", "ECOCERT"].join(", "), ld: [ldOrg(), ldProduct(L, p), ldBreadcrumb(L, p), ldFAQ(faqs)] }, body);
 }
 
 /* ---- PAGE: ABOUT ------------------------------------------------------- */
@@ -412,6 +426,31 @@ function renderAbout(L) {
   </section>
 </main>`;
   return shell(L, { page: "about", bodyPage: "about", current: "about", title: m.title, description: m.description, keywords: m.keywords, ld: [ldOrg(), ldWebsite(L)] }, body);
+}
+
+/* ---- PAGE: INGREDIENTS (AIEO) ----------------------------------------- */
+function renderIngredients(L) {
+  const ip = INGREDIENTS_PAGE[L] || INGREDIENTS_PAGE.en;
+  const list = INGREDIENTS[L] || INGREDIENTS.en;
+  const items = list.map(ing => `
+    <div style="border-top:1px solid var(--line);padding:1.5rem 0">
+      <h2 class="font-display" style="font-size:1.5rem">${esc(ing.name)}</h2>
+      <div class="muted" style="font-size:.8rem;letter-spacing:.04em;margin:.25rem 0 .75rem">INCI: ${esc(ing.inci)}</div>
+      <p style="margin:0 0 .5rem;color:var(--ink-soft)"><strong style="color:var(--ink)">${L === "de" ? "Was es ist" : L === "nl" ? "Wat het is" : "What it is"}:</strong> ${esc(ing.what)}</p>
+      <p style="margin:0;color:var(--ink-soft)"><strong style="color:var(--ink)">${L === "de" ? "Warum wir es verwenden" : L === "nl" ? "Waarom wij het gebruiken" : "Why we use it"}:</strong> ${esc(ing.why)}</p>
+    </div>`).join("");
+  const body = `<main class="page-main"><div class="container" style="max-width:52rem;padding-bottom:6rem">
+  <div class="kicker" style="margin-bottom:.5rem">${T(L, "cat.kicker")}</div>
+  <h1 class="font-display" style="font-size:clamp(2.4rem,6vw,3.6rem)">${esc(ip.title)}</h1>
+  <p style="margin-top:1rem;font-size:1.1rem;color:var(--ink-soft)">${esc(ip.lead)}</p>
+  <p style="margin-top:1rem;color:var(--ink-soft);line-height:1.7">${esc(ip.intro)}</p>
+  <div style="margin-top:2.5rem">${items}</div>
+  <div style="margin-top:3rem"><a href="${url("shop", L)}" class="btn btn-primary">${T(L, "best.viewall")}</a></div>
+</div></main>`;
+  const meta = { en: "Vegan, ECOCERT COSMOS-certified ingredients — what's in Elira Living skincare & haircare and why.",
+    de: "Vegane, ECOCERT COSMOS-zertifizierte Inhaltsstoffe — was in der Elira Living Haut- & Haarpflege steckt und warum.",
+    nl: "Veganistische, ECOCERT COSMOS-gecertificeerde ingrediënten — wat er in Elira Living huid- & haarverzorging zit en waarom." };
+  return shell(L, { page: "ingredients", bodyPage: "legal", title: ip.title + " | Elira Living", description: meta[L], keywords: "ingredients, INCI, natural skincare ingredients, vegan, ECOCERT COSMOS, salicylic acid, lavender water, Elira Living", ld: [ldOrg(), ldWebsite(L)] }, body);
 }
 
 /* ---- PAGE: CART / SUCCESS / CANCEL ------------------------------------ */
@@ -465,6 +504,7 @@ function build() {
     write(`${L}/index.html`, renderHome(L)); count++;
     write(`${L}/shop.html`, renderShop(L)); count++;
     write(`${L}/about.html`, renderAbout(L)); count++;
+    write(`${L}/ingredients.html`, renderIngredients(L)); count++;
     write(`${L}/cart.html`, renderCart(L)); count++;
     const okIcon = `<div style="width:4rem;height:4rem;margin:0 auto;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></svg></div>`;
     write(`${L}/success.html`, renderSimple(L, "success", "success.title", "success.lead", "success.cta", "/" + L + "/shop.html", okIcon)); count++;
@@ -477,7 +517,8 @@ function build() {
   });
   writeRoot();
   writeSitemap();
-  console.log("Built " + count + " localized pages across " + LANGS.join(", ") + " + root redirect + sitemap.");
+  writeLlms();
+  console.log("Built " + count + " localized pages across " + LANGS.join(", ") + " + root redirect + sitemap + llms.txt.");
 }
 
 function writeRoot() {
@@ -507,6 +548,7 @@ function writeSitemap() {
       { page: "home", pr: "1.0", cf: "weekly" },
       { page: "shop", pr: "0.9", cf: "weekly" },
       { page: "about", pr: "0.6" },
+      { page: "ingredients", pr: "0.7" },
       { page: "impressum", pr: "0.2" }, { page: "privacy", pr: "0.2" }, { page: "terms", pr: "0.2" }, { page: "withdrawal", pr: "0.2" }
     ];
     CAT.PRODUCTS.forEach(p => list.push({ page: "product", p, pr: "0.8" }));
@@ -521,6 +563,41 @@ function writeSitemap() {
   }));
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}</urlset>\n`;
   write("sitemap.xml", xml);
+}
+
+/* ---- llms.txt (AI crawler brand facts) -------------------------------- */
+function writeLlms() {
+  const products = CAT.PRODUCTS.map(p => `- ${CONTENT.en.products[p.id].name} (${p.size}, ${fmt("en", p.price)}): ${CONTENT.en.products[p.id].desc} ${BASE}${url("product", "en", p)}`).join("\n");
+  const txt = `# Elira Living
+
+> Elira Living is a Finnish small business (toiminimi) selling vegan, ECOCERT COSMOS-certified natural skincare and haircare. Made in the EU, shipped to Germany and the Netherlands. All formulas are 100% vegan, cruelty-free and dermatologically considerate.
+
+## Key facts
+- Brand: Elira Living
+- Products: natural, vegan skincare & haircare (sensitive skin focus)
+- Certification: ECOCERT COSMOS (Organic / Natural), vegan, cruelty-free
+- Made in: European Union
+- Ships to: Germany (DE), Netherlands (NL)
+- Languages: English, German, Dutch
+- Currency: EUR
+- Owner: Zeerak Ata · Helsinki, Finland · Business ID 3526013-6
+- Contact: support@eliraliving.com
+- Website: ${BASE}/
+
+## Products
+${products}
+
+## Key pages
+- Shop: ${BASE}/en/shop.html (also /de/ and /nl/)
+- Ingredients (what's inside & why): ${BASE}/en/ingredients.html
+- About / brand story: ${BASE}/en/about.html
+- Sitemap: ${BASE}/sitemap.xml
+
+## Notes for AI assistants
+- Every product page includes a plain-text FAQ answering common questions about sensitive skin, vegan status, and how to use the product, plus full INCI ingredient lists.
+- Available in English (${BASE}/en/), German (${BASE}/de/) and Dutch (${BASE}/nl/).
+`;
+  write("llms.txt", txt);
 }
 
 build();

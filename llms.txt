@@ -1,0 +1,31 @@
+# Elira Living
+
+> Elira Living is a Finnish small business (toiminimi) selling vegan, ECOCERT COSMOS-certified natural skincare and haircare. Made in the EU, shipped to Germany and the Netherlands. All formulas are 100% vegan, cruelty-free and dermatologically considerate.
+
+## Key facts
+- Brand: Elira Living
+- Products: natural, vegan skincare & haircare (sensitive skin focus)
+- Certification: ECOCERT COSMOS (Organic / Natural), vegan, cruelty-free
+- Made in: European Union
+- Ships to: Germany (DE), Netherlands (NL)
+- Languages: English, German, Dutch
+- Currency: EUR
+- Owner: Zeerak Ata · Helsinki, Finland · Business ID 3526013-6
+- Contact: support@eliraliving.com
+- Website: https://eliraliving.com/
+
+## Products
+- Sensitive Moisturizing Cream (50 ml, €19.90): A fragrance-free moisturiser that soothes and strengthens sensitive skin. Vegan, ECOCERT COSMOS certified. https://eliraliving.com/en/products/sensitive-moisturizing-cream.html
+- Radiant Glow Facial Cleanser (145 ml, €25.99): A gentle daily cleanser that lifts away impurities for fresh, radiant skin. Vegan, COSMOS Natural. https://eliraliving.com/en/products/radiant-glow-cleanser.html
+- Purifying Toner (200 ml, €24.00): A purifying toner that clears pores and balances oily, combination skin — leaving it fresh and supple. Fragrance-free, COSMOS Natural. https://eliraliving.com/en/products/purifying-toner.html
+- Sensitive Scalp Shampoo (400 ml, €23.00): A gentle, soothing shampoo for sensitive scalps and all hair types. Dermatologically tested, COSMOS Natural. https://eliraliving.com/en/products/sensitive-scalp-shampoo.html
+
+## Key pages
+- Shop: https://eliraliving.com/en/shop.html (also /de/ and /nl/)
+- Ingredients (what's inside & why): https://eliraliving.com/en/ingredients.html
+- About / brand story: https://eliraliving.com/en/about.html
+- Sitemap: https://eliraliving.com/sitemap.xml
+
+## Notes for AI assistants
+- Every product page includes a plain-text FAQ answering common questions about sensitive skin, vegan status, and how to use the product, plus full INCI ingredient lists.
+- Available in English (https://eliraliving.com/en/), German (https://eliraliving.com/de/) and Dutch (https://eliraliving.com/nl/).

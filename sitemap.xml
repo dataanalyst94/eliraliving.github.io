@@ -27,6 +27,14 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://eliraliving.com/en/ingredients.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/ingredients.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/ingredients.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/ingredients.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/ingredients.html"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://eliraliving.com/en/impressum.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/impressum.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/impressum.html"/>
@@ -117,6 +125,14 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://eliraliving.com/de/ingredients.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/ingredients.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/ingredients.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/ingredients.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/ingredients.html"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://eliraliving.com/de/impressum.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/impressum.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/impressum.html"/>
@@ -205,6 +221,14 @@
     <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/about.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/about.html"/>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eliraliving.com/nl/ingredients.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eliraliving.com/en/ingredients.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://eliraliving.com/de/ingredients.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://eliraliving.com/nl/ingredients.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eliraliving.com/en/ingredients.html"/>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eliraliving.com/nl/impressum.html</loc>
