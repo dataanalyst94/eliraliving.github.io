@@ -64,7 +64,7 @@ if (!process.env.ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
-const MODEL = process.env.ELIRA_MODEL || "claude-opus-4-8";
+const MODEL = () => process.env.ELIRA_MODEL || "claude-opus-4-8"; // resolved at call time (after --model is parsed)
 const client = new Anthropic(); // reads ANTHROPIC_API_KEY from the environment
 
 /* ---- brand + product context fed to the model -------------------------- */
@@ -118,15 +118,15 @@ const POST_SCHEMA = {
 };
 
 /* ---- one constrained, streamed Claude call → parsed JSON --------------- */
+// Adaptive thinking + the effort param are only on Opus 4.6+/Sonnet 4.6.
+// Haiku 4.5 / Sonnet 4.5 reject them — they still support structured outputs.
+const supportsThinking = m => /opus-4-[678]/.test(m) || /sonnet-4-6/.test(m);
 async function generateJSON(system, userText) {
-  const stream = client.messages.stream({
-    model: MODEL,
-    max_tokens: 16000,
-    thinking: { type: "adaptive" },
-    output_config: { effort: "high", format: { type: "json_schema", schema: POST_SCHEMA } },
-    system,
-    messages: [{ role: "user", content: userText }]
-  });
+  const model = MODEL();
+  const output_config = { format: { type: "json_schema", schema: POST_SCHEMA } };
+  const params = { model, max_tokens: 16000, output_config, system, messages: [{ role: "user", content: userText }] };
+  if (supportsThinking(model)) { params.thinking = { type: "adaptive" }; output_config.effort = "high"; }
+  const stream = client.messages.stream(params);
   const msg = await stream.finalMessage();
   const text = (msg.content.find(b => b.type === "text") || {}).text || "";
   try {
@@ -249,7 +249,7 @@ function writePost(post, force, dry) {
     process.exit(1);
   }
 
-  console.log(`\nElira blog engine · model=${MODEL} · ${jobs.length} post(s)\n`);
+  console.log(`\nElira blog engine · model=${MODEL()} · ${jobs.length} post(s)\n`);
   let ok = 0;
   for (const job of jobs) {
     try {
