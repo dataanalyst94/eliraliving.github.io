@@ -20,7 +20,11 @@
      GA4_API_SECRET         GA4 Measurement Protocol API secret
      STRIPE_WEBHOOK_SECRET  "whsec_…" (only for /stripe-webhook)
      ALLOW_ORIGIN           e.g. https://eliraliving.com  (defaults to *)
+     KLAVIYO_API_KEY        "pk_…" Klaviyo PRIVATE key (optional; enables the
+                            server-side "Placed Order" event → post-purchase flow)
    ========================================================================= */
+
+const KLAVIYO_REVISION = "2025-01-15";
 
 const META_VER = "v19.0";
 
@@ -86,6 +90,39 @@ async function sendGA4(env, e) {
   return { ga4: res.status };
 }
 
+/* ---- Klaviyo (server-side "Placed Order" event) ----------------------- */
+async function sendKlaviyoOrder(env, s) {
+  if (!env.KLAVIYO_API_KEY) return { skipped: "klaviyo" };
+  const email = s.customer_details && s.customer_details.email;
+  if (!email) return { skipped: "klaviyo (no email)" };
+  const value = (s.amount_total || 0) / 100;
+  const body = {
+    data: {
+      type: "event",
+      attributes: {
+        properties: { OrderId: s.id, Source: "Stripe", "$value": value },
+        metric: { data: { type: "metric", attributes: { name: "Placed Order" } } },
+        profile: { data: { type: "profile", attributes: { email } } },
+        value,
+        value_currency: (s.currency || "eur").toUpperCase(),
+        unique_id: s.id,
+        time: new Date().toISOString()
+      }
+    }
+  };
+  const res = await fetch("https://a.klaviyo.com/api/events/", {
+    method: "POST",
+    headers: {
+      Authorization: `Klaviyo-API-Key ${env.KLAVIYO_API_KEY}`,
+      revision: KLAVIYO_REVISION,
+      "Content-Type": "application/json",
+      accept: "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  return { klaviyo: res.status, body: res.ok ? "ok" : await res.text() };
+}
+
 /* ---- routes ------------------------------------------------------------ */
 async function handleCollect(request, env, origin) {
   const b = await request.json();
@@ -113,12 +150,15 @@ async function handleStripeWebhook(request, env, origin) {
   const event = JSON.parse(payload);
   if (event.type === "checkout.session.completed") {
     const s = event.data.object;
-    await sendMeta(env, {
-      event_name: "Purchase", event_id: s.id, event_time: Math.floor(Date.now() / 1000),
-      url: s.success_url || "https://eliraliving.com/", value: (s.amount_total || 0) / 100,
-      currency: (s.currency || "eur").toUpperCase(),
-      email: s.customer_details && s.customer_details.email
-    });
+    await Promise.all([
+      sendMeta(env, {
+        event_name: "Purchase", event_id: s.id, event_time: Math.floor(Date.now() / 1000),
+        url: s.success_url || "https://eliraliving.com/", value: (s.amount_total || 0) / 100,
+        currency: (s.currency || "eur").toUpperCase(),
+        email: s.customer_details && s.customer_details.email
+      }),
+      sendKlaviyoOrder(env, s)   // → triggers Klaviyo post-purchase / review flow
+    ]);
   }
   return json({ received: true }, 200, origin);
 }

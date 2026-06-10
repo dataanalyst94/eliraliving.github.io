@@ -25,6 +25,14 @@
     // Server-side backup (Meta CAPI + GA4 Measurement Protocol)
     TRACKING_ENDPOINT: "https://elira-tracking.elira-living.workers.dev",
 
+    // Klaviyo — PUBLIC values only (safe to ship). The private pk_ key lives
+    // ONLY as a Worker secret (KLAVIYO_API_KEY), never here.
+    KLAVIYO: {
+      SITE_ID: "V2dqim",      // public company / Site ID
+      LIST_ID: "WKcxya",      // "Email List" — newsletter signups land here
+      REVISION: "2025-01-15"  // Klaviyo API revision pinned for the client endpoint
+    },
+
     fire: { ga4: "direct", meta: "direct", tiktok: "direct", googleAds: "direct" },
 
     currency: "EUR",

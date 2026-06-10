@@ -188,7 +188,29 @@
       const qa = e.target.closest("[data-quick-add]");
       if (qa) { e.preventDefault(); e.stopPropagation(); Cart.add(qa.getAttribute("data-quick-add")); showToast(t("toast.added")); openCart(); }
     });
-    document.addEventListener("submit", e => { if (e.target.matches("[data-newsletter]")) { e.preventDefault(); e.target.innerHTML = `<p class="font-display" style="font-size:1.4rem;color:var(--gold)">${t("news.thanks")}</p>`; } });
+    document.addEventListener("submit", e => {
+      const form = e.target;
+      if (!form.matches("[data-newsletter]")) return;
+      e.preventDefault();
+      const input = form.querySelector('input[type="email"]');
+      const email = input && input.value ? input.value.trim() : "";
+      const thanks = () => { form.innerHTML = `<p class="font-display" style="font-size:1.4rem;color:var(--gold)">${t("news.thanks")}</p>`; };
+      const K = (window.ELIRA_TRACKING && window.ELIRA_TRACKING.KLAVIYO) || null;
+      if (!email || !K || !K.SITE_ID || !K.LIST_ID) { thanks(); return; }
+      // Klaviyo client-side list subscription (public Site ID; the list's
+      // opt-in setting — double opt-in — is enforced by Klaviyo).
+      const body = { data: { type: "subscription", attributes: {
+        custom_source: "Website newsletter",
+        profile: { data: { type: "profile", attributes: { email } } }
+      }, relationships: { list: { data: { type: "list", id: K.LIST_ID } } } } };
+      fetch("https://a.klaviyo.com/client/subscriptions/?company_id=" + encodeURIComponent(K.SITE_ID), {
+        method: "POST",
+        headers: { "Content-Type": "application/json", revision: K.REVISION || "2025-01-15" },
+        body: JSON.stringify(body)
+      }).then(() => { try { (window.dataLayer = window.dataLayer || []).push({ event: "newsletter_signup" }); } catch (_) {} })
+        .catch(() => {})
+        .finally(thanks);
+    });
     const header = document.querySelector(".site-header");
     const onScroll = () => header && header.classList.toggle("scrolled", window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
