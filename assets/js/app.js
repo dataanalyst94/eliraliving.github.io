@@ -90,6 +90,36 @@
         row.querySelector("[data-rm]")?.addEventListener("click", () => this.remove(key));
       });
     },
+    /* Abandoned-cart email capture (Klaviyo "Started Checkout") */
+    savedEmail() { try { return localStorage.getItem("elira_email") || ""; } catch (e) { return ""; } },
+    emailBlock() {
+      const v = this.savedEmail().replace(/"/g, "&quot;");
+      return `<div data-email-capture style="margin:0 0 1rem">
+        <label style="display:block;font-size:.78rem;color:var(--ink-soft);margin-bottom:.4rem">${t("cart.save.title")}</label>
+        <input type="email" data-cart-email value="${v}" placeholder="${t("news.placeholder")}" autocomplete="email"
+          style="width:100%;box-sizing:border-box;padding:.7rem .85rem;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-size:.9rem;border-radius:2px">
+        <p class="muted" style="font-size:.68rem;line-height:1.5;margin:.45rem 0 0" data-email-note>${t("cart.save.consent")}</p>
+      </div>`;
+    },
+    wireEmail(scope) {
+      const input = scope && scope.querySelector("[data-cart-email]");
+      if (!input) return;
+      const note = scope.querySelector("[data-email-note]");
+      const valid = (s) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s);
+      const capture = () => {
+        const val = (input.value || "").trim();
+        if (!valid(val)) return;
+        try { localStorage.setItem("elira_email", val); } catch (e) {}
+        if (window.EliraAnalytics) {
+          window.EliraAnalytics.identifyEmail(val);
+          window.EliraAnalytics.startedCheckout(this.read(), this.total(), val);
+        }
+        if (note) { note.textContent = t("cart.save.saved"); note.style.color = "var(--sage)"; }
+      };
+      input.addEventListener("change", capture);
+      input.addEventListener("blur", capture);
+      input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); capture(); input.blur(); } });
+    },
     renderDrawer() {
       const body = document.querySelector("[data-drawer-body]"), foot = document.querySelector("[data-drawer-foot]");
       if (!body) return;
@@ -101,9 +131,11 @@
         foot.innerHTML = `<div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.25rem"><span>${t("cart.subtotal")}</span><span>${fmt(this.subtotal())}</span></div>
           <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.75rem" class="muted"><span>${t("cart.shipping")}</span><span>${this.shipping() === 0 ? t("cart.shippingFree") : fmt(this.shipping())}</span></div>
           <div class="font-display" style="display:flex;justify-content:space-between;font-size:1.25rem;margin-bottom:1rem;padding-top:.75rem;border-top:1px solid var(--line)"><span>${t("cart.total")}</span><span>${fmt(this.total())}</span></div>
+          ${this.emailBlock()}
           <button class="btn btn-primary btn-block" data-checkout>${t("cart.checkout")}</button>
           <p class="muted" style="font-size:11px;text-align:center;margin-top:.75rem;line-height:1.5">${t("cart.securenote")}</p>`;
         foot.querySelector("[data-checkout]")?.addEventListener("click", checkout);
+        this.wireEmail(foot);
       }
     },
     renderPage() {
@@ -118,11 +150,13 @@
           <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.5rem"><span>${t("cart.subtotal")}</span><span>${fmt(this.subtotal())}</span></div>
           <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:1rem" class="muted"><span>${t("cart.shipping")}</span><span>${this.shipping() === 0 ? t("cart.shippingFree") : fmt(this.shipping())}</span></div>
           <div class="font-display" style="display:flex;justify-content:space-between;font-size:1.5rem;margin-bottom:1.25rem;padding-top:1rem;border-top:1px solid var(--line)"><span>${t("cart.total")}</span><span>${fmt(this.total())}</span></div>
+          ${this.emailBlock()}
           <button class="btn btn-primary btn-block" data-checkout>${t("cart.checkout")}</button>
           <p class="muted" style="font-size:11px;text-align:center;margin-top:.75rem;line-height:1.5">${t("cart.securenote")}</p>
         </aside></div>`;
       this.bindLines(wrap.querySelector("[data-lines]"));
       wrap.querySelector("[data-checkout]")?.addEventListener("click", checkout);
+      this.wireEmail(wrap);
     },
     renderAll() { this.badges(); this.renderDrawer(); this.renderPage(); }
   };
@@ -137,6 +171,8 @@
     if (window.EliraAnalytics) {
       const gaItems = items.map(i => { const p = CAT.getProduct(i.id) || {}; return { item_id: p.sku || i.id, item_name: pname(i.id), item_category: t("cat." + p.category), price: +(i.unitPrice / 100).toFixed(2), quantity: i.qty }; });
       window.EliraAnalytics.beginCheckout(gaItems, +(Cart.total() / 100).toFixed(2));
+      // Klaviyo abandoned-cart trigger (with captured email if we have one, else anonymous onsite)
+      window.EliraAnalytics.startedCheckout(items, Cart.total(), Cart.savedEmail());
     }
     try {
       Cart.setLoading(true);

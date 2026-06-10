@@ -15,6 +15,7 @@
   const CAT = window.CATALOG, C = window.CONTENT, LANG = window.LANG || "en";
   const CUR = CFG.currency || "EUR";
   const FIRE = CFG.fire || {};
+  const KLAVIYO = CFG.KLAVIYO || null;
   const DEBUG = (CFG.DEBUG === null || CFG.DEBUG === undefined)
     ? /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) : !!CFG.DEBUG;
 
@@ -30,7 +31,7 @@
   const loadScript = (src, cb) => { const s = document.createElement("script"); s.async = true; s.src = src; if (cb) s.onload = cb; document.head.appendChild(s); return s; };
 
   /* ---- platform loaders (idempotent) ---------------------------------- */
-  const loaded = { ga4: false, ads: false, meta: false, tiktok: false };
+  const loaded = { ga4: false, ads: false, meta: false, tiktok: false, klaviyo: false };
 
   function loadGoogle() {
     if (loaded.ga4) return;
@@ -59,6 +60,15 @@
     log("TikTok Pixel loaded", CFG.TIKTOK_PIXEL_ID);
   }
   function loadAdPixels() { loadMeta(); loadTikTok(); }
+  // Klaviyo onsite tracking (cookie-based → consent-gated). Enables anonymous
+  // "Started Checkout" + later identity-stitching for the abandoned-cart flow.
+  function loadKlaviyo() {
+    if (loaded.klaviyo || !KLAVIYO || !KLAVIYO.SITE_ID) return;
+    loaded.klaviyo = true;
+    window.klaviyo = window.klaviyo || [];
+    loadScript("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=" + encodeURIComponent(KLAVIYO.SITE_ID));
+    log("Klaviyo onsite loaded", KLAVIYO.SITE_ID);
+  }
 
   /* ---- Consent Mode v2 ------------------------------------------------- */
   const CONSENT_VERSION = 1;
@@ -74,6 +84,7 @@
       if (persist !== false) { try { localStorage.setItem("elira_consent", JSON.stringify({ analytics: !!s.analytics, ads: !!s.ads, v: CONSENT_VERSION, ts: Date.now() })); } catch (e) {} }
       if (s.analytics) loadGoogle();
       if (s.ads) loadAdPixels();
+      if (s.analytics || s.ads) loadKlaviyo();
       log("consent updated", s, persist === false ? "(not persisted)" : "");
     },
     saved() { try { const s = JSON.parse(localStorage.getItem("elira_consent")); return (s && s.v === CONSENT_VERSION) ? s : null; } catch (e) { return null; } },
@@ -158,6 +169,46 @@
     return eid;
   }
 
+  /* ---- Klaviyo "Started Checkout" (abandoned-cart trigger) ------------ */
+  function klaviyoCartProps(cartItems, valueCents) {
+    const origin = location.origin, v = +(valueCents / 100).toFixed(2);
+    const items = (cartItems || []).map(i => {
+      const p = product(i.id) || {};
+      return {
+        product_name: i.name || pname(i.id),
+        quantity: i.qty || 1,
+        price: ((i.unitPrice || 0) / 100).toFixed(2),
+        url: origin + "/" + LANG + "/products/" + i.id + ".html",
+        image_url: p.image ? origin + p.image : ""
+      };
+    });
+    return { "$value": v, value: v, CheckoutURL: origin + "/" + LANG + "/cart.html", ItemNames: items.map(i => i.product_name), items: items };
+  }
+  function klaviyoTrack(metric, props, email) {
+    if (!KLAVIYO || !KLAVIYO.SITE_ID) return;
+    // Onsite (anonymous, cookie-stitched) — fires only if consent loaded klaviyo.js
+    if (window.klaviyo && typeof window.klaviyo.push === "function") {
+      if (email) window.klaviyo.push(["identify", { "$email": email }]);
+      window.klaviyo.push(["track", metric, props]);
+    }
+    // With a volunteered email, also send via the public client API so the event
+    // reliably attaches to that profile (works even without cookie consent).
+    if (email) {
+      const body = { data: { type: "event", attributes: {
+        metric: { data: { type: "metric", attributes: { name: metric } } },
+        profile: { data: { type: "profile", attributes: { email: email } } },
+        value: props.value, properties: props
+      } } };
+      try {
+        fetch("https://a.klaviyo.com/client/events/?company_id=" + encodeURIComponent(KLAVIYO.SITE_ID), {
+          method: "POST", headers: { "Content-Type": "application/json", revision: KLAVIYO.REVISION || "2025-01-15" },
+          body: JSON.stringify(body), keepalive: true
+        }).catch(() => {});
+      } catch (e) {}
+    }
+    log("Klaviyo", metric, email ? "(email)" : "(onsite)");
+  }
+
   /* ---- public API ----------------------------------------------------- */
   const A = {
     viewItem(id) { const it = [item(id, 1)]; track("view_item", it, valueOf(it)); },
@@ -166,6 +217,9 @@
       const eid = track("begin_checkout", items, value);
       try { localStorage.setItem("elira_pending", JSON.stringify({ event_id: eid, items, value, ts: Date.now() })); } catch (e) {}
     },
+    // Klaviyo abandoned-cart trigger. cartItems = raw cart lines; valueCents = total in cents.
+    startedCheckout(cartItems, valueCents, email) { try { klaviyoTrack("Started Checkout", klaviyoCartProps(cartItems, valueCents), email || ""); } catch (e) {} },
+    identifyEmail(email) { try { if (email && window.klaviyo && typeof window.klaviyo.push === "function") window.klaviyo.push(["identify", { "$email": email }]); } catch (e) {} },
     purchase(transactionId, items, value) { track("purchase", items, value, { transaction_id: transactionId, event_id: transactionId }); }
   };
   window.EliraAnalytics = A;
