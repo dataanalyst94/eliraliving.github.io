@@ -16,6 +16,9 @@ checkout-worker/.wrangler/
 Thumbs.db
 *.log
 
+# Generated marketing drafts (transient)
+marketing/pitches/
+
 # Product images: commit only the optimized web versions, not the raw originals
 assets/img/*
 !assets/img/cream.jpg
