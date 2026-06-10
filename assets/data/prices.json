@@ -1,0 +1,12 @@
+{
+  "_comment": "Auto-generated from assets/data/catalog.js by build.js. Do not edit by hand — edit catalog.js. The checkout worker reads this so displayed and charged prices always match.",
+  "currency": "EUR",
+  "freeShippingThreshold": 3900,
+  "shippingFlat": 495,
+  "prices": {
+    "sensitive-moisturizing-cream": 1990,
+    "radiant-glow-cleanser": 2599,
+    "purifying-toner": 2400,
+    "sensitive-scalp-shampoo": 2300
+  }
+}

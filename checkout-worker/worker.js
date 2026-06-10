@@ -19,21 +19,47 @@
    6. Copy the deployed URL (https://elira-checkout.<you>.workers.dev)
       into assets/js/stripe.js → STRIPE_CONFIG.checkoutEndpoint
 
-   ── SECURITY: server-side price map ─────────────────────────────────────
-   Prices below are the source of truth (EUR cents). They MUST match
-   assets/js/products.js. The client-sent amount is ignored. Variant
-   surcharges (e.g. larger sizes) are added via `variantAdd`.
+   ── SINGLE SOURCE OF TRUTH: prices come from the site's catalog ─────────
+   The worker fetches https://www.eliraliving.com/assets/data/prices.json,
+   which build.js auto-generates from assets/data/catalog.js. So you only ever
+   edit ONE file (catalog.js) — the displayed price and the charged price stay
+   in sync automatically, and you don't need to redeploy this worker for a
+   price change (it re-reads prices.json every ~5 minutes).
+
+   Security is unchanged: prices are fetched from OUR OWN site (server-side),
+   never trusted from the customer's browser. The FALLBACK_PRICES below are
+   only used if that fetch ever fails, so checkout can never break.
    ========================================================================= */
 
-const PRICES = {
+const PRICES_URL = "https://www.eliraliving.com/assets/data/prices.json";
+
+// Used only if prices.json can't be fetched (network/404). Keep roughly current.
+const FALLBACK_PRICES = {
   "sensitive-moisturizing-cream": 1990,
   "radiant-glow-cleanser": 2599,
   "purifying-toner": 2400,
   "sensitive-scalp-shampoo": 2300
 };
+const FALLBACK_FREE_SHIPPING_THRESHOLD = 3900; // €39.00
+const FALLBACK_SHIPPING_FLAT = 495;            // €4.95
 
-const FREE_SHIPPING_THRESHOLD = 3900; // €39.00
-const SHIPPING_FLAT = 495;            // €4.95
+// Fetch current pricing from the site (cached ~5 min at Cloudflare's edge).
+async function loadPricing() {
+  try {
+    const res = await fetch(PRICES_URL, { cf: { cacheTtl: 300, cacheEverything: true } });
+    if (res.ok) {
+      const d = await res.json();
+      if (d && d.prices && typeof d.prices === "object") {
+        return {
+          prices: d.prices,
+          freeThreshold: Number.isFinite(d.freeShippingThreshold) ? d.freeShippingThreshold : FALLBACK_FREE_SHIPPING_THRESHOLD,
+          shippingFlat: Number.isFinite(d.shippingFlat) ? d.shippingFlat : FALLBACK_SHIPPING_FLAT
+        };
+      }
+    }
+  } catch (e) { /* fall through to fallback */ }
+  return { prices: FALLBACK_PRICES, freeThreshold: FALLBACK_FREE_SHIPPING_THRESHOLD, shippingFlat: FALLBACK_SHIPPING_FLAT };
+}
 
 function cors(origin) {
   return {
@@ -54,6 +80,8 @@ export default {
       const items = Array.isArray(body.items) ? body.items : [];
       if (!items.length) return json({ error: "Empty cart" }, 400, origin);
 
+      const pricing = await loadPricing(); // current prices from the site catalog
+
       const form = new URLSearchParams();
       form.append("mode", "payment");
       form.append("locale", ["de", "nl", "en"].includes(body.locale) ? body.locale : "auto");
@@ -67,7 +95,7 @@ export default {
 
       let subtotal = 0;
       items.forEach((it, n) => {
-        const base = PRICES[it.id];
+        const base = pricing.prices[it.id];
         if (base == null) throw new Error("Unknown product: " + it.id);
         // variant surcharge derived from client amount above base (sizes only)
         const surcharge = Math.max(0, Math.round((it.amount || base) - base));
@@ -89,7 +117,7 @@ export default {
       });
 
       // Shipping (free over threshold)
-      const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FLAT;
+      const shipping = subtotal >= pricing.freeThreshold ? 0 : pricing.shippingFlat;
       form.append("shipping_options[0][shipping_rate_data][type]", "fixed_amount");
       form.append("shipping_options[0][shipping_rate_data][fixed_amount][amount]", shipping);
       form.append("shipping_options[0][shipping_rate_data][fixed_amount][currency]", "eur");

@@ -645,7 +645,22 @@ function build() {
   writeRoot();
   writeSitemap();
   writeLlms();
-  console.log("Built " + count + " localized pages across " + LANGS.join(", ") + " + root redirect + sitemap + llms.txt.");
+  writePrices();
+  console.log("Built " + count + " localized pages across " + LANGS.join(", ") + " + root redirect + sitemap + llms.txt + prices.json.");
+}
+
+/* ---- prices.json (single source of truth for the checkout worker) ------ */
+function writePrices() {
+  const prices = {};
+  CAT.PRODUCTS.forEach(p => { prices[p.id] = p.price; });
+  const data = {
+    _comment: "Auto-generated from assets/data/catalog.js by build.js. Do not edit by hand — edit catalog.js. The checkout worker reads this so displayed and charged prices always match.",
+    currency: CAT.CONFIG.currency,
+    freeShippingThreshold: CAT.CONFIG.freeShippingThreshold,
+    shippingFlat: CAT.CONFIG.shippingFlat,
+    prices
+  };
+  write("assets/data/prices.json", JSON.stringify(data, null, 2) + "\n");
 }
 
 function writeRoot() {

@@ -1,0 +1,53 @@
+name: Build & publish site
+
+# Auto-rebuilds the static site whenever you change a source/content file
+# (e.g. assets/data/catalog.js or assets/content/*.js) — including edits made
+# right here on github.com. Runs `node build.js` and commits the regenerated
+# pages, so your change is live in about a minute. No terminal needed.
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'build.js'
+      - 'assets/data/**'
+      - 'assets/content/**'
+      - 'assets/js/**'
+      - 'assets/css/**'
+      - 'assets/img/**'
+      - '.github/workflows/build-site.yml'
+  workflow_dispatch: {}   # also lets you run it manually from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build the site
+        run: node build.js
+
+      - name: Commit & publish if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to publish."
+          else
+            git commit -m "Auto-build site from latest content [skip ci]"
+            git push
+          fi
