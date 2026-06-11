@@ -325,6 +325,33 @@
     const addToCart = () => { Cart.add(id, { variant, qty: Math.max(1, parseInt(qty.value, 10) || 1) }); showToast(t("toast.added")); };
     root.querySelector("[data-add]")?.addEventListener("click", () => { addToCart(); openCart(); });
     root.querySelector("[data-buy]")?.addEventListener("click", () => { addToCart(); checkout(); });
+
+    /* ---- Image gallery + lightbox ---- */
+    const mainImg = root.querySelector("[data-gallery-img]");
+    const thumbs = [...root.querySelectorAll("[data-gallery-thumb]")];
+    thumbs.forEach(btn => btn.addEventListener("click", () => {
+      if (!mainImg) return;
+      mainImg.setAttribute("src", btn.getAttribute("data-gallery-thumb"));
+      thumbs.forEach(b => b.classList.toggle("active", b === btn));
+    }));
+    const mainBox = root.querySelector("[data-gallery-main]");
+    if (mainImg && mainBox) {
+      const closeLb = () => { const lb = document.querySelector(".lightbox.open"); if (lb) { lb.classList.remove("open"); document.body.style.overflow = ""; } };
+      const openLb = () => {
+        let lb = document.querySelector(".lightbox");
+        if (!lb) {
+          lb = document.createElement("div"); lb.className = "lightbox";
+          lb.innerHTML = `<button class="lightbox-close" aria-label="Close"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button><img alt="">`;
+          document.body.appendChild(lb);
+          lb.addEventListener("click", e => { if (e.target === lb || e.target.closest(".lightbox-close")) closeLb(); });
+        }
+        lb.querySelector("img").setAttribute("src", mainImg.getAttribute("src"));
+        lb.classList.add("open"); document.body.style.overflow = "hidden";
+      };
+      mainBox.addEventListener("click", openLb);
+      mainBox.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLb(); } });
+      document.addEventListener("keydown", e => { if (e.key === "Escape") closeLb(); });
+    }
   }
 
   /* ---- Homepage animations (GSAP + Lenis), tuned ---------------------- */

@@ -213,7 +213,7 @@ function ldOrg() {
 }
 function ldWebsite(L) { return JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Elira Living", url: BASE + "/", inLanguage: L }); }
 function ldProduct(L, p) {
-  return JSON.stringify({ "@context": "https://schema.org", "@type": "Product", name: pname(L, p.id), sku: p.sku, image: [BASE + p.image], description: pdesc(L, p.id), brand: { "@type": "Brand", name: "Elira Living" }, category: t(L, "cat." + p.category), offers: { "@type": "Offer", url: BASE + url("product", L, p), priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "Elira Living" } } });
+  return JSON.stringify({ "@context": "https://schema.org", "@type": "Product", name: pname(L, p.id), sku: p.sku, image: (p.images && p.images.length ? p.images : [p.image]).map(i => BASE + i), description: pdesc(L, p.id), brand: { "@type": "Brand", name: "Elira Living" }, category: t(L, "cat." + p.category), offers: { "@type": "Offer", url: BASE + url("product", L, p), priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "Elira Living" } } });
 }
 function ldBreadcrumb(L, p) {
   return JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
@@ -398,10 +398,14 @@ function renderProduct(L, p) {
   const features = (CAT.getProduct(p.id).featureKeys || []).map(k => `<span class="tag">${esc(feat(L, k))}</span>`).join("");
   const faqs = (PRODUCT_FAQ[p.id] && (PRODUCT_FAQ[p.id][L] || PRODUCT_FAQ[p.id].en)) || [];
   const usage = (USAGE[p.id] && (USAGE[p.id][L] || USAGE[p.id].en)) || "";
+  const imgs = (p.images && p.images.length) ? p.images : [p.image];
   const body = `<main class="page-main" data-product="${p.id}"><div class="container" style="padding-bottom:6rem">
   <a href="${url("shop", L)}" class="link-underline muted" style="display:inline-block;font-size:.875rem;margin-bottom:2rem">← ${T(L, "pdp.back")}</a>
   <div class="pdp-grid">
-    <div class="reveal in"><div style="aspect-ratio:4/5;background:var(--stone);overflow:hidden;border:1px solid var(--line)"><img src="${p.image}" alt="${escA(pname(L, p.id))}" style="width:100%;height:100%;object-fit:cover"></div></div>
+    <div class="reveal in" data-gallery>
+      <div class="pdp-main" data-gallery-main tabindex="0" role="button" aria-label="${escA(pname(L, p.id))} — zoom"><img src="${imgs[0]}" alt="${escA(pname(L, p.id))}" data-gallery-img></div>
+      ${imgs.length > 1 ? `<div class="pdp-thumbs">${imgs.map((src, i) => `<button class="pdp-thumb${i === 0 ? " active" : ""}" data-gallery-thumb="${src}" aria-label="View image ${i + 1} of ${imgs.length}"><img src="${src}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
+    </div>
     <div class="reveal in">
       <div class="kicker">${T(L, "cat." + p.category)}</div>
       <h1 class="font-display" style="font-size:clamp(2.2rem,5vw,3.2rem);margin-top:.75rem;line-height:1.05">${esc(pname(L, p.id))}</h1>

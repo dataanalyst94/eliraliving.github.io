@@ -34,7 +34,7 @@
       featureKeys: ["vegan", "cosmosOrganic", "fragranceFree", "sensitiveSkin"],
       naturalOrigin: null,
       image: "/assets/img/cream.jpg",
-      images: ["/assets/img/cream.jpg"],
+      images: ["/assets/img/cream.jpg", "/assets/img/gallery/sensitive-moisturizing-cream-2.jpg", "/assets/img/gallery/sensitive-moisturizing-cream-3.jpg", "/assets/img/gallery/sensitive-moisturizing-cream-4.jpg"],
       priceId: "", paymentLink: ""
     },
     {
@@ -48,7 +48,7 @@
       featureKeys: ["vegan", "cosmosNatural", "dailyUse", "allSkin"],
       naturalOrigin: null,
       image: "/assets/img/cleanser.jpg",
-      images: ["/assets/img/cleanser.jpg"],
+      images: ["/assets/img/cleanser.jpg", "/assets/img/gallery/radiant-glow-cleanser-2.jpg", "/assets/img/gallery/radiant-glow-cleanser-3.jpg"],
       priceId: "", paymentLink: ""
     },
     {
@@ -62,7 +62,7 @@
       featureKeys: ["vegan", "cosmosNatural", "fragranceFree", "oilyComb"],
       naturalOrigin: 99,
       image: "/assets/img/toner.jpg",
-      images: ["/assets/img/toner.jpg"],
+      images: ["/assets/img/toner.jpg", "/assets/img/gallery/purifying-toner-2.jpg", "/assets/img/gallery/purifying-toner-3.jpg", "/assets/img/gallery/purifying-toner-4.jpg"],
       priceId: "", paymentLink: ""
     },
     {
@@ -76,7 +76,7 @@
       featureKeys: ["vegan", "cosmosNatural", "derm", "allHair"],
       naturalOrigin: 98,
       image: "/assets/img/shampoo.jpg",
-      images: ["/assets/img/shampoo.jpg"],
+      images: ["/assets/img/shampoo.jpg", "/assets/img/gallery/sensitive-scalp-shampoo-2.jpg", "/assets/img/gallery/sensitive-scalp-shampoo-3.jpg", "/assets/img/gallery/sensitive-scalp-shampoo-4.jpg"],
       priceId: "", paymentLink: ""
     }
   ];

@@ -9,6 +9,7 @@
     "serve": "npx --yes http-server . -p 8099 -c-1"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "latest"
+    "@anthropic-ai/sdk": "latest",
+    "sharp": "^0.35.0"
   }
 }

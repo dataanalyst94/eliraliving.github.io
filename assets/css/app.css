@@ -194,3 +194,19 @@ input[type=email]:focus,input[type=text]:focus{ outline:none; border-color:var(-
   *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
   .reveal{ opacity:1 !important; transform:none !important; }
 }
+
+/* PDP image gallery */
+.pdp-main{ aspect-ratio:4/5; background:var(--stone); overflow:hidden; border:1px solid var(--line); cursor:zoom-in; }
+.pdp-main img{ width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
+.pdp-main:hover img{ transform:scale(1.04); }
+.pdp-thumbs{ display:flex; gap:.6rem; margin-top:.75rem; flex-wrap:wrap; }
+.pdp-thumb{ width:62px; height:78px; border:1px solid var(--line); overflow:hidden; background:var(--stone); cursor:pointer; padding:0; opacity:.6; transition:opacity .25s var(--ease),border-color .25s var(--ease); }
+.pdp-thumb img{ width:100%; height:100%; object-fit:cover; }
+.pdp-thumb:hover{ opacity:1; }
+.pdp-thumb.active{ opacity:1; border-color:var(--gold); }
+
+/* Lightbox */
+.lightbox{ position:fixed; inset:0; z-index:200; background:rgba(8,10,7,.93); display:flex; align-items:center; justify-content:center; padding:2rem; opacity:0; visibility:hidden; transition:opacity .35s var(--ease),visibility .35s; -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); cursor:zoom-out; }
+.lightbox.open{ opacity:1; visibility:visible; }
+.lightbox img{ max-width:92vw; max-height:88vh; object-fit:contain; box-shadow:var(--shadow-lg); }
+.lightbox-close{ position:absolute; top:1.25rem; right:1.5rem; background:none; border:none; color:var(--ink); cursor:pointer; padding:.5rem; line-height:0; }
