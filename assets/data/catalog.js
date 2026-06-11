@@ -15,7 +15,7 @@
     freeShippingThreshold: 3900, // €39.00 (cents)
     shippingFlat: 495,           // €4.95
     markets: ["DE", "NL"],
-    baseUrl: "https://eliraliving.com"
+    baseUrl: "https://www.eliraliving.com"
   };
 
   const CATEGORIES = ["skincare", "haircare"];

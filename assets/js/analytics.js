@@ -184,19 +184,20 @@
     });
     return { "$value": v, value: v, CheckoutURL: origin + "/" + LANG + "/cart.html", ItemNames: items.map(i => i.product_name), items: items };
   }
-  function klaviyoTrack(metric, props, email) {
+  function klaviyoTrack(metric, props, email, name) {
     if (!KLAVIYO || !KLAVIYO.SITE_ID) return;
     // Onsite (anonymous, cookie-stitched) — fires only if consent loaded klaviyo.js
     if (window.klaviyo && typeof window.klaviyo.push === "function") {
-      if (email) window.klaviyo.push(["identify", { "$email": email }]);
+      if (email) { const id = { "$email": email }; if (name) id["$first_name"] = name; window.klaviyo.push(["identify", id]); }
       window.klaviyo.push(["track", metric, props]);
     }
     // With a volunteered email, also send via the public client API so the event
     // reliably attaches to that profile (works even without cookie consent).
     if (email) {
+      const profileAttrs = name ? { email: email, first_name: name } : { email: email };
       const body = { data: { type: "event", attributes: {
         metric: { data: { type: "metric", attributes: { name: metric } } },
-        profile: { data: { type: "profile", attributes: { email: email } } },
+        profile: { data: { type: "profile", attributes: profileAttrs } },
         value: props.value, properties: props
       } } };
       try {
@@ -218,8 +219,8 @@
       try { localStorage.setItem("elira_pending", JSON.stringify({ event_id: eid, items, value, ts: Date.now() })); } catch (e) {}
     },
     // Klaviyo abandoned-cart trigger. cartItems = raw cart lines; valueCents = total in cents.
-    startedCheckout(cartItems, valueCents, email) { try { klaviyoTrack("Started Checkout", klaviyoCartProps(cartItems, valueCents), email || ""); } catch (e) {} },
-    identifyEmail(email) { try { if (email && window.klaviyo && typeof window.klaviyo.push === "function") window.klaviyo.push(["identify", { "$email": email }]); } catch (e) {} },
+    startedCheckout(cartItems, valueCents, email, name) { try { klaviyoTrack("Started Checkout", klaviyoCartProps(cartItems, valueCents), email || "", name || ""); } catch (e) {} },
+    identifyEmail(email, name) { try { if (email && window.klaviyo && typeof window.klaviyo.push === "function") { const id = { "$email": email }; if (name) id["$first_name"] = name; window.klaviyo.push(["identify", id]); } } catch (e) {} },
     purchase(transactionId, items, value) { track("purchase", items, value, { transaction_id: transactionId, event_id: transactionId }); }
   };
   window.EliraAnalytics = A;

@@ -92,33 +92,61 @@
     },
     /* Abandoned-cart email capture (Klaviyo "Started Checkout") */
     savedEmail() { try { return localStorage.getItem("elira_email") || ""; } catch (e) { return ""; } },
+    savedName() { try { return localStorage.getItem("elira_name") || ""; } catch (e) { return ""; } },
     emailBlock() {
       const v = this.savedEmail().replace(/"/g, "&quot;");
+      const n = this.savedName().replace(/"/g, "&quot;");
+      const fld = "width:100%;box-sizing:border-box;padding:.7rem .85rem;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-size:.9rem;border-radius:2px";
       return `<div data-email-capture style="margin:0 0 1rem">
         <label style="display:block;font-size:.78rem;color:var(--ink-soft);margin-bottom:.4rem">${t("cart.save.title")}</label>
-        <input type="email" data-cart-email value="${v}" placeholder="${t("news.placeholder")}" autocomplete="email"
-          style="width:100%;box-sizing:border-box;padding:.7rem .85rem;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-size:.9rem;border-radius:2px">
+        <input type="text" data-cart-name value="${n}" placeholder="${t("form.firstName")}" autocomplete="given-name" style="${fld};margin-bottom:.5rem">
+        <input type="email" data-cart-email value="${v}" placeholder="${t("news.placeholder")}" autocomplete="email" style="${fld}">
         <p class="muted" style="font-size:.68rem;line-height:1.5;margin:.45rem 0 0" data-email-note>${t("cart.save.consent")}</p>
       </div>`;
     },
     wireEmail(scope) {
       const input = scope && scope.querySelector("[data-cart-email]");
       if (!input) return;
+      const nameEl = scope.querySelector("[data-cart-name]");
       const note = scope.querySelector("[data-email-note]");
       const valid = (s) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s);
       const capture = () => {
         const val = (input.value || "").trim();
+        const nm = nameEl ? (nameEl.value || "").trim() : "";
         if (!valid(val)) return;
-        try { localStorage.setItem("elira_email", val); } catch (e) {}
+        try { localStorage.setItem("elira_email", val); if (nm) localStorage.setItem("elira_name", nm); } catch (e) {}
         if (window.EliraAnalytics) {
-          window.EliraAnalytics.identifyEmail(val);
-          window.EliraAnalytics.startedCheckout(this.read(), this.total(), val);
+          window.EliraAnalytics.identifyEmail(val, nm);
+          window.EliraAnalytics.startedCheckout(this.read(), this.total(), val, nm);
         }
         if (note) { note.textContent = t("cart.save.saved"); note.style.color = "var(--sage)"; }
       };
       input.addEventListener("change", capture);
       input.addEventListener("blur", capture);
       input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); capture(); input.blur(); } });
+      if (nameEl) nameEl.addEventListener("change", () => { const nm = (nameEl.value || "").trim(); if (nm) { try { localStorage.setItem("elira_name", nm); } catch (e) {} } });
+    },
+    /* In-cart cross-sell (raise AOV) */
+    crossSellProduct() {
+      const inCart = new Set(this.read().map(i => i.id));
+      return CAT.PRODUCTS.find(p => !inCart.has(p.id)) || null;
+    },
+    crossSellHTML() {
+      const p = this.crossSellProduct(); if (!p) return "";
+      return `<div data-xsell style="border-top:1px solid var(--line);margin-top:1rem;padding-top:1rem">
+        <div class="kicker" style="margin-bottom:.6rem">${t("cart.xsell")}</div>
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <img src="${pImg(p.id)}" alt="${pname(p.id)}" loading="lazy" style="width:46px;height:58px;object-fit:cover;border:1px solid var(--line)">
+          <div style="flex:1;min-width:0"><div class="font-display" style="font-size:.95rem;line-height:1.2">${pname(p.id)}</div><div class="muted" style="font-size:.8rem">${fmt(p.price)}</div></div>
+          <button class="btn btn-outline" data-xsell-add="${p.id}" style="padding:.5rem 1rem;font-size:.78rem;white-space:nowrap">${t("cart.add")}</button>
+        </div>
+      </div>`;
+    },
+    wireCrossSell(scope) {
+      scope && scope.querySelector("[data-xsell-add]")?.addEventListener("click", e => {
+        const id = e.currentTarget.getAttribute("data-xsell-add");
+        Cart.add(id); showToast(t("toast.added"));
+      });
     },
     renderDrawer() {
       const body = document.querySelector("[data-drawer-body]"), foot = document.querySelector("[data-drawer-foot]");
@@ -131,11 +159,13 @@
         foot.innerHTML = `<div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.25rem"><span>${t("cart.subtotal")}</span><span>${fmt(this.subtotal())}</span></div>
           <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.75rem" class="muted"><span>${t("cart.shipping")}</span><span>${this.shipping() === 0 ? t("cart.shippingFree") : fmt(this.shipping())}</span></div>
           <div class="font-display" style="display:flex;justify-content:space-between;font-size:1.25rem;margin-bottom:1rem;padding-top:.75rem;border-top:1px solid var(--line)"><span>${t("cart.total")}</span><span>${fmt(this.total())}</span></div>
-          ${this.emailBlock()}
           <button class="btn btn-primary btn-block" data-checkout>${t("cart.checkout")}</button>
-          <p class="muted" style="font-size:11px;text-align:center;margin-top:.75rem;line-height:1.5">${t("cart.securenote")}</p>`;
+          <p class="muted" style="font-size:11px;text-align:center;margin-top:.75rem;line-height:1.5">${t("cart.securenote")}</p>
+          ${this.crossSellHTML()}
+          ${this.emailBlock()}`;
         foot.querySelector("[data-checkout]")?.addEventListener("click", checkout);
         this.wireEmail(foot);
+        this.wireCrossSell(foot);
       }
     },
     renderPage() {
@@ -150,13 +180,15 @@
           <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.5rem"><span>${t("cart.subtotal")}</span><span>${fmt(this.subtotal())}</span></div>
           <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:1rem" class="muted"><span>${t("cart.shipping")}</span><span>${this.shipping() === 0 ? t("cart.shippingFree") : fmt(this.shipping())}</span></div>
           <div class="font-display" style="display:flex;justify-content:space-between;font-size:1.5rem;margin-bottom:1.25rem;padding-top:1rem;border-top:1px solid var(--line)"><span>${t("cart.total")}</span><span>${fmt(this.total())}</span></div>
-          ${this.emailBlock()}
           <button class="btn btn-primary btn-block" data-checkout>${t("cart.checkout")}</button>
           <p class="muted" style="font-size:11px;text-align:center;margin-top:.75rem;line-height:1.5">${t("cart.securenote")}</p>
+          ${this.crossSellHTML()}
+          ${this.emailBlock()}
         </aside></div>`;
       this.bindLines(wrap.querySelector("[data-lines]"));
       wrap.querySelector("[data-checkout]")?.addEventListener("click", checkout);
       this.wireEmail(wrap);
+      this.wireCrossSell(wrap);
     },
     renderAll() { this.badges(); this.renderDrawer(); this.renderPage(); }
   };
@@ -172,7 +204,7 @@
       const gaItems = items.map(i => { const p = CAT.getProduct(i.id) || {}; return { item_id: p.sku || i.id, item_name: pname(i.id), item_category: t("cat." + p.category), price: +(i.unitPrice / 100).toFixed(2), quantity: i.qty }; });
       window.EliraAnalytics.beginCheckout(gaItems, +(Cart.total() / 100).toFixed(2));
       // Klaviyo abandoned-cart trigger (with captured email if we have one, else anonymous onsite)
-      window.EliraAnalytics.startedCheckout(items, Cart.total(), Cart.savedEmail());
+      window.EliraAnalytics.startedCheckout(items, Cart.total(), Cart.savedEmail(), Cart.savedName());
     }
     try {
       Cart.setLoading(true);
@@ -230,14 +262,18 @@
       e.preventDefault();
       const input = form.querySelector('input[type="email"]');
       const email = input && input.value ? input.value.trim() : "";
+      const fnameEl = form.querySelector('[data-fname]');
+      const firstName = fnameEl && fnameEl.value ? fnameEl.value.trim() : "";
       const thanks = () => { form.innerHTML = `<p class="font-display" style="font-size:1.4rem;color:var(--gold)">${t("news.thanks")}</p>`; };
       const K = (window.ELIRA_TRACKING && window.ELIRA_TRACKING.KLAVIYO) || null;
       if (!email || !K || !K.SITE_ID || !K.LIST_ID) { thanks(); return; }
+      if (firstName) { try { localStorage.setItem("elira_name", firstName); } catch (_) {} }
       // Klaviyo client-side list subscription (public Site ID; the list's
       // opt-in setting — double opt-in — is enforced by Klaviyo).
+      const profileAttrs = firstName ? { email, first_name: firstName } : { email };
       const body = { data: { type: "subscription", attributes: {
         custom_source: "Website newsletter",
-        profile: { data: { type: "profile", attributes: { email } } }
+        profile: { data: { type: "profile", attributes: profileAttrs } }
       }, relationships: { list: { data: { type: "list", id: K.LIST_ID } } } } };
       fetch("https://a.klaviyo.com/client/subscriptions/?company_id=" + encodeURIComponent(K.SITE_ID), {
         method: "POST",

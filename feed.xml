@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>Elira Living</title>
+    <link>https://www.eliraliving.com/</link>
+    <description>Vegan, ECOCERT COSMOS-certified natural skincare &amp; haircare. Made in the EU.</description>
+    <item>
+      <g:id>EL-SC-CREAM-50</g:id>
+      <g:title>Sensitive Moisturizing Cream</g:title>
+      <g:description>A fragrance-free moisturiser that soothes and strengthens sensitive skin. Vegan, ECOCERT COSMOS certified.</g:description>
+      <g:link>https://www.eliraliving.com/en/products/sensitive-moisturizing-cream.html</g:link>
+      <g:image_link>https://www.eliraliving.com/assets/img/cream.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>19.90 EUR</g:price>
+      <g:brand>Elira Living</g:brand>
+      <g:condition>new</g:condition>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Skin Care</g:google_product_category>
+      <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+      <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+    </item>
+    <item>
+      <g:id>EL-SC-CLEAN-145</g:id>
+      <g:title>Radiant Glow Facial Cleanser</g:title>
+      <g:description>A gentle daily cleanser that lifts away impurities for fresh, radiant skin. Vegan, COSMOS Natural.</g:description>
+      <g:link>https://www.eliraliving.com/en/products/radiant-glow-cleanser.html</g:link>
+      <g:image_link>https://www.eliraliving.com/assets/img/cleanser.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>25.99 EUR</g:price>
+      <g:brand>Elira Living</g:brand>
+      <g:condition>new</g:condition>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Skin Care</g:google_product_category>
+      <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+      <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+    </item>
+    <item>
+      <g:id>EL-SC-TONER-200</g:id>
+      <g:title>Purifying Toner</g:title>
+      <g:description>A purifying toner that clears pores and balances oily, combination skin — leaving it fresh and supple. Fragrance-free, COSMOS Natural.</g:description>
+      <g:link>https://www.eliraliving.com/en/products/purifying-toner.html</g:link>
+      <g:image_link>https://www.eliraliving.com/assets/img/toner.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>24.00 EUR</g:price>
+      <g:brand>Elira Living</g:brand>
+      <g:condition>new</g:condition>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Skin Care</g:google_product_category>
+      <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+      <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+    </item>
+    <item>
+      <g:id>EL-HC-SHAMP-400</g:id>
+      <g:title>Sensitive Scalp Shampoo</g:title>
+      <g:description>A gentle, soothing shampoo for sensitive scalps and all hair types. Dermatologically tested, COSMOS Natural.</g:description>
+      <g:link>https://www.eliraliving.com/en/products/sensitive-scalp-shampoo.html</g:link>
+      <g:image_link>https://www.eliraliving.com/assets/img/shampoo.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>23.00 EUR</g:price>
+      <g:brand>Elira Living</g:brand>
+      <g:condition>new</g:condition>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Hair Care</g:google_product_category>
+      <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+      <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+    </item>
+  </channel>
+</rss>

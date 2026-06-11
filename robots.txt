@@ -4,4 +4,4 @@ Disallow: /*/cart.html
 Disallow: /*/success.html
 Disallow: /*/cancel.html
 
-Sitemap: https://eliraliving.com/sitemap.xml
+Sitemap: https://www.eliraliving.com/sitemap.xml

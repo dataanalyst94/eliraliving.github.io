@@ -103,6 +103,9 @@ function head(L, o) {
   <link rel="stylesheet" href="/assets/css/app.css?v=${ASSET_V}">
   ${o.home ? `<link rel="stylesheet" href="/assets/css/home.css?v=${ASSET_V}">` : ""}
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F120D'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='62' fill='%23C8A24E' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#0F120D">
+  <link rel="manifest" href="/site.webmanifest">
+  ${o.home ? `<link rel="preload" as="image" href="/assets/img/shampoo.jpg">` : ""}
   ${ld}
 </head>`;
 }
@@ -331,14 +334,25 @@ function renderHome(L) {
     </div>
   </section>
 
+  ${POSTS.length ? `<section class="container" style="padding:6rem 1.25rem">
+    <div style="text-align:center;max-width:36rem;margin:0 auto 3.5rem">
+      <div class="kicker reveal" style="margin-bottom:.75rem">${esc(BLOG_UI[L].kicker)}</div>
+      <h2 class="font-display reveal" style="font-size:clamp(2.2rem,5vw,3.5rem)">${esc(BLOG_UI[L].heading)}</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2.75rem 2rem">${POSTS.slice(0, 3).map(p => blogCard(L, p)).join("\n")}</div>
+    <div style="text-align:center;margin-top:3.5rem" class="reveal"><a href="${P}/blog/" class="btn btn-outline">${esc(BLOG_UI[L].back)}</a></div>
+  </section>` : ""}
+
   <section class="container" style="padding:6rem 1.25rem">
     <div style="border:1px solid var(--line);background:var(--surface);padding:4rem 1.5rem;text-align:center" class="reveal">
       <div class="kicker" style="margin-bottom:.75rem">${T(L, "news.kicker")}</div>
       <h2 class="font-display" style="font-size:clamp(2rem,4vw,3rem);max-width:36rem;margin:0 auto">${T(L, "news.title")}</h2>
       <p class="muted" style="margin-top:1rem;max-width:28rem;margin-left:auto;margin-right:auto">${T(L, "news.lead")}</p>
       <form data-newsletter style="margin-top:2rem;max-width:28rem;margin-left:auto;margin-right:auto;display:flex;flex-wrap:wrap;gap:.75rem">
+        <label class="sr-only" for="nl-name">${T(L, "form.firstName")}</label>
+        <input id="nl-name" type="text" data-fname placeholder="${escA(t(L, "form.firstName"))}" autocomplete="given-name" style="flex:1;min-width:8rem">
         <label class="sr-only" for="nl">${T(L, "news.placeholder")}</label>
-        <input id="nl" type="email" required placeholder="${escA(t(L, "news.placeholder"))}" style="flex:1;min-width:12rem">
+        <input id="nl" type="email" required placeholder="${escA(t(L, "news.placeholder"))}" style="flex:1;min-width:10rem">
         <button class="btn btn-primary" type="submit">${T(L, "news.btn")}</button>
       </form>
       <p class="muted" style="font-size:.75rem;margin-top:1rem">${T(L, "news.consent")}</p>
@@ -646,7 +660,111 @@ function build() {
   writeSitemap();
   writeLlms();
   writePrices();
-  console.log("Built " + count + " localized pages across " + LANGS.join(", ") + " + root redirect + sitemap + llms.txt + prices.json.");
+  writeRobots();
+  write404();
+  writeManifest();
+  writeFeed();
+  console.log("Built " + count + " localized pages across " + LANGS.join(", ") + " + root + sitemap + llms.txt + prices.json + robots + 404 + manifest + feed.");
+}
+
+/* ---- robots.txt (kept in sync with baseUrl) --------------------------- */
+function writeRobots() {
+  write("robots.txt", `User-agent: *
+Allow: /
+Disallow: /*/cart.html
+Disallow: /*/success.html
+Disallow: /*/cancel.html
+
+Sitemap: ${BASE}/sitemap.xml
+`);
+}
+
+/* ---- web manifest ----------------------------------------------------- */
+function writeManifest() {
+  const icon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F120D'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-size='64' fill='%23C8A24E' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E";
+  write("site.webmanifest", JSON.stringify({
+    name: "Elira Living", short_name: "Elira",
+    description: "Vegan, ECOCERT COSMOS-certified natural skincare & haircare.",
+    start_url: "/en/", scope: "/", display: "standalone",
+    background_color: "#0F120D", theme_color: "#0F120D",
+    icons: [{ src: icon, sizes: "any", type: "image/svg+xml", purpose: "any" }]
+  }, null, 2) + "\n");
+}
+
+/* ---- branded 404 (GitHub Pages serves /404.html for any missing path) - */
+function write404() {
+  const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Elira Living</title>
+<meta name="robots" content="noindex,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F120D'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='62' fill='%23C8A24E' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0} html,body{height:100%}
+  body{background:#0F120D;color:#ECE7DB;font-family:'Jost',system-ui,sans-serif;display:grid;place-items:center;text-align:center;padding:2rem;overflow:hidden}
+  .wrap{max-width:34rem}
+  .kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#C8A24E;margin-bottom:1.25rem}
+  h1{font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(4rem,16vw,8rem);line-height:1;color:#ECE7DB}
+  h2{font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(1.4rem,5vw,2rem);margin:.5rem 0 1rem}
+  p{color:#8E8A78;line-height:1.7;margin-bottom:2rem}
+  .btns{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+  a.btn{display:inline-flex;align-items:center;padding:.85rem 1.8rem;font-size:.95rem;letter-spacing:.02em;border:1px solid rgba(236,231,219,.32);color:#ECE7DB;text-decoration:none;transition:background .25s,color .25s}
+  a.btn:hover{background:#C8A24E;color:#14160F;border-color:#C8A24E}
+  a.btn.primary{background:#ECE7DB;color:#14160F;border-color:#ECE7DB}
+  a.btn.primary:hover{background:#C8A24E;border-color:#C8A24E}
+  .langs{margin-top:2rem;font-size:.8rem;color:#8E8A78}.langs a{color:#C8A24E;text-decoration:none;margin:0 .4rem}
+</style></head>
+<body><div class="wrap">
+  <div class="kicker">Elira Living</div>
+  <h1>404</h1>
+  <h2>This page wandered off.</h2>
+  <p>The page you're looking for doesn't exist or has moved. Let's get you back to something lovely.</p>
+  <div class="btns">
+    <a class="btn primary" href="/en/">Home</a>
+    <a class="btn" href="/en/shop.html">Shop</a>
+    <a class="btn" href="/en/blog/">Journal</a>
+  </div>
+  <div class="langs">Language: <a href="/en/">EN</a>·<a href="/de/">DE</a>·<a href="/nl/">NL</a></div>
+</div>
+<script>try{var l=(navigator.language||'en').slice(0,2).toLowerCase();if(['de','nl'].indexOf(l)>-1){document.querySelectorAll('a.btn,.langs a').forEach(function(a){a.href=a.getAttribute('href').replace('/en/','/'+l+'/');});}}catch(e){}</script>
+</body></html>`;
+  write("404.html", html);
+}
+
+/* ---- Google Merchant product feed (feed.xml) -------------------------- */
+function writeFeed() {
+  const items = CAT.PRODUCTS.map(p => {
+    const L = "en";
+    const gcat = p.category === "haircare"
+      ? "Health &amp; Beauty &gt; Personal Care &gt; Hair Care"
+      : "Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Skin Care";
+    return `    <item>
+      <g:id>${esc(p.sku)}</g:id>
+      <g:title>${esc(pname(L, p.id))}</g:title>
+      <g:description>${esc(pdesc(L, p.id))}</g:description>
+      <g:link>${BASE + url("product", L, p)}</g:link>
+      <g:image_link>${BASE + p.image}</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>${(p.price / 100).toFixed(2)} EUR</g:price>
+      <g:brand>Elira Living</g:brand>
+      <g:condition>new</g:condition>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>${gcat}</g:google_product_category>
+      <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+      <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+    </item>`;
+  }).join("\n");
+  write("feed.xml", `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>Elira Living</title>
+    <link>${BASE}/</link>
+    <description>Vegan, ECOCERT COSMOS-certified natural skincare &amp; haircare. Made in the EU.</description>
+${items}
+  </channel>
+</rss>
+`);
 }
 
 /* ---- prices.json (single source of truth for the checkout worker) ------ */
