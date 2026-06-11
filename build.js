@@ -31,6 +31,15 @@ function gtmBody() {
 const BASE = CAT.CONFIG.baseUrl;
 const OG = BASE + "/assets/img/og-image.jpg";
 const LOGO = BASE + "/assets/img/brand/logo-512.png"; // clean brand logo for schema.org
+const FONT_CSS = "https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Jost:wght@300;400;500;600&display=swap";
+
+// <picture> with a WebP source + JPEG fallback. PNG/other sources pass through.
+// CSS `picture{display:contents}` keeps layout identical to a bare <img>.
+const webpOf = src => src.replace(/\.jpe?g$/i, ".webp");
+function pic(src, imgAttrs = "") {
+  if (!/\.jpe?g$/i.test(src)) return `<img src="${src}" ${imgAttrs}>`;
+  return `<picture><source srcset="${webpOf(src)}" type="image/webp"><img src="${src}" ${imgAttrs}></picture>`;
+}
 const OGLOC = { en: "en_GB", de: "de_DE", nl: "nl_NL" };
 const LANGS = ["en", "de", "nl"];
 const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE" };
@@ -102,7 +111,9 @@ function head(L, o) {
   <meta name="twitter:image" content="${img}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="${FONT_CSS}">
+  <link rel="stylesheet" href="${FONT_CSS}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="${FONT_CSS}"></noscript>
   <link rel="stylesheet" href="/assets/css/app.css?v=${ASSET_V}">
   ${o.home ? `<link rel="stylesheet" href="/assets/css/home.css?v=${ASSET_V}">` : ""}
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/brand/favicon-32.png?v=${ASSET_V}">
@@ -111,7 +122,7 @@ function head(L, o) {
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/brand/apple-touch-icon.png?v=${ASSET_V}">
   <meta name="theme-color" content="#0F120D">
   <link rel="manifest" href="/site.webmanifest">
-  ${o.home ? `<link rel="preload" as="image" href="/assets/img/shampoo.jpg">` : ""}
+  ${o.home ? `<link rel="preload" as="image" href="/assets/img/shampoo.webp" type="image/webp" fetchpriority="high">` : ""}
   ${ld}
 </head>`;
 }
@@ -183,18 +194,20 @@ function drawerMenu(L) {
 }
 
 function scripts(L, o) {
-  const libs = (o && o.home) ? `<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-` : "";
   const v = "?v=" + ASSET_V;
+  // Self-hosted (same-origin, HTTP/2 multiplexed) animation libs — no third-party
+  // origins. All scripts deferred so they never block parsing/first paint.
+  const libs = (o && o.home) ? `<script defer src="/assets/vendor/gsap.min.js${v}"></script>
+<script defer src="/assets/vendor/ScrollTrigger.min.js${v}"></script>
+<script defer src="/assets/vendor/lenis.min.js${v}"></script>
+` : "";
   return `<script>window.LANG=${JSON.stringify(L)};</script>
-<script src="/assets/data/catalog.js${v}"></script>
-<script src="/assets/content/${L}.js${v}"></script>
-<script src="/assets/data/analytics-config.js${v}"></script>
-<script src="/assets/js/analytics.js${v}"></script>
-<script src="/assets/js/consent-banner.js${v}"></script>
-${libs}<script src="/assets/js/app.js${v}"></script>`;
+<script defer src="/assets/data/catalog.js${v}"></script>
+<script defer src="/assets/content/${L}.js${v}"></script>
+<script defer src="/assets/data/analytics-config.js${v}"></script>
+<script defer src="/assets/js/analytics.js${v}"></script>
+<script defer src="/assets/js/consent-banner.js${v}"></script>
+${libs}<script defer src="/assets/js/app.js${v}"></script>`;
 }
 
 function shell(L, o, bodyHtml) {
@@ -206,7 +219,7 @@ function card(L, p) {
   const badge = p.badge ? `<span class="tag" style="position:absolute;top:12px;left:12px;z-index:3">${p.badge === "new" ? "New" : "Bestseller"}</span>` : "";
   return `<article class="card" data-cat="${p.category}" data-price="${p.price}" data-name="${escA(pname(L, p.id))}">
   <a href="${url("product", L, p)}" style="display:block">
-    <div class="media">${badge}<img src="${p.image}" alt="${escA(pname(L, p.id))}" loading="lazy" decoding="async">
+    <div class="media">${badge}${pic(p.image, `alt="${escA(pname(L, p.id))}" loading="lazy" decoding="async"`)}
       <button class="btn btn-primary quick" data-quick-add="${p.id}">${T(L, "pdp.add")}</button></div></a>
   <div class="meta"><div><a href="${url("product", L, p)}" class="name link-underline">${esc(pname(L, p.id))}</a><div class="desc">${esc(pdesc(L, p.id))}</div></div>
     <div class="price">${fmt(L, p.price)}</div></div>
@@ -305,7 +318,7 @@ function renderHome(L) {
   const cards = CAT.PRODUCTS.map(p => card(L, p)).join("\n");
   const body = `<main>
   <section class="hero">
-    <div class="hero__bg" data-hero-bg><img src="/assets/img/shampoo.jpg" alt="${escA(t(L, "hero.lead"))}"></div>
+    <div class="hero__bg" data-hero-bg>${pic("/assets/img/shampoo.jpg", `alt="${escA(t(L, "hero.lead"))}" fetchpriority="high" decoding="async"`)}</div>
     <div class="hero__veil"></div>
     <svg class="botanical" data-botanical style="top:18%;left:8%;width:70px" viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C20 18 12 30 12 42a20 20 0 0 0 40 0c0-12-8-24-20-38Z" opacity=".5"/></svg>
     <svg class="botanical" data-botanical style="top:62%;left:14%;width:48px" viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C20 18 12 30 12 42a20 20 0 0 0 40 0c0-12-8-24-20-38Z" opacity=".4"/></svg>
@@ -335,7 +348,7 @@ function renderHome(L) {
 
   <section class="chapter" data-chapter>
     <div class="chapter__stage"><div class="chapter__glow" data-chapter-glow></div>
-      <div class="chapter__product" data-chapter-product><img src="/assets/img/toner.jpg" alt="${escA(pname(L, "purifying-toner"))}"></div></div>
+      <div class="chapter__product" data-chapter-product>${pic("/assets/img/toner.jpg", `alt="${escA(pname(L, "purifying-toner"))}" loading="lazy" decoding="async"`)}</div></div>
     <div class="chapter__headlines" data-chapter-headlines>
       <div class="kicker" style="margin-bottom:.75rem">${T(L, "chapter.kicker")}</div>
       <h2 class="font-display" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1.05"><span data-headline="0">${T(L, "chapter.head1")}</span><span data-headline="1" style="opacity:0">${T(L, "chapter.head2")}</span><span data-headline="2" style="opacity:0">${T(L, "chapter.head3")}</span></h2>
@@ -372,7 +385,7 @@ function renderHome(L) {
   </section>
 
   <section class="split">
-    <div class="split-media" data-split><img src="/assets/img/cream.jpg" alt="${escA(t(L, "about.kicker"))}"></div>
+    <div class="split-media" data-split>${pic("/assets/img/cream.jpg", `alt="${escA(t(L, "about.kicker"))}" loading="lazy" decoding="async"`)}</div>
     <div style="display:flex;align-items:center;background:var(--bg2);padding:5rem 1.5rem">
       <div style="max-width:28rem">
         <div class="kicker reveal" style="margin-bottom:.75rem">${T(L, "story.kicker")}</div>
@@ -459,8 +472,8 @@ function renderProduct(L, p) {
   <a href="${url("shop", L)}" class="link-underline muted" style="display:inline-block;font-size:.875rem;margin-bottom:2rem">← ${T(L, "pdp.back")}</a>
   <div class="pdp-grid">
     <div class="reveal in" data-gallery>
-      <div class="pdp-main" data-gallery-main tabindex="0" role="button" aria-label="${escA(pname(L, p.id))} — zoom"><img src="${imgs[0]}" alt="${escA(pname(L, p.id))}" data-gallery-img></div>
-      ${imgs.length > 1 ? `<div class="pdp-thumbs">${imgs.map((src, i) => `<button class="pdp-thumb${i === 0 ? " active" : ""}" data-gallery-thumb="${src}" aria-label="View image ${i + 1} of ${imgs.length}"><img src="${src}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
+      <div class="pdp-main" data-gallery-main tabindex="0" role="button" aria-label="${escA(pname(L, p.id))} — zoom">${pic(imgs[0], `alt="${escA(pname(L, p.id))}" fetchpriority="high" decoding="async" data-gallery-img`)}</div>
+      ${imgs.length > 1 ? `<div class="pdp-thumbs">${imgs.map((src, i) => `<button class="pdp-thumb${i === 0 ? " active" : ""}" data-gallery-thumb="${src}" aria-label="View image ${i + 1} of ${imgs.length}">${pic(src, `alt="" loading="lazy"`)}</button>`).join("")}</div>` : ""}
     </div>
     <div class="reveal in">
       <div class="kicker">${T(L, "cat." + p.category)}</div>
@@ -509,7 +522,7 @@ function renderAbout(L) {
     <p class="muted reveal in" style="margin-top:1.5rem;font-size:1.125rem;max-width:36rem;margin-left:auto;margin-right:auto">${T(L, "about.lead")}</p>
   </section>
   <section style="max-width:72rem;margin:0 auto;padding:0 1.25rem">
-    <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line)" class="reveal"><img src="/assets/img/cream.jpg" alt="${escA(t(L, "about.kicker"))}" style="width:100%;height:100%;object-fit:cover"></div>
+    <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line)" class="reveal">${pic("/assets/img/cream.jpg", `alt="${escA(t(L, "about.kicker"))}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover"`)}</div>
   </section>
   <section style="max-width:46rem;margin:0 auto;padding:5rem 1.25rem">
     <p class="font-display reveal" style="font-size:clamp(1.4rem,3vw,2rem);line-height:1.4">${T(L, "about.body1")}</p>
@@ -569,7 +582,7 @@ function productCallout(L, id) {
   if (!p) return "";
   const purl = url("product", L, p);
   return `<aside class="blog-product" style="display:flex;gap:1.25rem;align-items:center;border:1px solid var(--line);background:var(--surface);padding:1.25rem;margin:2rem 0">
-  <a href="${purl}" style="flex:0 0 auto" aria-label="${escA(pname(L, p.id))}"><img src="${p.image}" alt="${escA(pname(L, p.id))}" loading="lazy" style="width:84px;height:105px;object-fit:cover;border:1px solid var(--line)"></a>
+  <a href="${purl}" style="flex:0 0 auto" aria-label="${escA(pname(L, p.id))}">${pic(p.image, `alt="${escA(pname(L, p.id))}" loading="lazy" style="width:84px;height:105px;object-fit:cover;border:1px solid var(--line)"`)}</a>
   <div style="flex:1;min-width:0">
     <div class="kicker" style="margin-bottom:.3rem">${T(L, "cat." + p.category)}</div>
     <a href="${purl}" class="font-display link-underline" style="font-size:1.15rem;display:inline-block;line-height:1.2">${esc(pname(L, p.id))}</a>
@@ -598,7 +611,7 @@ function blogCard(L, post) {
   const c = postContent(L, post);
   const purl = url("post", L, post);
   return `<article class="blog-card reveal" style="display:flex;flex-direction:column">
-  <a href="${purl}" aria-label="${escA(c.title)}"><div style="aspect-ratio:16/10;overflow:hidden;border:1px solid var(--line);background:var(--stone)"><img src="${post.image}" alt="${escA(c.title)}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover"></div></a>
+  <a href="${purl}" aria-label="${escA(c.title)}"><div style="aspect-ratio:16/10;overflow:hidden;border:1px solid var(--line);background:var(--stone)">${pic(post.image, `alt="${escA(c.title)}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover"`)}</div></a>
   <div style="padding-top:1.1rem;display:flex;flex-direction:column;flex:1">
     <div class="kicker" style="margin-bottom:.5rem">${T(L, "cat." + post.category)} · ${esc(blogDate(L, post.date))}</div>
     <a href="${purl}" class="font-display link-underline" style="font-size:1.35rem;line-height:1.2">${esc(c.title)}</a>
@@ -645,7 +658,7 @@ function renderPost(L, post) {
     <h1 class="font-display" style="font-size:clamp(2.2rem,5.5vw,3.4rem);line-height:1.05">${esc(c.title)}</h1>
     ${metaLine}
   </div>
-  <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line);margin:2rem 0 2.5rem;max-width:60rem" class="reveal"><img src="${post.image}" alt="${escA(c.title)}" style="width:100%;height:100%;object-fit:cover"></div>
+  <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line);margin:2rem 0 2.5rem;max-width:60rem" class="reveal">${pic(post.image, `alt="${escA(c.title)}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover"`)}</div>
   <div class="blog-prose" style="max-width:44rem;font-size:1.05rem">
     ${renderBody(L, c.body)}
   </div>

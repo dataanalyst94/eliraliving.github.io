@@ -336,7 +336,11 @@
     const thumbs = [...root.querySelectorAll("[data-gallery-thumb]")];
     thumbs.forEach(btn => btn.addEventListener("click", () => {
       if (!mainImg) return;
-      mainImg.setAttribute("src", btn.getAttribute("data-gallery-thumb"));
+      const src = btn.getAttribute("data-gallery-thumb");
+      mainImg.setAttribute("src", src);
+      // keep the WebP <source> in sync so the picture shows the right image
+      const srcEl = mainImg.parentElement && mainImg.parentElement.querySelector("source");
+      if (srcEl) srcEl.setAttribute("srcset", src.replace(/\.jpe?g$/i, ".webp"));
       thumbs.forEach(b => b.classList.toggle("active", b === btn));
     }));
     const mainBox = root.querySelector("[data-gallery-main]");
