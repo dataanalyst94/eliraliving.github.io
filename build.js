@@ -14,6 +14,7 @@ const { USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE } = require("./assets/
 const { BLOG_UI, POSTS } = require("./assets/data/blog-content.js");
 const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen" };
 const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik" };
+const FREESHIP_H = { en: "Free shipping on this item", de: "Kostenloser Versand für diesen Artikel", nl: "Gratis verzending voor dit artikel" };
 
 // Google Consent Mode v2 default (denied) + GTM loader — baked into every page.
 function gtmHead() {
@@ -410,6 +411,7 @@ function renderProduct(L, p) {
       <div class="kicker">${T(L, "cat." + p.category)}</div>
       <h1 class="font-display" style="font-size:clamp(2.2rem,5vw,3.2rem);margin-top:.75rem;line-height:1.05">${esc(pname(L, p.id))}</h1>
       <div class="font-display" style="font-size:1.5rem;margin-top:1rem">${fmt(L, p.price)}</div>
+      ${p.freeShipping ? `<div style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.6rem;font-size:.8rem;color:var(--sage)"><span style="color:var(--gold)">✦</span>${esc(FREESHIP_H[L])}</div>` : ""}
       <p style="margin-top:1.25rem;line-height:1.7;color:var(--ink-soft);max-width:34rem">${esc(pdesc(L, p.id))}</p>
       <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem">${features}</div>
       <div style="margin-top:1.5rem"><span class="kicker">${T(L, "pdp.size")}</span><div style="margin-top:.75rem"><button class="swatch-size" aria-pressed="true">${esc(p.size)}</button></div></div>
@@ -433,7 +435,12 @@ function renderProduct(L, p) {
     <h2 class="font-display reveal" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:2rem">${T(L, "pdp.related")}</h2>
     <div class="grid-products">${related.map(r => card(L, r)).join("\n")}</div>
   </section>
-</div></main>`;
+</div>
+<div class="sticky-cart" data-sticky-cart aria-hidden="true"><div class="container" style="display:flex;align-items:center;gap:1rem;justify-content:space-between">
+  <div style="min-width:0"><div class="font-display" style="font-size:1rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(pname(L, p.id))}</div><div class="muted" style="font-size:.85rem">${fmt(L, p.price)}</div></div>
+  <button class="btn btn-primary" data-sticky-add style="flex:none">${T(L, "pdp.add")}</button>
+</div></div>
+</main>`;
   return shell(L, { page: "product", p, bodyPage: "product", title, description, ogType: "product", image: BASE + p.image, inlineData: `window.ELIRA_PAGE={type:"product",id:${JSON.stringify(p.id)}};`, keywords: [pname(L, p.id), t(L, "cat." + p.category), "Elira Living", "vegan", "COSMOS", "ECOCERT"].join(", "), ld: [ldOrg(), ldProduct(L, p), ldBreadcrumb(L, p), ldFAQ(faqs)] }, body);
 }
 
@@ -780,6 +787,7 @@ function writePrices() {
     currency: CAT.CONFIG.currency,
     freeShippingThreshold: CAT.CONFIG.freeShippingThreshold,
     shippingFlat: CAT.CONFIG.shippingFlat,
+    freeShipping: CAT.PRODUCTS.filter(p => p.freeShipping).map(p => p.id),
     prices
   };
   write("assets/data/prices.json", JSON.stringify(data, null, 2) + "\n");

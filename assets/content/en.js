@@ -197,7 +197,8 @@
     "allSkin": "All skin types",
     "oilyComb": "Oily / combination",
     "derm": "Dermatologically tested",
-    "allHair": "All hair types"
+    "allHair": "All hair types",
+    "antiAging": "Anti-aging"
   },
   "products": {
     "sensitive-moisturizing-cream": {
@@ -219,6 +220,11 @@
       "name": "Sensitive Scalp Shampoo",
       "desc": "A gentle, soothing shampoo for sensitive scalps and all hair types. Dermatologically tested, COSMOS Natural.",
       "ingredients": "Aqua, Sodium Coco-Sulfate, Cocamidopropyl Betaine, Coco-Glucoside, Betaine, Glyceryl Oleate, Prunus Domestica (Plum) Fruit Extract*, Sodium Chloride, Citric Acid, Parfum, Benzyl Alcohol, Hydrolyzed Wheat Protein, Tilia Cordata (Linden) Flower Extract*, Sodium Benzoate, Potassium Sorbate, Jasminum Officinale (Jasmin) Extract, Leuconostoc/Radish Root Ferment Filtrate.  *from organic farming · 98% natural origin · ECOCERT COSMOS Natural."
+    },
+    "retinol-alternative-serum": {
+      "name": "Retinol Alternative Serum",
+      "desc": "A gentle natural anti-aging serum with 2% Bidens Pilosa — a plant-based retinol alternative — plus hyaluronic acid. Visibly refines skin texture and softens fine lines and dark spots, without irritation. COSMOS Natural, vegan, for all skin types.",
+      "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin**, Simmondsia Chinensis (Jojoba) Seed Oil*, Pentylene Glycol, Polyglyceryl-6 Stearate, Cetearyl Alcohol, Propanediol, Dicaprylyl Carbonate, Astrocaryum Murumuru Seed Butter, Gossypium Herbaceum Seed Oil, Isoamyl Laurate, Bidens Pilosa Extract, Polyglyceryl-6 Behenate, Linum Usitatissimum Seed Oil, Parfum/Fragrance, Cellulose, Aqua/Water, Hippophae Rhamnoides (Sea Buckthorn) Fruit Extract*, Lactic Acid, Xanthan Gum, Rhodomyrtus Tomentosa (Rose Myrtle) Fruit Extract, Caprylic/Capric Triglyceride, Rosa Canina (Rosehip) Fruit Oil*, Mangifera Indica (Mango) Seed Butter*, Hydrolyzed Hyaluronic Acid, Sodium Hyaluronate, Sodium Phytate, Octyldodecanol, Tocopherol, Geraniol***, Citronellol***, Pelargonium Graveolens Flower Oil, Linalool***, Citral***.  *from organic farming  **made using organic ingredients  ***from natural essential oils · 99% natural origin · 24% organic · COSMOS Natural certified by ECOCERT Greenlife."
     }
   }
 };

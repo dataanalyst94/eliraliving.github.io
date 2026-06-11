@@ -197,7 +197,8 @@
     "allSkin": "Alle huidtypes",
     "oilyComb": "Vette/gemengde huid",
     "derm": "Dermatologisch getest",
-    "allHair": "Alle haartypes"
+    "allHair": "Alle haartypes",
+    "antiAging": "Anti-aging"
   },
   "products": {
     "sensitive-moisturizing-cream": {
@@ -219,6 +220,11 @@
       "name": "Shampoo Gevoelige Hoofdhuid",
       "desc": "Milde, kalmerende shampoo voor de gevoelige hoofdhuid en alle haartypes. Dermatologisch getest, COSMOS Natural.",
       "ingredients": "Aqua, Sodium Coco-Sulfate, Cocamidopropyl Betaine, Coco-Glucoside, Betaine, Glyceryl Oleate, Prunus Domestica (Plum) Fruit Extract*, Sodium Chloride, Citric Acid, Parfum, Benzyl Alcohol, Hydrolyzed Wheat Protein, Tilia Cordata (Linden) Flower Extract*, Sodium Benzoate, Potassium Sorbate, Jasminum Officinale (Jasmin) Extract, Leuconostoc/Radish Root Ferment Filtrate.  *uit biologische landbouw · 98% natuurlijke oorsprong · ECOCERT COSMOS Natural."
+    },
+    "retinol-alternative-serum": {
+      "name": "Retinol Alternatief Serum",
+      "desc": "Zachte, natuurlijke anti-aging kracht: 2% Bidens Pilosa als plantaardig retinol-alternatief, met hyaluronzuur, verfijnt de huidtextuur en verzacht fijne lijntjes & donkere vlekjes — zonder irritatie. COSMOS Natural, veganistisch, voor alle huidtypes.",
+      "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin**, Simmondsia Chinensis (Jojoba) Seed Oil*, Pentylene Glycol, Polyglyceryl-6 Stearate, Cetearyl Alcohol, Propanediol, Dicaprylyl Carbonate, Astrocaryum Murumuru Seed Butter, Gossypium Herbaceum Seed Oil, Isoamyl Laurate, Bidens Pilosa Extract, Polyglyceryl-6 Behenate, Linum Usitatissimum Seed Oil, Parfum/Fragrance, Cellulose, Aqua/Water, Hippophae Rhamnoides (Sea Buckthorn) Fruit Extract*, Lactic Acid, Xanthan Gum, Rhodomyrtus Tomentosa (Rose Myrtle) Fruit Extract, Caprylic/Capric Triglyceride, Rosa Canina (Rosehip) Fruit Oil*, Mangifera Indica (Mango) Seed Butter*, Hydrolyzed Hyaluronic Acid, Sodium Hyaluronate, Sodium Phytate, Octyldodecanol, Tocopherol, Geraniol***, Citronellol***, Pelargonium Graveolens Flower Oil, Linalool***, Citral***.  *uit biologische landbouw  **gemaakt met biologische ingrediënten  ***uit natuurlijke etherische oliën · 99% natuurlijke oorsprong · 24% biologische oorsprong · COSMOS Natural gecertificeerd door ECOCERT Greenlife."
     }
   }
 };

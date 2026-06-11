@@ -197,7 +197,8 @@
     "allSkin": "Alle Hauttypen",
     "oilyComb": "Fettige/Mischhaut",
     "derm": "Dermatologisch getestet",
-    "allHair": "Alle Haartypen"
+    "allHair": "Alle Haartypen",
+    "antiAging": "Anti-Aging"
   },
   "products": {
     "sensitive-moisturizing-cream": {
@@ -219,6 +220,11 @@
       "name": "Sensitive Kopfhaut Shampoo",
       "desc": "Sanftes, beruhigendes Shampoo für empfindliche Kopfhaut und alle Haartypen. Dermatologisch getestet, COSMOS Natural.",
       "ingredients": "Aqua, Sodium Coco-Sulfate, Cocamidopropyl Betaine, Coco-Glucoside, Betaine, Glyceryl Oleate, Prunus Domestica (Plum) Fruit Extract*, Sodium Chloride, Citric Acid, Parfum, Benzyl Alcohol, Hydrolyzed Wheat Protein, Tilia Cordata (Linden) Flower Extract*, Sodium Benzoate, Potassium Sorbate, Jasminum Officinale (Jasmin) Extract, Leuconostoc/Radish Root Ferment Filtrate.  *aus biologischem Anbau · 98 % natürlichen Ursprungs · ECOCERT COSMOS Natural."
+    },
+    "retinol-alternative-serum": {
+      "name": "Retinol Alternative Serum",
+      "desc": "Sanfte Anti-Aging-Kraft aus der Natur: 2 % Bidens Pilosa als natürlicher Retinol-Ersatz, mit Hyaluronsäure, verfeinert die Hauttextur und mildert feine Linien & dunkle Flecken — ohne Reizung. COSMOS Natural, vegan, für alle Hauttypen.",
+      "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin**, Simmondsia Chinensis (Jojoba) Seed Oil*, Pentylene Glycol, Polyglyceryl-6 Stearate, Cetearyl Alcohol, Propanediol, Dicaprylyl Carbonate, Astrocaryum Murumuru Seed Butter, Gossypium Herbaceum Seed Oil, Isoamyl Laurate, Bidens Pilosa Extract, Polyglyceryl-6 Behenate, Linum Usitatissimum Seed Oil, Parfum/Fragrance, Cellulose, Aqua/Water, Hippophae Rhamnoides (Sea Buckthorn) Fruit Extract*, Lactic Acid, Xanthan Gum, Rhodomyrtus Tomentosa (Rose Myrtle) Fruit Extract, Caprylic/Capric Triglyceride, Rosa Canina (Rosehip) Fruit Oil*, Mangifera Indica (Mango) Seed Butter*, Hydrolyzed Hyaluronic Acid, Sodium Hyaluronate, Sodium Phytate, Octyldodecanol, Tocopherol, Geraniol***, Citronellol***, Pelargonium Graveolens Flower Oil, Linalool***, Citral***.  *aus biologischem Anbau  **aus biologischen Zutaten hergestellt  ***aus natürlichen ätherischen Ölen · 99 % natürlichen Ursprungs · 24 % biologischen Ursprungs · COSMOS Natural zertifiziert durch ECOCERT Greenlife."
     }
   }
 };

@@ -38,7 +38,12 @@
     write(items) { localStorage.setItem(this.KEY, JSON.stringify(items)); document.dispatchEvent(new CustomEvent("cartchange")); },
     count() { return this.read().reduce((n, i) => n + i.qty, 0); },
     subtotal() { return this.read().reduce((n, i) => n + i.unitPrice * i.qty, 0); },
-    shipping() { const s = this.subtotal(); return (!this.read().length || s >= CFG.freeShippingThreshold) ? 0 : CFG.shippingFlat; },
+    shipping() {
+      const items = this.read();
+      if (!items.length) return 0;
+      if (items.some(i => { const p = CAT.getProduct(i.id); return p && p.freeShipping; })) return 0;
+      return this.subtotal() >= CFG.freeShippingThreshold ? 0 : CFG.shippingFlat;
+    },
     total() { return this.subtotal() + this.shipping(); },
     add(id, { variant = "", unitPrice = null, qty = 1 } = {}) {
       const p = CAT.getProduct(id); if (!p) return;
@@ -59,7 +64,7 @@
     freeBar() {
       const s = this.subtotal();
       if (s === 0) return `<div class="reveal in" style="height:1px;background:var(--line);margin:.5rem 0"></div>`;
-      if (s >= CFG.freeShippingThreshold) return `<div style="font-size:.75rem;color:var(--sage);margin-bottom:.5rem">${t("cart.freeReached")}</div><div style="height:3px;background:var(--gold)"></div>`;
+      if (this.shipping() === 0) return `<div style="font-size:.75rem;color:var(--sage);margin-bottom:.5rem">${t("cart.freeReached")}</div><div style="height:3px;background:var(--gold)"></div>`;
       const pct = Math.min(100, Math.round(s / CFG.freeShippingThreshold * 100));
       return `<div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">${t("cart.freeProgress").replace("{amount}", fmt(CFG.freeShippingThreshold - s))}</div>
         <div style="height:3px;background:var(--line)"><div style="height:100%;width:${pct}%;background:var(--gold);transition:width .5s"></div></div>`;
@@ -351,6 +356,16 @@
       mainBox.addEventListener("click", openLb);
       mainBox.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLb(); } });
       document.addEventListener("keydown", e => { if (e.key === "Escape") closeLb(); });
+    }
+
+    /* ---- Mobile sticky add-to-cart ---- */
+    const stickyBar = document.querySelector("[data-sticky-cart]");
+    const addBtnEl = root.querySelector("[data-add]");
+    if (stickyBar && addBtnEl && "IntersectionObserver" in window) {
+      stickyBar.querySelector("[data-sticky-add]")?.addEventListener("click", () => { addToCart(); openCart(); });
+      new IntersectionObserver(ents => {
+        ents.forEach(e => stickyBar.classList.toggle("visible", !e.isIntersecting && e.boundingClientRect.top < 0));
+      }, { threshold: 0 }).observe(addBtnEl);
     }
   }
 

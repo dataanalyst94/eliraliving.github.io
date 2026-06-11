@@ -210,3 +210,9 @@ input[type=email]:focus,input[type=text]:focus{ outline:none; border-color:var(-
 .lightbox.open{ opacity:1; visibility:visible; }
 .lightbox img{ max-width:92vw; max-height:88vh; object-fit:contain; box-shadow:var(--shadow-lg); }
 .lightbox-close{ position:absolute; top:1.25rem; right:1.5rem; background:none; border:none; color:var(--ink); cursor:pointer; padding:.5rem; line-height:0; }
+
+/* Mobile sticky add-to-cart (PDP) */
+.sticky-cart{ position:fixed; left:0; right:0; bottom:0; z-index:40; background:rgba(15,18,13,.93); -webkit-backdrop-filter:saturate(140%) blur(14px); backdrop-filter:saturate(140%) blur(14px); border-top:1px solid var(--line); padding:.7rem 0; transform:translateY(115%); transition:transform .4s var(--ease); }
+.sticky-cart.visible{ transform:none; }
+.sticky-cart .btn{ padding:.7rem 1.4rem; font-size:.9rem; }
+@media(min-width:880px){ .sticky-cart{ display:none !important; } }

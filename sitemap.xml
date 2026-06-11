@@ -108,6 +108,14 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.eliraliving.com/en/products/retinol-alternative-serum.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/products/retinol-alternative-serum.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/products/retinol-alternative-serum.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.eliraliving.com/nl/products/retinol-alternative-serum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eliraliving.com/en/products/retinol-alternative-serum.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.eliraliving.com/en/blog/dry-flaky-scalp-vs-dandruff-how-to-tell-them-apart.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/blog/dry-flaky-scalp-vs-dandruff-how-to-tell-them-apart.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/blog/dry-flaky-scalp-vs-dandruff-how-to-tell-them-apart.html"/>
@@ -391,6 +399,14 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.eliraliving.com/de/products/retinol-alternative-serum.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/products/retinol-alternative-serum.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/products/retinol-alternative-serum.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.eliraliving.com/nl/products/retinol-alternative-serum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eliraliving.com/en/products/retinol-alternative-serum.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.eliraliving.com/de/blog/dry-flaky-scalp-vs-dandruff-how-to-tell-them-apart.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/blog/dry-flaky-scalp-vs-dandruff-how-to-tell-them-apart.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/blog/dry-flaky-scalp-vs-dandruff-how-to-tell-them-apart.html"/>
@@ -671,6 +687,14 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/products/sensitive-scalp-shampoo.html"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://www.eliraliving.com/nl/products/sensitive-scalp-shampoo.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eliraliving.com/en/products/sensitive-scalp-shampoo.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.eliraliving.com/nl/products/retinol-alternative-serum.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/products/retinol-alternative-serum.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/products/retinol-alternative-serum.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.eliraliving.com/nl/products/retinol-alternative-serum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eliraliving.com/en/products/retinol-alternative-serum.html"/>
     <priority>0.8</priority>
   </url>
   <url>

@@ -38,10 +38,12 @@ const FALLBACK_PRICES = {
   "sensitive-moisturizing-cream": 1990,
   "radiant-glow-cleanser": 2599,
   "purifying-toner": 2400,
-  "sensitive-scalp-shampoo": 2300
+  "sensitive-scalp-shampoo": 2300,
+  "retinol-alternative-serum": 2999
 };
 const FALLBACK_FREE_SHIPPING_THRESHOLD = 3900; // €39.00
 const FALLBACK_SHIPPING_FLAT = 495;            // €4.95
+const FALLBACK_FREE_SHIPPING = ["retinol-alternative-serum"]; // products that always ship free
 
 // Fetch current pricing from the site (cached ~5 min at Cloudflare's edge).
 async function loadPricing() {
@@ -53,12 +55,13 @@ async function loadPricing() {
         return {
           prices: d.prices,
           freeThreshold: Number.isFinite(d.freeShippingThreshold) ? d.freeShippingThreshold : FALLBACK_FREE_SHIPPING_THRESHOLD,
-          shippingFlat: Number.isFinite(d.shippingFlat) ? d.shippingFlat : FALLBACK_SHIPPING_FLAT
+          shippingFlat: Number.isFinite(d.shippingFlat) ? d.shippingFlat : FALLBACK_SHIPPING_FLAT,
+          freeShipping: Array.isArray(d.freeShipping) ? d.freeShipping : FALLBACK_FREE_SHIPPING
         };
       }
     }
   } catch (e) { /* fall through to fallback */ }
-  return { prices: FALLBACK_PRICES, freeThreshold: FALLBACK_FREE_SHIPPING_THRESHOLD, shippingFlat: FALLBACK_SHIPPING_FLAT };
+  return { prices: FALLBACK_PRICES, freeThreshold: FALLBACK_FREE_SHIPPING_THRESHOLD, shippingFlat: FALLBACK_SHIPPING_FLAT, freeShipping: FALLBACK_FREE_SHIPPING };
 }
 
 function cors(origin) {
@@ -95,7 +98,9 @@ export default {
 
       let subtotal = 0;
       items.forEach((it, n) => {
-        const base = pricing.prices[it.id];
+        // Prefer the live catalog price; fall back to the baked-in price so a
+        // freshly-added product still works during the ~5-min prices.json cache window.
+        const base = pricing.prices[it.id] != null ? pricing.prices[it.id] : FALLBACK_PRICES[it.id];
         if (base == null) throw new Error("Unknown product: " + it.id);
         // variant surcharge derived from client amount above base (sizes only)
         const surcharge = Math.max(0, Math.round((it.amount || base) - base));
@@ -116,8 +121,9 @@ export default {
         }
       });
 
-      // Shipping (free over threshold)
-      const shipping = subtotal >= pricing.freeThreshold ? 0 : pricing.shippingFlat;
+      // Shipping (free over threshold, or if the cart has a free-shipping product)
+      const hasFreeShipItem = items.some(it => (pricing.freeShipping || []).includes(it.id));
+      const shipping = (hasFreeShipItem || subtotal >= pricing.freeThreshold) ? 0 : pricing.shippingFlat;
       form.append("shipping_options[0][shipping_rate_data][type]", "fixed_amount");
       form.append("shipping_options[0][shipping_rate_data][fixed_amount][amount]", shipping);
       form.append("shipping_options[0][shipping_rate_data][fixed_amount][currency]", "eur");

@@ -78,6 +78,21 @@
       image: "/assets/img/shampoo.jpg",
       images: ["/assets/img/shampoo.jpg", "/assets/img/gallery/sensitive-scalp-shampoo-2.jpg", "/assets/img/gallery/sensitive-scalp-shampoo-3.jpg", "/assets/img/gallery/sensitive-scalp-shampoo-4.jpg"],
       priceId: "", paymentLink: ""
+    },
+    {
+      id: "retinol-alternative-serum",
+      sku: "EL-SC-SERUM-30",
+      category: "skincare",
+      price: 2999,
+      size: "30 ml",
+      sizes: [{ id: "30ml", add: 0 }],
+      badge: "new",
+      featureKeys: ["vegan", "cosmosNatural", "antiAging", "allSkin"],
+      naturalOrigin: 99,
+      freeShipping: true,                 // this product ships free regardless of cart total
+      image: "/assets/img/serum.jpg",
+      images: ["/assets/img/serum.jpg", "/assets/img/gallery/retinol-alternative-serum-2.jpg"],
+      priceId: "", paymentLink: ""
     }
   ];
 

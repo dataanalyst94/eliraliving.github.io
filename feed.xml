@@ -64,5 +64,20 @@
       <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
       <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
     </item>
+    <item>
+      <g:id>EL-SC-SERUM-30</g:id>
+      <g:title>Retinol Alternative Serum</g:title>
+      <g:description>A gentle natural anti-aging serum with 2% Bidens Pilosa — a plant-based retinol alternative — plus hyaluronic acid. Visibly refines skin texture and softens fine lines and dark spots, without irritation. COSMOS Natural, vegan, for all skin types.</g:description>
+      <g:link>https://www.eliraliving.com/en/products/retinol-alternative-serum.html</g:link>
+      <g:image_link>https://www.eliraliving.com/assets/img/serum.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>29.99 EUR</g:price>
+      <g:brand>Elira Living</g:brand>
+      <g:condition>new</g:condition>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Skin Care</g:google_product_category>
+      <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+      <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+    </item>
   </channel>
 </rss>

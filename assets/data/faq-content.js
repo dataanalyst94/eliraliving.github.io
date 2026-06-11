@@ -22,7 +22,11 @@ const USAGE = {
   "sensitive-scalp-shampoo": {
     en: "Massage into wet hair and scalp, lather, then rinse thoroughly. Gentle enough for frequent use.",
     de: "In das nasse Haar und die Kopfhaut einmassieren, aufschäumen und gründlich ausspülen. Mild genug für die häufige Anwendung.",
-    nl: "Masseer in nat haar en op de hoofdhuid, laat schuimen en spoel grondig uit. Mild genoeg voor frequent gebruik." }
+    nl: "Masseer in nat haar en op de hoofdhuid, laat schuimen en spoel grondig uit. Mild genoeg voor frequent gebruik." },
+  "retinol-alternative-serum": {
+    en: "Cleanse your face and pat dry. Apply a few drops to face and neck and massage in gently. Use morning and/or evening, before moisturiser; avoid the eye area.",
+    de: "Das Gesicht gründlich reinigen und leicht abtrocknen. Einige Tropfen auf Gesicht und Hals auftragen und sanft einmassieren. Morgens und/oder abends vor der Feuchtigkeitspflege anwenden; Augenkontakt vermeiden.",
+    nl: "Reinig je gezicht en dep droog. Breng enkele druppels aan op gezicht en hals en masseer zachtjes in. Gebruik ’s ochtends en/of ’s avonds, vóór je moisturizer; vermijd de oogcontour." }
 };
 
 // ---- Product FAQs (the questions people ask AI about these products) ----
@@ -93,6 +97,23 @@ const PRODUCT_FAQ = {
       { q: "Is deze shampoo goed voor een gevoelige of jeukende hoofdhuid?", a: "Ja. Het is een milde, dermatologisch geteste formule voor de gevoelige, snel geïrriteerde hoofdhuid en geschikt voor alle haartypes." },
       { q: "Is hij veganistisch en mild?", a: "Ja — veganistisch, ECOCERT COSMOS Natural-gecertificeerd en gebaseerd op milde reinigers voor de gevoelige hoofdhuid." },
       { q: "Kan ik hem elke dag gebruiken?", a: "Ja, hij is mild genoeg voor frequent gebruik. Masseer in nat haar en hoofdhuid, laat schuimen en spoel uit." }
+    ]
+  },
+  "retinol-alternative-serum": {
+    en: [
+      { q: "Is this a real retinol?", a: "No — it's a gentle, plant-based retinol alternative built on 2% Bidens Pilosa, giving retinol-like smoothing benefits without the irritation, so it suits sensitive and all skin types." },
+      { q: "How and when do I use the serum?", a: "Apply a few drops to clean skin morning and/or evening, before your moisturiser, and massage in gently. Avoid the eye area." },
+      { q: "Is it vegan and certified?", a: "Yes — 100% vegan and COSMOS Natural certified by ECOCERT Greenlife, with 99% natural-origin ingredients and hyaluronic acid for hydration." }
+    ],
+    de: [
+      { q: "Ist das echtes Retinol?", a: "Nein — es ist ein sanfter, pflanzlicher Retinol-Ersatz auf Basis von 2 % Bidens Pilosa. Er bietet retinolähnliche, glättende Effekte ohne Reizung und eignet sich für empfindliche sowie alle Hauttypen." },
+      { q: "Wie und wann wende ich das Serum an?", a: "Einige Tropfen morgens und/oder abends vor der Feuchtigkeitspflege auf die gereinigte Haut auftragen und sanft einmassieren. Augenpartie aussparen." },
+      { q: "Ist es vegan und zertifiziert?", a: "Ja — 100 % vegan und COSMOS Natural zertifiziert durch ECOCERT Greenlife, mit 99 % Inhaltsstoffen natürlichen Ursprungs und Hyaluronsäure für Feuchtigkeit." }
+    ],
+    nl: [
+      { q: "Is dit echte retinol?", a: "Nee — het is een mild, plantaardig retinol-alternatief op basis van 2% Bidens Pilosa. Het geeft retinol-achtige, gladmakende voordelen zonder irritatie en is geschikt voor de gevoelige en alle huidtypes." },
+      { q: "Hoe en wanneer gebruik ik het serum?", a: "Breng enkele druppels ’s ochtends en/of ’s avonds aan op de gereinigde huid, vóór je moisturizer, en masseer zachtjes in. Vermijd de oogcontour." },
+      { q: "Is het veganistisch en gecertificeerd?", a: "Ja — 100% veganistisch en COSMOS Natural gecertificeerd door ECOCERT Greenlife, met 99% ingrediënten van natuurlijke oorsprong en hyaluronzuur voor hydratatie." }
     ]
   }
 };

@@ -3,10 +3,14 @@
   "currency": "EUR",
   "freeShippingThreshold": 3900,
   "shippingFlat": 495,
+  "freeShipping": [
+    "retinol-alternative-serum"
+  ],
   "prices": {
     "sensitive-moisturizing-cream": 1990,
     "radiant-glow-cleanser": 2599,
     "purifying-toner": 2400,
-    "sensitive-scalp-shampoo": 2300
+    "sensitive-scalp-shampoo": 2300,
+    "retinol-alternative-serum": 2999
   }
 }
