@@ -49,7 +49,11 @@ h1,h2,h3,h4{ letter-spacing:-.01em; margin:0; }
 .site-header{ position:fixed; inset:0 0 auto 0; z-index:50; transition:background-color .5s var(--ease),backdrop-filter .5s var(--ease),border-color .5s var(--ease); border-bottom:1px solid transparent; }
 .site-header.scrolled{ background:rgba(15,18,13,.72); backdrop-filter:saturate(140%) blur(16px); -webkit-backdrop-filter:saturate(140%) blur(16px); border-bottom-color:var(--line); }
 .nav{ display:flex; align-items:center; justify-content:space-between; height:72px; }
-.brand{ font-family:'Bodoni Moda',serif; font-size:1.5rem; letter-spacing:-.01em; color:var(--ink); }
+.brand{ font-family:'Bodoni Moda',serif; font-size:1.5rem; letter-spacing:-.01em; color:var(--ink); display:inline-flex; align-items:center; }
+.brand-logo{ height:32px; width:auto; display:block; transition:opacity .3s var(--ease); }
+.brand:hover .brand-logo{ opacity:.8; }
+.footer-logo{ height:50px; width:auto; display:block; }
+@media(max-width:560px){ .brand-logo{ height:28px; } }
 .nav-links{ display:none; gap:2rem; font-size:.95rem; }
 @media(min-width:880px){ .nav-links{ display:flex; } }
 .nav-link{ position:relative; color:var(--ink-soft); transition:color .3s; padding:.25rem 0; }

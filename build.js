@@ -30,6 +30,7 @@ function gtmBody() {
 
 const BASE = CAT.CONFIG.baseUrl;
 const OG = BASE + "/assets/img/og-image.jpg";
+const LOGO = BASE + "/assets/img/brand/logo-512.png"; // clean brand logo for schema.org
 const OGLOC = { en: "en_GB", de: "de_DE", nl: "nl_NL" };
 const LANGS = ["en", "de", "nl"];
 const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE" };
@@ -104,7 +105,10 @@ function head(L, o) {
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/app.css?v=${ASSET_V}">
   ${o.home ? `<link rel="stylesheet" href="/assets/css/home.css?v=${ASSET_V}">` : ""}
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F120D'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='62' fill='%23C8A24E' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/brand/favicon-32.png?v=${ASSET_V}">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/brand/favicon-16.png?v=${ASSET_V}">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/brand/apple-touch-icon.png?v=${ASSET_V}">
   <meta name="theme-color" content="#0F120D">
   <link rel="manifest" href="/site.webmanifest">
   ${o.home ? `<link rel="preload" as="image" href="/assets/img/shampoo.jpg">` : ""}
@@ -117,7 +121,7 @@ function header(L, current) {
   return `<header class="site-header"><div class="container nav">
   <div style="display:flex;align-items:center;gap:1.5rem">
     <button class="icon-btn menu-btn" data-menu-open aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
-    <a href="${P}/" class="brand">Elira Living</a>
+    <a href="${P}/" class="brand" aria-label="Elira Living — home"><img src="/assets/img/brand/logo-white.png" alt="Elira Living" class="brand-logo" width="44" height="32" decoding="async"></a>
   </div>
   <nav class="nav-links">
     <a href="${P}/shop.html" class="nav-link" ${cur("shop")}>${T(L, "nav.shop")}</a>
@@ -138,7 +142,7 @@ function footer(L) {
   const li = (href, label) => `<li><a class="link-underline" href="${href}">${label}</a></li>`;
   return `<footer class="site-footer footer"><div class="container" style="padding-top:4rem;padding-bottom:5rem">
   <div class="foot-grid" style="display:grid;gap:2.5rem">
-    <div style="max-width:20rem"><div class="font-display" style="font-size:1.9rem;margin-bottom:.75rem">Elira Living</div><p class="muted" style="font-size:.875rem;line-height:1.6">${T(L, "foot.tag")}</p></div>
+    <div style="max-width:20rem"><img src="/assets/img/brand/logo-white.png" alt="Elira Living" class="footer-logo" width="69" height="50" loading="lazy" decoding="async" style="margin-bottom:1rem"><p class="muted" style="font-size:.875rem;line-height:1.6">${T(L, "foot.tag")}</p></div>
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.shop")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
       ${li(P + "/shop.html?category=skincare", T(L, "nav.skincare"))}${li(P + "/shop.html?category=haircare", T(L, "nav.haircare"))}${li(P + "/shop.html", T(L, "nav.shop"))}</ul></div>
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.help")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
@@ -171,7 +175,7 @@ function drawerMenu(L) {
 </aside>
 <div class="menu-overlay" data-menu-overlay></div>
 <div class="mobile-menu" data-mobile-menu>
-  <div style="display:flex;justify-content:space-between;align-items:center"><span class="font-display" style="font-size:1.5rem">Elira Living</span>
+  <div style="display:flex;justify-content:space-between;align-items:center"><img src="/assets/img/brand/logo-white.png" alt="Elira Living" width="55" height="40" decoding="async">
     <button class="icon-btn" data-menu-close aria-label="Close"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <nav><a href="${P}/shop.html">${T(L, "nav.shop")}</a><a href="${P}/shop.html?category=skincare">${T(L, "nav.skincare")}</a><a href="${P}/shop.html?category=haircare">${T(L, "nav.haircare")}</a><a href="${P}/blog/">${esc(BLOG_UI[L].nav)}</a><a href="${P}/about.html">${T(L, "nav.about")}</a></nav>
   <div class="muted" style="margin-top:auto;font-size:.875rem">${T(L, "foot.tag")}</div>
@@ -211,7 +215,7 @@ function card(L, p) {
 
 /* ---- JSON-LD ----------------------------------------------------------- */
 function ldOrg() {
-  return JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Elira Living", url: BASE + "/", logo: OG, email: "support@eliraliving.com", founder: { "@type": "Person", name: "Zeerak Ata" }, address: { "@type": "PostalAddress", streetAddress: "Lapinrinne 1b", postalCode: "00180", addressLocality: "Helsinki", addressCountry: "FI" }, areaServed: ["DE", "NL"] });
+  return JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Elira Living", url: BASE + "/", logo: LOGO, image: OG, email: "support@eliraliving.com", founder: { "@type": "Person", name: "Zeerak Ata" }, address: { "@type": "PostalAddress", streetAddress: "Lapinrinne 1b", postalCode: "00180", addressLocality: "Helsinki", addressCountry: "FI" }, areaServed: ["DE", "NL"] });
 }
 function ldWebsite(L) { return JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Elira Living", url: BASE + "/", inLanguage: L }); }
 function ldProduct(L, p) {
@@ -234,7 +238,7 @@ function ldArticle(L, post, c) {
     image: [BASE + post.image], inLanguage: L,
     datePublished: post.date, dateModified: post.updated || post.date,
     author: { "@type": "Organization", name: "Elira Living", url: BASE + "/" },
-    publisher: { "@type": "Organization", name: "Elira Living", logo: { "@type": "ImageObject", url: OG } },
+    publisher: { "@type": "Organization", name: "Elira Living", logo: { "@type": "ImageObject", url: LOGO } },
     mainEntityOfPage: { "@type": "WebPage", "@id": BASE + url("post", L, post) }
   });
 }
@@ -743,13 +747,16 @@ Sitemap: ${BASE}/sitemap.xml
 
 /* ---- web manifest ----------------------------------------------------- */
 function writeManifest() {
-  const icon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F120D'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-size='64' fill='%23C8A24E' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E";
   write("site.webmanifest", JSON.stringify({
     name: "Elira Living", short_name: "Elira",
     description: "Vegan, ECOCERT COSMOS-certified natural skincare & haircare.",
     start_url: "/en/", scope: "/", display: "standalone",
     background_color: "#0F120D", theme_color: "#0F120D",
-    icons: [{ src: icon, sizes: "any", type: "image/svg+xml", purpose: "any" }]
+    icons: [
+      { src: "/assets/img/brand/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/assets/img/brand/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "/assets/img/brand/icon-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }
+    ]
   }, null, 2) + "\n");
 }
 
@@ -759,7 +766,8 @@ function write404() {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page not found — Elira Living</title>
 <meta name="robots" content="noindex,follow">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F120D'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='62' fill='%23C8A24E' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -778,7 +786,7 @@ function write404() {
   .langs{margin-top:2rem;font-size:.8rem;color:#8E8A78}.langs a{color:#C8A24E;text-decoration:none;margin:0 .4rem}
 </style></head>
 <body><div class="wrap">
-  <div class="kicker">Elira Living</div>
+  <img src="/assets/img/brand/logo-white.png" alt="Elira Living" style="height:52px;width:auto;margin:0 auto 1.75rem;display:block">
   <h1>404</h1>
   <h2>This page wandered off.</h2>
   <p>The page you're looking for doesn't exist or has moved. Let's get you back to something lovely.</p>
@@ -845,23 +853,49 @@ function writePrices() {
 }
 
 function writeRoot() {
+  const hm = meta("en").home; // keep the bare domain's snippet identical to /en/
+  const title = hm.title, desc = hm.description;
   const links = LANGS.map(L => `<a href="/${L}/">${L.toUpperCase()}</a>`).join(" · ");
   const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elira Living — Natural Vegan Skincare & Haircare</title>
-<meta name="description" content="Vegan, ECOCERT COSMOS-certified natural skincare and haircare. Made in the EU. Shipping to Germany & the Netherlands.">
+<title>${escA(title)}</title>
+<meta name="description" content="${escA(desc)}">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="${BASE}/en/">
 ${LANGS.map(L => `<link rel="alternate" hreflang="${L}" href="${BASE}/${L}/">`).join("\n")}
 <link rel="alternate" hreflang="x-default" href="${BASE}/en/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F120D'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='62' fill='%23C8A24E' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
-<style>html,body{height:100%;margin:0;background:#0F120D;color:#ECE7DB;font-family:system-ui,sans-serif;display:grid;place-items:center;text-align:center}a{color:#C8A24E}</style>
+<meta property="og:site_name" content="Elira Living">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${escA(title)}">
+<meta property="og:description" content="${escA(desc)}">
+<meta property="og:url" content="${BASE}/">
+<meta property="og:image" content="${OG}">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="nl_NL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escA(title)}">
+<meta name="twitter:description" content="${escA(desc)}">
+<meta name="twitter:image" content="${OG}">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/brand/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/brand/favicon-16.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/brand/apple-touch-icon.png">
+<meta name="theme-color" content="#0F120D">
+<link rel="manifest" href="/site.webmanifest">
+<script type="application/ld+json">${ldOrg()}</script>
+<script type="application/ld+json">${ldWebsite("en")}</script>
+<style>html,body{height:100%;margin:0;background:#0F120D;color:#ECE7DB;font-family:'Jost',system-ui,sans-serif;display:grid;place-items:center;text-align:center;padding:2rem}a{color:#C8A24E;text-decoration:none}.logo{height:64px;width:auto;margin-bottom:1.5rem}h1{font-family:Georgia,serif;font-weight:400;font-size:1.75rem;margin:0 0 .5rem}p{color:#C7C1B1;line-height:1.6;max-width:30rem;margin:.4rem auto}.l{margin-top:1.5rem;font-size:.85rem;letter-spacing:.08em}</style>
 <script>
   var supported=["en","de","nl"];
   var l=(navigator.language||"en").slice(0,2).toLowerCase();
   if(supported.indexOf(l)<0)l="en";
   location.replace("/"+l+"/");
 </script></head>
-<body><div><h1 style="font-family:Georgia,serif">Elira Living</h1><p>Choose your language: ${links}</p></div></body></html>`;
+<body><main><img class="logo" src="/assets/img/brand/logo-white.png" alt="Elira Living">
+<h1>Elira Living — Natural Vegan Skincare &amp; Haircare</h1>
+<p>${escA(desc)}</p>
+<p class="l">${links}</p></main></body></html>`;
   write("index.html", html);
 }
 
@@ -879,12 +913,13 @@ function writeSitemap() {
     POSTS.forEach(post => list.push({ page: "post", p: post, pr: "0.6" }));
     return list;
   };
+  const lastmod = new Date().toISOString().slice(0, 10);
   let urls = "";
   LANGS.forEach(L => pagesFor(L).forEach(it => {
     const loc = BASE + url(it.page, L, it.p);
     const alts = LANGS.map(x => `    <xhtml:link rel="alternate" hreflang="${x}" href="${BASE + url(it.page, x, it.p)}"/>`).join("\n") +
       `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE + url(it.page, "en", it.p)}"/>`;
-    urls += `  <url>\n    <loc>${loc}</loc>\n${alts}\n${it.cf ? `    <changefreq>${it.cf}</changefreq>\n` : ""}    <priority>${it.pr}</priority>\n  </url>\n`;
+    urls += `  <url>\n    <loc>${loc}</loc>\n${alts}\n    <lastmod>${lastmod}</lastmod>\n${it.cf ? `    <changefreq>${it.cf}</changefreq>\n` : ""}    <priority>${it.pr}</priority>\n  </url>\n`;
   }));
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}</urlset>\n`;
   write("sitemap.xml", xml);
