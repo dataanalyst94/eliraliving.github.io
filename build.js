@@ -12,6 +12,7 @@ const TRACK = require("./assets/data/analytics-config.js");
 const { LEGAL, DISCLAIMER } = require("./assets/data/legal-content.js");
 const { USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE } = require("./assets/data/faq-content.js");
 const { BLOG_UI, POSTS } = require("./assets/data/blog-content.js");
+const { REVIEWS, REVIEW_UI } = require("./assets/data/reviews-content.js");
 const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen" };
 const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik" };
 const FREESHIP_H = { en: "Free shipping on this item", de: "Kostenloser Versand für diesen Artikel", nl: "Gratis verzending voor dit artikel" };
@@ -245,6 +246,54 @@ function ldPostBreadcrumb(L, post, c) {
   ] });
 }
 
+/* ---- Reviews: 3D scroll-reveal social proof (home) --------------------- */
+function flagSVG(country) {
+  // Tiny, crisp SVG flags (emoji flags don't render on Windows) — 21x14, rounded.
+  if (country === "de") return `<svg class="r-flag" viewBox="0 0 5 3" width="21" height="13" aria-hidden="true"><rect width="5" height="3" fill="#000"/><rect width="5" height="2" y="1" fill="#D00"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>`;
+  return `<svg class="r-flag" viewBox="0 0 9 6" width="21" height="13" aria-hidden="true"><rect width="9" height="6" fill="#fff"/><rect width="9" height="2" fill="#AE1C28"/><rect width="9" height="2" y="4" fill="#21468B"/></svg>`;
+}
+function starsSVG(rating) {
+  const star = (on) => `<svg viewBox="0 0 24 24" width="16" height="16" class="r-star${on ? " on" : ""}" aria-hidden="true"><path d="M12 2.3l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.6l-5.8 3.07 1.1-6.47L2.6 9.6l6.5-.95z"/></svg>`;
+  let s = "";
+  for (let i = 1; i <= 5; i++) s += star(i <= rating);
+  return `<div class="r-stars" role="img" aria-label="${rating} / 5">${s}</div>`;
+}
+function reviewCard(L, r, i) {
+  const ui = REVIEW_UI[L];
+  const col = i % 3;            // depth tier for the 3D reveal (0|1|2)
+  return `<figure class="r-card" data-rcard data-col="${col}">
+    <span class="r-quote" aria-hidden="true">&ldquo;</span>
+    ${starsSVG(r.rating)}
+    <blockquote class="r-text">${esc(r.text)}</blockquote>
+    <figcaption class="r-meta">
+      <span class="r-avatar" aria-hidden="true">${esc(r.name.charAt(0))}</span>
+      <span class="r-who"><span class="r-name">${esc(r.name)}</span><span class="r-loc">${flagSVG(r.country)} ${esc(ui.country[r.country])}</span></span>
+      <span class="r-badge"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>${esc(ui.verified)}</span>
+    </figcaption>
+  </figure>`;
+}
+function reviewsSection(L) {
+  const ui = REVIEW_UI[L];
+  const n = REVIEWS.length;
+  const avg = REVIEWS.reduce((s, r) => s + r.rating, 0) / n;
+  const avgStr = avg.toFixed(1).replace(".", L === "en" ? "." : ",");
+  const cards = REVIEWS.map((r, i) => reviewCard(L, r, i)).join("\n");
+  return `<section class="reviews" data-reviews>
+    <div class="reviews__blob reviews__blob--a"></div>
+    <div class="reviews__blob reviews__blob--b"></div>
+    <div class="reviews__head">
+      <div class="kicker reveal" style="margin-bottom:.75rem">${esc(ui.kicker)}</div>
+      <h2 class="font-display reveal" style="font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.05">${esc(ui.title)}</h2>
+      <div class="reviews__agg reveal">
+        <span class="reviews__score font-display">${avgStr}</span>
+        ${starsSVG(Math.round(avg))}
+        <span class="reviews__count muted">${esc(ui.aggSuffix.replace("{n}", n))}</span>
+      </div>
+    </div>
+    <div class="reviews__grid" data-reviews-grid>${cards}</div>
+  </section>`;
+}
+
 /* ---- PAGE: HOME -------------------------------------------------------- */
 function renderHome(L) {
   const P = "/" + L;
@@ -334,6 +383,8 @@ function renderHome(L) {
       </div>
     </div>
   </section>
+
+  ${reviewsSection(L)}
 
   ${POSTS.length ? `<section class="container" style="padding:6rem 1.25rem">
     <div style="text-align:center;max-width:36rem;margin:0 auto 3.5rem">

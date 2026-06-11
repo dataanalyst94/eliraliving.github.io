@@ -417,6 +417,24 @@
     if (countEl) { const o = { v: 0 }, target = +countEl.dataset.count, sfx = countEl.dataset.suffix || ""; gsap.to(o, { v: target, duration: 2.0, ease: "power2.out", scrollTrigger: { trigger: countEl, start: "top 85%" }, onUpdate: () => countEl.textContent = Math.round(o.v) + sfx }); }
     document.querySelectorAll("[data-leaf] path").forEach((p) => { const len = p.getTotalLength(); gsap.set(p, { strokeDasharray: len, strokeDashoffset: len }); gsap.to(p, { strokeDashoffset: 0, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: "[data-cert]", start: "top 75%" } }); });
     gsap.fromTo("[data-split] img", { yPercent: -8 }, { yPercent: 8, ease: "none", scrollTrigger: { trigger: "[data-split]", start: "top bottom", end: "bottom top", scrub: true } });
+
+    /* Reviews — full-3D pop-up: a couple of cards rise & rotate into place as
+       you scroll. Cards are grouped by row (ScrollTrigger.batch), so they
+       appear two/three at a time with a soft stagger. */
+    const rcards = gsap.utils.toArray("[data-rcard]");
+    if (rcards.length) {
+      ScrollTrigger.batch(rcards, {
+        start: "top 90%",
+        onEnter: (els) => gsap.from(els, {
+          opacity: 0, y: 90, z: -280, scale: 0.92, rotateX: -32,
+          rotateY: (i, t) => t.dataset.col === "0" ? 13 : t.dataset.col === "2" ? -13 : 0,
+          transformOrigin: "50% 100%",
+          duration: 1.05, ease: "power3.out", stagger: 0.14, overwrite: true
+        })
+      });
+      // gentle scroll parallax for depth on the whole grid
+      gsap.fromTo("[data-reviews-grid]", { yPercent: 4 }, { yPercent: -4, ease: "none", scrollTrigger: { trigger: ".reviews", start: "top bottom", end: "bottom top", scrub: true } });
+    }
   }
 
   /* ---- Boot ----------------------------------------------------------- */
