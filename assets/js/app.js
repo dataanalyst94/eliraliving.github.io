@@ -435,12 +435,12 @@
       gsap.set(ings, { opacity: 0, y: 26 });
       gsap.set("[data-chapter-glow]", { scale: 0.6, opacity: 0.15 });
       // the bottle starts small and, as you scroll the pinned section, slowly
-      // turns a full 360° while zooming up — settling back to its normal size
-      // right before the section ends.
+      // does a full clockwise rotation (Z-axis, like a clock needle) while
+      // zooming up — settling back to its normal size before the section ends.
       const coin = chapter.querySelector("[data-chapter-coin]");
-      gsap.set(coin, { transformPerspective: 1600, rotateY: 0, scale: 0.62 });
+      gsap.set(coin, { rotation: 0, scale: 0.62 });
       const tl = gsap.timeline({ scrollTrigger: { trigger: chapter, start: "top top", end: "+=240%", pin: true, scrub: 0.7, anticipatePin: 1, onUpdate: (self) => setHead(self.progress < 0.34 ? 0 : self.progress < 0.67 ? 1 : 2) } });
-      tl.to(coin, { rotateY: 360, ease: "none", duration: 1 }, 0)
+      tl.to(coin, { rotation: 360, ease: "none", duration: 1 }, 0)
         .to(coin, { keyframes: [{ scale: 1.32, duration: 0.62, ease: "power1.inOut" }, { scale: 1.0, duration: 0.38, ease: "power1.inOut" }] }, 0)
         .to("[data-chapter-glow]", { scale: 1.25, opacity: 1, ease: "none", duration: 1 }, 0)
         .to(ings[0], { opacity: 1, y: 0, duration: 0.2 }, 0.15)
