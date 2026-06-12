@@ -435,7 +435,7 @@
       gsap.set(ings, { opacity: 0, y: 26 });
       gsap.set("[data-chapter-glow]", { scale: 0.6, opacity: 0.15 });
       const tl = gsap.timeline({ scrollTrigger: { trigger: chapter, start: "top top", end: "+=180%", pin: true, scrub: 0.5, anticipatePin: 1, onUpdate: (self) => setHead(self.progress < 0.34 ? 0 : self.progress < 0.67 ? 1 : 2) } });
-      tl.to("[data-chapter-product]", { scale: 1.1, ease: "none", duration: 1 }, 0)
+      tl.to("[data-chapter-product]", { scale: 1.45, ease: "none", duration: 1 }, 0)
         .to("[data-chapter-glow]", { scale: 1.15, opacity: 1, ease: "none", duration: 1 }, 0)
         .to(ings[0], { opacity: 1, y: 0, duration: 0.2 }, 0.15)
         .to(ings[1], { opacity: 1, y: 0, duration: 0.2 }, 0.42)

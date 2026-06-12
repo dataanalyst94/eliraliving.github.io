@@ -35,15 +35,16 @@ const PRICES_URL = "https://www.eliraliving.com/assets/data/prices.json";
 
 // Used only if prices.json can't be fetched (network/404). Keep roughly current.
 const FALLBACK_PRICES = {
-  "sensitive-moisturizing-cream": 1990,
-  "radiant-glow-cleanser": 2599,
-  "purifying-toner": 2400,
-  "sensitive-scalp-shampoo": 2300,
+  "sensitive-moisturizing-cream": 2650,
+  "radiant-glow-cleanser": 3250,
+  "purifying-toner": 3050,
+  "sensitive-scalp-shampoo": 2950,
   "retinol-alternative-serum": 2999
 };
 const FALLBACK_FREE_SHIPPING_THRESHOLD = 3900; // €39.00
 const FALLBACK_SHIPPING_FLAT = 495;            // €4.95
-const FALLBACK_FREE_SHIPPING = ["retinol-alternative-serum"]; // products that always ship free
+// every product ships free
+const FALLBACK_FREE_SHIPPING = ["sensitive-moisturizing-cream", "radiant-glow-cleanser", "purifying-toner", "sensitive-scalp-shampoo", "retinol-alternative-serum"];
 
 // Fetch current pricing from the site (cached ~5 min at Cloudflare's edge).
 async function loadPricing() {

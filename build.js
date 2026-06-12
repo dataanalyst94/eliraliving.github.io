@@ -378,7 +378,7 @@ function renderHome(L) {
 
   <section class="chapter" data-chapter>
     <div class="chapter__stage"><div class="chapter__glow" data-chapter-glow></div>
-      <div class="chapter__product" data-chapter-product>${pic("/assets/img/toner.jpg", `alt="${escA(pname(L, "purifying-toner"))}" loading="lazy" decoding="async"`, "(min-width:880px) 42vw, 75vw")}</div></div>
+      <div class="chapter__product" data-chapter-product><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="${escA(pname(L, "sensitive-moisturizing-cream"))}" loading="lazy" decoding="async"></picture></div></div>
     <div class="chapter__headlines" data-chapter-headlines>
       <div class="kicker" style="margin-bottom:.75rem">${T(L, "chapter.kicker")}</div>
       <h2 class="font-display" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1.05"><span data-headline="0">${T(L, "chapter.head1")}</span><span data-headline="1" style="opacity:0">${T(L, "chapter.head2")}</span><span data-headline="2" style="opacity:0">${T(L, "chapter.head3")}</span></h2>
@@ -386,7 +386,7 @@ function renderHome(L) {
     <div class="ingredient" data-ingredient style="top:24%;left:8%"><div class="ln"></div><h4 class="font-display">${T(L, "ing.1.t")}</h4><p>${T(L, "ing.1.d")}</p></div>
     <div class="ingredient" data-ingredient style="top:54%;right:9%;text-align:right"><div class="ln" style="margin-left:auto"></div><h4 class="font-display">${T(L, "ing.2.t")}</h4><p>${T(L, "ing.2.d")}</p></div>
     <div class="ingredient" data-ingredient style="bottom:16%;left:12%"><div class="ln"></div><h4 class="font-display">${T(L, "ing.3.t")}</h4><p>${T(L, "ing.3.d")}</p></div>
-    <div style="position:absolute;bottom:7%;left:50%;transform:translateX(-50%);z-index:3"><a href="${url("product", L, { id: "purifying-toner" })}" class="btn btn-primary">${T(L, "chapter.cta")}</a></div>
+    <div style="position:absolute;bottom:7%;left:50%;transform:translateX(-50%);z-index:3"><a href="${url("product", L, { id: "sensitive-moisturizing-cream" })}" class="btn btn-primary">${T(L, "chapter.cta")}</a></div>
   </section>
 
   <section class="container" style="padding:6rem 1.25rem">
