@@ -373,16 +373,36 @@
     }
   }
 
-  /* ---- Homepage animations (GSAP + Lenis), tuned ---------------------- */
+  /* ---- Homepage animations (GSAP + Lenis) ----------------------------- */
+  function homeStaticFallback() {
+    document.querySelectorAll("[data-ingredient]").forEach(e => e.style.opacity = 1);
+    document.querySelectorAll("[data-botanical]").forEach(e => e.style.opacity = .25);
+    const c = document.querySelector("[data-count]"); if (c) c.textContent = c.dataset.count + (c.dataset.suffix || "");
+    document.documentElement.classList.remove("pre-anim");
+  }
+  function loadScript(src) {
+    return new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.async = false; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+  }
+  async function loadMotionLibs() {
+    if (window.gsap && window.ScrollTrigger && window.Lenis) return;
+    const v = window.ELIRA_V ? ("?v=" + window.ELIRA_V) : "";
+    await loadScript("/assets/vendor/gsap.min.js" + v);
+    await loadScript("/assets/vendor/ScrollTrigger.min.js" + v);
+    await loadScript("/assets/vendor/lenis.min.js" + v);
+  }
   function initHomeMotion() {
     const isHome = document.body.getAttribute("data-page") === "home";
     if (!isHome) return;
-    if (REDUCED || !window.gsap) {
-      document.querySelectorAll("[data-ingredient]").forEach(e => e.style.opacity = 1);
-      document.querySelectorAll("[data-botanical]").forEach(e => e.style.opacity = .25);
-      const c = document.querySelector("[data-count]"); if (c) c.textContent = c.dataset.count + (c.dataset.suffix || "");
-      return;
-    }
+    // The heavy animation libs (~128KB) load on larger screens only. Phones and
+    // reduced-motion visitors get a lightweight static layout — far less
+    // main-thread work, much better mobile TBT/LCP.
+    const bigScreen = window.matchMedia("(min-width: 760px)").matches;
+    if (REDUCED || !bigScreen) { homeStaticFallback(); return; }
+    const safety = setTimeout(() => document.documentElement.classList.remove("pre-anim"), 2500);
+    loadMotionLibs().then(() => { clearTimeout(safety); runHomeMotion(); })
+                    .catch(() => { clearTimeout(safety); homeStaticFallback(); });
+  }
+  function runHomeMotion() {
     gsap.registerPlugin(ScrollTrigger);
     if (window.Lenis) {
       const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
@@ -392,6 +412,8 @@
     }
     gsap.from("[data-hero-text] > *", { y: 40, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: 0.15 });
     gsap.fromTo("[data-wordmark]", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.4, ease: "power3.out", delay: 0.5 });
+    // hero start-states are now set by GSAP — safe to reveal (removes anti-flash guard)
+    document.documentElement.classList.remove("pre-anim");
     const hST = { trigger: ".hero", start: "top top", end: "bottom top", scrub: true };
     gsap.to("[data-hero-bg]", { yPercent: 16, ease: "none", scrollTrigger: hST });
     gsap.to("[data-hero-text]", { yPercent: -24, opacity: 0, ease: "none", scrollTrigger: hST });
@@ -439,6 +461,8 @@
       // gentle scroll parallax for depth on the whole grid
       gsap.fromTo("[data-reviews-grid]", { yPercent: 4 }, { yPercent: -4, ease: "none", scrollTrigger: { trigger: ".reviews", start: "top bottom", end: "bottom top", scrub: true } });
     }
+    // libs loaded after window 'load', so re-measure trigger positions once settled
+    requestAnimationFrame(() => ScrollTrigger.refresh());
   }
 
   /* ---- Boot ----------------------------------------------------------- */
