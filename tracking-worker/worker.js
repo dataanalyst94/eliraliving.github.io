@@ -29,9 +29,25 @@ const KLAVIYO_REVISION = "2025-01-15";
 const META_VER = "v19.0";
 
 /* ---- helpers ----------------------------------------------------------- */
-function cors(origin) {
-  return { "Access-Control-Allow-Origin": origin || "*", "Access-Control-Allow-Methods": "POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type" };
+const ALLOWED_ORIGINS = ["https://www.eliraliving.com", "https://eliraliving.com"];
+const PRIMARY_ORIGIN = "https://www.eliraliving.com";
+function pickOrigin(request, env) {
+  const o = request.headers.get("Origin");
+  if (o && ALLOWED_ORIGINS.includes(o)) return o;
+  if (env && env.ALLOW_ORIGIN) return env.ALLOW_ORIGIN;
+  return PRIMARY_ORIGIN;
 }
+function cors(origin) {
+  return { "Access-Control-Allow-Origin": origin, "Access-Control-Allow-Methods": "POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type", "Vary": "Origin" };
+}
+// constant-time comparison of two hex strings (avoids signature timing leaks)
+function timingSafeEqualHex(a, b) {
+  if (typeof a !== "string" || typeof b !== "string" || a.length !== b.length) return false;
+  let r = 0;
+  for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return r === 0;
+}
+const ALLOWED_EVENTS = new Set(["Purchase", "AddToCart", "InitiateCheckout", "ViewContent", "PageView"]);
 function json(obj, status, origin) {
   return new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", ...cors(origin) } });
 }
@@ -126,6 +142,9 @@ async function sendKlaviyoOrder(env, s) {
 /* ---- routes ------------------------------------------------------------ */
 async function handleCollect(request, env, origin) {
   const b = await request.json();
+  if (!ALLOWED_EVENTS.has(b.event_name)) return json({ error: "invalid event" }, 400, origin);
+  if (Array.isArray(b.contents) && b.contents.length > 50) b.contents = b.contents.slice(0, 50);
+  if (Array.isArray(b.content_ids) && b.content_ids.length > 50) b.content_ids = b.content_ids.slice(0, 50);
   const e = {
     event_name: b.event_name, event_id: b.event_id, event_time: b.event_time,
     url: b.event_source_url || b.page_location, value: b.value, currency: b.currency || "EUR",
@@ -140,13 +159,19 @@ async function handleCollect(request, env, origin) {
 }
 
 async function handleStripeWebhook(request, env, origin) {
+  // Fail CLOSED: without a configured signing secret we cannot trust the payload,
+  // so we refuse it. This prevents anyone forging a "paid order" to trigger fake
+  // Klaviyo "Placed Order" emails / Meta Purchases.
+  if (!env.STRIPE_WEBHOOK_SECRET) return json({ error: "webhook not configured" }, 503, origin);
   const sig = request.headers.get("stripe-signature") || "";
   const payload = await request.text();
-  if (env.STRIPE_WEBHOOK_SECRET) {
-    const parts = Object.fromEntries(sig.split(",").map(p => p.split("=")));
-    const expected = await hmacSha256Hex(env.STRIPE_WEBHOOK_SECRET, `${parts.t}.${payload}`);
-    if (!parts.v1 || parts.v1 !== expected) return json({ error: "bad signature" }, 400, origin);
-  }
+  const parts = Object.fromEntries(sig.split(",").map(p => p.split("=")));
+  if (!parts.t || !parts.v1) return json({ error: "bad signature" }, 400, origin);
+  // replay protection: reject events whose timestamp is more than 5 min off
+  const skew = Math.floor(Date.now() / 1000) - parseInt(parts.t, 10);
+  if (!Number.isFinite(skew) || Math.abs(skew) > 300) return json({ error: "stale event" }, 400, origin);
+  const expected = await hmacSha256Hex(env.STRIPE_WEBHOOK_SECRET, `${parts.t}.${payload}`);
+  if (!timingSafeEqualHex(parts.v1, expected)) return json({ error: "bad signature" }, 400, origin);
   const event = JSON.parse(payload);
   if (event.type === "checkout.session.completed") {
     const s = event.data.object;
@@ -165,7 +190,7 @@ async function handleStripeWebhook(request, env, origin) {
 
 export default {
   async fetch(request, env) {
-    const origin = env.ALLOW_ORIGIN || "*";
+    const origin = pickOrigin(request, env);
     const { pathname } = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { headers: cors(origin) });
     try {

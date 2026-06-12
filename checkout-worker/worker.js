@@ -64,17 +64,27 @@ async function loadPricing() {
   return { prices: FALLBACK_PRICES, freeThreshold: FALLBACK_FREE_SHIPPING_THRESHOLD, shippingFlat: FALLBACK_SHIPPING_FLAT, freeShipping: FALLBACK_FREE_SHIPPING };
 }
 
+// Only our own storefront may use this endpoint from a browser.
+const ALLOWED_ORIGINS = ["https://www.eliraliving.com", "https://eliraliving.com"];
+const PRIMARY_ORIGIN = "https://www.eliraliving.com";
+function pickOrigin(request, env) {
+  const o = request.headers.get("Origin");
+  if (o && ALLOWED_ORIGINS.includes(o)) return o;
+  if (env && env.ALLOW_ORIGIN) return env.ALLOW_ORIGIN;
+  return PRIMARY_ORIGIN;
+}
 function cors(origin) {
   return {
-    "Access-Control-Allow-Origin": origin || "*",
+    "Access-Control-Allow-Origin": origin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type"
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Vary": "Origin"
   };
 }
 
 export default {
   async fetch(request, env) {
-    const origin = env.ALLOW_ORIGIN || "*";
+    const origin = pickOrigin(request, env);
     if (request.method === "OPTIONS") return new Response(null, { headers: cors(origin) });
     if (request.method !== "POST") return new Response("Method not allowed", { status: 405, headers: cors(origin) });
 
@@ -82,14 +92,18 @@ export default {
       const body = await request.json();
       const items = Array.isArray(body.items) ? body.items : [];
       if (!items.length) return json({ error: "Empty cart" }, 400, origin);
+      if (items.length > 50) return json({ error: "Too many items" }, 400, origin);
 
       const pricing = await loadPricing(); // current prices from the site catalog
+      const loc = ["de", "nl", "en"].includes(body.locale) ? body.locale : "en";
 
       const form = new URLSearchParams();
       form.append("mode", "payment");
-      form.append("locale", ["de", "nl", "en"].includes(body.locale) ? body.locale : "auto");
-      form.append("success_url", body.successUrl || "https://example.com/success.html");
-      form.append("cancel_url", body.cancelUrl || "https://example.com/cancel.html");
+      form.append("locale", loc);
+      // Redirect targets are built server-side from a fixed origin — never trust
+      // client-supplied URLs (prevents using this endpoint as an open redirect).
+      form.append("success_url", `${PRIMARY_ORIGIN}/${loc}/success.html?session_id={CHECKOUT_SESSION_ID}`);
+      form.append("cancel_url", `${PRIMARY_ORIGIN}/${loc}/cancel.html`);
       form.append("billing_address_collection", "auto");
       // Ship only to your markets:
       form.append("shipping_address_collection[allowed_countries][0]", "DE");
@@ -102,13 +116,13 @@ export default {
         // freshly-added product still works during the ~5-min prices.json cache window.
         const base = pricing.prices[it.id] != null ? pricing.prices[it.id] : FALLBACK_PRICES[it.id];
         if (base == null) throw new Error("Unknown product: " + it.id);
-        // variant surcharge derived from client amount above base (sizes only)
-        const surcharge = Math.max(0, Math.round((it.amount || base) - base));
-        const unit = base + surcharge;
+        // Price is fully server-authoritative — the client-supplied amount is
+        // never trusted, so a tampered cart cannot change what is charged.
+        const unit = base;
         const qty = Math.max(1, Math.min(20, parseInt(it.quantity, 10) || 1));
         subtotal += unit * qty;
 
-        const name = (it.name || it.id) + (it.variant ? ` — ${it.variant}` : "");
+        const name = (String(it.name || it.id) + (it.variant ? ` — ${it.variant}` : "")).slice(0, 120);
         // Prefer a real Stripe Price if provided; else build price_data.
         if (it.priceId) {
           form.append(`line_items[${n}][price]`, it.priceId);

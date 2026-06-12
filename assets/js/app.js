@@ -14,6 +14,9 @@
   const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const t = (k) => (C.ui && C.ui[k] != null ? C.ui[k] : k);
+  // escape any string before putting it in innerHTML (defense-in-depth for
+  // cart values that originate from localStorage)
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmt = (c) => new Intl.NumberFormat(LOCALES[LANG] || "en-IE", { style: "currency", currency: "EUR" }).format((c || 0) / 100);
   const pname = (id) => (C.products[id] && C.products[id].name) || id;
   const pImg = (id) => { const p = CAT.getProduct(id); return p ? p.image : ""; };
@@ -70,12 +73,12 @@
         <div style="height:3px;background:var(--line)"><div style="height:100%;width:${pct}%;background:var(--gold);transition:width .5s"></div></div>`;
     },
     lineHTML(i) {
-      const variant = i.variant ? `<div class="muted" style="font-size:.72rem;margin-top:.15rem">${i.variant}</div>` : "";
-      return `<div class="cart-line" data-line="${i.key}">
-        <div class="thumb"><img src="${pImg(i.id)}" alt="${i.name}" loading="lazy"></div>
+      const variant = i.variant ? `<div class="muted" style="font-size:.72rem;margin-top:.15rem">${esc(i.variant)}</div>` : "";
+      return `<div class="cart-line" data-line="${esc(i.key)}">
+        <div class="thumb"><img src="${esc(pImg(i.id))}" alt="${esc(i.name)}" loading="lazy"></div>
         <div style="flex:1;min-width:0">
           <div style="display:flex;justify-content:space-between;gap:.75rem">
-            <div class="font-display" style="font-size:1.05rem;line-height:1.2">${i.name}</div>
+            <div class="font-display" style="font-size:1.05rem;line-height:1.2">${esc(i.name)}</div>
             <div style="white-space:nowrap">${fmt(i.unitPrice * i.qty)}</div>
           </div>${variant}
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.75rem">

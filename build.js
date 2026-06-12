@@ -33,6 +33,26 @@ const OG = BASE + "/assets/img/og-image.jpg";
 const LOGO = BASE + "/assets/img/brand/logo-512.png"; // clean brand logo for schema.org
 const FONT_CSS = "https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Jost:wght@300;400;500;600&display=swap";
 
+// Content-Security-Policy — locks the page to exactly the origins this site uses
+// (payments, analytics, fonts). Blocks scripts/connections to anything else, so an
+// injected <script src> or data-exfil to an attacker domain is refused by the browser.
+// 'unsafe-inline' is required for GTM + the static site's inline snippets; everything
+// else is tightly scoped. (frame-ancestors/HSTS need real HTTP headers — see Cloudflare note.)
+const CSP = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "upgrade-insecure-requests",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.klaviyo.com https://js.stripe.com https://connect.facebook.net https://analytics.tiktok.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com data:",
+  "img-src 'self' data: https:",
+  "connect-src 'self' https://elira-checkout.elira-living.workers.dev https://elira-tracking.elira-living.workers.dev https://api.stripe.com https://a.klaviyo.com https://*.klaviyo.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://analytics.tiktok.com https://*.tiktok.com https://www.facebook.com https://connect.facebook.net https://www.googletagmanager.com https://googleads.g.doubleclick.net",
+  "frame-src https://js.stripe.com https://checkout.stripe.com https://hooks.stripe.com https://td.doubleclick.net https://www.googletagmanager.com https://bid.g.doubleclick.net",
+  "form-action 'self' https://checkout.stripe.com"
+].join("; ");
+
 // <picture> with responsive WebP + JPEG fallback. PNG/other sources pass through.
 // Widths come from assets/data/responsive-manifest.json (tools/responsive-images.js)
 // so phones download a 480/960px image instead of the full-size one.
@@ -97,9 +117,11 @@ function head(L, o) {
   return `<!DOCTYPE html>
 <html lang="${L}">
 <head>
-  ${gtmHead()}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="${CSP}">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  ${gtmHead()}
   <title>${escA(o.title)}</title>
   <meta name="description" content="${escA(o.description)}">
   ${o.keywords ? `<meta name="keywords" content="${escA(o.keywords)}">` : ""}
