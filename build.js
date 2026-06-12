@@ -153,7 +153,7 @@ function head(L, o) {
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/brand/apple-touch-icon.png?v=${ASSET_V}">
   <meta name="theme-color" content="#0F120D">
   <link rel="manifest" href="/site.webmanifest">
-  ${o.home ? `<link rel="preload" as="image" type="image/webp" imagesrcset="${RESP["/assets/img/shampoo.jpg"].map(t => `${t[1]} ${t[0]}w`).join(", ")}" imagesizes="100vw" fetchpriority="high">
+  ${o.home ? `<link rel="preload" as="image" type="image/webp" imagesrcset="${RESP["/assets/img/hero.jpg"].map(t => `${t[1]} ${t[0]}w`).join(", ")}" imagesizes="100vw" fetchpriority="high">
   <style>.pre-anim [data-hero-text]>*,.pre-anim [data-wordmark]{opacity:0}</style>
   <script>if(matchMedia("(min-width:760px)").matches&&!matchMedia("(prefers-reduced-motion:reduce)").matches){document.documentElement.className+=" pre-anim"}</script>` : ""}
   ${ld}
@@ -348,7 +348,7 @@ function renderHome(L) {
   const cards = CAT.PRODUCTS.map(p => card(L, p)).join("\n");
   const body = `<main>
   <section class="hero">
-    <div class="hero__bg" data-hero-bg>${pic("/assets/img/shampoo.jpg", `alt="${escA(t(L, "hero.lead"))}" fetchpriority="high" decoding="async"`, "100vw")}</div>
+    <div class="hero__bg" data-hero-bg>${pic("/assets/img/hero.jpg", `alt="${escA(t(L, "hero.lead"))}" fetchpriority="high" decoding="async"`, "100vw")}</div>
     <div class="hero__veil"></div>
     <svg class="botanical" data-botanical style="top:18%;left:8%;width:70px" viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C20 18 12 30 12 42a20 20 0 0 0 40 0c0-12-8-24-20-38Z" opacity=".5"/></svg>
     <svg class="botanical" data-botanical style="top:62%;left:14%;width:48px" viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C20 18 12 30 12 42a20 20 0 0 0 40 0c0-12-8-24-20-38Z" opacity=".4"/></svg>
@@ -378,7 +378,10 @@ function renderHome(L) {
 
   <section class="chapter" data-chapter>
     <div class="chapter__stage"><div class="chapter__glow" data-chapter-glow></div>
-      <div class="chapter__product" data-chapter-product><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="${escA(pname(L, "sensitive-moisturizing-cream"))}" loading="lazy" decoding="async"></picture></div></div>
+      <div class="chapter__product" data-chapter-product><div class="cp-coin" data-chapter-coin>
+        <div class="cp-face cp-front"><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="${escA(pname(L, "sensitive-moisturizing-cream"))}" loading="lazy" decoding="async"></picture></div>
+        <div class="cp-face cp-back" aria-hidden="true"><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="" loading="lazy" decoding="async"></picture></div>
+      </div></div></div>
     <div class="chapter__headlines" data-chapter-headlines>
       <div class="kicker" style="margin-bottom:.75rem">${T(L, "chapter.kicker")}</div>
       <h2 class="font-display" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1.05"><span data-headline="0">${T(L, "chapter.head1")}</span><span data-headline="1" style="opacity:0">${T(L, "chapter.head2")}</span><span data-headline="2" style="opacity:0">${T(L, "chapter.head3")}</span></h2>

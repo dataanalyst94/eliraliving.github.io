@@ -434,19 +434,20 @@
       const ings = gsap.utils.toArray("[data-ingredient]");
       gsap.set(ings, { opacity: 0, y: 26 });
       gsap.set("[data-chapter-glow]", { scale: 0.6, opacity: 0.15 });
-      const tl = gsap.timeline({ scrollTrigger: { trigger: chapter, start: "top top", end: "+=180%", pin: true, scrub: 0.5, anticipatePin: 1, onUpdate: (self) => setHead(self.progress < 0.34 ? 0 : self.progress < 0.67 ? 1 : 2) } });
-      // scroll drives a slow 3D turn + zoom (perspective comes from .chapter__stage)
-      tl.fromTo("[data-chapter-product]",
-            { rotateY: -18, rotateX: 5, scale: 0.9 },
-            { rotateY: 14, rotateX: -4, scale: 1.4, ease: "none", duration: 1 }, 0)
-        .to("[data-chapter-glow]", { scale: 1.2, opacity: 1, ease: "none", duration: 1 }, 0)
+      // the bottle starts small and, as you scroll the pinned section, slowly
+      // turns a full 360° while zooming up — settling back to its normal size
+      // right before the section ends.
+      const coin = chapter.querySelector("[data-chapter-coin]");
+      gsap.set(coin, { transformPerspective: 1600, rotateY: 0, scale: 0.62 });
+      const tl = gsap.timeline({ scrollTrigger: { trigger: chapter, start: "top top", end: "+=240%", pin: true, scrub: 0.7, anticipatePin: 1, onUpdate: (self) => setHead(self.progress < 0.34 ? 0 : self.progress < 0.67 ? 1 : 2) } });
+      tl.to(coin, { rotateY: 360, ease: "none", duration: 1 }, 0)
+        .to(coin, { keyframes: [{ scale: 1.32, duration: 0.62, ease: "power1.inOut" }, { scale: 1.0, duration: 0.38, ease: "power1.inOut" }] }, 0)
+        .to("[data-chapter-glow]", { scale: 1.25, opacity: 1, ease: "none", duration: 1 }, 0)
         .to(ings[0], { opacity: 1, y: 0, duration: 0.2 }, 0.15)
         .to(ings[1], { opacity: 1, y: 0, duration: 0.2 }, 0.42)
         .to(ings[2], { opacity: 1, y: 0, duration: 0.2 }, 0.68);
-      // always-on classy float: the bottle gently drifts & sways even when idle
-      gsap.fromTo("[data-chapter-product] img",
-        { y: -10, rotationZ: -1.3, scale: 1 },
-        { y: 10, rotationZ: 1.3, scale: 1.015, duration: 5, ease: "sine.inOut", yoyo: true, repeat: -1 });
+      // gentle always-on float on the wrapper, so it has life even when paused
+      gsap.to("[data-chapter-product]", { y: "+=14", duration: 5, ease: "sine.inOut", yoyo: true, repeat: -1 });
     }
     ScrollTrigger.batch(".grid-products .card", { start: "top 86%", onEnter: (els) => gsap.from(els, { y: 48, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.1, overwrite: true }) });
     const countEl = document.querySelector("[data-count]");

@@ -10,7 +10,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const IMG = path.join(ROOT, "assets", "img");
 const GAL = path.join(IMG, "gallery");
-const TOP = ["cream", "cleanser", "toner", "shampoo", "serum"]; // deployed product images
+const TOP = ["cream", "cleanser", "toner", "shampoo", "serum", "hero"]; // deployed product + hero images
 const WIDTHS = [480, 960];
 const manifest = {};
 
