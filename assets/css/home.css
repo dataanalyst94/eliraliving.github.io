@@ -37,6 +37,18 @@ html.lenis,html.lenis body{ height:auto; }
 .cp-face{ position:absolute; inset:0; display:grid; place-items:center; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
 .cp-back{ transform:rotateY(180deg); }
 .cp-face img{ width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 32px 58px rgba(0,0,0,.5)); }
+/* MOBILE: scroll-driven clockwise spin, CSS-only (no GSAP) so perf stays high.
+   Bottle rotates a full 360° + zooms small→big→normal as the section scrolls. */
+@media (max-width:759px) and (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline: view()){
+    .chapter__product{ animation:cp-mobile-spin linear both; animation-timeline:view(); animation-range:entry 5% exit 95%; }
+  }
+}
+@keyframes cp-mobile-spin{
+  from{ transform:rotate(0deg) scale(.72); }
+  50%{ transform:rotate(180deg) scale(1.12); }
+  to{ transform:rotate(360deg) scale(1); }
+}
 .chapter__glow{ position:absolute; z-index:1; width:60vmin; height:60vmin; border-radius:50%; background:radial-gradient(circle,rgba(200,162,78,.22),transparent 65%); filter:blur(20px); will-change:transform,opacity; }
 .ingredient{ position:absolute; z-index:3; max-width:230px; opacity:0; will-change:transform,opacity; }
 .ingredient .ln{ width:56px; height:1px; background:var(--gold); margin-bottom:10px; }

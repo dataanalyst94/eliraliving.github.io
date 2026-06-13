@@ -19,6 +19,10 @@ Thumbs.db
 # Generated marketing drafts (transient)
 marketing/pitches/
 
+# Private internal tools — never publish to the public site
+kanban.html
+elira-board.json
+
 # Product images: commit only the optimized web versions, not the raw originals
 assets/img/*
 !assets/img/cream.jpg
