@@ -279,6 +279,8 @@
       // Klaviyo client-side list subscription (public Site ID; the list's
       // opt-in setting — double opt-in — is enforced by Klaviyo).
       const profileAttrs = firstName ? { email, first_name: firstName } : { email };
+      // Tag the subscriber's language so Klaviyo Welcome flow sends DE/NL/EN correctly.
+      profileAttrs.properties = { Locale: LANG };
       const body = { data: { type: "subscription", attributes: {
         custom_source: "Website newsletter",
         profile: { data: { type: "profile", attributes: profileAttrs } }
