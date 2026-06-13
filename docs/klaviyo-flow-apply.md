@@ -63,6 +63,20 @@ Preview:
 
 ---
 
+### Browse Abandonment — NEW flow (create it)
+Template ready: **"Browse Abandonment — EN/DE/NL (ready)"**. This flow doesn't exist yet — create it:
+1. Klaviyo → **Flows → Create flow → Browse Abandonment** (or blank flow, trigger = **Viewed Product**).
+2. Recommended: add a **time delay** (~4 h) and a flow filter "**has not** Placed Order since starting" so buyers don't get it.
+3. Add an email → paste the "Browse Abandonment — EN/DE/NL (ready)" HTML → set subject/preview below.
+4. Onsite tracking already fires Viewed Product (consent-gated), so the trigger works once live.
+
+Subject:
+`{% if person.Locale == 'de' %}Noch am Überlegen? 🌿{% elif person.Locale == 'nl' %}Twijfel je nog? 🌿{% else %}Still thinking it over? 🌿{% endif %}`
+Preview:
+`{% if person.Locale == 'de' %}Die Produkte, die dir gefallen haben, sind gespeichert.{% elif person.Locale == 'nl' %}De producten die je bekeek, staan voor je klaar.{% else %}The products you viewed are saved for you.{% endif %}`
+
+---
+
 ## Language routing — what's automatic vs. what's pending
 - **Abandoned Cart + Post Purchase:** `Locale` is set automatically by n8n from the shipping country
   (DE→de, NL→nl, else en). ✅ Works now.
