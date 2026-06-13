@@ -1,0 +1,45 @@
+# Elira Living — self-hosted n8n + Caddy (auto-HTTPS) on Oracle Cloud Always-Free.
+# Free forever, 24/7, your PC off. SQLite storage keeps it light for the micro VM.
+# Start:  docker compose up -d        Logs: docker compose logs -f
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    environment:
+      - N8N_HOST=${DOMAIN}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - WEBHOOK_URL=https://${DOMAIN}/
+      - N8N_EDITOR_BASE_URL=https://${DOMAIN}/
+      - GENERIC_TIMEZONE=${TZ}
+      - TZ=${TZ}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}   # KEEP THIS SAFE — losing it locks saved credentials
+      - N8N_SECURE_COOKIE=true
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_HIRING_BANNER_ENABLED=false
+      - NODE_OPTIONS=--max-old-space-size=768       # safe ceiling for a 1GB micro VM
+    volumes:
+      - n8n_data:/home/node/.n8n
+    expose:
+      - "5678"
+    depends_on:
+      - caddy
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  n8n_data:
+  caddy_data:
+  caddy_config:

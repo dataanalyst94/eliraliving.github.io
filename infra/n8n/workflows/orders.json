@@ -1,0 +1,84 @@
+{
+  "name": "Elira — Orders",
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateId": "elira-orders" },
+  "nodes": [
+    {
+      "parameters": { "events": ["checkout.session.completed"] },
+      "id": "a1111111-1111-4111-8111-111111111111",
+      "name": "Stripe Trigger",
+      "type": "n8n-nodes-base.stripeTrigger",
+      "typeVersion": 1,
+      "position": [0, 0],
+      "credentials": { "stripeApi": { "id": "", "name": "Stripe account" } }
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.stripe.com/v1/checkout/sessions/{{ $json.data.object.id }}/line_items",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "stripeApi",
+        "sendQuery": true,
+        "queryParameters": { "parameters": [{ "name": "limit", "value": "100" }] },
+        "options": {}
+      },
+      "id": "a5555555-5555-4555-8555-555555555555",
+      "name": "Line items",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [220, 0],
+      "credentials": { "stripeApi": { "id": "", "name": "Stripe account" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const ev=$('Stripe Trigger').first().json;const s=(ev.data&&ev.data.object)?ev.data.object:ev;const li=($json&&$json.data)?$json.data:[];const items=li.map(i=>(i.quantity+'× '+(i.description||''))).join(', ')||'(see Stripe)';const cust=s.customer_details||{};const sd=s.shipping_details||s.shipping||(s.collected_information&&s.collected_information.shipping_details)||null;const addr=(sd&&sd.address)||cust.address||{};const name=(sd&&sd.name)||cust.name||'';const addrStr=[addr.line1,addr.line2,[addr.postal_code,addr.city].filter(Boolean).join(' '),addr.state,addr.country].filter(Boolean).join(', ');const phone=cust.phone||'';const amt=((s.amount_total!=null?s.amount_total:(s.amount!=null?s.amount:0)))/100;const o={order:'EL-'+String(s.id||'').slice(-8).toUpperCase(),date:new Date((s.created?s.created*1000:Date.now())).toISOString(),email:cust.email||s.customer_email||'',customer:name,amount:amt,currency:String(s.currency||'eur').toUpperCase(),country:addr.country||'',items:items,address:addrStr,phone:phone,stripeId:s.id||''};o.notionBody=JSON.stringify({parent:{database_id:'37ea4815-a826-81eb-ab38-f65e104a0a83'},icon:{type:'emoji',emoji:'🧾'},properties:{Order:{title:[{text:{content:o.order}}]},Date:{date:{start:o.date}},Email:{email:o.email||null},Customer:{rich_text:[{text:{content:o.customer}}]},Amount:{number:o.amount},Currency:{select:{name:'EUR'}},Items:{rich_text:[{text:{content:o.items}}]},Address:{rich_text:[{text:{content:o.address}}]},Phone:{rich_text:[{text:{content:o.phone}}]},Country:{rich_text:[{text:{content:o.country}}]},Payment:{select:{name:'Paid'}},Fulfilment:{select:{name:'To pack'}},'Stripe ID':{rich_text:[{text:{content:o.stripeId}}]}}});return [{json:o}];"
+      },
+      "id": "a2222222-2222-4222-8222-222222222222",
+      "name": "Format",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.notion.com/v1/pages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "notionApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Notion-Version", "value": "2022-06-28" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.notionBody }}",
+        "options": {}
+      },
+      "id": "a3333333-3333-4333-8333-333333333333",
+      "name": "Notion → Orders",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 0],
+      "credentials": { "notionApi": { "id": "", "name": "Notion account" } }
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_CHAT_ID",
+        "text": "=🧾 New order — €{{ $('Format').first().json.amount }}\n\n{{ $('Format').first().json.items }}\n\n👤 {{ $('Format').first().json.customer }}\n✉️ {{ $('Format').first().json.email }}\n📦 {{ $('Format').first().json.address }}\n☎️ {{ $('Format').first().json.phone }}\n\nStripe: {{ $('Format').first().json.stripeId }}",
+        "additionalFields": { "appendAttribution": false }
+      },
+      "id": "a4444444-4444-4444-8444-444444444444",
+      "name": "Telegram alert",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [880, 0],
+      "credentials": { "telegramApi": { "id": "", "name": "Telegram account" } }
+    }
+  ],
+  "connections": {
+    "Stripe Trigger": { "main": [[{ "node": "Line items", "type": "main", "index": 0 }]] },
+    "Line items": { "main": [[{ "node": "Format", "type": "main", "index": 0 }]] },
+    "Format": { "main": [[{ "node": "Notion → Orders", "type": "main", "index": 0 }]] },
+    "Notion → Orders": { "main": [[{ "node": "Telegram alert", "type": "main", "index": 0 }]] }
+  }
+}

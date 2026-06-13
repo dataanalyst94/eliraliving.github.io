@@ -10,6 +10,8 @@ checkout-worker/.wrangler/
 *.env
 .env*
 .secret*
+# …but the n8n example template is safe to commit
+!infra/n8n/.env.example
 
 # OS / editor
 .DS_Store

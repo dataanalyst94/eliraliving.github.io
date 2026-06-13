@@ -1,0 +1,68 @@
+{
+  "name": "Elira — Daily KPI digest",
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateId": "elira-kpi" },
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "hours", "triggerAtHour": 8 }] }
+      },
+      "id": "b1111111-1111-4111-8111-111111111111",
+      "name": "Every morning 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.stripe.com/v1/charges",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "stripeApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "created[gte]", "value": "={{ Math.floor(Date.now()/1000) - 86400 }}" },
+            { "name": "limit", "value": "100" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b2222222-2222-4222-8222-222222222222",
+      "name": "Stripe charges (24h)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [240, 0],
+      "credentials": { "stripeApi": { "id": "", "name": "Stripe account" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "const d=$json.data||[];let n=0,sum=0,cur='eur';for(const c of d){if(c.paid&&!c.refunded){n++;sum+=c.amount;cur=c.currency;}}return [{json:{count:n,revenue:(sum/100).toFixed(2),currency:String(cur).toUpperCase()}}];"
+      },
+      "id": "b3333333-3333-4333-8333-333333333333",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 0]
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_CHAT_ID",
+        "text": "=📊 Elira — last 24h\nOrders: {{ $json.count }}\nRevenue: €{{ $json.revenue }}",
+        "additionalFields": { "appendAttribution": false }
+      },
+      "id": "b4444444-4444-4444-8444-444444444444",
+      "name": "Telegram digest",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [720, 0],
+      "credentials": { "telegramApi": { "id": "", "name": "Telegram account" } }
+    }
+  ],
+  "connections": {
+    "Every morning 08:00": { "main": [[{ "node": "Stripe charges (24h)", "type": "main", "index": 0 }]] },
+    "Stripe charges (24h)": { "main": [[{ "node": "Aggregate", "type": "main", "index": 0 }]] },
+    "Aggregate": { "main": [[{ "node": "Telegram digest", "type": "main", "index": 0 }]] }
+  }
+}

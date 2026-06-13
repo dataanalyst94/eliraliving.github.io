@@ -1,0 +1,6 @@
+# Caddy auto-provisions a free Let's Encrypt TLS cert for your domain and
+# reverse-proxies to n8n. Nothing else to configure.
+{$DOMAIN} {
+	reverse_proxy n8n:5678
+	encode gzip
+}

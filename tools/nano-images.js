@@ -45,7 +45,7 @@ const FONTCSS = `<style>@font-face{font-family:'BodoniEmbed';src:url(data:font/t
 const CC = { cream: "#ECE7DB", gold: "#C8A24E", ink: "#171B12" };
 const escX = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 function wrap(t, m) { const w = t.split(" "); const o = []; let l = ""; for (const x of w) { if ((l + " " + x).trim().length > m) { o.push(l.trim()); l = x; } else l += " " + x; } if (l.trim()) o.push(l.trim()); return o; }
-async function addCopy(buf, o) {
+async function addCopy(buf, o, bar) {
   const hl = wrap(o.title, 20);
   const top = H - 86 - 40 - hl.length * 74 - 30;
   const head = hl.map((l, i) => `<text x="80" y="${top + 40 + i * 74}" fill="${CC.cream}" font-family="BodoniEmbed,serif" font-size="64">${escX(l)}</text>`).join("");
@@ -56,56 +56,167 @@ async function addCopy(buf, o) {
     <text x="80" y="${top - 36}" fill="${CC.gold}" font-family="InterEmbed,sans-serif" font-size="26" letter-spacing="6" font-weight="600">${escX(o.eyebrow.toUpperCase())}</text>
     ${head}
     <rect x="0" y="${H - 86}" width="${W}" height="86" fill="${CC.ink}" fill-opacity="0.55"/>
-    <text x="${W / 2}" y="${H - 33}" fill="${CC.cream}" font-family="InterEmbed,sans-serif" font-size="27" letter-spacing="3" text-anchor="middle">FREE SHIPPING · VEGAN · ECOCERT COSMOS</text>
+    <text x="${W / 2}" y="${H - 33}" fill="${CC.cream}" font-family="InterEmbed,sans-serif" font-size="27" letter-spacing="3" text-anchor="middle">${escX(bar)}</text>
   </svg>`;
   return sharp(buf).composite([{ input: Buffer.from(svg) }]).jpeg({ quality: 90, mozjpeg: true }).toBuffer();
 }
 
-/* ---- full library spec --------------------------------------------------- */
-const PRODUCTS = [
-  { ref: "pep.png", name: "Peptide Anti-Aging Serum", cat: "skin", desc: "a small frosted blush-pink glass serum bottle with a white pump and cream label", title: "Firmer skin, none of the sting." },
-  { ref: "p4.png", name: "Retinol Alternative Serum", cat: "skin", desc: "a skincare serum bottle with a dropper/pump and cream label", title: "Retinol results, zero burn." },
-  { ref: "cream.png", name: "Sensitive Moisturizing Cream", cat: "skin", desc: "a skincare cream jar/tube with cream label", title: "Calm skin, no compromise." },
-  { ref: "p1.png", name: "Radiant Glow Cleanser", cat: "skin", desc: "a facial cleanser pump bottle with cream label", title: "Clean that doesn't strip." },
-  { ref: "p3.png", name: "Purifying Toner", cat: "skin", desc: "a toner bottle with cream label", title: "Clarify without the sting." },
-  { ref: "p2.png", name: "Sensitive Scalp Shampoo", cat: "hair", desc: "a shampoo bottle with cream label", title: "For scalps that react to everything." },
-];
-const SCENES = p => {
-  const lifestyle = p.cat === "hair"
-    ? "A woman with healthy hair, a towel around her shoulders, holds the product in a bright airy bathroom, soft daylight, natural blurred background"
-    : "A woman with healthy glowing skin gently holds the product near her cheek, soft daylight, minimal neutral blurred background, intimate skincare moment";
-  return [
-    { id: "hero", eyebrow: p.name, title: p.title, prompt: `Hero shot: ${p.desc} standing on a wet dark stone surface with delicate water ripples, deep sage-green moody background, a single soft studio key light from upper right, droplets on the bottle, luxurious and minimal.` },
-    { id: "vanity", eyebrow: "The gentle ritual", title: "Slow mornings, calmer skin.", prompt: `${p.desc} on a pale marble vanity beside a small eucalyptus sprig and a folded linen towel, soft morning window light from the left, a few water droplets, calm spa atmosphere, background softly blurred.` },
-    { id: "model", eyebrow: "Results without irritation", title: "Strong results. Soft on you.", prompt: `${lifestyle}. The product is clearly visible and in sharp focus.` },
-    { id: "flatlay", eyebrow: "Plant-powered", title: "Nature, but proven.", prompt: `Top-down flatlay: ${p.desc} on natural beige linen with scattered fresh botanical leaves, eucalyptus and a few water drops, soft even overhead light, calm editorial styling.` },
-  ];
+
+/* ---- trilingual library spec --------------------------------------------- */
+// All copy is traceable ONLY to each product's on-site description
+// (EU Reg. 655/2013 — no claims beyond the substantiated product copy).
+const SCENES = ["hero", "vanity", "modelf", "modelm", "flatlay"];
+const BAR = {
+  en: "VEGAN · CRUELTY-FREE · COSMOS NATURAL",
+  de: "VEGAN · TIERVERSUCHSFREI · COSMOS NATURAL",
+  nl: "VEGAN · DIERPROEFVRIJ · COSMOS NATURAL",
 };
 
-async function buildAll() {
+// Female / male lifestyle templates per category.
+function lifestyle(p, sex) {
+  if (sex === "m") {
+    // masculine: upright posture, firm grip, calm serious/neutral expression —
+    // NOT soft, coy, seductive, no head tilt, no pouting.
+    const grip = "holds {P} firmly and confidently in front of him at about chest height, presenting the bottle clearly to camera";
+    const look = "calm, serious, self-assured expression, relaxed strong jaw, looking straight at the camera, upright squared shoulders, masculine grounded posture; not soft, not coy, not seductive, no head tilt, no pouted lips";
+    if (p.cat === "hair")
+      return `A confident man with healthy, well-groomed hair and light stubble, a towel over one shoulder, ${grip}, in a bright airy bathroom, soft natural daylight, calm blurred background, ${look}`;
+    return `A confident man with healthy, well-groomed skin and light stubble, ${grip}, soft natural daylight, minimal neutral blurred background, ${look}`;
+  }
+  if (p.cat === "hair")
+    return `A woman with healthy, glowing hair, a soft towel around the shoulders, holds {P} in a bright airy bathroom, soft natural daylight, calm blurred background, modern clean-beauty moment`;
+  return `A woman with healthy, glowing skin gently holds {P} near the face, soft natural daylight, minimal neutral blurred background, intimate skincare moment`;
+}
+const FRAME = " The bottle is turned at a slight three-quarter angle so the tiny fine print on the label is not sharply legible, while the brand name and product name remain clearly visible and in focus.";
+
+const PRODUCTS = [
+  {
+    ref: "pep.png", slug: "pep", cat: "skin",
+    desc: "a small frosted blush-pink glass serum bottle with a white pump dispenser (NOT a glass dropper) and a cream label",
+    copy: {
+      hero:    { en: ["Peptide Anti-Aging Serum", "Visibly softer fine lines."], de: ["Peptid Anti-Aging Serum", "Sichtbar glattere Fältchen."], nl: ["Peptide Anti-Aging Serum", "Zichtbaar gladdere lijntjes."] },
+      vanity:  { en: ["The evening ritual", "Wind down. Smooth on."], de: ["Das Abendritual", "Zur Ruhe kommen."], nl: ["Het avondritueel", "Tot rust komen."] },
+      modelf:  { en: ["Hexapeptide-11 + Ginkgo", "Plumper, firmer skin."], de: ["Hexapeptid-11 + Ginkgo", "Pralle, festere Haut."], nl: ["Hexapeptide-11 + Ginkgo", "Voller, stevigere huid."] },
+      modelm:  { en: ["Anti-aging, for everyone", "Smooth lines. Any age."], de: ["Anti-Aging, für alle", "Glatte Linien. Jedes Alter."], nl: ["Anti-aging, voor iedereen", "Gladde lijnen. Elke leeftijd."] },
+      flatlay: { en: ["Plant-powered, vegan", "Peptides, the gentle way."], de: ["Pflanzenkraft, vegan", "Peptide, ganz sanft."], nl: ["Plantkracht, vegan", "Peptiden, de zachte manier."] },
+    },
+  },
+  {
+    ref: "p4.png", slug: "p4", cat: "skin",
+    desc: "a skincare serum bottle with a pump and a cream label",
+    copy: {
+      hero:    { en: ["Retinol Alternative Serum", "Refines texture, no irritation."], de: ["Retinol-Alternative Serum", "Verfeinert die Haut, ohne Reizung."], nl: ["Retinol-alternatief Serum", "Verfijnt de huid, zonder irritatie."] },
+      vanity:  { en: ["The nightly swap", "Retinol results, plant-based."], de: ["Der Abend-Tausch", "Retinol-Effekt, pflanzlich."], nl: ["De avondwissel", "Retinol-effect, plantaardig."] },
+      modelf:  { en: ["2% Bidens Pilosa", "Softer lines, even tone."], de: ["2% Bidens Pilosa", "Sanftere Linien, ebenmäßiger Teint."], nl: ["2% Bidens Pilosa", "Zachtere lijnen, egale teint."] },
+      modelm:  { en: ["For all skin types", "Refined skin, zero sting."], de: ["Für jeden Hauttyp", "Verfeinerte Haut, kein Brennen."], nl: ["Voor elk huidtype", "Verfijnde huid, geen branderig gevoel."] },
+      flatlay: { en: ["Plant-powered, vegan", "Nature's retinol alternative."], de: ["Pflanzenkraft, vegan", "Die pflanzliche Retinol-Alternative."], nl: ["Plantkracht, vegan", "Het plantaardige retinol-alternatief."] },
+    },
+  },
+  {
+    ref: "cream.png", slug: "cream", cat: "skin",
+    desc: "a skincare cream tube with a cream label",
+    copy: {
+      hero:    { en: ["Sensitive Moisturizing Cream", "Soothes sensitive skin."], de: ["Feuchtigkeitscreme Sensitiv", "Beruhigt empfindliche Haut."], nl: ["Hydraterende Crème Gevoelig", "Kalmeert de gevoelige huid."] },
+      vanity:  { en: ["Fragrance-free care", "Calm, strengthened skin."], de: ["Parfümfreie Pflege", "Ruhige, gestärkte Haut."], nl: ["Parfumvrije verzorging", "Rustige, sterkere huid."] },
+      modelf:  { en: ["Daily moisture", "Soft skin, no fragrance."], de: ["Tägliche Feuchtigkeit", "Weiche Haut, parfümfrei."], nl: ["Dagelijkse hydratatie", "Zachte huid, parfumvrij."] },
+      modelm:  { en: ["Made for reactive skin", "Strength for sensitive skin."], de: ["Für reaktive Haut", "Stärke für sensible Haut."], nl: ["Voor reactieve huid", "Kracht voor de gevoelige huid."] },
+      flatlay: { en: ["Plant-powered, vegan", "Bare-minimum, by design."], de: ["Pflanzenkraft, vegan", "Bewusst minimalistisch."], nl: ["Plantkracht, vegan", "Bewust minimalistisch."] },
+    },
+  },
+  {
+    ref: "p1.png", slug: "p1", cat: "skin",
+    desc: "a facial cleanser pump bottle with a cream label",
+    copy: {
+      hero:    { en: ["Radiant Glow Cleanser", "Fresh, radiant skin."], de: ["Radiant Glow Reiniger", "Frische, strahlende Haut."], nl: ["Radiant Glow Reiniger", "Frisse, stralende huid."] },
+      vanity:  { en: ["The morning rinse", "A gentle daily cleanse."], de: ["Die Morgenreinigung", "Eine sanfte tägliche Reinigung."], nl: ["De ochtendreiniging", "Een zachte dagelijkse reiniging."] },
+      modelf:  { en: ["Lifts away impurities", "Clean skin, kept calm."], de: ["Löst Unreinheiten", "Saubere Haut, schön ruhig."], nl: ["Verwijdert onzuiverheden", "Schone huid, lekker rustig."] },
+      modelm:  { en: ["Daily, for everyone", "Fresh start, every morning."], de: ["Täglich, für alle", "Frischer Start, jeden Morgen."], nl: ["Dagelijks, voor iedereen", "Frisse start, elke ochtend."] },
+      flatlay: { en: ["Plant-powered, vegan", "Clean that respects skin."], de: ["Pflanzenkraft, vegan", "Reinigung, die die Haut achtet."], nl: ["Plantkracht, vegan", "Reiniging die de huid respecteert."] },
+    },
+  },
+  {
+    ref: "p3.png", slug: "p3", cat: "skin",
+    desc: "a toner bottle with a cream label",
+    copy: {
+      hero:    { en: ["Purifying Toner", "Clears pores, balanced skin."], de: ["Klärendes Gesichtswasser", "Klärt Poren, ausgeglichene Haut."], nl: ["Zuiverende Toner", "Heldere poriën, balans in de huid."] },
+      vanity:  { en: ["Between cleanse & serum", "Fresh, supple, balanced."], de: ["Zwischen Reinigung & Serum", "Frisch, geschmeidig, im Gleichgewicht."], nl: ["Tussen reiniging & serum", "Fris, soepel, in balans."] },
+      modelf:  { en: ["For oily & combination skin", "Clarified, not stripped."], de: ["Für fettige & Mischhaut", "Geklärt, nicht ausgetrocknet."], nl: ["Voor vette & gemengde huid", "Gezuiverd, niet uitgedroogd."] },
+      modelm:  { en: ["Fragrance-free", "Balance for oily skin."], de: ["Parfümfrei", "Balance für fettige Haut."], nl: ["Parfumvrij", "Balans voor de vette huid."] },
+      flatlay: { en: ["Plant-powered, vegan", "Purify, the calm way."], de: ["Pflanzenkraft, vegan", "Klären, ganz ruhig."], nl: ["Plantkracht, vegan", "Zuiveren, op een rustige manier."] },
+    },
+  },
+  {
+    ref: "p2.png", slug: "p2", cat: "hair",
+    desc: "a shampoo bottle with a cream label",
+    copy: {
+      hero:    { en: ["Sensitive Scalp Shampoo", "Gentle on sensitive scalps."], de: ["Shampoo Sensitive Kopfhaut", "Sanft zur empfindlichen Kopfhaut."], nl: ["Shampoo Gevoelige Hoofdhuid", "Zacht voor de gevoelige hoofdhuid."] },
+      vanity:  { en: ["Dermatologically tested", "Soothes from the roots."], de: ["Dermatologisch getestet", "Beruhigt ab dem Ansatz."], nl: ["Dermatologisch getest", "Kalmeert vanaf de wortel."] },
+      modelf:  { en: ["All hair types", "Calm scalp, soft hair."], de: ["Für jeden Haartyp", "Ruhige Kopfhaut, weiches Haar."], nl: ["Voor elk haartype", "Rustige hoofdhuid, zacht haar."] },
+      modelm:  { en: ["For reactive scalps", "Wash gentle, every day."], de: ["Für reaktive Kopfhaut", "Sanft waschen, jeden Tag."], nl: ["Voor reactieve hoofdhuid", "Zacht wassen, elke dag."] },
+      flatlay: { en: ["Plant-powered, vegan", "Scalp care, simplified."], de: ["Pflanzenkraft, vegan", "Kopfhautpflege, einfach gemacht."], nl: ["Plantkracht, vegan", "Hoofdhuidverzorging, vereenvoudigd."] },
+    },
+  },
+];
+
+function scenePrompt(p, scene) {
+  const D = p.desc;
+  if (scene === "hero")
+    return `Hero shot: ${D} standing on a wet dark stone surface with delicate water ripples, deep muted sage-green moody background, a single soft studio key light from upper right, fine water droplets on the bottle, luxurious minimal clean-beauty editorial.${FRAME}`;
+  if (scene === "vanity")
+    return `${D} on a pale marble vanity beside a small eucalyptus sprig and a folded linen towel, soft morning window light from the left, a few water droplets, calm spa atmosphere, background softly blurred.`;
+  if (scene === "flatlay")
+    return `Top-down flatlay: ${D} on natural beige linen with scattered fresh botanical leaves, eucalyptus and a few water drops, soft even overhead light, calm editorial styling.`;
+  const sex = scene === "modelm" ? "m" : "f";
+  return `${lifestyle(p, sex).replace("{P}", D)}. The product is clearly visible and in sharp focus.${FRAME}`;
+}
+
+async function buildLibrary() {
+  const cleanDir = path.join(OUT, "clean");
+  fs.mkdirSync(cleanDir, { recursive: true });
+  const FORCE = (process.argv[4] || "").split(",").filter(Boolean); // e.g. pep-modelf
   const manifest = [];
-  const cleanDir = path.join(OUT, "clean"), postDir = path.join(OUT, "post");
-  fs.mkdirSync(cleanDir, { recursive: true }); fs.mkdirSync(postDir, { recursive: true });
+
+  // 1) ensure all 30 clean photos exist (reuse cache; regenerate forced ones)
   for (const p of PRODUCTS) {
-    const ref = path.join(IMG, "_src", p.ref);
-    const slug = p.ref.replace(/\.png$/, "");
-    for (const s of SCENES(p)) {
-      const id = `${slug}-${s.id}`;
-      try {
-        await gen2(path.join(cleanDir, id + ".jpg"), s.prompt, [ref]);
-        const posted = await addCopy(fs.readFileSync(path.join(cleanDir, id + ".jpg")), s);
-        const pf = path.join(postDir, id + ".jpg"); fs.writeFileSync(pf, posted);
-        manifest.push({ style: "photoreal", file: path.relative(ROOT, pf).split(path.sep).join("/"), caption: `${p.name} — ${s.title}` });
-        console.log("  ↳ posted", id);
-      } catch (e) { console.error("✗", id, e.message); }
+    for (const scene of SCENES) {
+      const id = `${p.slug}-${scene}`;
+      const f = path.join(cleanDir, id + ".jpg");
+      const need = !fs.existsSync(f) || FORCE.includes(id);
+      if (need) {
+        try { await gen2(f, scenePrompt(p, scene), [path.join(IMG, "_src", p.ref)]); }
+        catch (e) { console.error("✗ gen", id, e.message); continue; }
+      } else console.log("• cached", id);
     }
   }
-  // fold in the free programmatic text styles already generated by content-images.js
-  const cm = path.join(ROOT, "marketing", "social", "manifest.json");
-  if (fs.existsSync(cm)) for (const e of JSON.parse(fs.readFileSync(cm))) if (/s2-quote|s4-review|s5-compare/.test(e.style)) manifest.push(e);
-  fs.writeFileSync(path.join(ROOT, "marketing", "social", "library.json"), JSON.stringify(manifest, null, 0));
-  console.log(`\n✓ library.json — ${manifest.length} curated images (${manifest.filter(m => m.style === "photoreal").length} photoreal + text styles)`);
+
+  // 2) overlay copy in every language (overlay-only = no API cost)
+  for (const lang of ["en", "de", "nl"]) {
+    const postDir = path.join(OUT, "post", lang);
+    fs.mkdirSync(postDir, { recursive: true });
+    for (const p of PRODUCTS) {
+      for (const scene of SCENES) {
+        const id = `${p.slug}-${scene}`;
+        const clean = path.join(cleanDir, id + ".jpg");
+        if (!fs.existsSync(clean)) continue;
+        const [eyebrow, title] = p.copy[scene][lang];
+        const posted = await addCopy(fs.readFileSync(clean), { eyebrow, title }, BAR[lang]);
+        const pf = path.join(postDir, id + ".jpg");
+        fs.writeFileSync(pf, posted);
+        manifest.push({
+          file: path.relative(ROOT, pf).split(path.sep).join("/"),
+          lang, product: p.slug, scene,
+          eyebrow, title,
+          caption: `${eyebrow} — ${title}`,
+        });
+      }
+    }
+    console.log(`✓ ${lang.toUpperCase()} overlays done`);
+  }
+
+  fs.writeFileSync(path.join(OUT, "library.json"), JSON.stringify(manifest, null, 0));
+  console.log(`\n✓ library.json — ${manifest.length} images (${manifest.length / 3} concepts × 3 languages)`);
 }
+
 // gen variant that writes to an explicit path
 async function gen2(outPath, prompt, refs) {
   const content = [{ type: "text", text: `${prompt}\n\n${STYLE}` }];
@@ -119,16 +230,5 @@ async function gen2(outPath, prompt, refs) {
   console.log("✓", path.relative(ROOT, outPath));
 }
 
-const PEP = path.join(IMG, "_src", "pep_front_nobox.jpg");
-const PROOFS = [
-  ["proof-1", "Place the product on a pale marble bathroom shelf beside a small eucalyptus sprig, soft morning window light from the left, a few water droplets on the marble, calm spa atmosphere, background softly blurred."],
-  ["proof-2", "A woman with healthy natural skin gently holds the product near her cheek, soft daylight, minimal neutral blurred background, intimate skincare-routine moment, focus on the bottle in her hand."],
-  ["proof-3", "Hero shot of the product standing on a wet dark stone surface with delicate water ripples, deep sage-green moody background, a single soft studio key light from upper right, luxurious and minimal."],
-];
-
-(async () => {
-  if (!fs.existsSync(PEP)) throw new Error("missing reference " + PEP);
-  if (MODE === "proofs") for (const [id, p] of PROOFS) { try { await gen(id, p, [PEP]); } catch (e) { console.error("✗", id, e.message); } }
-  else if (MODE === "all") await buildAll();
-  console.log("\nDone. See marketing/social/nano/");
-})().catch(e => { console.error(e); process.exit(1); });
+(async () => { await buildLibrary(); console.log("\nDone. See marketing/social/nano/post/<lang>/"); })()
+  .catch(e => { console.error(e); process.exit(1); });
