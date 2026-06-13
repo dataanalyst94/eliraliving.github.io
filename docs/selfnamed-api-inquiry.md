@@ -60,3 +60,8 @@ Database ID: 37ea4815-a826-81cb-9ee9-e60372973062
 Parent page: 243a4815-a826-8060-93b6-f2e9a3d90a68
 API version: 2022-06-28
 (Token is a Notion secret — kept out of the repo. Update tasks via Notion API.)
+
+## Notion Content Library (60 social images)
+Database ID: 37ea4815-a826-81da-bc04-d85e70d0b595
+Generator: tools/content-images.js (node tools/content-images.js all)
+Stock: tools/fetch-stock.js (Pexels) · Upload: tools/notion-upload.js

@@ -57,7 +57,7 @@ async function s1(o) {
 async function s2(o) { return svg(`${bg()}${logo}${eyebrow(W / 2, 430, o.eyebrow)} <g/>${headline(W / 2, 560, wrap(o.quote, 20), 76, 96, "middle")}${body(W / 2, 560 + wrap(o.quote, 20).length * 96 + 40, [o.sub || ""], 30, 42, C.sage, "middle")}`.replace("<g/>", `<line x1="${W / 2 - 40}" y1="395" x2="${W / 2 + 40}" y2="395" stroke="${C.gold}" stroke-width="2"/>`)); }
 // S3 ingredient spotlight: product + callouts
 async function s3(o) {
-  const cut = fs.existsSync(path.join(IMG, "_src", o.cut)) ? path.join(IMG, "_src", o.cut) : null;
+  const cut = o.cut && fs.existsSync(path.join(IMG, "_src", o.cut)) ? path.join(IMG, "_src", o.cut) : null;
   const prod = cut ? await sharp(cut).trim({ threshold: 6 }).resize({ height: 900, fit: "inside" }).toBuffer() : await sharp(path.join(IMG, o.product)).resize(560, 900, { fit: "cover" }).toBuffer();
   const m = await sharp(prod).metadata();
   const callouts = o.points.map((p, i) => { const y = 360 + i * 230; return `<line x1="700" y1="${y}" x2="780" y2="${y}" stroke="${C.gold}" stroke-width="2"/>${body(700, y - 12, [p.h], 30, 40, C.cream)}${body(700, y + 28, wrap(p.t, 26), 24, 32, C.soft)}`; }).join("");
@@ -78,14 +78,24 @@ async function s5(o) {
     ${o.rows.map((r, i) => { const y = midY + 90 + i * 110; return body(W / 4, y, wrap(r[0], 18), 28, 36, C.soft, "middle") + body(W * 3 / 4, y, wrap(r[1], 18), 28, 36, C.cream, "middle"); }).join("")}
     ${offerBar}`);
 }
-// S6 lifestyle: stock photo base (if provided) + headline; else soft gradient placeholder
+// S6 lifestyle: real stock photo + scrim + headline, with a product "chip"
+// (real bottle cutout) so the product is present alongside real people.
 async function s6(o) {
   let base;
-  const stock = o.stock && path.join(IMG, "_src", o.stock);
-  if (stock && fs.existsSync(stock)) base = await sharp(stock).resize(W, H, { fit: "cover" }).modulate({ brightness: 0.78 }).toBuffer();
+  const stock = o.stock && path.join(IMG, "_src", "stock", o.stock);
+  if (stock && fs.existsSync(stock)) base = await sharp(stock).resize(W, H, { fit: "cover" }).modulate({ brightness: 0.82 }).toBuffer();
   else base = await svg(bg(`<rect width="${W}" height="${H}" fill="${C.forest}" fill-opacity="0.2"/>`));
-  const over = await svg(`<rect width="${W}" height="${H}" fill="${C.ink}" fill-opacity="0.25"/>${logo}${eyebrow(80, H - 360, o.eyebrow)}${headline(80, H - 270, wrap(o.title, 18), 70, 80)}${body(80, H - 150, wrap(o.sub || "", 40), 28, 38, C.cream)}`);
-  return sharp(base).composite([{ input: over }]).png().toBuffer();
+  const scrim = `<defs><linearGradient id="s6" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${C.ink}" stop-opacity="0.45"/><stop offset="55%" stop-color="${C.ink}" stop-opacity="0.05"/><stop offset="100%" stop-color="${C.ink}" stop-opacity="0.9"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#s6)"/>`;
+  const over = await svg(`${scrim}${logo}${eyebrow(80, H - 340, o.eyebrow)}${headline(80, H - 250, wrap(o.title, 18), 66, 78)}${body(80, H - 135, wrap(o.sub || "", 42), 27, 36, C.cream)}`);
+  const layers = [{ input: over }];
+  // product chip bottom-right
+  const chipSrc = path.join(IMG, "_src", "pep_10.png");
+  if (fs.existsSync(chipSrc)) {
+    const chip = await sharp(chipSrc).trim({ threshold: 6 }).resize({ height: 300, fit: "inside" }).toBuffer();
+    const cm = await sharp(chip).metadata();
+    layers.push({ input: chip, top: H - 300 - 150, left: W - cm.width - 70 });
+  }
+  return sharp(base).composite(layers).png().toBuffer();
 }
 
 /* ---- PROOFS ------------------------------------------------------------- */
@@ -99,5 +109,98 @@ async function proofs() {
   console.log("\nProofs in marketing/social/*/proof.jpg");
 }
 
+/* ---- FULL 60 SPEC ------------------------------------------------------- */
+const PROD = { cream: "Sensitive Moisturizing Cream", cleanser: "Radiant Glow Cleanser", toner: "Purifying Toner", shampoo: "Sensitive Scalp Shampoo", serum: "Retinol Alternative Serum", "peptide-serum": "Peptide Anti-Aging Serum" };
+const SPEC = {
+  "s1-hero": [
+    { product: "cream.jpg", eyebrow: PROD.cream, title: "Calm skin, no compromise." },
+    { product: "cream.jpg", eyebrow: PROD.cream, title: "Moisture your barrier can trust." },
+    { product: "cleanser.jpg", eyebrow: PROD.cleanser, title: "Clean that doesn't strip." },
+    { product: "cleanser.jpg", eyebrow: PROD.cleanser, title: "Fresh skin, barrier intact." },
+    { product: "toner.jpg", eyebrow: PROD.toner, title: "Clarify without the sting." },
+    { product: "toner.jpg", eyebrow: PROD.toner, title: "Balance, gently." },
+    { product: "shampoo.jpg", eyebrow: PROD.shampoo, title: "For scalps that react to everything." },
+    { product: "shampoo.jpg", eyebrow: PROD.shampoo, title: "Calm scalp, soft hair." },
+    { product: "serum.jpg", eyebrow: PROD.serum, title: "Retinol results, zero retinol burn." },
+    { product: "serum.jpg", eyebrow: PROD.serum, title: "Smoother skin, no irritation." },
+    { product: "peptide-serum.jpg", eyebrow: PROD["peptide-serum"], title: "Firmer skin, none of the sting." },
+    { product: "peptide-serum.jpg", eyebrow: PROD["peptide-serum"], title: "Age gently. Glow anyway." },
+  ],
+  "s2-quote": [
+    "Anti-aging that doesn't fight your skin.", "If actives leave you red, start here.",
+    "Certified gentle. Actually effective.", "Your barrier wants the calm version.",
+    "Strong results. Soft on sensitive skin.", "Glow without the gamble.",
+    "Skincare that calms, not conquers.", "Powerful plants. Gentle on you.",
+    "Less sting. More skin you love.", "Sensitive skin deserves real results too.",
+    "Clean beauty you can actually verify.", "Slow skincare for reactive skin.",
+  ].map(q => ({ eyebrow: "Results without irritation", quote: q, sub: "Vegan · ECOCERT COSMOS certified" })),
+  "s3-ingredient": [
+    { product: "peptide-serum.jpg", cut: "pep_10.png", eyebrow: "Inside the formula", points: [{ h: "2% Hexapeptide-11", t: "Visibly smooths fine lines" }, { h: "Ginkgo Biloba", t: "Antioxidant defense" }, { h: "Hyaluronic acid", t: "Plumps & holds moisture" }] },
+    { product: "serum.jpg", eyebrow: "Inside the formula", points: [{ h: "2% Bidens Pilosa", t: "Plant retinol alternative" }, { h: "Rosehip oil", t: "Softens fine lines" }, { h: "Hyaluronic acid", t: "Deep hydration" }] },
+    { product: "toner.jpg", eyebrow: "Inside the formula", points: [{ h: "Lavender water", t: "Soothes & refreshes" }, { h: "Cucumber extract", t: "Calms the skin" }, { h: "Gentle BHA", t: "Clears without stripping" }] },
+    { product: "shampoo.jpg", eyebrow: "Inside the formula", points: [{ h: "Plum extract", t: "Nourishes the scalp" }, { h: "Coco-glucoside", t: "Mild, plant-based wash" }, { h: "Derm-tested", t: "For sensitive scalps" }] },
+    { product: "cream.jpg", eyebrow: "Inside the formula", points: [{ h: "Glycerin", t: "Draws in moisture" }, { h: "Fragrance-free", t: "Kind to reactive skin" }, { h: "Barrier support", t: "Strengthens over time" }] },
+    { product: "cleanser.jpg", eyebrow: "Inside the formula", points: [{ h: "Aloe", t: "Soothes as it cleans" }, { h: "Gentle surfactants", t: "No tight, stripped feel" }, { h: "COSMOS Natural", t: "Certified clean" }] },
+    { product: "peptide-serum.jpg", cut: "pep_10.png", eyebrow: "Antioxidant rich", points: [{ h: "Blueberry seed oil", t: "Protective antioxidants" }, { h: "Strawberry seed oil", t: "Replenishing lipids" }, { h: "Phytosterols", t: "Comfort & elasticity" }] },
+    { product: "serum.jpg", eyebrow: "Barrier first", points: [{ h: "Sea buckthorn", t: "Revives dull skin" }, { h: "Mango butter", t: "Cushions & softens" }, { h: "99% natural", t: "ECOCERT COSMOS" }] },
+  ],
+  "s4-review": [
+    { quote: "Meine Haut hat es gut vertragen.", name: "Julia R.", country: "DE" },
+    { quote: "Ik hou ervan dat het niet zo sterk ruikt.", name: "Sanne M.", country: "NL" },
+    { quote: "Fühlt sich gut an und sieht echt schick aus.", name: "Markus T.", country: "DE" },
+    { quote: "Viel me echt mee — voelt prettig aan.", name: "Femke D.", country: "NL" },
+    { quote: "Der Duft ist dezent. Finde ich gut.", name: "Sabine K.", country: "DE" },
+    { quote: "Kwam goed verpakt binnen en voelt fijn.", name: "Daan V.", country: "NL" },
+    { quote: "Cleanes Design, ordentlich gemacht.", name: "Lena B.", country: "DE" },
+    { quote: "Geen rare geur, voelt betrouwbaar aan.", name: "Lotte S.", country: "NL" },
+  ],
+  "s5-compare": [
+    { rows: [["Tingling, redness", "Calm, tolerated"], ["Synthetic actives", "Plant-based, certified"], ["Strips the barrier", "Supports the barrier"]] },
+    { rows: [["Harsh retinol", "Bidens Pilosa"], ["Peeling, flaking", "Smooth, comfortable"], ["Sun-sensitive", "Daytime friendly"]] },
+    { rows: [["Strong perfume", "Considerate scent"], ["Unknown origin", "99% natural origin"], ["Unclear ethics", "Vegan · ECOCERT"]] },
+    { rows: [["Foaming sulfates", "Gentle cleansers"], ["Tight, dry feel", "Soft, fresh feel"], ["Daily irritation", "Daily comfort"]] },
+    { rows: [["Quick fixes", "Barrier-first"], ["More is more", "Less, but right"], ["Marketing claims", "Certified proof"]] },
+    { rows: [["Reactive scalp", "Soothed scalp"], ["Itch & flakes", "Calm & balanced"], ["Heavy build-up", "Light & clean"]] },
+  ],
+  "s6-lifestyle": null, // filled from stock dir below
+};
+// S6 copy pool
+const S6COPY = [
+  { eyebrow: "The gentle ritual", title: "Slow mornings, calmer skin.", sub: "A routine your barrier will thank you for." },
+  { eyebrow: "Sensitive-skin friendly", title: "Results you can feel. Gently.", sub: "Vegan · ECOCERT COSMOS certified." },
+  { eyebrow: "Real skin, real calm", title: "No sting. Just glow.", sub: "Plant-based actives for reactive skin." },
+  { eyebrow: "Certified clean", title: "Trust what touches your skin.", sub: "99% natural origin." },
+  { eyebrow: "Everyday comfort", title: "Skincare that behaves.", sub: "Fragrance-considerate, barrier-first." },
+  { eyebrow: "For reactive skin", title: "Strong on results. Soft on you.", sub: "Vegan & certified." },
+  { eyebrow: "The calm edit", title: "Less reaction. More radiance.", sub: "ECOCERT COSMOS certified." },
+  { eyebrow: "Gentle by design", title: "Your skin, uncomplicated.", sub: "Clean, certified, kind." },
+  { eyebrow: "Quiet luxury", title: "Effective doesn't have to hurt.", sub: "Plant-powered, sensitively made." },
+  { eyebrow: "Morning light", title: "Begin gently.", sub: "Skincare for skin that reacts." },
+  { eyebrow: "Self-care, simplified", title: "Calm is a routine.", sub: "Vegan · ECOCERT COSMOS." },
+  { eyebrow: "Skin you trust", title: "Glow without the gamble.", sub: "Certified gentle, genuinely effective." },
+  { eyebrow: "Plant-powered", title: "Nature, but proven.", sub: "99% natural origin · ECOCERT." },
+  { eyebrow: "The soft approach", title: "Kind to sensitive skin.", sub: "Results without irritation." },
+];
+
+async function generateAll() {
+  const R = { s1: s1, s2: s2, s3: s3, s4: s4, s5: s5, s6: s6 };
+  // build S6 from stock images
+  const stockDir = path.join(IMG, "_src", "stock");
+  const stocks = fs.existsSync(stockDir) ? fs.readdirSync(stockDir).filter(f => /\.jpg$/i.test(f)) : [];
+  SPEC["s6-lifestyle"] = stocks.slice(0, 14).map((s, i) => ({ stock: s, ...S6COPY[i % S6COPY.length] }));
+  let total = 0; const manifest = [];
+  const cap = (style, o) => o.title || o.quote || (o.points ? o.eyebrow + ": " + o.points.map(p => p.h).join(", ") : "") || (o.rows ? "Gentle vs harsh: " + o.rows.map(r => r[1]).join(", ") : "");
+  for (const [style, items] of Object.entries(SPEC)) {
+    const fn = R[style.slice(0, 2)];
+    for (let i = 0; i < items.length; i++) {
+      const id = String(i + 1).padStart(2, "0");
+      await save(style, id, await fn(items[i])); total++;
+      manifest.push({ style, file: `marketing/social/${style}/${id}.jpg`, caption: cap(style, items[i]) });
+    }
+  }
+  fs.writeFileSync(path.join(OUT, "manifest.json"), JSON.stringify(manifest, null, 0));
+  console.log(`\n✓ ${total} images generated in marketing/social/  (+ manifest.json)`);
+}
+
 const mode = process.argv[2] || "proofs";
-(mode === "proofs" ? proofs() : Promise.resolve()).catch(e => { console.error(e); process.exit(1); });
+(mode === "all" ? generateAll() : mode === "proofs" ? proofs() : Promise.resolve()).catch(e => { console.error(e); process.exit(1); });
