@@ -33,7 +33,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const ev=$('Stripe Trigger').first().json;const s=(ev.data&&ev.data.object)?ev.data.object:ev;const li=($json&&$json.data)?$json.data:[];const items=li.map(i=>(i.quantity+'× '+(i.description||''))).join(', ')||'(see Stripe)';const cust=s.customer_details||{};const sd=s.shipping_details||s.shipping||(s.collected_information&&s.collected_information.shipping_details)||null;const addr=(sd&&sd.address)||cust.address||{};const name=(sd&&sd.name)||cust.name||'';const addrStr=[addr.line1,addr.line2,[addr.postal_code,addr.city].filter(Boolean).join(' '),addr.state,addr.country].filter(Boolean).join(', ');const phone=cust.phone||'';const amt=((s.amount_total!=null?s.amount_total:(s.amount!=null?s.amount:0)))/100;const o={order:'EL-'+String(s.id||'').slice(-8).toUpperCase(),date:new Date((s.created?s.created*1000:Date.now())).toISOString(),email:cust.email||s.customer_email||'',customer:name,amount:amt,currency:String(s.currency||'eur').toUpperCase(),country:addr.country||'',items:items,address:addrStr,phone:phone,stripeId:s.id||''};o.notionBody=JSON.stringify({parent:{database_id:'37ea4815-a826-81eb-ab38-f65e104a0a83'},icon:{type:'emoji',emoji:'🧾'},properties:{Order:{title:[{text:{content:o.order}}]},Date:{date:{start:o.date}},Email:{email:o.email||null},Customer:{rich_text:[{text:{content:o.customer}}]},Amount:{number:o.amount},Currency:{select:{name:'EUR'}},Items:{rich_text:[{text:{content:o.items}}]},Address:{rich_text:[{text:{content:o.address}}]},Phone:{rich_text:[{text:{content:o.phone}}]},Country:{rich_text:[{text:{content:o.country}}]},Payment:{select:{name:'Paid'}},Fulfilment:{select:{name:'To pack'}},'Stripe ID':{rich_text:[{text:{content:o.stripeId}}]}}});return [{json:o}];"
+        "jsCode": "const ev=$('Stripe Trigger').first().json;const s=(ev.data&&ev.data.object)?ev.data.object:ev;const li=($json&&$json.data)?$json.data:[];const items=li.map(i=>(i.quantity+'× '+(i.description||''))).join(', ')||'(see Stripe)';const cust=s.customer_details||{};const sd=s.shipping_details||s.shipping||(s.collected_information&&s.collected_information.shipping_details)||null;const addr=(sd&&sd.address)||cust.address||{};const name=(sd&&sd.name)||cust.name||'';const addrStr=[addr.line1,addr.line2,[addr.postal_code,addr.city].filter(Boolean).join(' '),addr.state,addr.country].filter(Boolean).join(', ');const phone=cust.phone||'';const amt=((s.amount_total!=null?s.amount_total:(s.amount!=null?s.amount:0)))/100;const o={order:'EL-'+String(s.id||'').slice(-8).toUpperCase(),date:new Date((s.created?s.created*1000:Date.now())).toISOString(),email:cust.email||s.customer_email||'',customer:name,amount:amt,currency:String(s.currency||'eur').toUpperCase(),country:addr.country||'',items:items,address:addrStr,phone:phone,stripeId:s.id||''};o.notionBody=JSON.stringify({parent:{database_id:'37ea4815-a826-81eb-ab38-f65e104a0a83'},icon:{type:'emoji',emoji:'🧾'},properties:{Order:{title:[{text:{content:o.order}}]},Date:{date:{start:o.date}},Email:{email:o.email||null},Customer:{rich_text:[{text:{content:o.customer}}]},Amount:{number:o.amount},Currency:{select:{name:'EUR'}},Items:{rich_text:[{text:{content:o.items}}]},Address:{rich_text:[{text:{content:o.address}}]},Phone:{rich_text:[{text:{content:o.phone}}]},Country:{rich_text:[{text:{content:o.country}}]},Payment:{select:{name:'Paid'}},Fulfilment:{select:{name:'To pack'}},'Stripe ID':{rich_text:[{text:{content:o.stripeId}}]}}});o.klaviyoBody=JSON.stringify({data:{type:'event',attributes:{properties:{Items:o.items,OrderId:o.order,Country:o.country,'$value':o.amount},metric:{data:{type:'metric',attributes:{name:'Placed Order'}}},profile:{data:{type:'profile',attributes:{email:o.email,first_name:o.customer,properties:{Locale:(o.country==='DE'?'de':(o.country==='NL'?'nl':'en'))}}}},value:o.amount,unique_id:o.stripeId,time:o.date}}});return [{json:o}];"
       },
       "id": "a2222222-2222-4222-8222-222222222222",
       "name": "Format",
@@ -63,6 +63,27 @@
     },
     {
       "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "revision", "value": "2024-10-15" }, { "name": "Content-Type", "value": "application/json" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('Format').first().json.klaviyoBody }}",
+        "options": {}
+      },
+      "id": "a6666666-6666-4666-8666-666666666666",
+      "name": "Klaviyo Placed Order",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 0],
+      "credentials": { "httpHeaderAuth": { "id": "", "name": "Klaviyo" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
         "chatId": "REPLACE_CHAT_ID",
         "text": "=🧾 New order — €{{ $('Format').first().json.amount }}\n\n{{ $('Format').first().json.items }}\n\n👤 {{ $('Format').first().json.customer }}\n✉️ {{ $('Format').first().json.email }}\n📦 {{ $('Format').first().json.address }}\n☎️ {{ $('Format').first().json.phone }}\n\nStripe: {{ $('Format').first().json.stripeId }}",
         "additionalFields": { "appendAttribution": false }
@@ -71,7 +92,7 @@
       "name": "Telegram alert",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
-      "position": [880, 0],
+      "position": [1100, 0],
       "credentials": { "telegramApi": { "id": "", "name": "Telegram account" } }
     }
   ],
@@ -79,6 +100,7 @@
     "Stripe Trigger": { "main": [[{ "node": "Line items", "type": "main", "index": 0 }]] },
     "Line items": { "main": [[{ "node": "Format", "type": "main", "index": 0 }]] },
     "Format": { "main": [[{ "node": "Notion → Orders", "type": "main", "index": 0 }]] },
-    "Notion → Orders": { "main": [[{ "node": "Telegram alert", "type": "main", "index": 0 }]] }
+    "Notion → Orders": { "main": [[{ "node": "Klaviyo Placed Order", "type": "main", "index": 0 }]] },
+    "Klaviyo Placed Order": { "main": [[{ "node": "Telegram alert", "type": "main", "index": 0 }]] }
   }
 }

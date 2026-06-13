@@ -1,0 +1,22 @@
+[
+  { "en": "What \"clean\" really means at Elira", "de": "Was \"sauber\" bei Elira wirklich bedeutet", "nl": "Wat \"clean\" echt betekent bij Elira" },
+  { "en": "Vegan, fragrance-free, ECOCERT COSMOS-certified — no greenwashing.", "de": "Vegan, parfümfrei, ECOCERT-COSMOS-zertifiziert – kein Greenwashing.", "nl": "Veganistisch, parfumvrij, ECOCERT COSMOS-gecertificeerd – geen greenwashing." },
+  { "en": "No marketing fluff", "de": "Kein Marketing-Geschwätz", "nl": "Geen marketingpraat" },
+  { "en": "\"Clean\" gets thrown around a lot.", "de": "\"Sauber\" wird oft benutzt.", "nl": "\"Clean\" hoor je overal." },
+  { "en": "Here's what it means to us.", "de": "Das bedeutet es für uns.", "nl": "Dit is wat het voor ons betekent." },
+  { "en": "Most \"natural\" claims aren't verified by anyone. Ours are. Every Elira formula is held to a standard you can actually check — so you know exactly what you're putting on your skin, {{ first_name|default:'and your scalp' }}.", "de": "Die meisten \"natürlich\"-Aussagen werden von niemandem geprüft. Unsere schon. Jede Elira-Formel erfüllt einen Standard, den du wirklich überprüfen kannst – so weißt du genau, was du auf deine Haut gibst, {{ first_name|default:'und deine Kopfhaut' }}.", "nl": "De meeste \"natuurlijk\"-claims worden door niemand geverifieerd. De onze wel. Elke Elira-formule voldoet aan een standaard die je echt kunt controleren – zodat je precies weet wat je op je huid smeert, {{ first_name|default:'en je hoofdhuid' }}." },
+  { "en": "ECOCERT COSMOS certified", "de": "ECOCERT COSMOS zertifiziert", "nl": "ECOCERT COSMOS gecertificeerd" },
+  { "en": "An independent body verifies the natural origin of our ingredients — it's not a word we award ourselves.", "de": "Eine unabhängige Stelle bestätigt den natürlichen Ursprung unserer Inhaltsstoffe – es ist kein Wort, das wir uns selbst verleihen.", "nl": "Een onafhankelijke instantie verifieert de natuurlijke oorsprong van onze ingrediënten – het is geen woord dat we onszelf toekennen." },
+  { "en": "100% vegan &amp; cruelty-free", "de": "100% vegan &amp; tierversuchsfrei", "nl": "100% veganistisch &amp; dierproefvrij" },
+  { "en": "No animal-derived ingredients, no animal testing — ever.", "de": "Keine tierischen Inhaltsstoffe, keine Tierversuche – niemals.", "nl": "Geen dierlijke ingrediënten, geen dierproeven – nooit." },
+  { "en": "Fragrance-free where it matters", "de": "Parfümfrei, wo es zählt", "nl": "Parfumvrij waar het telt" },
+  { "en": "Added perfume is a leading irritant. Our sensitive range leaves it out.", "de": "Zugesetztes Parfüm ist ein häufiger Reizstoff. Unsere Sensitiv-Linie verzichtet darauf.", "nl": "Toegevoegd parfum is een veelvoorkomende irritant. Onze sensitive-lijn laat het weg." },
+  { "en": "SEE WHAT'S INSIDE →", "de": "BLICK IN DIE FORMEL →", "nl": "BEKIJK WAT ERIN ZIT →" },
+  { "en": "SEE WHAT'S INSIDE", "de": "BLICK IN DIE FORMEL", "nl": "BEKIJK WAT ERIN ZIT" },
+  { "en": "Still have your", "de": "Hast du noch deinen", "nl": "Heb je je" },
+  { "en": "code? It's good for a few more days.", "de": "Code? Er gilt noch ein paar Tage.", "nl": "code? Die is nog een paar dagen geldig." },
+  { "en": "100% Vegan  ✦  ECOCERT COSMOS  ✦  Made in the EU  ✦  Cruelty-free", "de": "100% Vegan  ✦  ECOCERT COSMOS  ✦  In der EU hergestellt  ✦  Tierversuchsfrei", "nl": "100% Veganistisch  ✦  ECOCERT COSMOS  ✦  Gemaakt in de EU  ✦  Dierproefvrij" },
+  { "en": "You're receiving this because you signed up at eliraliving.com.", "de": "Du erhältst diese E-Mail, weil du dich auf eliraliving.com angemeldet hast.", "nl": "Je ontvangt deze e-mail omdat je je hebt aangemeld op eliraliving.com." },
+  { "en": "Unsubscribe", "de": "Abmelden", "nl": "Uitschrijven" },
+  { "en": "Email preferences", "de": "E-Mail-Einstellungen", "nl": "E-mailvoorkeuren" }
+]

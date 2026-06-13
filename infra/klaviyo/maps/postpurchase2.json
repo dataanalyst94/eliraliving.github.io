@@ -1,0 +1,19 @@
+[
+  { "en": "How's your skin feeling?", "de": "Wie fühlt sich deine Haut an?", "nl": "Hoe voelt je huid?" },
+  { "en": "Two minutes to help others find Elira — and a thank-you inside.", "de": "Zwei Minuten, um anderen zu helfen, Elira zu finden – und ein Dankeschön für dich.", "nl": "Twee minuten om anderen Elira te laten vinden – en een bedankje voor jou." },
+  { "en": "How's your skin feeling, {{ first_name|default:'lovely' }}?", "de": "Wie fühlt sich deine Haut an, {{ first_name|default:'Liebes' }}?", "nl": "Hoe voelt je huid, {{ first_name|default:'lieverd' }}?" },
+  { "en": "You've had your Elira a week or so now. If you're enjoying it, would you share a quick review? It takes two minutes — and it genuinely helps other people with sensitive skin find us.", "de": "Du hast dein Elira jetzt etwa eine Woche. Wenn es dir gefällt, würdest du eine kurze Bewertung schreiben? Es dauert zwei Minuten – und hilft anderen mit empfindlicher Haut wirklich, uns zu finden.", "nl": "Je hebt je Elira nu ongeveer een week. Als je het fijn vindt, wil je dan een korte review schrijven? Het kost twee minuten – en het helpt anderen met een gevoelige huid echt om ons te vinden." },
+  { "en": "LEAVE A REVIEW →", "de": "BEWERTUNG SCHREIBEN →", "nl": "SCHRIJF EEN REVIEW →" },
+  { "en": "LEAVE A REVIEW", "de": "BEWERTUNG SCHREIBEN", "nl": "SCHRIJF EEN REVIEW" },
+  { "en": "A little thank-you", "de": "Ein kleines Dankeschön", "nl": "Een klein bedankje" },
+  { "en": "10% off your next order", "de": "10% Rabatt auf deine nächste Bestellung", "nl": "10% korting op je volgende bestelling" },
+  { "en": "Use code", "de": "Code", "nl": "Gebruik code" },
+  { "en": "at checkout", "de": "an der Kasse verwenden", "nl": "bij het afrekenen" },
+  { "en": "Complete your ritual", "de": "Vervollständige dein Ritual", "nl": "Maak je ritueel compleet" },
+  { "en": "Sensitive Scalp Shampoo", "de": "Shampoo Sensitive Kopfhaut", "nl": "Shampoo Gevoelige Hoofdhuid" },
+  { "en": "Gentle, dermatologically tested care for delicate scalps.", "de": "Sanfte, dermatologisch getestete Pflege für empfindliche Kopfhaut.", "nl": "Zachte, dermatologisch geteste verzorging voor de gevoelige hoofdhuid." },
+  { "en": "Discover it →", "de": "Entdecken →", "nl": "Ontdek het →" },
+  { "en": "100% Vegan  ✦  ECOCERT COSMOS  ✦  Made in the EU", "de": "100% Vegan  ✦  ECOCERT COSMOS  ✦  In der EU hergestellt", "nl": "100% Veganistisch  ✦  ECOCERT COSMOS  ✦  Gemaakt in de EU" },
+  { "en": "Unsubscribe", "de": "Abmelden", "nl": "Uitschrijven" },
+  { "en": "Email preferences", "de": "E-Mail-Einstellungen", "nl": "E-mailvoorkeuren" }
+]

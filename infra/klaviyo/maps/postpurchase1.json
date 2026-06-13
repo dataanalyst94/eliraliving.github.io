@@ -1,0 +1,21 @@
+[
+  { "en": "Thank you for your order", "de": "Danke für deine Bestellung", "nl": "Bedankt voor je bestelling" },
+  { "en": "Thank you — your Elira ritual is on its way. Here's how to get the best from it.", "de": "Danke – dein Elira-Ritual ist unterwegs. So holst du das Beste heraus.", "nl": "Bedankt – je Elira-ritueel is onderweg. Zo haal je er het meeste uit." },
+  { "en": "Thank you, {{ first_name|default:'lovely' }}.", "de": "Danke, {{ first_name|default:'Liebes' }}.", "nl": "Bedankt, {{ first_name|default:'lieverd' }}." },
+  { "en": "Your order is confirmed and being prepared with care. You'll get tracking as soon as it ships — usually within", "de": "Deine Bestellung ist bestätigt und wird sorgfältig vorbereitet. Die Sendungsverfolgung bekommst du, sobald sie verschickt wird – meist innerhalb von", "nl": "Je bestelling is bevestigd en wordt met zorg klaargemaakt. Je ontvangt de tracking zodra ’m verzonden is – meestal binnen" },
+  { "en": "3–7 working days", "de": "3–7 Werktagen", "nl": "3–7 werkdagen" },
+  { "en": "across Germany &amp; the Netherlands.", "de": "in Deutschland &amp; den Niederlanden.", "nl": "in Duitsland &amp; Nederland." },
+  { "en": "Get the best from your ritual", "de": "Hol das Beste aus deinem Ritual", "nl": "Haal het meeste uit je ritueel" },
+  { "en": "Start gentle.", "de": "Sanft starten.", "nl": "Begin zacht." },
+  { "en": "Introduce one product at a time so your skin can tell you what it loves.", "de": "Führe ein Produkt nach dem anderen ein, damit deine Haut dir zeigt, was sie liebt.", "nl": "Introduceer één product tegelijk, zodat je huid je laat weten wat ze fijn vindt." },
+  { "en": "Lukewarm, not hot.", "de": "Lauwarm, nicht heiß.", "nl": "Lauwwarm, niet heet." },
+  { "en": "Cleanse and rinse with lukewarm water; pat (don't rub) dry.", "de": "Reinige und spüle mit lauwarmem Wasser; tupfe (nicht reiben) trocken.", "nl": "Reinig en spoel met lauwwarm water; dep (niet wrijven) droog." },
+  { "en": "Be consistent.", "de": "Bleib konsequent.", "nl": "Wees consistent." },
+  { "en": "A calm, stronger barrier shows up over 2–4 weeks of simple, daily care.", "de": "Eine ruhige, stärkere Hautbarriere zeigt sich nach 2–4 Wochen einfacher, täglicher Pflege.", "nl": "Een rustige, sterkere huidbarrière ontstaat na 2–4 weken eenvoudige, dagelijkse verzorging." },
+  { "en": "HOW TO USE EACH PRODUCT →", "de": "SO VERWENDEST DU JEDES PRODUKT →", "nl": "ZO GEBRUIK JE ELK PRODUCT →" },
+  { "en": "HOW TO USE EACH PRODUCT", "de": "SO VERWENDEST DU JEDES PRODUKT", "nl": "ZO GEBRUIK JE ELK PRODUCT" },
+  { "en": "Order ref: {{ event.OrderId|default:'—' }} · Need help? Reply or email", "de": "Bestell-Nr.: {{ event.OrderId|default:'—' }} · Brauchst du Hilfe? Antworte oder schreib an", "nl": "Bestelnr.: {{ event.OrderId|default:'—' }} · Hulp nodig? Reageer of mail naar" },
+  { "en": "100% Vegan  ✦  ECOCERT COSMOS  ✦  Made in the EU  ✦  Cruelty-free", "de": "100% Vegan  ✦  ECOCERT COSMOS  ✦  In der EU hergestellt  ✦  Tierversuchsfrei", "nl": "100% Veganistisch  ✦  ECOCERT COSMOS  ✦  Gemaakt in de EU  ✦  Dierproefvrij" },
+  { "en": "This is a service email about your order.", "de": "Dies ist eine Service-E-Mail zu deiner Bestellung.", "nl": "Dit is een service-e-mail over je bestelling." },
+  { "en": "Unsubscribe from marketing", "de": "Marketing abbestellen", "nl": "Marketing afmelden" }
+]
