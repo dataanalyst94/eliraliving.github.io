@@ -87,15 +87,31 @@ async function s6(o) {
   else base = await svg(bg(`<rect width="${W}" height="${H}" fill="${C.forest}" fill-opacity="0.2"/>`));
   const scrim = `<defs><linearGradient id="s6" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${C.ink}" stop-opacity="0.45"/><stop offset="55%" stop-color="${C.ink}" stop-opacity="0.05"/><stop offset="100%" stop-color="${C.ink}" stop-opacity="0.9"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#s6)"/>`;
   const over = await svg(`${scrim}${logo}${eyebrow(80, H - 340, o.eyebrow)}${headline(80, H - 250, wrap(o.title, 18), 66, 78)}${body(80, H - 135, wrap(o.sub || "", 42), 27, 36, C.cream)}`);
-  const layers = [{ input: over }];
-  // product chip bottom-right
+  const layers = [];
+  // product chip bottom-right, grounded + brightness-matched to the scene
   const chipSrc = path.join(IMG, "_src", "pep_10.png");
   if (fs.existsSync(chipSrc)) {
-    const chip = await sharp(chipSrc).trim({ threshold: 6 }).resize({ height: 300, fit: "inside" }).toBuffer();
+    const chipH = 320;
+    let chip = await sharp(chipSrc).trim({ threshold: 6 }).resize({ height: chipH, fit: "inside" }).toBuffer();
     const cm = await sharp(chip).metadata();
-    layers.push({ input: chip, top: H - 300 - 150, left: W - cm.width - 70 });
+    const cx = W - cm.width - 64, cy = H - chipH - 120;
+    // match exposure: nudge chip brightness toward the local scene luminance
+    const region = { left: Math.max(0, cx - 20), top: Math.max(0, cy), width: Math.min(cm.width + 40, W - cx), height: Math.min(chipH, H - cy) };
+    const lum = (await sharp(base).extract(region).greyscale().resize(1, 1).raw().toBuffer())[0];
+    const chipLum = (await sharp(chip).flatten({ background: "#888" }).greyscale().resize(1, 1).raw().toBuffer())[0];
+    const bf = Math.max(0.72, Math.min(1.12, (lum + 60) / (chipLum + 60)));
+    chip = await sharp(chip).modulate({ brightness: bf, saturation: 0.9 }).blur(0.5).toBuffer(); // 0.5px = edge feather + slight DoF
+    // soft contact shadow under the bottle
+    const shW = Math.round(cm.width * 0.9), shY = cy + chipH - 18;
+    const shadow = await sharp(Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><ellipse cx="${cx + cm.width / 2}" cy="${shY}" rx="${shW / 2}" ry="22" fill="#000" fill-opacity="0.42"/></svg>`)).blur(16).toBuffer();
+    layers.push({ input: shadow, top: 0, left: 0 }, { input: chip, top: cy, left: cx });
   }
-  return sharp(base).composite(layers).png().toBuffer();
+  layers.push({ input: over });
+  // film grain over the whole frame to bind product + photo into one image
+  const gw = Math.round(W / 2), gh = Math.round(H / 2), buf = Buffer.alloc(gw * gh * 3);
+  for (let i = 0; i < buf.length; i++) buf[i] = 118 + Math.floor(Math.random() * 22);
+  const grain = await sharp(buf, { raw: { width: gw, height: gh, channels: 3 } }).resize(W, H).png().toBuffer();
+  return sharp(base).composite([...layers, { input: grain, blend: "soft-light" }]).png().toBuffer();
 }
 
 /* ---- PROOFS ------------------------------------------------------------- */
