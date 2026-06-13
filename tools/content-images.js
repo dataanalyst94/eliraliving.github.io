@@ -14,8 +14,14 @@ const OUT = path.join(ROOT, "marketing", "social");
 const W = 1080, H = 1350;
 
 const C = { sageDark: "#1E2417", forest: "#2C3322", ink: "#171B12", sage: "#9DB08A", gold: "#C8A24E", cream: "#ECE7DB", soft: "#A9B19C" };
-const SERIF = "Bodoni Moda, Didot, Georgia, 'Times New Roman', serif";
-const SANS = "Inter, 'Segoe UI', Arial, sans-serif";
+const SERIF = "BodoniEmbed, Didot, Georgia, serif";
+const SANS = "InterEmbed, 'Segoe UI', Arial, sans-serif";
+// embed real brand fonts so renders are pixel-accurate regardless of system fonts
+const b64 = f => fs.readFileSync(path.join(__dirname, "fonts", f)).toString("base64");
+const FONTCSS = `<style>
+  @font-face{font-family:'BodoniEmbed';src:url(data:font/ttf;base64,${b64("Bodoni.ttf")}) format('truetype');font-weight:400 700;}
+  @font-face{font-family:'InterEmbed';src:url(data:font/ttf;base64,${b64("Inter.ttf")}) format('truetype');font-weight:300 700;}
+</style>`;
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 // crude word-wrap into <= maxChars lines
@@ -34,14 +40,17 @@ function body(x, y, lines, size = 32, lh = 44, fill = C.soft, anchor = "start") 
 const offerBar = `<rect x="0" y="${H - 86}" width="${W}" height="86" fill="${C.ink}" fill-opacity="0.55"/><text x="${W / 2}" y="${H - 33}" fill="${C.cream}" font-family="${SANS}" font-size="27" letter-spacing="3" text-anchor="middle">FREE SHIPPING · VEGAN · ECOCERT COSMOS</text>`;
 const logo = `<text x="${W / 2}" y="92" fill="${C.cream}" font-family="${SERIF}" font-size="40" text-anchor="middle" letter-spacing="2">elira living</text>`;
 
-async function svg(s) { return sharp(Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${s}</svg>`)).png().toBuffer(); }
+async function svg(s) { return sharp(Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${FONTCSS}${s}</svg>`)).png().toBuffer(); }
 async function save(style, id, buf) { const d = path.join(OUT, style); fs.mkdirSync(d, { recursive: true }); const f = path.join(d, id + ".jpg"); await sharp(buf).jpeg({ quality: 88, mozjpeg: true }).toFile(f); console.log("✓", path.relative(ROOT, f)); }
 
 /* ---- STYLE TEMPLATES ---------------------------------------------------- */
 // S1 hero: product image base + eyebrow/headline + offer bar
 async function s1(o) {
   const base = await sharp(path.join(IMG, o.product)).resize(W, H, { fit: "cover" }).toBuffer();
-  const over = await svg(`${logo}${eyebrow(80, 250, o.eyebrow)}${headline(80, 340, wrap(o.title, 16))}${offerBar}`);
+  const hl = wrap(o.title, 20);
+  const top = H - 86 - 40 - hl.length * 74 - 30; // sit headline block just above offer bar
+  const scrim = `<defs><linearGradient id="sc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${C.ink}" stop-opacity="0"/><stop offset="100%" stop-color="${C.ink}" stop-opacity="0.85"/></linearGradient></defs><rect x="0" y="${H - 560}" width="${W}" height="560" fill="url(#sc)"/>`;
+  const over = await svg(`${scrim}${logo}${eyebrow(80, top - 36, o.eyebrow)}${headline(80, top + 40, hl, 64, 74)}${offerBar}`);
   return sharp(base).composite([{ input: over }]).png().toBuffer();
 }
 // S2 quote card
