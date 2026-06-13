@@ -77,6 +77,25 @@ Preview:
 
 ---
 
+### Shipped notification — NEW flow (create it)
+Template ready: **"Shipped — EN/DE/NL (ready)"**. Closes the fulfilment loop.
+1. Klaviyo → **Flows → Create flow → blank → trigger = metric "Fulfilled Order"**.
+2. Add an email → paste "Shipped — EN/DE/NL (ready)" → set subject/preview below.
+   The "track your parcel" button uses `{{ event.Tracking }}` automatically.
+
+Subject:
+`{% if person.Locale == 'de' %}Deine Bestellung ist unterwegs 🌿{% elif person.Locale == 'nl' %}Je bestelling is onderweg 🌿{% else %}Your order is on its way 🌿{% endif %}`
+Preview:
+`{% if person.Locale == 'de' %}Gute Nachrichten – verfolge dein Paket hier.{% elif person.Locale == 'nl' %}Goed nieuws – volg je pakket hier.{% else %}Good news — track your parcel here.{% endif %}`
+
+**How fulfilment works now (semi-automated):**
+1. Order arrives → Notion **Orders** row created automatically.
+2. You fulfil via selfnamed, then in the Notion row: paste the **Tracking** URL and set **Fulfilment → Shipped**.
+3. Within 15 min, n8n ("Shipped notify") sends the customer the **Shipped** email in their language with the tracking link, and ticks **Notified**.
+   (Emails only start once you've created the "Fulfilled Order" flow above.)
+
+---
+
 ## Language routing — what's automatic vs. what's pending
 - **Abandoned Cart + Post Purchase:** `Locale` is set automatically by n8n from the shipping country
   (DE→de, NL→nl, else en). ✅ Works now.

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta name="x-apple-disable-message-reformatting"/>
+<meta content="light dark" name="color-scheme"/>
+<meta content="light dark" name="supported-color-schemes"/>
+<title>
+      {% if person.Locale == 'de' %}Deine Bestellung ist unterwegs{% elif person.Locale == 'nl' %}Je bestelling is onderweg{% else %}Your order is on its way{% endif %}
+    </title>
+<!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
+<style>html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #E5E0D3
+    }
+* {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+    }
+table, td {
+    mso-table-lspace: 0;
+    mso-table-rspace: 0;
+    border-collapse: collapse
+    }
+img {
+    border: 0;
+    outline: none;
+    line-height: 100%;
+    -ms-interpolation-mode: bicubic;
+    display: block
+    }
+a {
+    text-decoration: none
+    }
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 100% !important
+        }
+    .px {
+        padding-left: 24px !important;
+        padding-right: 24px !important
+        }
+    .h1 {
+        font-size: 30px !important
+        }
+    .btn a {
+        display: block !important
+        }
+    }</style></head>
+<body style="margin:0;padding:0;background:#E5E0D3;">
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;opacity:0;color:#E5E0D3;font-size:1px;line-height:1px;">
+      {% if person.Locale == 'de' %}Gute Nachrichten – deine Elira-Bestellung ist unterwegs.{% elif person.Locale == 'nl' %}Goed nieuws – je Elira-bestelling is onderweg.{% else %}Good news — your Elira order has shipped.{% endif %}͏‌ ͏‌ ͏‌ ͏‌
+    </div>
+<table bgcolor="#E5E0D3" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+<tr>
+<td align="center" style="padding:28px 12px;">
+<table cellpadding="0" cellspacing="0" class="container" role="presentation" style="width:600px;max-width:600px;background:#FAF8F3;border-radius:16px;overflow:hidden;" width="600">
+<tr>
+<td align="center" bgcolor="#0F120D" style="padding:28px 24px;">
+<span style="font-family:Georgia,'Times New Roman',serif;font-size:22px;letter-spacing:.26em;color:#C8A24E;">ELIRA LIVING</span>
+</td>
+</tr>
+<tr>
+<td align="center" style="padding:0;">
+<img alt="Elira Living natural skincare" src="https://res.cloudinary.com/df4of6htg/image/upload/w_1200,h_640,c_fill,g_auto,q_auto:good,f_jpg/v1781105868/pexels-kerim-isazade-2148708032-33448217_fppwxw.jpg" style="width:100%;max-width:600px;height:auto;" width="600"/>
+</td>
+</tr>
+<tr>
+<td align="center" class="px" style="padding:36px 48px 6px;">
+<p style="margin:0 0 14px;font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#C8A24E;">
+                  {% if person.Locale == 'de' %}Unterwegs{% elif person.Locale == 'nl' %}Onderweg{% else %}On its way{% endif %}
+                </p>
+<h1 class="h1" style="margin:0 0 16px;font-family:Georgia,'Times New Roman',serif;font-size:34px;line-height:1.14;color:#1E2118;font-weight:normal;">
+                  {% if person.Locale == 'de' %}Deine Bestellung ist unterwegs.{% elif person.Locale == 'nl' %}Je bestelling is onderweg.{% else %}Your order is on its way.{% endif %}
+                </h1>
+<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;color:#3A3F33;">
+                  {% if person.Locale == 'de' %}Gute Nachrichten, {{ first_name|default:'Liebes' }} – deine Elira-Bestellung ist unterwegs. Tippe unten, um dein Paket zu verfolgen.{% elif person.Locale == 'nl' %}Goed nieuws, {{ first_name|default:'lieverd' }} – je Elira-bestelling is onderweg. Tik hieronder om je pakket te volgen.{% else %}Good news, {{ first_name|default:'lovely' }} — your Elira order is on its way. Tap below to follow your parcel.{% endif %}
+                </p>
+</td>
+</tr>
+<!-- STATIC SHOWCASE -->
+<tr>
+<td class="px" style="padding:26px 48px 0;">
+<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+<tr>
+<td align="center" style="padding:8px;" valign="top" width="33%">
+<a href="https://www.eliraliving.com/{{ person.Locale|default:'en' }}/products/purifying-toner.html"> <img alt="Purifying Toner" src="https://www.eliraliving.com/assets/img/toner.jpg" style="width:100%;max-width:150px;height:auto;border-radius:10px;" width="150"/></a>
+</td>
+<td align="center" style="padding:8px;" valign="top" width="33%">
+<a href="https://www.eliraliving.com/{{ person.Locale|default:'en' }}/products/sensitive-moisturizing-cream.html"> <img alt="Sensitive Moisturizing Cream" src="https://www.eliraliving.com/assets/img/cream.jpg" style="width:100%;max-width:150px;height:auto;border-radius:10px;" width="150"/></a>
+</td>
+<td align="center" style="padding:8px;" valign="top" width="33%">
+<a href="https://www.eliraliving.com/{{ person.Locale|default:'en' }}/products/sensitive-scalp-shampoo.html"> <img alt="Sensitive Scalp Shampoo" src="https://www.eliraliving.com/assets/img/shampoo.jpg" style="width:100%;max-width:150px;height:auto;border-radius:10px;" width="150"/></a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td align="center" class="btn" style="padding:32px 48px 8px;">
+<table align="center" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td align="center" bgcolor="#C8A24E" style="border-radius:40px;"> <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{% if event.Tracking %}{{ event.Tracking }}{% else %}https://www.eliraliving.com/{{ person.Locale|default:'en' }}/{% endif %}" style="height:54px;v-text-anchor:middle;width:260px;" arcsize="50%" fillcolor="#C8A24E" stroke="f"><w:anchorlock/><center style="color:#0F120D;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;letter-spacing:.06em;">{% if person.Locale == 'de' %}PAKET VERFOLGEN{% elif person.Locale == 'nl' %}VOLG JE PAKKET{% else %}TRACK YOUR PARCEL{% endif %}</center></v:roundrect><![endif]-->
+<!--[if !mso]><!-- --><a href="{% if event.Tracking %}{{ event.Tracking }}{% else %}https://www.eliraliving.com/{{ person.Locale|default:'en' }}/{% endif %}" style="display:inline-block;padding:17px 40px;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;letter-spacing:.06em;color:#0F120D;background:#C8A24E;border-radius:40px;">{% if person.Locale == 'de' %}PAKET VERFOLGEN →{% elif person.Locale == 'nl' %}VOLG JE PAKKET →{% else %}TRACK YOUR PARCEL →{% endif %}</a><!--<![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td align="center" style="padding:0 48px 28px;">
+<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#8A8778;">
+                  {% if person.Locale == 'de' %}Kostenloser, klimaneutraler Versand in DE &amp; NL ab <strong style="color:#1E2118;">39&nbsp;€</strong>.{% elif person.Locale == 'nl' %}Gratis, klimaatneutrale verzending in DE &amp; NL vanaf <strong style="color:#1E2118;">€39</strong>.{% else %}Free, climate-neutral shipping in DE &amp; NL over <strong style="color:#1E2118;">€39</strong>.{% endif %}
+                </p>
+</td>
+</tr>
+<!-- REASSURANCE -->
+<tr>
+<td class="px" style="padding:0 48px 8px;">
+<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+<tr>
+<td align="center" style="padding:10px 6px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.5;color:#3A3F33;" width="33%">
+<span style="color:#C8A24E;font-size:18px;">✦</span><br/>{% if person.Locale == 'de' %}Vegan &amp;<br/>COSMOS-zertifiziert{% elif person.Locale == 'nl' %}Veganistisch &amp;<br/>COSMOS-gecertificeerd{% else %}Vegan &amp;<br/>COSMOS-certified{% endif %}
+                    </td>
+<td align="center" style="padding:10px 6px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.5;color:#3A3F33;" width="33%">
+<span style="color:#C8A24E;font-size:18px;">✦</span><br/>{% if person.Locale == 'de' %}Sicherer Stripe-<br/>Checkout{% elif person.Locale == 'nl' %}Veilig afrekenen<br/>via Stripe{% else %}Secure Stripe<br/>checkout{% endif %}
+                    </td>
+<td align="center" style="padding:10px 6px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.5;color:#3A3F33;" width="33%">
+<span style="color:#C8A24E;font-size:18px;">✦</span><br/>{% if person.Locale == 'de' %}14 Tage<br/>Rückgaberecht{% elif person.Locale == 'nl' %}14 dagen<br/>retourrecht{% else %}14-day<br/>right of return{% endif %}
+                    </td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="padding:26px 48px 40px;border-top:1px solid #ECE6D8;">
+<p style="margin:0 0 10px;font-family:Georgia,serif;font-size:16px;color:#1E2118;">
+                  Elira Living
+                </p>
+<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#A8A595;">
+                  {% if person.Locale == 'de' %}Fragen zu deiner Bestellung? Antworte oder schreib an{% elif person.Locale == 'nl' %}Vragen over je bestelling? Reageer of mail naar{% else %}Questions about your order? Reply or email{% endif %}
+                  <a href="mailto:support@eliraliving.com" style="color:#8A7320;">support@eliraliving.com</a>.<br/><a href="{% unsubscribe %}" style="color:#A8A595;text-decoration:underline;">{% if person.Locale == 'de' %}Abmelden{% elif person.Locale == 'nl' %}Uitschrijven{% else %}Unsubscribe{% endif %}</a> · <a href="{% manage_preferences %}" style="color:#A8A595;text-decoration:underline;">{% if person.Locale == 'de' %}E-Mail-Einstellungen{% elif person.Locale == 'nl' %}E-mailvoorkeuren{% else %}Email preferences{% endif %}</a><br/>{{ organization.full_address|default:'Elira Living · Helsinki, Finland' }}
+                </p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

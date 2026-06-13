@@ -1,0 +1,93 @@
+{
+  "name": "Elira — Shipped notify",
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateId": "elira-shipped" },
+  "nodes": [
+    {
+      "parameters": { "rule": { "interval": [{ "field": "minutes", "minutesInterval": 15 }] } },
+      "id": "f1111111-1111-4111-8111-111111111111",
+      "name": "Every 15 min",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.notion.com/v1/databases/37ea4815-a826-81eb-ab38-f65e104a0a83/query",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "notionApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Notion-Version", "value": "2022-06-28" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"filter\":{\"and\":[{\"property\":\"Fulfilment\",\"select\":{\"equals\":\"Shipped\"}},{\"property\":\"Notified\",\"checkbox\":{\"equals\":false}}]},\"page_size\":25}",
+        "options": {}
+      },
+      "id": "f2222222-2222-4222-8222-222222222222",
+      "name": "Query shipped orders",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [220, 0],
+      "credentials": { "notionApi": { "id": "", "name": "Notion account" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rs=($json.results)||[];const out=[];for(const r of rs){const p=r.properties||{};const email=(p.Email&&p.Email.email)||'';if(!email)continue;const g=x=>(x&&x.rich_text&&x.rich_text[0]&&x.rich_text[0].plain_text)||'';const tracking=g(p.Tracking);const country=g(p.Country);const name=g(p.Customer);const locale=country==='DE'?'de':(country==='NL'?'nl':'en');const klaviyoBody=JSON.stringify({data:{type:'event',attributes:{properties:{Tracking:tracking,Locale:locale},metric:{data:{type:'metric',attributes:{name:'Fulfilled Order'}}},profile:{data:{type:'profile',attributes:{email:email,first_name:name,properties:{Locale:locale}}}},unique_id:'ship-'+r.id,time:new Date().toISOString()}}});out.push({json:{pageId:r.id,klaviyoBody:klaviyoBody}});}return out;"
+      },
+      "id": "f3333333-3333-4333-8333-333333333333",
+      "name": "Map",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "revision", "value": "2024-10-15" }, { "name": "Content-Type", "value": "application/json" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.klaviyoBody }}",
+        "options": {}
+      },
+      "id": "f4444444-4444-4444-8444-444444444444",
+      "name": "Klaviyo Fulfilled Order",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, -90],
+      "credentials": { "httpHeaderAuth": { "id": "", "name": "Klaviyo" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.notion.com/v1/pages/{{ $json.pageId }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "notionApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Notion-Version", "value": "2022-06-28" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"properties\":{\"Notified\":{\"checkbox\":true}}}",
+        "options": {}
+      },
+      "id": "f5555555-5555-4555-8555-555555555555",
+      "name": "Mark notified",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 90],
+      "credentials": { "notionApi": { "id": "", "name": "Notion account" } },
+      "continueOnFail": true
+    }
+  ],
+  "connections": {
+    "Every 15 min": { "main": [[{ "node": "Query shipped orders", "type": "main", "index": 0 }]] },
+    "Query shipped orders": { "main": [[{ "node": "Map", "type": "main", "index": 0 }]] },
+    "Map": { "main": [[{ "node": "Klaviyo Fulfilled Order", "type": "main", "index": 0 }, { "node": "Mark notified", "type": "main", "index": 0 }]] }
+  }
+}
