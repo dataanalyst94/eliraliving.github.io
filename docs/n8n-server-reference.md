@@ -68,6 +68,17 @@
 - Stripe webhook auto-registered: `https://n8n.eliraliving.com/webhook/d54e74b3-…/webhook` (checkout.session.completed)
 - Provision scripts: `tools/n8n-provision.js`, `tools/n8n-fix-telegram.js` (read secrets from env)
 
+### Phase B/C workflows (added later)
+- **Elira — Abandoned checkout** (active) — `checkout.session.expired` → Klaviyo "Started Checkout" + recovery URL + Locale
+- **Elira — Shipped notify** (active, id `GeaRH4PMdlKgdFev`) — polls Orders (Fulfilment=Shipped, Notified=false) every 15 min → Klaviyo "Fulfilled Order" event → ticks Notified
+- **Elira — Newsletter draft (weekly)** (INACTIVE, id `WdATieH0NWgfxvcl`) — Mon 09:00 → OpenRouter draft → Telegram. Activate later (costs ~$0.01/run).
+- Extra credential: **OpenRouter** (httpHeaderAuth, id `NX7bSaRvgqeOrNno`), **Klaviyo** (httpHeaderAuth, id `F0YMOpS35y5d8Y7c`)
+- Orders DB extra props: Address, Phone, Notified (checkbox)
+
+### Klaviyo "(ready)" library templates (EN/DE/NL, routed by person.Locale)
+Abandoned Cart · Welcome #1/#2/#3 · Post Purchase #1 · Post Purchase #2 & #3 · Browse Abandonment · Shipped.
+Apply guide: `docs/klaviyo-flow-apply.md`. Locale set by n8n (orders/abandoned) + signup form (welcome).
+
 ## n8n public API note (for future automation)
 - Auth header: `X-N8N-API-KEY`. Base: `https://n8n.eliraliving.com/api/v1`
 - Credential `data` uses conditional-if schemas: for stripeApi/notionApi send
