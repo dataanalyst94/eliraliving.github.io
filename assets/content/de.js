@@ -198,7 +198,8 @@
     "oilyComb": "Fettige/Mischhaut",
     "derm": "Dermatologisch getestet",
     "allHair": "Alle Haartypen",
-    "antiAging": "Anti-Aging"
+    "antiAging": "Anti-Aging",
+    "normalDry": "Normale / trockene Haut"
   },
   "products": {
     "sensitive-moisturizing-cream": {
@@ -225,6 +226,11 @@
       "name": "Retinol Alternative Serum",
       "desc": "Sanfte Anti-Aging-Kraft aus der Natur: 2 % Bidens Pilosa als natürlicher Retinol-Ersatz, mit Hyaluronsäure, verfeinert die Hauttextur und mildert feine Linien & dunkle Flecken — ohne Reizung. COSMOS Natural, vegan, für alle Hauttypen.",
       "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin**, Simmondsia Chinensis (Jojoba) Seed Oil*, Pentylene Glycol, Polyglyceryl-6 Stearate, Cetearyl Alcohol, Propanediol, Dicaprylyl Carbonate, Astrocaryum Murumuru Seed Butter, Gossypium Herbaceum Seed Oil, Isoamyl Laurate, Bidens Pilosa Extract, Polyglyceryl-6 Behenate, Linum Usitatissimum Seed Oil, Parfum/Fragrance, Cellulose, Aqua/Water, Hippophae Rhamnoides (Sea Buckthorn) Fruit Extract*, Lactic Acid, Xanthan Gum, Rhodomyrtus Tomentosa (Rose Myrtle) Fruit Extract, Caprylic/Capric Triglyceride, Rosa Canina (Rosehip) Fruit Oil*, Mangifera Indica (Mango) Seed Butter*, Hydrolyzed Hyaluronic Acid, Sodium Hyaluronate, Sodium Phytate, Octyldodecanol, Tocopherol, Geraniol***, Citronellol***, Pelargonium Graveolens Flower Oil, Linalool***, Citral***.  *aus biologischem Anbau  **aus biologischen Zutaten hergestellt  ***aus natürlichen ätherischen Ölen · 99 % natürlichen Ursprungs · 24 % biologischen Ursprungs · COSMOS Natural zertifiziert durch ECOCERT Greenlife."
+    },
+    "peptide-anti-aging-serum": {
+      "name": "Peptid Anti-Aging Serum",
+      "desc": "Ein luxuriöses, glättendes Serum mit 2 % Hexapeptid-11 und 1 % Ginkgo Biloba, dazu Hyaluronsäure und antioxidantienreiche Blaubeer- und Erdbeersamenöle. Mildert sichtbar feine Linien und Falten für vollere, festere und elastischere Haut — mit zart-blumigem Duft. COSMOS Natural, vegan, für normale bis trockene Haut.",
+      "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin, Simmondsia Chinensis (Jojoba) Seed Oil*, Aqua/Water, Pentylene Glycol, Cetearyl Alcohol, Sodium PCA, Isoamyl Laurate, Glyceryl Stearate Citrate, Dipalmitoyl Hydroxyproline, Propanediol, Parfum/Fragrance, Caprylic/Capric Triglyceride, Fragaria Ananassa (Strawberry) Seed Oil, Vaccinium Myrtillus (Blueberry) Seed Oil*, Xanthan Gum, Hexapeptide-11, Phytosterols, Ricinus Communis (Castor) Seed Oil*, Ascorbyl Palmitate, Hydrolyzed Hyaluronic Acid, Potassium Hydroxide, Sodium Hyaluronate, Sodium Phytate, Tocopherol, Leuconostoc/Radish Root Ferment Filtrate, Ginkgo Biloba Leaf Extract, CI 77491 (Iron Oxides), Citric Acid, Sodium Benzoate, Potassium Sorbate, Glycolipids, Linalool***, Geraniol***, Citronellol***.  *aus biologischem Anbau  ***aus natürlichen ätherischen Ölen · 99 % natürlichen Ursprungs · 20 % biologischen Ursprungs · COSMOS Natural zertifiziert durch ECOCERT Greenlife."
     }
   }
 };

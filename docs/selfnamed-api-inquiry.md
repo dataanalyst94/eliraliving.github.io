@@ -53,3 +53,10 @@ Elira Living — eliraliving.com
 - **"Use Zapier/Make"** → we replicate that flow in n8n (free self-host) in Phase 5.
 - **No reply in ~3–4 days** → proceed with the reliability layer + manual/Cowork fulfilment
   so launch isn't blocked; revisit automation later.
+
+---
+## Notion board (internal reference)
+Database ID: 37ea4815-a826-81cb-9ee9-e60372973062
+Parent page: 243a4815-a826-8060-93b6-f2e9a3d90a68
+API version: 2022-06-28
+(Token is a Notion secret — kept out of the repo. Update tasks via Notion API.)

@@ -79,5 +79,20 @@
       <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
       <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
     </item>
+    <item>
+      <g:id>EL-SC-PEP-30</g:id>
+      <g:title>Peptide Anti-Aging Serum</g:title>
+      <g:description>A luxurious smoothing serum with 2% Hexapeptide-11 and 1% Ginkgo Biloba, plus hyaluronic acid and antioxidant-rich blueberry and strawberry seed oils. Visibly softens fine lines and wrinkles for plumper, firmer, more elastic skin — with a delicate floral aroma. COSMOS Natural, vegan, for normal to dry skin.</g:description>
+      <g:link>https://www.eliraliving.com/en/products/peptide-anti-aging-serum.html</g:link>
+      <g:image_link>https://www.eliraliving.com/assets/img/peptide-serum.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>29.99 EUR</g:price>
+      <g:brand>Elira Living</g:brand>
+      <g:condition>new</g:condition>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Skin Care</g:google_product_category>
+      <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+      <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+    </item>
   </channel>
 </rss>

@@ -1,0 +1,36 @@
+Task,Status,Phase
+Trilingual site (EN/DE/NL) built & deployed,Done,Shipped
+3D scroll-reveal reviews section,Done,Shipped
+Brand logo across site + fixed SEO meta,Done,Shipped
+Mobile + desktop speed optimization,Done,Shipped
+Full security audit & hardening (site + Workers),Done,Shipped
+New product renders + pricing + free shipping,Done,Shipped
+Hero collection lineup (all 5 products),Done,Shipped
+Chapter cream clockwise spin (desktop + mobile),Done,Shipped
+Automation roadmap document,Done,Shipped
+selfnamed API inquiry email drafted,Done,Shipped
+Operations board (kanban + Notion),Done,Shipped
+Send selfnamed email re: headless API access,In Process,Founder action
+Phase 1 build — paused pending selfnamed reply,In Process,P1 Fulfilment
+Never-miss-an-order layer: Stripe to email + Sheet queue + customer confirmation,To Do,P1 Fulfilment
+Wire chosen fulfilment path (API / WooCommerce bridge / Cowork),To Do,P1 Fulfilment
+Capture tracking to 'shipped' email via Klaviyo,To Do,P1 Fulfilment
+Failure alerts to founder email,To Do,P1 Fulfilment
+Set STRIPE_WEBHOOK_SECRET on tracking worker,To Do,Founder action
+Rotate shared secrets (Klaviyo, GitHub, Anthropic),To Do,Founder action
+Search Console: request indexing for / and /en/,To Do,Founder action
+Brand kit: voice, visuals, caption & hook formulas (EN/DE/NL),To Do,P2 Content
+Pick generation path: free self-host vs paid UGC tool,To Do,P2 Content
+UGC scripts + shot lists + ad storyboards,To Do,P2 Content
+Image system: dark-green thematic backgrounds, batch,To Do,P2 Content
+Produce 20-30 launch assets,To Do,P2 Content
+Auto-schedule + cross-post (IG/TikTok/Pinterest),To Do,P3 Social
+Repurpose long content to Reels/Shorts/Pins,To Do,P3 Social
+Meta Ads: launch/monitor/A-B test DE + NL,To Do,P4 Ads/CRM
+Klaviyo flows: welcome, abandoned cart, post-purchase, win-back,To Do,P4 Ads/CRM
+Budget pacing + ROAS guardrails,To Do,P4 Ads/CRM
+Stand up self-hosted n8n (local or 5eur VPS),To Do,P5 n8n
+Central flows: Stripe to selfnamed to Klaviyo to Sheets to alerts,To Do,P5 n8n
+Auto-draft customer-service replies,To Do,P6 Analytics
+KPI dashboard (orders, CAC, margin, ROAS),To Do,P6 Analytics
+Weekly 'scale vs cut' briefing,To Do,P6 Analytics

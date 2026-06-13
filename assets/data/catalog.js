@@ -97,6 +97,21 @@
       image: "/assets/img/serum.jpg",
       images: ["/assets/img/serum.jpg", "/assets/img/gallery/retinol-alternative-serum-2.jpg"],
       priceId: "", paymentLink: ""
+    },
+    {
+      id: "peptide-anti-aging-serum",
+      sku: "EL-SC-PEP-30",
+      category: "skincare",
+      price: 2999,
+      size: "30 ml",
+      sizes: [{ id: "30ml", add: 0 }],
+      badge: "new",
+      featureKeys: ["vegan", "cosmosNatural", "antiAging", "normalDry"],
+      naturalOrigin: 99,
+      freeShipping: true,
+      image: "/assets/img/peptide-serum.jpg",
+      images: ["/assets/img/peptide-serum.jpg", "/assets/img/gallery/peptide-anti-aging-serum-2.jpg", "/assets/img/gallery/peptide-anti-aging-serum-3.jpg", "/assets/img/gallery/peptide-anti-aging-serum-4.jpg"],
+      priceId: "", paymentLink: ""
     }
   ];
 

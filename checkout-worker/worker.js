@@ -39,12 +39,13 @@ const FALLBACK_PRICES = {
   "radiant-glow-cleanser": 3250,
   "purifying-toner": 3050,
   "sensitive-scalp-shampoo": 2950,
-  "retinol-alternative-serum": 2999
+  "retinol-alternative-serum": 2999,
+  "peptide-anti-aging-serum": 2999
 };
 const FALLBACK_FREE_SHIPPING_THRESHOLD = 3900; // €39.00
 const FALLBACK_SHIPPING_FLAT = 495;            // €4.95
 // every product ships free
-const FALLBACK_FREE_SHIPPING = ["sensitive-moisturizing-cream", "radiant-glow-cleanser", "purifying-toner", "sensitive-scalp-shampoo", "retinol-alternative-serum"];
+const FALLBACK_FREE_SHIPPING = ["sensitive-moisturizing-cream", "radiant-glow-cleanser", "purifying-toner", "sensitive-scalp-shampoo", "retinol-alternative-serum", "peptide-anti-aging-serum"];
 
 // Fetch current pricing from the site (cached ~5 min at Cloudflare's edge).
 async function loadPricing() {

@@ -8,13 +8,15 @@
     "radiant-glow-cleanser",
     "purifying-toner",
     "sensitive-scalp-shampoo",
-    "retinol-alternative-serum"
+    "retinol-alternative-serum",
+    "peptide-anti-aging-serum"
   ],
   "prices": {
     "sensitive-moisturizing-cream": 2650,
     "radiant-glow-cleanser": 3250,
     "purifying-toner": 3050,
     "sensitive-scalp-shampoo": 2950,
-    "retinol-alternative-serum": 2999
+    "retinol-alternative-serum": 2999,
+    "peptide-anti-aging-serum": 2999
   }
 }

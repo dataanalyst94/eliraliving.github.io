@@ -198,7 +198,8 @@
     "oilyComb": "Vette/gemengde huid",
     "derm": "Dermatologisch getest",
     "allHair": "Alle haartypes",
-    "antiAging": "Anti-aging"
+    "antiAging": "Anti-aging",
+    "normalDry": "Normale / droge huid"
   },
   "products": {
     "sensitive-moisturizing-cream": {
@@ -225,6 +226,11 @@
       "name": "Retinol Alternatief Serum",
       "desc": "Zachte, natuurlijke anti-aging kracht: 2% Bidens Pilosa als plantaardig retinol-alternatief, met hyaluronzuur, verfijnt de huidtextuur en verzacht fijne lijntjes & donkere vlekjes — zonder irritatie. COSMOS Natural, veganistisch, voor alle huidtypes.",
       "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin**, Simmondsia Chinensis (Jojoba) Seed Oil*, Pentylene Glycol, Polyglyceryl-6 Stearate, Cetearyl Alcohol, Propanediol, Dicaprylyl Carbonate, Astrocaryum Murumuru Seed Butter, Gossypium Herbaceum Seed Oil, Isoamyl Laurate, Bidens Pilosa Extract, Polyglyceryl-6 Behenate, Linum Usitatissimum Seed Oil, Parfum/Fragrance, Cellulose, Aqua/Water, Hippophae Rhamnoides (Sea Buckthorn) Fruit Extract*, Lactic Acid, Xanthan Gum, Rhodomyrtus Tomentosa (Rose Myrtle) Fruit Extract, Caprylic/Capric Triglyceride, Rosa Canina (Rosehip) Fruit Oil*, Mangifera Indica (Mango) Seed Butter*, Hydrolyzed Hyaluronic Acid, Sodium Hyaluronate, Sodium Phytate, Octyldodecanol, Tocopherol, Geraniol***, Citronellol***, Pelargonium Graveolens Flower Oil, Linalool***, Citral***.  *uit biologische landbouw  **gemaakt met biologische ingrediënten  ***uit natuurlijke etherische oliën · 99% natuurlijke oorsprong · 24% biologische oorsprong · COSMOS Natural gecertificeerd door ECOCERT Greenlife."
+    },
+    "peptide-anti-aging-serum": {
+      "name": "Peptide Anti-Aging Serum",
+      "desc": "Een luxueus, gladmakend serum met 2% Hexapeptide-11 en 1% Ginkgo Biloba, plus hyaluronzuur en antioxidantrijke blauwebessen- en aardbeienzaadoliën. Verzacht zichtbaar fijne lijntjes en rimpels voor een voller, steviger en elastischer ogende huid — met een delicaat bloemig aroma. COSMOS Natural, veganistisch, voor de normale tot droge huid.",
+      "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin, Simmondsia Chinensis (Jojoba) Seed Oil*, Aqua/Water, Pentylene Glycol, Cetearyl Alcohol, Sodium PCA, Isoamyl Laurate, Glyceryl Stearate Citrate, Dipalmitoyl Hydroxyproline, Propanediol, Parfum/Fragrance, Caprylic/Capric Triglyceride, Fragaria Ananassa (Strawberry) Seed Oil, Vaccinium Myrtillus (Blueberry) Seed Oil*, Xanthan Gum, Hexapeptide-11, Phytosterols, Ricinus Communis (Castor) Seed Oil*, Ascorbyl Palmitate, Hydrolyzed Hyaluronic Acid, Potassium Hydroxide, Sodium Hyaluronate, Sodium Phytate, Tocopherol, Leuconostoc/Radish Root Ferment Filtrate, Ginkgo Biloba Leaf Extract, CI 77491 (Iron Oxides), Citric Acid, Sodium Benzoate, Potassium Sorbate, Glycolipids, Linalool***, Geraniol***, Citronellol***.  *uit biologische landbouw  ***uit natuurlijke etherische oliën · 99% natuurlijke oorsprong · 20% biologische oorsprong · COSMOS Natural gecertificeerd door ECOCERT Greenlife."
     }
   }
 };

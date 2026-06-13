@@ -198,7 +198,8 @@
     "oilyComb": "Oily / combination",
     "derm": "Dermatologically tested",
     "allHair": "All hair types",
-    "antiAging": "Anti-aging"
+    "antiAging": "Anti-aging",
+    "normalDry": "Normal / dry skin"
   },
   "products": {
     "sensitive-moisturizing-cream": {
@@ -225,6 +226,11 @@
       "name": "Retinol Alternative Serum",
       "desc": "A gentle natural anti-aging serum with 2% Bidens Pilosa — a plant-based retinol alternative — plus hyaluronic acid. Visibly refines skin texture and softens fine lines and dark spots, without irritation. COSMOS Natural, vegan, for all skin types.",
       "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin**, Simmondsia Chinensis (Jojoba) Seed Oil*, Pentylene Glycol, Polyglyceryl-6 Stearate, Cetearyl Alcohol, Propanediol, Dicaprylyl Carbonate, Astrocaryum Murumuru Seed Butter, Gossypium Herbaceum Seed Oil, Isoamyl Laurate, Bidens Pilosa Extract, Polyglyceryl-6 Behenate, Linum Usitatissimum Seed Oil, Parfum/Fragrance, Cellulose, Aqua/Water, Hippophae Rhamnoides (Sea Buckthorn) Fruit Extract*, Lactic Acid, Xanthan Gum, Rhodomyrtus Tomentosa (Rose Myrtle) Fruit Extract, Caprylic/Capric Triglyceride, Rosa Canina (Rosehip) Fruit Oil*, Mangifera Indica (Mango) Seed Butter*, Hydrolyzed Hyaluronic Acid, Sodium Hyaluronate, Sodium Phytate, Octyldodecanol, Tocopherol, Geraniol***, Citronellol***, Pelargonium Graveolens Flower Oil, Linalool***, Citral***.  *from organic farming  **made using organic ingredients  ***from natural essential oils · 99% natural origin · 24% organic · COSMOS Natural certified by ECOCERT Greenlife."
+    },
+    "peptide-anti-aging-serum": {
+      "name": "Peptide Anti-Aging Serum",
+      "desc": "A luxurious smoothing serum with 2% Hexapeptide-11 and 1% Ginkgo Biloba, plus hyaluronic acid and antioxidant-rich blueberry and strawberry seed oils. Visibly softens fine lines and wrinkles for plumper, firmer, more elastic skin — with a delicate floral aroma. COSMOS Natural, vegan, for normal to dry skin.",
+      "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin, Simmondsia Chinensis (Jojoba) Seed Oil*, Aqua/Water, Pentylene Glycol, Cetearyl Alcohol, Sodium PCA, Isoamyl Laurate, Glyceryl Stearate Citrate, Dipalmitoyl Hydroxyproline, Propanediol, Parfum/Fragrance, Caprylic/Capric Triglyceride, Fragaria Ananassa (Strawberry) Seed Oil, Vaccinium Myrtillus (Blueberry) Seed Oil*, Xanthan Gum, Hexapeptide-11, Phytosterols, Ricinus Communis (Castor) Seed Oil*, Ascorbyl Palmitate, Hydrolyzed Hyaluronic Acid, Potassium Hydroxide, Sodium Hyaluronate, Sodium Phytate, Tocopherol, Leuconostoc/Radish Root Ferment Filtrate, Ginkgo Biloba Leaf Extract, CI 77491 (Iron Oxides), Citric Acid, Sodium Benzoate, Potassium Sorbate, Glycolipids, Linalool***, Geraniol***, Citronellol***.  *from organic farming  ***from natural essential oils · 99% natural origin · 20% organic · COSMOS Natural certified by ECOCERT Greenlife."
     }
   }
 };
