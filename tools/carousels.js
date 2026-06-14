@@ -202,9 +202,36 @@ async function cardIngredients(bg, d, lang) {
   }).join("");
   return render(bg, g.rect + chrome(3) + eb + head + list, g.def);
 }
-// Card 5 — PROOF points + cert bar
+// gold 5-point star, ~28px wide, anchored at (x,y) top-left
+function star(x, y, s = 28) {
+  const u = s / 28;
+  const p = `M14 0 L17.6 9.5 L28 9.5 L19.6 15.8 L23 26 L14 19.6 L5 26 L8.4 15.8 L0 9.5 L10.4 9.5 Z`;
+  return `<g transform="translate(${x},${y}) scale(${u})"><path d="${p}" fill="${CC.gold}"/></g>`;
+}
+function stars(x, y, n = 5, s = 28, gap = 8) {
+  let out = ""; for (let i = 0; i < n; i++) out += star(x + i * (s + gap), y, s); return out;
+}
+// Card 5 — PROOF. Two modes: a review (social proof) OR cert points (authority). Cert bar always.
 async function cardProof(bg, d, lang) {
   const g = grad(34, 0.86);
+  const bar = `<rect x="0" y="${H - 84}" width="${W}" height="84" fill="${CC.ink}" fill-opacity="0.6"/><text x="${W / 2}" y="${H - 32}" fill="${CC.cream}" font-family="InterEmbed,sans-serif" font-size="26" letter-spacing="3" text-anchor="middle">${esc(BAR[lang])}</text>`;
+  const rv = d.proof.review;
+  if (rv) {
+    // social-proof layout: eyebrow + headline + ★★★★★ + quote + attribution, cert bar underneath
+    const hl = wrap(d.proof.headline, 20);
+    const ql = wrap(rv.quote, 30);
+    const block = hl.length * 60 + 30 + 40 + 30 + ql.length * 46 + 50;
+    const top = H - 200 - block;
+    const eb = `<text x="72" y="${top - 50}" fill="${CC.gold}" font-family="InterEmbed,sans-serif" font-size="26" letter-spacing="5" font-weight="600">${esc(d.proof.eyebrow.toUpperCase())}</text>`;
+    const head = hl.map((l, i) => `<text x="70" y="${top + i * 60}" fill="${CC.cream}" font-family="BodoniEmbed,serif" font-size="54">${esc(l)}</text>`).join("");
+    const sy = top + hl.length * 60 + 24;
+    const st = stars(72, sy, rv.stars || 5, 30, 10);
+    let qy = sy + 88;
+    const quote = ql.map((l, i) => { const pre = i === 0 ? "“" : ""; const post = i === ql.length - 1 ? "”" : ""; return `<text x="72" y="${qy + i * 46}" fill="${CC.cream}" font-family="BodoniEmbed,serif" font-size="40" font-style="italic">${esc(pre + l + post)}</text>`; }).join("");
+    const ay = qy + ql.length * 46 + 16;
+    const by = `<text x="72" y="${ay}" fill="${CC.gold}" font-family="InterEmbed,sans-serif" font-size="26" letter-spacing="1" opacity="0.95">${esc("— " + rv.by)}</text>`;
+    return render(bg, g.rect + chrome(5) + eb + head + st + quote + by + bar, g.def);
+  }
   const hl = wrap(d.proof.headline, 18);
   const pts = (d.proof.points || []).slice(0, 3);
   const block = hl.length * 66 + 30 + pts.length * 58;
@@ -213,7 +240,6 @@ async function cardProof(bg, d, lang) {
   const head = hl.map((l, i) => `<text x="70" y="${top + i * 66}" fill="${CC.cream}" font-family="BodoniEmbed,serif" font-size="58">${esc(l)}</text>`).join("");
   let py = top + hl.length * 66 + 44;
   const list = pts.map(pt => { const row = `<text x="100" y="${py}" fill="${CC.cream}" font-family="InterEmbed,sans-serif" font-size="31">${esc(pt)}</text><path d="M72 ${py - 11} l8 9 l16 -20" stroke="${CC.gold}" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`; py += 58; return row; }).join("");
-  const bar = `<rect x="0" y="${H - 84}" width="${W}" height="84" fill="${CC.ink}" fill-opacity="0.6"/><text x="${W / 2}" y="${H - 32}" fill="${CC.cream}" font-family="InterEmbed,sans-serif" font-size="26" letter-spacing="3" text-anchor="middle">${esc(BAR[lang])}</text>`;
   return render(bg, g.rect + chrome(5) + eb + head + list + bar, g.def);
 }
 // Card 6 — CTA with button
@@ -242,15 +268,20 @@ const cleanBuf = id => fs.readFileSync(path.join(CLEAN, id + ".jpg"));
 // Card backgrounds (real product imagery, no AI-hallucinated blank bottles on card 3):
 //   1 hook=hero · 2 texture=Gemini macro · 3 ingredients=flatlay (real product+botanicals)
 //   4 for-whom=modelf · 5 proof=modelm · 6 cta=vanity
-async function composeCards(p, copy, lang) {
+async function composeCards(p, copy, lang, bgOverride = {}) {
   const texImg = path.join(CARDIMG, `${p.slug}-texture.jpg`);
+  // a review on card 5 reads best on a clean still-life, not a mismatched model shot;
+  // when it does, the CTA card takes the model shot so every background stays unique.
+  const hasReview = !!(copy.proof && copy.proof.review);
+  const bg5 = hasReview ? "vanity" : "modelm";
+  const bg6 = hasReview ? "modelm" : "vanity";
   const bgFor = {
     1: cleanBuf(`${p.slug}-hero`),
     2: fs.readFileSync(texImg),
     3: cleanBuf(`${p.slug}-flatlay`),
     4: cleanBuf(`${p.slug}-modelf`),
-    5: cleanBuf(`${p.slug}-modelm`),
-    6: cleanBuf(`${p.slug}-vanity`),
+    5: cleanBuf(`${p.slug}-${bgOverride[5] || bg5}`),
+    6: cleanBuf(`${p.slug}-${bgOverride[6] || bg6}`),
   };
   return Promise.all([
     cardHook(bgFor[1], copy, lang),
@@ -289,7 +320,7 @@ async function buildProduct(p, manifest) {
   }
 }
 
-module.exports = { PRODUCTS, OUT, ROOT, composeCards, writeCards, cleanBuf, setCardTotal, cardHook, cardLine, cardCTA, render };
+module.exports = { PRODUCTS, OUT, ROOT, composeCards, writeCards, cleanBuf, setCardTotal, cardHook, cardLine, cardIngredients, cardProof, cardCTA, render };
 
 if (require.main === module) {
   (async () => {

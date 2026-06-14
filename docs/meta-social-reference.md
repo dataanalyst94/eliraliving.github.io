@@ -53,9 +53,15 @@
   3. Wait 30s → `POST /{ig}/media_publish` with `creation_id`
 - Walks `carousels.json` queue via static data (`carouselIndex`), 1 carousel/run.
 - Cards hosted at `https://elira-media.elira-living.workers.dev/carousel/{de,nl}/{slug}/card-1..6.jpg`
-- Manifest: `https://elira-media.elira-living.workers.dev/carousels.json` (12 carousels).
+- Manifest: `https://elira-media.elira-living.workers.dev/carousels.json` (**28 carousels**: 12 fresh insight-led `*-v2`, 12 original product, 4 routine).
 - Uses same IG credential as single-image poster (`7MAxzdkUXpkRXCpo`).
 - Caption = CTA headline + localized site link + localized hashtags.
+
+### Carousel content batches (queue order = posting order)
+- **1–12 — fresh `*-v2` (insight-led):** built from `/ad-creative` + `/marketing-psychology` + `/marketing-ideas`. Structure: hook(the mistake) → agitate → reframe(free insight) → product → proof → CTA. Hand-written native DE/NL, EU 655/2013-compliant, 0 API tokens. **Queued first = best first impression.** Lead is `p3-v2` carrying Emma's (Berlin) real 5★ review.
+- **13–24 — original product carousels:** product-led structure, kept on purpose to post later in the flow.
+- **25–28 — routines** (women/men, DE+NL).
+- Build: `node tools/carousels-fresh.js` · Sync to worker: `node tools/sync-carousels-media.js` · `cardProof` renders a `review{stars,quote,by}` (social proof) or `points[]` certs (authority).
 
 ## Token-refresh jobs (BUILT, INACTIVE)
 - **Elira — Instagram token refresh** id `WeiMADMOSmO74t4U`. 1st of month 09:00.

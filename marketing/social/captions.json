@@ -4,14 +4,16 @@
   "name": "Peptide Anti-Aging Serum",
   "scene": "hero",
   "lang": "en",
+  "angle": "hero",
   "file": "marketing/social/nano/post/en/pep-hero.jpg",
-  "caption": "Visibly softer fine lines — none of the sting.\n\n2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Visibly softer fine lines — none of the sting.\n\n2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer-looking skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "hero",
   "lang": "de",
+  "angle": "hero",
   "file": "marketing/social/nano/post/de/pep-hero.jpg",
   "caption": "Sichtbar glattere Fältchen – ganz ohne Brennen.\n\n2% Hexapeptid-11 + Ginkgo Biloba glätten sichtbar Fältchen für prallere, festere Haut – für normale bis trockene Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
@@ -20,703 +22,791 @@
   "name": "Peptide Anti-Aging Serum",
   "scene": "hero",
   "lang": "nl",
+  "angle": "hero",
   "file": "marketing/social/nano/post/nl/pep-hero.jpg",
-  "caption": "Zichtbaar gladdere lijntjes – zonder branderig gevoel.\n\n2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Zichtbaar gladdere lijntjes – zonder branderig gevoel.\n\n2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger ogende huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "vanity",
   "lang": "en",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/en/pep-vanity.jpg",
-  "caption": "Visibly softer fine lines — none of the sting.\n\nSlow mornings start here. 2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Two drops. The quietest part of your evening.\n\n2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer-looking skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "vanity",
   "lang": "de",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/de/pep-vanity.jpg",
-  "caption": "Sichtbar glattere Fältchen – ganz ohne Brennen.\n\nRuhige Morgen beginnen hier. 2% Hexapeptid-11 + Ginkgo Biloba glätten sichtbar Fältchen für prallere, festere Haut – für normale bis trockene Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Zwei Tropfen. Der ruhigste Moment deines Abends.\n\n2% Hexapeptid-11 + Ginkgo Biloba glätten sichtbar Fältchen für prallere, festere Haut – für normale bis trockene Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "vanity",
   "lang": "nl",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/nl/pep-vanity.jpg",
-  "caption": "Zichtbaar gladdere lijntjes – zonder branderig gevoel.\n\nRustige ochtenden beginnen hier. 2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Twee druppels. Het rustigste moment van je avond.\n\n2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger ogende huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "modelf",
   "lang": "en",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/en/pep-modelf.jpg",
-  "caption": "Visibly softer fine lines — none of the sting.\n\nStrong results, soft on you. 2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "The anti-aging mistake that makes lines look worse.\n\n2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer-looking skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "modelf",
   "lang": "de",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/de/pep-modelf.jpg",
-  "caption": "Sichtbar glattere Fältchen – ganz ohne Brennen.\n\nStarke Ergebnisse, sanft zu dir. 2% Hexapeptid-11 + Ginkgo Biloba glätten sichtbar Fältchen für prallere, festere Haut – für normale bis trockene Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Der Anti-Aging-Fehler, der Linien betont.\n\n2% Hexapeptid-11 + Ginkgo Biloba glätten sichtbar Fältchen für prallere, festere Haut – für normale bis trockene Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "modelf",
   "lang": "nl",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/nl/pep-modelf.jpg",
-  "caption": "Zichtbaar gladdere lijntjes – zonder branderig gevoel.\n\nSterke resultaten, zacht voor jou. 2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "De anti-agingfout die lijntjes juist benadrukt.\n\n2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger ogende huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "modelm",
   "lang": "en",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/en/pep-modelm.jpg",
-  "caption": "Visibly softer fine lines — none of the sting.\n\nSkincare, for everyone. 2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Gentle enough for every skin, strong enough to show.\n\n2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer-looking skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "modelm",
   "lang": "de",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/de/pep-modelm.jpg",
-  "caption": "Sichtbar glattere Fältchen – ganz ohne Brennen.\n\nHautpflege, für alle. 2% Hexapeptid-11 + Ginkgo Biloba glätten sichtbar Fältchen für prallere, festere Haut – für normale bis trockene Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Sanft genug für jede Haut, stark genug, um zu wirken.\n\n2% Hexapeptid-11 + Ginkgo Biloba glätten sichtbar Fältchen für prallere, festere Haut – für normale bis trockene Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "modelm",
   "lang": "nl",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/nl/pep-modelm.jpg",
-  "caption": "Zichtbaar gladdere lijntjes – zonder branderig gevoel.\n\nHuidverzorging, voor iedereen. 2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Zacht genoeg voor elke huid, sterk genoeg om te zien.\n\n2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger ogende huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "flatlay",
   "lang": "en",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/en/pep-flatlay.jpg",
-  "caption": "Visibly softer fine lines — none of the sting.\n\nPlant-powered, properly certified. 2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "2% Hexapeptide-11 + Ginkgo Biloba — the proof is on the label.\n\n2% Hexapeptide-11 + Ginkgo Biloba visibly soften fine lines for plumper, firmer-looking skin — for normal to dry skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "flatlay",
   "lang": "de",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/de/pep-flatlay.jpg",
-  "caption": "Sichtbar glattere Fältchen – ganz ohne Brennen.\n\nPflanzenkraft, echt zertifiziert. 2% Hexapeptid-11 + Ginkgo Biloba glätten sichtbar Fältchen für prallere, festere Haut – für normale bis trockene Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "2% Hexapeptid-11 + Ginkgo Biloba – der Beweis steht drauf.\n\n2% Hexapeptid-11 + Ginkgo Biloba glätten sichtbar Fältchen für prallere, festere Haut – für normale bis trockene Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "pep",
   "name": "Peptide Anti-Aging Serum",
   "scene": "flatlay",
   "lang": "nl",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/nl/pep-flatlay.jpg",
-  "caption": "Zichtbaar gladdere lijntjes – zonder branderig gevoel.\n\nPlantkracht, echt gecertificeerd. 2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "2% Hexapeptide-11 + Ginkgo Biloba — het bewijs staat erop.\n\n2% Hexapeptide-11 + Ginkgo Biloba verzachten zichtbaar lijntjes voor een voller, steviger ogende huid — voor de normale tot droge huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "hero",
   "lang": "en",
+  "angle": "hero",
   "file": "marketing/social/nano/post/en/p4-hero.jpg",
-  "caption": "Retinol results, plant-based.\n\n2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Retinol results, plant-based.\n\n2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation. Suitable for all skin types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "hero",
   "lang": "de",
+  "angle": "hero",
   "file": "marketing/social/nano/post/de/p4-hero.jpg",
-  "caption": "Retinol-Effekt, pflanzlich.\n\n2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Retinol-Effekt, pflanzlich.\n\n2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen. Für jeden Hauttyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "hero",
   "lang": "nl",
+  "angle": "hero",
   "file": "marketing/social/nano/post/nl/p4-hero.jpg",
-  "caption": "Retinol-effect, plantaardig.\n\n2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Retinol-effect, plantaardig.\n\n2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie. Geschikt voor elk huidtype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "vanity",
   "lang": "en",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/en/p4-vanity.jpg",
-  "caption": "Retinol results, plant-based.\n\nSlow mornings start here. 2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "The night step that does the quiet work.\n\n2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation. Suitable for all skin types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "vanity",
   "lang": "de",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/de/p4-vanity.jpg",
-  "caption": "Retinol-Effekt, pflanzlich.\n\nRuhige Morgen beginnen hier. 2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Der Abendschritt, der leise arbeitet.\n\n2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen. Für jeden Hauttyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "vanity",
   "lang": "nl",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/nl/p4-vanity.jpg",
-  "caption": "Retinol-effect, plantaardig.\n\nRustige ochtenden beginnen hier. 2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "De avondstap die rustig zijn werk doet.\n\n2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie. Geschikt voor elk huidtype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "modelf",
   "lang": "en",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/en/p4-modelf.jpg",
-  "caption": "Retinol results, plant-based.\n\nStrong results, soft on you. 2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Retinol left your skin red? It doesn't have to.\n\n2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation. Suitable for all skin types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "modelf",
   "lang": "de",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/de/p4-modelf.jpg",
-  "caption": "Retinol-Effekt, pflanzlich.\n\nStarke Ergebnisse, sanft zu dir. 2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Retinol gereizt? Das muss nicht sein.\n\n2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen. Für jeden Hauttyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "modelf",
   "lang": "nl",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/nl/p4-modelf.jpg",
-  "caption": "Retinol-effect, plantaardig.\n\nSterke resultaten, zacht voor jou. 2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Geïrriteerd van retinol? Dat hoeft niet.\n\n2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie. Geschikt voor elk huidtype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "modelm",
   "lang": "en",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/en/p4-modelm.jpg",
-  "caption": "Retinol results, plant-based.\n\nSkincare, for everyone. 2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Smoother-looking texture, for every skin type.\n\n2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation. Suitable for all skin types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "modelm",
   "lang": "de",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/de/p4-modelm.jpg",
-  "caption": "Retinol-Effekt, pflanzlich.\n\nHautpflege, für alle. 2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Sichtbar feinere Textur, für jeden Hauttyp.\n\n2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen. Für jeden Hauttyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "modelm",
   "lang": "nl",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/nl/p4-modelm.jpg",
-  "caption": "Retinol-effect, plantaardig.\n\nHuidverzorging, voor iedereen. 2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Zichtbaar fijnere textuur, voor elk huidtype.\n\n2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie. Geschikt voor elk huidtype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "flatlay",
   "lang": "en",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/en/p4-flatlay.jpg",
-  "caption": "Retinol results, plant-based.\n\nPlant-powered, properly certified. 2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "2% Bidens Pilosa — a plant-based retinol alternative.\n\n2% Bidens Pilosa refines skin texture and softens fine lines — without the irritation. Suitable for all skin types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "flatlay",
   "lang": "de",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/de/p4-flatlay.jpg",
-  "caption": "Retinol-Effekt, pflanzlich.\n\nPflanzenkraft, echt zertifiziert. 2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "2% Bidens Pilosa – die pflanzliche Retinol-Alternative.\n\n2% Bidens Pilosa verfeinert die Hautstruktur und glättet Fältchen – ohne Reizungen. Für jeden Hauttyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p4",
   "name": "Retinol Alternative Serum",
   "scene": "flatlay",
   "lang": "nl",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/nl/p4-flatlay.jpg",
-  "caption": "Retinol-effect, plantaardig.\n\nPlantkracht, echt gecertificeerd. 2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "2% Bidens Pilosa — het plantaardige retinol-alternatief.\n\n2% Bidens Pilosa verfijnt de huidstructuur en verzacht lijntjes – zonder irritatie. Geschikt voor elk huidtype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "hero",
   "lang": "en",
+  "angle": "hero",
   "file": "marketing/social/nano/post/en/cream-hero.jpg",
-  "caption": "Calm, comforted, fragrance-free.\n\nSoothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Calm, comforted, fragrance-free.\n\nFragrance-free care that soothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "hero",
   "lang": "de",
+  "angle": "hero",
   "file": "marketing/social/nano/post/de/cream-hero.jpg",
-  "caption": "Beruhigt, gepflegt, parfümfrei.\n\nBeruhigt und stärkt empfindliche Haut, jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Beruhigt, gepflegt, parfümfrei.\n\nParfümfreie Pflege, die empfindliche Haut beruhigt und stärkt – jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "hero",
   "lang": "nl",
+  "angle": "hero",
   "file": "marketing/social/nano/post/nl/cream-hero.jpg",
-  "caption": "Gekalmeerd, verzorgd, parfumvrij.\n\nKalmeert en versterkt de gevoelige huid, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Gekalmeerd, verzorgd, parfumvrij.\n\nParfumvrije verzorging die de gevoelige huid kalmeert en versterkt, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "vanity",
   "lang": "en",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/en/cream-vanity.jpg",
-  "caption": "Calm, comforted, fragrance-free.\n\nSlow mornings start here. Soothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Fewer products. Calmer skin.\n\nFragrance-free care that soothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "vanity",
   "lang": "de",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/de/cream-vanity.jpg",
-  "caption": "Beruhigt, gepflegt, parfümfrei.\n\nRuhige Morgen beginnen hier. Beruhigt und stärkt empfindliche Haut, jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Weniger Produkte. Ruhigere Haut.\n\nParfümfreie Pflege, die empfindliche Haut beruhigt und stärkt – jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "vanity",
   "lang": "nl",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/nl/cream-vanity.jpg",
-  "caption": "Gekalmeerd, verzorgd, parfumvrij.\n\nRustige ochtenden beginnen hier. Kalmeert en versterkt de gevoelige huid, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Minder producten. Een rustigere huid.\n\nParfumvrije verzorging die de gevoelige huid kalmeert en versterkt, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "modelf",
   "lang": "en",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/en/cream-modelf.jpg",
-  "caption": "Calm, comforted, fragrance-free.\n\nStrong results, soft on you. Soothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Does your skin react to almost everything?\n\nFragrance-free care that soothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "modelf",
   "lang": "de",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/de/cream-modelf.jpg",
-  "caption": "Beruhigt, gepflegt, parfümfrei.\n\nStarke Ergebnisse, sanft zu dir. Beruhigt und stärkt empfindliche Haut, jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Reagiert deine Haut auf fast alles?\n\nParfümfreie Pflege, die empfindliche Haut beruhigt und stärkt – jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "modelf",
   "lang": "nl",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/nl/cream-modelf.jpg",
-  "caption": "Gekalmeerd, verzorgd, parfumvrij.\n\nSterke resultaten, zacht voor jou. Kalmeert en versterkt de gevoelige huid, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Reageert je huid op bijna alles?\n\nParfumvrije verzorging die de gevoelige huid kalmeert en versterkt, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "modelm",
   "lang": "en",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/en/cream-modelm.jpg",
-  "caption": "Calm, comforted, fragrance-free.\n\nSkincare, for everyone. Soothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "The simplest step for skin that's had enough.\n\nFragrance-free care that soothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "modelm",
   "lang": "de",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/de/cream-modelm.jpg",
-  "caption": "Beruhigt, gepflegt, parfümfrei.\n\nHautpflege, für alle. Beruhigt und stärkt empfindliche Haut, jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Der einfachste Schritt für gereizte Haut.\n\nParfümfreie Pflege, die empfindliche Haut beruhigt und stärkt – jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "modelm",
   "lang": "nl",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/nl/cream-modelm.jpg",
-  "caption": "Gekalmeerd, verzorgd, parfumvrij.\n\nHuidverzorging, voor iedereen. Kalmeert en versterkt de gevoelige huid, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "De simpelste stap voor een huid die genoeg heeft.\n\nParfumvrije verzorging die de gevoelige huid kalmeert en versterkt, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "flatlay",
   "lang": "en",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/en/cream-flatlay.jpg",
-  "caption": "Calm, comforted, fragrance-free.\n\nPlant-powered, properly certified. Soothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Fragrance-free and COSMOS Natural certified.\n\nFragrance-free care that soothes and strengthens sensitive skin, every day.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "flatlay",
   "lang": "de",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/de/cream-flatlay.jpg",
-  "caption": "Beruhigt, gepflegt, parfümfrei.\n\nPflanzenkraft, echt zertifiziert. Beruhigt und stärkt empfindliche Haut, jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Parfümfrei und COSMOS Natural zertifiziert.\n\nParfümfreie Pflege, die empfindliche Haut beruhigt und stärkt – jeden Tag.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "cream",
   "name": "Sensitive Moisturizing Cream",
   "scene": "flatlay",
   "lang": "nl",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/nl/cream-flatlay.jpg",
-  "caption": "Gekalmeerd, verzorgd, parfumvrij.\n\nPlantkracht, echt gecertificeerd. Kalmeert en versterkt de gevoelige huid, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Parfumvrij en COSMOS Natural gecertificeerd.\n\nParfumvrije verzorging die de gevoelige huid kalmeert en versterkt, elke dag.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "hero",
   "lang": "en",
+  "angle": "hero",
   "file": "marketing/social/nano/post/en/p1-hero.jpg",
-  "caption": "A clean that never strips.\n\nLifts away impurities for fresh, radiant skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "A clean that never strips.\n\nA gentle daily cleanser that lifts away impurities for fresh, radiant-looking skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "hero",
   "lang": "de",
+  "angle": "hero",
   "file": "marketing/social/nano/post/de/p1-hero.jpg",
-  "caption": "Sauber, ohne auszutrocknen.\n\nEntfernt Unreinheiten für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Sauber, ohne auszutrocknen.\n\nEin mildes tägliches Reinigungsgel, das Unreinheiten entfernt – für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "hero",
   "lang": "nl",
+  "angle": "hero",
   "file": "marketing/social/nano/post/nl/p1-hero.jpg",
-  "caption": "Schoon, zonder uit te drogen.\n\nVerwijdert onzuiverheden voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Schoon, zonder uit te drogen.\n\nEen milde dagelijkse reiniger die onzuiverheden verwijdert voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "vanity",
   "lang": "en",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/en/p1-vanity.jpg",
-  "caption": "A clean that never strips.\n\nSlow mornings start here. Lifts away impurities for fresh, radiant skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Where slow mornings start.\n\nA gentle daily cleanser that lifts away impurities for fresh, radiant-looking skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "vanity",
   "lang": "de",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/de/p1-vanity.jpg",
-  "caption": "Sauber, ohne auszutrocknen.\n\nRuhige Morgen beginnen hier. Entfernt Unreinheiten für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Wo ruhige Morgen beginnen.\n\nEin mildes tägliches Reinigungsgel, das Unreinheiten entfernt – für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "vanity",
   "lang": "nl",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/nl/p1-vanity.jpg",
-  "caption": "Schoon, zonder uit te drogen.\n\nRustige ochtenden beginnen hier. Verwijdert onzuiverheden voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Waar rustige ochtenden beginnen.\n\nEen milde dagelijkse reiniger die onzuiverheden verwijdert voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "modelf",
   "lang": "en",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/en/p1-modelf.jpg",
-  "caption": "A clean that never strips.\n\nStrong results, soft on you. Lifts away impurities for fresh, radiant skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "That squeaky-clean feeling? It's stripped skin.\n\nA gentle daily cleanser that lifts away impurities for fresh, radiant-looking skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "modelf",
   "lang": "de",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/de/p1-modelf.jpg",
-  "caption": "Sauber, ohne auszutrocknen.\n\nStarke Ergebnisse, sanft zu dir. Entfernt Unreinheiten für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Das quietschsaubere Gefühl? Ausgetrocknete Haut.\n\nEin mildes tägliches Reinigungsgel, das Unreinheiten entfernt – für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "modelf",
   "lang": "nl",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/nl/p1-modelf.jpg",
-  "caption": "Schoon, zonder uit te drogen.\n\nSterke resultaten, zacht voor jou. Verwijdert onzuiverheden voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Dat piepschone gevoel? Een uitgedroogde huid.\n\nEen milde dagelijkse reiniger die onzuiverheden verwijdert voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "modelm",
   "lang": "en",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/en/p1-modelm.jpg",
-  "caption": "A clean that never strips.\n\nSkincare, for everyone. Lifts away impurities for fresh, radiant skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "A daily clean that's gentle on everyone.\n\nA gentle daily cleanser that lifts away impurities for fresh, radiant-looking skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "modelm",
   "lang": "de",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/de/p1-modelm.jpg",
-  "caption": "Sauber, ohne auszutrocknen.\n\nHautpflege, für alle. Entfernt Unreinheiten für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Tägliche Reinigung, sanft zu allen.\n\nEin mildes tägliches Reinigungsgel, das Unreinheiten entfernt – für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "modelm",
   "lang": "nl",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/nl/p1-modelm.jpg",
-  "caption": "Schoon, zonder uit te drogen.\n\nHuidverzorging, voor iedereen. Verwijdert onzuiverheden voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Dagelijkse reiniging, zacht voor iedereen.\n\nEen milde dagelijkse reiniger die onzuiverheden verwijdert voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "flatlay",
   "lang": "en",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/en/p1-flatlay.jpg",
-  "caption": "A clean that never strips.\n\nPlant-powered, properly certified. Lifts away impurities for fresh, radiant skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Plant-powered and properly certified.\n\nA gentle daily cleanser that lifts away impurities for fresh, radiant-looking skin.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "flatlay",
   "lang": "de",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/de/p1-flatlay.jpg",
-  "caption": "Sauber, ohne auszutrocknen.\n\nPflanzenkraft, echt zertifiziert. Entfernt Unreinheiten für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Pflanzenkraft, echt zertifiziert.\n\nEin mildes tägliches Reinigungsgel, das Unreinheiten entfernt – für frische, strahlende Haut.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p1",
   "name": "Radiant Glow Cleanser",
   "scene": "flatlay",
   "lang": "nl",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/nl/p1-flatlay.jpg",
-  "caption": "Schoon, zonder uit te drogen.\n\nPlantkracht, echt gecertificeerd. Verwijdert onzuiverheden voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Plantkracht, echt gecertificeerd.\n\nEen milde dagelijkse reiniger die onzuiverheden verwijdert voor een frisse, stralende huid.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "hero",
   "lang": "en",
+  "angle": "hero",
   "file": "marketing/social/nano/post/en/p3-hero.jpg",
-  "caption": "Clear pores, kept in balance.\n\nClarifies oily and combination skin — fragrance-free.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Clear pores, kept in balance.\n\nA fragrance-free toner that clears pores and brings oily and combination skin into balance.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "hero",
   "lang": "de",
+  "angle": "hero",
   "file": "marketing/social/nano/post/de/p3-hero.jpg",
-  "caption": "Klare Poren, im Gleichgewicht.\n\nKlärt fettige und Mischhaut – parfümfrei.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Klare Poren, im Gleichgewicht.\n\nEin parfümfreies Tonikum, das die Poren klärt und fettige sowie Mischhaut in Balance bringt.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "hero",
   "lang": "nl",
+  "angle": "hero",
   "file": "marketing/social/nano/post/nl/p3-hero.jpg",
-  "caption": "Heldere poriën, in balans.\n\nZuivert de vette en gemengde huid – parfumvrij.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Heldere poriën, in balans.\n\nEen parfumvrije toner die de poriën zuivert en de vette en gemengde huid in balans brengt.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "vanity",
   "lang": "en",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/en/p3-vanity.jpg",
-  "caption": "Clear pores, kept in balance.\n\nSlow mornings start here. Clarifies oily and combination skin — fragrance-free.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "The two-second step that balances your day.\n\nA fragrance-free toner that clears pores and brings oily and combination skin into balance.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "vanity",
   "lang": "de",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/de/p3-vanity.jpg",
-  "caption": "Klare Poren, im Gleichgewicht.\n\nRuhige Morgen beginnen hier. Klärt fettige und Mischhaut – parfümfrei.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Der Zwei-Sekunden-Schritt für mehr Balance.\n\nEin parfümfreies Tonikum, das die Poren klärt und fettige sowie Mischhaut in Balance bringt.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "vanity",
   "lang": "nl",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/nl/p3-vanity.jpg",
-  "caption": "Heldere poriën, in balans.\n\nRustige ochtenden beginnen hier. Zuivert de vette en gemengde huid – parfumvrij.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "De tweesecondenstap die je dag in balans brengt.\n\nEen parfumvrije toner die de poriën zuivert en de vette en gemengde huid in balans brengt.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "modelf",
   "lang": "en",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/en/p3-modelf.jpg",
-  "caption": "Clear pores, kept in balance.\n\nStrong results, soft on you. Clarifies oily and combination skin — fragrance-free.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Shiny by midday? You might be over-washing.\n\nA fragrance-free toner that clears pores and brings oily and combination skin into balance.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "modelf",
   "lang": "de",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/de/p3-modelf.jpg",
-  "caption": "Klare Poren, im Gleichgewicht.\n\nStarke Ergebnisse, sanft zu dir. Klärt fettige und Mischhaut – parfümfrei.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Mittags-Glanz? Vielleicht wäschst du zu viel.\n\nEin parfümfreies Tonikum, das die Poren klärt und fettige sowie Mischhaut in Balance bringt.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "modelf",
   "lang": "nl",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/nl/p3-modelf.jpg",
-  "caption": "Heldere poriën, in balans.\n\nSterke resultaten, zacht voor jou. Zuivert de vette en gemengde huid – parfumvrij.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Glans tegen de middag? Misschien was je te vaak.\n\nEen parfumvrije toner die de poriën zuivert en de vette en gemengde huid in balans brengt.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "modelm",
   "lang": "en",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/en/p3-modelm.jpg",
-  "caption": "Clear pores, kept in balance.\n\nSkincare, for everyone. Clarifies oily and combination skin — fragrance-free.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Five stars, from Berlin.\n\n“Feels light — and my T-zone looks calmer all day.” — Emma, Berlin\n\nA fragrance-free toner that clears pores and brings oily and combination skin into balance.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "modelm",
   "lang": "de",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/de/p3-modelm.jpg",
-  "caption": "Klare Poren, im Gleichgewicht.\n\nHautpflege, für alle. Klärt fettige und Mischhaut – parfümfrei.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Fünf Sterne, aus Berlin.\n\n„Fühlt sich leicht an – und meine T-Zone wirkt den ganzen Tag ruhiger.“ — Emma, Berlin\n\nEin parfümfreies Tonikum, das die Poren klärt und fettige sowie Mischhaut in Balance bringt.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "modelm",
   "lang": "nl",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/nl/p3-modelm.jpg",
-  "caption": "Heldere poriën, in balans.\n\nHuidverzorging, voor iedereen. Zuivert de vette en gemengde huid – parfumvrij.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Vijf sterren, uit Berlijn.\n\n„Voelt licht aan – en mijn T-zone oogt de hele dag rustiger.“ — Emma, Berlijn\n\nEen parfumvrije toner die de poriën zuivert en de vette en gemengde huid in balans brengt.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "flatlay",
   "lang": "en",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/en/p3-flatlay.jpg",
-  "caption": "Clear pores, kept in balance.\n\nPlant-powered, properly certified. Clarifies oily and combination skin — fragrance-free.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Fragrance-free and COSMOS Natural certified.\n\nA fragrance-free toner that clears pores and brings oily and combination skin into balance.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "flatlay",
   "lang": "de",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/de/p3-flatlay.jpg",
-  "caption": "Klare Poren, im Gleichgewicht.\n\nPflanzenkraft, echt zertifiziert. Klärt fettige und Mischhaut – parfümfrei.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Parfümfrei und COSMOS Natural zertifiziert.\n\nEin parfümfreies Tonikum, das die Poren klärt und fettige sowie Mischhaut in Balance bringt.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p3",
   "name": "Purifying Toner",
   "scene": "flatlay",
   "lang": "nl",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/nl/p3-flatlay.jpg",
-  "caption": "Heldere poriën, in balans.\n\nPlantkracht, echt gecertificeerd. Zuivert de vette en gemengde huid – parfumvrij.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Parfumvrij en COSMOS Natural gecertificeerd.\n\nEen parfumvrije toner die de poriën zuivert en de vette en gemengde huid in balans brengt.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "hero",
   "lang": "en",
+  "angle": "hero",
   "file": "marketing/social/nano/post/en/p2-hero.jpg",
-  "caption": "Gentle on the most reactive scalps.\n\nSoothing, dermatologically tested care for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Gentle on the most reactive scalps.\n\nSoothing, dermatologically tested care for sensitive scalps — suitable for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "hero",
   "lang": "de",
+  "angle": "hero",
   "file": "marketing/social/nano/post/de/p2-hero.jpg",
-  "caption": "Sanft zur empfindlichsten Kopfhaut.\n\nBeruhigende, dermatologisch getestete Pflege für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Sanft zur empfindlichsten Kopfhaut.\n\nBeruhigende, dermatologisch getestete Pflege für empfindliche Kopfhaut – für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "hero",
   "lang": "nl",
+  "angle": "hero",
   "file": "marketing/social/nano/post/nl/p2-hero.jpg",
-  "caption": "Zacht voor de meest gevoelige hoofdhuid.\n\nKalmerende, dermatologisch geteste verzorging voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Zacht voor de meest gevoelige hoofdhuid.\n\nKalmerende, dermatologisch geteste verzorging voor een gevoelige hoofdhuid — geschikt voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "vanity",
   "lang": "en",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/en/p2-vanity.jpg",
-  "caption": "Gentle on the most reactive scalps.\n\nSlow mornings start here. Soothing, dermatologically tested care for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "A wash ritual your scalp will thank you for.\n\nSoothing, dermatologically tested care for sensitive scalps — suitable for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "vanity",
   "lang": "de",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/de/p2-vanity.jpg",
-  "caption": "Sanft zur empfindlichsten Kopfhaut.\n\nRuhige Morgen beginnen hier. Beruhigende, dermatologisch getestete Pflege für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Ein Waschritual, das deine Kopfhaut liebt.\n\nBeruhigende, dermatologisch getestete Pflege für empfindliche Kopfhaut – für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "vanity",
   "lang": "nl",
+  "angle": "vanity",
   "file": "marketing/social/nano/post/nl/p2-vanity.jpg",
-  "caption": "Zacht voor de meest gevoelige hoofdhuid.\n\nRustige ochtenden beginnen hier. Kalmerende, dermatologisch geteste verzorging voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Een wasritueel waar je hoofdhuid dol op is.\n\nKalmerende, dermatologisch geteste verzorging voor een gevoelige hoofdhuid — geschikt voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "modelf",
   "lang": "en",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/en/p2-modelf.jpg",
-  "caption": "Gentle on the most reactive scalps.\n\nStrong results, soft on you. Soothing, dermatologically tested care for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Itchy scalp? Look at your shampoo first.\n\nSoothing, dermatologically tested care for sensitive scalps — suitable for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "modelf",
   "lang": "de",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/de/p2-modelf.jpg",
-  "caption": "Sanft zur empfindlichsten Kopfhaut.\n\nStarke Ergebnisse, sanft zu dir. Beruhigende, dermatologisch getestete Pflege für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Juckende Kopfhaut? Schau zuerst aufs Shampoo.\n\nBeruhigende, dermatologisch getestete Pflege für empfindliche Kopfhaut – für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "modelf",
   "lang": "nl",
+  "angle": "modelf",
   "file": "marketing/social/nano/post/nl/p2-modelf.jpg",
-  "caption": "Zacht voor de meest gevoelige hoofdhuid.\n\nSterke resultaten, zacht voor jou. Kalmerende, dermatologisch geteste verzorging voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Jeukende hoofdhuid? Kijk eerst naar je shampoo.\n\nKalmerende, dermatologisch geteste verzorging voor een gevoelige hoofdhuid — geschikt voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "modelm",
   "lang": "en",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/en/p2-modelm.jpg",
-  "caption": "Gentle on the most reactive scalps.\n\nSkincare, for everyone. Soothing, dermatologically tested care for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Soothing care for every hair type.\n\nSoothing, dermatologically tested care for sensitive scalps — suitable for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "modelm",
   "lang": "de",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/de/p2-modelm.jpg",
-  "caption": "Sanft zur empfindlichsten Kopfhaut.\n\nHautpflege, für alle. Beruhigende, dermatologisch getestete Pflege für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Beruhigende Pflege für jeden Haartyp.\n\nBeruhigende, dermatologisch getestete Pflege für empfindliche Kopfhaut – für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "modelm",
   "lang": "nl",
+  "angle": "modelm",
   "file": "marketing/social/nano/post/nl/p2-modelm.jpg",
-  "caption": "Zacht voor de meest gevoelige hoofdhuid.\n\nHuidverzorging, voor iedereen. Kalmerende, dermatologisch geteste verzorging voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Kalmerende verzorging voor elk haartype.\n\nKalmerende, dermatologisch geteste verzorging voor een gevoelige hoofdhuid — geschikt voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "flatlay",
   "lang": "en",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/en/p2-flatlay.jpg",
-  "caption": "Gentle on the most reactive scalps.\n\nPlant-powered, properly certified. Soothing, dermatologically tested care for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
+  "caption": "Dermatologically tested, COSMOS Natural certified.\n\nSoothing, dermatologically tested care for sensitive scalps — suitable for all hair types.\n\nVegan · cruelty-free · COSMOS Natural · made in the EU\nShop the range → eliraliving.com\n\n#veganskincare #sensitiveskin #cleanbeauty #crueltyfree #cosmosnatural #skincareroutine #madeintheeu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "flatlay",
   "lang": "de",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/de/p2-flatlay.jpg",
-  "caption": "Sanft zur empfindlichsten Kopfhaut.\n\nPflanzenkraft, echt zertifiziert. Beruhigende, dermatologisch getestete Pflege für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
+  "caption": "Dermatologisch getestet, COSMOS Natural zertifiziert.\n\nBeruhigende, dermatologisch getestete Pflege für empfindliche Kopfhaut – für jeden Haartyp.\n\nVegan · tierversuchsfrei · COSMOS Natural · in der EU hergestellt\nZur Kollektion → eliraliving.com\n\n#vegankosmetik #empfindlichehaut #naturkosmetik #tierversuchsfrei #cosmosnatural #hautpflege #madeineu #eliraliving"
  },
  {
   "product": "p2",
   "name": "Sensitive Scalp Shampoo",
   "scene": "flatlay",
   "lang": "nl",
+  "angle": "flatlay",
   "file": "marketing/social/nano/post/nl/p2-flatlay.jpg",
-  "caption": "Zacht voor de meest gevoelige hoofdhuid.\n\nPlantkracht, echt gecertificeerd. Kalmerende, dermatologisch geteste verzorging voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
+  "caption": "Dermatologisch getest, COSMOS Natural gecertificeerd.\n\nKalmerende, dermatologisch geteste verzorging voor een gevoelige hoofdhuid — geschikt voor elk haartype.\n\nVeganistisch · dierproefvrij · COSMOS Natural · gemaakt in de EU\nBekijk de collectie → eliraliving.com\n\n#veganskincare #gevoeligehuid #natuurlijkehuidverzorging #dierproefvrij #cosmosnatural #huidverzorging #eliraliving"
  }
 ]
