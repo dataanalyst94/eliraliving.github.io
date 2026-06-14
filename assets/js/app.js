@@ -59,7 +59,7 @@
       if (window.EliraAnalytics) window.EliraAnalytics.addToCart(id, qty, variant);
     },
     setQty(key, qty) { const items = this.read(); const it = items.find(i => i.key === key); if (it) { it.qty = Math.max(1, qty); this.write(items); } },
-    remove(key) { this.write(this.read().filter(i => i.key !== key)); },
+    remove(key) { const it = this.read().find(i => i.key === key); if (it && window.EliraAnalytics) window.EliraAnalytics.removeFromCart(it.id, it.qty); this.write(this.read().filter(i => i.key !== key)); },
     clear() { this.write([]); },
     setLoading(on) { document.querySelectorAll("[data-checkout]").forEach(b => { b.disabled = on; }); },
 
@@ -235,7 +235,7 @@
   window.eliraCheckout = checkout;
 
   /* ---- Drawer / menu -------------------------------------------------- */
-  const openCart = () => { document.querySelector("[data-cart-overlay]")?.classList.add("open"); document.querySelector("[data-drawer]")?.classList.add("open"); document.body.style.overflow = "hidden"; };
+  const openCart = () => { document.querySelector("[data-cart-overlay]")?.classList.add("open"); document.querySelector("[data-drawer]")?.classList.add("open"); document.body.style.overflow = "hidden"; if (window.EliraAnalytics && Cart.read().length) window.EliraAnalytics.viewCart(Cart.read().map(i => ({ id: i.id, qty: i.qty }))); };
   const closeCart = () => { document.querySelector("[data-cart-overlay]")?.classList.remove("open"); document.querySelector("[data-drawer]")?.classList.remove("open"); document.body.style.overflow = ""; };
   const openMenu = () => { document.querySelector("[data-menu-overlay]")?.classList.add("open"); document.querySelector("[data-mobile-menu]")?.classList.add("open"); document.body.style.overflow = "hidden"; };
   const closeMenu = () => { document.querySelector("[data-menu-overlay]")?.classList.remove("open"); document.querySelector("[data-mobile-menu]")?.classList.remove("open"); document.body.style.overflow = ""; };
@@ -289,7 +289,7 @@
         method: "POST",
         headers: { "Content-Type": "application/json", revision: K.REVISION || "2025-01-15" },
         body: JSON.stringify(body)
-      }).then(() => { try { (window.dataLayer = window.dataLayer || []).push({ event: "newsletter_signup" }); } catch (_) {} })
+      }).then(() => { try { (window.dataLayer = window.dataLayer || []).push({ event: "newsletter_signup" }); if (window.EliraAnalytics) window.EliraAnalytics.signUp("newsletter"); } catch (_) {} })
         .catch(() => {})
         .finally(thanks);
     });
@@ -302,6 +302,11 @@
   function initShop() {
     const grid = document.querySelector("[data-shop-grid]"); if (!grid) return;
     const cards = [...grid.children];
+    // GA4 list events: impression of the whole grid + click-through per card
+    const cardId = c => c.querySelector("[data-quick-add]")?.getAttribute("data-quick-add")
+      || ((c.querySelector("a[href*='/products/']")?.getAttribute("href") || "").split("/products/")[1] || "").replace(".html", "");
+    if (window.EliraAnalytics) window.EliraAnalytics.viewItemList(cards.map(cardId).filter(Boolean), "Shop");
+    cards.forEach(c => { const id = cardId(c); if (id) c.addEventListener("click", () => { if (window.EliraAnalytics) window.EliraAnalytics.selectItem(id, "Shop"); }); });
     const params = new URLSearchParams(location.search);
     let cat = params.get("category") || "all";
     const apply = () => {

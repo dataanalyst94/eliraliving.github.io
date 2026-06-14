@@ -210,9 +210,36 @@
     log("Klaviyo", metric, email ? "(email)" : "(onsite)");
   }
 
+  /* ---- extra GA4 funnel + engagement events (dataLayer + direct GA4) --- */
+  function ecomFire(name, items, value) {
+    ecom(name, items, value);
+    fireGA4(name, value, items);
+  }
+  function ga4List(name, items, listName) {
+    dl({ ecommerce: null });
+    dl({ event: name, ecommerce: { item_list_name: listName, items } });
+    if (FIRE.ga4 === "direct" && window.gtag && CFG.GA4_MEASUREMENT_ID)
+      window.gtag("event", name, { item_list_name: listName, items, send_to: CFG.GA4_MEASUREMENT_ID });
+    log(name, listName, items.length + " items");
+  }
+
   /* ---- public API ----------------------------------------------------- */
   const A = {
     viewItem(id) { const it = [item(id, 1)]; track("view_item", it, valueOf(it)); },
+    // mid-funnel GA4 ecommerce — completes the view→list→cart→checkout→purchase funnel
+    viewItemList(ids, listName) { const items = (ids || []).map((id, i) => Object.assign(item(id, 1), { index: i, item_list_name: listName })); if (items.length) ga4List("view_item_list", items, listName); },
+    selectItem(id, listName) { const it = [Object.assign(item(id, 1), { item_list_name: listName })]; ga4List("select_item", it, listName); },
+    viewCart(lines) { const items = (lines || []).map(l => item(l.id, l.qty || 1)); ecomFire("view_cart", items, valueOf(items)); },
+    removeFromCart(id, qty) { const it = [item(id, qty || 1)]; ecomFire("remove_from_cart", it, valueOf(it)); },
+    // newsletter / lead — GA4 sign_up + Meta Lead + TikTok SubmitForm for ad optimisation
+    signUp(method) {
+      const m = method || "newsletter";
+      if (FIRE.ga4 === "direct" && window.gtag && CFG.GA4_MEASUREMENT_ID) window.gtag("event", "sign_up", { method: m, send_to: CFG.GA4_MEASUREMENT_ID });
+      dl({ event: "sign_up", method: m });
+      if (FIRE.meta === "direct" && window.fbq) window.fbq("track", "Lead", { content_name: m });
+      if (FIRE.tiktok === "direct" && window.ttq) window.ttq.track("SubmitForm", {});
+      log("sign_up", m);
+    },
     addToCart(id, qty) { const it = [item(id, qty || 1)]; track("add_to_cart", it, valueOf(it)); },
     beginCheckout(items, value) {
       const eid = track("begin_checkout", items, value);
