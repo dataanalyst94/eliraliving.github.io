@@ -15,21 +15,6 @@
     {
       "parameters": {
         "method": "GET",
-        "url": "https://api.pinterest.com/v5/user_account",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "options": {}
-      },
-      "id": "r2222222-2222-4222-8222-222222222222",
-      "name": "Get my Pinterest account",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [240, 0],
-      "credentials": { "httpHeaderAuth": { "id": "NlgyQkVlFPZjxe9m", "name": "Pinterest token" } }
-    },
-    {
-      "parameters": {
-        "method": "GET",
         "url": "https://api.pinterest.com/v5/boards",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
@@ -38,15 +23,14 @@
         "options": {}
       },
       "id": "r3333333-3333-4333-8333-333333333333",
-      "name": "List my boards",
+      "name": "List my Pinterest boards",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [480, 0],
+      "position": [260, 0],
       "credentials": { "httpHeaderAuth": { "id": "NlgyQkVlFPZjxe9m", "name": "Pinterest token" } }
     }
   ],
   "connections": {
-    "Click to run": { "main": [[{ "node": "Get my Pinterest account", "type": "main", "index": 0 }]] },
-    "Get my Pinterest account": { "main": [[{ "node": "List my boards", "type": "main", "index": 0 }]] }
+    "Click to run": { "main": [[{ "node": "List my Pinterest boards", "type": "main", "index": 0 }]] }
   }
 }
