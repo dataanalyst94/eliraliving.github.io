@@ -224,50 +224,71 @@ async function cardCTA(bg, d, lang) {
 /* ---------- per-product build --------------------------------------------- */
 const cleanBuf = id => fs.readFileSync(path.join(CLEAN, id + ".jpg"));
 
-async function buildProduct(p, manifest) {
-  // 1) fresh Gemini visuals (language-neutral, generated once, cached)
+// Composite all 6 cards from copy + cached/clean images. NO API calls — pure render.
+// Card backgrounds (real product imagery, no AI-hallucinated blank bottles on card 3):
+//   1 hook=hero · 2 texture=Gemini macro · 3 ingredients=flatlay (real product+botanicals)
+//   4 for-whom=modelf · 5 proof=modelm · 6 cta=vanity
+async function composeCards(p, copy, lang) {
   const texImg = path.join(CARDIMG, `${p.slug}-texture.jpg`);
-  const ingImg = path.join(CARDIMG, `${p.slug}-ingredient.jpg`);
+  const bgFor = {
+    1: cleanBuf(`${p.slug}-hero`),
+    2: fs.readFileSync(texImg),
+    3: cleanBuf(`${p.slug}-flatlay`),
+    4: cleanBuf(`${p.slug}-modelf`),
+    5: cleanBuf(`${p.slug}-modelm`),
+    6: cleanBuf(`${p.slug}-vanity`),
+  };
+  return Promise.all([
+    cardHook(bgFor[1], copy, lang),
+    cardLine(bgFor[2], 2, copy.texture.eyebrow, copy.texture.headline, copy.texture.body, lang),
+    cardIngredients(bgFor[3], copy, lang),
+    cardLine(bgFor[4], 4, copy.forwhom.eyebrow, copy.forwhom.headline, copy.forwhom.body, lang),
+    cardProof(bgFor[5], copy, lang),
+    cardCTA(bgFor[6], copy, lang),
+  ]);
+}
+
+function writeCards(p, lang, cards, manifest, copy) {
+  const dir = path.join(OUT, lang, p.slug);
+  fs.mkdirSync(dir, { recursive: true });
+  const files = [];
+  for (let i = 0; i < cards.length; i++) {
+    const f = path.join(dir, `card-${i + 1}.jpg`);
+    fs.writeFileSync(f, cards[i]);
+    files.push(path.relative(ROOT, f).split(path.sep).join("/"));
+  }
+  manifest.push({ product: p.slug, name: p.name, lang, cards: files, copy });
+}
+
+async function buildProduct(p, manifest) {
+  // 1) fresh Gemini texture visual for card 2 (language-neutral, generated once, cached)
+  const texImg = path.join(CARDIMG, `${p.slug}-texture.jpg`);
   await genCardImg(texImg, p.textureGen, fs.existsSync(path.join(IMG, "_src", p.ref)) ? path.join(IMG, "_src", p.ref) : null);
-  await genCardImg(ingImg, p.ingredientGen, null);
 
   for (const lang of LANGS) {
     let copy;
     try { copy = await writeCopy(p, lang); }
     catch (e) { console.error(`✗ copy ${p.slug}/${lang}:`, e.message); continue; }
-
-    const dir = path.join(OUT, lang, p.slug);
-    fs.mkdirSync(dir, { recursive: true });
-    const bgFor = { 1: cleanBuf(`${p.slug}-hero`), 2: fs.readFileSync(texImg), 3: fs.readFileSync(ingImg), 4: cleanBuf(`${p.slug}-modelf`), 5: cleanBuf(`${p.slug}-flatlay`), 6: cleanBuf(`${p.slug}-vanity`) };
-    const cards = [
-      await cardHook(bgFor[1], copy, lang),
-      await cardLine(bgFor[2], 2, copy.texture.eyebrow, copy.texture.headline, copy.texture.body, lang),
-      await cardIngredients(bgFor[3], copy, lang),
-      await cardLine(bgFor[4], 4, copy.forwhom.eyebrow, copy.forwhom.headline, copy.forwhom.body, lang),
-      await cardProof(bgFor[5], copy, lang),
-      await cardCTA(bgFor[6], copy, lang),
-    ];
-    const files = [];
-    for (let i = 0; i < cards.length; i++) {
-      const f = path.join(dir, `card-${i + 1}.jpg`);
-      fs.writeFileSync(f, cards[i]);
-      files.push(path.relative(ROOT, f).split(path.sep).join("/"));
-    }
-    manifest.push({ product: p.slug, name: p.name, lang, cards: files, copy });
+    const cards = await composeCards(p, copy, lang);
+    writeCards(p, lang, cards, manifest, copy);
     console.log(`✓ carousel ${p.slug} / ${lang.toUpperCase()} — 6 cards`);
   }
 }
 
-(async () => {
-  if (!KEY) throw new Error("Pass the OpenRouter key as arg 1");
-  const list = ONLY === "all" ? PRODUCTS : PRODUCTS.filter(p => ONLY.split(",").includes(p.slug));
-  if (!list.length) throw new Error("no matching product for: " + ONLY);
-  const manifest = [];
-  for (const p of list) await buildProduct(p, manifest);
-  fs.mkdirSync(OUT, { recursive: true });
-  const mf = path.join(OUT, "carousels.json");
-  const prev = fs.existsSync(mf) ? JSON.parse(fs.readFileSync(mf, "utf8")) : [];
-  const merged = prev.filter(x => !manifest.some(m => m.product === x.product && m.lang === x.lang)).concat(manifest);
-  fs.writeFileSync(mf, JSON.stringify(merged, null, 0));
-  console.log(`\n✓ Done. ${manifest.length} carousels this run · ${merged.length} total → ${path.relative(ROOT, mf)}`);
-})().catch(e => { console.error(e); process.exit(1); });
+module.exports = { PRODUCTS, OUT, ROOT, composeCards, writeCards };
+
+if (require.main === module) {
+  (async () => {
+    if (!KEY) throw new Error("Pass the OpenRouter key as arg 1");
+    const list = ONLY === "all" ? PRODUCTS : PRODUCTS.filter(p => ONLY.split(",").includes(p.slug));
+    if (!list.length) throw new Error("no matching product for: " + ONLY);
+    const manifest = [];
+    for (const p of list) await buildProduct(p, manifest);
+    fs.mkdirSync(OUT, { recursive: true });
+    const mf = path.join(OUT, "carousels.json");
+    const prev = fs.existsSync(mf) ? JSON.parse(fs.readFileSync(mf, "utf8")) : [];
+    const merged = prev.filter(x => !manifest.some(m => m.product === x.product && m.lang === x.lang)).concat(manifest);
+    fs.writeFileSync(mf, JSON.stringify(merged, null, 0));
+    console.log(`\n✓ Done. ${manifest.length} carousels this run · ${merged.length} total → ${path.relative(ROOT, mf)}`);
+  })().catch(e => { console.error(e); process.exit(1); });
+}
