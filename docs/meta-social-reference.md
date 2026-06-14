@@ -25,8 +25,14 @@
 - Page: **Elira Living**, Page ID `674483282422623`, linked to @eliralivingeu
 - Still need: add `pages_manage_posts` + `pages_read_engagement` in the "Manage everything on your Page" use case, then grab Page token via Graph API Explorer.
 
-## Pinterest (pending — separate app)
-- developers.pinterest.com → create app → get token. Build as second n8n workflow.
+## Pinterest (BUILT, INACTIVE)
+- Account: business · App ID `1580853` · Trial access (enough to post to own boards)
+- Board: **"Sensitive Skin Care"** id `1144477392746854109`
+- Scopes: boards:read/write, pins:read/write
+- Token: 30-day access + 60-day refresh (stored as n8n cred `Pinterest token`, id `NlgyQkVlFPZjxe9m`). NOT here.
+  - Refresh: `POST https://api.pinterest.com/v5/oauth/token` Basic auth(app_id:secret), body `grant_type=refresh_token&refresh_token=<rt>` → new access token. ⚠️ access token expires in 30 days — build a refresh job before then, or re-auth.
+- Workflow: **Elira — Pinterest poster** id `29w1TGa80DK1tU9l` (INACTIVE). Mon/Thu 11:00, walks a 12-pin SEO queue (embedded), pins product images from the media host with keyword-rich titles/descriptions → eliraliving.com.
+- ⚠️ App secret was shared in chat → rotate after go-live.
 
 ## ⚠️ Blocker before posting: images need PUBLIC URLs
 - IG `image_url` must be a publicly reachable HTTPS URL. Our nano images live locally in

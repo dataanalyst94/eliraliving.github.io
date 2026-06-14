@@ -1,0 +1,64 @@
+{
+  "name": "Elira — Pinterest poster",
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateId": "elira-pinterest" },
+  "nodes": [
+    {
+      "parameters": { "rule": { "interval": [{ "field": "cronExpression", "expression": "0 11 * * 1,4" }] } },
+      "id": "p1111111-1111-4111-8111-111111111111",
+      "name": "Mon/Thu 11:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const IMG='https://elira-media.elira-living.workers.dev/post/en/';\nconst BOARD='1144477392746854109';\nconst LINK='https://www.eliraliving.com';\nconst PINS=[\n {f:'pep-hero.jpg',t:'Vegan Peptide Anti-Aging Serum for Normal to Dry Skin',d:'A lightweight peptide serum with 2% Hexapeptide-11 and Ginkgo Biloba that visibly softens fine lines for plumper, firmer-looking skin. Vegan, cruelty-free, ECOCERT COSMOS Natural, made in the EU. #veganskincare #cleanbeauty'},\n {f:'pep-flatlay.jpg',t:'Plant-Based Anti-Aging Serum | Clean Vegan Skincare',d:'Peptides done the gentle way: 2% Hexapeptide-11 + Ginkgo Biloba for firmer, smoother-looking skin. Fragrance-free, vegan and COSMOS Natural certified. Clean anti-aging skincare made in Europe.'},\n {f:'p4-hero.jpg',t:'Plant-Based Retinol Alternative Serum (No Irritation)',d:'A retinol alternative serum with 2% Bidens Pilosa that refines skin texture and softens fine lines without irritation. Suitable for all skin types. Vegan, cruelty-free, COSMOS Natural. #retinolalternative #veganskincare'},\n {f:'p4-flatlay.jpg',t:'Gentle Retinol Alternative for Sensitive Skin',d:'Nature\\u2019s answer to retinol: 2% Bidens Pilosa smooths and refines without the sting. Plant-based, fragrance-free, ECOCERT COSMOS Natural. Clean skincare for every skin type.'},\n {f:'cream-hero.jpg',t:'Fragrance-Free Moisturizer for Sensitive Skin',d:'A fragrance-free moisturizing cream that soothes and strengthens sensitive, reactive skin. Vegan, cruelty-free and COSMOS Natural certified, made in the EU. #sensitiveskin #fragrancefree'},\n {f:'cream-flatlay.jpg',t:'Soothing Vegan Cream for Reactive Skin | Clean Beauty',d:'Bare-minimum by design: a calming, fragrance-free moisturizer for sensitive skin. No fragrance, no fuss, just plant-based comfort. Vegan and COSMOS Natural certified.'},\n {f:'p1-hero.jpg',t:'Gentle Daily Cleanser for Radiant, Fresh Skin',d:'A gentle daily cleanser that lifts away impurities for fresh, radiant-looking skin. Vegan, cruelty-free, ECOCERT COSMOS Natural, made in the EU. #cleanser #veganskincare #cleanbeauty'},\n {f:'p1-flatlay.jpg',t:'Clean Vegan Face Cleanser | Everyday Skincare',d:'Start every day fresh: a soft, daily cleanse that respects your skin barrier. Plant-based, fragrance-friendly and COSMOS Natural certified. Made in Europe.'},\n {f:'p3-hero.jpg',t:'Pore-Clarifying Toner for Oily & Combination Skin',d:'A fragrance-free toner that clears pores and balances oily and combination skin. Vegan, cruelty-free and COSMOS Natural certified. #toner #oilyskin #veganskincare'},\n {f:'p3-flatlay.jpg',t:'Balancing Vegan Toner | Fragrance-Free Skincare',d:'Clarify without stripping: a gentle toner that balances oily, combination skin between cleanse and serum. Fragrance-free, plant-based, COSMOS Natural certified.'},\n {f:'p2-hero.jpg',t:'Soothing Shampoo for Sensitive Scalps (All Hair Types)',d:'A dermatologically tested, soothing shampoo for sensitive scalps, suitable for all hair types. Vegan, cruelty-free and COSMOS Natural certified, made in the EU. #sensitivescalp #veganhaircare'},\n {f:'p2-flatlay.jpg',t:'Gentle Vegan Scalp Shampoo | Clean Hair Care',d:'Scalp care, simplified: a soothing, dermatologically tested shampoo for reactive scalps and all hair types. Plant-based and COSMOS Natural certified.'}\n];\nconst sd=$getWorkflowStaticData('global');let i=typeof sd.pinIndex==='number'?sd.pinIndex:0;if(i>=PINS.length)i=0;const p=PINS[i];sd.pinIndex=i+1;\nconst body=JSON.stringify({board_id:BOARD,title:p.t,description:p.d,link:LINK,media_source:{source_type:'image_url',url:IMG+p.f}});\nreturn [{json:{pinBody:body,title:p.t,idx:i,total:PINS.length}}];"
+      },
+      "id": "p2222222-2222-4222-8222-222222222222",
+      "name": "Pick next pin",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pinterest.com/v5/pins",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Content-Type", "value": "application/json" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.pinBody }}",
+        "options": {}
+      },
+      "id": "p3333333-3333-4333-8333-333333333333",
+      "name": "Create pin",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 0],
+      "credentials": { "httpHeaderAuth": { "id": "", "name": "Pinterest token" } }
+    },
+    {
+      "parameters": {
+        "chatId": "5556844215",
+        "text": "=📌 Pinned to Pinterest — pin {{ $('Pick next pin').first().json.idx + 1 }}/{{ $('Pick next pin').first().json.total }}\n{{ $('Pick next pin').first().json.title }}",
+        "additionalFields": { "appendAttribution": false }
+      },
+      "id": "p4444444-4444-4444-8444-444444444444",
+      "name": "Telegram confirm",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [660, 0],
+      "credentials": { "telegramApi": { "id": "", "name": "Telegram account" } }
+    }
+  ],
+  "connections": {
+    "Mon/Thu 11:00": { "main": [[{ "node": "Pick next pin", "type": "main", "index": 0 }]] },
+    "Pick next pin": { "main": [[{ "node": "Create pin", "type": "main", "index": 0 }]] },
+    "Create pin": { "main": [[{ "node": "Telegram confirm", "type": "main", "index": 0 }]] }
+  }
+}
