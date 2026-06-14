@@ -141,8 +141,10 @@ function wrap(t, m) { const w = String(t).split(" "); const o = []; let l = ""; 
 const BAR = { en: "VEGAN · CRUELTY-FREE · COSMOS NATURAL", de: "VEGAN · TIERVERSUCHSFREI · COSMOS NATURAL", nl: "VEGAN · DIERPROEFVRIJ · COSMOS NATURAL" };
 
 // shared chrome: wordmark + card counter (+ optional swipe hint)
+let CARD_TOTAL = 6; // overridable for non-6-card carousels (e.g. routines)
+const setCardTotal = n => { CARD_TOTAL = n; };
 function chrome(idx, swipeHint) {
-  const counter = `<text x="${W - 70}" y="${H - 54}" fill="${CC.cream}" font-family="InterEmbed,sans-serif" font-size="26" text-anchor="end" opacity="0.85">${idx} / 6</text>`;
+  const counter = `<text x="${W - 70}" y="${H - 54}" fill="${CC.cream}" font-family="InterEmbed,sans-serif" font-size="26" text-anchor="end" opacity="0.85">${idx} / ${CARD_TOTAL}</text>`;
   const mark = `<text x="70" y="86" fill="${CC.cream}" font-family="BodoniEmbed,serif" font-size="34" letter-spacing="2">elira living</text>`;
   const swipe = swipeHint ? `<text x="${W - 70}" y="86" fill="${CC.gold}" font-family="InterEmbed,sans-serif" font-size="24" text-anchor="end" letter-spacing="3">${esc(swipeHint)} →</text>` : "";
   return mark + swipe + counter;
@@ -287,7 +289,7 @@ async function buildProduct(p, manifest) {
   }
 }
 
-module.exports = { PRODUCTS, OUT, ROOT, composeCards, writeCards };
+module.exports = { PRODUCTS, OUT, ROOT, composeCards, writeCards, cleanBuf, setCardTotal, cardHook, cardLine, cardCTA, render };
 
 if (require.main === module) {
   (async () => {
