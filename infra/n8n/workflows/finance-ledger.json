@@ -1,0 +1,89 @@
+{
+  "name": "Elira — Finance ledger (website)",
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateId": "elira-finance" },
+  "nodes": [
+    {
+      "parameters": { "events": ["checkout.session.completed"] },
+      "id": "c1111111-1111-4111-8111-111111111111",
+      "name": "Stripe Trigger",
+      "type": "n8n-nodes-base.stripeTrigger",
+      "typeVersion": 1,
+      "position": [0, 0],
+      "credentials": { "stripeApi": { "id": "", "name": "Stripe account" } }
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.stripe.com/v1/checkout/sessions/{{ $json.data.object.id }}/line_items",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "stripeApi",
+        "sendQuery": true,
+        "queryParameters": { "parameters": [{ "name": "limit", "value": "100" }] },
+        "options": {}
+      },
+      "id": "c2222222-2222-4222-8222-222222222222",
+      "name": "Line items",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [220, 0],
+      "credentials": { "stripeApi": { "id": "", "name": "Stripe account" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.stripe.com/v1/payment_intents/{{ $('Stripe Trigger').first().json.data.object.payment_intent }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "stripeApi",
+        "sendQuery": true,
+        "queryParameters": { "parameters": [{ "name": "expand[]", "value": "latest_charge.balance_transaction" }] },
+        "options": {}
+      },
+      "id": "c3333333-3333-4333-8333-333333333333",
+      "name": "Payment intent (fee)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 0],
+      "credentials": { "stripeApi": { "id": "", "name": "Stripe account" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const ev=$('Stripe Trigger').first().json;const s=(ev.data&&ev.data.object)?ev.data.object:ev;\nconst li=($('Line items').first().json&&$('Line items').first().json.data)?$('Line items').first().json.data:[];\nlet fee=0;try{const pi=$json;const bt=pi&&pi.latest_charge&&pi.latest_charge.balance_transaction;if(bt&&typeof bt.fee==='number')fee=bt.fee/100;}catch(e){}\nconst COGS={pep:22.81,p4:21.68,cream:21.18,p1:20.81,p3:17.92,p2:20.81};\nfunction slug(desc){const d=String(desc||'').toLowerCase();if(d.includes('peptide'))return'pep';if(d.includes('retinol'))return'p4';if(d.includes('moistur')||d.includes('cream'))return'cream';if(d.includes('cleanser')||d.includes('radiant')||d.includes('glow'))return'p1';if(d.includes('toner')||d.includes('purif'))return'p3';if(d.includes('shampoo')||d.includes('scalp'))return'p2';return null;}\nlet cogs=0,qty=0;const parts=[];for(const i of li){const q=i.quantity||1;qty+=q;const sl=slug(i.description);if(sl)cogs+=COGS[sl]*q;parts.push(q+'× '+(i.description||''));}\ncogs=+cogs.toFixed(2);\nconst gross=((s.amount_total!=null?s.amount_total:0))/100;\nconst meta=s.metadata||{};const src=String(meta.channel||meta.utm_source||'').toLowerCase();\nconst channel=(src.includes('social')||src.includes('insta')||src.includes('face')||src.includes('pin')||src.includes('tiktok'))?'Social':'Website';\nconst order='EL-'+String(s.id||'').slice(-8).toUpperCase();\nconst date=new Date((s.created?s.created*1000:Date.now())).toISOString();\nconst body=JSON.stringify({parent:{database_id:'37fa4815-a826-8132-9a84-e8e0defc62be'},icon:{type:'emoji',emoji:'💶'},properties:{Name:{title:[{text:{content:channel+' · '+order+' · €'+gross.toFixed(2)}}]},Date:{date:{start:date}},Channel:{select:{name:channel}},Type:{select:{name:'Sale'}},Product:{rich_text:[{text:{content:parts.join(', ').slice(0,1900)}}]},Qty:{number:qty},Gross:{number:gross},Fees:{number:+fee.toFixed(2)},COGS:{number:cogs},'Other cost':{number:0},'Order ID':{rich_text:[{text:{content:String(s.id||'')}}]}}});\nreturn [{json:{notionBody:body,gross,fee:+fee.toFixed(2),cogs,channel,order}}];"
+      },
+      "id": "c4444444-4444-4444-8444-444444444444",
+      "name": "Build finance row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.notion.com/v1/pages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "notionApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Notion-Version", "value": "2022-06-28" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.notionBody }}",
+        "options": {}
+      },
+      "id": "c5555555-5555-4555-8555-555555555555",
+      "name": "Notion → Finance Ledger",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 0],
+      "credentials": { "notionApi": { "id": "", "name": "Notion account" } }
+    }
+  ],
+  "connections": {
+    "Stripe Trigger": { "main": [[{ "node": "Line items", "type": "main", "index": 0 }]] },
+    "Line items": { "main": [[{ "node": "Payment intent (fee)", "type": "main", "index": 0 }]] },
+    "Payment intent (fee)": { "main": [[{ "node": "Build finance row", "type": "main", "index": 0 }]] },
+    "Build finance row": { "main": [[{ "node": "Notion → Finance Ledger", "type": "main", "index": 0 }]] }
+  }
+}
