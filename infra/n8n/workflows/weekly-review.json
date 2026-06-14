@@ -1,0 +1,61 @@
+{
+  "name": "Elira — Weekly review",
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateId": "elira-weekly" },
+  "nodes": [
+    {
+      "parameters": { "rule": { "interval": [{ "field": "cronExpression", "expression": "0 18 * * 0" }] } },
+      "id": "g1111111-1111-4111-8111-111111111111",
+      "name": "Sunday 18:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.stripe.com/v1/charges",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "stripeApi",
+        "sendQuery": true,
+        "queryParameters": { "parameters": [{ "name": "created[gte]", "value": "={{ Math.floor(Date.now()/1000) - 7*86400 }}" }, { "name": "limit", "value": "100" }] },
+        "options": {}
+      },
+      "id": "g2222222-2222-4222-8222-222222222222",
+      "name": "Stripe charges (7d)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [220, 0],
+      "credentials": { "stripeApi": { "id": "", "name": "Stripe account" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "const d=$json.data||[];let n=0,sum=0;const byc={};for(const c of d){if(c.paid&&!c.refunded){n++;sum+=c.amount;const cc=(c.billing_details&&c.billing_details.address&&c.billing_details.address.country)||'?';byc[cc]=(byc[cc]||0)+1;}}const rev=(sum/100).toFixed(2);const aov=n?(sum/100/n).toFixed(2):'0.00';const split=Object.entries(byc).map(x=>x[0]+': '+x[1]).join(', ')||'—';return [{json:{count:n,revenue:rev,aov:aov,split:split}}];"
+      },
+      "id": "g3333333-3333-4333-8333-333333333333",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_CHAT_ID",
+        "text": "=📈 Elira — past 7 days\n\nOrders: {{ $json.count }}\nRevenue: €{{ $json.revenue }}\nAvg order: €{{ $json.aov }}\nBy country: {{ $json.split }}\n\nNew week, here we go.",
+        "additionalFields": { "appendAttribution": false }
+      },
+      "id": "g4444444-4444-4444-8444-444444444444",
+      "name": "Telegram weekly",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [660, 0],
+      "credentials": { "telegramApi": { "id": "", "name": "Telegram account" } }
+    }
+  ],
+  "connections": {
+    "Sunday 18:00": { "main": [[{ "node": "Stripe charges (7d)", "type": "main", "index": 0 }]] },
+    "Stripe charges (7d)": { "main": [[{ "node": "Aggregate", "type": "main", "index": 0 }]] },
+    "Aggregate": { "main": [[{ "node": "Telegram weekly", "type": "main", "index": 0 }]] }
+  }
+}
