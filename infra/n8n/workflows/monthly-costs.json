@@ -14,7 +14,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const DB='37fa4815-a826-8132-9a84-e8e0defc62be';\nconst now=new Date();const first=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),1)).toISOString().slice(0,10);\nconst COSTS=[\n {name:'Claude subscription',cost:22.59,type:'Subscription'},\n {name:'Anthropic Haiku API',cost:5.59,type:'Subscription'},\n {name:'Occasional / misc',cost:6.45,type:'Other cost'},\n];\nreturn COSTS.map(c=>({json:{notionBody:JSON.stringify({parent:{database_id:DB},icon:{type:'emoji',emoji:'💶'},properties:{Name:{title:[{text:{content:'Monthly · '+c.name}}]},Date:{date:{start:first}},Channel:{select:{name:'—'}},Type:{select:{name:c.type}},Gross:{number:0},Fees:{number:0},COGS:{number:0},'Other cost':{number:c.cost},Notes:{rich_text:[{text:{content:'Auto-logged fixed monthly cost'}}]}}})}}));"
+        "jsCode": "const DB='37fa4815-a826-8132-9a84-e8e0defc62be';\nconst now=new Date();const first=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),1)).toISOString().slice(0,10);\nconst COSTS=[\n {name:'Claude subscription',cost:22.59,type:'Subscription'},\n {name:'Anthropic Haiku API',cost:5.59,type:'Subscription'},\n {name:'Occasional / misc',cost:6.45,type:'Other cost'},\n];\nreturn COSTS.map(c=>({json:{notionBody:JSON.stringify({parent:{database_id:DB},icon:{type:'emoji',emoji:'💶'},properties:{Name:{title:[{text:{content:'Monthly · '+c.name}}]},Date:{date:{start:first}},Channel:{select:{name:'—'}},Type:{select:{name:c.type}},Gross:{number:0},Fees:{number:0},COGS:{number:0},'Other cost':{number:c.cost},Profit:{number:-c.cost},Notes:{rich_text:[{text:{content:'Auto-logged fixed monthly cost'}}]}}})}}));"
       },
       "id": "d2222222-2222-4222-8222-222222222222",
       "name": "Build monthly cost rows",
