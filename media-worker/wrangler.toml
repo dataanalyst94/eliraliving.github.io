@@ -1,0 +1,7 @@
+name = "elira-media"
+compatibility_date = "2024-11-01"
+
+# Static-asset host for social images + post manifest.
+# Public, read-only. Files served at https://elira-media.<subdomain>.workers.dev/<path>
+[assets]
+directory = "./public"
