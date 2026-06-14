@@ -74,13 +74,21 @@ SUBSTANTIATED FACTS (you may ONLY make claims supported by these — EU Reg. 655
 - Key ingredients: ${p.ingredients}
 - Brand proof: ${CERT}${p.cat === "hair" ? "; dermatologically tested" : ""}
 
+CLAIMS DISCIPLINE (hard rules — a violation makes the copy unusable):
+- NEVER invent numbers, percentages, timeframes or statistics. Forbidden examples: "in 4 weeks / in vier Wochen / in 4 weken", "90% saw results", "2x more". The ONLY figures you may state are those literally in the facts above (e.g. the 2% active). No time-to-result or before/after promises.
+- Keep every benefit "soft" and appearance-based ("lässt die Haut praller wirken" / "doet de huid voller lijken"), never a guaranteed clinical result.
+- The HOOK (card 1) must be self-contained — no pronoun ("sie/ze/they") referring to something the reader hasn't seen yet.
+
 CAROUSEL BEST PRACTICES TO FOLLOW:
-- Card 1 = the HOOK: a scroll-stopping, curiosity-driven headline (max 7 words). Open a loop the reader must swipe to close. No product name dump.
+- Card 1 = the HOOK: a scroll-stopping, curiosity-driven headline (max 7 words). Open a loop the reader must swipe to close. No product name dump. Favour an emotional or problem-aware angle ("Warum brennt deine Kopfhaut?") over a textbook statement.
 - Cards build one idea each; short, skimmable, mobile-first. Plain language.
-- Card 6 = a clear, single CTA with light momentum (no fake urgency).
+- Lead with the BENEFIT/outcome, not the feature ("für sichtbar pralle Haut", not "enthält Peptide").
+- Card 6 = a clear, single CTA. The CTA headline must name the concrete OUTCOME the reader gets (not a generic "mehr erfahren"). Light momentum, no fake urgency.
 - Every card earns the next swipe.
 
-LANGUAGE QUALITY: Write in flawless, natural, native ${LANGNAME[lang]}. Use only real, correctly spelled words — never invent words and never mix in English (no Denglish / no Dutch-English). Ingredient names (Hexapeptide-11, Ginkgo Biloba, Bidens Pilosa) and "ECOCERT COSMOS Natural" stay as-is.
+ADDRESS FORM (critical, must be 100% consistent across ALL cards): Elira is a young, premium clean-beauty brand. Always use the INFORMAL address — ${lang === "de" ? "German \"du / dein / dir\" (NEVER the formal \"Sie / Ihre / Ihnen\")" : lang === "nl" ? "Dutch \"je / jij / jouw\" (NEVER the formal \"u / uw\")" : "English \"you / your\""}. Do not mix formal and informal anywhere.
+
+LANGUAGE QUALITY: Write in flawless, natural, native ${LANGNAME[lang]}. Use only real, dictionary-correct ${LANGNAME[lang]} words — never invent words, never Germanise Dutch or Dutch-ise German (e.g. in Dutch use "voller/steviger", never the German "praller/pralere"), and never mix in English (no Denglish / no Dutch-English). Avoid English bottle/colour descriptors — describe them in ${LANGNAME[lang]} or omit. Translate EVERY descriptor and generic ingredient/base name fully into ${LANGNAME[lang]} (e.g. not "Fragrance-free Soothing Base" but ${lang === "de" ? "\"Duftfreie beruhigende Basis\"" : lang === "nl" ? "\"Geurvrije kalmerende basis\"" : "\"Fragrance-free soothing base\""}, not "Moisturizing Complex" but ${lang === "de" ? "\"Feuchtigkeitskomplex\"" : lang === "nl" ? "\"Hydraterend complex\"" : "\"Moisturizing complex\""}). ONLY these stay in their original form: proper INCI actives (Hexapeptide-11, Ginkgo Biloba, Bidens Pilosa) and "ECOCERT COSMOS Natural".
 
 Return ONLY valid minified JSON, no markdown, exactly this shape:
 {"hook":{"eyebrow":"2-3 word tag","headline":"max 7 words"},
@@ -88,7 +96,7 @@ Return ONLY valid minified JSON, no markdown, exactly this shape:
 "ingredients":{"eyebrow":"short tag","headline":"max 6 words","items":[{"name":"ingredient","benefit":"max 8 words"}]},
 "forwhom":{"eyebrow":"short tag","headline":"max 6 words","body":"max 14 words"},
 "proof":{"eyebrow":"short tag","headline":"max 6 words","points":["max 4 words","max 4 words","max 4 words"]},
-"cta":{"eyebrow":"short tag","headline":"max 7 words","button":"2-3 word action"}}`;
+"cta":{"eyebrow":"short tag","headline":"max 7 words, names the outcome","button":"2-3 word action","save":"short save-for-later nudge, max 5 words"}}`;
 }
 
 async function writeCopy(p, lang) {
@@ -218,7 +226,11 @@ async function cardCTA(bg, d, lang) {
   const btnW = 120 + label.length * 18;
   const btn = `<rect x="70" y="${by}" width="${btnW}" height="74" rx="37" fill="${CC.gold}"/><text x="${70 + btnW / 2}" y="${by + 48}" fill="${CC.ink}" font-family="InterEmbed,sans-serif" font-size="28" font-weight="700" letter-spacing="2" text-anchor="middle">${esc(label)}</text>`;
   const url = `<text x="70" y="${by + 132}" fill="${CC.cream}" font-family="InterEmbed,sans-serif" font-size="30" letter-spacing="2">eliraliving.com</text>`;
-  return render(bg, g.rect + chrome(6) + eb + head + btn + url, g.def);
+  const sy = by + 184;
+  const save = d.cta.save
+    ? `<path d="M70 ${sy - 22} h22 v30 l-11 -8 l-11 8 z" fill="${CC.gold}"/><text x="106" y="${sy}" fill="${CC.gold}" font-family="InterEmbed,sans-serif" font-size="25" letter-spacing="1" opacity="0.95">${esc(d.cta.save)}</text>`
+    : "";
+  return render(bg, g.rect + chrome(6) + eb + head + btn + url + save, g.def);
 }
 
 /* ---------- per-product build --------------------------------------------- */
