@@ -21,9 +21,14 @@
 - TODO before activating: open Telegram confirm node once, pick existing "Telegram account" credential.
 - Activation gate: user wants carousels + videos done first, then a nod.
 
-## Facebook Page (pending)
+## Facebook Page (BUILT, INACTIVE)
 - Page: **Elira Living**, Page ID `674483282422623`, linked to @eliralivingeu
-- Still need: add `pages_manage_posts` + `pages_read_engagement` in the "Manage everything on your Page" use case, then grab Page token via Graph API Explorer.
+- Meta App ID `2163778501189430` (secret shared in chat → rotate)
+- Page token: **PERMANENT** (never expires), scopes incl. `pages_manage_posts`, `pages_read_engagement`.
+  Stored as n8n cred `Facebook Page token` (id `Wh6vzIMqfiRvCdVt`). NOT here.
+  - Obtained via: short user token → `fb_exchange_token` (long-lived user) → `me/accounts` (permanent page token). Tool: `tools/fb-page-token.js`.
+- Workflow: **Elira — Facebook Page poster** id `BfpbLkhZEVlPmf6q` (INACTIVE). Tue/Sat 12:00,
+  walks posts.json, POSTs image+caption to /{page}/photos. Activate on go-live nod.
 
 ## Pinterest (BUILT, INACTIVE)
 - Account: business · App ID `1580853` · Trial access (enough to post to own boards)
