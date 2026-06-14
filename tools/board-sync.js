@@ -38,14 +38,8 @@ async function notion(method, path, body) {
   if (!T) throw new Error("Set NOTION_TOKEN");
   const db = await notion("GET", `/databases/${DB}`);
   const titleKey = Object.keys(db.properties).find(k => db.properties[k].type === "title");
-  const statusKey = Object.keys(db.properties).find(k => db.properties[k].type === "status")
-    || Object.keys(db.properties).find(k => db.properties[k].type === "select");
-  const sp = db.properties[statusKey];
-  const isStatus = sp.type === "status";
-  const opts = (isStatus ? sp.status.options : sp.select.options).map(o => o.name);
-  const doneName = opts.find(o => /^done$|complete|✅|fertig/i.test(o)) || opts[opts.length - 1];
-  console.log(`Board: status prop = "${statusKey}" (${sp.type}) · options: ${opts.join(" | ")}`);
-  console.log(`Done column = "${doneName}"\n`);
+  const PHASE = "Phase", STATUS = "Status", SHIPPED = "✓ Shipped", DONE_COL = "Done";
+  console.log(`Sync: completed task -> Phase="${SHIPPED}" AND Status="${DONE_COL}" (kanban groups by Status)\n`);
 
   let cur, rows = [];
   do {
@@ -56,22 +50,26 @@ async function notion(method, path, body) {
   let moved = 0, alreadyDone = 0, skipped = [];
   for (const r of rows) {
     const title = (r.properties[titleKey].title[0] || {}).plain_text || "";
-    const cur = isStatus ? (r.properties[statusKey].status || {}).name : (r.properties[statusKey].select || {}).name;
+    const phase = (r.properties[PHASE]?.select || {}).name;
+    const status = (r.properties[STATUS]?.select || {}).name;
     const tl = title.toLowerCase();
-    const matches = DONE.some(d => tl.includes(d)) && !EXCLUDE.some(x => tl.includes(x));
-    if (cur === doneName) { alreadyDone++; continue; }
-    if (matches) {
-      console.log(`${APPLY ? "→ MOVING" : "would move"}: "${title}"  [${cur || "—"}] → ${doneName}`);
+    // A task is "done" if it already sits in Phase=Shipped, or it matches the DONE list (and isn't excluded).
+    const isDone = (phase === SHIPPED) || (DONE.some(d => tl.includes(d)) && !EXCLUDE.some(x => tl.includes(x)));
+    if (phase === SHIPPED && status === DONE_COL) { alreadyDone++; continue; }
+    if (isDone) {
+      console.log(`${APPLY ? "→ DONE" : "would mark"}: "${title}"  [Phase:${phase || "—"} / Status:${status || "—"}]`);
       if (APPLY) {
-        const val = isStatus ? { status: { name: doneName } } : { select: { name: doneName } };
-        await notion("PATCH", `/pages/${r.id}`, { properties: { [statusKey]: val } });
+        await notion("PATCH", `/pages/${r.id}`, { properties: {
+          [PHASE]: { select: { name: SHIPPED } },
+          [STATUS]: { select: { name: DONE_COL } },
+        } });
       }
       moved++;
     } else {
-      skipped.push(`${title} [${cur || "—"}]`);
+      skipped.push(`${title} [${status || "—"}]`);
     }
   }
-  console.log(`\n${APPLY ? "Moved" : "Would move"}: ${moved} · already Done: ${alreadyDone}`);
+  console.log(`\n${APPLY ? "Marked done" : "Would mark"}: ${moved} · already Done: ${alreadyDone}`);
   console.log(`\nLeft as-is (not matched / genuinely open):`);
   skipped.forEach(s => console.log("  -", s));
 })().catch(e => { console.error(e.message); process.exit(1); });
