@@ -21,6 +21,20 @@ based on the `Locale` profile property (set by n8n on orders/abandoned-cart).
 | Post Purchase | Email #2 | Post Purchase #2 & #3 — EN/DE/NL (ready) |
 | Post Purchase | Email #3 | Post Purchase #2 & #3 — EN/DE/NL (ready) |
 
+> ⚠️ **Unsubscribe-link issue (Post Purchase #1).** Only Abandoned Cart is marked
+> ✅ done — the Welcome and Post Purchase ready templates may **not yet be applied to
+> the live flow emails**. The repo template footer is correct
+> (`<a href="{% unsubscribe %}">…</a>`), so a missing link in a delivered email means
+> the live email is a stale version. **Fix: re-apply the ready template** (steps above).
+>
+> Note: Klaviyo does **not** render `{% unsubscribe %}` in **test/preview sends** — the
+> link only appears in real flow sends. If the 20:33 email was a test send (or a test
+> order), the missing link is expected and a genuine order will show a working link.
+> If Post Purchase #1 is set as a **Transactional** email in Klaviyo, it sends regardless
+> of marketing consent (which is why the owner received it) and Klaviyo omits the
+> unsubscribe link — in that case remove the "Unsubscribe from marketing" line from the
+> footer, since transactional order emails don't need it.
+
 ---
 
 ## Subject + preview text (paste into each email's fields)
