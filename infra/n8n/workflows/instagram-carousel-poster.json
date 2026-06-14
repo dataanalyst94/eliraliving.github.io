@@ -1,0 +1,154 @@
+{
+  "name": "Elira — Instagram carousel poster",
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateId": "elira-ig-carousel" },
+  "nodes": [
+    {
+      "parameters": { "rule": { "interval": [{ "field": "cronExpression", "expression": "0 11 * * 2,5" }] } },
+      "id": "igc1-0000-0000-0000-000000000001",
+      "name": "Tue/Fri 11:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://elira-media.elira-living.workers.dev/carousels.json",
+        "options": {}
+      },
+      "id": "igc1-0000-0000-0000-000000000002",
+      "name": "Fetch carousels manifest",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const carousels=Array.isArray($json)?$json:($json.body||[]);\nconst sd=$getWorkflowStaticData('global');\nlet i=typeof sd.carouselIndex==='number'?sd.carouselIndex:0;\nif(i>=carousels.length)i=0;\nconst c=carousels[i];\nsd.carouselIndex=i+1;\n\n// Build full caption\nconst langLinks={de:'https://www.eliraliving.com/de/',nl:'https://www.eliraliving.com/nl/'};\nconst hashtags={de:'#NatürlicheHautpflege #VeganeSkincare #EcocertCosmos #HautpflegeDeutschland #CleanBeauty',nl:'#NatuurlijkeHuidverzorging #VeganeSkincare #EcocertCosmos #HuidverzorgingNederland #CleanBeauty'};\nconst link=langLinks[c.lang]||'https://www.eliraliving.com';\nconst tags=hashtags[c.lang]||'#NaturalSkincare #VeganBeauty';\nconst caption=`${c.caption}\\n\\n${link}\\n\\n${tags}`;\n\nreturn [{json:{carousel:c,caption,igUserId:'17841476184618645',idx:i,total:carousels.length}}];"
+      },
+      "id": "igc1-0000-0000-0000-000000000003",
+      "name": "Pick next carousel",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Create one IG media container per card (is_carousel_item=true)\n// Returns array of container creation requests to run in sequence\nconst {carousel,igUserId}=$json;\nconst base=`https://graph.instagram.com/v21.0/${igUserId}/media`;\nreturn carousel.cards.map((url,i)=>({json:{url:base,cardUrl:url,cardIndex:i,igUserId,totalCards:carousel.cards.length,carousel,caption:$json.caption}}));"
+      },
+      "id": "igc1-0000-0000-0000-000000000004",
+      "name": "Prepare card requests",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.instagram.com/v21.0/{{ $json.igUserId }}/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": { "parameters": [
+          { "name": "image_url", "value": "={{ $json.cardUrl }}" },
+          { "name": "is_carousel_item", "value": "true" }
+        ]},
+        "options": {}
+      },
+      "id": "igc1-0000-0000-0000-000000000005",
+      "name": "Create card container",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 0],
+      "credentials": { "httpQueryAuth": { "id": "7MAxzdkUXpkRXCpo", "name": "Instagram token" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aggregate all card container IDs into one carousel create call\nconst items=$input.all();\nconst childIds=items.map(i=>i.json.id);\nconst first=items[0].json;\n// grab carousel + caption from upstream via static data trick\nconst igUserId='17841476184618645';\nreturn [{json:{childIds,igUserId,caption:$('Pick next carousel').first().json.caption,carousel:$('Pick next carousel').first().json.carousel,idx:$('Pick next carousel').first().json.idx,total:$('Pick next carousel').first().json.total}}];"
+      },
+      "id": "igc1-0000-0000-0000-000000000006",
+      "name": "Collect container IDs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.instagram.com/v21.0/{{ $json.igUserId }}/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": { "parameters": [
+          { "name": "media_type", "value": "CAROUSEL" },
+          { "name": "caption", "value": "={{ $json.caption }}" },
+          { "name": "children", "value": "={{ $json.childIds.join(',') }}" }
+        ]},
+        "options": {}
+      },
+      "id": "igc1-0000-0000-0000-000000000007",
+      "name": "Create carousel container",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 0],
+      "credentials": { "httpQueryAuth": { "id": "7MAxzdkUXpkRXCpo", "name": "Instagram token" } }
+    },
+    {
+      "parameters": {
+        "amount": 30,
+        "unit": "seconds"
+      },
+      "id": "igc1-0000-0000-0000-000000000008",
+      "name": "Wait 30s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1540, 0],
+      "webhookId": "igc-wait-carousel"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.instagram.com/v21.0/{{ $('Collect container IDs').first().json.igUserId }}/media_publish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": { "parameters": [
+          { "name": "creation_id", "value": "={{ $json.id }}" }
+        ]},
+        "options": {}
+      },
+      "id": "igc1-0000-0000-0000-000000000009",
+      "name": "Publish carousel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1760, 0],
+      "credentials": { "httpQueryAuth": { "id": "7MAxzdkUXpkRXCpo", "name": "Instagram token" } }
+    },
+    {
+      "parameters": {
+        "chatId": "5556844215",
+        "text": "=🎠 Carousel posted to Instagram!\nProduct: {{ $('Pick next carousel').first().json.carousel.name }} ({{ $('Pick next carousel').first().json.carousel.lang }})\nPost {{ $('Pick next carousel').first().json.idx + 1 }}/{{ $('Pick next carousel').first().json.total }}\nIG media id: {{ $json.id }}",
+        "additionalFields": { "appendAttribution": false }
+      },
+      "id": "igc1-0000-0000-0000-000000000010",
+      "name": "Telegram confirm",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1980, 0],
+      "credentials": { "telegramApi": { "id": "", "name": "Telegram account" } }
+    }
+  ],
+  "connections": {
+    "Tue/Fri 11:00": { "main": [[{ "node": "Fetch carousels manifest", "type": "main", "index": 0 }]] },
+    "Fetch carousels manifest": { "main": [[{ "node": "Pick next carousel", "type": "main", "index": 0 }]] },
+    "Pick next carousel": { "main": [[{ "node": "Prepare card requests", "type": "main", "index": 0 }]] },
+    "Prepare card requests": { "main": [[{ "node": "Create card container", "type": "main", "index": 0 }]] },
+    "Create card container": { "main": [[{ "node": "Collect container IDs", "type": "main", "index": 0 }]] },
+    "Collect container IDs": { "main": [[{ "node": "Create carousel container", "type": "main", "index": 0 }]] },
+    "Create carousel container": { "main": [[{ "node": "Wait 30s", "type": "main", "index": 0 }]] },
+    "Wait 30s": { "main": [[{ "node": "Publish carousel", "type": "main", "index": 0 }]] },
+    "Publish carousel": { "main": [[{ "node": "Telegram confirm", "type": "main", "index": 0 }]] }
+  }
+}

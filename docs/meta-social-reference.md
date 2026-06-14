@@ -45,6 +45,26 @@
 - Plan: push the post images to **Cloudflare R2** (or the existing Worker/site) and reference those URLs
   in the scheduler. captions.json maps caption ↔ image slug.
 
+## Instagram carousel poster (BUILT, INACTIVE)
+- Workflow: **Elira — Instagram carousel poster** id `Z5dLwRfJe7KHRZEZ` (INACTIVE). Tue/Fri 11:00.
+- Posts educational 6-card carousels (DE+NL, 12 total) via the multi-image container API:
+  1. For each card → `POST /{ig}/media` with `image_url` + `is_carousel_item=true` → child container id
+  2. Aggregate child ids → `POST /{ig}/media` with `media_type=CAROUSEL`, `caption`, `children=id1,id2,…`
+  3. Wait 30s → `POST /{ig}/media_publish` with `creation_id`
+- Walks `carousels.json` queue via static data (`carouselIndex`), 1 carousel/run.
+- Cards hosted at `https://elira-media.elira-living.workers.dev/carousel/{de,nl}/{slug}/card-1..6.jpg`
+- Manifest: `https://elira-media.elira-living.workers.dev/carousels.json` (12 carousels).
+- Uses same IG credential as single-image poster (`7MAxzdkUXpkRXCpo`).
+- Caption = CTA headline + localized site link + localized hashtags.
+
+## Token-refresh jobs (BUILT, INACTIVE)
+- **Elira — Instagram token refresh** id `WeiMADMOSmO74t4U`. 1st of month 09:00.
+  Calls `/refresh_access_token` (ig_refresh_token) → PUTs new token into n8n cred `7MAxzdkUXpkRXCpo` → Telegram. Fully automatic.
+- **Elira — Pinterest token refresh** id `XIUCpvlzLI5imaA6`. 20th of month 09:00.
+  Reads refresh_token from workflow static data → `POST /v5/oauth/token` (Basic auth) → PUTs new access token into cred `NlgyQkVlFPZjxe9m`, stores rotated refresh_token → Telegram.
+  ⚠️ Needs refresh_token seeded once: `node tools/set-pinterest-rt.js <refresh_token>` (after Pinterest OAuth).
+- Both call back into n8n via cred **n8n API key** id `FQsptzaFvbLAnTtd`. Pinterest Basic auth cred id `pag3LxjTnxac1meh`.
+
 ## Token rotation note
 - The IG token was shared in plaintext during setup → rotate after the scheduler is live
   (regenerate from Meta dashboard → API setup with Instagram login → Generate token).
