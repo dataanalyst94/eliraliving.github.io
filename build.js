@@ -126,6 +126,7 @@ function head(L, o) {
   <meta name="description" content="${escA(o.description)}">
   ${o.keywords ? `<meta name="keywords" content="${escA(o.keywords)}">` : ""}
   <meta name="robots" content="${o.noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"}">
+  ${TRACK.GSC_VERIFICATION ? `<meta name="google-site-verification" content="${escA(TRACK.GSC_VERIFICATION)}">` : ""}
   <link rel="canonical" href="${canonical}">
   ${hreflangs(o.page, o.p)}
   <meta property="og:site_name" content="Elira Living">

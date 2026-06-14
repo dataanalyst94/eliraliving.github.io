@@ -16,6 +16,13 @@
   return {
     GTM_ID: "GTM-NGL5C9TL",
 
+    // Google Search Console verification. EASIEST: in Search Console add a
+    // URL-prefix property for https://www.eliraliving.com and verify via the
+    // "Google Analytics" or "Google Tag Manager" method (both already live) —
+    // no code change needed. Only paste a token here if you pick the "HTML tag"
+    // method instead (the content value only, not the whole <meta> tag).
+    GSC_VERIFICATION: "",
+
     GA4_MEASUREMENT_ID: "G-TCKTDT6E7T",
     META_PIXEL_ID: "2382778145481273",
     TIKTOK_PIXEL_ID: "D8JB7MJC77U2SBB696UG",
