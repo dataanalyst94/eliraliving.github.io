@@ -9,7 +9,7 @@ const E = process.env;
 const BASE = (E.N8N_URL || "https://n8n.eliraliving.com").replace(/\/$/, "");
 const H = { "X-N8N-API-KEY": E.N8N_API_KEY, "Content-Type": "application/json", accept: "application/json" };
 const ORDERS_ID = "OlJrQ9gznLbuEY3R";
-const WF = path.join(__dirname, "..", "infra", "n8n", "workflows", "finance-ledger.json");
+const WF = path.join(__dirname, "..", "infra", "n8n", "workflows", process.argv[2] || "finance-ledger.json");
 
 async function api(method, p, body) {
   const r = await fetch(BASE + p, { method, headers: H, body: body ? JSON.stringify(body) : undefined });

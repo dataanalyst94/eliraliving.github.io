@@ -1,0 +1,50 @@
+{
+  "name": "Elira — Monthly fixed costs",
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateId": "elira-monthly-costs" },
+  "nodes": [
+    {
+      "parameters": { "rule": { "interval": [{ "field": "cronExpression", "expression": "0 7 1 * *" }] } },
+      "id": "d1111111-1111-4111-8111-111111111111",
+      "name": "1st of month 07:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const DB='37fa4815-a826-8132-9a84-e8e0defc62be';\nconst now=new Date();const first=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),1)).toISOString().slice(0,10);\nconst COSTS=[\n {name:'Claude subscription',cost:22.59,type:'Subscription'},\n {name:'Anthropic Haiku API',cost:5.59,type:'Subscription'},\n {name:'Occasional / misc',cost:6.45,type:'Other cost'},\n];\nreturn COSTS.map(c=>({json:{notionBody:JSON.stringify({parent:{database_id:DB},icon:{type:'emoji',emoji:'💶'},properties:{Name:{title:[{text:{content:'Monthly · '+c.name}}]},Date:{date:{start:first}},Channel:{select:{name:'—'}},Type:{select:{name:c.type}},Gross:{number:0},Fees:{number:0},COGS:{number:0},'Other cost':{number:c.cost},Notes:{rich_text:[{text:{content:'Auto-logged fixed monthly cost'}}]}}})}}));"
+      },
+      "id": "d2222222-2222-4222-8222-222222222222",
+      "name": "Build monthly cost rows",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.notion.com/v1/pages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "notionApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Notion-Version", "value": "2022-06-28" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.notionBody }}",
+        "options": {}
+      },
+      "id": "d3333333-3333-4333-8333-333333333333",
+      "name": "Notion → Finance Ledger",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 0],
+      "credentials": { "notionApi": { "id": "", "name": "Notion account" } }
+    }
+  ],
+  "connections": {
+    "1st of month 07:00": { "main": [[{ "node": "Build monthly cost rows", "type": "main", "index": 0 }]] },
+    "Build monthly cost rows": { "main": [[{ "node": "Notion → Finance Ledger", "type": "main", "index": 0 }]] }
+  }
+}
