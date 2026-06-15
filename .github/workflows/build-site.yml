@@ -28,6 +28,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Single-source guard: this workflow is mirrored into the live repo
+    # (eliraliving.github.io) as part of the built site, but it must only ever
+    # RUN in the dev repo. Without this guard the live repo builds itself and
+    # commits independent auto-build commits, diverging from dev and freezing
+    # the live site. The live repo is a pure deploy target — Pages serves its
+    # static files directly, no Actions build needed there.
+    if: github.repository == 'dataanalyst94/elira-living'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
