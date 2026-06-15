@@ -64,5 +64,10 @@ jobs:
             echo "::warning::PAGES_SYNC_TOKEN not set — live site (eliraliving.github.io) was NOT updated. Add the secret to enable auto-publish."
             exit 0
           fi
-          git push "https://x-access-token:$SYNC@github.com/dataanalyst94/eliraliving.github.io.git" HEAD:main
-          echo "✓ Forwarded to live Pages repo."
+          # Force mirror: the live repo is a pure deploy target (built HTML only),
+          # so its history should always equal this build. A plain push fails as
+          # "non-fast-forward" the moment histories diverge (e.g. an out-of-band
+          # auto-build commit), silently freezing the live site. --force keeps the
+          # live repo an exact mirror and prevents that freeze class entirely.
+          git push --force "https://x-access-token:$SYNC@github.com/dataanalyst94/eliraliving.github.io.git" HEAD:main
+          echo "✓ Forwarded (force-mirror) to live Pages repo."
