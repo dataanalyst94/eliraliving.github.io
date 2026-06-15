@@ -19,7 +19,10 @@ html.lenis,html.lenis body{ height:auto; }
 .hero__badge{ position:absolute; bottom:-1.5rem; left:-1.5rem; display:none; align-items:center; gap:.75rem; background:var(--surface); border:1px solid var(--line); padding:1rem 1.25rem; box-shadow:var(--shadow-md); }
 @media(min-width:768px){ .hero__badge{ display:flex; } }
 
-.wordmark{ font-family:'Bodoni Moda',serif; font-weight:600; font-size:clamp(3.4rem,16vw,16rem); line-height:.8; letter-spacing:-.02em; color:transparent; -webkit-text-stroke:1px rgba(236,231,219,.32); white-space:nowrap; pointer-events:none; }
+.wordmark{ font-family:'Bodoni Moda',serif; font-weight:600; font-size:clamp(3.4rem,16vw,16rem); line-height:.8; letter-spacing:-.02em; color:transparent; -webkit-text-stroke:1px rgba(236,231,219,.32); white-space:nowrap; pointer-events:none;
+  /* faint metallic fill that catches a vertical light — reads as engraved brass */
+  background:linear-gradient(180deg,rgba(236,231,219,.10),rgba(200,162,78,.16) 48%,rgba(236,231,219,.04));
+  -webkit-background-clip:text; background-clip:text; }
 .wordmark-wrap{ position:absolute; bottom:4vh; left:0; right:0; z-index:2; display:flex; justify-content:center; overflow:hidden; }
 
 .botanical{ position:absolute; z-index:2; opacity:0; color:var(--sage); will-change:transform; }
@@ -37,6 +40,31 @@ html.lenis,html.lenis body{ height:auto; }
 .cp-face{ position:absolute; inset:0; display:grid; place-items:center; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
 .cp-back{ transform:rotateY(180deg); }
 .cp-face img{ width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 32px 58px rgba(0,0,0,.5)); }
+
+/* ===== WET BOTTLE — condensation, running droplets, specular gloss ========
+   The .cp-wet layer sits over each bottle face and rotates with the coin-flip.
+   Built from SVG beads (light-catching) + CSS runner droplets + a sheen sweep.
+   mix-blend screen makes beads brighten the glass like real water. */
+.cp-wet{ position:absolute; inset:0; z-index:1; pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);
+          mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent); }
+.cp-wet .beads{ position:absolute; inset:0; width:100%; height:100%; mix-blend-mode:screen; opacity:.85; }
+/* slow vertical light sweep = wet gloss travelling down the bottle */
+.cp-wet::after{ content:""; position:absolute; inset:0; mix-blend-mode:screen; opacity:.5;
+  background:linear-gradient(180deg,transparent 38%,rgba(255,255,255,.22) 50%,transparent 62%);
+  background-size:100% 280%; animation:wet-sheen 6.5s var(--ease) infinite; }
+@keyframes wet-sheen{ 0%{ background-position:50% -40%; } 100%{ background-position:50% 140%; } }
+/* a few droplets that slide down and re-form — the "actively wet" cue */
+.cp-drip{ position:absolute; width:7px; height:11px; border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+  background:radial-gradient(40% 35% at 38% 30%,rgba(255,255,255,.9),rgba(255,255,255,.18) 55%,rgba(160,180,150,.05) 80%);
+  box-shadow:0 1px 2px rgba(0,0,0,.25), inset 0 -2px 3px rgba(0,0,0,.12); mix-blend-mode:screen; opacity:0;
+  will-change:transform,opacity; animation:wet-drip linear infinite; }
+@keyframes wet-drip{ 0%{ transform:translateY(0) scale(.6); opacity:0; } 8%{ opacity:.95; }
+  82%{ opacity:.9; } 100%{ transform:translateY(360px) scale(1.05); opacity:0; } }
+.cp-drip.d1{ left:42%; top:26%; animation-duration:5.5s; animation-delay:.2s; }
+.cp-drip.d2{ left:56%; top:34%; width:5px; height:8px; animation-duration:7s; animation-delay:2.1s; }
+.cp-drip.d3{ left:48%; top:46%; width:8px; height:13px; animation-duration:6.2s; animation-delay:3.6s; }
+@media (max-width:759px){ .cp-drip{ animation-duration:0s; } } /* mobile keeps it calm */
 /* MOBILE: scroll-driven clockwise spin, CSS-only (no GSAP) so perf stays high.
    Bottle rotates a full 360° + zooms small→big→normal as the section scrolls. */
 @media (max-width:759px) and (prefers-reduced-motion:no-preference){

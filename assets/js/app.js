@@ -329,6 +329,42 @@
     apply();
   }
 
+  /* ---- Product-card 3D tilt + cursor glow ----------------------------- */
+  // Pointer-tracked rotateX/rotateY with a sheen that follows the cursor.
+  // Desktop pointers only; fully skipped for reduced-motion / touch.
+  function initCardTilt() {
+    if (REDUCED) return;
+    if (!window.matchMedia("(hover:hover) and (pointer:fine)").matches) return;
+    const cards = document.querySelectorAll(".grid-products .card, [data-shop-grid] .card");
+    cards.forEach((card) => {
+      const media = card.querySelector(".media");
+      if (!media || card.dataset.tiltOn) return;
+      card.dataset.tiltOn = "1";
+      if (!media.querySelector(".gloss")) {
+        const g = document.createElement("span"); g.className = "gloss"; media.appendChild(g);
+      }
+      let raf = 0, rx = 0, ry = 0, mx = 50, my = 30;
+      const apply = () => {
+        raf = 0;
+        card.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+        media.style.setProperty("--mx", mx.toFixed(1) + "%");
+        media.style.setProperty("--my", my.toFixed(1) + "%");
+      };
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        ry = (px - 0.5) * 9; rx = (0.5 - py) * 9; mx = px * 100; my = py * 100;
+        if (!raf) raf = requestAnimationFrame(apply);
+      });
+      card.addEventListener("pointerenter", () => card.classList.add("tilting"));
+      card.addEventListener("pointerleave", () => {
+        card.classList.remove("tilting");
+        if (raf) { cancelAnimationFrame(raf); raf = 0; }
+        card.style.transform = "";
+      });
+    });
+  }
+
   /* ---- Product page --------------------------------------------------- */
   function initProduct() {
     const root = document.querySelector("[data-product]"); if (!root) return;
@@ -489,6 +525,7 @@
     Cart.renderAll();
     initReveal();
     initShop();
+    initCardTilt();
     initProduct();
     initHomeMotion();
     if (document.body.getAttribute("data-page") === "success") Cart.clear();

@@ -347,6 +347,11 @@ function renderHome(L) {
   const P = "/" + L;
   const m = meta(L).home;
   const cards = CAT.PRODUCTS.map(p => card(L, p)).join("\n");
+  // Wet-bottle overlay: SVG condensation beads + running droplets + gloss sweep.
+  // Sits inside each cp-face so it rotates with the coin-flip. Pure CSS motion.
+  const drops = [[78,170,4],[120,150,3],[150,210,5],[95,250,3],[135,300,4],[70,340,3],[160,360,4],[110,400,6],[145,450,3],[85,470,4],[125,520,5],[160,560,3],[95,600,4],[135,640,3],[75,680,5],[150,700,3],[115,740,6],[90,790,3],[140,820,4],[110,870,5],[80,905,3],[150,935,4]];
+  const beads = drops.map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="url(#drp)"/>`).join("");
+  const WET = `<div class="cp-wet" aria-hidden="true"><svg class="beads" viewBox="0 0 234 1100" preserveAspectRatio="xMidYMid meet"><defs><radialGradient id="drp" cx="38%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffffff" stop-opacity=".95"/><stop offset="45%" stop-color="#dfe9df" stop-opacity=".35"/><stop offset="100%" stop-color="#a9bda0" stop-opacity="0"/></radialGradient></defs>${beads}</svg><span class="cp-drip d1"></span><span class="cp-drip d2"></span><span class="cp-drip d3"></span></div>`;
   const body = `<main>
   <section class="hero">
     <div class="hero__bg" data-hero-bg>${pic("/assets/img/hero.jpg", `alt="${escA(t(L, "hero.lead"))}" fetchpriority="high" decoding="async"`, "100vw")}</div>
@@ -380,8 +385,8 @@ function renderHome(L) {
   <section class="chapter" data-chapter>
     <div class="chapter__stage"><div class="chapter__glow" data-chapter-glow></div>
       <div class="chapter__product" data-chapter-product><div class="cp-coin" data-chapter-coin>
-        <div class="cp-face cp-front"><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="${escA(pname(L, "sensitive-moisturizing-cream"))}" loading="lazy" decoding="async"></picture></div>
-        <div class="cp-face cp-back" aria-hidden="true"><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="" loading="lazy" decoding="async"></picture></div>
+        <div class="cp-face cp-front"><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="${escA(pname(L, "sensitive-moisturizing-cream"))}" loading="lazy" decoding="async"></picture>${WET}</div>
+        <div class="cp-face cp-back" aria-hidden="true"><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="" loading="lazy" decoding="async"></picture>${WET}</div>
       </div></div></div>
     <div class="chapter__headlines" data-chapter-headlines>
       <div class="kicker" style="margin-bottom:.75rem">${T(L, "chapter.kicker")}</div>
