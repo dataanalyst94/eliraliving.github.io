@@ -1,0 +1,7 @@
+name = "elira-ebay-deletion"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# Secret (set via CLI, never committed):
+#   wrangler secret put EBAY_VERIFICATION_TOKEN
+# The same token value is pasted into eBay's "Verification token" field.
