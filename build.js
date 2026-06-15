@@ -16,6 +16,22 @@ const { REVIEWS, REVIEW_UI } = require("./assets/data/reviews-content.js");
 const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen" };
 const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik" };
 const FREESHIP_H = { en: "Free shipping on this item", de: "Kostenloser Versand für diesen Artikel", nl: "Gratis verzending voor dit artikel" };
+// Trust signals shown right under the add-to-cart on every product page.
+// EU-compliant, factual — no invented numbers or timeframes beyond the statutory
+// 14-day right of withdrawal.
+const TRUST = {
+  en: [["secure", "Secure checkout"], ["ship", "Ships from the EU"], ["return", "14-day returns"], ["cert", "Vegan · ECOCERT COSMOS"]],
+  de: [["secure", "Sicherer Bezahlvorgang"], ["ship", "Versand aus der EU"], ["return", "14 Tage Widerrufsrecht"], ["cert", "Vegan · ECOCERT COSMOS"]],
+  nl: [["secure", "Veilig afrekenen"], ["ship", "Verzending uit de EU"], ["return", "14 dagen retourrecht"], ["cert", "Vegan · ECOCERT COSMOS"]],
+};
+const TRUST_ICONS = {
+  secure: '<rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  ship: '<path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.4"/><circle cx="17" cy="18" r="1.4"/>',
+  return: '<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/>',
+  cert: '<circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/>',
+};
+const trustRow = (L) => `<div class="pdp-trust">${(TRUST[L] || TRUST.en).map(([k, label]) =>
+  `<div class="pdp-trust__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">${TRUST_ICONS[k]}</svg><span>${esc(label)}</span></div>`).join("")}</div>`;
 
 // Google Consent Mode v2 default (denied) + GTM loader — baked into every page.
 function gtmHead() {
@@ -527,6 +543,7 @@ function renderProduct(L, p) {
         <button class="btn btn-primary" style="flex:1" data-add>${T(L, "pdp.add")}</button>
       </div>
       <button class="btn btn-outline btn-block" style="margin-top:.75rem" data-buy>${T(L, "pdp.buy")}</button>
+      ${trustRow(L)}
       <div style="margin-top:2.25rem">
         <details class="acc" open><summary><span class="kicker">${T(L, "pdp.ingredients")}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(ping(L, p.id))} <a href="${url("ingredients", L)}" ${'class="link-underline"'}>${esc(INGREDIENTS_PAGE[L].title)} →</a></p></details>
         <details class="acc"><summary><span class="kicker">${USE_H[L]}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(usage)}</p></details>
