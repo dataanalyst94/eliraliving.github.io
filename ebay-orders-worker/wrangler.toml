@@ -1,0 +1,20 @@
+name = "elira-ebay-orders"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# Runs every 6 hours: pull new eBay.de orders → write to the Notion Finance Ledger.
+[triggers]
+crons = ["0 */6 * * *"]
+
+[vars]
+# Not secret. The Notion Finance Ledger database id and the eBay marketplace.
+NOTION_FINANCE_DB = "37fa4815-a826-8132-9a84-e8e0defc62be"
+EBAY_MARKETPLACE  = "EBAY_DE"
+# How many days back to scan each run (dedupe makes re-scanning harmless).
+LOOKBACK_DAYS     = "7"
+
+# Secrets — set via CLI, NEVER committed (you paste the value at the prompt):
+#   wrangler secret put EBAY_CLIENT_ID        (your App ID)
+#   wrangler secret put EBAY_CLIENT_SECRET    (your Cert ID — the secret)
+#   wrangler secret put EBAY_REFRESH_TOKEN    (OAuth user refresh token, 18-mo)
+#   wrangler secret put NOTION_TOKEN          (Notion internal integration token)
