@@ -204,7 +204,8 @@ function footer(L) {
   const li = (href, label) => `<li><a class="link-underline" href="${href}">${label}</a></li>`;
   return `<footer class="site-footer footer"><div class="container" style="padding-top:4rem;padding-bottom:5rem">
   <div class="foot-grid" style="display:grid;gap:2.5rem">
-    <div style="max-width:20rem"><img src="/assets/img/brand/logo-white.png" alt="Elira Living" class="footer-logo" width="69" height="50" loading="lazy" decoding="async" style="margin-bottom:1rem"><p class="muted" style="font-size:.875rem;line-height:1.6">${T(L, "foot.tag")}</p></div>
+    <div style="max-width:20rem"><img src="/assets/img/brand/logo-white.png" alt="Elira Living" class="footer-logo" width="69" height="50" loading="lazy" decoding="async" style="margin-bottom:1rem"><p class="muted" style="font-size:.875rem;line-height:1.6">${T(L, "foot.tag")}</p>
+      <div class="foot-social">${SOCIALS.map(s => `<a class="foot-social__a" href="${s.url}" target="_blank" rel="me noopener" aria-label="Elira Living on ${s.name}"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${s.icon}</svg></a>`).join("")}</div></div>
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.shop")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
       ${li(P + "/shop.html?category=skincare", T(L, "nav.skincare"))}${li(P + "/shop.html?category=haircare", T(L, "nav.haircare"))}${li(P + "/shop.html", T(L, "nav.shop"))}</ul></div>
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.help")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
@@ -283,12 +284,19 @@ function card(L, p) {
 // never point sameAs at a profile that doesn't exist. When non-empty it is
 // emitted on every page's Organization schema automatically.
 const SAMEAS = [
-  // "https://www.instagram.com/<handle>",
-  // "https://www.facebook.com/<page>",
-  // "https://www.pinterest.com/<handle>",
+  "https://www.instagram.com/eliralivingeu",
+  "https://www.facebook.com/eliralivingeu",
+  "https://www.tiktok.com/@eliralivingeu",
+  // Add as they go live (then rebuild):
   // "https://www.trustpilot.com/review/eliraliving.com",
   // "https://www.crunchbase.com/organization/elira-living",
   // "https://www.wikidata.org/wiki/<Qid>",
+];
+// Footer social links (also drive entity reciprocity via rel="me").
+const SOCIALS = [
+  { name: "Instagram", url: "https://www.instagram.com/eliralivingeu", icon: '<path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .47 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.07-.9.04-1.4.2-1.7.32-.43.17-.74.37-1.06.7-.32.32-.52.63-.7 1.06-.12.3-.28.8-.32 1.7C3.25 8.5 3.24 8.9 3.24 12s0 3.5.07 4.7c.04.9.2 1.4.32 1.7.17.43.37.74.7 1.06.32.32.63.52 1.06.7.3.12.8.28 1.7.32 1.2.06 1.6.07 4.7.07s3.5 0 4.7-.07c.9-.04 1.4-.2 1.7-.32.43-.17.74-.37 1.06-.7.32-.32.52-.63.7-1.06.12-.3.28-.8.32-1.7.06-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.04-.9-.2-1.4-.32-1.7a2.86 2.86 0 0 0-.7-1.06 2.86 2.86 0 0 0-1.06-.7c-.3-.12-.8-.28-1.7-.32C15.5 4 15.1 4 12 4Zm0 3.06A4.94 4.94 0 1 1 12 17a4.94 4.94 0 0 1 0-9.88Zm0 1.8a3.14 3.14 0 1 0 0 6.28 3.14 3.14 0 0 0 0-6.28Zm5.15-.6a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0Z"/>' },
+  { name: "Facebook", url: "https://www.facebook.com/eliralivingeu", icon: '<path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/>' },
+  { name: "TikTok", url: "https://www.tiktok.com/@eliralivingeu", icon: '<path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.2v12.6a2.6 2.6 0 1 1-2.6-2.6c.27 0 .53.04.78.12v-3.3a5.9 5.9 0 1 0 5.02 5.84V9.01a7.5 7.5 0 0 0 4.36 1.4V7.2a4.28 4.28 0 0 1-3.3-1.38Z"/>' },
 ];
 function ldOrg() {
   return JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Elira Living", url: BASE + "/", logo: LOGO, image: OG, email: "support@eliraliving.com", founder: { "@type": "Person", name: "Zeerak Ata" }, address: { "@type": "PostalAddress", streetAddress: "Lapinrinne 1b", postalCode: "00180", addressLocality: "Helsinki", addressCountry: "FI" }, areaServed: ["DE", "NL"], ...(SAMEAS.length ? { sameAs: SAMEAS } : {}) });

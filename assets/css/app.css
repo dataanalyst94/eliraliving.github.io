@@ -170,6 +170,9 @@ input[type=email]:focus,input[type=text]:focus{ outline:none; border-color:var(-
 
 /* Footer */
 .site-footer{ position:relative; background:var(--bg2); border-top:1px solid var(--line); }
+.foot-social{ display:flex; gap:.65rem; margin-top:1.25rem; }
+.foot-social__a{ width:38px; height:38px; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; color:var(--ink-soft); transition:color .25s var(--ease),border-color .25s var(--ease),background-color .25s var(--ease),transform .25s var(--ease); }
+.foot-social__a:hover{ color:#14160F; background:var(--gold); border-color:var(--gold); transform:translateY(-2px); }
 /* a hairline of light along the top edge — reads as a polished seam */
 .site-footer::before{ content:""; position:absolute; left:0; right:0; top:-1px; height:1px; pointer-events:none;
   background:linear-gradient(90deg,transparent,rgba(200,162,78,.35),transparent); }
