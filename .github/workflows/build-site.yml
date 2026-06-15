@@ -51,3 +51,18 @@ jobs:
             git commit -m "Auto-build site from latest content [skip ci]"
             git push
           fi
+
+      # Keep the LIVE GitHub Pages repo (eliraliving.github.io) in sync with this
+      # dev repo. Without this, commits here never reach the live domain and the
+      # site silently freezes. Requires a one-time secret PAGES_SYNC_TOKEN
+      # (a PAT with 'repo' scope). If the secret is absent, this step no-ops.
+      - name: Forward built site to live Pages repo
+        env:
+          SYNC: ${{ secrets.PAGES_SYNC_TOKEN }}
+        run: |
+          if [ -z "$SYNC" ]; then
+            echo "::warning::PAGES_SYNC_TOKEN not set — live site (eliraliving.github.io) was NOT updated. Add the secret to enable auto-publish."
+            exit 0
+          fi
+          git push "https://x-access-token:$SYNC@github.com/dataanalyst94/eliraliving.github.io.git" HEAD:main
+          echo "✓ Forwarded to live Pages repo."
