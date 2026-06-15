@@ -32,6 +32,7 @@ const TRUST_ICONS = {
 };
 const trustRow = (L) => `<div class="pdp-trust">${(TRUST[L] || TRUST.en).map(([k, label]) =>
   `<div class="pdp-trust__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">${TRUST_ICONS[k]}</svg><span>${esc(label)}</span></div>`).join("")}</div>`;
+const JOURNAL_H = { en: "From the Journal", de: "Aus dem Journal", nl: "Uit het Journal" };
 
 // Google Consent Mode v2 default (denied) + GTM loader — baked into every page.
 function gtmHead() {
@@ -519,6 +520,9 @@ function renderProduct(L, p) {
   const title = pname(L, p.id) + " – " + t(L, "cat." + p.category) + " | Elira Living";
   const description = pdesc(L, p.id) + " " + m.productShippingNote;
   const related = CAT.PRODUCTS.filter(x => x.id !== p.id).slice(0, 4);
+  // Internal-link this product to the Journal articles that feature it (reverse
+  // of each post's `related: [productId]`). Strong topical relevance for SEO + buyer education.
+  const guides = POSTS.filter(post => (post.related || []).includes(p.id)).slice(0, 3);
   const features = (CAT.getProduct(p.id).featureKeys || []).map(k => `<span class="tag">${esc(feat(L, k))}</span>`).join("");
   const faqs = (PRODUCT_FAQ[p.id] && (PRODUCT_FAQ[p.id][L] || PRODUCT_FAQ[p.id].en)) || [];
   const usage = (USAGE[p.id] && (USAGE[p.id][L] || USAGE[p.id].en)) || "";
@@ -555,6 +559,10 @@ function renderProduct(L, p) {
     <h2 class="font-display" style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1.5rem">${FAQ_H[L]}</h2>
     <div>${faqs.map(f => `<details class="acc"><summary><span style="font-weight:500;color:var(--ink)">${esc(f.q)}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(f.a)}</p></details>`).join("\n")}</div>
   </section>
+  ${guides.length ? `<section style="margin-top:5rem;max-width:46rem">
+    <h2 class="font-display" style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1.5rem">${JOURNAL_H[L]}</h2>
+    <div style="display:flex;flex-direction:column">${guides.map(g => { const gc = postContent(L, g); const gurl = url("post", L, g); return `<a href="${gurl}" class="pdp-guide"><div style="min-width:0"><div class="font-display" style="font-size:1.15rem;line-height:1.25">${esc(gc.title.split(" | ")[0])}</div><p class="muted" style="font-size:.85rem;margin:.35rem 0 0;line-height:1.55">${esc(gc.excerpt)}</p></div><span class="pdp-guide__arrow" aria-hidden="true">→</span></a>`; }).join("")}</div>
+  </section>` : ""}
   <section style="margin-top:5rem">
     <h2 class="font-display reveal" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:2rem">${T(L, "pdp.related")}</h2>
     <div class="grid-products">${related.map(r => card(L, r)).join("\n")}</div>
