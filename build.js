@@ -275,8 +275,23 @@ function card(L, p) {
 }
 
 /* ---- JSON-LD ----------------------------------------------------------- */
+// Entity `sameAs` — links the Elira brand entity to its official profiles.
+// This is a core AI-SEO / Knowledge-Graph signal: it's how Google and LLMs
+// confirm "this brand = these profiles" and decide what to cite. Paste your
+// REAL profile URLs here as they go live (Instagram, Facebook, Pinterest,
+// LinkedIn, Trustpilot, Crunchbase, Wikidata, etc.). Leave empty until real —
+// never point sameAs at a profile that doesn't exist. When non-empty it is
+// emitted on every page's Organization schema automatically.
+const SAMEAS = [
+  // "https://www.instagram.com/<handle>",
+  // "https://www.facebook.com/<page>",
+  // "https://www.pinterest.com/<handle>",
+  // "https://www.trustpilot.com/review/eliraliving.com",
+  // "https://www.crunchbase.com/organization/elira-living",
+  // "https://www.wikidata.org/wiki/<Qid>",
+];
 function ldOrg() {
-  return JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Elira Living", url: BASE + "/", logo: LOGO, image: OG, email: "support@eliraliving.com", founder: { "@type": "Person", name: "Zeerak Ata" }, address: { "@type": "PostalAddress", streetAddress: "Lapinrinne 1b", postalCode: "00180", addressLocality: "Helsinki", addressCountry: "FI" }, areaServed: ["DE", "NL"] });
+  return JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Elira Living", url: BASE + "/", logo: LOGO, image: OG, email: "support@eliraliving.com", founder: { "@type": "Person", name: "Zeerak Ata" }, address: { "@type": "PostalAddress", streetAddress: "Lapinrinne 1b", postalCode: "00180", addressLocality: "Helsinki", addressCountry: "FI" }, areaServed: ["DE", "NL"], ...(SAMEAS.length ? { sameAs: SAMEAS } : {}) });
 }
 function ldWebsite(L) { return JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Elira Living", url: BASE + "/", inLanguage: L }); }
 function ldProduct(L, p) {

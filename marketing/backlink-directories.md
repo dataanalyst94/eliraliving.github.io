@@ -83,6 +83,27 @@ Tagline:  Vegan, ECOCERT COSMOS-certified natural skincare & haircare. Made in t
 
 ---
 
+## Tier 6 — AI / LLM citation sources (get cited in ChatGPT, Gemini, AI Overviews)
+
+> **Why this tier exists:** LLMs and AI search answers don't rank links — they cite
+> *entities* they can verify. The levers are (a) a consistent brand entity across
+> structured sources, (b) presence in the corpora these models read, and (c)
+> clean machine-readable data on your own site. We've already done (c): Organization
+> schema, `llms.txt`, FAQ/Article schema, clean canonical/hreflang. This tier feeds (a) and (b).
+
+| Target | Why it matters for AI | Free/Paid | Notes |
+|---|---|---|---|
+| **Wikidata** (create an item) | The single biggest AI/Knowledge-Graph lever. LLMs and Google's KG ingest Wikidata entities directly. | Free | Create a `Elira Living` item: instance of "brand"/"business", country FI, official website, founder, sector cosmetics. Link every profile via "described at URL". Then paste the Q-ID into `SAMEAS` in `build.js`. |
+| **Crunchbase** (Tier 4 too) | Widely scraped into training data; strong entity confirmation. | Free | Company profile, consistent NAP, founder, website. |
+| **Trustpilot** (Tier 1 too) | Review content is frequently cited in "is X legit / good" AI answers. | Free | Genuine reviews only (EU Omnibus). |
+| **Vegan/cruelty-free databases** (Tier 2) | These curated lists are exactly what models cite for "vegan skincare brands". | Free | HappyCow, vegan product directories, ethical-shop lists. |
+| **Product Hunt** | Indexed + scraped; good for "new/indie brand" answers. | Free | Brand/launch listing. |
+| **"Best vegan/clean skincare" listicles** | Direct source for AI "best X" answers. | Outreach | Pitch via `outreach-templates.md` to be *included* in roundups. |
+| **Reddit / community mentions** (r/SkincareAddiction, r/vegan, DE/NL equivalents) | Heavily weighted in training data; authentic mentions get cited. | Free | Be a genuine participant — never astroturf. Answer questions where Elira is honestly relevant. |
+| **`sameAs` in site schema** | Confirms "this entity = these profiles" to Google + LLMs. | Done (mechanism) | Paste real profile URLs into `SAMEAS` in `build.js` as they go live — then it's emitted on every page automatically. |
+
+**AI-SEO sequence:** create Wikidata + Crunchbase + Trustpilot first → paste their URLs (and any social) into `SAMEAS` → rebuild → the entity graph is now consistent end-to-end. Then pursue listicle inclusion and authentic community presence over time.
+
 ## Submission tips
 - **Be consistent** — identical NAP wording everywhere (copy from the block above).
 - **Use the canonical URL** `https://www.eliraliving.com/` (with `www`, trailing slash).
