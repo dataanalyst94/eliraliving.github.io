@@ -60,3 +60,5 @@ assets/img/*
 
 # Generated social marketing images (kept out of the public site)
 marketing/social/
+# local Telegram notify secret — never commit
+infra/telegram/notify.local.json
