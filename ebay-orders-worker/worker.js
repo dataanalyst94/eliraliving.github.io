@@ -58,10 +58,12 @@ async function run(env) {
 /* ---- eBay: refresh-token → access-token ---- */
 async function ebayAccessToken(env) {
   const basic = btoa(`${env.EBAY_CLIENT_ID}:${env.EBAY_CLIENT_SECRET}`);
+  // No `scope` param: eBay then issues an access token covering exactly the
+  // scopes the refresh token was granted. This avoids "invalid_scope" when the
+  // granted set (broad selling scopes) differs from any single requested scope.
   const body = new URLSearchParams({
     grant_type: "refresh_token",
     refresh_token: env.EBAY_REFRESH_TOKEN,
-    scope: SCOPE,
   });
   const r = await fetch(EBAY_OAUTH, {
     method: "POST",
