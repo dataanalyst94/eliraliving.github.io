@@ -11,26 +11,28 @@
    rating / text, then run:  node build.js
    ========================================================================= */
 
+// `product` links each verified review to the product the buyer bought, so the
+// product page can show its own rating + emit Review/AggregateRating schema.
 const REVIEWS = [
-  { name: "Markus T.", country: "de", rating: 5,
+  { name: "Markus T.", country: "de", rating: 5, product: "radiant-glow-cleanser",
     text: "Ehrlich gesagt war ich erst skeptisch, weil ich die Marke nicht kannte. Aber das Produkt fühlt sich gut an und sieht im Bad auch echt schick aus. Für mich wirkt es nicht wie so ein billiges Drogerie-Ding." },
-  { name: "Daan V.", country: "nl", rating: 5,
+  { name: "Daan V.", country: "nl", rating: 5, product: "retinol-alternative-serum",
     text: "Eerlijk, ik kende Elira helemaal niet, maar het zag er netjes uit dus ik dacht: proberen maar. Product kwam goed verpakt binnen en voelt gewoon fijn aan. Geen overdreven gedoe, gewoon prima." },
-  { name: "Sabine K.", country: "de", rating: 4,
+  { name: "Sabine K.", country: "de", rating: 4, product: "retinol-alternative-serum",
     text: "Hab Elira einfach mal bestellt, weil die Verpackung gut aussah. Kam sauber an, nichts ausgelaufen, alles ordentlich. Der Duft ist eher dezent, was ich persönlich gut finde. Kein Wow-Wunder, aber solide und würde ich wieder nehmen." },
-  { name: "Sanne M.", country: "nl", rating: 5,
+  { name: "Sanne M.", country: "nl", rating: 5, product: "sensitive-moisturizing-cream",
     text: "Best tevreden mee. De verpakking ziet er strak uit en het product voelt niet goedkoop. Ik hou er vooral van dat het niet zo sterk ruikt. Dat is voor mij echt een pluspunt." },
-  { name: "Julia R.", country: "de", rating: 5,
+  { name: "Julia R.", country: "de", rating: 5, product: "sensitive-moisturizing-cream",
     text: "Kam schneller an als gedacht. Die Verpackung war schlicht, aber schön. Ich mag, dass es nicht so übertrieben parfümiert ist. Meine Haut hat es gut vertragen, also passt für mich." },
-  { name: "Femke D.", country: "nl", rating: 5,
+  { name: "Femke D.", country: "nl", rating: 5, product: "purifying-toner",
     text: "Ik had niet mega hoge verwachtingen, maar het viel me echt mee. Ziet er mooi uit in de badkamer en voelt prettig aan. Zou het wel opnieuw kopen." },
-  { name: "Thomas H.", country: "de", rating: 4,
+  { name: "Thomas H.", country: "de", rating: 4, product: "sensitive-scalp-shampoo",
     text: "Ganz nice eigentlich. Sieht hochwertiger aus als erwartet und fühlt sich angenehm an. Einen Stern weniger, weil ich mir die Flasche minimal größer vorgestellt hatte, aber sonst alles top." },
-  { name: "Bram J.", country: "nl", rating: 4,
+  { name: "Bram J.", country: "nl", rating: 4, product: "retinol-alternative-serum",
     text: "Netjes geleverd en alles zag er verzorgd uit. Het product zelf is simpel maar goed. Niet super luxe ofzo, maar wel beter dan veel standaard dingen die je online ziet." },
-  { name: "Lena B.", country: "de", rating: 5,
+  { name: "Lena B.", country: "de", rating: 5, product: "radiant-glow-cleanser",
     text: "Ich habe es meiner Freundin mitbestellt und sie fand es direkt gut. Vor allem das cleane Design kommt gut an. Nicht zu fancy, nicht billig, einfach ordentlich gemacht." },
-  { name: "Lotte S.", country: "nl", rating: 4,
+  { name: "Lotte S.", country: "nl", rating: 4, product: "retinol-alternative-serum",
     text: "Voor mij was dit een fijne eerste bestelling. Mooi design, geen rare geur, en het voelt gewoon betrouwbaar aan. Kleine tip: misschien wat meer info op de verpakking, maar verder helemaal goed." }
 ];
 

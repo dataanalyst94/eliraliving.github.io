@@ -287,10 +287,10 @@ const SAMEAS = [
   "https://www.instagram.com/eliralivingeu",
   "https://www.facebook.com/eliralivingeu",
   "https://www.tiktok.com/@eliralivingeu",
-  // Add as they go live (then rebuild):
-  // "https://www.trustpilot.com/review/eliraliving.com",
-  // "https://www.crunchbase.com/organization/elira-living",
-  // "https://www.wikidata.org/wiki/<Qid>",
+  "https://www.trustpilot.com/review/eliraliving.com",
+  "https://www.crunchbase.com/organization/elira-living",
+  "https://www.linkedin.com/company/elira-living",
+  // Wikidata intentionally skipped (notability risk for a new brand).
 ];
 // Footer social links (also drive entity reciprocity via rel="me").
 const SOCIALS = [
@@ -302,8 +302,22 @@ function ldOrg() {
   return JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Elira Living", url: BASE + "/", logo: LOGO, image: OG, email: "support@eliraliving.com", founder: { "@type": "Person", name: "Zeerak Ata" }, address: { "@type": "PostalAddress", streetAddress: "Lapinrinne 1b", postalCode: "00180", addressLocality: "Helsinki", addressCountry: "FI" }, areaServed: ["DE", "NL"], ...(SAMEAS.length ? { sameAs: SAMEAS } : {}) });
 }
 function ldWebsite(L) { return JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Elira Living", url: BASE + "/", inLanguage: L }); }
+// Verified reviews for a given product (genuine buyers; see reviews-content.js).
+function productReviews(id) { return REVIEWS.filter(r => r.product === id); }
+function productAgg(id) {
+  const revs = productReviews(id);
+  if (!revs.length) return null;
+  const avg = revs.reduce((s, r) => s + r.rating, 0) / revs.length;
+  return { revs, avg, count: revs.length };
+}
 function ldProduct(L, p) {
-  return JSON.stringify({ "@context": "https://schema.org", "@type": "Product", name: pname(L, p.id), sku: p.sku, image: (p.images && p.images.length ? p.images : [p.image]).map(i => BASE + i), description: pdesc(L, p.id), brand: { "@type": "Brand", name: "Elira Living" }, category: t(L, "cat." + p.category), offers: { "@type": "Offer", url: BASE + url("product", L, p), priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "Elira Living" } } });
+  const obj = { "@context": "https://schema.org", "@type": "Product", name: pname(L, p.id), sku: p.sku, image: (p.images && p.images.length ? p.images : [p.image]).map(i => BASE + i), description: pdesc(L, p.id), brand: { "@type": "Brand", name: "Elira Living" }, category: t(L, "cat." + p.category), offers: { "@type": "Offer", url: BASE + url("product", L, p), priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "Elira Living" } } };
+  const agg = productAgg(p.id);
+  if (agg) {
+    obj.aggregateRating = { "@type": "AggregateRating", ratingValue: agg.avg.toFixed(1), reviewCount: agg.count, bestRating: 5, worstRating: 1 };
+    obj.review = agg.revs.map(r => ({ "@type": "Review", author: { "@type": "Person", name: r.name }, reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5, worstRating: 1 }, reviewBody: r.text }));
+  }
+  return JSON.stringify(obj);
 }
 function ldBreadcrumb(L, p) {
   return JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
@@ -379,6 +393,26 @@ function reviewsSection(L) {
       </div>
     </div>
     <div class="reviews__grid" data-reviews-grid>${cards}</div>
+  </section>`;
+}
+
+// Visible per-product reviews on the PDP — Google requires the rating that the
+// schema declares to also be visible to users on the page.
+const PDP_REVIEWS_H = { en: "What buyers say", de: "Was Käufer:innen sagen", nl: "Wat kopers zeggen" };
+function productReviewsSection(L, p) {
+  const agg = productAgg(p.id);
+  if (!agg) return "";
+  const ui = REVIEW_UI[L];
+  const avgStr = agg.avg.toFixed(1).replace(".", L === "en" ? "." : ",");
+  const cards = agg.revs.map((r, i) => reviewCard(L, r, i)).join("\n");
+  return `<section style="margin-top:5rem">
+    <h2 class="font-display reveal" style="font-size:clamp(1.8rem,4vw,2.5rem)">${esc(PDP_REVIEWS_H[L])}</h2>
+    <div class="reviews__agg reveal" style="margin-top:1rem;margin-bottom:2.5rem">
+      <span class="reviews__score font-display">${avgStr}</span>
+      ${starsSVG(Math.round(agg.avg))}
+      <span class="reviews__count muted">${esc(ui.aggSuffix.replace("{n}", agg.count))}</span>
+    </div>
+    <div class="reviews__grid">${cards}</div>
   </section>`;
 }
 
@@ -578,6 +612,7 @@ function renderProduct(L, p) {
       </div>
     </div>
   </div>
+  ${productReviewsSection(L, p)}
   <section style="margin-top:5rem;max-width:46rem">
     <h2 class="font-display" style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1.5rem">${FAQ_H[L]}</h2>
     <div>${faqs.map(f => `<details class="acc"><summary><span style="font-weight:500;color:var(--ink)">${esc(f.q)}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(f.a)}</p></details>`).join("\n")}</div>

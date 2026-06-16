@@ -65,17 +65,14 @@ html.lenis,html.lenis body{ height:auto; }
 .cp-drip.d2{ left:56%; top:34%; width:5px; height:8px; animation-duration:7s; animation-delay:2.1s; }
 .cp-drip.d3{ left:48%; top:46%; width:8px; height:13px; animation-duration:6.2s; animation-delay:3.6s; }
 @media (max-width:759px){ .cp-drip{ animation-duration:0s; } } /* mobile keeps it calm */
-/* MOBILE: scroll-driven clockwise spin, CSS-only (no GSAP) so perf stays high.
-   Bottle rotates a full 360° + zooms small→big→normal as the section scrolls. */
-@media (max-width:759px) and (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline: view()){
-    .chapter__product{ animation:cp-mobile-spin linear both; animation-timeline:view(); animation-range:entry 5% exit 95%; }
-  }
-}
-@keyframes cp-mobile-spin{
-  from{ transform:rotate(0deg) scale(.72); }
-  50%{ transform:rotate(180deg) scale(1.12); }
-  to{ transform:rotate(360deg) scale(1); }
+/* MOBILE: the bottle stays upright & static (the wet droplets still animate).
+   We previously used a scroll-driven spin via `animation-timeline: view()`, but
+   on several mobile browsers the scroll timeline doesn't advance and the element
+   froze at its mid-keyframe — rendering the bottle upside-down and motionless.
+   A static, upright bottle is correct on every device; the scroll-spin remains
+   on desktop (GSAP-driven). */
+@media (max-width:759px){
+  .chapter__product{ animation:none !important; transform:none !important; }
 }
 .chapter__glow{ position:absolute; z-index:1; width:60vmin; height:60vmin; border-radius:50%; background:radial-gradient(circle,rgba(200,162,78,.22),transparent 65%); filter:blur(20px); will-change:transform,opacity; }
 .ingredient{ position:absolute; z-index:3; max-width:230px; opacity:0; will-change:transform,opacity; }
