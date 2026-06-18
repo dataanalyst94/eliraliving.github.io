@@ -73,6 +73,13 @@ html.lenis,html.lenis body{ height:auto; }
    on desktop (GSAP-driven). */
 @media (max-width:759px){
   .chapter__product{ animation:none !important; transform:none !important; }
+  /* Bulletproofing: drop the whole 3D coin on mobile. The back face is
+     rotateY(180deg); if a mobile browser mishandles backface-visibility it can
+     surface that rotated face. Flattening the stack + hiding the back face
+     removes every possible flip vector — only the upright front image renders. */
+  .cp-coin{ transform-style:flat !important; }
+  .cp-back{ display:none !important; }
+  .cp-front{ transform:none !important; }
 }
 .chapter__glow{ position:absolute; z-index:1; width:60vmin; height:60vmin; border-radius:50%; background:radial-gradient(circle,rgba(200,162,78,.22),transparent 65%); filter:blur(20px); will-change:transform,opacity; }
 .ingredient{ position:absolute; z-index:3; max-width:230px; opacity:0; will-change:transform,opacity; }
