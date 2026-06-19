@@ -80,6 +80,23 @@ html.lenis,html.lenis body{ height:auto; }
   .cp-coin{ transform-style:flat !important; }
   .cp-back{ display:none !important; }
   .cp-front{ transform:none !important; }
+
+  /* On phones the bottle fills the width, so the annotation text used to bleed
+     over the light bottle and become unreadable. Give each callout a frosted
+     dark card so the text always sits on a dark background, and shadow the
+     headlines for contrast. */
+  .ingredient{
+    max-width:56vw;
+    background:rgba(12,15,10,.7);
+    -webkit-backdrop-filter:blur(7px) saturate(120%); backdrop-filter:blur(7px) saturate(120%);
+    border:1px solid var(--line); border-radius:12px;
+    padding:.7rem .85rem;
+    box-shadow:0 12px 30px -14px rgba(0,0,0,.75);
+  }
+  .ingredient .ln{ display:none; }
+  .ingredient h4{ font-size:1.1rem; color:var(--ink); }
+  .ingredient p{ color:var(--ink-soft); font-size:.76rem; }
+  .chapter__headlines h2 span{ text-shadow:0 2px 16px rgba(8,10,7,.92), 0 0 3px rgba(8,10,7,.8); }
 }
 .chapter__glow{ position:absolute; z-index:1; width:60vmin; height:60vmin; border-radius:50%; background:radial-gradient(circle,rgba(200,162,78,.22),transparent 65%); filter:blur(20px); will-change:transform,opacity; }
 .ingredient{ position:absolute; z-index:3; max-width:230px; opacity:0; will-change:transform,opacity; }
