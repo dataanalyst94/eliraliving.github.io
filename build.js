@@ -465,7 +465,6 @@ function renderHome(L) {
           <a href="${P}/shop.html" class="btn btn-primary">${T(L, "hero.cta")}</a>
           <a href="${P}/about.html" class="btn btn-outline">${T(L, "hero.cta2")}</a>
         </div>
-        <p class="hero__ship"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.4"/><circle cx="17" cy="18" r="1.4"/></svg><span>${T(L, "hero.shipNote")}</span></p>
       </div>
       <div class="hero__badge">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.3"><path d="M12 2C7 6 5 9 5 13a7 7 0 0 0 14 0c0-4-2-7-7-11Z"/><path d="M12 9v8"/></svg>
@@ -473,6 +472,7 @@ function renderHome(L) {
       </div>
     </div>
     <div class="wordmark-wrap"><div class="wordmark" data-wordmark>ELIRA LIVING</div></div>
+    <div class="hero__ship-track"><p class="hero__ship"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.4"/><circle cx="17" cy="18" r="1.4"/></svg><span>${T(L, "hero.shipNote")}<span class="hero__ship-extra"> — ${T(L, "hero.shipNoteExtra")}</span></span></p></div>
     <div class="scroll-cue"><span></span></div>
   </section>
 

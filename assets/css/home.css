@@ -18,8 +18,13 @@ html.lenis,html.lenis body{ height:auto; }
 .hero__title .accent{ font-style:italic; color:var(--gold); }
 .hero__badge{ position:absolute; bottom:-1.5rem; left:-1.5rem; display:none; align-items:center; gap:.75rem; background:var(--surface); border:1px solid var(--line); padding:1rem 1.25rem; box-shadow:var(--shadow-md); }
 @media(min-width:768px){ .hero__badge{ display:flex; } }
-.hero__ship{ margin-top:1.25rem; display:inline-flex; align-items:center; gap:.6rem; font-size:.85rem; letter-spacing:.01em; color:var(--ink); background:rgba(200,162,78,.10); border:1px solid rgba(200,162,78,.32); border-radius:999px; padding:.5rem 1rem; }
+/* Floating free-EU-delivery bulletin — drifts edge to edge and bumps back */
+.hero__ship-track{ position:absolute; left:0; right:0; bottom:13vh; z-index:4; height:0; pointer-events:none; }
+.hero__ship{ position:absolute; left:0; top:0; margin:0; white-space:nowrap; display:inline-flex; align-items:center; gap:.6rem; font-size:.85rem; letter-spacing:.01em; color:var(--ink); background:rgba(15,18,13,.72); border:1px solid rgba(200,162,78,.45); border-radius:999px; padding:.5rem 1.05rem; box-shadow:var(--shadow-md); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); animation:shipBounce 8s ease-in-out infinite alternate; will-change:left,transform; }
 .hero__ship svg{ color:var(--gold); flex:none; }
+@keyframes shipBounce{ from{ left:1rem; transform:translateX(0); } to{ left:calc(100% - 1rem); transform:translateX(-100%); } }
+@media (max-width:640px){ .hero__ship-extra{ display:none; } .hero__ship{ font-size:.74rem; padding:.45rem .85rem; animation-duration:6.5s; } .hero__ship-track{ bottom:11vh; } }
+@media (prefers-reduced-motion:reduce){ .hero__ship{ animation:none; left:50%; transform:translateX(-50%); } }
 
 .wordmark{ font-family:'Bodoni Moda',serif; font-weight:600; font-size:clamp(3.4rem,16vw,16rem); line-height:.8; letter-spacing:-.02em; color:transparent; -webkit-text-stroke:1px rgba(236,231,219,.32); white-space:nowrap; pointer-events:none;
   /* faint metallic fill that catches a vertical light — reads as engraved brass */
