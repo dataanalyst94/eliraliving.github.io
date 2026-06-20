@@ -107,9 +107,9 @@ export default {
       form.append("success_url", `${PRIMARY_ORIGIN}/${loc}/success.html?session_id={CHECKOUT_SESSION_ID}`);
       form.append("cancel_url", `${PRIMARY_ORIGIN}/${loc}/cancel.html`);
       form.append("billing_address_collection", "auto");
-      // Ship only to your markets:
-      form.append("shipping_address_collection[allowed_countries][0]", "DE");
-      form.append("shipping_address_collection[allowed_countries][1]", "NL");
+      // Ship to all 27 EU member states (same price, free delivery):
+      const EU_COUNTRIES = ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE"];
+      EU_COUNTRIES.forEach((c, i) => form.append(`shipping_address_collection[allowed_countries][${i}]`, c));
       form.append("phone_number_collection[enabled]", "false");
       // Abandoned-cart recovery: let the session be recovered after it expires,
       // and expire it ~3h after creation so the recovery email goes out sooner.

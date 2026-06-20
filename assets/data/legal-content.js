@@ -29,7 +29,7 @@ const LEGAL = {
   <h2>7. Your rights</h2><p>Access, rectification, erasure, restriction, portability, objection, and withdrawal of consent — email ${MAIL}. Lead authority: Finnish Data Protection Ombudsman (${TIETO}). DE/NL customers may also contact their national authority.</p>` },
     terms: { title: "Terms &amp; Conditions", subtitle: "General terms of sale for consumers", body: `
   <h2>1. Seller</h2><p>Elira Living (owner: Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland — Business ID 3526013-6. ${MAIL}.</p>
-  <h2>2. Scope</h2><p>These terms apply to all consumer orders placed via this shop. We currently ship to <strong>Germany</strong> and the <strong>Netherlands</strong>.</p>
+  <h2>2. Scope</h2><p>These terms apply to all consumer orders placed via this shop. We ship across the <strong>European Union</strong>.</p>
   <h2>3. Contract</h2><p>Product display is not a binding offer. Completing payment at Stripe checkout places a binding order; the contract forms on our confirmation or dispatch.</p>
   <h2>4. Prices &amp; VAT</h2><p>All prices are total prices in Euro. As a small business we are not currently VAT-registered, so VAT is not shown separately.</p>
   <h2>5. Shipping</h2><p>Free on all orders. Dispatched from within the EU (currently Latvia). Delivery 3–7 working days.</p>
@@ -63,7 +63,7 @@ const LEGAL = {
   <h2>7. Ihre Rechte</h2><p>Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerspruch sowie Widerruf der Einwilligung — per E-Mail an ${MAIL}. Zuständige Aufsichtsbehörde: finnische Datenschutzbeauftragte (${TIETO}). Kundinnen und Kunden in Deutschland können sich auch an ihre zuständige Landesdatenschutzbehörde wenden.</p>` },
     terms: { title: "Allgemeine Geschäftsbedingungen (AGB)", subtitle: "Allgemeine Verkaufsbedingungen für Verbraucher", body: `
   <h2>1. Verkäufer</h2><p>Elira Living (Inhaber: Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finnland — Unternehmenskennung 3526013-6. ${MAIL}.</p>
-  <h2>2. Geltungsbereich</h2><p>Diese Bedingungen gelten für alle Verbraucherbestellungen über diesen Shop. Wir liefern derzeit nach <strong>Deutschland</strong> und in die <strong>Niederlande</strong>.</p>
+  <h2>2. Geltungsbereich</h2><p>Diese Bedingungen gelten für alle Verbraucherbestellungen über diesen Shop. Wir liefern in die gesamte <strong>Europäische Union</strong>.</p>
   <h2>3. Vertragsschluss</h2><p>Die Produktdarstellung ist kein verbindliches Angebot. Mit Abschluss der Zahlung an der Stripe-Kasse geben Sie eine verbindliche Bestellung ab; der Vertrag kommt mit unserer Bestätigung oder dem Versand zustande.</p>
   <h2>4. Preise &amp; Umsatzsteuer</h2><p>Alle Preise sind Gesamtpreise in Euro. Als Kleinunternehmen sind wir derzeit nicht umsatzsteuerlich registriert; Umsatzsteuer wird nicht gesondert ausgewiesen.</p>
   <h2>5. Versand</h2><p>Kostenloser Versand auf alle Bestellungen. Versand aus der EU (derzeit Lettland). Lieferung in 3–7 Werktagen.</p>
@@ -97,7 +97,7 @@ const LEGAL = {
   <h2>7. Je rechten</h2><p>Inzage, rectificatie, wissing, beperking, overdraagbaarheid, bezwaar en intrekking van toestemming — e-mail ${MAIL}. Leidende toezichthouder: de Finse toezichthouder voor gegevensbescherming (${TIETO}). Klanten in Nederland kunnen ook terecht bij de Autoriteit Persoonsgegevens.</p>` },
     terms: { title: "Algemene voorwaarden", subtitle: "Algemene verkoopvoorwaarden voor consumenten", body: `
   <h2>1. Verkoper</h2><p>Elira Living (eigenaar: Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland — Bedrijfsidentificatie 3526013-6. ${MAIL}.</p>
-  <h2>2. Toepassingsgebied</h2><p>Deze voorwaarden gelden voor alle consumentenbestellingen via deze shop. Wij verzenden momenteel naar <strong>Duitsland</strong> en <strong>Nederland</strong>.</p>
+  <h2>2. Toepassingsgebied</h2><p>Deze voorwaarden gelden voor alle consumentenbestellingen via deze shop. Wij verzenden naar de gehele <strong>Europese Unie</strong>.</p>
   <h2>3. Totstandkoming</h2><p>De productpresentatie is geen bindend aanbod. Door de betaling bij de Stripe-kassa af te ronden plaats je een bindende bestelling; de overeenkomst komt tot stand bij onze bevestiging of verzending.</p>
   <h2>4. Prijzen &amp; btw</h2><p>Alle prijzen zijn totaalprijzen in euro. Als kleine onderneming zijn we momenteel niet btw-geregistreerd; btw wordt niet apart vermeld.</p>
   <h2>5. Verzending</h2><p>Gratis op alle bestellingen. Verzonden vanuit de EU (momenteel Letland). Levering in 3–7 werkdagen.</p>

@@ -13,7 +13,7 @@
   "meta": {
     "home": {
       "title": "Elira Living | Natuurlijke veganistische huid- & haarverzorging — COSMOS",
-      "description": "Veganistische, ECOCERT COSMOS-gecertificeerde natuurlijke huid- en haarverzorging. Dierproefvrij, gemaakt in de EU. Gratis klimaatneutrale verzending in DE & NL.",
+      "description": "Veganistische, ECOCERT COSMOS-gecertificeerde natuurlijke huid- en haarverzorging. Dierproefvrij, gemaakt in de EU. Gratis klimaatneutrale verzending door heel de EU.",
       "keywords": "natuurlijke huidverzorging, veganistische huidverzorging, COSMOS gecertificeerd, biologische huidverzorging, natuurlijke haarverzorging, dierproefvrije cosmetica, clean beauty, ECOCERT, veganistische shampoo, zuiverende toner"
     },
     "shop": {
@@ -26,7 +26,7 @@
       "description": "Elira Living maakt veganistische, ECOCERT COSMOS-gecertificeerde huid- en haarverzorging — schone, effectieve formules uit de natuur, verantwoord gemaakt in de EU.",
       "keywords": "over Elira Living, clean beauty merk, veganistische cosmetica Europa, ECOCERT COSMOS, duurzame huidverzorging"
     },
-    "productShippingNote": "Vegan, ECOCERT COSMOS-gecertificeerd. Gratis verzending in DE & NL bij elke bestelling.",
+    "productShippingNote": "Vegan, ECOCERT COSMOS-gecertificeerd. Gratis verzending door heel de EU bij elke bestelling.",
     "impressum": {
       "title": "Colofon | Elira Living"
     },
@@ -64,9 +64,9 @@
     "nav.certifications": "Certificeringen",
     "trust.kicker": "Echte routines",
     "trust.title": "Gemaakt voor de echte huid, in het echte leven",
-    "trust.lead": "Van de eerste reiniging tot het avondserum — Elira past stilletjes in dagelijkse routines in Duitsland en Nederland.",
+    "trust.lead": "Van de eerste reiniging tot het avondserum — Elira past stilletjes in dagelijkse routines door heel de EU.",
     "nav.cart": "Winkelwagen",
-    "announce.1": "Gratis verzending in DE & NL – bij elke bestelling",
+    "announce.1": "Gratis verzending door heel de EU – bij elke bestelling",
     "announce.2": "Klimaatneutrale verzending · 3–7 werkdagen",
     "announce.3": "Vegan & dierproefvrij",
     "hero.kicker": "Schone verzorging, gecertificeerd",
@@ -115,7 +115,7 @@
     "value.1.t": "Vegan & Clean",
     "value.1.d": "Vrij van parabenen, sulfaten en dierproeven — altijd.",
     "value.2.t": "Klimaatneutraal",
-    "value.2.d": "Gecompenseerde CO₂-verzending door heel Duitsland en Nederland.",
+    "value.2.d": "Gecompenseerde CO₂-verzending door heel de EU.",
     "value.3.t": "COSMOS gecertificeerd",
     "value.3.d": "Onafhankelijk als natuurlijk gecertificeerd door ECOCERT COSMOS.",
     "value.4.t": "Veilig betalen",
@@ -159,7 +159,7 @@
     "pdp.details": "Details",
     "pdp.ingredients": "Ingrediënten (INCI)",
     "pdp.shipping": "Verzending",
-    "pdp.shippingText": "Gratis, klimaatneutrale verzending in DE & NL bij elke bestelling. Levering in 3–7 werkdagen vanuit de EU.",
+    "pdp.shippingText": "Gratis, klimaatneutrale verzending door heel de EU bij elke bestelling — zelfde prijs, geen verzendkosten. Verzonden vanuit de EU, doorgaans 3–7 werkdagen.",
     "pdp.related": "Misschien vind je dit ook leuk",
     "pdp.back": "Terug naar shop",
     "cart.title": "Winkelwagen",

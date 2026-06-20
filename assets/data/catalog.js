@@ -14,7 +14,7 @@
     currency: "EUR",
     freeShippingThreshold: 3900, // €39.00 (cents)
     shippingFlat: 495,           // €4.95
-    markets: ["DE", "NL"],
+    markets: ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE"], // all 27 EU member states
     baseUrl: "https://www.eliraliving.com"
   };
 

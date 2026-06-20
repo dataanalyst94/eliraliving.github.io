@@ -13,7 +13,7 @@
   "meta": {
     "home": {
       "title": "Elira Living | Natürliche vegane Haut- & Haarpflege — COSMOS-zertifiziert",
-      "description": "Vegane, ECOCERT COSMOS-zertifizierte Naturkosmetik für Haut und Haar. Tierversuchsfrei, in der EU hergestellt. Kostenloser klimaneutraler Versand in DE & NL.",
+      "description": "Vegane, ECOCERT COSMOS-zertifizierte Naturkosmetik für Haut und Haar. Tierversuchsfrei, in der EU hergestellt. Kostenloser klimaneutraler Versand in der gesamten EU.",
       "keywords": "Naturkosmetik, vegane Hautpflege, COSMOS zertifiziert, Bio Hautpflege, natürliche Haarpflege, tierversuchsfreie Kosmetik, Clean Beauty, ECOCERT, in EU hergestellt, veganes Shampoo, klärendes Gesichtswasser"
     },
     "shop": {
@@ -26,7 +26,7 @@
       "description": "Elira Living entwickelt vegane, ECOCERT COSMOS-zertifizierte Haut- und Haarpflege — saubere, wirksame Formeln aus der Natur, verantwortungsvoll in der EU hergestellt.",
       "keywords": "über Elira Living, Clean Beauty Marke, vegane Kosmetik Europa, ECOCERT COSMOS, nachhaltige Hautpflege"
     },
-    "productShippingNote": "Vegan, ECOCERT COSMOS-zertifiziert. Kostenloser Versand in DE & NL bei jeder Bestellung.",
+    "productShippingNote": "Vegan, ECOCERT COSMOS-zertifiziert. Kostenloser Versand in der gesamten EU bei jeder Bestellung.",
     "impressum": {
       "title": "Impressum | Elira Living"
     },
@@ -64,9 +64,9 @@
     "nav.certifications": "Zertifizierungen",
     "trust.kicker": "Echte Routinen",
     "trust.title": "Gemacht für echte Haut, im echten Leben",
-    "trust.lead": "Von der ersten Reinigung bis zum Abend-Serum — Elira fügt sich leise in den Alltag in Deutschland und den Niederlanden ein.",
+    "trust.lead": "Von der ersten Reinigung bis zum Abend-Serum — Elira fügt sich leise in den Alltag in der gesamten EU ein.",
     "nav.cart": "Warenkorb",
-    "announce.1": "Kostenloser Versand in DE & NL – bei jeder Bestellung",
+    "announce.1": "Kostenloser Versand in der gesamten EU – bei jeder Bestellung",
     "announce.2": "Klimaneutraler Versand · 3–7 Werktage",
     "announce.3": "Vegan & tierversuchsfrei",
     "hero.kicker": "Saubere Pflege, zertifiziert",
@@ -115,7 +115,7 @@
     "value.1.t": "Vegan & Clean",
     "value.1.d": "Frei von Parabenen, Sulfaten und Tierversuchen — immer.",
     "value.2.t": "Klimaneutral",
-    "value.2.d": "Kompensierter CO₂-Versand in ganz Deutschland und den Niederlanden.",
+    "value.2.d": "Kompensierter CO₂-Versand in der gesamten EU.",
     "value.3.t": "COSMOS zertifiziert",
     "value.3.d": "Unabhängig als Naturkosmetik zertifiziert durch ECOCERT COSMOS.",
     "value.4.t": "Sicher bezahlen",
@@ -159,7 +159,7 @@
     "pdp.details": "Details",
     "pdp.ingredients": "Inhaltsstoffe (INCI)",
     "pdp.shipping": "Versand",
-    "pdp.shippingText": "Kostenloser, klimaneutraler Versand in DE & NL bei jeder Bestellung. Lieferung in 3–7 Werktagen aus der EU.",
+    "pdp.shippingText": "Kostenloser, klimaneutraler Versand in der gesamten EU bei jeder Bestellung — gleicher Preis, keine Versandkosten. Versand aus der EU, in der Regel 3–7 Werktage.",
     "pdp.related": "Das könnte Ihnen gefallen",
     "pdp.back": "Zurück zum Shop",
     "cart.title": "Warenkorb",

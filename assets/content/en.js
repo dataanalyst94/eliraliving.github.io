@@ -13,7 +13,7 @@
   "meta": {
     "home": {
       "title": "Elira Living | Natural Vegan Skincare & Haircare — COSMOS Certified",
-      "description": "Vegan, ECOCERT COSMOS-certified natural skincare and haircare. Cruelty-free, made in the EU. Free climate-neutral shipping in Germany & the Netherlands.",
+      "description": "Vegan, ECOCERT COSMOS-certified natural skincare and haircare. Cruelty-free, made in the EU. Free climate-neutral shipping across the EU.",
       "keywords": "natural skincare, vegan skincare, COSMOS certified, organic skincare, natural haircare, cruelty-free cosmetics, clean beauty, ECOCERT, made in EU, vegan shampoo, purifying toner"
     },
     "shop": {
@@ -26,7 +26,7 @@
       "description": "Elira Living makes vegan, ECOCERT COSMOS-certified skincare and haircare — clean, effective formulas rooted in nature and responsibly made in the EU.",
       "keywords": "about Elira Living, clean beauty brand, vegan cosmetics Europe, ECOCERT COSMOS, sustainable skincare, natural beauty"
     },
-    "productShippingNote": "Vegan, ECOCERT COSMOS certified. Free shipping in DE & NL on every order.",
+    "productShippingNote": "Vegan, ECOCERT COSMOS certified. Free shipping across the EU on every order.",
     "impressum": {
       "title": "Impressum / Legal Notice | Elira Living"
     },
@@ -64,9 +64,9 @@
     "nav.certifications": "Certifications",
     "trust.kicker": "Real routines",
     "trust.title": "Made for real skin, in real life",
-    "trust.lead": "From first cleanse to evening serum — Elira fits quietly into everyday routines across Germany and the Netherlands.",
+    "trust.lead": "From first cleanse to evening serum — Elira fits quietly into everyday routines across the EU.",
     "nav.cart": "Cart",
-    "announce.1": "Free shipping in DE & NL — on every order",
+    "announce.1": "Free shipping across the EU — on every order",
     "announce.2": "Climate-neutral delivery · 3–7 working days",
     "announce.3": "Vegan & cruelty-free",
     "hero.kicker": "Clean beauty, certified",
@@ -115,7 +115,7 @@
     "value.1.t": "Vegan & Clean",
     "value.1.d": "Free from parabens, sulfates and animal testing — always.",
     "value.2.t": "Climate-neutral",
-    "value.2.d": "Offset CO₂ delivery across Germany and the Netherlands.",
+    "value.2.d": "Offset CO₂ delivery across the EU.",
     "value.3.t": "COSMOS Certified",
     "value.3.d": "Independently certified natural by ECOCERT COSMOS.",
     "value.4.t": "Pay securely",
@@ -159,7 +159,7 @@
     "pdp.details": "Details",
     "pdp.ingredients": "Ingredients (INCI)",
     "pdp.shipping": "Shipping",
-    "pdp.shippingText": "Free, climate-neutral shipping in DE & NL on every order. Delivery in 3–7 working days from the EU.",
+    "pdp.shippingText": "Free, climate-neutral shipping across the EU on every order — same price, no delivery fee. Dispatched from the EU, typically 3–7 working days.",
     "pdp.related": "You may also like",
     "pdp.back": "Back to shop",
     "cart.title": "Cart",
