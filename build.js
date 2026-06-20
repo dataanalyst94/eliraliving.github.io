@@ -1115,6 +1115,14 @@ function writeSitemap() {
       `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE + url(it.page, "en", it.p)}"/>`;
     urls += `  <url>\n    <loc>${loc}</loc>\n${alts}\n    <lastmod>${lastmod}</lastmod>\n${it.cf ? `    <changefreq>${it.cf}</changefreq>\n` : ""}    <priority>${it.pr}</priority>\n  </url>\n`;
   }));
+  // Standalone research / PR assets that live outside the generated /en/de/nl
+  // tree (the clean() step never touches these). Single-language, no hreflang.
+  const STATIC_EXTRAS = [
+    { loc: "/research/sensitive-skin-statistics-2026.html", pr: "0.7", cf: "monthly" }
+  ];
+  STATIC_EXTRAS.forEach(it => {
+    urls += `  <url>\n    <loc>${BASE + it.loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n${it.cf ? `    <changefreq>${it.cf}</changefreq>\n` : ""}    <priority>${it.pr}</priority>\n  </url>\n`;
+  });
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}</urlset>\n`;
   write("sitemap.xml", xml);
 }
