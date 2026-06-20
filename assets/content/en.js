@@ -75,6 +75,7 @@
     "hero.lead": "Vegan, ECOCERT COSMOS–certified formulas — gentle, effective, and made in Europe.",
     "hero.cta": "Shop the collection",
     "hero.cta2": "Our story",
+    "hero.shipNote": "Free delivery across all 27 EU countries — same price, no fees",
     "hero.badge1": "COSMOS",
     "hero.badge2": "Natural certified",
     "chapter.kicker": "The moisturiser",

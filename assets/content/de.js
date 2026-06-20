@@ -75,6 +75,7 @@
     "hero.lead": "Vegane, ECOCERT COSMOS-zertifizierte Formeln — sanft, wirksam und in Europa hergestellt.",
     "hero.cta": "Zur Kollektion",
     "hero.cta2": "Unsere Geschichte",
+    "hero.shipNote": "Kostenlose Lieferung in alle 27 EU-Länder — gleicher Preis, keine Gebühren",
     "hero.badge1": "COSMOS",
     "hero.badge2": "Natural zertifiziert",
     "chapter.kicker": "Die Feuchtigkeitspflege",
