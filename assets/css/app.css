@@ -156,6 +156,24 @@ h1,h2,h3,h4{ letter-spacing:-.01em; margin:0; }
 @media(min-width:760px){ .ing-card__media{ aspect-ratio:1/1; } }
 .ing-card__media img{ width:100%; height:100%; object-fit:cover; }
 
+/* Certifications page */
+.cert-section__title{ font-size:clamp(1.6rem,3.5vw,2.2rem); margin-bottom:.5rem; }
+.cert-section__lead{ font-size:.95rem; margin-bottom:2.25rem; }
+.cert-cards{ display:grid; grid-template-columns:1fr; gap:1.25rem; }
+@media(min-width:600px){ .cert-cards{ grid-template-columns:repeat(2,1fr); } }
+@media(min-width:900px){ .cert-cards{ grid-template-columns:repeat(3,1fr); } }
+.cert-card{ border:1px solid var(--line); border-radius:10px; background:var(--surface); padding:1.75rem; display:flex; flex-direction:column; gap:.6rem; }
+.cert-card__num{ font-size:.65rem; letter-spacing:.22em; color:var(--muted); }
+.cert-card__badge{ font-family:'Jost',sans-serif; font-size:.7rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(200,162,78,.35); background:rgba(200,162,78,.08); padding:.3rem .65rem; display:inline-block; border-radius:2px; width:fit-content; }
+.cert-card__name{ font-size:1.25rem; line-height:1.15; margin:.15rem 0 0; }
+.cert-card__body{ font-size:.78rem; color:var(--muted); letter-spacing:.02em; }
+.cert-card__desc{ font-size:.88rem; color:var(--ink-soft); line-height:1.7; margin-top:.25rem; flex:1; }
+.cert-card__prohibits{ margin-top:.75rem; padding-top:.75rem; border-top:1px solid var(--line); }
+.cert-card__prohibits ul{ list-style:none; padding:0; margin:.4rem 0 0; display:flex; flex-direction:column; gap:.3rem; }
+.cert-card__prohibits li{ font-size:.8rem; color:var(--ink-soft); padding-left:1rem; position:relative; }
+.cert-card__prohibits li::before{ content:"✕"; position:absolute; left:0; color:var(--muted); font-size:.65rem; top:.1em; }
+.cert-card__applies{ margin-top:.75rem; padding-top:.75rem; border-top:1px solid var(--line); font-size:.8rem; color:var(--ink-soft); }
+
 /* PDP */
 .pdp-trust{ display:grid; grid-template-columns:1fr 1fr; gap:.75rem 1.25rem; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--line); }
 .pdp-trust__item{ display:flex; align-items:center; gap:.6rem; font-size:.82rem; color:var(--ink-soft); line-height:1.2; }

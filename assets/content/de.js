@@ -47,6 +47,11 @@
     },
     "cancel": {
       "title": "Zahlung abgebrochen | Elira Living"
+    },
+    "certifications": {
+      "title": "Unsere Zertifizierungen | ECOCERT COSMOS, Vegan & mehr | Elira Living",
+      "description": "Jedes Elira-Living-Produkt wird unabhängig geprüft und zertifiziert — ECOCERT COSMOS Organic & Natural, 100 % vegan, tierversuchsfrei und unter GMP-zertifizierten Bedingungen hergestellt.",
+      "keywords": "ECOCERT COSMOS zertifizierte Hautpflege, COSMOS Natural, COSMOS Organic, vegane Kosmetik Zertifizierung, tierversuchsfreie Hautpflege, GMP zertifizierte Kosmetik, B Corp Schönheitsmarke"
     }
   },
   "ui": {
@@ -56,6 +61,7 @@
     "nav.haircare": "Haarpflege",
     "nav.about": "Über uns",
     "nav.ingredients": "Über Inhaltsstoffe",
+    "nav.certifications": "Zertifizierungen",
     "trust.kicker": "Echte Routinen",
     "trust.title": "Gemacht für echte Haut, im echten Leben",
     "trust.lead": "Von der ersten Reinigung bis zum Abend-Serum — Elira fügt sich leise in den Alltag in Deutschland und den Niederlanden ein.",

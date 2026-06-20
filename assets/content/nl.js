@@ -47,6 +47,11 @@
     },
     "cancel": {
       "title": "Betaling geannuleerd | Elira Living"
+    },
+    "certifications": {
+      "title": "Onze Certificeringen | ECOCERT COSMOS, Vegan & meer | Elira Living",
+      "description": "Elk Elira Living-product wordt onafhankelijk gecontroleerd en gecertificeerd — ECOCERT COSMOS Organic & Natural, 100% veganistisch, cruelty-free en gemaakt onder GMP-gecertificeerde omstandigheden.",
+      "keywords": "ECOCERT COSMOS gecertificeerde huidverzorging, COSMOS Natural, COSMOS Organic, veganistische cosmetica certificering, cruelty-free huidverzorging, GMP gecertificeerde cosmetica, B Corp schoonheidsmerk"
     }
   },
   "ui": {
@@ -56,6 +61,7 @@
     "nav.haircare": "Haarverzorging",
     "nav.about": "Over ons",
     "nav.ingredients": "Over Ingrediënten",
+    "nav.certifications": "Certificeringen",
     "trust.kicker": "Echte routines",
     "trust.title": "Gemaakt voor de echte huid, in het echte leven",
     "trust.lead": "Van de eerste reiniging tot het avondserum — Elira past stilletjes in dagelijkse routines in Duitsland en Nederland.",

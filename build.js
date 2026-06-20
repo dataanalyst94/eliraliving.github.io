@@ -109,6 +109,7 @@ function url(page, L, p) {
     case "shop": return P + "/shop.html";
     case "about": return P + "/about.html";
     case "ingredients": return P + "/ingredients.html";
+    case "certifications": return P + "/certifications.html";
     case "blog": return P + "/blog/";
     case "post": return P + "/blog/" + p.slug + ".html";
     case "cart": return P + "/cart.html";
@@ -192,6 +193,7 @@ function header(L, current) {
     <a href="${P}/blog/" class="nav-link" ${cur("blog")}>${esc(BLOG_UI[L].nav)}</a>
     <a href="${P}/about.html" class="nav-link" ${cur("about")}>${T(L, "nav.about")}</a>
     <a href="${P}/ingredients.html" class="nav-link" ${cur("ingredients")}>${T(L, "nav.ingredients")}</a>
+    <a href="${P}/certifications.html" class="nav-link" ${cur("certifications")}>${T(L, "nav.certifications")}</a>
   </nav>
   <div class="nav-actions">
     <select class="lang-select" data-lang aria-label="Language"><option value="de">DE</option><option value="nl">NL</option><option value="en">EN</option></select>
@@ -212,7 +214,7 @@ function footer(L) {
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.help")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
       ${li(P + "/withdrawal.html", T(L, "foot.shipping"))}${li(P + "/terms.html", T(L, "foot.faq"))}${li("mailto:support@eliraliving.com", T(L, "foot.contact"))}</ul></div>
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.company")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
-      ${li(P + "/about.html", T(L, "foot.about"))}${li(P + "/blog/", esc(BLOG_UI[L].nav))}${li(P + "/ingredients.html", esc(INGREDIENTS_PAGE[L].title))}${li(P + "/privacy.html", T(L, "foot.privacy"))}${li(P + "/impressum.html", T(L, "foot.imprint"))}</ul></div>
+      ${li(P + "/about.html", T(L, "foot.about"))}${li(P + "/blog/", esc(BLOG_UI[L].nav))}${li(P + "/ingredients.html", esc(INGREDIENTS_PAGE[L].title))}${li(P + "/certifications.html", T(L, "nav.certifications"))}${li(P + "/privacy.html", T(L, "foot.privacy"))}${li(P + "/impressum.html", T(L, "foot.imprint"))}</ul></div>
   </div>
   <div style="margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;font-size:.75rem" class="muted">
     <div>© <span data-year></span> Elira Living · ${T(L, "foot.rights")}</div>
@@ -241,7 +243,7 @@ function drawerMenu(L) {
 <div class="mobile-menu" data-mobile-menu>
   <div style="display:flex;justify-content:space-between;align-items:center"><img src="/assets/img/brand/logo-white.png" alt="Elira Living" width="55" height="40" decoding="async">
     <button class="icon-btn" data-menu-close aria-label="Close"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-  <nav><a href="${P}/shop.html" data-nav="shop">${T(L, "nav.shop")}</a><a href="${P}/shop.html?category=skincare" data-nav="skincare">${T(L, "nav.skincare")}</a><a href="${P}/shop.html?category=haircare" data-nav="haircare">${T(L, "nav.haircare")}</a><a href="${P}/blog/">${esc(BLOG_UI[L].nav)}</a><a href="${P}/about.html">${T(L, "nav.about")}</a><a href="${P}/ingredients.html">${T(L, "nav.ingredients")}</a></nav>
+  <nav><a href="${P}/shop.html" data-nav="shop">${T(L, "nav.shop")}</a><a href="${P}/shop.html?category=skincare" data-nav="skincare">${T(L, "nav.skincare")}</a><a href="${P}/shop.html?category=haircare" data-nav="haircare">${T(L, "nav.haircare")}</a><a href="${P}/blog/">${esc(BLOG_UI[L].nav)}</a><a href="${P}/about.html">${T(L, "nav.about")}</a><a href="${P}/ingredients.html">${T(L, "nav.ingredients")}</a><a href="${P}/certifications.html">${T(L, "nav.certifications")}</a></nav>
   <div class="muted" style="margin-top:auto;font-size:.875rem">${T(L, "foot.tag")}</div>
 </div>`;
 }
@@ -749,6 +751,176 @@ function renderIngredients(L) {
   return shell(L, { page: "ingredients", bodyPage: "legal", current: "ingredients", title: ip.title + " | Elira Living", description: meta[L], keywords: "ingredients, INCI, natural skincare ingredients, vegan, ECOCERT COSMOS, salicylic acid, lavender water, Elira Living", ld: [ldOrg(), ldWebsite(L)] }, body);
 }
 
+/* ---- PAGE: CERTIFICATIONS --------------------------------------------- */
+const CERT_HERO = {
+  en: { kicker: "Certified clean", h1: "Every claim, independently verified.", lead: "We don't ask you to take our word for it. Every Elira Living product is audited and certified by recognised third-party bodies — because real transparency means showing your work. Below is a full account of every certification we carry, who granted it, and exactly what it means for you." },
+  de: { kicker: "Zertifiziert sauber", h1: "Jede Aussage, unabhängig geprüft.", lead: "Wir bitten Sie nicht, uns auf's Wort zu glauben. Jedes Elira-Living-Produkt wird von anerkannten unabhängigen Stellen geprüft und zertifiziert — weil echte Transparenz bedeutet, die eigene Arbeit offenzulegen. Hier finden Sie eine vollständige Übersicht aller unserer Zertifizierungen: wer sie vergeben hat und was das konkret für Sie bedeutet." },
+  nl: { kicker: "Gecertificeerd schoon", h1: "Elke claim, onafhankelijk geverifieerd.", lead: "We vragen je niet ons op ons woord te geloven. Elk Elira Living-product wordt gecontroleerd en gecertificeerd door erkende onafhankelijke instanties — want echte transparantie betekent je werk laten zien. Hieronder vind je een volledig overzicht van elke certificering die wij dragen, wie deze heeft verleend en wat dat precies voor jou betekent." },
+};
+const CERT_SEC = {
+  en: { prod: "Product certifications", prodLead: "Verified on every product we make.", mfg: "Manufacturing certifications", mfgLead: "How and where your products are made.", by: "Issued by", prohibits: "Prohibited by this standard", applies: "Applies to", cta: "Shop certified →" },
+  de: { prod: "Produktzertifizierungen", prodLead: "Auf jedem unserer Produkte geprüft.", mfg: "Herstellungszertifizierungen", mfgLead: "Wie und wo Ihre Produkte hergestellt werden.", by: "Ausgestellt von", prohibits: "Durch diesen Standard verboten", applies: "Gilt für", cta: "Zertifiziert einkaufen →" },
+  nl: { prod: "Productcertificeringen", prodLead: "Geverifieerd op elk product dat we maken.", mfg: "Productiecertificeringen", mfgLead: "Hoe en waar jouw producten worden gemaakt.", by: "Uitgegeven door", prohibits: "Verboden door deze standaard", applies: "Van toepassing op", cta: "Gecertificeerd winkelen →" },
+};
+const PROD_CERTS = [
+  {
+    num: "01", badge: "COSMOS ORGANIC",
+    name: { en: "ECOCERT COSMOS Organic", de: "ECOCERT COSMOS Organic", nl: "ECOCERT COSMOS Organic" },
+    body: "ECOCERT · COSMOS-standard AISBL",
+    desc: {
+      en: "The most rigorous tier of natural cosmetics certification. A minimum of 95% natural-origin ingredients is required across the formula. Additionally, at least 20% of the total product — and 95% of all plant-derived ingredients — must originate from certified organic farming. Every certified batch is independently audited on-site by ECOCERT inspectors.",
+      de: "Die strengste Stufe der Naturkosmetik-Zertifizierung. Mindestens 95 % der Zutaten müssen natürlichen Ursprungs sein. Zusätzlich müssen mindestens 20 % des Gesamtprodukts — und 95 % aller pflanzlichen Zutaten — aus zertifiziertem ökologischem Anbau stammen. Jede zertifizierte Charge wird von ECOCERT-Inspektoren unabhängig vor Ort kontrolliert.",
+      nl: "De meest rigoureuze categorie van certificering voor naturele cosmetica. Minimaal 95% van de ingrediënten moet van natuurlijke oorsprong zijn. Bovendien moet minimaal 20% van het totale product — en 95% van alle plantaardige ingrediënten — afkomstig zijn van gecertificeerde biologische landbouw. Elke gecertificeerde batch wordt ter plaatse onafhankelijk gecontroleerd door ECOCERT-inspecteurs.",
+    },
+    prohibits: {
+      en: ["Synthetic fragrances & colorants", "GMOs & nano-materials", "Mineral oils & silicones", "Parabens & phthalates"],
+      de: ["Synthetische Duftstoffe & Farbstoffe", "GVO & Nanomaterialien", "Mineralöle & Silikone", "Parabene & Phthalate"],
+      nl: ["Synthetische geurstoffen & kleurstoffen", "GGO's & nanomaterialen", "Minerale oliën & siliconen", "Parabenen & ftalaten"],
+    },
+    products: { en: "Sensitive Moisturizing Cream", de: "Feuchtigkeitscreme für empfindliche Haut", nl: "Hydraterende crème voor gevoelige huid" },
+  },
+  {
+    num: "02", badge: "COSMOS NATURAL",
+    name: { en: "ECOCERT COSMOS Natural", de: "ECOCERT COSMOS Natural", nl: "ECOCERT COSMOS Natural" },
+    body: "ECOCERT · COSMOS-standard AISBL",
+    desc: {
+      en: "Certified natural cosmetics standard requiring a minimum of 95% natural-origin ingredients. Synthetic fragrances, synthetic colorants, GMOs, mineral oils, and nano-materials are all explicitly prohibited. Full ingredient transparency is mandatory — every ingredient on the label has been audited and approved by ECOCERT.",
+      de: "Zertifizierter Standard für Naturkosmetik mit mindestens 95 % Inhaltsstoffen natürlichen Ursprungs. Synthetische Duftstoffe, Farbstoffe, GVO, Mineralöle und Nanomaterialien sind ausdrücklich verboten. Vollständige Inhaltsstofftransparenz ist verpflichtend — jeder Inhaltsstoff auf dem Etikett wurde von ECOCERT geprüft und genehmigt.",
+      nl: "Gecertificeerde standaard voor naturele cosmetica met minimaal 95% ingrediënten van natuurlijke oorsprong. Synthetische geurstoffen, kleurstoffen, GGO's, minerale oliën en nanomaterialen zijn allemaal uitdrukkelijk verboden. Volledige transparantie over ingrediënten is verplicht — elk ingrediënt op het etiket is gecontroleerd en goedgekeurd door ECOCERT.",
+    },
+    prohibits: {
+      en: ["Synthetic fragrances & colorants", "GMOs & nano-materials", "Mineral oils & silicones", "Parabens & phthalates"],
+      de: ["Synthetische Duftstoffe & Farbstoffe", "GVO & Nanomaterialien", "Mineralöle & Silikone", "Parabene & Phthalate"],
+      nl: ["Synthetische geurstoffen & kleurstoffen", "GGO's & nanomaterialen", "Minerale oliën & siliconen", "Parabenen & ftalaten"],
+    },
+    products: { en: "Radiant Glow Cleanser · Purifying Toner · Sensitive Scalp Shampoo · Bidens Pilosa Serum · Peptide Anti-Aging Serum", de: "Reinigungsgel · Klärendes Tonic · Sensitiv-Shampoo · Bidens-Pilosa-Serum · Peptid-Anti-Aging-Serum", nl: "Reiniger · Zuiverende toner · Sensitief shampoo · Bidens Pilosa Serum · Peptide Anti-Aging Serum" },
+  },
+  {
+    num: "03", badge: "100% VEGAN",
+    name: { en: "100% Vegan", de: "100 % Vegan", nl: "100% Veganistisch" },
+    body: { en: "Verified at formulation level", de: "Auf Formulierungsebene geprüft", nl: "Geverifieerd op formuleringssniveau" },
+    desc: {
+      en: "Every Elira Living formula contains zero animal-derived ingredients — no beeswax, no lanolin, no collagen, no carmine, no honey, no keratin. Verified at the ingredient level by ECOCERT as part of the COSMOS certification process, with every raw material cross-checked against the COSMOS approved ingredient list.",
+      de: "Jede Elira-Living-Formel enthält keinerlei tierische Zutaten — kein Bienenwachs, kein Lanolin, kein Kollagen, kein Karmin, keinen Honig, kein Keratin. Auf Rohstoffebene von ECOCERT im Rahmen der COSMOS-Zertifizierung geprüft, mit Überprüfung jedes Rohstoffs anhand der zugelassenen COSMOS-Inhaltsstoffliste.",
+      nl: "Elke Elira Living-formule bevat nul ingrediënten van dierlijke oorsprong — geen bijenwas, geen lanoline, geen collageen, geen karmijn, geen honing, geen keratine. Geverifieerd op ingrediëntenniveau door ECOCERT als onderdeel van de COSMOS-certificering, met controle van elk grondstofelement aan de hand van de goedgekeurde COSMOS-ingrediëntenlijst.",
+    },
+    prohibits: null,
+    products: { en: "All products", de: "Alle Produkte", nl: "Alle producten" },
+  },
+  {
+    num: "04", badge: "CRUELTY-FREE",
+    name: { en: "Cruelty-free", de: "Tierversuchsfrei", nl: "Cruelty-free" },
+    body: { en: "No animal testing, at any stage", de: "Keine Tierversuche — auf keiner Stufe", nl: "Geen dierproeven, in geen enkele fase" },
+    desc: {
+      en: "No animal testing is conducted at any stage of development or production — not on ingredients, not on finished products, and not by any third party acting on our behalf. This applies across the entire supply chain, from raw material sourcing through manufacturing to final packaging.",
+      de: "Auf keiner Stufe der Entwicklung oder Herstellung werden Tierversuche durchgeführt — weder an Inhaltsstoffen noch am fertigen Produkt, noch durch Dritte in unserem Auftrag. Dies gilt für die gesamte Lieferkette, von der Rohstoffbeschaffung über die Herstellung bis zur finalen Verpackung.",
+      nl: "Er worden geen dierproeven uitgevoerd in welke fase van ontwikkeling of productie dan ook — niet op ingrediënten, niet op eindproducten, en niet door derden die namens ons handelen. Dit geldt voor de gehele toeleveringsketen, van inkoop van grondstoffen via productie tot eindverpakking.",
+    },
+    prohibits: null,
+    products: { en: "All products", de: "Alle Produkte", nl: "Alle producten" },
+  },
+  {
+    num: "05", badge: "DERM. TESTED",
+    name: { en: "Dermatologically tested", de: "Dermatologisch getestet", nl: "Dermatologisch getest" },
+    body: { en: "Tested under dermatological supervision", de: "Unter dermatologischer Aufsicht getestet", nl: "Getest onder dermatologisch toezicht" },
+    desc: {
+      en: "The Sensitive Scalp Shampoo has been tested under dermatological supervision with human volunteers, confirming suitability for sensitive and reactive scalps. The test is conducted by an independent laboratory and certified by a qualified dermatologist. Results are held on file with our manufacturing partner.",
+      de: "Das Sensitiv-Shampoo für die Kopfhaut wurde unter dermatologischer Aufsicht mit menschlichen Probanden getestet und für empfindliche sowie reaktive Kopfhaut geeignet befunden. Der Test wird von einem unabhängigen Labor durchgeführt und von einem qualifizierten Dermatologen zertifiziert.",
+      nl: "De shampoo voor gevoelige hoofdhuid is getest onder dermatologisch toezicht met menselijke vrijwilligers, wat bevestigt dat het geschikt is voor gevoelige en reactieve hoofdhuiden. De test wordt uitgevoerd door een onafhankelijk laboratorium en gecertificeerd door een gekwalificeerde dermatoloog.",
+    },
+    prohibits: null,
+    products: { en: "Sensitive Scalp Shampoo", de: "Sensitiv-Shampoo für die Kopfhaut", nl: "Shampoo voor gevoelige hoofdhuid" },
+  },
+];
+const MFG_CERTS = [
+  {
+    num: "06", badge: "GMP",
+    name: { en: "GMP Certified Manufacturing", de: "GMP-zertifizierte Herstellung", nl: "GMP-gecertificeerde productie" },
+    body: "ISO 22716 · Good Manufacturing Practices for cosmetics",
+    desc: {
+      en: "Our EU manufacturing partner holds ISO 22716 Good Manufacturing Practice certification — the international standard governing facility hygiene, quality control systems, ingredient traceability, production documentation, and staff training. Every batch produced for Elira Living is made under audited conditions that meet or exceed this standard.",
+      de: "Unser EU-Herstellungspartner hält die Zertifizierung nach ISO 22716 Good Manufacturing Practice — dem internationalen Standard für Anlagenhygiene, Qualitätskontrollsysteme, Rückverfolgbarkeit von Inhaltsstoffen, Produktionsdokumentation und Mitarbeiterschulung. Jede für Elira Living produzierte Charge wird unter geprüften Bedingungen hergestellt.",
+      nl: "Onze EU-productiepartner beschikt over ISO 22716 Good Manufacturing Practice-certificering — de internationale standaard voor faciliteitshygiëne, kwaliteitscontrolesystemen, traceerbaarheid van ingrediënten, productiedocumentatie en personeelstraining. Elke voor Elira Living geproduceerde batch wordt geproduceerd onder gecontroleerde omstandigheden.",
+    },
+    prohibits: null,
+    products: null,
+  },
+  {
+    num: "07", badge: "B CORP",
+    name: { en: "B Corp Certified Partner", de: "B-Corp-zertifizierter Partner", nl: "B Corp gecertificeerde partner" },
+    body: "B Lab · B Corporation Certification",
+    desc: {
+      en: "Selfnamed, our EU manufacturing partner, is certified by B Lab — the global non-profit that independently verifies companies against rigorous standards for social impact, environmental responsibility, and governance. B Corp certification requires companies to score across workers, community, environment, and customers, and undergo on-site verification every three years.",
+      de: "Selfnamed, unser EU-Herstellungspartner, ist von B Lab zertifiziert — der globalen Non-Profit-Organisation, die Unternehmen unabhängig nach strengen Standards für soziale Wirkung, ökologische Verantwortung und Governance prüft. Die B-Corp-Zertifizierung erfordert Nachweise in den Bereichen Mitarbeiter, Gemeinschaft, Umwelt und Kunden sowie alle drei Jahre eine Vor-Ort-Prüfung.",
+      nl: "Selfnamed, onze EU-productiepartner, is gecertificeerd door B Lab — de wereldwijde non-profitorganisatie die bedrijven onafhankelijk verifieert aan de hand van strenge normen voor sociale impact, milieubewustzijn en governance. B Corp-certificering vereist scores op het gebied van werknemers, gemeenschap, milieu en klanten, en een verificatie ter plaatse elke drie jaar.",
+    },
+    prohibits: null,
+    products: null,
+  },
+  {
+    num: "08", badge: "BUREAU VERITAS",
+    name: { en: "Bureau Veritas Verified", de: "Bureau Veritas geprüft", nl: "Bureau Veritas geverifieerd" },
+    body: "Bureau Veritas · Independent Quality & Safety Assurance",
+    desc: {
+      en: "Independently verified by Bureau Veritas — one of the world's leading testing, inspection, and certification organisations, active in over 140 countries. Their verification of our manufacturing partner covers quality management systems, safety standards, and regulatory compliance across facilities and production processes.",
+      de: "Unabhängig geprüft von Bureau Veritas — einer der führenden Prüf-, Inspektions- und Zertifizierungsorganisationen der Welt, tätig in über 140 Ländern. Ihre Überprüfung unseres Herstellungspartners umfasst Qualitätsmanagementsysteme, Sicherheitsstandards und regulatorische Konformität.",
+      nl: "Onafhankelijk geverifieerd door Bureau Veritas — een van 's werelds toonaangevende test-, inspectie- en certificeringsorganisaties, actief in meer dan 140 landen. Hun verificatie van onze productiepartner omvat kwaliteitsmanagementsystemen, veiligheidsnormen en naleving van regelgeving.",
+    },
+    prohibits: null,
+    products: null,
+  },
+];
+
+function certCard(L, c, isMfg) {
+  const sec = CERT_SEC[L];
+  const body = typeof c.body === "object" ? c.body[L] : c.body;
+  const prohibitsList = c.prohibits
+    ? `<div class="cert-card__prohibits"><div class="kicker" style="font-size:.6rem;margin-bottom:.5rem">${esc(sec.prohibits)}</div><ul>${c.prohibits[L].map(p => `<li>${esc(p)}</li>`).join("")}</ul></div>`
+    : "";
+  const productsPill = c.products
+    ? `<div class="cert-card__applies"><span class="kicker" style="font-size:.6rem">${esc(sec.applies)}:</span> <span>${esc(c.products[L])}</span></div>`
+    : (isMfg ? `<div class="cert-card__applies"><span class="kicker" style="font-size:.6rem">${esc(sec.applies)}:</span> <span>${L === "de" ? "Alle Produkte" : L === "nl" ? "Alle producten" : "All products"}</span></div>` : "");
+  return `<article class="cert-card reveal">
+  <div class="cert-card__num">${c.num}</div>
+  <div class="cert-card__badge">${esc(c.badge)}</div>
+  <h3 class="cert-card__name font-display">${esc(c.name[L])}</h3>
+  <div class="cert-card__body">${esc(body)}</div>
+  <p class="cert-card__desc">${esc(c.desc[L])}</p>
+  ${prohibitsList}
+  ${productsPill}
+</article>`;
+}
+
+function renderCertifications(L) {
+  const h = CERT_HERO[L];
+  const sec = CERT_SEC[L];
+  const prodCards = PROD_CERTS.map(c => certCard(L, c, false)).join("\n");
+  const mfgCards = MFG_CERTS.map(c => certCard(L, c, true)).join("\n");
+  const m = meta(L).certifications;
+  const body = `<main class="page-main"><div class="container cert-page" style="padding-bottom:6rem">
+  <div class="kicker" style="margin-bottom:.75rem">${esc(h.kicker)}</div>
+  <h1 class="font-display reveal" style="font-size:clamp(2.4rem,6vw,3.6rem);max-width:22rem">${esc(h.h1)}</h1>
+  <p class="reveal" style="margin-top:1.25rem;font-size:1.05rem;color:var(--ink-soft);max-width:48rem;line-height:1.75">${esc(h.lead)}</p>
+
+  <div class="cert-section" style="margin-top:4.5rem">
+    <h2 class="font-display cert-section__title">${esc(sec.prod)}</h2>
+    <p class="cert-section__lead muted">${esc(sec.prodLead)}</p>
+    <div class="cert-cards">${prodCards}</div>
+  </div>
+
+  <div class="cert-section" style="margin-top:5rem">
+    <h2 class="font-display cert-section__title">${esc(sec.mfg)}</h2>
+    <p class="cert-section__lead muted">${esc(sec.mfgLead)}</p>
+    <div class="cert-cards cert-cards--mfg">${mfgCards}</div>
+  </div>
+
+  <div style="margin-top:4rem;text-align:center">
+    <a href="${url("shop", L)}" class="btn btn-primary">${esc(sec.cta)}</a>
+  </div>
+</div></main>`;
+  return shell(L, { page: "certifications", bodyPage: "legal", current: "certifications", title: m.title, description: m.description, keywords: m.keywords, ld: [ldOrg(), ldWebsite(L)] }, body);
+}
+
 /* ---- PAGE: BLOG / JOURNAL (Phase 1 — SEO content engine) -------------- */
 const slugify = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
 function blogDate(L, iso) {
@@ -904,6 +1076,7 @@ function build() {
     write(`${L}/shop.html`, renderShop(L)); count++;
     write(`${L}/about.html`, renderAbout(L)); count++;
     write(`${L}/ingredients.html`, renderIngredients(L)); count++;
+    write(`${L}/certifications.html`, renderCertifications(L)); count++;
     write(`${L}/blog/index.html`, renderBlogIndex(L)); count++;
     POSTS.forEach(post => { write(`${L}/blog/${post.slug}.html`, renderPost(L, post)); count++; });
     write(`${L}/cart.html`, renderCart(L)); count++;
@@ -1100,6 +1273,7 @@ function writeSitemap() {
       { page: "shop", pr: "0.9", cf: "weekly" },
       { page: "about", pr: "0.6" },
       { page: "ingredients", pr: "0.7" },
+      { page: "certifications", pr: "0.7" },
       { page: "blog", pr: "0.7", cf: "weekly" },
       { page: "impressum", pr: "0.2" }, { page: "privacy", pr: "0.2" }, { page: "terms", pr: "0.2" }, { page: "withdrawal", pr: "0.2" }
     ];
