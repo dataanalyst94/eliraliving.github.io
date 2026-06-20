@@ -186,11 +186,12 @@ function header(L, current) {
     <a href="${P}/" class="brand" aria-label="Elira Living — home"><img src="/assets/img/brand/logo-white.png" alt="Elira Living" class="brand-logo" width="44" height="32" decoding="async"></a>
   </div>
   <nav class="nav-links">
-    <a href="${P}/shop.html" class="nav-link" ${cur("shop")}>${T(L, "nav.shop")}</a>
-    <a href="${P}/shop.html?category=skincare" class="nav-link">${T(L, "nav.skincare")}</a>
-    <a href="${P}/shop.html?category=haircare" class="nav-link">${T(L, "nav.haircare")}</a>
+    <a href="${P}/shop.html" class="nav-link" data-nav="shop" ${cur("shop")}>${T(L, "nav.shop")}</a>
+    <a href="${P}/shop.html?category=skincare" class="nav-link" data-nav="skincare">${T(L, "nav.skincare")}</a>
+    <a href="${P}/shop.html?category=haircare" class="nav-link" data-nav="haircare">${T(L, "nav.haircare")}</a>
     <a href="${P}/blog/" class="nav-link" ${cur("blog")}>${esc(BLOG_UI[L].nav)}</a>
     <a href="${P}/about.html" class="nav-link" ${cur("about")}>${T(L, "nav.about")}</a>
+    <a href="${P}/ingredients.html" class="nav-link" ${cur("ingredients")}>${T(L, "nav.ingredients")}</a>
   </nav>
   <div class="nav-actions">
     <select class="lang-select" data-lang aria-label="Language"><option value="de">DE</option><option value="nl">NL</option><option value="en">EN</option></select>
@@ -240,7 +241,7 @@ function drawerMenu(L) {
 <div class="mobile-menu" data-mobile-menu>
   <div style="display:flex;justify-content:space-between;align-items:center"><img src="/assets/img/brand/logo-white.png" alt="Elira Living" width="55" height="40" decoding="async">
     <button class="icon-btn" data-menu-close aria-label="Close"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-  <nav><a href="${P}/shop.html">${T(L, "nav.shop")}</a><a href="${P}/shop.html?category=skincare">${T(L, "nav.skincare")}</a><a href="${P}/shop.html?category=haircare">${T(L, "nav.haircare")}</a><a href="${P}/blog/">${esc(BLOG_UI[L].nav)}</a><a href="${P}/about.html">${T(L, "nav.about")}</a></nav>
+  <nav><a href="${P}/shop.html" data-nav="shop">${T(L, "nav.shop")}</a><a href="${P}/shop.html?category=skincare" data-nav="skincare">${T(L, "nav.skincare")}</a><a href="${P}/shop.html?category=haircare" data-nav="haircare">${T(L, "nav.haircare")}</a><a href="${P}/blog/">${esc(BLOG_UI[L].nav)}</a><a href="${P}/about.html">${T(L, "nav.about")}</a><a href="${P}/ingredients.html">${T(L, "nav.ingredients")}</a></nav>
   <div class="muted" style="margin-top:auto;font-size:.875rem">${T(L, "foot.tag")}</div>
 </div>`;
 }
@@ -374,6 +375,26 @@ function reviewCard(L, r, i) {
     </figcaption>
   </figure>`;
 }
+// Lifestyle "trust strip" — real people using the real products. Strong social
+// proof / trust signal placed just before the written reviews on the home page.
+const TRUST_IMGS = [
+  ["/assets/img/lifestyle/hold-serum-f.jpg", "A woman holding the Elira peptide serum"],
+  ["/assets/img/lifestyle/hold-cleanser-f.jpg", "A woman with the Elira cleanser"],
+  ["/assets/img/lifestyle/hold-shampoo-m.jpg", "A man holding the Elira shampoo"],
+  ["/assets/img/lifestyle/ritual.jpg", "A calm skincare ritual moment"],
+];
+function trustStrip(L) {
+  const items = TRUST_IMGS.map(([src, alt]) =>
+    `<figure class="trust-strip__item reveal" style="margin:0">${pic(src, `alt="${escA(alt)}" loading="lazy" decoding="async"`, "(min-width:760px) 22vw, 45vw")}</figure>`).join("");
+  return `<section class="container" style="padding:5rem 1.25rem 4rem">
+    <div style="text-align:center;max-width:38rem;margin:0 auto 2.75rem">
+      <div class="kicker reveal" style="margin-bottom:.75rem">${T(L, "trust.kicker")}</div>
+      <h2 class="font-display reveal" style="font-size:clamp(2rem,4.5vw,3rem);line-height:1.08">${T(L, "trust.title")}</h2>
+      <p class="muted reveal" style="margin-top:1rem">${T(L, "trust.lead")}</p>
+    </div>
+    <div class="trust-strip">${items}</div>
+  </section>`;
+}
 function reviewsSection(L) {
   const ui = REVIEW_UI[L];
   const n = REVIEWS.length;
@@ -498,7 +519,7 @@ function renderHome(L) {
   </section>
 
   <section class="split">
-    <div class="split-media" data-split>${pic("/assets/img/cream.jpg", `alt="${escA(t(L, "about.kicker"))}" loading="lazy" decoding="async"`, "(min-width:880px) 50vw, 100vw")}</div>
+    <div class="split-media" data-split>${pic("/assets/img/lifestyle/hold-cream-f.jpg", `alt="${escA(t(L, "story.title"))}" loading="lazy" decoding="async"`, "(min-width:880px) 50vw, 100vw")}</div>
     <div style="display:flex;align-items:center;background:var(--bg2);padding:5rem 1.5rem">
       <div style="max-width:28rem">
         <div class="kicker reveal" style="margin-bottom:.75rem">${T(L, "story.kicker")}</div>
@@ -513,6 +534,8 @@ function renderHome(L) {
       </div>
     </div>
   </section>
+
+  ${trustStrip(L)}
 
   ${reviewsSection(L)}
 
@@ -637,27 +660,51 @@ function renderProduct(L, p) {
 /* ---- PAGE: ABOUT ------------------------------------------------------- */
 function renderAbout(L) {
   const m = meta(L).about; const P = "/" + L;
+  const imgStyle = `style="width:100%;height:100%;object-fit:cover"`;
   const body = `<main class="page-main">
-  <section class="container" style="text-align:center;padding-bottom:4rem">
+  <section class="container" style="text-align:center;padding-bottom:3.5rem">
     <div class="kicker reveal in" style="margin-bottom:1rem">${T(L, "about.kicker")}</div>
     <h1 class="font-display reveal in" style="font-size:clamp(2.6rem,7vw,5rem);line-height:1;max-width:60rem;margin:0 auto">${T(L, "about.title")}</h1>
     <p class="muted reveal in" style="margin-top:1.5rem;font-size:1.125rem;max-width:36rem;margin-left:auto;margin-right:auto">${T(L, "about.lead")}</p>
   </section>
-  <section style="max-width:72rem;margin:0 auto;padding:0 1.25rem">
-    <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line)" class="reveal">${pic("/assets/img/cream.jpg", `alt="${escA(t(L, "about.kicker"))}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover"`, "(min-width:1040px) 60rem, 100vw")}</div>
-  </section>
-  <section style="max-width:46rem;margin:0 auto;padding:5rem 1.25rem">
-    <p class="font-display reveal" style="font-size:clamp(1.4rem,3vw,2rem);line-height:1.4">${T(L, "about.body1")}</p>
-    <p class="reveal reveal-d1" style="margin-top:2rem;font-size:1.05rem;line-height:1.7;color:var(--ink-soft)">${T(L, "about.body2")}</p>
-  </section>
-  <section style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-    <div class="container" style="padding:5rem 1.25rem;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;text-align:center">
-      <div class="reveal"><div class="font-display" style="font-size:clamp(2.5rem,5vw,3.5rem)">≤99%</div><div class="muted" style="font-size:.8rem;margin-top:.5rem">${T(L, "about.stat1")}</div></div>
-      <div class="reveal reveal-d1"><div class="font-display" style="font-size:clamp(2.5rem,5vw,3.5rem)">100%</div><div class="muted" style="font-size:.8rem;margin-top:.5rem">${T(L, "about.stat2")}</div></div>
-      <div class="reveal reveal-d2"><div class="font-display" style="font-size:clamp(2.5rem,5vw,3.5rem)">0</div><div class="muted" style="font-size:.8rem;margin-top:.5rem">${T(L, "about.stat3")}</div></div>
+
+  <section class="container" style="padding:1rem 1.25rem 1.5rem">
+    <div class="about-split">
+      <div class="about-split__media reveal">${pic("/assets/img/lifestyle/calm.jpg", `alt="${escA(t(L, "about.storyTitle"))}" fetchpriority="high" decoding="async" ${imgStyle}`, "(min-width:880px) 40vw, 100vw")}</div>
+      <div class="about-split__text">
+        <div class="kicker reveal" style="margin-bottom:.75rem">${T(L, "about.storyKicker")}</div>
+        <h2 class="font-display reveal" style="font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.12">${T(L, "about.storyTitle")}</h2>
+        <p class="reveal" style="margin-top:1.5rem;line-height:1.7;color:var(--ink-soft)">${T(L, "about.body1")}</p>
+        <p class="reveal reveal-d1" style="margin-top:1rem;line-height:1.7;color:var(--ink-soft)">${T(L, "about.story1")}</p>
+      </div>
     </div>
   </section>
-  <section class="container" style="padding:6rem 1.25rem;text-align:center">
+
+  <section style="max-width:46rem;margin:0 auto;padding:3rem 1.25rem 1rem">
+    <p class="reveal" style="font-size:1.05rem;line-height:1.7;color:var(--ink-soft)">${T(L, "about.story2")}</p>
+    <p class="reveal reveal-d1" style="margin-top:1.5rem;font-size:1.05rem;line-height:1.7;color:var(--ink-soft)">${T(L, "about.body2")}</p>
+  </section>
+
+  <section class="container" style="padding:3rem 1.25rem 4rem">
+    <figure class="reveal" style="margin:0">
+      <blockquote class="font-display" style="font-size:clamp(1.6rem,3.5vw,2.4rem);line-height:1.35;max-width:46rem;margin:0 auto;text-align:center">&ldquo;${T(L, "about.quote")}&rdquo;</blockquote>
+      <figcaption class="muted" style="text-align:center;margin-top:1.25rem;font-size:.9rem;letter-spacing:.02em">${T(L, "about.quoteAuthor")}</figcaption>
+    </figure>
+  </section>
+
+  <section style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="container about-values" style="padding:5rem 1.25rem">
+      ${[1, 2, 3].map(i => `<div class="reveal reveal-d${i - 1}"><div class="kicker" style="margin-bottom:.75rem">0${i}</div><h3 class="font-display" style="font-size:1.3rem;margin-bottom:.6rem">${T(L, "about.values" + i + "Title")}</h3><p class="muted" style="line-height:1.65;font-size:.95rem">${T(L, "about.values" + i + "Body")}</p></div>`).join("")}
+    </div>
+  </section>
+
+  <section class="container" style="padding:5rem 1.25rem;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;text-align:center">
+    <div class="reveal"><div class="font-display" style="font-size:clamp(2.5rem,5vw,3.5rem)">≤99%</div><div class="muted" style="font-size:.8rem;margin-top:.5rem">${T(L, "about.stat1")}</div></div>
+    <div class="reveal reveal-d1"><div class="font-display" style="font-size:clamp(2.5rem,5vw,3.5rem)">100%</div><div class="muted" style="font-size:.8rem;margin-top:.5rem">${T(L, "about.stat2")}</div></div>
+    <div class="reveal reveal-d2"><div class="font-display" style="font-size:clamp(2.5rem,5vw,3.5rem)">0</div><div class="muted" style="font-size:.8rem;margin-top:.5rem">${T(L, "about.stat3")}</div></div>
+  </section>
+
+  <section class="container" style="padding:1rem 1.25rem 6rem;text-align:center">
     <h2 class="font-display reveal" style="font-size:clamp(2rem,5vw,3rem);margin-bottom:2rem">${T(L, "story.title")}</h2>
     <a href="${P}/shop.html" class="btn btn-primary reveal reveal-d1">${T(L, "about.cta")}</a>
   </section>
@@ -666,28 +713,40 @@ function renderAbout(L) {
 }
 
 /* ---- PAGE: INGREDIENTS (AIEO) ----------------------------------------- */
+// Ingredient → photo slug (language-neutral; arrays are parallel across locales).
+const INGREDIENT_SLUGS = ["lavender", "cucumber", "salicylic-acid", "glycerin", "betaine", "plum", "linden", "coco-glucoside"];
+function ingImgPath(slug) { return path.join(ROOT, "assets", "img", "ingredients", slug + ".jpg"); }
 function renderIngredients(L) {
   const ip = INGREDIENTS_PAGE[L] || INGREDIENTS_PAGE.en;
   const list = INGREDIENTS[L] || INGREDIENTS.en;
-  const items = list.map(ing => `
-    <div style="border-top:1px solid var(--line);padding:1.5rem 0">
-      <h2 class="font-display" style="font-size:1.5rem">${esc(ing.name)}</h2>
-      <div class="muted" style="font-size:.8rem;letter-spacing:.04em;margin:.25rem 0 .75rem">INCI: ${esc(ing.inci)}</div>
-      <p style="margin:0 0 .5rem;color:var(--ink-soft)"><strong style="color:var(--ink)">${L === "de" ? "Was es ist" : L === "nl" ? "Wat het is" : "What it is"}:</strong> ${esc(ing.what)}</p>
-      <p style="margin:0;color:var(--ink-soft)"><strong style="color:var(--ink)">${L === "de" ? "Warum wir es verwenden" : L === "nl" ? "Waarom wij het gebruiken" : "Why we use it"}:</strong> ${esc(ing.why)}</p>
-    </div>`).join("");
-  const body = `<main class="page-main"><div class="container" style="max-width:52rem;padding-bottom:6rem">
+  const whatH = L === "de" ? "Was es ist" : L === "nl" ? "Wat het is" : "What it is";
+  const whyH = L === "de" ? "Warum wir es verwenden" : L === "nl" ? "Waarom wij het gebruiken" : "Why we use it";
+  const items = list.map((ing, i) => {
+    const slug = INGREDIENT_SLUGS[i];
+    const hasImg = slug && fs.existsSync(ingImgPath(slug));
+    const media = hasImg ? `<div class="ing-card__media reveal">${pic("/assets/img/ingredients/" + slug + ".jpg", `alt="${escA(ing.name)}" loading="lazy" decoding="async"`, "(min-width:760px) 15rem, 100vw")}</div>` : "";
+    return `<article class="ing-card${hasImg ? "" : " ing-card--noimg"}">
+      ${media}
+      <div class="ing-card__body reveal">
+        <h2 class="font-display" style="font-size:1.5rem">${esc(ing.name)}</h2>
+        <div class="muted" style="font-size:.8rem;letter-spacing:.04em;margin:.25rem 0 .75rem">INCI: ${esc(ing.inci)}</div>
+        <p style="margin:0 0 .5rem;color:var(--ink-soft)"><strong style="color:var(--ink)">${whatH}:</strong> ${esc(ing.what)}</p>
+        <p style="margin:0;color:var(--ink-soft)"><strong style="color:var(--ink)">${whyH}:</strong> ${esc(ing.why)}</p>
+      </div>
+    </article>`;
+  }).join("");
+  const body = `<main class="page-main"><div class="container" style="max-width:60rem;padding-bottom:6rem">
   <div class="kicker" style="margin-bottom:.5rem">${T(L, "cat.kicker")}</div>
   <h1 class="font-display" style="font-size:clamp(2.4rem,6vw,3.6rem)">${esc(ip.title)}</h1>
-  <p style="margin-top:1rem;font-size:1.1rem;color:var(--ink-soft)">${esc(ip.lead)}</p>
-  <p style="margin-top:1rem;color:var(--ink-soft);line-height:1.7">${esc(ip.intro)}</p>
-  <div style="margin-top:2.5rem">${items}</div>
+  <p style="margin-top:1rem;font-size:1.1rem;color:var(--ink-soft);max-width:46rem">${esc(ip.lead)}</p>
+  <p style="margin-top:1rem;color:var(--ink-soft);line-height:1.7;max-width:46rem">${esc(ip.intro)}</p>
+  <div class="ing-list" style="margin-top:2.5rem">${items}</div>
   <div style="margin-top:3rem"><a href="${url("shop", L)}" class="btn btn-primary">${T(L, "best.viewall")}</a></div>
 </div></main>`;
   const meta = { en: "Vegan, ECOCERT COSMOS-certified ingredients — what's in Elira Living skincare & haircare and why.",
     de: "Vegane, ECOCERT COSMOS-zertifizierte Inhaltsstoffe — was in der Elira Living Haut- & Haarpflege steckt und warum.",
     nl: "Veganistische, ECOCERT COSMOS-gecertificeerde ingrediënten — wat er in Elira Living huid- & haarverzorging zit en waarom." };
-  return shell(L, { page: "ingredients", bodyPage: "legal", title: ip.title + " | Elira Living", description: meta[L], keywords: "ingredients, INCI, natural skincare ingredients, vegan, ECOCERT COSMOS, salicylic acid, lavender water, Elira Living", ld: [ldOrg(), ldWebsite(L)] }, body);
+  return shell(L, { page: "ingredients", bodyPage: "legal", current: "ingredients", title: ip.title + " | Elira Living", description: meta[L], keywords: "ingredients, INCI, natural skincare ingredients, vegan, ECOCERT COSMOS, salicylic acid, lavender water, Elira Living", ld: [ldOrg(), ldWebsite(L)] }, body);
 }
 
 /* ---- PAGE: BLOG / JOURNAL (Phase 1 — SEO content engine) -------------- */

@@ -37,13 +37,12 @@ const LEGAL = {
   <h2>7. Right of withdrawal</h2><p>14-day statutory right — see the <a href="{{withdrawalUrl}}" ${A}>Right of Withdrawal</a> page.</p>
   <h2>8. Cosmetics &amp; hygiene</h2><p>Sealed cosmetics unsealed after delivery are excluded from withdrawal where permitted by law.</p>
   <h2>9. Governing law</h2><p>Finnish law applies, without prejudice to mandatory consumer rights of your country of residence. EU ODR: ${ODR}.</p>` },
-    withdrawal: { title: "Right of Withdrawal", subtitle: "Your 14-day right to cancel · model form", body: `
+    withdrawal: { title: "Right of Withdrawal", subtitle: "Your 14-day right to cancel", body: `
   <h2>Right of withdrawal</h2><p>You may withdraw within 14 days without giving a reason, from the day you take possession of the goods.</p>
-  <p>Inform us — <strong>Elira Living</strong> (Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland · ${MAIL} — by a clear statement.</p>
-  <h2>Consequences</h2><p>We reimburse all payments including standard delivery within 14 days of being informed, via Stripe. We may withhold until goods are returned. You bear the direct cost of return.</p>
+  <p>To exercise it, inform us — <strong>Elira Living</strong> (Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland · ${MAIL} — with a clear statement of your decision (for example, by email). You may simply state that you wish to withdraw from your order, quoting your order number and date.</p>
+  <h2>Consequences</h2><p>We reimburse all payments including standard delivery within 14 days of being informed, via Stripe. We may withhold reimbursement until the goods are returned. You bear the direct cost of return.</p>
   <h3>Returns address</h3><p>Elira Living — Returns<br>Lapinrinne 1B, 606<br>00180 Helsinki, Finland</p>
-  <h2>Exclusions</h2><p>Sealed cosmetics (toners, shampoos) unsealed after delivery are excluded for hygiene reasons.</p>
-  <h2>Model withdrawal form</h2><table><tr><td>To Elira Living, Lapinrinne 1b, 00180 Helsinki, Finland — support@eliraliving.com:<br><br>I/We hereby withdraw from my/our contract of sale of the following goods:<br>____________________<br><br>Ordered/received on: ________ · Name: ________ · Address: ________ · Date: ________</td></tr></table>` }
+  <h2>Exclusions</h2><p>Sealed cosmetics (toners, shampoos) unsealed after delivery are excluded for hygiene reasons.</p>` }
   },
 
   de: {
@@ -72,13 +71,12 @@ const LEGAL = {
   <h2>7. Widerrufsrecht</h2><p>14-tägiges gesetzliches Widerrufsrecht — siehe Seite <a href="{{withdrawalUrl}}" ${A}>Widerrufsrecht</a>.</p>
   <h2>8. Kosmetik &amp; Hygiene</h2><p>Versiegelte Kosmetikprodukte, die nach der Lieferung entsiegelt wurden, sind vom Widerruf ausgeschlossen, soweit gesetzlich zulässig.</p>
   <h2>9. Anwendbares Recht</h2><p>Es gilt finnisches Recht, unbeschadet der zwingenden verbraucherschützenden Vorschriften Ihres Wohnsitzstaates. EU-Streitbeilegung: ${ODR}.</p>` },
-    withdrawal: { title: "Widerrufsrecht", subtitle: "Ihr 14-tägiges Widerrufsrecht · Muster-Widerrufsformular", body: `
+    withdrawal: { title: "Widerrufsrecht", subtitle: "Ihr 14-tägiges Widerrufsrecht", body: `
   <h2>Widerrufsrecht</h2><p>Sie haben das Recht, binnen 14 Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt 14 Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben.</p>
-  <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns — <strong>Elira Living</strong> (Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finnland · ${MAIL} — mittels einer eindeutigen Erklärung über Ihren Entschluss informieren.</p>
+  <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns — <strong>Elira Living</strong> (Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finnland · ${MAIL} — mittels einer eindeutigen Erklärung (z. B. per E-Mail) über Ihren Entschluss informieren. Es genügt, wenn Sie mitteilen, dass Sie Ihre Bestellung widerrufen, unter Angabe Ihrer Bestellnummer und des Bestelldatums.</p>
   <h2>Folgen des Widerrufs</h2><p>Wir erstatten Ihnen alle Zahlungen einschließlich der Standard-Lieferkosten unverzüglich und spätestens binnen 14 Tagen ab Eingang Ihrer Widerrufsmitteilung über Stripe zurück. Wir können die Rückzahlung verweigern, bis wir die Waren zurückerhalten haben. Sie tragen die unmittelbaren Kosten der Rücksendung.</p>
   <h3>Rücksendeadresse</h3><p>Elira Living — Retoure<br>Lapinrinne 1B, 606<br>00180 Helsinki, Finnland</p>
-  <h2>Ausschluss</h2><p>Versiegelte Kosmetik (Gesichtswasser, Shampoo), die nach Lieferung entsiegelt wurde, ist aus Hygienegründen vom Widerruf ausgeschlossen.</p>
-  <h2>Muster-Widerrufsformular</h2><table><tr><td>An Elira Living, Lapinrinne 1b, 00180 Helsinki, Finnland — support@eliraliving.com:<br><br>Hiermit widerrufe(n) ich/wir den von mir/uns abgeschlossenen Vertrag über den Kauf der folgenden Waren:<br>____________________<br><br>Bestellt am / erhalten am: ________ · Name: ________ · Anschrift: ________ · Datum: ________</td></tr></table>` }
+  <h2>Ausschluss</h2><p>Versiegelte Kosmetik (Gesichtswasser, Shampoo), die nach Lieferung entsiegelt wurde, ist aus Hygienegründen vom Widerruf ausgeschlossen.</p>` }
   },
 
   nl: {
@@ -107,13 +105,12 @@ const LEGAL = {
   <h2>7. Herroepingsrecht</h2><p>Wettelijk herroepingsrecht van 14 dagen — zie de pagina <a href="{{withdrawalUrl}}" ${A}>Herroepingsrecht</a>.</p>
   <h2>8. Cosmetica &amp; hygiëne</h2><p>Verzegelde cosmetica die na levering is ontzegeld, is uitgesloten van herroeping voor zover wettelijk toegestaan.</p>
   <h2>9. Toepasselijk recht</h2><p>Het Finse recht is van toepassing, onverminderd de dwingende consumentenrechten van je land van verblijf. EU-ODR: ${ODR}.</p>` },
-    withdrawal: { title: "Herroepingsrecht", subtitle: "Je herroepingsrecht van 14 dagen · modelformulier", body: `
+    withdrawal: { title: "Herroepingsrecht", subtitle: "Je herroepingsrecht van 14 dagen", body: `
   <h2>Herroepingsrecht</h2><p>Je hebt het recht om binnen 14 dagen zonder opgave van redenen de overeenkomst te herroepen, vanaf de dag waarop je de goederen in ontvangst neemt.</p>
-  <p>Informeer ons — <strong>Elira Living</strong> (Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland · ${MAIL} — via een ondubbelzinnige verklaring.</p>
+  <p>Om je herroepingsrecht uit te oefenen, informeer ons — <strong>Elira Living</strong> (Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland · ${MAIL} — via een ondubbelzinnige verklaring (bijvoorbeeld per e-mail). Je kunt eenvoudig melden dat je je bestelling herroept, met vermelding van je bestelnummer en besteldatum.</p>
   <h2>Gevolgen</h2><p>Wij betalen alle betalingen inclusief standaard leveringskosten binnen 14 dagen na ontvangst van je melding terug via Stripe. Wij mogen wachten tot de goederen retour zijn. Je draagt de directe kosten van retournering.</p>
   <h3>Retouradres</h3><p>Elira Living — Retouren<br>Lapinrinne 1B, 606<br>00180 Helsinki, Finland</p>
-  <h2>Uitsluitingen</h2><p>Verzegelde cosmetica (toners, shampoos) die na levering is ontzegeld, is om hygiënische redenen uitgesloten.</p>
-  <h2>Modelformulier voor herroeping</h2><table><tr><td>Aan Elira Living, Lapinrinne 1b, 00180 Helsinki, Finland — support@eliraliving.com:<br><br>Hierbij herroep(en) ik/wij de met mij/ons gesloten overeenkomst voor de verkoop van de volgende goederen:<br>____________________<br><br>Besteld op / ontvangen op: ________ · Naam: ________ · Adres: ________ · Datum: ________</td></tr></table>` }
+  <h2>Uitsluitingen</h2><p>Verzegelde cosmetica (toners, shampoos) die na levering is ontzegeld, is om hygiënische redenen uitgesloten.</p>` }
   }
 };
 

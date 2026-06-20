@@ -55,6 +55,10 @@
     "nav.skincare": "Hautpflege",
     "nav.haircare": "Haarpflege",
     "nav.about": "Über uns",
+    "nav.ingredients": "Über Inhaltsstoffe",
+    "trust.kicker": "Echte Routinen",
+    "trust.title": "Gemacht für echte Haut, im echten Leben",
+    "trust.lead": "Von der ersten Reinigung bis zum Abend-Serum — Elira fügt sich leise in den Alltag in Deutschland und den Niederlanden ein.",
     "nav.cart": "Warenkorb",
     "announce.1": "Kostenloser Versand in DE & NL – bei jeder Bestellung",
     "announce.2": "Klimaneutraler Versand · 3–7 Werktage",
@@ -180,12 +184,24 @@
     "about.kicker": "Über Elira Living",
     "about.title": "Saubere Pflege, hergestellt in Europa.",
     "about.lead": "Wir entwickeln natürlich zertifizierte Haut- und Haarpflege — ohne Kompromisse.",
-    "about.body1": "Elira Living begann mit einer einfachen Überzeugung: Wirksame Pflege darf weder Ihrer Gesundheit noch dem Planeten schaden. Wir entwickeln vegane, natürlich zertifizierte Formeln für Haut und Haar.",
-    "about.body2": "Jedes Produkt ist durch ECOCERT COSMOS zertifiziert, hautverträglich und verantwortungsvoll in der EU hergestellt — und wird klimaneutral nach Deutschland und in die Niederlande versendet.",
+    "about.body1": "Elira Living begann mit einer Frustration, die viele Menschen still mit sich tragen: Haut, die auf fast alles reagiert. Produkte, die echte Ergebnisse versprachen, hinterließen oft Rötungen, Spannungsgefühl und Reizungen — und die sanften schienen kaum etwas zu bewirken.",
+    "about.body2": "Wir fanden, man sollte nicht zwischen einem Produkt wählen müssen, das wirkt, und einem, das gut zu einem ist. Also haben wir Haut- und Haarpflege entwickelt, die wirklich sanft und wirklich wirksam ist — vegan, unabhängig durch ECOCERT COSMOS zertifiziert und verantwortungsvoll in Europa hergestellt.",
     "about.stat1": "Natürlicher Ursprung",
     "about.stat2": "Vegane Formeln",
     "about.stat3": "Tierversuche",
-    "about.cta": "Jetzt einkaufen"
+    "about.cta": "Jetzt einkaufen",
+    "about.storyKicker": "Unsere Geschichte",
+    "about.storyTitle": "Aus empfindlicher Haut entstanden.",
+    "about.story1": "Jahrelang fühlte es sich unmöglich an, Produkte zu finden, die nicht brennen, röten oder schuppen. Die Regale waren voller Versprechen — „klärend\", „kraftvoll\", „klinisch\" — doch für reaktive Haut bedeutete diese Stärke zu oft eine gereizte, unglückliche Barriere.",
+    "about.story2": "Elira Living ist die Antwort, die wir uns selbst gewünscht hätten: saubere, zertifizierte Formeln, die die Haut respektieren, statt sie zu bekämpfen. Keine aggressiven Abkürzungen, keine Tierversuche, nichts auf dem Etikett zu verbergen — nur ehrliche Produkte, denen man vertrauen kann, für alle, deren Haut sich je übergangen gefühlt hat.",
+    "about.quote": "Wirksame Pflege sollte nicht auf Kosten Ihrer Haut, Ihrer Gesundheit oder des Planeten gehen.",
+    "about.quoteAuthor": "— Das Elira Living Team",
+    "about.values1Title": "Sanft konzipiert",
+    "about.values1Body": "Parfümbewusste, barriere-orientierte Formeln, entwickelt für Haut, die reagiert.",
+    "about.values2Title": "Ehrlich zertifiziert",
+    "about.values2Body": "Unabhängig durch ECOCERT COSMOS geprüft — nicht nur „clean\" als Schlagwort.",
+    "about.values3Title": "Verantwortungsvoll hergestellt",
+    "about.values3Body": "Vegan, tierversuchsfrei und in der EU hergestellt, klimaneutral zu Ihnen geliefert."
   },
   "features": {
     "vegan": "Vegan",
@@ -204,22 +220,22 @@
   "products": {
     "sensitive-moisturizing-cream": {
       "name": "Sensitive Feuchtigkeitscreme",
-      "desc": "Parfümfreie Feuchtigkeitscreme, die empfindliche Haut beruhigt und stärkt. Vegan, ECOCERT COSMOS zertifiziert.",
+      "desc": "Eine parfümfreie Feuchtigkeitscreme mit pflegendem Glycerin und Betain, die reaktive Haut langanhaltend mit Feuchtigkeit versorgt. Beruhigt Rötungen und stärkt mit jeder Anwendung eine widerstandsfähigere Hautbarriere — für ein weiches, angenehmes Hautgefühl, nie spannend. ECOCERT COSMOS Organic, vegan, für empfindliche Haut.",
       "ingredients": "Vegan · ECOCERT COSMOS Organic zertifiziert · Ohne Parfüm. Vollständige INCI-Liste auf der Verpackung."
     },
     "radiant-glow-cleanser": {
       "name": "Radiant Glow Gesichtsreiniger",
-      "desc": "Sanfter Reiniger für täglichen Gebrauch — entfernt Unreinheiten für frische, strahlende Haut. Vegan, COSMOS Natural.",
+      "desc": "Ein sanfter täglicher Reiniger, der Make-up, Unreinheiten und überschüssiges Öl entfernt, ohne die Haut auszutrocknen. Hinterlässt einen sauberen, frischen und sichtbar strahlenden Teint — nie spannend — und ist morgens wie abends eine Freude. COSMOS Natural, vegan, für alle Hauttypen.",
       "ingredients": "Vegan · ECOCERT COSMOS Natural zertifiziert. Vollständige INCI-Liste auf der Verpackung."
     },
     "purifying-toner": {
       "name": "Klärendes Gesichtswasser",
-      "desc": "Klärendes Gesichtswasser, das Poren reinigt und fettige Mischhaut ausgleicht — für ein frisches, geschmeidiges Hautgefühl. Ohne Parfüm, COSMOS Natural.",
+      "desc": "Ein klärendes Gesichtswasser mit beruhigendem Lavendelwasser, feuchtigkeitsspendender Gurke und einem Hauch milder Salicylsäure (BHA), das die Poren klärt und fettige Mischhaut ausgleicht. Verfeinert und erfrischt für ein glatteres, ebenmäßigeres, mattes Finish — ohne Brennen. 99 % natürlichen Ursprungs, ohne Parfüm, COSMOS Natural, vegan.",
       "ingredients": "Aqua, Alcohol, Lavandula Angustifolia (Lavender) Flower Water*, Glycerin**, Betaine, Propanediol, Acorus Calamus (Sweet Flag) Root Extract*, Cucumis Sativus (Cucumber) Fruit Extract*, Salicylic Acid, Benzyl Alcohol, Sodium Benzoate, Potassium Sorbate, Rhamnose, Glucose, Glucuronic Acid.  *aus biologischem Anbau  **mit biologischen Zutaten hergestellt · 99 % natürlichen Ursprungs · ECOCERT COSMOS Natural."
     },
     "sensitive-scalp-shampoo": {
       "name": "Sensitive Kopfhaut Shampoo",
-      "desc": "Sanftes, beruhigendes Shampoo für empfindliche Kopfhaut und alle Haartypen. Dermatologisch getestet, COSMOS Natural.",
+      "desc": "Ein sanftes, sulfatfreies Shampoo mit milden Reinigern auf Kokosbasis, pflegendem Pflaumenextrakt und beruhigender Lindenblüte für empfindliche, schnell gereizte Kopfhaut. Lindert Juckreiz und Spannungsgefühl und hinterlässt weiches, sauberes, gut kämmbares Haar — mild genug für die tägliche Anwendung. Dermatologisch getestet, 98 % natürlichen Ursprungs, COSMOS Natural, vegan, für alle Haartypen.",
       "ingredients": "Aqua, Sodium Coco-Sulfate, Cocamidopropyl Betaine, Coco-Glucoside, Betaine, Glyceryl Oleate, Prunus Domestica (Plum) Fruit Extract*, Sodium Chloride, Citric Acid, Parfum, Benzyl Alcohol, Hydrolyzed Wheat Protein, Tilia Cordata (Linden) Flower Extract*, Sodium Benzoate, Potassium Sorbate, Jasminum Officinale (Jasmin) Extract, Leuconostoc/Radish Root Ferment Filtrate.  *aus biologischem Anbau · 98 % natürlichen Ursprungs · ECOCERT COSMOS Natural."
     },
     "retinol-alternative-serum": {

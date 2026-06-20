@@ -54,7 +54,11 @@
     "nav.shop": "Shop",
     "nav.skincare": "Skincare",
     "nav.haircare": "Haircare",
-    "nav.about": "About",
+    "nav.about": "About Us",
+    "nav.ingredients": "About Ingredients",
+    "trust.kicker": "Real routines",
+    "trust.title": "Made for real skin, in real life",
+    "trust.lead": "From first cleanse to evening serum — Elira fits quietly into everyday routines across Germany and the Netherlands.",
     "nav.cart": "Cart",
     "announce.1": "Free shipping in DE & NL — on every order",
     "announce.2": "Climate-neutral delivery · 3–7 working days",
@@ -180,12 +184,24 @@
     "about.kicker": "About Elira Living",
     "about.title": "Clean beauty, made in Europe.",
     "about.lead": "We make naturally certified skincare and haircare — without compromise.",
-    "about.body1": "Elira Living began with a simple belief: effective beauty shouldn't cost your health or the planet. We create vegan, naturally certified formulas for skin and hair.",
-    "about.body2": "Every product is certified by ECOCERT COSMOS, gentle on skin, and responsibly made in the EU — then shipped climate-neutral across Germany and the Netherlands.",
+    "about.body1": "Elira Living started with a frustration many people quietly live with: skin that reacts to almost everything. The products that promised real results often left redness, tightness and irritation behind — and the gentle ones rarely seemed to do anything at all.",
+    "about.body2": "We didn't think you should have to choose between a product that works and one that's kind to you. So we set out to make skincare and haircare that's genuinely gentle and genuinely effective — vegan, independently certified by ECOCERT COSMOS, and responsibly made in Europe.",
     "about.stat1": "Natural origin",
     "about.stat2": "Vegan formulas",
     "about.stat3": "Animal testing",
-    "about.cta": "Shop now"
+    "about.cta": "Shop now",
+    "about.storyKicker": "Our story",
+    "about.storyTitle": "Born from sensitive skin.",
+    "about.story1": "For years, finding products that didn't sting, flush or flake felt impossible. The shelves were full of promises — \"clarifying,\" \"powerful,\" \"clinical\" — but for reactive skin, that strength too often meant a barrier left raw and unhappy.",
+    "about.story2": "Elira Living is the answer we wished we'd had: clean, certified formulas that respect the skin instead of fighting it. No harsh shortcuts, no animal testing, nothing to hide on the label — just honest products you can trust, made for everyone whose skin has ever felt left out.",
+    "about.quote": "Effective beauty shouldn't have to come at the expense of your skin, your health, or the planet.",
+    "about.quoteAuthor": "— The Elira Living team",
+    "about.values1Title": "Gentle by design",
+    "about.values1Body": "Fragrance-considerate, barrier-first formulas built around skin that reacts.",
+    "about.values2Title": "Honestly certified",
+    "about.values2Body": "Independently verified by ECOCERT COSMOS — not just \"clean\" as a buzzword.",
+    "about.values3Title": "Made responsibly",
+    "about.values3Body": "Vegan, cruelty-free and made in the EU, shipped climate-neutral to your door."
   },
   "features": {
     "vegan": "Vegan",
@@ -204,22 +220,22 @@
   "products": {
     "sensitive-moisturizing-cream": {
       "name": "Sensitive Moisturizing Cream",
-      "desc": "A fragrance-free moisturiser that soothes and strengthens sensitive skin. Vegan, ECOCERT COSMOS certified.",
+      "desc": "A fragrance-free moisturiser with skin-loving glycerin and betaine that drench reactive skin in lasting moisture. Calms redness and reinforces a stronger, more resilient barrier with every use — leaving skin soft, comfortable and never tight. ECOCERT COSMOS Organic, vegan, for sensitive skin.",
       "ingredients": "Vegan · ECOCERT COSMOS Organic certified · Fragrance-free. Full INCI is printed on the product packaging."
     },
     "radiant-glow-cleanser": {
       "name": "Radiant Glow Facial Cleanser",
-      "desc": "A gentle daily cleanser that lifts away impurities for fresh, radiant skin. Vegan, COSMOS Natural.",
+      "desc": "A gentle daily cleanser that melts away makeup, impurities and excess oil without ever stripping the skin. Leaves your complexion clean, fresh and visibly radiant — never tight or squeaky — so it's a pleasure to use morning and night. COSMOS Natural, vegan, for all skin types.",
       "ingredients": "Vegan · ECOCERT COSMOS Natural certified. Full INCI is printed on the product packaging."
     },
     "purifying-toner": {
       "name": "Purifying Toner",
-      "desc": "A purifying toner that clears pores and balances oily, combination skin — leaving it fresh and supple. Fragrance-free, COSMOS Natural.",
+      "desc": "A purifying toner with soothing lavender water, hydrating cucumber and a touch of gentle salicylic acid (BHA) that clears pores and balances oily, combination skin. Refines and refreshes for a smoother, more even, shine-free finish — without the sting. 99% natural origin, fragrance-free, COSMOS Natural, vegan.",
       "ingredients": "Aqua, Alcohol, Lavandula Angustifolia (Lavender) Flower Water*, Glycerin**, Betaine, Propanediol, Acorus Calamus (Sweet Flag) Root Extract*, Cucumis Sativus (Cucumber) Fruit Extract*, Salicylic Acid, Benzyl Alcohol, Sodium Benzoate, Potassium Sorbate, Rhamnose, Glucose, Glucuronic Acid.  *from organic farming  **made using organic ingredients · 99% natural origin · ECOCERT COSMOS Natural."
     },
     "sensitive-scalp-shampoo": {
       "name": "Sensitive Scalp Shampoo",
-      "desc": "A gentle, soothing shampoo for sensitive scalps and all hair types. Dermatologically tested, COSMOS Natural.",
+      "desc": "A gentle, sulfate-free shampoo with mild coconut-derived cleansers, nourishing plum extract and calming linden flower for sensitive, easily-irritated scalps. Soothes itch and tightness while leaving hair soft, clean and manageable — kind enough for everyday washing. Dermatologically tested, 98% natural origin, COSMOS Natural, vegan, for all hair types.",
       "ingredients": "Aqua, Sodium Coco-Sulfate, Cocamidopropyl Betaine, Coco-Glucoside, Betaine, Glyceryl Oleate, Prunus Domestica (Plum) Fruit Extract*, Sodium Chloride, Citric Acid, Parfum, Benzyl Alcohol, Hydrolyzed Wheat Protein, Tilia Cordata (Linden) Flower Extract*, Sodium Benzoate, Potassium Sorbate, Jasminum Officinale (Jasmin) Extract, Leuconostoc/Radish Root Ferment Filtrate.  *from organic farming · 98% natural origin · ECOCERT COSMOS Natural."
     },
     "retinol-alternative-serum": {

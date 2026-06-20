@@ -55,6 +55,10 @@
     "nav.skincare": "Huidverzorging",
     "nav.haircare": "Haarverzorging",
     "nav.about": "Over ons",
+    "nav.ingredients": "Over Ingrediënten",
+    "trust.kicker": "Echte routines",
+    "trust.title": "Gemaakt voor de echte huid, in het echte leven",
+    "trust.lead": "Van de eerste reiniging tot het avondserum — Elira past stilletjes in dagelijkse routines in Duitsland en Nederland.",
     "nav.cart": "Winkelwagen",
     "announce.1": "Gratis verzending in DE & NL – bij elke bestelling",
     "announce.2": "Klimaatneutrale verzending · 3–7 werkdagen",
@@ -180,12 +184,24 @@
     "about.kicker": "Over Elira Living",
     "about.title": "Schone verzorging, gemaakt in Europa.",
     "about.lead": "Wij maken natuurlijk gecertificeerde huid- en haarverzorging — zonder compromis.",
-    "about.body1": "Elira Living begon met een simpele overtuiging: effectieve verzorging mag niet ten koste gaan van je gezondheid of de planeet. We ontwikkelen veganistische, natuurlijk gecertificeerde formules voor huid en haar.",
-    "about.body2": "Elk product is gecertificeerd door ECOCERT COSMOS, huidvriendelijk en verantwoord gemaakt in de EU — en wordt klimaatneutraal verzonden naar Duitsland en Nederland.",
+    "about.body1": "Elira Living begon met een frustratie die veel mensen stil met zich meedragen: een huid die op bijna alles reageert. Producten die echte resultaten beloofden, lieten vaak roodheid, een trekkerig gevoel en irritatie achter — en de milde leken nauwelijks iets te doen.",
+    "about.body2": "Wij vonden dat je niet zou moeten kiezen tussen een product dat werkt en een product dat goed voor je is. Daarom ontwikkelden we huid- en haarverzorging die écht mild en écht effectief is — veganistisch, onafhankelijk gecertificeerd door ECOCERT COSMOS en verantwoord gemaakt in Europa.",
     "about.stat1": "Natuurlijke oorsprong",
     "about.stat2": "Vegan formules",
     "about.stat3": "Dierproeven",
-    "about.cta": "Shop nu"
+    "about.cta": "Shop nu",
+    "about.storyKicker": "Ons verhaal",
+    "about.storyTitle": "Ontstaan uit een gevoelige huid.",
+    "about.story1": "Jarenlang voelde het onmogelijk om producten te vinden die niet prikken, roodheid geven of schilferen. De schappen stonden vol beloften — „zuiverend\", „krachtig\", „klinisch\" — maar voor de reactieve huid betekende die kracht te vaak een geïrriteerde, ongelukkige barrière.",
+    "about.story2": "Elira Living is het antwoord dat we zelf hadden willen hebben: schone, gecertificeerde formules die de huid respecteren in plaats van bestrijden. Geen agressieve sluiproutes, geen dierproeven, niets op het etiket om te verbergen — alleen eerlijke producten die je kunt vertrouwen, voor iedereen wiens huid zich ooit buitengesloten voelde.",
+    "about.quote": "Effectieve verzorging zou niet ten koste mogen gaan van je huid, je gezondheid of de planeet.",
+    "about.quoteAuthor": "— Het Elira Living-team",
+    "about.values1Title": "Mild van opzet",
+    "about.values1Body": "Parfumbewuste, barrière-gerichte formules, ontwikkeld voor een huid die reageert.",
+    "about.values2Title": "Eerlijk gecertificeerd",
+    "about.values2Body": "Onafhankelijk geverifieerd door ECOCERT COSMOS — niet zomaar „clean\" als modewoord.",
+    "about.values3Title": "Verantwoord gemaakt",
+    "about.values3Body": "Veganistisch, dierproefvrij en gemaakt in de EU, klimaatneutraal bij je bezorgd."
   },
   "features": {
     "vegan": "Vegan",
@@ -204,22 +220,22 @@
   "products": {
     "sensitive-moisturizing-cream": {
       "name": "Sensitieve Hydraterende Crème",
-      "desc": "Parfumvrije moisturizer die de gevoelige huid kalmeert en versterkt. Vegan, ECOCERT COSMOS-gecertificeerd.",
+      "desc": "Een parfumvrije moisturizer met verzorgende glycerine en betaïne die de reactieve huid langdurig hydrateert. Kalmeert roodheid en versterkt bij elk gebruik een veerkrachtigere huidbarrière — voor een zachte, comfortabele huid die nooit trekt. ECOCERT COSMOS Organic, veganistisch, voor de gevoelige huid.",
       "ingredients": "Vegan · ECOCERT COSMOS Organic gecertificeerd · Parfumvrij. Volledige INCI op de verpakking."
     },
     "radiant-glow-cleanser": {
       "name": "Radiant Glow Gezichtsreiniger",
-      "desc": "Milde dagelijkse reiniger die onzuiverheden verwijdert voor een frisse, stralende huid. Vegan, COSMOS Natural.",
+      "desc": "Een milde dagelijkse reiniger die make-up, onzuiverheden en overtollig talg verwijdert zonder de huid uit te drogen. Laat een schone, frisse en zichtbaar stralende huid achter — nooit trekkerig — een plezier om 's ochtends en 's avonds te gebruiken. COSMOS Natural, veganistisch, voor alle huidtypes.",
       "ingredients": "Vegan · ECOCERT COSMOS Natural gecertificeerd. Volledige INCI op de verpakking."
     },
     "purifying-toner": {
       "name": "Zuiverende Toner",
-      "desc": "Zuiverende toner die poriën reinigt en de vette/gemengde huid in balans brengt — fris en soepel. Parfumvrij, COSMOS Natural.",
+      "desc": "Een zuiverende toner met kalmerend lavendelwater, hydraterende komkommer en een vleugje milde salicylzuur (BHA) die de poriën zuivert en de vette/gemengde huid in balans brengt. Verfijnt en verfrist voor een gladdere, egalere en matte finish — zonder branderig gevoel. 99% natuurlijke oorsprong, parfumvrij, COSMOS Natural, veganistisch.",
       "ingredients": "Aqua, Alcohol, Lavandula Angustifolia (Lavender) Flower Water*, Glycerin**, Betaine, Propanediol, Acorus Calamus (Sweet Flag) Root Extract*, Cucumis Sativus (Cucumber) Fruit Extract*, Salicylic Acid, Benzyl Alcohol, Sodium Benzoate, Potassium Sorbate, Rhamnose, Glucose, Glucuronic Acid.  *uit biologische landbouw  **gemaakt met biologische ingrediënten · 99% natuurlijke oorsprong · ECOCERT COSMOS Natural."
     },
     "sensitive-scalp-shampoo": {
       "name": "Shampoo Gevoelige Hoofdhuid",
-      "desc": "Milde, kalmerende shampoo voor de gevoelige hoofdhuid en alle haartypes. Dermatologisch getest, COSMOS Natural.",
+      "desc": "Een milde, sulfaatvrije shampoo met zachte reinigers op kokosbasis, verzorgend pruimenextract en kalmerende lindebloesem voor de gevoelige, snel geïrriteerde hoofdhuid. Verlicht jeuk en een trekkerig gevoel en laat zacht, schoon en goed doorkambaar haar achter — mild genoeg voor dagelijks gebruik. Dermatologisch getest, 98% natuurlijke oorsprong, COSMOS Natural, veganistisch, voor alle haartypes.",
       "ingredients": "Aqua, Sodium Coco-Sulfate, Cocamidopropyl Betaine, Coco-Glucoside, Betaine, Glyceryl Oleate, Prunus Domestica (Plum) Fruit Extract*, Sodium Chloride, Citric Acid, Parfum, Benzyl Alcohol, Hydrolyzed Wheat Protein, Tilia Cordata (Linden) Flower Extract*, Sodium Benzoate, Potassium Sorbate, Jasminum Officinale (Jasmin) Extract, Leuconostoc/Radish Root Ferment Filtrate.  *uit biologische landbouw · 98% natuurlijke oorsprong · ECOCERT COSMOS Natural."
     },
     "retinol-alternative-serum": {

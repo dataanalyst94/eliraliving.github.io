@@ -309,11 +309,21 @@
     cards.forEach(c => { const id = cardId(c); if (id) c.addEventListener("click", () => { if (window.EliraAnalytics) window.EliraAnalytics.selectItem(id, "Shop"); }); });
     const params = new URLSearchParams(location.search);
     let cat = params.get("category") || "all";
+    // Keep the top nav in sync with the active category: when a category is
+    // selected, that nav link (Skincare/Haircare) is the "current" one, not Shop.
+    const syncNav = () => {
+      const active = cat === "skincare" || cat === "haircare" ? cat : "shop";
+      document.querySelectorAll('[data-nav]').forEach(a => {
+        const on = a.getAttribute("data-nav") === active;
+        if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+      });
+    };
     const apply = () => {
       let shown = 0;
       cards.forEach(c => { const ok = cat === "all" || c.getAttribute("data-cat") === cat; c.style.display = ok ? "" : "none"; if (ok) shown++; });
       document.querySelectorAll("[data-filter-cat]").forEach(b => b.setAttribute("aria-pressed", b.getAttribute("data-filter-cat") === cat));
       const cnt = document.querySelector("[data-shop-count]"); if (cnt) cnt.textContent = shown + " " + t("shop.results");
+      syncNav();
     };
     document.querySelectorAll("[data-filter-cat]").forEach(b => b.addEventListener("click", () => { cat = b.getAttribute("data-filter-cat"); apply(); }));
     const sort = document.querySelector("[data-sort]");
@@ -504,16 +514,15 @@
     const rcards = gsap.utils.toArray("[data-rcard]");
     if (rcards.length) {
       ScrollTrigger.batch(rcards, {
-        start: "top 90%",
+        start: "top 88%",
         onEnter: (els) => gsap.from(els, {
-          opacity: 0, y: 90, z: -280, scale: 0.92, rotateX: -32,
-          rotateY: (i, t) => t.dataset.col === "0" ? 13 : t.dataset.col === "2" ? -13 : 0,
+          opacity: 0, y: 34, z: -90, scale: 0.97, rotateX: -10,
           transformOrigin: "50% 100%",
-          duration: 1.05, ease: "power3.out", stagger: 0.14, overwrite: true
+          duration: .8, ease: "power3.out", stagger: 0.09, overwrite: true
         })
       });
-      // gentle scroll parallax for depth on the whole grid
-      gsap.fromTo("[data-reviews-grid]", { yPercent: 4 }, { yPercent: -4, ease: "none", scrollTrigger: { trigger: ".reviews", start: "top bottom", end: "bottom top", scrub: true } });
+      // very subtle scroll parallax for depth on the whole grid
+      gsap.fromTo("[data-reviews-grid]", { yPercent: 1.5 }, { yPercent: -1.5, ease: "none", scrollTrigger: { trigger: ".reviews", start: "top bottom", end: "bottom top", scrub: true } });
     }
     // libs loaded after window 'load', so re-measure trigger positions once settled
     requestAnimationFrame(() => ScrollTrigger.refresh());
