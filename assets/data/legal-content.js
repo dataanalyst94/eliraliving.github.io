@@ -32,7 +32,7 @@ const LEGAL = {
   <h2>2. Scope</h2><p>These terms apply to all consumer orders placed via this shop. We currently ship to <strong>Germany</strong> and the <strong>Netherlands</strong>.</p>
   <h2>3. Contract</h2><p>Product display is not a binding offer. Completing payment at Stripe checkout places a binding order; the contract forms on our confirmation or dispatch.</p>
   <h2>4. Prices &amp; VAT</h2><p>All prices are total prices in Euro. As a small business we are not currently VAT-registered, so VAT is not shown separately.</p>
-  <h2>5. Shipping</h2><p>Free over €39; otherwise €4.95. Dispatched from within the EU (currently Latvia). Delivery 3–7 working days.</p>
+  <h2>5. Shipping</h2><p>Free on all orders. Dispatched from within the EU (currently Latvia). Delivery 3–7 working days.</p>
   <h2>6. Payment</h2><p>Securely via Stripe (card, iDEAL, Klarna, SEPA). Due immediately on order.</p>
   <h2>7. Right of withdrawal</h2><p>14-day statutory right — see the <a href="{{withdrawalUrl}}" ${A}>Right of Withdrawal</a> page.</p>
   <h2>8. Cosmetics &amp; hygiene</h2><p>Sealed cosmetics unsealed after delivery are excluded from withdrawal where permitted by law.</p>
@@ -66,7 +66,7 @@ const LEGAL = {
   <h2>2. Geltungsbereich</h2><p>Diese Bedingungen gelten für alle Verbraucherbestellungen über diesen Shop. Wir liefern derzeit nach <strong>Deutschland</strong> und in die <strong>Niederlande</strong>.</p>
   <h2>3. Vertragsschluss</h2><p>Die Produktdarstellung ist kein verbindliches Angebot. Mit Abschluss der Zahlung an der Stripe-Kasse geben Sie eine verbindliche Bestellung ab; der Vertrag kommt mit unserer Bestätigung oder dem Versand zustande.</p>
   <h2>4. Preise &amp; Umsatzsteuer</h2><p>Alle Preise sind Gesamtpreise in Euro. Als Kleinunternehmen sind wir derzeit nicht umsatzsteuerlich registriert; Umsatzsteuer wird nicht gesondert ausgewiesen.</p>
-  <h2>5. Versand</h2><p>Versandkostenfrei ab 39 €; andernfalls 4,95 €. Versand aus der EU (derzeit Lettland). Lieferung in 3–7 Werktagen.</p>
+  <h2>5. Versand</h2><p>Kostenloser Versand auf alle Bestellungen. Versand aus der EU (derzeit Lettland). Lieferung in 3–7 Werktagen.</p>
   <h2>6. Zahlung</h2><p>Sichere Zahlung über Stripe (Karte, iDEAL, Klarna, SEPA). Fällig sofort mit der Bestellung.</p>
   <h2>7. Widerrufsrecht</h2><p>14-tägiges gesetzliches Widerrufsrecht — siehe Seite <a href="{{withdrawalUrl}}" ${A}>Widerrufsrecht</a>.</p>
   <h2>8. Kosmetik &amp; Hygiene</h2><p>Versiegelte Kosmetikprodukte, die nach der Lieferung entsiegelt wurden, sind vom Widerruf ausgeschlossen, soweit gesetzlich zulässig.</p>
@@ -100,7 +100,7 @@ const LEGAL = {
   <h2>2. Toepassingsgebied</h2><p>Deze voorwaarden gelden voor alle consumentenbestellingen via deze shop. Wij verzenden momenteel naar <strong>Duitsland</strong> en <strong>Nederland</strong>.</p>
   <h2>3. Totstandkoming</h2><p>De productpresentatie is geen bindend aanbod. Door de betaling bij de Stripe-kassa af te ronden plaats je een bindende bestelling; de overeenkomst komt tot stand bij onze bevestiging of verzending.</p>
   <h2>4. Prijzen &amp; btw</h2><p>Alle prijzen zijn totaalprijzen in euro. Als kleine onderneming zijn we momenteel niet btw-geregistreerd; btw wordt niet apart vermeld.</p>
-  <h2>5. Verzending</h2><p>Gratis vanaf € 39; anders € 4,95. Verzonden vanuit de EU (momenteel Letland). Levering in 3–7 werkdagen.</p>
+  <h2>5. Verzending</h2><p>Gratis op alle bestellingen. Verzonden vanuit de EU (momenteel Letland). Levering in 3–7 werkdagen.</p>
   <h2>6. Betaling</h2><p>Veilig via Stripe (kaart, iDEAL, Klarna, SEPA). Direct verschuldigd bij bestelling.</p>
   <h2>7. Herroepingsrecht</h2><p>Wettelijk herroepingsrecht van 14 dagen — zie de pagina <a href="{{withdrawalUrl}}" ${A}>Herroepingsrecht</a>.</p>
   <h2>8. Cosmetica &amp; hygiëne</h2><p>Verzegelde cosmetica die na levering is ontzegeld, is uitgesloten van herroeping voor zover wettelijk toegestaan.</p>
