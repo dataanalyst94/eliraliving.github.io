@@ -777,7 +777,7 @@ const PROD_CERTS = [
       de: ["Synthetische Duftstoffe & Farbstoffe", "GVO & Nanomaterialien", "Mineralöle & Silikone", "Parabene & Phthalate"],
       nl: ["Synthetische geurstoffen & kleurstoffen", "GGO's & nanomaterialen", "Minerale oliën & siliconen", "Parabenen & ftalaten"],
     },
-    products: { en: "Sensitive Moisturizing Cream", de: "Feuchtigkeitscreme für empfindliche Haut", nl: "Hydraterende crème voor gevoelige huid" },
+    products: { en: "Sensitive Moisturizing Cream", de: "Sensitive Feuchtigkeitscreme", nl: "Sensitieve Hydraterende Crème" },
   },
   {
     num: "02", badge: "COSMOS NATURAL",
@@ -793,7 +793,7 @@ const PROD_CERTS = [
       de: ["Synthetische Duftstoffe & Farbstoffe", "GVO & Nanomaterialien", "Mineralöle & Silikone", "Parabene & Phthalate"],
       nl: ["Synthetische geurstoffen & kleurstoffen", "GGO's & nanomaterialen", "Minerale oliën & siliconen", "Parabenen & ftalaten"],
     },
-    products: { en: "Radiant Glow Cleanser · Purifying Toner · Sensitive Scalp Shampoo · Bidens Pilosa Serum · Peptide Anti-Aging Serum", de: "Reinigungsgel · Klärendes Tonic · Sensitiv-Shampoo · Bidens-Pilosa-Serum · Peptid-Anti-Aging-Serum", nl: "Reiniger · Zuiverende toner · Sensitief shampoo · Bidens Pilosa Serum · Peptide Anti-Aging Serum" },
+    products: { en: "Radiant Glow Facial Cleanser · Purifying Toner · Sensitive Scalp Shampoo · Retinol Alternative Serum · Peptide Anti-Aging Serum", de: "Radiant Glow Gesichtsreiniger · Klärendes Gesichtswasser · Sensitive Kopfhaut Shampoo · Retinol Alternative Serum · Peptid Anti-Aging Serum", nl: "Radiant Glow Gezichtsreiniger · Zuiverende Toner · Shampoo Gevoelige Hoofdhuid · Retinol Alternatief Serum · Peptide Anti-Aging Serum" },
   },
   {
     num: "03", badge: "100% VEGAN",
@@ -824,12 +824,12 @@ const PROD_CERTS = [
     name: { en: "Dermatologically tested", de: "Dermatologisch getestet", nl: "Dermatologisch getest" },
     body: { en: "Tested under dermatological supervision", de: "Unter dermatologischer Aufsicht getestet", nl: "Getest onder dermatologisch toezicht" },
     desc: {
-      en: "The Sensitive Scalp Shampoo has been tested under dermatological supervision with human volunteers, confirming suitability for sensitive and reactive scalps. The test is conducted by an independent laboratory and certified by a qualified dermatologist. Results are held on file with our manufacturing partner.",
-      de: "Das Sensitiv-Shampoo für die Kopfhaut wurde unter dermatologischer Aufsicht mit menschlichen Probanden getestet und für empfindliche sowie reaktive Kopfhaut geeignet befunden. Der Test wird von einem unabhängigen Labor durchgeführt und von einem qualifizierten Dermatologen zertifiziert.",
-      nl: "De shampoo voor gevoelige hoofdhuid is getest onder dermatologisch toezicht met menselijke vrijwilligers, wat bevestigt dat het geschikt is voor gevoelige en reactieve hoofdhuiden. De test wordt uitgevoerd door een onafhankelijk laboratorium en gecertificeerd door een gekwalificeerde dermatoloog.",
+      en: "The Sensitive Scalp Shampoo is dermatologically tested — assessed under dermatological supervision for suitability on sensitive, easily-irritated scalps. It is the one product in our range to carry this additional claim, reflecting its formulation for reactive, easily-bothered skin.",
+      de: "Das Sensitive Kopfhaut Shampoo ist dermatologisch getestet — unter dermatologischer Aufsicht auf Verträglichkeit für empfindliche, leicht reizbare Kopfhaut geprüft. Es ist das einzige Produkt unseres Sortiments mit dieser zusätzlichen Auslobung, passend zu seiner Rezeptur für reaktive Haut.",
+      nl: "De Shampoo Gevoelige Hoofdhuid is dermatologisch getest — beoordeeld onder dermatologisch toezicht op geschiktheid voor de gevoelige, snel geïrriteerde hoofdhuid. Het is het enige product in ons assortiment met deze aanvullende claim, passend bij de formule voor de reactieve huid.",
     },
     prohibits: null,
-    products: { en: "Sensitive Scalp Shampoo", de: "Sensitiv-Shampoo für die Kopfhaut", nl: "Shampoo voor gevoelige hoofdhuid" },
+    products: { en: "Sensitive Scalp Shampoo", de: "Sensitive Kopfhaut Shampoo", nl: "Shampoo Gevoelige Hoofdhuid" },
   },
 ];
 const MFG_CERTS = [
