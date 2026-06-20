@@ -850,9 +850,9 @@ const MFG_CERTS = [
     name: { en: "B Corp Certified Partner", de: "B-Corp-zertifizierter Partner", nl: "B Corp gecertificeerde partner" },
     body: "B Lab · B Corporation Certification",
     desc: {
-      en: "Selfnamed, our EU manufacturing partner, is certified by B Lab — the global non-profit that independently verifies companies against rigorous standards for social impact, environmental responsibility, and governance. B Corp certification requires companies to score across workers, community, environment, and customers, and undergo on-site verification every three years.",
-      de: "Selfnamed, unser EU-Herstellungspartner, ist von B Lab zertifiziert — der globalen Non-Profit-Organisation, die Unternehmen unabhängig nach strengen Standards für soziale Wirkung, ökologische Verantwortung und Governance prüft. Die B-Corp-Zertifizierung erfordert Nachweise in den Bereichen Mitarbeiter, Gemeinschaft, Umwelt und Kunden sowie alle drei Jahre eine Vor-Ort-Prüfung.",
-      nl: "Selfnamed, onze EU-productiepartner, is gecertificeerd door B Lab — de wereldwijde non-profitorganisatie die bedrijven onafhankelijk verifieert aan de hand van strenge normen voor sociale impact, milieubewustzijn en governance. B Corp-certificering vereist scores op het gebied van werknemers, gemeenschap, milieu en klanten, en een verificatie ter plaatse elke drie jaar.",
+      en: "Our EU manufacturing partner is certified by B Lab — the global non-profit that independently verifies companies against rigorous standards for social impact, environmental responsibility, and governance. B Corp certification requires companies to score across workers, community, environment, and customers, and undergo on-site verification every three years.",
+      de: "Unser EU-Herstellungspartner ist von B Lab zertifiziert — der globalen Non-Profit-Organisation, die Unternehmen unabhängig nach strengen Standards für soziale Wirkung, ökologische Verantwortung und Governance prüft. Die B-Corp-Zertifizierung erfordert Nachweise in den Bereichen Mitarbeiter, Gemeinschaft, Umwelt und Kunden sowie alle drei Jahre eine Vor-Ort-Prüfung.",
+      nl: "Onze EU-productiepartner is gecertificeerd door B Lab — de wereldwijde non-profitorganisatie die bedrijven onafhankelijk verifieert aan de hand van strenge normen voor sociale impact, milieubewustzijn en governance. B Corp-certificering vereist scores op het gebied van werknemers, gemeenschap, milieu en klanten, en een verificatie ter plaatse elke drie jaar.",
     },
     prohibits: null,
     products: null,
