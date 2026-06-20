@@ -39,6 +39,15 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.eliraliving.com/en/certifications.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/certifications.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/certifications.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.eliraliving.com/nl/certifications.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eliraliving.com/en/certifications.html"/>
+    <lastmod>2026-06-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.eliraliving.com/en/blog/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/blog/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/blog/"/>
@@ -429,6 +438,15 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.eliraliving.com/de/certifications.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/certifications.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/certifications.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.eliraliving.com/nl/certifications.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eliraliving.com/en/certifications.html"/>
+    <lastmod>2026-06-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.eliraliving.com/de/blog/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/blog/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/blog/"/>
@@ -815,6 +833,15 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/ingredients.html"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://www.eliraliving.com/nl/ingredients.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eliraliving.com/en/ingredients.html"/>
+    <lastmod>2026-06-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.eliraliving.com/nl/certifications.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eliraliving.com/en/certifications.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.eliraliving.com/de/certifications.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.eliraliving.com/nl/certifications.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eliraliving.com/en/certifications.html"/>
     <lastmod>2026-06-20</lastmod>
     <priority>0.7</priority>
   </url>
