@@ -183,6 +183,8 @@
     "cart.freeProgress": "Noch {amount} bis zum kostenlosen Versand",
     "cart.freeReached": "Kostenloser Versand inklusive ✓",
     "toast.added": "Zum Warenkorb hinzugefügt",
+    "product.seeMore": "Mehr anzeigen",
+    "product.seeLess": "Weniger anzeigen",
     "success.title": "Vielen Dank für Ihre Bestellung!",
     "success.lead": "Eine Bestätigung wurde an Ihre E-Mail gesendet. Ihre Elira Living-Produkte sind unterwegs.",
     "success.cta": "Weiter einkaufen",

@@ -529,6 +529,33 @@
   }
 
   /* ---- Boot ----------------------------------------------------------- */
+  // Product blurbs are clamped to 2 lines; add a "See more" toggle only to the
+  // cards whose text actually overflows. Runs after fonts load so the overflow
+  // measurement matches the final wrap.
+  function initDescToggles() {
+    const run = () => {
+      document.querySelectorAll(".card .desc").forEach((desc) => {
+        if (desc.dataset.toggleInit) return;
+        if (desc.scrollHeight - desc.clientHeight < 4) return; // fits in 2 lines
+        desc.dataset.toggleInit = "1";
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "desc-toggle";
+        btn.textContent = t("product.seeMore");
+        btn.setAttribute("aria-expanded", "false");
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const open = desc.classList.toggle("is-open");
+          btn.textContent = open ? t("product.seeLess") : t("product.seeMore");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        desc.insertAdjacentElement("afterend", btn);
+      });
+    };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(run); else run();
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     wireShell();
     Cart.renderAll();
@@ -537,6 +564,7 @@
     initCardTilt();
     initProduct();
     initHomeMotion();
+    initDescToggles();
     if (document.body.getAttribute("data-page") === "success") Cart.clear();
     document.addEventListener("cartchange", () => Cart.renderAll());
     window.addEventListener("load", () => window.ScrollTrigger && ScrollTrigger.refresh());

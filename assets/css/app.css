@@ -11,7 +11,7 @@
   --shadow-lg:0 30px 70px -24px rgba(0,0,0,.7);
 }
 *{ -webkit-tap-highlight-color:transparent; box-sizing:border-box; }
-html{ background:var(--paper); scroll-behavior:smooth; }
+html{ background:var(--paper); scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 body{ background:var(--paper); color:var(--ink); font-family:'Jost',ui-sans-serif,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; margin:0; overflow-x:hidden; }
 body::before{ content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.05; mix-blend-mode:screen;
@@ -94,7 +94,8 @@ h1,h2,h3,h4{ letter-spacing:-.01em; margin:0; }
 /* Product card */
 .grid-products{ perspective:1300px; }
 .card{ position:relative; transform-style:preserve-3d; will-change:transform;
-  transition:transform .5s var(--ease); }
+  display:flex; flex-direction:column; transition:transform .5s var(--ease); }
+.card > a{ flex:none; }
 .card .media{ position:relative; overflow:hidden; background:var(--stone); aspect-ratio:4/5;
   border:1px solid var(--line); border-radius:4px;
   /* layered depth: ambient drop + a top inner highlight that catches the light */
@@ -113,12 +114,16 @@ h1,h2,h3,h4{ letter-spacing:-.01em; margin:0; }
   box-shadow:0 1px 0 rgba(236,231,219,.08) inset, 0 30px 60px -26px rgba(0,0,0,.85), 0 8px 18px -10px rgba(0,0,0,.6); }
 .card .quick{ position:absolute; left:14px; right:14px; bottom:14px; z-index:2; transform:translateY(130%); opacity:0; transition:transform .5s var(--ease),opacity .4s; }
 .card:hover .quick,.card:focus-within .quick{ transform:none; opacity:1; }
-.card .meta{ padding-top:1rem; display:flex; align-items:flex-start; justify-content:space-between; gap:.75rem; }
+.card .meta{ flex:1 0 auto; padding-top:1rem; display:flex; align-items:flex-start; justify-content:space-between; gap:.75rem; }
 .card .name{ font-family:'Bodoni Moda',serif; font-size:1.125rem; line-height:1.25; }
-.card .desc{ font-size:.78rem; color:var(--muted); margin-top:.25rem; }
+.card .desc{ font-size:.78rem; color:var(--muted); margin-top:.25rem; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; overflow:hidden; }
+.card .desc.is-open{ -webkit-line-clamp:unset; line-clamp:unset; overflow:visible; }
+.desc-toggle{ margin-top:.4rem; font-size:.72rem; letter-spacing:.03em; color:var(--gold); background:none; border:none; padding:0; cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
+.desc-toggle:hover{ color:var(--gold-700); }
 .card .price{ font-family:'Bodoni Moda',serif; font-size:1.125rem; white-space:nowrap; }
-.grid-products{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem 1.25rem; }
-@media(min-width:1024px){ .grid-products{ grid-template-columns:repeat(4,1fr); gap:1.5rem; } }
+.grid-products{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem 1.25rem; }
+@media(min-width:1024px){ .grid-products{ grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.5rem; } }
+.card .meta > div{ min-width:0; }
 
 /* Filters */
 .chip{ padding:.6rem 1.3rem; border:1px solid var(--line); font-size:.95rem; cursor:pointer; color:var(--ink-soft); background:transparent; transition:all .2s var(--ease); }

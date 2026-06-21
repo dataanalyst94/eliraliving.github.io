@@ -183,6 +183,8 @@
     "cart.freeProgress": "Nog {amount} tot gratis verzending",
     "cart.freeReached": "Gratis verzending inbegrepen ✓",
     "toast.added": "Toegevoegd aan winkelwagen",
+    "product.seeMore": "Meer tonen",
+    "product.seeLess": "Minder tonen",
     "success.title": "Bedankt voor je bestelling!",
     "success.lead": "Een bevestiging is naar je e-mail gestuurd. Je Elira Living-producten zijn onderweg.",
     "success.cta": "Verder winkelen",
