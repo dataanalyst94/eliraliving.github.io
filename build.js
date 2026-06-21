@@ -754,9 +754,9 @@ function renderIngredients(L) {
 
 /* ---- PAGE: CERTIFICATIONS --------------------------------------------- */
 const CERT_HERO = {
-  en: { kicker: "Certified clean", h1: "Every claim, independently verified.", lead: "We don't ask you to take our word for it. Every Elira Living product is audited and certified by recognised third-party bodies — because real transparency means showing your work. Below is a full account of every certification we carry, who granted it, and exactly what it means for you." },
-  de: { kicker: "Zertifiziert sauber", h1: "Jede Aussage, unabhängig geprüft.", lead: "Wir bitten Sie nicht, uns auf's Wort zu glauben. Jedes Elira-Living-Produkt wird von anerkannten unabhängigen Stellen geprüft und zertifiziert — weil echte Transparenz bedeutet, die eigene Arbeit offenzulegen. Hier finden Sie eine vollständige Übersicht aller unserer Zertifizierungen: wer sie vergeben hat und was das konkret für Sie bedeutet." },
-  nl: { kicker: "Gecertificeerd schoon", h1: "Elke claim, onafhankelijk geverifieerd.", lead: "We vragen je niet ons op ons woord te geloven. Elk Elira Living-product wordt gecontroleerd en gecertificeerd door erkende onafhankelijke instanties — want echte transparantie betekent je werk laten zien. Hieronder vind je een volledig overzicht van elke certificering die wij dragen, wie deze heeft verleend en wat dat precies voor jou betekent." },
+  en: { kicker: "Certified clean", h1: "Every claim, independently verified.", lead: "We don't ask you to take our word for it. Every Elira Living product is audited and certified by recognised third-party bodies — because real transparency means showing your work. Below is a full account of every certification we carry, who granted it, and exactly what it means for you.", certifiedBy: "Independently certified by", badgesSub: "COSMOS Organic & COSMOS Natural · audited by ECOCERT Greenlife" },
+  de: { kicker: "Zertifiziert sauber", h1: "Jede Aussage, unabhängig geprüft.", lead: "Wir bitten Sie nicht, uns auf's Wort zu glauben. Jedes Elira-Living-Produkt wird von anerkannten unabhängigen Stellen geprüft und zertifiziert — weil echte Transparenz bedeutet, die eigene Arbeit offenzulegen. Hier finden Sie eine vollständige Übersicht aller unserer Zertifizierungen: wer sie vergeben hat und was das konkret für Sie bedeutet.", certifiedBy: "Unabhängig zertifiziert durch", badgesSub: "COSMOS Organic & COSMOS Natural · geprüft von ECOCERT Greenlife" },
+  nl: { kicker: "Gecertificeerd schoon", h1: "Elke claim, onafhankelijk geverifieerd.", lead: "We vragen je niet ons op ons woord te geloven. Elk Elira Living-product wordt gecontroleerd en gecertificeerd door erkende onafhankelijke instanties — want echte transparantie betekent je werk laten zien. Hieronder vind je een volledig overzicht van elke certificering die wij dragen, wie deze heeft verleend en wat dat precies voor jou betekent.", certifiedBy: "Onafhankelijk gecertificeerd door", badgesSub: "COSMOS Organic & COSMOS Natural · gecontroleerd door ECOCERT Greenlife" },
 };
 const CERT_SEC = {
   en: { prod: "Product certifications", prodLead: "Verified on every product we make.", mfg: "Manufacturing certifications", mfgLead: "How and where your products are made.", by: "Issued by", prohibits: "Prohibited by this standard", applies: "Applies to", cta: "Shop certified →" },
@@ -892,6 +892,31 @@ function certCard(L, c, isMfg) {
 </article>`;
 }
 
+// Big "certified by" lockup. Official artwork wins when present — drop files
+// named ecocert.* / cosmos.* into assets/img/cert-logos/ to replace the SVGs.
+function officialCertLogo(slug) {
+  const dir = path.join(ROOT, "assets", "img", "cert-logos");
+  if (!fs.existsSync(dir)) return null;
+  const f = fs.readdirSync(dir).find(n => n.toLowerCase().startsWith(slug));
+  return f ? `/assets/img/cert-logos/${f}` : null;
+}
+function certLockupLogo(slug, alt, fallbackSvg) {
+  const src = officialCertLogo(slug);
+  return src
+    ? `<img src="${src}" alt="${escA(alt)}" class="cert-lockup__img" loading="lazy" decoding="async">`
+    : fallbackSvg;
+}
+const ECOCERT_SVG = `<svg class="cert-lockup__svg" viewBox="0 0 240 240" role="img" aria-label="ECOCERT Greenlife">
+  <circle cx="120" cy="120" r="117" fill="#fbfaf5" stroke="#4c7a2c" stroke-width="2"/><circle cx="120" cy="120" r="105" fill="#4c7a2c"/>
+  <path d="M120 58c-21 23-32 40-32 58a32 32 0 0 0 64 0c0-18-11-35-32-58Z" fill="#fbfaf5"/><path d="M120 92v54" stroke="#4c7a2c" stroke-width="3" stroke-linecap="round"/>
+  <text x="120" y="188" text-anchor="middle" fill="#fbfaf5" font-family="'Helvetica Neue',Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="2">ECOCERT</text></svg>`;
+const COSMOS_SVG = `<svg class="cert-lockup__svg" viewBox="0 0 240 240" role="img" aria-label="COSMOS Organic and Natural certified">
+  <circle cx="120" cy="120" r="117" fill="#fbfaf5" stroke="#2f6b3f" stroke-width="2"/><circle cx="120" cy="120" r="105" fill="#2f6b3f"/>
+  <g fill="#fbfaf5"><circle cx="120" cy="66" r="4.5"/><circle cx="152" cy="80" r="3"/><circle cx="88" cy="80" r="3"/></g>
+  <text x="120" y="130" text-anchor="middle" fill="#fbfaf5" font-family="'Helvetica Neue',Arial,sans-serif" font-size="33" font-weight="800" letter-spacing="2">COSMOS</text>
+  <text x="120" y="159" text-anchor="middle" fill="#cfe3c4" font-family="Arial,sans-serif" font-size="15" font-weight="600" letter-spacing="5">ORGANIC</text>
+  <text x="120" y="180" text-anchor="middle" fill="#cfe3c4" font-family="Arial,sans-serif" font-size="13" font-weight="500" letter-spacing="3">&amp; NATURAL</text></svg>`;
+
 function renderCertifications(L) {
   const h = CERT_HERO[L];
   const sec = CERT_SEC[L];
@@ -902,6 +927,15 @@ function renderCertifications(L) {
   <div class="kicker" style="margin-bottom:.75rem">${esc(h.kicker)}</div>
   <h1 class="font-display reveal" style="font-size:clamp(2.4rem,6vw,3.6rem);max-width:22rem">${esc(h.h1)}</h1>
   <p class="reveal" style="margin-top:1.25rem;font-size:1.05rem;color:var(--ink-soft);max-width:48rem;line-height:1.75">${esc(h.lead)}</p>
+
+  <div class="cert-lockup reveal">
+    <span class="cert-lockup__cap">${esc(h.certifiedBy)}</span>
+    <div class="cert-lockup__row">
+      <div class="cert-lockup__item">${certLockupLogo("ecocert", "ECOCERT Greenlife", ECOCERT_SVG)}</div>
+      <div class="cert-lockup__item">${certLockupLogo("cosmos", "COSMOS Organic and Natural", COSMOS_SVG)}</div>
+    </div>
+    <span class="cert-lockup__sub">${esc(h.badgesSub)}</span>
+  </div>
 
   <div class="cert-section" style="margin-top:4.5rem">
     <h2 class="font-display cert-section__title">${esc(sec.prod)}</h2>

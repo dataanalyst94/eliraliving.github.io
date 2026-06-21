@@ -159,6 +159,11 @@ h1,h2,h3,h4{ letter-spacing:-.01em; margin:0; }
 /* Certifications page */
 .cert-section__title{ font-size:clamp(1.6rem,3.5vw,2.2rem); margin-bottom:.5rem; }
 .cert-section__lead{ font-size:.95rem; margin-bottom:2.25rem; }
+.cert-lockup{ margin-top:3rem; padding:clamp(2rem,5vw,3rem); border:1px solid var(--line); border-radius:14px; background:var(--surface); text-align:center; }
+.cert-lockup__cap{ display:block; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+.cert-lockup__row{ display:flex; align-items:center; justify-content:center; gap:clamp(2rem,8vw,5rem); flex-wrap:wrap; margin:1.75rem 0 1.25rem; }
+.cert-lockup__svg,.cert-lockup__img{ width:clamp(150px,30vw,220px); height:auto; display:block; }
+.cert-lockup__sub{ display:block; font-size:.85rem; color:var(--ink-soft); }
 .cert-cards{ display:grid; grid-template-columns:1fr; gap:1.25rem; }
 @media(min-width:600px){ .cert-cards{ grid-template-columns:repeat(2,1fr); } }
 @media(min-width:900px){ .cert-cards{ grid-template-columns:repeat(3,1fr); } }
