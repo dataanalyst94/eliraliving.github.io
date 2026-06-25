@@ -21,6 +21,10 @@ Thumbs.db
 # Generated marketing drafts (transient)
 marketing/pitches/
 
+# Local automation tooling — never publish to the public site
+marketing/qwoted/
+marketing/blog-automation/
+
 # Private internal tools — never publish to the public site
 kanban.html
 elira-board.json
