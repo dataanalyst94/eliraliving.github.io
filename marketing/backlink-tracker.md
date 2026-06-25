@@ -22,14 +22,14 @@ Tagline:  Vegan, ECOCERT COSMOS-certified natural skincare & haircare. Made in t
 |---|--------|------|--------------|--------|------|----------|
 | 1 | Google Business Profile | Listing | Google acct | ☐ open | | hard for cross-border sole trader — optional |
 | 2 | Trustpilot (free profile) | Reviews | Email | ✅ live | | trustpilot.com/review/eliraliving.com |
-| 3 | Bing Places | Listing | Microsoft acct | ☐ open | | |
+| 3 | Bing Places | Listing | Microsoft acct | ✅ done | | pending publish (submitted) |
 | 4 | Trusted Shops (DE/NL) | Trust seal | Paid signup | ☐ later | | paid; revisit |
 | 5 | ~~happycow~~ vegan SHOP dirs | Vegan | Email | ☐ open | | HappyCow = food only; use vegan-shop dirs instead |
 | 6 | ethical/vegan shop directories | Ethical | Email | ☐ open | | see backlink-directories.md Tier 2 |
 | 7 | Product Hunt (brand/launch) | Tech/launch | Account | ☐ open | | |
 | 8 | Crunchbase company profile | Business | Account | ✅ live | | crunchbase.com/organization/elira-living |
 | 9 | LinkedIn Company Page | Social/brand | LinkedIn | ✅ live | | linkedin.com/company/elira-living |
-| 10 | Pinterest business (claim site) | Social | Pinterest | ☐ open | | |
+| 10 | Pinterest business (claim site) | Social | Pinterest | ✅ done | | published; API verify pending |
 | + | Instagram / Facebook / TikTok | Social | — | ✅ live | | @eliralivingeu |
 
 ## Week 2 — topical vegan / clean-beauty directories

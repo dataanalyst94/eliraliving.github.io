@@ -109,6 +109,84 @@ EU natural/vegan e-shops.
 
 ---
 
+## ▶ Starter shortlist (researched, real — verify the contact page before sending)
+Grab each one's current PR/contact email from their site's contact page; I've noted the
+method where known. Don't mass-send — personalise sentence one per the notes.
+
+### Netherlands (NL)
+| Target | URL | Type | Fit / personalisation hook |
+|---|---|---|---|
+| Living the Green Life | livingthegreenlife.com/lifestyle/vegan-gezichtsverzorging-11x-onze-favorieten/ | **Listicle inclusion** | They keep a "11x favorite vegan face care" list — ask to be added |
+| The Vegan Effect (Quirine) | theveganeffect.nl/alles-over-vegan-huidverzorging-mijn-favorieten/ | **Listicle + seed** | "My favorite vegan skincare" post; she reviews NL brands (SMPL) |
+| Zij Tikt (Natascha) | zijtikt.nl/natuurlijke-huidverzorging/ | **Seed** | Ingredient-list analyst — lead with INCI/ECOCERT angle |
+| Care for Skin | careforskin.nl | Seed | Beauty specialist, writes skincare blogs |
+| Vegan Beauty NL | vegan-beauty.nl | Seed | Vegan/cruelty-free focus |
+| The Green Beauty Shop | greenbeautyshop.nl | **Retailer/stockist** | Curated clean-beauty shop + blog |
+| De Groene Drogist | degroenedrogist.nl | **Retailer/stockist** | Natural/organic e-shop |
+
+### Germany (DE)
+| Target | URL | Type | Fit / personalisation hook |
+|---|---|---|---|
+| Green Shades of Red | greenshadesofred.de | **Seed** | Came to natural cosmetics via skin problems — perfect sensitive-skin fit |
+| Herbs and Flowers (Ida) | herbsandflowers.de | **Seed** | Tests & presents new natural cosmetics |
+| Natural Beauty | naturalbeauty.de | **Seed** | Ingredient-critical — lead with ECOCERT/fragrance-free |
+| kokebi | kokebi.de | Seed | Vegan natural cosmetics blog |
+| Notino Beauty Blog — Naturkosmetik | notino.de/beautyblog | **Listicle inclusion** | Bigger editorial; harder but high value |
+| Utopia.de — Naturkosmetik blogs | utopia.de | **Listicle/PR** | Sustainability publication |
+
+> ⚠️ Skip/verify: **kosmetik-vegan.de** (Vegan Beauty Blog) was a top DE blog but ran ~2010–2022 — check if active before pitching.
+
+### EN / pan-EU (from Lane-3 listicle list above)
+UpHavin "Best Vegan Skincare in Europe", Vegan Avenue, VegOut Magazine — all take new entries.
+
+## ▶ Pre-filled, ready-to-send (top 3 — just grab the email & send)
+
+**1 — Living the Green Life (NL listicle inclusion)**
+```
+Subject: Een Fins veganistisch merk voor je 'vegan gezichtsverzorging' lijst
+
+Hoi,
+
+Je lijst met favoriete vegan gezichtsverzorging is precies waar mensen zoeken naar merken
+die ze kunnen vertrouwen — dank dat je 'm bijhoudt.
+
+Ik ben Zeerak, oprichter van Elira Living, een Fins merk met vegan, ECOCERT COSMOS-
+gecertificeerde huid- en haarverzorging voor de gevoelige, parfumbewuste huid — gemaakt in
+de EU en verkrijgbaar in NL. We zouden een eerlijke aanvulling op je lijst zijn: écht
+gecertificeerd (niet alleen 'clean' op het etiket), parfumvrij, en gemaakt voor reactieve
+huid. Ik stuur graag een product op zodat je het zelf kunt proberen.
+
+De collectie: https://www.eliraliving.com
+
+Hartelijke groet,
+Zeerak — oprichter, Elira Living
+```
+
+**2 — Green Shades of Red (DE seeding)**
+```
+Subject: Ein kleines Geschenk für deine Leser mit empfindlicher Haut?
+
+Hallo,
+
+dass du über Naturkosmetik schreibst, weil deine eigene Haut dich dorthin gebracht hat,
+spricht mich sehr an — genau dafür haben wir Elira Living gemacht.
+
+Ich bin Zeerak, Gründer von Elira Living, einem kleinen finnischen Label für vegane,
+ECOCERT COSMOS-zertifizierte Hautpflege für empfindliche, parfümbewusste Haut. Ich würde
+dir gern ein Produkt zum Testen schicken — ohne Bedingungen, kein Pflichtpost. Wenn es
+deiner Haut guttut und du deine ehrliche Meinung teilen magst, würde das einem kleinen
+Gründer viel bedeuten.
+
+Was möchtest du testen — unsere parfümfreie Sensitive Moisturizing Cream oder das
+pflanzliche Retinol Alternative Serum? Schick mir einfach eine Adresse.
+
+Herzliche Grüße,
+Zeerak — Gründer, Elira Living · https://www.eliraliving.com
+```
+
+**3 — UpHavin (EN, "Best Vegan Skincare in Europe" inclusion)** — use Template 1 (English),
+swap sentence one to reference their Europe-specific roundup.
+
 ## Tracking
 | Date | Target | Type (listicle/seed/retail) | Contact | Sent | Reply | Link earned |
 |---|---|---|---|---|---|---|
