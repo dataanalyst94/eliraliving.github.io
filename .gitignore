@@ -24,6 +24,7 @@ marketing/pitches/
 # Local automation tooling — never publish to the public site
 marketing/qwoted/
 marketing/blog-automation/
+marketing/outreach-automation/
 
 # Private internal tools — never publish to the public site
 kanban.html
