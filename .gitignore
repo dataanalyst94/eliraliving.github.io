@@ -78,3 +78,6 @@ assets/img/*
 marketing/social/
 # local Telegram notify secret — never commit
 infra/telegram/notify.local.json
+
+# local Zoho email secret — never commit
+infra/email/zoho.local.json

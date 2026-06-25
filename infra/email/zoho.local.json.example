@@ -1,0 +1,8 @@
+{
+  "host": "smtp.zoho.eu",
+  "port": 465,
+  "user": "support@eliraliving.com",
+  "appPassword": "PASTE_ZOHO_APP_SPECIFIC_PASSWORD_HERE",
+  "from": "support@eliraliving.com",
+  "fromName": "Zeerak — Elira Living"
+}

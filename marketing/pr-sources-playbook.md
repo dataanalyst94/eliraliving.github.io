@@ -27,8 +27,8 @@ Bio:         Founder of Elira Living, a Finnish maker of vegan, ECOCERT COSMOS-c
 ## The services to join (priority order)
 | # | Service | What it is | Cost | How it works | Priority |
 |---|---------|-----------|------|--------------|----------|
-| 1 | **Featured.com** | The big HARO successor; experts answer journalist questions | Free tier | Web app + email; answer questions in your topics | ⭐ High |
-| 2 | **SourceBottle** | Source-request alerts, strong in lifestyle/beauty | Free | Email digests by category (Health & Beauty) | ⭐ High |
+| 1 | **Featured.com** ✅ signed up | The big HARO successor; experts answer journalist questions | Free tier | Web app dashboard (login: infinitytraders020@gmail.com) | ⭐ High |
+| 2 | ~~SourceBottle~~ DROPPED | AU/US-focused — does not meaningfully serve EU. No benefit. | — | skip | — |
 | 3 | **#journorequest / #PRrequest** | Live journalist requests on X + Bluesky | Free | Follow/search hashtags + "beauty"/"skincare"; reply/DM | ⭐ High |
 | 4 | **Help a B2B Writer** | B2B angle (your ecommerce/founder/marketing expertise) | Free | Email digests 3x/week | Medium |
 | 5 | **ResponseSource** | UK/EU journalist requests, beauty desk | Paid | Email alerts | Later |
