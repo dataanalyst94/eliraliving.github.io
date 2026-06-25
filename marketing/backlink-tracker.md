@@ -20,16 +20,17 @@ Tagline:  Vegan, ECOCERT COSMOS-certified natural skincare & haircare. Made in t
 ## Week 1 — highest impact (do these 10 first)
 | # | Target | Type | Login needed | Status | Date | Live URL |
 |---|--------|------|--------------|--------|------|----------|
-| 1 | Google Business Profile | Listing | Google acct | ☐ | | |
-| 2 | Trustpilot (free profile) | Reviews | Email | ☐ | | |
-| 3 | Bing Places | Listing | Microsoft acct | ☐ | | |
-| 4 | Trusted Shops (DE/NL) | Trust seal | Paid signup | ☐ | | |
-| 5 | happycow / vegan directories | Vegan | Email | ☐ | | |
-| 6 | ecosia / ethical shop directories | Ethical | Email | ☐ | | |
-| 7 | Product Hunt (brand/launch) | Tech/launch | Account | ☐ | | |
-| 8 | Crunchbase company profile | Business | Account | ☐ | | |
-| 9 | LinkedIn Company Page | Social/brand | LinkedIn | ☐ | | |
-| 10 | Pinterest business (claim site) | Social | Pinterest | ☐ | | |
+| 1 | Google Business Profile | Listing | Google acct | ☐ open | | hard for cross-border sole trader — optional |
+| 2 | Trustpilot (free profile) | Reviews | Email | ✅ live | | trustpilot.com/review/eliraliving.com |
+| 3 | Bing Places | Listing | Microsoft acct | ☐ open | | |
+| 4 | Trusted Shops (DE/NL) | Trust seal | Paid signup | ☐ later | | paid; revisit |
+| 5 | ~~happycow~~ vegan SHOP dirs | Vegan | Email | ☐ open | | HappyCow = food only; use vegan-shop dirs instead |
+| 6 | ethical/vegan shop directories | Ethical | Email | ☐ open | | see backlink-directories.md Tier 2 |
+| 7 | Product Hunt (brand/launch) | Tech/launch | Account | ☐ open | | |
+| 8 | Crunchbase company profile | Business | Account | ✅ live | | crunchbase.com/organization/elira-living |
+| 9 | LinkedIn Company Page | Social/brand | LinkedIn | ✅ live | | linkedin.com/company/elira-living |
+| 10 | Pinterest business (claim site) | Social | Pinterest | ☐ open | | |
+| + | Instagram / Facebook / TikTok | Social | — | ✅ live | | @eliralivingeu |
 
 ## Week 2 — topical vegan / clean-beauty directories
 See `backlink-directories.md` Tier 2 — work the list, same NAP, record below.
