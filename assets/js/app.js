@@ -10,7 +10,7 @@
   const C = window.CONTENT || { ui: {}, products: {}, features: {}, meta: {} };
   const CAT = window.CATALOG;
   const CFG = CAT.CONFIG;
-  const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE" };
+  const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE", fi: "fi-FI" };
   const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const t = (k) => (C.ui && C.ui[k] != null ? C.ui[k] : k);
@@ -21,7 +21,7 @@
   const pname = (id) => (C.products[id] && C.products[id].name) || id;
   const pImg = (id) => { const p = CAT.getProduct(id); return p ? p.image : ""; };
   const langPrefix = "/" + LANG;
-  const switchLangPath = (to) => location.pathname.replace(/^\/(en|de|nl)(\/|$)/, "/" + to + "$2") || "/" + to + "/";
+  const switchLangPath = (to) => location.pathname.replace(/^\/(en|de|nl|fi)(\/|$)/, "/" + to + "$2") || "/" + to + "/";
 
   /* ---- Toast ---------------------------------------------------------- */
   let toastTimer;

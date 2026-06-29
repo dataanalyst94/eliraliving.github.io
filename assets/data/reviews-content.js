@@ -49,7 +49,11 @@ const REVIEW_UI = {
   nl: { kicker: "Echte reviews", title: "Geliefd in Duitsland & Nederland",
         lead: "Een paar eerlijke woorden van onze eerste Elira-klanten — onbewerkt, in hun eigen woorden.",
         verified: "Geverifieerde koper", aggSuffix: "uit {n} geverifieerde reviews",
-        country: { de: "Duitsland", nl: "Nederland" } }
+        country: { de: "Duitsland", nl: "Nederland" } },
+  fi: { kicker: "Aitoja arvosteluja", title: "Rakastettu Saksassa & Alankomaissa",
+        lead: "Muutama rehellinen sana ensimmäisiltä Elira-asiakkailtamme — muokkaamattomina, heidän omin sanoin.",
+        verified: "Vahvistettu ostaja", aggSuffix: "{n} vahvistetusta arvostelusta",
+        country: { de: "Saksa", nl: "Alankomaat" } }
 };
 
 module.exports = { REVIEWS, REVIEW_UI };

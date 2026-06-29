@@ -88,10 +88,31 @@ const BLOG_UI = {
     faqHeading: "Veelgestelde vragen",
     toc: "In deze gids",
     learn: "Meer weten"
+  },
+  fi: {
+    nav: "Journal",
+    indexTitle: "Elira Journal — Luonnollisen ihonhoidon oppaat & ainesosatarinat | Elira Living",
+    indexDescription: "Asiantuntevia, selkokielisiä oppaita vegaaniseen, luonnolliseen iho- ja hiustenhoitoon — herkän ihon rutiinit, ainesosien selitykset ja puhtaan kauneuden vinkit Elira Livingiltä.",
+    indexKeywords: "luonnollisen ihonhoidon blogi, vegaaninen ihonhoito-opas, herkän ihon rutiini, puhtaan kauneuden journal, salisyylihappo, ainesosaopas, COSMOS ihonhoito, herkkä hiuspohja",
+    kicker: "Journal",
+    heading: "Hoito-oppaat & ainesosatarinat",
+    lead: "Asiantuntevaa, selkokielistä opastusta luonnolliseen, vegaaniseen iho- ja hiustenhoitoon — ja sertifioituihin ainesosiin jokaisen Elira Living -formulaation takana.",
+    readMore: "Lue artikkeli",
+    empty: "Uusia artikkeleita on tulossa.",
+    back: "Kaikki artikkelit",
+    crumbHome: "Etusivu",
+    minRead: "min lukuaika",
+    published: "Julkaistu",
+    updated: "Päivitetty",
+    related: "Esillä tässä oppaassa",
+    shopCta: "Tutustu valikoimaan",
+    faqHeading: "Usein kysytyt kysymykset",
+    toc: "Tässä oppaassa",
+    learn: "Lue lisää"
   }
 };
 
-const LANGS = ["en", "de", "nl"];
+const LANGS = ["en", "de", "nl", "fi"];
 
 function validate(post, file) {
   if (!post || typeof post !== "object") throw new Error(`Blog post ${file}: not an object`);

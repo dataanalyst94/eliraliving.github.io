@@ -7,15 +7,15 @@ const fs = require("fs");
 const path = require("path");
 const ROOT = __dirname;
 const CAT = require("./assets/data/catalog.js");
-const CONTENT = { en: require("./assets/content/en.js"), de: require("./assets/content/de.js"), nl: require("./assets/content/nl.js") };
+const CONTENT = { en: require("./assets/content/en.js"), de: require("./assets/content/de.js"), nl: require("./assets/content/nl.js"), fi: require("./assets/content/fi.js") };
 const TRACK = require("./assets/data/analytics-config.js");
 const { LEGAL, DISCLAIMER } = require("./assets/data/legal-content.js");
 const { USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE } = require("./assets/data/faq-content.js");
 const { BLOG_UI, POSTS } = require("./assets/data/blog-content.js");
 const { REVIEWS, REVIEW_UI } = require("./assets/data/reviews-content.js");
-const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen" };
-const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik" };
-const FREESHIP_H = { en: "Free shipping on this item", de: "Kostenloser Versand für diesen Artikel", nl: "Gratis verzending voor dit artikel" };
+const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen", fi: "Usein kysytyt kysymykset" };
+const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik", fi: "Käyttöohjeet" };
+const FREESHIP_H = { en: "Free shipping on this item", de: "Kostenloser Versand für diesen Artikel", nl: "Gratis verzending voor dit artikel", fi: "Ilmainen toimitus tälle tuotteelle" };
 // Trust signals shown right under the add-to-cart on every product page.
 // EU-compliant, factual — no invented numbers or timeframes beyond the statutory
 // 14-day right of withdrawal.
@@ -23,6 +23,7 @@ const TRUST = {
   en: [["secure", "Secure checkout"], ["ship", "Ships from the EU"], ["return", "14-day returns"], ["cert", "Vegan · ECOCERT COSMOS"]],
   de: [["secure", "Sicherer Bezahlvorgang"], ["ship", "Versand aus der EU"], ["return", "14 Tage Widerrufsrecht"], ["cert", "Vegan · ECOCERT COSMOS"]],
   nl: [["secure", "Veilig afrekenen"], ["ship", "Verzending uit de EU"], ["return", "14 dagen retourrecht"], ["cert", "Vegan · ECOCERT COSMOS"]],
+  fi: [["secure", "Turvallinen maksu"], ["ship", "Toimitus EU:sta"], ["return", "14 päivän palautusoikeus"], ["cert", "Vegaaninen · ECOCERT COSMOS"]],
 };
 const TRUST_ICONS = {
   secure: '<rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
@@ -32,7 +33,7 @@ const TRUST_ICONS = {
 };
 const trustRow = (L) => `<div class="pdp-trust">${(TRUST[L] || TRUST.en).map(([k, label]) =>
   `<div class="pdp-trust__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">${TRUST_ICONS[k]}</svg><span>${esc(label)}</span></div>`).join("")}</div>`;
-const JOURNAL_H = { en: "From the Journal", de: "Aus dem Journal", nl: "Uit het Journal" };
+const JOURNAL_H = { en: "From the Journal", de: "Aus dem Journal", nl: "Uit het Journal", fi: "Journalista" };
 
 // Google Consent Mode v2 default (denied) + GTM loader — baked into every page.
 function gtmHead() {
@@ -86,9 +87,9 @@ function pic(src, imgAttrs = "", sizes = "100vw") {
   }
   return `<picture><source srcset="${webpOf(src)}" type="image/webp"><img src="${src}" ${imgAttrs}></picture>`;
 }
-const OGLOC = { en: "en_GB", de: "de_DE", nl: "nl_NL" };
-const LANGS = ["en", "de", "nl"];
-const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE" };
+const OGLOC = { en: "en_GB", de: "de_DE", nl: "nl_NL", fi: "fi_FI" };
+const LANGS = ["en", "de", "nl", "fi"];
+const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE", fi: "fi-FI" };
 const ASSET_V = Date.now().toString(36); // cache-buster: changes every build
 
 const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -196,7 +197,7 @@ function header(L, current) {
     <a href="${P}/certifications.html" class="nav-link" ${cur("certifications")}>${T(L, "nav.certifications")}</a>
   </nav>
   <div class="nav-actions">
-    <select class="lang-select" data-lang aria-label="Language"><option value="de">DE</option><option value="nl">NL</option><option value="en">EN</option></select>
+    <select class="lang-select" data-lang aria-label="Language"><option value="de">DE</option><option value="nl">NL</option><option value="en">EN</option><option value="fi">FI</option></select>
     <button class="icon-btn" data-cart-open aria-label="${escA(t(L, "nav.cart"))}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="cart-badge" data-cart-count style="display:none">0</span></button>
   </div>
 </div></header>`;
@@ -421,7 +422,7 @@ function reviewsSection(L) {
 
 // Visible per-product reviews on the PDP — Google requires the rating that the
 // schema declares to also be visible to users on the page.
-const PDP_REVIEWS_H = { en: "What buyers say", de: "Was Käufer:innen sagen", nl: "Wat kopers zeggen" };
+const PDP_REVIEWS_H = { en: "What buyers say", de: "Was Käufer:innen sagen", nl: "Wat kopers zeggen", fi: "Mitä ostajat sanovat" };
 function productReviewsSection(L, p) {
   const agg = productAgg(p.id);
   if (!agg) return "";
@@ -757,11 +758,13 @@ const CERT_HERO = {
   en: { kicker: "Certified clean", h1: "Every claim, independently verified.", lead: "We don't ask you to take our word for it. Every Elira Living product is audited and certified by recognised third-party bodies — because real transparency means showing your work. Below is a full account of every certification we carry, who granted it, and exactly what it means for you.", certifiedBy: "Independently certified by", badgesSub: "COSMOS Organic & COSMOS Natural · audited by ECOCERT Greenlife" },
   de: { kicker: "Zertifiziert sauber", h1: "Jede Aussage, unabhängig geprüft.", lead: "Wir bitten Sie nicht, uns auf's Wort zu glauben. Jedes Elira-Living-Produkt wird von anerkannten unabhängigen Stellen geprüft und zertifiziert — weil echte Transparenz bedeutet, die eigene Arbeit offenzulegen. Hier finden Sie eine vollständige Übersicht aller unserer Zertifizierungen: wer sie vergeben hat und was das konkret für Sie bedeutet.", certifiedBy: "Unabhängig zertifiziert durch", badgesSub: "COSMOS Organic & COSMOS Natural · geprüft von ECOCERT Greenlife" },
   nl: { kicker: "Gecertificeerd schoon", h1: "Elke claim, onafhankelijk geverifieerd.", lead: "We vragen je niet ons op ons woord te geloven. Elk Elira Living-product wordt gecontroleerd en gecertificeerd door erkende onafhankelijke instanties — want echte transparantie betekent je werk laten zien. Hieronder vind je een volledig overzicht van elke certificering die wij dragen, wie deze heeft verleend en wat dat precies voor jou betekent.", certifiedBy: "Onafhankelijk gecertificeerd door", badgesSub: "COSMOS Organic & COSMOS Natural · gecontroleerd door ECOCERT Greenlife" },
+  fi: { kicker: "Sertifioidusti puhdas", h1: "Jokainen väite, riippumattomasti vahvistettu.", lead: "Emme pyydä sinua uskomaan pelkkää sanaamme. Jokainen Elira Living -tuote on auditoitu ja sertifioitu tunnustettujen riippumattomien tahojen toimesta — sillä aito läpinäkyvyys tarkoittaa työn näyttämistä. Alla on täydellinen selvitys jokaisesta kantamastamme sertifikaatista: kuka sen myönsi ja mitä se tarkalleen tarkoittaa sinulle.", certifiedBy: "Riippumattomasti sertifioinut", badgesSub: "COSMOS Organic & COSMOS Natural · auditoinut ECOCERT Greenlife" },
 };
 const CERT_SEC = {
   en: { prod: "Product certifications", prodLead: "Verified on every product we make.", mfg: "Manufacturing certifications", mfgLead: "How and where your products are made.", by: "Issued by", prohibits: "Prohibited by this standard", applies: "Applies to", cta: "Shop certified →" },
   de: { prod: "Produktzertifizierungen", prodLead: "Auf jedem unserer Produkte geprüft.", mfg: "Herstellungszertifizierungen", mfgLead: "Wie und wo Ihre Produkte hergestellt werden.", by: "Ausgestellt von", prohibits: "Durch diesen Standard verboten", applies: "Gilt für", cta: "Zertifiziert einkaufen →" },
   nl: { prod: "Productcertificeringen", prodLead: "Geverifieerd op elk product dat we maken.", mfg: "Productiecertificeringen", mfgLead: "Hoe en waar jouw producten worden gemaakt.", by: "Uitgegeven door", prohibits: "Verboden door deze standaard", applies: "Van toepassing op", cta: "Gecertificeerd winkelen →" },
+  fi: { prod: "Tuotesertifikaatit", prodLead: "Vahvistettu jokaisessa valmistamassamme tuotteessa.", mfg: "Valmistuksen sertifikaatit", mfgLead: "Miten ja missä tuotteesi valmistetaan.", by: "Myöntäjä", prohibits: "Tämän standardin kieltämät", applies: "Koskee", cta: "Osta sertifioituja →" },
 };
 const PROD_CERTS = [
   {
@@ -772,13 +775,15 @@ const PROD_CERTS = [
       en: "The most rigorous tier of natural cosmetics certification. A minimum of 95% natural-origin ingredients is required across the formula. Additionally, at least 20% of the total product — and 95% of all plant-derived ingredients — must originate from certified organic farming. Every certified batch is independently audited on-site by ECOCERT inspectors.",
       de: "Die strengste Stufe der Naturkosmetik-Zertifizierung. Mindestens 95 % der Zutaten müssen natürlichen Ursprungs sein. Zusätzlich müssen mindestens 20 % des Gesamtprodukts — und 95 % aller pflanzlichen Zutaten — aus zertifiziertem ökologischem Anbau stammen. Jede zertifizierte Charge wird von ECOCERT-Inspektoren unabhängig vor Ort kontrolliert.",
       nl: "De meest rigoureuze categorie van certificering voor naturele cosmetica. Minimaal 95% van de ingrediënten moet van natuurlijke oorsprong zijn. Bovendien moet minimaal 20% van het totale product — en 95% van alle plantaardige ingrediënten — afkomstig zijn van gecertificeerde biologische landbouw. Elke gecertificeerde batch wordt ter plaatse onafhankelijk gecontroleerd door ECOCERT-inspecteurs.",
+      fi: "Tiukin luonnonkosmetiikan sertifiointitaso. Vähintään 95 % ainesosista on oltava luonnollista alkuperää. Lisäksi vähintään 20 % koko tuotteesta — ja 95 % kaikista kasviperäisistä ainesosista — on oltava peräisin sertifioidusta luomuviljelystä. Jokainen sertifioitu erä tarkastetaan riippumattomasti paikan päällä ECOCERT-tarkastajien toimesta.",
     },
     prohibits: {
       en: ["Synthetic fragrances & colorants", "GMOs & nano-materials", "Mineral oils & silicones", "Parabens & phthalates"],
       de: ["Synthetische Duftstoffe & Farbstoffe", "GVO & Nanomaterialien", "Mineralöle & Silikone", "Parabene & Phthalate"],
       nl: ["Synthetische geurstoffen & kleurstoffen", "GGO's & nanomaterialen", "Minerale oliën & siliconen", "Parabenen & ftalaten"],
+      fi: ["Synteettiset hajusteet & väriaineet", "GMO:t & nanomateriaalit", "Mineraaliöljyt & silikonit", "Parabeenit & ftalaatit"],
     },
-    products: { en: "Sensitive Moisturizing Cream", de: "Sensitive Feuchtigkeitscreme", nl: "Sensitieve Hydraterende Crème" },
+    products: { en: "Sensitive Moisturizing Cream", de: "Sensitive Feuchtigkeitscreme", nl: "Sensitieve Hydraterende Crème", fi: "Herkän ihon kosteusvoide" },
   },
   {
     num: "02", badge: "COSMOS NATURAL",
@@ -788,84 +793,92 @@ const PROD_CERTS = [
       en: "Certified natural cosmetics standard requiring a minimum of 95% natural-origin ingredients. Synthetic fragrances, synthetic colorants, GMOs, mineral oils, and nano-materials are all explicitly prohibited. Full ingredient transparency is mandatory — every ingredient on the label has been audited and approved by ECOCERT.",
       de: "Zertifizierter Standard für Naturkosmetik mit mindestens 95 % Inhaltsstoffen natürlichen Ursprungs. Synthetische Duftstoffe, Farbstoffe, GVO, Mineralöle und Nanomaterialien sind ausdrücklich verboten. Vollständige Inhaltsstofftransparenz ist verpflichtend — jeder Inhaltsstoff auf dem Etikett wurde von ECOCERT geprüft und genehmigt.",
       nl: "Gecertificeerde standaard voor naturele cosmetica met minimaal 95% ingrediënten van natuurlijke oorsprong. Synthetische geurstoffen, kleurstoffen, GGO's, minerale oliën en nanomaterialen zijn allemaal uitdrukkelijk verboden. Volledige transparantie over ingrediënten is verplicht — elk ingrediënt op het etiket is gecontroleerd en goedgekeurd door ECOCERT.",
+      fi: "Sertifioitu luonnonkosmetiikan standardi, joka edellyttää vähintään 95 % luonnollista alkuperää olevia ainesosia. Synteettiset hajusteet, väriaineet, GMO:t, mineraaliöljyt ja nanomateriaalit ovat nimenomaisesti kiellettyjä. Täysi ainesosien läpinäkyvyys on pakollista — jokainen etiketin ainesosa on ECOCERTin tarkastama ja hyväksymä.",
     },
     prohibits: {
       en: ["Synthetic fragrances & colorants", "GMOs & nano-materials", "Mineral oils & silicones", "Parabens & phthalates"],
       de: ["Synthetische Duftstoffe & Farbstoffe", "GVO & Nanomaterialien", "Mineralöle & Silikone", "Parabene & Phthalate"],
       nl: ["Synthetische geurstoffen & kleurstoffen", "GGO's & nanomaterialen", "Minerale oliën & siliconen", "Parabenen & ftalaten"],
+      fi: ["Synteettiset hajusteet & väriaineet", "GMO:t & nanomateriaalit", "Mineraaliöljyt & silikonit", "Parabeenit & ftalaatit"],
     },
-    products: { en: "Radiant Glow Facial Cleanser · Purifying Toner · Sensitive Scalp Shampoo · Retinol Alternative Serum · Peptide Anti-Aging Serum", de: "Radiant Glow Gesichtsreiniger · Klärendes Gesichtswasser · Sensitive Kopfhaut Shampoo · Retinol Alternative Serum · Peptid Anti-Aging Serum", nl: "Radiant Glow Gezichtsreiniger · Zuiverende Toner · Shampoo Gevoelige Hoofdhuid · Retinol Alternatief Serum · Peptide Anti-Aging Serum" },
+    products: { en: "Radiant Glow Facial Cleanser · Purifying Toner · Sensitive Scalp Shampoo · Retinol Alternative Serum · Peptide Anti-Aging Serum", de: "Radiant Glow Gesichtsreiniger · Klärendes Gesichtswasser · Sensitive Kopfhaut Shampoo · Retinol Alternative Serum · Peptid Anti-Aging Serum", nl: "Radiant Glow Gezichtsreiniger · Zuiverende Toner · Shampoo Gevoelige Hoofdhuid · Retinol Alternatief Serum · Peptide Anti-Aging Serum", fi: "Radiant Glow -kasvojenpuhdistusaine · Puhdistava kasvovesi · Herkän hiuspohjan shampoo · Retinolin vaihtoehto -seerumi · Peptidi anti-age -seerumi" },
   },
   {
     num: "03", badge: "100% VEGAN",
-    name: { en: "100% Vegan", de: "100 % Vegan", nl: "100% Veganistisch" },
-    body: { en: "Verified at formulation level", de: "Auf Formulierungsebene geprüft", nl: "Geverifieerd op formuleringssniveau" },
+    name: { en: "100% Vegan", de: "100 % Vegan", nl: "100% Veganistisch", fi: "100 % vegaaninen" },
+    body: { en: "Verified at formulation level", de: "Auf Formulierungsebene geprüft", nl: "Geverifieerd op formuleringssniveau", fi: "Vahvistettu formulaatiotasolla" },
     desc: {
       en: "Every Elira Living formula contains zero animal-derived ingredients — no beeswax, no lanolin, no collagen, no carmine, no honey, no keratin. Verified at the ingredient level by ECOCERT as part of the COSMOS certification process, with every raw material cross-checked against the COSMOS approved ingredient list.",
       de: "Jede Elira-Living-Formel enthält keinerlei tierische Zutaten — kein Bienenwachs, kein Lanolin, kein Kollagen, kein Karmin, keinen Honig, kein Keratin. Auf Rohstoffebene von ECOCERT im Rahmen der COSMOS-Zertifizierung geprüft, mit Überprüfung jedes Rohstoffs anhand der zugelassenen COSMOS-Inhaltsstoffliste.",
       nl: "Elke Elira Living-formule bevat nul ingrediënten van dierlijke oorsprong — geen bijenwas, geen lanoline, geen collageen, geen karmijn, geen honing, geen keratine. Geverifieerd op ingrediëntenniveau door ECOCERT als onderdeel van de COSMOS-certificering, met controle van elk grondstofelement aan de hand van de goedgekeurde COSMOS-ingrediëntenlijst.",
+      fi: "Jokainen Elira Living -formulaatio ei sisällä lainkaan eläinperäisiä ainesosia — ei mehiläisvahaa, ei lanoliinia, ei kollageenia, ei karmiinia, ei hunajaa, ei keratiinia. ECOCERT on vahvistanut tämän ainesosatasolla osana COSMOS-sertifiointiprosessia, ja jokainen raaka-aine on ristiintarkastettu COSMOSin hyväksymää ainesosalistaa vasten.",
     },
     prohibits: null,
-    products: { en: "All products", de: "Alle Produkte", nl: "Alle producten" },
+    products: { en: "All products", de: "Alle Produkte", nl: "Alle producten", fi: "Kaikki tuotteet" },
   },
   {
     num: "04", badge: "CRUELTY-FREE",
-    name: { en: "Cruelty-free", de: "Tierversuchsfrei", nl: "Cruelty-free" },
-    body: { en: "No animal testing, at any stage", de: "Keine Tierversuche — auf keiner Stufe", nl: "Geen dierproeven, in geen enkele fase" },
+    name: { en: "Cruelty-free", de: "Tierversuchsfrei", nl: "Cruelty-free", fi: "Eläinkokeeton" },
+    body: { en: "No animal testing, at any stage", de: "Keine Tierversuche — auf keiner Stufe", nl: "Geen dierproeven, in geen enkele fase", fi: "Ei eläinkokeita, missään vaiheessa" },
     desc: {
       en: "No animal testing is conducted at any stage of development or production — not on ingredients, not on finished products, and not by any third party acting on our behalf. This applies across the entire supply chain, from raw material sourcing through manufacturing to final packaging.",
       de: "Auf keiner Stufe der Entwicklung oder Herstellung werden Tierversuche durchgeführt — weder an Inhaltsstoffen noch am fertigen Produkt, noch durch Dritte in unserem Auftrag. Dies gilt für die gesamte Lieferkette, von der Rohstoffbeschaffung über die Herstellung bis zur finalen Verpackung.",
       nl: "Er worden geen dierproeven uitgevoerd in welke fase van ontwikkeling of productie dan ook — niet op ingrediënten, niet op eindproducten, en niet door derden die namens ons handelen. Dit geldt voor de gehele toeleveringsketen, van inkoop van grondstoffen via productie tot eindverpakking.",
+      fi: "Eläinkokeita ei tehdä missään kehitys- tai tuotantovaiheessa — ei ainesosille, ei valmiille tuotteille eikä kenenkään puolestamme toimivan kolmannen osapuolen toimesta. Tämä koskee koko toimitusketjua raaka-aineiden hankinnasta valmistuksen kautta lopulliseen pakkaukseen.",
     },
     prohibits: null,
-    products: { en: "All products", de: "Alle Produkte", nl: "Alle producten" },
+    products: { en: "All products", de: "Alle Produkte", nl: "Alle producten", fi: "Kaikki tuotteet" },
   },
   {
     num: "05", badge: "DERM. TESTED",
-    name: { en: "Dermatologically tested", de: "Dermatologisch getestet", nl: "Dermatologisch getest" },
-    body: { en: "Tested under dermatological supervision", de: "Unter dermatologischer Aufsicht getestet", nl: "Getest onder dermatologisch toezicht" },
+    name: { en: "Dermatologically tested", de: "Dermatologisch getestet", nl: "Dermatologisch getest", fi: "Dermatologisesti testattu" },
+    body: { en: "Tested under dermatological supervision", de: "Unter dermatologischer Aufsicht getestet", nl: "Getest onder dermatologisch toezicht", fi: "Testattu dermatologisessa valvonnassa" },
     desc: {
       en: "The Sensitive Scalp Shampoo is dermatologically tested — assessed under dermatological supervision for suitability on sensitive, easily-irritated scalps. It is the one product in our range to carry this additional claim, reflecting its formulation for reactive, easily-bothered skin.",
       de: "Das Sensitive Kopfhaut Shampoo ist dermatologisch getestet — unter dermatologischer Aufsicht auf Verträglichkeit für empfindliche, leicht reizbare Kopfhaut geprüft. Es ist das einzige Produkt unseres Sortiments mit dieser zusätzlichen Auslobung, passend zu seiner Rezeptur für reaktive Haut.",
       nl: "De Shampoo Gevoelige Hoofdhuid is dermatologisch getest — beoordeeld onder dermatologisch toezicht op geschiktheid voor de gevoelige, snel geïrriteerde hoofdhuid. Het is het enige product in ons assortiment met deze aanvullende claim, passend bij de formule voor de reactieve huid.",
+      fi: "Herkän hiuspohjan shampoo on dermatologisesti testattu — arvioitu dermatologisessa valvonnassa soveltuvuuden osalta herkälle, helposti ärsyyntyvälle hiuspohjalle. Se on valikoimamme ainoa tuote, joka kantaa tätä lisämerkintää, mikä heijastaa sen koostumusta reaktiiviselle, helposti ärtyvälle iholle.",
     },
     prohibits: null,
-    products: { en: "Sensitive Scalp Shampoo", de: "Sensitive Kopfhaut Shampoo", nl: "Shampoo Gevoelige Hoofdhuid" },
+    products: { en: "Sensitive Scalp Shampoo", de: "Sensitive Kopfhaut Shampoo", nl: "Shampoo Gevoelige Hoofdhuid", fi: "Herkän hiuspohjan shampoo" },
   },
 ];
 const MFG_CERTS = [
   {
     num: "06", badge: "GMP",
-    name: { en: "GMP Certified Manufacturing", de: "GMP-zertifizierte Herstellung", nl: "GMP-gecertificeerde productie" },
+    name: { en: "GMP Certified Manufacturing", de: "GMP-zertifizierte Herstellung", nl: "GMP-gecertificeerde productie", fi: "GMP-sertifioitu valmistus" },
     body: "ISO 22716 · Good Manufacturing Practices for cosmetics",
     desc: {
       en: "Our EU manufacturing partner holds ISO 22716 Good Manufacturing Practice certification — the international standard governing facility hygiene, quality control systems, ingredient traceability, production documentation, and staff training. Every batch produced for Elira Living is made under audited conditions that meet or exceed this standard.",
       de: "Unser EU-Herstellungspartner hält die Zertifizierung nach ISO 22716 Good Manufacturing Practice — dem internationalen Standard für Anlagenhygiene, Qualitätskontrollsysteme, Rückverfolgbarkeit von Inhaltsstoffen, Produktionsdokumentation und Mitarbeiterschulung. Jede für Elira Living produzierte Charge wird unter geprüften Bedingungen hergestellt.",
       nl: "Onze EU-productiepartner beschikt over ISO 22716 Good Manufacturing Practice-certificering — de internationale standaard voor faciliteitshygiëne, kwaliteitscontrolesystemen, traceerbaarheid van ingrediënten, productiedocumentatie en personeelstraining. Elke voor Elira Living geproduceerde batch wordt geproduceerd onder gecontroleerde omstandigheden.",
+      fi: "EU-valmistuskumppanillamme on ISO 22716 Good Manufacturing Practice -sertifiointi — kansainvälinen standardi, joka säätelee tilojen hygieniaa, laadunvalvontajärjestelmiä, ainesosien jäljitettävyyttä, tuotantodokumentaatiota ja henkilöstön koulutusta. Jokainen Elira Livingille valmistettu erä tehdään auditoiduissa olosuhteissa, jotka täyttävät tämän standardin tai ylittävät sen.",
     },
     prohibits: null,
     products: null,
   },
   {
     num: "07", badge: "B CORP",
-    name: { en: "B Corp Certified Partner", de: "B-Corp-zertifizierter Partner", nl: "B Corp gecertificeerde partner" },
+    name: { en: "B Corp Certified Partner", de: "B-Corp-zertifizierter Partner", nl: "B Corp gecertificeerde partner", fi: "B Corp -sertifioitu kumppani" },
     body: "B Lab · B Corporation Certification",
     desc: {
       en: "Our EU manufacturing partner is certified by B Lab — the global non-profit that independently verifies companies against rigorous standards for social impact, environmental responsibility, and governance. B Corp certification requires companies to score across workers, community, environment, and customers, and undergo on-site verification every three years.",
       de: "Unser EU-Herstellungspartner ist von B Lab zertifiziert — der globalen Non-Profit-Organisation, die Unternehmen unabhängig nach strengen Standards für soziale Wirkung, ökologische Verantwortung und Governance prüft. Die B-Corp-Zertifizierung erfordert Nachweise in den Bereichen Mitarbeiter, Gemeinschaft, Umwelt und Kunden sowie alle drei Jahre eine Vor-Ort-Prüfung.",
       nl: "Onze EU-productiepartner is gecertificeerd door B Lab — de wereldwijde non-profitorganisatie die bedrijven onafhankelijk verifieert aan de hand van strenge normen voor sociale impact, milieubewustzijn en governance. B Corp-certificering vereist scores op het gebied van werknemers, gemeenschap, milieu en klanten, en een verificatie ter plaatse elke drie jaar.",
+      fi: "EU-valmistuskumppanimme on B Labin sertifioima — maailmanlaajuisen voittoa tavoittelemattoman järjestön, joka arvioi yrityksiä riippumattomasti tiukoilla sosiaalisen vaikuttavuuden, ympäristövastuun ja hallinnon standardeilla. B Corp -sertifiointi edellyttää yrityksiltä pisteytystä työntekijöiden, yhteisön, ympäristön ja asiakkaiden osalta sekä paikan päällä tehtävää tarkastusta joka kolmas vuosi.",
     },
     prohibits: null,
     products: null,
   },
   {
     num: "08", badge: "BUREAU VERITAS",
-    name: { en: "Bureau Veritas Verified", de: "Bureau Veritas geprüft", nl: "Bureau Veritas geverifieerd" },
+    name: { en: "Bureau Veritas Verified", de: "Bureau Veritas geprüft", nl: "Bureau Veritas geverifieerd", fi: "Bureau Veritas -vahvistettu" },
     body: "Bureau Veritas · Independent Quality & Safety Assurance",
     desc: {
       en: "Independently verified by Bureau Veritas — one of the world's leading testing, inspection, and certification organisations, active in over 140 countries. Their verification of our manufacturing partner covers quality management systems, safety standards, and regulatory compliance across facilities and production processes.",
       de: "Unabhängig geprüft von Bureau Veritas — einer der führenden Prüf-, Inspektions- und Zertifizierungsorganisationen der Welt, tätig in über 140 Ländern. Ihre Überprüfung unseres Herstellungspartners umfasst Qualitätsmanagementsysteme, Sicherheitsstandards und regulatorische Konformität.",
       nl: "Onafhankelijk geverifieerd door Bureau Veritas — een van 's werelds toonaangevende test-, inspectie- en certificeringsorganisaties, actief in meer dan 140 landen. Hun verificatie van onze productiepartner omvat kwaliteitsmanagementsystemen, veiligheidsnormen en naleving van regelgeving.",
+      fi: "Riippumattomasti vahvistanut Bureau Veritas — yksi maailman johtavista testaus-, tarkastus- ja sertifiointiorganisaatioista, joka toimii yli 140 maassa. Heidän valmistuskumppaniamme koskeva vahvistuksensa kattaa laadunhallintajärjestelmät, turvallisuusstandardit ja säädöstenmukaisuuden tiloissa ja tuotantoprosesseissa.",
     },
     prohibits: null,
     products: null,
@@ -1102,6 +1115,23 @@ function write(rel, html) {
   fs.writeFileSync(out, html, "utf8");
 }
 function clean(dir) { const d = path.join(ROOT, dir); if (fs.existsSync(d)) fs.rmSync(d, { recursive: true, force: true }); }
+
+// Safety net for the Finnish locale: ensure every language-keyed object carries
+// an `fi` entry, falling back to English wherever a translation isn't filled in
+// yet — so the build never half-renders while Finnish copy is added over time.
+function backfillLang(node, seen) {
+  seen = seen || new Set();
+  if (!node || typeof node !== "object" || seen.has(node)) return;
+  seen.add(node);
+  if (Object.prototype.hasOwnProperty.call(node, "en") && !Object.prototype.hasOwnProperty.call(node, "fi")) node.fi = node.en;
+  for (const k of Object.keys(node)) backfillLang(node[k], seen);
+}
+[FAQ_H, USE_H, FREESHIP_H, TRUST, JOURNAL_H, PDP_REVIEWS_H, CERT_HERO, CERT_SEC, PROD_CERTS, MFG_CERTS,
+ LEGAL, DISCLAIMER, USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE, BLOG_UI, REVIEWS, REVIEW_UI].forEach(o => backfillLang(o));
+// Backfill any content keys missing from fi.js with the English value (keys, not
+// whole sections — fi.js carries the real translations).
+["ui", "features"].forEach(sec => { const en = CONTENT.en[sec] || {}, fi = CONTENT.fi[sec] || (CONTENT.fi[sec] = {}); for (const k in en) if (fi[k] == null) fi[k] = en[k]; });
+for (const id in CONTENT.en.products) { if (!CONTENT.fi.products[id]) CONTENT.fi.products[id] = CONTENT.en.products[id]; }
 
 function build() {
   let count = 0;
