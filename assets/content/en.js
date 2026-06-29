@@ -144,6 +144,7 @@
     "foot.withdrawal": "Withdrawal",
     "foot.imprint": "Imprint",
     "foot.rights": "All rights reserved.",
+    "foot.businessId": "Business ID (Y-tunnus) 3526013-6",
     "shop.title": "The shop",
     "shop.lead": "The full range — filter by category.",
     "shop.all": "All",

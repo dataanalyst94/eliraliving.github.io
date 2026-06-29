@@ -144,6 +144,7 @@
     "foot.withdrawal": "Widerruf",
     "foot.imprint": "Impressum",
     "foot.rights": "Alle Rechte vorbehalten.",
+    "foot.businessId": "Unternehmenskennung (Y-tunnus) 3526013-6",
     "shop.title": "Der Shop",
     "shop.lead": "Das vollständige Sortiment — filtern Sie nach Kategorie.",
     "shop.all": "Alle",

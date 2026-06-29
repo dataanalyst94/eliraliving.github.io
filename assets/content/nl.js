@@ -144,6 +144,7 @@
     "foot.withdrawal": "Herroeping",
     "foot.imprint": "Colofon",
     "foot.rights": "Alle rechten voorbehouden.",
+    "foot.businessId": "Bedrijfsidentificatie (Y-tunnus) 3526013-6",
     "shop.title": "De shop",
     "shop.lead": "Het volledige assortiment — filter op categorie.",
     "shop.all": "Alles",

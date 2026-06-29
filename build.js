@@ -217,7 +217,7 @@ function footer(L) {
       ${li(P + "/about.html", T(L, "foot.about"))}${li(P + "/blog/", esc(BLOG_UI[L].nav))}${li(P + "/ingredients.html", esc(INGREDIENTS_PAGE[L].title))}${li(P + "/certifications.html", T(L, "nav.certifications"))}${li(P + "/privacy.html", T(L, "foot.privacy"))}${li(P + "/impressum.html", T(L, "foot.imprint"))}</ul></div>
   </div>
   <div style="margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;font-size:.75rem" class="muted">
-    <div>© <span data-year></span> Elira Living · ${T(L, "foot.rights")}</div>
+    <div>© <span data-year></span> Elira Living · ${T(L, "foot.rights")} · ${T(L, "foot.businessId")}</div>
     <div style="display:flex;flex-wrap:wrap;gap:1.25rem">
       <a class="link-underline" href="${P}/privacy.html">${T(L, "foot.privacy")}</a>
       <a class="link-underline" href="${P}/terms.html">${T(L, "foot.terms")}</a>
