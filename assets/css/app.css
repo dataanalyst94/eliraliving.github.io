@@ -69,6 +69,8 @@ h1,h2,h3,h4{ letter-spacing:-.01em; margin:0; }
 .nav-actions{ display:flex; align-items:center; gap:1rem; color:var(--ink); }
 .lang-select{ appearance:none; background:transparent; color:var(--ink); border:1px solid var(--line); padding:.35rem 1.6rem .35rem .6rem; font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; cursor:pointer; border-radius:2px; }
 .lang-select:focus{ outline:none; border-color:var(--gold); }
+.lang-select option{ background:var(--surface); color:var(--ink); font-weight:500; }
+.lang-select option:checked{ background:var(--stone); color:var(--gold); }
 .icon-btn{ position:relative; background:none; border:none; color:var(--ink); cursor:pointer; padding:.4rem; display:grid; place-items:center; }
 .cart-badge{ position:absolute; top:-2px; right:-2px; background:var(--gold); color:#14160F; font-size:10px; line-height:1; min-width:16px; height:16px; padding:0 4px; display:grid; place-items:center; border-radius:999px; }
 .menu-btn{ display:grid; }
