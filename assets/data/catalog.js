@@ -112,6 +112,24 @@
       image: "/assets/img/peptide-serum.jpg",
       images: ["/assets/img/peptide-serum.jpg", "/assets/img/gallery/peptide-anti-aging-serum-2.jpg", "/assets/img/gallery/peptide-anti-aging-serum-3.jpg", "/assets/img/gallery/peptide-anti-aging-serum-4.jpg"],
       priceId: "", paymentLink: ""
+    },
+    {
+      // Bundle: Retinol-Alternative Serum + Peptide Anti-Aging Serum, 10% off the
+      // combined €59.98 (exact 10% = €53.98). Single SKU; the product name/desc
+      // spells out both contents so manual fulfilment (no bundle-splitting logic
+      // in the cart/order pipeline) packs the right two bottles.
+      id: "anti-aging-duo",
+      sku: "EL-BND-AAD",
+      category: "skincare",
+      price: 5398,
+      size: "2 × 30 ml",
+      sizes: [{ id: "bundle", add: 0 }],
+      badge: "bundle",
+      featureKeys: ["vegan", "cosmosNatural", "antiAging"],
+      naturalOrigin: null,
+      image: "/assets/img/peptide-serum.jpg",
+      images: ["/assets/img/peptide-serum.jpg", "/assets/img/serum.jpg"],
+      priceId: "", paymentLink: ""
     }
   ];
 

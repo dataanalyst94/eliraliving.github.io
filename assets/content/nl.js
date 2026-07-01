@@ -258,6 +258,11 @@
       "name": "Peptide Anti-Aging Serum",
       "desc": "Een luxueus, gladmakend serum met 2% Hexapeptide-11 en 1% Ginkgo Biloba, plus hyaluronzuur en antioxidantrijke blauwebessen- en aardbeienzaadoliën. Verzacht zichtbaar fijne lijntjes en rimpels voor een voller, steviger en elastischer ogende huid — met een delicaat bloemig aroma. COSMOS Natural, veganistisch, voor de normale tot droge huid.",
       "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin, Simmondsia Chinensis (Jojoba) Seed Oil*, Aqua/Water, Pentylene Glycol, Cetearyl Alcohol, Sodium PCA, Isoamyl Laurate, Glyceryl Stearate Citrate, Dipalmitoyl Hydroxyproline, Propanediol, Parfum/Fragrance, Caprylic/Capric Triglyceride, Fragaria Ananassa (Strawberry) Seed Oil, Vaccinium Myrtillus (Blueberry) Seed Oil*, Xanthan Gum, Hexapeptide-11, Phytosterols, Ricinus Communis (Castor) Seed Oil*, Ascorbyl Palmitate, Hydrolyzed Hyaluronic Acid, Potassium Hydroxide, Sodium Hyaluronate, Sodium Phytate, Tocopherol, Leuconostoc/Radish Root Ferment Filtrate, Ginkgo Biloba Leaf Extract, CI 77491 (Iron Oxides), Citric Acid, Sodium Benzoate, Potassium Sorbate, Glycolipids, Linalool***, Geraniol***, Citronellol***.  *uit biologische landbouw  ***uit natuurlijke etherische oliën · 99% natuurlijke oorsprong · 20% biologische oorsprong · COSMOS Natural gecertificeerd door ECOCERT Greenlife."
+    },
+    "anti-aging-duo": {
+      "name": "Anti-Aging Duo",
+      "desc": "Twee van onze meest geliefde anti-aging serums samen, 10% voordeliger dan los gekocht. Het Retinol Alternatief Serum (2% Bidens Pilosa) verfijnt de huidtextuur en verzacht fijne lijntjes; het Peptide Anti-Aging Serum (Hexapeptide-11 + Ginkgo Biloba) maakt de huid gladder voor een voller en steviger ogende huid. Beide bevatten hyaluronzuur voor hydratatie. COSMOS Natural, veganistisch, gemaakt in de EU.",
+      "ingredients": "Deze set bevat twee serums op volledig formaat (elk 30 ml). De volledige ingrediëntenlijsten staan op de betreffende productpagina's — Retinol Alternatief Serum en Peptide Anti-Aging Serum."
     }
   }
 };

@@ -26,7 +26,11 @@ const USAGE = {
   "retinol-alternative-serum": {
     en: "Cleanse your face and pat dry. Apply a few drops to face and neck and massage in gently. Use morning and/or evening, before moisturiser; avoid the eye area.",
     de: "Das Gesicht gründlich reinigen und leicht abtrocknen. Einige Tropfen auf Gesicht und Hals auftragen und sanft einmassieren. Morgens und/oder abends vor der Feuchtigkeitspflege anwenden; Augenkontakt vermeiden.",
-    nl: "Reinig je gezicht en dep droog. Breng enkele druppels aan op gezicht en hals en masseer zachtjes in. Gebruik ’s ochtends en/of ’s avonds, vóór je moisturizer; vermijd de oogcontour." }
+    nl: "Reinig je gezicht en dep droog. Breng enkele druppels aan op gezicht en hals en masseer zachtjes in. Gebruik ’s ochtends en/of ’s avonds, vóór je moisturizer; vermijd de oogcontour." },
+  "anti-aging-duo": {
+    en: "Use the Retinol-Alternative Serum in the evening and the Peptide Anti-Aging Serum in the morning (or alternate evenings) — both go on clean, slightly damp skin before moisturiser. Patch test first if introducing both at once.",
+    de: "Verwende das Retinol Alternative Serum abends und das Peptide Anti-Aging Serum morgens (oder abwechselnd abends) — beide auf gereinigte, leicht feuchte Haut vor der Feuchtigkeitspflege auftragen. Bei gleichzeitigem Start mit beiden zuerst einen Verträglichkeitstest machen.",
+    nl: "Gebruik het Retinol Alternatief Serum ’s avonds en het Peptide Anti-Aging Serum ’s ochtends (of afwisselend ’s avonds) — beide aanbrengen op een schone, licht vochtige huid vóór je moisturizer. Doe eerst een patchtest als je met beide tegelijk begint." }
 };
 
 // ---- Product FAQs (the questions people ask AI about these products) ----
@@ -114,6 +118,23 @@ const PRODUCT_FAQ = {
       { q: "Is dit echte retinol?", a: "Nee — het is een mild, plantaardig retinol-alternatief op basis van 2% Bidens Pilosa. Het geeft retinol-achtige, gladmakende voordelen zonder irritatie en is geschikt voor de gevoelige en alle huidtypes." },
       { q: "Hoe en wanneer gebruik ik het serum?", a: "Breng enkele druppels ’s ochtends en/of ’s avonds aan op de gereinigde huid, vóór je moisturizer, en masseer zachtjes in. Vermijd de oogcontour." },
       { q: "Is het veganistisch en gecertificeerd?", a: "Ja — 100% veganistisch en COSMOS Natural gecertificeerd door ECOCERT Greenlife, met 99% ingrediënten van natuurlijke oorsprong en hyaluronzuur voor hydratatie." }
+    ]
+  },
+  "anti-aging-duo": {
+    en: [
+      { q: "What's included in the Anti-Aging Duo?", a: "One full-size 30ml Retinol-Alternative Serum and one full-size 30ml Peptide Anti-Aging Serum — the same products sold individually, bundled at 10% off." },
+      { q: "Can I use both serums together?", a: "Yes. Many people use the Retinol-Alternative Serum in the evening and the Peptide Anti-Aging Serum in the morning, or alternate them. Patch test first if you're new to either." },
+      { q: "Is the bundle vegan and COSMOS certified?", a: "Yes — both serums are 100% vegan and ECOCERT COSMOS Natural certified, made in the EU." }
+    ],
+    de: [
+      { q: "Was ist im Anti-Aging Duo enthalten?", a: "Ein Retinol Alternative Serum in voller Größe (30 ml) und ein Peptide Anti-Aging Serum in voller Größe (30 ml) — dieselben Produkte wie einzeln erhältlich, im Set mit 10 % Rabatt." },
+      { q: "Kann ich beide Seren zusammen verwenden?", a: "Ja. Viele verwenden das Retinol Alternative Serum abends und das Peptide Anti-Aging Serum morgens, oder wechseln sich ab. Bei Erstanwendung zuerst einen Verträglichkeitstest machen." },
+      { q: "Ist das Set vegan und COSMOS-zertifiziert?", a: "Ja — beide Seren sind 100 % vegan und ECOCERT COSMOS Natural zertifiziert, hergestellt in der EU." }
+    ],
+    nl: [
+      { q: "Wat zit er in de Anti-Aging Duo?", a: "Eén Retinol Alternatief Serum op volledig formaat (30 ml) en één Peptide Anti-Aging Serum op volledig formaat (30 ml) — dezelfde producten die ook los verkrijgbaar zijn, samen met 10% korting." },
+      { q: "Kan ik beide serums samen gebruiken?", a: "Ja. Veel mensen gebruiken het Retinol Alternatief Serum ’s avonds en het Peptide Anti-Aging Serum ’s ochtends, of wisselen ze af. Doe bij eerste gebruik eerst een patchtest." },
+      { q: "Is de set veganistisch en COSMOS-gecertificeerd?", a: "Ja — beide serums zijn 100% veganistisch en ECOCERT COSMOS Natural gecertificeerd, gemaakt in de EU." }
     ]
   }
 };

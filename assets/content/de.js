@@ -258,6 +258,11 @@
       "name": "Peptid Anti-Aging Serum",
       "desc": "Ein luxuriöses, glättendes Serum mit 2 % Hexapeptid-11 und 1 % Ginkgo Biloba, dazu Hyaluronsäure und antioxidantienreiche Blaubeer- und Erdbeersamenöle. Mildert sichtbar feine Linien und Falten für vollere, festere und elastischere Haut — mit zart-blumigem Duft. COSMOS Natural, vegan, für normale bis trockene Haut.",
       "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin, Simmondsia Chinensis (Jojoba) Seed Oil*, Aqua/Water, Pentylene Glycol, Cetearyl Alcohol, Sodium PCA, Isoamyl Laurate, Glyceryl Stearate Citrate, Dipalmitoyl Hydroxyproline, Propanediol, Parfum/Fragrance, Caprylic/Capric Triglyceride, Fragaria Ananassa (Strawberry) Seed Oil, Vaccinium Myrtillus (Blueberry) Seed Oil*, Xanthan Gum, Hexapeptide-11, Phytosterols, Ricinus Communis (Castor) Seed Oil*, Ascorbyl Palmitate, Hydrolyzed Hyaluronic Acid, Potassium Hydroxide, Sodium Hyaluronate, Sodium Phytate, Tocopherol, Leuconostoc/Radish Root Ferment Filtrate, Ginkgo Biloba Leaf Extract, CI 77491 (Iron Oxides), Citric Acid, Sodium Benzoate, Potassium Sorbate, Glycolipids, Linalool***, Geraniol***, Citronellol***.  *aus biologischem Anbau  ***aus natürlichen ätherischen Ölen · 99 % natürlichen Ursprungs · 20 % biologischen Ursprungs · COSMOS Natural zertifiziert durch ECOCERT Greenlife."
+    },
+    "anti-aging-duo": {
+      "name": "Anti-Aging Duo",
+      "desc": "Zwei unserer beliebtesten Anti-Aging-Seren im Set, 10 % günstiger als einzeln gekauft. Das Retinol Alternative Serum (2 % Bidens Pilosa) verfeinert die Hautstruktur und mildert feine Linien; das Peptide Anti-Aging Serum (Hexapeptid-11 + Ginkgo Biloba) glättet für praller und fester wirkende Haut. Beide enthalten Hyaluronsäure für Feuchtigkeit. COSMOS Natural, vegan, hergestellt in der EU.",
+      "ingredients": "Dieses Set enthält zwei Seren in voller Größe (je 30 ml). Die vollständigen Inhaltsstofflisten findest du auf den jeweiligen Produktseiten — Retinol Alternative Serum und Peptide Anti-Aging Serum."
     }
   }
 };

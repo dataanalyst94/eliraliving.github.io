@@ -258,6 +258,11 @@
       "name": "Peptide Anti-Aging Serum",
       "desc": "A luxurious smoothing serum with 2% Hexapeptide-11 and 1% Ginkgo Biloba, plus hyaluronic acid and antioxidant-rich blueberry and strawberry seed oils. Visibly softens fine lines and wrinkles for plumper, firmer, more elastic skin — with a delicate floral aroma. COSMOS Natural, vegan, for normal to dry skin.",
       "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin, Simmondsia Chinensis (Jojoba) Seed Oil*, Aqua/Water, Pentylene Glycol, Cetearyl Alcohol, Sodium PCA, Isoamyl Laurate, Glyceryl Stearate Citrate, Dipalmitoyl Hydroxyproline, Propanediol, Parfum/Fragrance, Caprylic/Capric Triglyceride, Fragaria Ananassa (Strawberry) Seed Oil, Vaccinium Myrtillus (Blueberry) Seed Oil*, Xanthan Gum, Hexapeptide-11, Phytosterols, Ricinus Communis (Castor) Seed Oil*, Ascorbyl Palmitate, Hydrolyzed Hyaluronic Acid, Potassium Hydroxide, Sodium Hyaluronate, Sodium Phytate, Tocopherol, Leuconostoc/Radish Root Ferment Filtrate, Ginkgo Biloba Leaf Extract, CI 77491 (Iron Oxides), Citric Acid, Sodium Benzoate, Potassium Sorbate, Glycolipids, Linalool***, Geraniol***, Citronellol***.  *from organic farming  ***from natural essential oils · 99% natural origin · 20% organic · COSMOS Natural certified by ECOCERT Greenlife."
+    },
+    "anti-aging-duo": {
+      "name": "Anti-Aging Duo",
+      "desc": "Two of our most-loved anti-aging serums together, at 10% off buying separately. Retinol-Alternative Serum (2% Bidens Pilosa) refines texture and softens fine lines; Peptide Anti-Aging Serum (Hexapeptide-11 + Ginkgo Biloba) smooths for plumper, firmer-looking skin. Both include hyaluronic acid for hydration. COSMOS Natural, vegan, made in the EU.",
+      "ingredients": "This duo contains two full-size 30ml serums. Full ingredient lists are on each product's own page — Retinol-Alternative Serum and Peptide Anti-Aging Serum."
     }
   }
 };

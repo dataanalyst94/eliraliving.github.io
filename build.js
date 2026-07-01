@@ -268,8 +268,13 @@ function shell(L, o, bodyHtml) {
   return head(L, o) + `\n<body data-page="${o.bodyPage}">\n` + gtmBody() + "\n" + header(L, o.current) + "\n" + bodyHtml + "\n" + footer(L) + "\n" + drawerMenu(L) + "\n" + inline + scripts(L, o) + "\n</body>\n</html>\n";
 }
 
+const BADGE_LABEL = {
+  en: { new: "New", bestseller: "Bestseller", bundle: "Save 10%" },
+  de: { new: "Neu", bestseller: "Bestseller", bundle: "10% sparen" },
+  nl: { new: "Nieuw", bestseller: "Bestseller", bundle: "10% korting" },
+};
 function card(L, p) {
-  const badge = p.badge ? `<span class="tag" style="position:absolute;top:12px;left:12px;z-index:3">${p.badge === "new" ? "New" : "Bestseller"}</span>` : "";
+  const badge = p.badge ? `<span class="tag" style="position:absolute;top:12px;left:12px;z-index:3">${esc((BADGE_LABEL[L] || BADGE_LABEL.en)[p.badge] || "Bestseller")}</span>` : "";
   return `<article class="card" data-cat="${p.category}" data-price="${p.price}" data-name="${escA(pname(L, p.id))}">
   <a href="${url("product", L, p)}" style="display:block">
     <div class="media">${badge}${pic(p.image, `alt="${escA(pname(L, p.id))}" loading="lazy" decoding="async"`, "(min-width:880px) 24vw, (min-width:560px) 30vw, 45vw")}
