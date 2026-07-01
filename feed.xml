@@ -94,5 +94,20 @@
       <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
       <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
     </item>
+    <item>
+      <g:id>EL-BND-AAD</g:id>
+      <g:title>Anti-Aging Duo</g:title>
+      <g:description>Two of our most-loved anti-aging serums together, at 10% off buying separately. Retinol-Alternative Serum (2% Bidens Pilosa) refines texture and softens fine lines; Peptide Anti-Aging Serum (Hexapeptide-11 + Ginkgo Biloba) smooths for plumper, firmer-looking skin. Both include hyaluronic acid for hydration. COSMOS Natural, vegan, made in the EU.</g:description>
+      <g:link>https://www.eliraliving.com/en/products/anti-aging-duo.html</g:link>
+      <g:image_link>https://www.eliraliving.com/assets/img/peptide-serum.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>53.98 EUR</g:price>
+      <g:brand>Elira Living</g:brand>
+      <g:condition>new</g:condition>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Skin Care</g:google_product_category>
+      <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+      <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+    </item>
   </channel>
 </rss>
