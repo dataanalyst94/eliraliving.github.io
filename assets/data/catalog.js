@@ -127,8 +127,8 @@
       badge: "bundle",
       featureKeys: ["vegan", "cosmosNatural", "antiAging"],
       naturalOrigin: null,
-      image: "/assets/img/peptide-serum.jpg",
-      images: ["/assets/img/peptide-serum.jpg", "/assets/img/serum.jpg"],
+      image: "/assets/img/anti-aging-duo.jpg",
+      images: ["/assets/img/anti-aging-duo.jpg", "/assets/img/serum.jpg", "/assets/img/peptide-serum.jpg"],
       priceId: "", paymentLink: ""
     }
   ];
