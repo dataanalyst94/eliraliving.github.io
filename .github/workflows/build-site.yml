@@ -38,6 +38,11 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
+        with:
+          # Full history (not shallow) so the force-mirror push to the divergent
+          # live repo can build a complete pack (avoids "did not receive expected
+          # object" from a thin pack referencing objects the live repo lacks).
+          fetch-depth: 0
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -83,6 +88,6 @@ jobs:
           # repo. Unset that specific key first, then push with the PAT. (Clearing
           # only the generic http.extraheader is NOT enough; the URL-specific key wins.)
           git config --local --unset-all "http.https://github.com/.extraheader" || true
-          git -c "http.https://github.com/.extraheader=" push --force \
+          git -c "http.https://github.com/.extraheader=" push --force --no-thin \
             "https://x-access-token:$SYNC@github.com/dataanalyst94/eliraliving.github.io.git" HEAD:main
           echo "Forwarded (force-mirror) to live Pages repo."
