@@ -76,5 +76,11 @@ jobs:
           # "non-fast-forward" the moment histories diverge (e.g. an out-of-band
           # auto-build commit), silently freezing the live site. --force keeps the
           # live repo an exact mirror and prevents that freeze class entirely.
-          git push --force "https://x-access-token:$SYNC@github.com/dataanalyst94/eliraliving.github.io.git" HEAD:main
+          #
+          # `-c http.extraheader=` clears the credential header that actions/checkout
+          # injects for github.com — otherwise it overrides the PAT in the URL below
+          # and the push goes out as github-actions[bot], which is denied (403) on
+          # the *other* repo. Clearing it lets the x-access-token:$SYNC PAT be used.
+          git -c http.extraheader= push --force \
+            "https://x-access-token:$SYNC@github.com/dataanalyst94/eliraliving.github.io.git" HEAD:main
           echo "✓ Forwarded (force-mirror) to live Pages repo."
