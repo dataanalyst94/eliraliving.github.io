@@ -68,19 +68,21 @@ git stash push -u                  # set aside locally-built HTML (untracked)
 git pull --rebase origin main
 git push origin main               # → triggers CI
 ```
-**Then verify + mirror (3 steps — HTTP 200 alone proves NOTHING, the old cached file also returns 200):**
-1. **Wait for CI's built commit** to land: `git fetch origin` until `origin/main` SHA changes from what you pushed. (Mirroring before this ships a site with missing pages.)
-2. **Mirror the built commit to live** *(manual, because the auto-forward token isn't set — see note):*
-   `git push elira <builtSHA>:main --force`
-3. **Check GitHub Pages actually deployed it:** using the GitHub token (§0),
-   `GET https://api.github.com/repos/dataanalyst94/eliraliving.github.io/pages/builds/latest` → `status` must be `"built"` for the new commit.
-   Then byte-compare a changed file: `curl -s -o /dev/null -w "%{size_download}" "https://www.eliraliving.com/<path>?cb=<random>"` should equal the local file size.
+**✅ Auto-publish is LIVE (set up 2026-07-05).** For a normal change (content, images,
+articles, prices, CSS/JS) you now just `git push origin main` and **CI builds + mirrors
+to the live site automatically** — no manual mirror. Give it ~1–2 min, then optionally
+byte-verify: `curl -s -o /dev/null -w "%{size_download}" "https://www.eliraliving.com/<path>?cb=<random>"` should match your local file.
 
-> **Auto-forward note:** CI *can* mirror automatically if the secret **`PAGES_SYNC_TOKEN`**
-> is added to the **elira-living** repo (Settings → Secrets → Actions). It currently is
-> **not set**, so the manual mirror in step 2 is required after every change. **One-time
-> permanent fix:** create a GitHub PAT (fine-grained: repo = `eliraliving.github.io`,
-> Contents = read/write) and add it as `PAGES_SYNC_TOKEN`. Then steps 1–2 happen automatically.
+**The ONE exception — editing the CI workflow file itself** (`.github/workflows/build-site.yml`):
+the `PAGES_SYNC_TOKEN` is a Contents-only token and GitHub refuses to let it push *workflow-file*
+changes. So after editing the workflow, the auto-forward will fail once. Fix: run a single manual
+mirror with a workflow-scoped token (your normal git credential has it):
+`git fetch origin && git push elira origin/main:main --force`. After that, content pushes
+auto-publish again. (You rarely touch this file.)
+
+> **If www still won't update** after a normal push (rare — GitHub Pages build stuck/errored):
+> re-request the build — `POST https://api.github.com/repos/dataanalyst94/eliraliving.github.io/pages/builds`
+> with the GitHub token (§0). Separate issue from mirroring; see the flaky-Pages note above.
 
 > **⚠️ GitHub Pages is flaky** (3 stuck/failed builds in July 2026). If www won't update
 > and step 3 shows `errored` or is stuck in `building`: **re-request a build** —
