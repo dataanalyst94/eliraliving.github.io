@@ -301,7 +301,7 @@ const SAMEAS = [
   "https://www.crunchbase.com/organization/elira-living",
   "https://www.linkedin.com/company/elira-living",
   // Wikidata intentionally skipped (notability risk for a new brand).
-  // All six profiles verified live and wired into the Organization entity.
+  // All six profiles verified live and wired into the Organization entity. (auto-publish check)
 ];
 // Footer social links (also drive entity reciprocity via rel="me").
 const SOCIALS = [
