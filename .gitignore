@@ -84,3 +84,6 @@ infra/telegram/notify.local.json
 
 # local Zoho email secret — never commit
 infra/email/zoho.local.json
+
+# local Anthropic API key for pay-per-use scheduled runs — never commit
+infra/anthropic.local.key
