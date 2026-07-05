@@ -260,7 +260,8 @@ function scripts(L, o) {
 <script defer src="/assets/data/analytics-config.js${v}"></script>
 <script defer src="/assets/js/analytics.js${v}"></script>
 <script defer src="/assets/js/consent-banner.js${v}"></script>
-<script defer src="/assets/js/app.js${v}"></script>`;
+<script defer src="/assets/js/app.js${v}"></script>
+<script defer src="/assets/js/eli.js${v}"></script>`;
 }
 
 function shell(L, o, bodyHtml) {
