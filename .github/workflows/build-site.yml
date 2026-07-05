@@ -77,10 +77,12 @@ jobs:
           # auto-build commit), silently freezing the live site. --force keeps the
           # live repo an exact mirror and prevents that freeze class entirely.
           #
-          # `-c http.extraheader=` clears the credential header that actions/checkout
-          # injects for github.com — otherwise it overrides the PAT in the URL below
-          # and the push goes out as github-actions[bot], which is denied (403) on
-          # the *other* repo. Clearing it lets the x-access-token:$SYNC PAT be used.
-          git -c http.extraheader= push --force \
+          # actions/checkout injects a URL-SPECIFIC credential header
+          # (http.https://github.com/.extraheader) that overrides the PAT in the URL
+          # below, so the push goes out as github-actions[bot] -> 403 on the *other*
+          # repo. Unset that specific key first, then push with the PAT. (Clearing
+          # only the generic http.extraheader is NOT enough; the URL-specific key wins.)
+          git config --local --unset-all "http.https://github.com/.extraheader" || true
+          git -c "http.https://github.com/.extraheader=" push --force \
             "https://x-access-token:$SYNC@github.com/dataanalyst94/eliraliving.github.io.git" HEAD:main
-          echo "✓ Forwarded (force-mirror) to live Pages repo."
+          echo "Forwarded (force-mirror) to live Pages repo."
