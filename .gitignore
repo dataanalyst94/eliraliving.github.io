@@ -87,3 +87,6 @@ infra/email/zoho.local.json
 
 # local Anthropic API key for pay-per-use scheduled runs — never commit
 infra/anthropic.local.key
+
+# local Eli live-chat webhook secret — never commit
+infra/eli-chat-webhook.local.secret

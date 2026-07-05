@@ -1,0 +1,12 @@
+name = "elira-chat"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+kv_namespaces = [
+  { binding = "CHAT", id = "9256e1599092434c9e75ac943293910c" }
+]
+
+# Secrets (set via CLI, never commit real values):
+#   wrangler secret put TG_TOKEN         # Telegram bot token from @BotFather
+#   wrangler secret put WEBHOOK_SECRET   # random string guarding the webhook path
+# One-time activation after both are set: tools/setup-eli-chat.ps1

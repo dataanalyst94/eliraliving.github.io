@@ -55,6 +55,10 @@
       thanksA: "You're very welcome! 🌿 Anything else I can help with?",
       byeA: "Take care! I'm right here if you need me. 🌿",
       fallback: "I'm a simple shop assistant, so I can only help with our products, skin & hair advice, shipping, returns, payment and ingredients. For anything else, the team at " + MAIL + " will gladly help! Meanwhile — anything from the menu?",
+      humanIntro: "Sure! Type your message below and it goes straight to a real person on our team. Replies appear right here — just keep this tab open. 💬",
+      humanSent: "✓ Delivered to the team. You can add more details anytime — their reply will appear here.",
+      humanFail: "Live chat isn't reachable right now — please email us instead at " + MAIL + ". We reply within 1–2 working days.",
+      teamLabel: "Elira team",
       inputPh: "Type a question…", open: "Chat with Eli", close: "Close chat"
     },
     de: {
@@ -86,6 +90,10 @@
       thanksA: "Sehr gerne! 🌿 Kann ich noch etwas für dich tun?",
       byeA: "Mach's gut! Ich bin hier, wenn du mich brauchst. 🌿",
       fallback: "Ich bin ein einfacher Shop-Assistent und helfe nur bei unseren Produkten, Haut- & Haarberatung, Versand, Rückgabe, Zahlung und Inhaltsstoffen. Für alles andere hilft dir das Team unter " + MAIL + " gern weiter! Magst du etwas aus dem Menü?",
+      humanIntro: "Gern! Schreib deine Nachricht unten — sie geht direkt an einen echten Menschen aus unserem Team. Antworten erscheinen genau hier — lass den Tab einfach geöffnet. 💬",
+      humanSent: "✓ Ans Team übermittelt. Du kannst jederzeit Details ergänzen — die Antwort erscheint hier.",
+      humanFail: "Der Live-Chat ist gerade nicht erreichbar — schreib uns bitte per E-Mail an " + MAIL + ". Wir antworten innerhalb von 1–2 Werktagen.",
+      teamLabel: "Elira-Team",
       inputPh: "Frage eingeben…", open: "Mit Eli chatten", close: "Chat schließen"
     },
     nl: {
@@ -117,6 +125,10 @@
       thanksA: "Graag gedaan! 🌿 Kan ik nog iets voor je doen?",
       byeA: "Het beste! Ik ben hier als je me nodig hebt. 🌿",
       fallback: "Ik ben een eenvoudige shopassistent en help alleen met onze producten, huid- & haaradvies, verzending, retourneren, betalen en ingrediënten. Voor al het andere helpt het team via " + MAIL + " je graag verder! Iets uit het menu misschien?",
+      humanIntro: "Natuurlijk! Typ je bericht hieronder — het gaat rechtstreeks naar een echt mens van ons team. Antwoorden verschijnen hier — houd dit tabblad open. 💬",
+      humanSent: "✓ Bezorgd bij het team. Je kunt altijd details toevoegen — het antwoord verschijnt hier.",
+      humanFail: "De livechat is nu even niet bereikbaar — mail ons via " + MAIL + ". We antwoorden binnen 1–2 werkdagen.",
+      teamLabel: "Elira-team",
       inputPh: "Typ een vraag…", open: "Chat met Eli", close: "Chat sluiten"
     },
     fi: {
@@ -148,6 +160,10 @@
       thanksA: "Ole hyvä! 🌿 Voinko auttaa vielä jossain?",
       byeA: "Kaikkea hyvää! Olen täällä, jos tarvitset minua. 🌿",
       fallback: "Olen yksinkertainen kauppa-avustaja, joten autan vain tuotteissamme, iho- ja hiusneuvonnassa, toimituksessa, palautuksissa, maksamisessa ja ainesosissa. Muissa asioissa tiimi auttaa mielellään: " + MAIL + ". Entä jokin valikosta?",
+      humanIntro: "Toki! Kirjoita viestisi alle — se menee suoraan oikealle ihmiselle tiimissämme. Vastaukset ilmestyvät tähän — pidä tämä välilehti auki. 💬",
+      humanSent: "✓ Toimitettu tiimille. Voit lisätä yksityiskohtia milloin vain — vastaus ilmestyy tähän.",
+      humanFail: "Live-chat ei ole juuri nyt tavoitettavissa — lähetä meille sähköpostia: " + MAIL + ". Vastaamme 1–2 arkipäivässä.",
+      teamLabel: "Elira-tiimi",
       inputPh: "Kirjoita kysymys…", open: "Juttele Elin kanssa", close: "Sulje chat"
     }
   };
@@ -175,6 +191,38 @@
     }
     return null;
   }
+
+  /* ---- Live human handoff (via elira-chat Worker → founder's Telegram) --- */
+  var CHAT_URL = "https://elira-chat.elira-living.workers.dev";
+  var humanMode = false, pollTimer = null, pollTicks = 0;
+  function sessionId() {
+    try {
+      var s = sessionStorage.getItem("eli-sess");
+      if (!s) { s = Math.random().toString(36).slice(2, 10) + Math.random().toString(36).slice(2, 10); sessionStorage.setItem("eli-sess", s); }
+      return s;
+    } catch (e) { return "anon" + Date.now().toString(36); }
+  }
+  function startPoll() {
+    if (pollTimer) return;
+    pollTicks = 0;
+    pollTimer = setInterval(function () {
+      if (++pollTicks > 900) { clearInterval(pollTimer); pollTimer = null; return; } // stop after ~1h
+      fetch(CHAT_URL + "/poll?session=" + sessionId())
+        .then(function (r) { return r.json(); })
+        .then(function (j) { (j.messages || []).forEach(teamSay); })
+        .catch(function () {});
+    }, 4000);
+  }
+  function sendHuman(text) {
+    fetch(CHAT_URL + "/send", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session: sessionId(), text: text, lang: LANG, page: location.pathname })
+    }).then(function (r) {
+      if (!r.ok) throw 0;
+      botSay(T.humanSent); chips([[T.back, exitHuman]]); startPoll();
+    }).catch(function () { humanMode = false; botSay(T.humanFail); menu(); });
+  }
+  function exitHuman() { humanMode = false; menuChips(); } // poller keeps running for late replies
 
   /* ---- Recommendation map ----------------------------------------------- */
   var RECS = {
@@ -251,6 +299,12 @@
     d.innerHTML = html;
     body.appendChild(d); scroll();
   }
+  function teamSay(text) {
+    var d = document.createElement("div");
+    d.className = "eli-msg bot";
+    d.innerHTML = '<span style="display:block;font-size:.68rem;letter-spacing:.06em;color:#C8A24E;margin-bottom:.2rem">' + esc(T.teamLabel) + "</span>" + esc(text);
+    body.appendChild(d); scroll();
+  }
   function userSay(text) {
     var d = document.createElement("div");
     d.className = "eli-msg user"; d.textContent = text;
@@ -285,7 +339,7 @@
     var list = [
       [m.skin, skinFlow], [m.hair, hairFlow], [m.ship, function () { answer("shipA"); }],
       [m.ret, function () { answer("retA"); }], [m.pay, function () { answer("payA"); }],
-      [m.ing, function () { botSay(T.ingA, T.ingLinks); menu(); }], [m.contact, function () { answer("contactA"); }]
+      [m.ing, function () { botSay(T.ingA, T.ingLinks); menu(); }], [m.contact, humanFlow]
     ];
     chips(list);
   }
@@ -318,6 +372,7 @@
     ]);
   }
   function hairFlow() { botSay(T.hairA); recommend("hair"); }
+  function humanFlow() { humanMode = true; botSay(T.humanIntro); chips([[T.back, exitHuman]]); }
 
   function handleFree(text) {
     var intent = matchIntent(text);
@@ -328,7 +383,7 @@
       case "ret": answer("retA"); break;
       case "pay": answer("payA"); break;
       case "ing": botSay(T.ingA, T.ingLinks); menu(); break;
-      case "contact": answer("contactA"); break;
+      case "contact": humanFlow(); break;
       case "thanks": botSay(T.thanksA); menu(); break;
       case "bye": botSay(T.byeA); menu(); break;
       case "hello": botSay(T.hello); menu(); break;
@@ -351,6 +406,7 @@
     e.preventDefault();
     var v = input.value.trim(); if (!v) return;
     input.value = ""; clearChips(); userSay(v);
+    if (humanMode) { sendHuman(v); return; }
     setTimeout(function () { handleFree(v); }, 250);
   });
 })();
