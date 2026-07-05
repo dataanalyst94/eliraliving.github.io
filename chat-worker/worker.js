@@ -42,7 +42,8 @@ const REPLY_TTL = 6 * 60 * 60;   // replies wait up to 6h for the widget to pick
 const RATE_MAX = 8;              // visitor messages per session per minute
 
 async function tg(env, method, payload) {
-  const r = await fetch(`https://api.telegram.org/bot${env.TG_TOKEN}/${method}`, {
+  const token = String(env.TG_TOKEN || "").trim(); // defensive: strip stray CR/LF from secret upload
+  const r = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
