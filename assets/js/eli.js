@@ -45,6 +45,7 @@
         "sensitive-scalp-shampoo": "Sulfate-free with mild coconut-derived cleansers, plum extract and linden flower — soothes itch and tightness, gentle enough for daily washing. Dermatologically tested."
       },
       alsoPair: "It pairs nicely with:", view: "View product →",
+      browseLead: "Want to see everything for your type?", browseSkin: "All skincare products", browseHair: "All haircare products",
       hairA: "For hair, the whole range is built around one hero: our dermatologically tested, sulfate-free shampoo for sensitive, easily-irritated scalps — and it's gentle enough for all hair types and daily washing.",
       shipA: "Shipping is free on every order — to all 27 EU countries, same price, no fees. Orders are dispatched from within the EU and typically arrive in 3–7 working days, climate-neutral. 📦",
       retA: "You have the EU statutory 14-day right of withdrawal from the day you receive your order. Just email " + MAIL + " with your order number — no form needed. Note: sealed cosmetics that have been opened are excluded for hygiene reasons, and return shipping is paid by the customer.",
@@ -80,6 +81,7 @@
         "sensitive-scalp-shampoo": "Sulfatfrei mit milden Tensiden auf Kokosbasis, Pflaumenextrakt und Lindenblüte — lindert Juckreiz und Spannungsgefühl, mild genug für die tägliche Wäsche. Dermatologisch getestet."
       },
       alsoPair: "Passt gut dazu:", view: "Zum Produkt →",
+      browseLead: "Möchtest du alles für deinen Typ sehen?", browseSkin: "Alle Hautpflegeprodukte", browseHair: "Alle Haarpflegeprodukte",
       hairA: "Für die Haare dreht sich bei uns alles um einen Helden: unser dermatologisch getestetes, sulfatfreies Shampoo für empfindliche, leicht gereizte Kopfhaut — mild genug für alle Haartypen und die tägliche Wäsche.",
       shipA: "Der Versand ist bei jeder Bestellung kostenlos — in alle 27 EU-Länder, gleicher Preis, keine Gebühren. Versand aus der EU, Lieferung in der Regel in 3–7 Werktagen, klimaneutral. 📦",
       retA: "Du hast das gesetzliche 14-tägige Widerrufsrecht ab Erhalt deiner Bestellung. Schreib einfach an " + MAIL + " mit deiner Bestellnummer — kein Formular nötig. Hinweis: Versiegelte, geöffnete Kosmetik ist aus Hygienegründen ausgeschlossen, die Rücksendekosten trägt der Kunde.",
@@ -115,6 +117,7 @@
         "sensitive-scalp-shampoo": "Sulfaatvrij met milde reinigers op kokosbasis, pruimenextract en lindebloesem — verzacht jeuk en een trekkerig gevoel, mild genoeg voor dagelijks wassen. Dermatologisch getest."
       },
       alsoPair: "Combineert mooi met:", view: "Bekijk product →",
+      browseLead: "Wil je alles voor jouw type zien?", browseSkin: "Alle huidverzorgingsproducten", browseHair: "Alle haarverzorgingsproducten",
       hairA: "Voor het haar draait alles om één held: onze dermatologisch geteste, sulfaatvrije shampoo voor de gevoelige, snel geïrriteerde hoofdhuid — mild genoeg voor alle haartypes en dagelijks wassen.",
       shipA: "Verzending is gratis bij elke bestelling — naar alle 27 EU-landen, zelfde prijs, geen kosten. Verzonden vanuit de EU, levering doorgaans in 3–7 werkdagen, klimaatneutraal. 📦",
       retA: "Je hebt het wettelijke herroepingsrecht van 14 dagen vanaf ontvangst van je bestelling. Mail gewoon naar " + MAIL + " met je bestelnummer — geen formulier nodig. Let op: verzegelde, geopende cosmetica is om hygiënische redenen uitgesloten en de retourkosten zijn voor de klant.",
@@ -150,6 +153,7 @@
         "sensitive-scalp-shampoo": "Sulfaatiton, miedot kookospohjaiset puhdistusaineet, luumu-uutetta ja lehmuksenkukkaa — lievittää kutinaa ja kireyttä, riittävän hellä päivittäiseen pesuun. Dermatologisesti testattu."
       },
       alsoPair: "Sopii hyvin yhteen tämän kanssa:", view: "Katso tuote →",
+      browseLead: "Haluatko nähdä kaiken tyypillesi?", browseSkin: "Kaikki ihonhoitotuotteet", browseHair: "Kaikki hiustenhoitotuotteet",
       hairA: "Hiuksille valikoimamme rakentuu yhden sankarin ympärille: dermatologisesti testattu, sulfaatiton shampoomme herkälle, helposti ärsyyntyvälle hiuspohjalle — riittävän hellä kaikille hiustyypeille ja päivittäiseen pesuun.",
       shipA: "Toimitus on ilmainen jokaisesta tilauksesta — kaikkiin 27 EU-maahan, sama hinta, ei lisämaksuja. Lähetys EU:sta, perillä tyypillisesti 3–7 arkipäivässä, ilmastoneutraalisti. 📦",
       retA: "Sinulla on EU:n lakisääteinen 14 päivän peruuttamisoikeus tilauksen vastaanottamisesta. Lähetä vain sähköpostia osoitteeseen " + MAIL + " ja mainitse tilausnumerosi — lomaketta ei tarvita. Huomio: sinetöity, avattu kosmetiikka on hygieniasyistä rajattu pois, ja palautuskulut maksaa asiakas.",
@@ -294,8 +298,8 @@
   function botSay(text, links) {
     var d = document.createElement("div");
     d.className = "eli-msg bot";
-    var html = esc(text).replace(esc(MAIL), '<a href="mailto:' + MAIL + '">' + MAIL + "</a>");
-    if (links) links.forEach(function (l) { html += '<br><a href="' + P + l[1] + '">' + esc(l[0]) + " →</a>"; });
+    var html = text ? esc(text).replace(esc(MAIL), '<a href="mailto:' + MAIL + '">' + MAIL + "</a>") : "";
+    if (links) links.forEach(function (l) { html += (html ? "<br>" : "") + '<a href="' + P + l[1] + '">' + esc(l[0]) + " →</a>"; });
     d.innerHTML = html;
     body.appendChild(d); scroll();
   }
@@ -350,6 +354,9 @@
     botSay(T.recIntro);
     productCard(r.main);
     if (r.pair) { botSay(T.alsoPair); productCard(r.pair); }
+    // Link to the full filtered shop page for that category so they can browse more.
+    var cat = (key === "hair") ? "haircare" : "skincare";
+    botSay(T.browseLead, [[cat === "haircare" ? T.browseHair : T.browseSkin, "/shop.html?category=" + cat]]);
     menu();
   }
   function skinFlow() {
