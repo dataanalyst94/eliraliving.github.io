@@ -72,6 +72,9 @@
       return `<div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">${t("cart.freeProgress").replace("{amount}", fmt(CFG.freeShippingThreshold - s))}</div>
         <div style="height:3px;background:var(--line)"><div style="height:100%;width:${pct}%;background:var(--gold);transition:width .5s"></div></div>`;
     },
+    vatNoteHTML() {
+      return `<p class="muted" style="font-size:11px;text-align:center;margin:-.35rem 0 .9rem;line-height:1.45">${esc(t("cart.vatNote"))}</p>`;
+    },
     lineHTML(i) {
       const variant = i.variant ? `<div class="muted" style="font-size:.72rem;margin-top:.15rem">${esc(i.variant)}</div>` : "";
       return `<div class="cart-line" data-line="${esc(i.key)}">
@@ -167,6 +170,7 @@
         foot.innerHTML = `<div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.25rem"><span>${t("cart.subtotal")}</span><span>${fmt(this.subtotal())}</span></div>
           <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.75rem" class="muted"><span>${t("cart.shipping")}</span><span>${this.shipping() === 0 ? t("cart.shippingFree") : fmt(this.shipping())}</span></div>
           <div class="font-display" style="display:flex;justify-content:space-between;font-size:1.25rem;margin-bottom:1rem;padding-top:.75rem;border-top:1px solid var(--line)"><span>${t("cart.total")}</span><span>${fmt(this.total())}</span></div>
+          ${this.vatNoteHTML()}
           <button class="btn btn-primary btn-block" data-checkout>${t("cart.checkout")}</button>
           <p class="muted" style="font-size:11px;text-align:center;margin-top:.75rem;line-height:1.5">${t("cart.securenote")}</p>
           ${this.crossSellHTML()}
@@ -188,6 +192,7 @@
           <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.5rem"><span>${t("cart.subtotal")}</span><span>${fmt(this.subtotal())}</span></div>
           <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:1rem" class="muted"><span>${t("cart.shipping")}</span><span>${this.shipping() === 0 ? t("cart.shippingFree") : fmt(this.shipping())}</span></div>
           <div class="font-display" style="display:flex;justify-content:space-between;font-size:1.5rem;margin-bottom:1.25rem;padding-top:1rem;border-top:1px solid var(--line)"><span>${t("cart.total")}</span><span>${fmt(this.total())}</span></div>
+          ${this.vatNoteHTML()}
           <button class="btn btn-primary btn-block" data-checkout>${t("cart.checkout")}</button>
           <p class="muted" style="font-size:11px;text-align:center;margin-top:.75rem;line-height:1.5">${t("cart.securenote")}</p>
           ${this.crossSellHTML()}

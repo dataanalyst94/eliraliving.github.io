@@ -16,7 +16,7 @@ const LEGAL = {
   <h2>Service provider</h2><p><strong>Elira Living</strong> (sole proprietorship / toiminimi)<br>Owner: Zeerak Ata<br>Lapinrinne 1b<br>00180 Helsinki<br>Finland</p>
   <h2>Contact</h2><p>Phone: +358 41 7408294<br>E-mail: ${MAIL}</p>
   <h2>Business ID (Y-tunnus)</h2><p>3526013-6 — registered in the Finnish Trade Register (PRH).</p>
-  <h2>VAT</h2><p>Elira Living is a small business and is not currently registered for VAT; no VAT identification number is held and VAT is not shown separately.</p>
+  <h2>VAT</h2><p>VAT is charged on taxable sales where required. Prices shown to consumers are total prices in Euro and include VAT where applicable.</p>
   <h2>Packaging register (LUCID)</h2><p>Registration number under the German Packaging Act (VerpackG): <strong>DE1454291180935</strong></p>
   <h2>Online dispute resolution</h2><p>EU ODR platform: ${ODR}. We are not obliged or willing to participate in consumer arbitration.</p>` },
     privacy: { title: "Privacy Policy", subtitle: "How we handle your personal data under the GDPR", body: `
@@ -31,7 +31,7 @@ const LEGAL = {
   <h2>1. Seller</h2><p>Elira Living (owner: Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland — Business ID 3526013-6. ${MAIL}.</p>
   <h2>2. Scope</h2><p>These terms apply to all consumer orders placed via this shop. We ship across the <strong>European Union</strong>.</p>
   <h2>3. Contract</h2><p>Product display is not a binding offer. Completing payment at Stripe checkout places a binding order; the contract forms on our confirmation or dispatch.</p>
-  <h2>4. Prices &amp; VAT</h2><p>All prices are total prices in Euro. As a small business we are not currently VAT-registered, so VAT is not shown separately.</p>
+  <h2>4. Prices &amp; VAT</h2><p>All prices are total prices in Euro and include VAT where applicable. The final VAT amount is calculated at checkout based on the delivery country and shown in the payment summary where available.</p>
   <h2>5. Shipping</h2><p>Free on all orders. Dispatched from within the EU (currently Latvia). Delivery 3–7 working days.</p>
   <h2>6. Payment</h2><p>Securely via Stripe (card, iDEAL, Klarna, SEPA). Due immediately on order.</p>
   <h2>7. Right of withdrawal</h2><p>14-day statutory right — see the <a href="{{withdrawalUrl}}" ${A}>Right of Withdrawal</a> page.</p>
@@ -50,7 +50,7 @@ const LEGAL = {
   <h2>Diensteanbieter</h2><p><strong>Elira Living</strong> (Einzelunternehmen / toiminimi)<br>Inhaber: Zeerak Ata<br>Lapinrinne 1b<br>00180 Helsinki<br>Finnland</p>
   <h2>Kontakt</h2><p>Telefon: +358 41 7408294<br>E-Mail: ${MAIL}</p>
   <h2>Unternehmenskennung (Y-tunnus)</h2><p>3526013-6 — eingetragen im finnischen Handelsregister (PRH).</p>
-  <h2>Umsatzsteuer</h2><p>Elira Living ist ein Kleinunternehmen und derzeit nicht umsatzsteuerlich registriert; es besteht keine Umsatzsteuer-Identifikationsnummer und es wird keine Umsatzsteuer gesondert ausgewiesen.</p>
+  <h2>Umsatzsteuer</h2><p>Umsatzsteuer wird auf steuerpflichtige Verkäufe erhoben, soweit gesetzlich erforderlich. Die Verbraucherpreise sind Gesamtpreise in Euro und enthalten die jeweils anwendbare Umsatzsteuer.</p>
   <h2>Verpackungsregister (LUCID)</h2><p>Registrierungsnummer nach dem Verpackungsgesetz (VerpackG): <strong>DE1454291180935</strong></p>
   <h2>Online-Streitbeilegung</h2><p>EU-Plattform zur Online-Streitbeilegung (OS): ${ODR}. Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>` },
     privacy: { title: "Datenschutzerklärung", subtitle: "Wie wir Ihre personenbezogenen Daten gemäß DSGVO verarbeiten", body: `
@@ -65,7 +65,7 @@ const LEGAL = {
   <h2>1. Verkäufer</h2><p>Elira Living (Inhaber: Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finnland — Unternehmenskennung 3526013-6. ${MAIL}.</p>
   <h2>2. Geltungsbereich</h2><p>Diese Bedingungen gelten für alle Verbraucherbestellungen über diesen Shop. Wir liefern in die gesamte <strong>Europäische Union</strong>.</p>
   <h2>3. Vertragsschluss</h2><p>Die Produktdarstellung ist kein verbindliches Angebot. Mit Abschluss der Zahlung an der Stripe-Kasse geben Sie eine verbindliche Bestellung ab; der Vertrag kommt mit unserer Bestätigung oder dem Versand zustande.</p>
-  <h2>4. Preise &amp; Umsatzsteuer</h2><p>Alle Preise sind Gesamtpreise in Euro. Als Kleinunternehmen sind wir derzeit nicht umsatzsteuerlich registriert; Umsatzsteuer wird nicht gesondert ausgewiesen.</p>
+  <h2>4. Preise &amp; Umsatzsteuer</h2><p>Alle Preise sind Gesamtpreise in Euro und enthalten die jeweils anwendbare Umsatzsteuer. Der endgültige Umsatzsteuerbetrag wird an der Kasse anhand des Lieferlands berechnet und in der Zahlungsübersicht angezeigt, soweit verfügbar.</p>
   <h2>5. Versand</h2><p>Kostenloser Versand auf alle Bestellungen. Versand aus der EU (derzeit Lettland). Lieferung in 3–7 Werktagen.</p>
   <h2>6. Zahlung</h2><p>Sichere Zahlung über Stripe (Karte, iDEAL, Klarna, SEPA). Fällig sofort mit der Bestellung.</p>
   <h2>7. Widerrufsrecht</h2><p>14-tägiges gesetzliches Widerrufsrecht — siehe Seite <a href="{{withdrawalUrl}}" ${A}>Widerrufsrecht</a>.</p>
@@ -84,7 +84,7 @@ const LEGAL = {
   <h2>Dienstverlener</h2><p><strong>Elira Living</strong> (eenmanszaak / toiminimi)<br>Eigenaar: Zeerak Ata<br>Lapinrinne 1b<br>00180 Helsinki<br>Finland</p>
   <h2>Contact</h2><p>Telefoon: +358 41 7408294<br>E-mail: ${MAIL}</p>
   <h2>Bedrijfsidentificatie (Y-tunnus)</h2><p>3526013-6 — ingeschreven in het Finse handelsregister (PRH).</p>
-  <h2>Btw</h2><p>Elira Living is een kleine onderneming en momenteel niet btw-geregistreerd; er is geen btw-identificatienummer en btw wordt niet apart vermeld.</p>
+  <h2>Btw</h2><p>Btw wordt berekend op belastbare verkopen waar dit verplicht is. Consumentenprijzen zijn totaalprijzen in euro en bevatten btw waar van toepassing.</p>
   <h2>Verpakkingsregister (LUCID)</h2><p>Registratienummer onder de Duitse Verpakkingswet (VerpackG): <strong>DE1454291180935</strong></p>
   <h2>Onlinegeschillenbeslechting</h2><p>EU-platform voor onlinegeschillenbeslechting (ODR): ${ODR}. Wij zijn niet verplicht en niet bereid deel te nemen aan geschillenbeslechting voor een geschillencommissie voor consumenten.</p>` },
     privacy: { title: "Privacybeleid", subtitle: "Hoe wij je persoonsgegevens verwerken onder de AVG", body: `
@@ -99,7 +99,7 @@ const LEGAL = {
   <h2>1. Verkoper</h2><p>Elira Living (eigenaar: Zeerak Ata), Lapinrinne 1b, 00180 Helsinki, Finland — Bedrijfsidentificatie 3526013-6. ${MAIL}.</p>
   <h2>2. Toepassingsgebied</h2><p>Deze voorwaarden gelden voor alle consumentenbestellingen via deze shop. Wij verzenden naar de gehele <strong>Europese Unie</strong>.</p>
   <h2>3. Totstandkoming</h2><p>De productpresentatie is geen bindend aanbod. Door de betaling bij de Stripe-kassa af te ronden plaats je een bindende bestelling; de overeenkomst komt tot stand bij onze bevestiging of verzending.</p>
-  <h2>4. Prijzen &amp; btw</h2><p>Alle prijzen zijn totaalprijzen in euro. Als kleine onderneming zijn we momenteel niet btw-geregistreerd; btw wordt niet apart vermeld.</p>
+  <h2>4. Prijzen &amp; btw</h2><p>Alle prijzen zijn totaalprijzen in euro en bevatten btw waar van toepassing. Het definitieve btw-bedrag wordt bij het afrekenen berekend op basis van het bezorgland en waar beschikbaar in het betalingsoverzicht getoond.</p>
   <h2>5. Verzending</h2><p>Gratis op alle bestellingen. Verzonden vanuit de EU (momenteel Letland). Levering in 3–7 werkdagen.</p>
   <h2>6. Betaling</h2><p>Veilig via Stripe (kaart, iDEAL, Klarna, SEPA). Direct verschuldigd bij bestelling.</p>
   <h2>7. Herroepingsrecht</h2><p>Wettelijk herroepingsrecht van 14 dagen — zie de pagina <a href="{{withdrawalUrl}}" ${A}>Herroepingsrecht</a>.</p>
@@ -115,9 +115,9 @@ const LEGAL = {
 };
 
 const DISCLAIMER = {
-  en: "This notice reflects the information provided by the business. Please have it reviewed by a qualified adviser. Last updated: June 2026.",
-  de: "Diese Angaben beruhen auf den Informationen des Unternehmens. Bitte lassen Sie sie von einer qualifizierten Fachperson prüfen. Stand: Juni 2026.",
-  nl: "Deze informatie is gebaseerd op gegevens van het bedrijf. Laat deze door een gekwalificeerde adviseur controleren. Laatst bijgewerkt: juni 2026."
+  en: "This notice reflects the information provided by the business. Please have it reviewed by a qualified adviser. Last updated: August 2026.",
+  de: "Diese Angaben beruhen auf den Informationen des Unternehmens. Bitte lassen Sie sie von einer qualifizierten Fachperson prüfen. Stand: August 2026.",
+  nl: "Deze informatie is gebaseerd op gegevens van het bedrijf. Laat deze door een gekwalificeerde adviseur controleren. Laatst bijgewerkt: augustus 2026."
 };
 
 module.exports = { LEGAL, DISCLAIMER };

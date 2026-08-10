@@ -123,6 +123,9 @@ h1,h2,h3,h4{ letter-spacing:-.01em; margin:0; }
 .desc-toggle{ margin-top:.4rem; font-size:.72rem; letter-spacing:.03em; color:var(--gold); background:none; border:none; padding:0; cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
 .desc-toggle:hover{ color:var(--gold-700); }
 .card .price{ font-family:'Bodoni Moda',serif; font-size:1.125rem; white-space:nowrap; }
+.price-vat{ display:block; margin-top:.12rem; font-family:'Jost',sans-serif; font-size:.68rem; line-height:1.2; font-weight:400; color:var(--muted); white-space:normal; }
+.price-vat--pdp{ font-size:.8rem; margin-top:.2rem; }
+.price-vat--sticky{ display:inline; margin:0 0 0 .35rem; font-size:.72rem; }
 .grid-products{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem 1.25rem; }
 @media(min-width:1024px){ .grid-products{ grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.5rem; } }
 .card .meta > div:first-child{ flex:1 1 auto; min-width:0; }

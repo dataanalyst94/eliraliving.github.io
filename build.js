@@ -274,6 +274,9 @@ const BADGE_LABEL = {
   de: { new: "Neu", bestseller: "Bestseller", bundle: "10% sparen" },
   nl: { new: "Nieuw", bestseller: "Bestseller", bundle: "10% korting" },
 };
+function priceWithTaxNote(L, cents, noteClass = "price-vat") {
+  return `${fmt(L, cents)} <span class="${noteClass}">${T(L, "price.vatIncluded")}</span>`;
+}
 function card(L, p) {
   const badge = p.badge ? `<span class="tag" style="position:absolute;top:12px;left:12px;z-index:3">${esc((BADGE_LABEL[L] || BADGE_LABEL.en)[p.badge] || "Bestseller")}</span>` : "";
   return `<article class="card" data-cat="${p.category}" data-price="${p.price}" data-name="${escA(pname(L, p.id))}">
@@ -281,7 +284,7 @@ function card(L, p) {
     <div class="media">${badge}${pic(p.image, `alt="${escA(pname(L, p.id))}" loading="lazy" decoding="async"`, "(min-width:880px) 24vw, (min-width:560px) 30vw, 45vw")}
       <button class="btn btn-primary quick" data-quick-add="${p.id}">${T(L, "pdp.add")}</button></div></a>
   <div class="meta"><div><a href="${url("product", L, p)}" class="name link-underline">${esc(pname(L, p.id))}</a><div class="desc">${esc(pdesc(L, p.id))}</div></div>
-    <div class="price">${fmt(L, p.price)}</div></div>
+    <div class="price">${priceWithTaxNote(L, p.price)}</div></div>
 </article>`;
 }
 
@@ -628,7 +631,7 @@ function renderProduct(L, p) {
     <div class="reveal in">
       <div class="kicker">${T(L, "cat." + p.category)}</div>
       <h1 class="font-display" style="font-size:clamp(2.2rem,5vw,3.2rem);margin-top:.75rem;line-height:1.05">${esc(pname(L, p.id))}</h1>
-      <div class="font-display" style="font-size:1.5rem;margin-top:1rem">${fmt(L, p.price)}</div>
+      <div class="font-display" style="font-size:1.5rem;margin-top:1rem">${priceWithTaxNote(L, p.price, "price-vat price-vat--pdp")}</div>
       ${p.freeShipping ? `<div style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.6rem;font-size:.8rem;color:var(--sage)"><span style="color:var(--gold)">✦</span>${esc(FREESHIP_H[L])}</div>` : ""}
       <p style="margin-top:1.25rem;line-height:1.7;color:var(--ink-soft);max-width:34rem">${esc(pdesc(L, p.id))}</p>
       <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem">${features}</div>
@@ -661,7 +664,7 @@ function renderProduct(L, p) {
   </section>
 </div>
 <div class="sticky-cart" data-sticky-cart aria-hidden="true"><div class="container" style="display:flex;align-items:center;gap:1rem;justify-content:space-between">
-  <div style="min-width:0"><div class="font-display" style="font-size:1rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(pname(L, p.id))}</div><div class="muted" style="font-size:.85rem">${fmt(L, p.price)}</div></div>
+  <div style="min-width:0"><div class="font-display" style="font-size:1rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(pname(L, p.id))}</div><div class="muted" style="font-size:.85rem">${priceWithTaxNote(L, p.price, "price-vat price-vat--sticky")}</div></div>
   <button class="btn btn-primary" data-sticky-add style="flex:none">${T(L, "pdp.add")}</button>
 </div></div>
 </main>`;
@@ -996,7 +999,7 @@ function productCallout(L, id) {
     <a href="${purl}" class="font-display link-underline" style="font-size:1.15rem;display:inline-block;line-height:1.2">${esc(pname(L, p.id))}</a>
     <p class="muted" style="font-size:.85rem;margin:.45rem 0 .8rem;line-height:1.5">${esc(pdesc(L, p.id))}</p>
     <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
-      <span class="font-display">${fmt(L, p.price)}</span>
+      <span class="font-display">${priceWithTaxNote(L, p.price)}</span>
       <a href="${purl}" class="btn btn-outline" style="padding:.4rem 1.1rem;font-size:.78rem">${esc(BLOG_UI[L].learn)}</a>
     </div>
   </div>

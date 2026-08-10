@@ -46,6 +46,10 @@ const FALLBACK_FREE_SHIPPING_THRESHOLD = 3900; // €39.00
 const FALLBACK_SHIPPING_FLAT = 495;            // €4.95
 // every product ships free
 const FALLBACK_FREE_SHIPPING = ["sensitive-moisturizing-cream", "radiant-glow-cleanser", "purifying-toner", "sensitive-scalp-shampoo", "retinol-alternative-serum", "peptide-anti-aging-serum"];
+const TAX_CODES = {
+  "sensitive-scalp-shampoo": "txcd_32050036", // Shampoo
+  default: "txcd_32050013" // Skin Care Products
+};
 
 // Fetch current pricing from the site (cached ~5 min at Cloudflare's edge).
 async function loadPricing() {
@@ -97,11 +101,12 @@ export default {
       if (items.length > 50) return json({ error: "Too many items" }, 400, origin);
 
       const pricing = await loadPricing(); // current prices from the site catalog
-      const loc = ["de", "nl", "en"].includes(body.locale) ? body.locale : "en";
+      const loc = ["de", "nl", "en", "fi"].includes(body.locale) ? body.locale : "en";
 
       const form = new URLSearchParams();
       form.append("mode", "payment");
       form.append("locale", loc);
+      form.append("automatic_tax[enabled]", "true");
       // Redirect targets are built server-side from a fixed origin — never trust
       // client-supplied URLs (prevents using this endpoint as an open redirect).
       form.append("success_url", `${PRIMARY_ORIGIN}/${loc}/success.html?session_id={CHECKOUT_SESSION_ID}`);
@@ -138,8 +143,10 @@ export default {
           form.append(`line_items[${n}][quantity]`, qty);
         } else {
           form.append(`line_items[${n}][price_data][currency]`, "eur");
+          form.append(`line_items[${n}][price_data][tax_behavior]`, "inclusive");
           form.append(`line_items[${n}][price_data][unit_amount]`, unit);
           form.append(`line_items[${n}][price_data][product_data][name]`, name);
+          form.append(`line_items[${n}][price_data][product_data][tax_code]`, TAX_CODES[it.id] || TAX_CODES.default);
           form.append(`line_items[${n}][quantity]`, qty);
         }
       });
@@ -148,6 +155,7 @@ export default {
       const hasFreeShipItem = items.some(it => (pricing.freeShipping || []).includes(it.id));
       const shipping = (hasFreeShipItem || subtotal >= pricing.freeThreshold) ? 0 : pricing.shippingFlat;
       form.append("shipping_options[0][shipping_rate_data][type]", "fixed_amount");
+      form.append("shipping_options[0][shipping_rate_data][tax_behavior]", "inclusive");
       form.append("shipping_options[0][shipping_rate_data][fixed_amount][amount]", shipping);
       form.append("shipping_options[0][shipping_rate_data][fixed_amount][currency]", "eur");
       form.append("shipping_options[0][shipping_rate_data][display_name]", shipping === 0 ? "Free shipping" : "Standard shipping");
