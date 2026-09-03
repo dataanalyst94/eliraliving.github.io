@@ -480,7 +480,7 @@
     gsap.to("[data-hero-text]", { yPercent: -24, opacity: 0, ease: "none", scrollTrigger: hST });
     gsap.to("[data-wordmark]", { yPercent: -50, ease: "none", scrollTrigger: hST });
     gsap.utils.toArray("[data-botanical]").forEach((el, i) => {
-      gsap.to(el, { opacity: 0.5, duration: 1.2, delay: 0.4 + i * 0.2 });
+      gsap.to(el, { opacity: 0.24, duration: 1.2, delay: 0.4 + i * 0.2 });
       gsap.to(el, { y: "+=24", rotation: 10, duration: 7 + i * 1.5, ease: "sine.inOut", yoyo: true, repeat: -1 });
       gsap.to(el, { yPercent: (i % 2 ? -1 : 1) * 60, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
     });
@@ -513,22 +513,6 @@
     document.querySelectorAll("[data-leaf] path").forEach((p) => { const len = p.getTotalLength(); gsap.set(p, { strokeDasharray: len, strokeDashoffset: len }); gsap.to(p, { strokeDashoffset: 0, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: "[data-cert]", start: "top 75%" } }); });
     gsap.fromTo("[data-split] img", { yPercent: -8 }, { yPercent: 8, ease: "none", scrollTrigger: { trigger: "[data-split]", start: "top bottom", end: "bottom top", scrub: true } });
 
-    /* Reviews — full-3D pop-up: a couple of cards rise & rotate into place as
-       you scroll. Cards are grouped by row (ScrollTrigger.batch), so they
-       appear two/three at a time with a soft stagger. */
-    const rcards = gsap.utils.toArray("[data-rcard]");
-    if (rcards.length) {
-      ScrollTrigger.batch(rcards, {
-        start: "top 88%",
-        onEnter: (els) => gsap.from(els, {
-          opacity: 0, y: 34, z: -90, scale: 0.97, rotateX: -10,
-          transformOrigin: "50% 100%",
-          duration: .8, ease: "power3.out", stagger: 0.09, overwrite: true
-        })
-      });
-      // very subtle scroll parallax for depth on the whole grid
-      gsap.fromTo("[data-reviews-grid]", { yPercent: 1.5 }, { yPercent: -1.5, ease: "none", scrollTrigger: { trigger: ".reviews", start: "top bottom", end: "bottom top", scrub: true } });
-    }
     // libs loaded after window 'load', so re-measure trigger positions once settled
     requestAnimationFrame(() => ScrollTrigger.refresh());
   }

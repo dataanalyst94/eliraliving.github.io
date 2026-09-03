@@ -12,7 +12,6 @@ const TRACK = require("./assets/data/analytics-config.js");
 const { LEGAL, DISCLAIMER } = require("./assets/data/legal-content.js");
 const { USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE } = require("./assets/data/faq-content.js");
 const { BLOG_UI, POSTS } = require("./assets/data/blog-content.js");
-const { REVIEWS, REVIEW_UI } = require("./assets/data/reviews-content.js");
 const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen", fi: "Usein kysytyt kysymykset" };
 const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik", fi: "Käyttöohjeet" };
 const FREESHIP_H = { en: "Free shipping on this item", de: "Kostenloser Versand für diesen Artikel", nl: "Gratis verzending voor dit artikel", fi: "Ilmainen toimitus tälle tuotteelle" };
@@ -316,21 +315,8 @@ function ldOrg() {
   return JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Elira Living", url: BASE + "/", logo: LOGO, image: OG, email: "support@eliraliving.com", founder: { "@type": "Person", name: "Zeerak Ata" }, address: { "@type": "PostalAddress", streetAddress: "Lapinrinne 1b", postalCode: "00180", addressLocality: "Helsinki", addressCountry: "FI" }, areaServed: ["DE", "NL"], ...(SAMEAS.length ? { sameAs: SAMEAS } : {}) });
 }
 function ldWebsite(L) { return JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Elira Living", url: BASE + "/", inLanguage: L }); }
-// Verified reviews for a given product (genuine buyers; see reviews-content.js).
-function productReviews(id) { return REVIEWS.filter(r => r.product === id); }
-function productAgg(id) {
-  const revs = productReviews(id);
-  if (!revs.length) return null;
-  const avg = revs.reduce((s, r) => s + r.rating, 0) / revs.length;
-  return { revs, avg, count: revs.length };
-}
 function ldProduct(L, p) {
   const obj = { "@context": "https://schema.org", "@type": "Product", name: pname(L, p.id), sku: p.sku, image: (p.images && p.images.length ? p.images : [p.image]).map(i => BASE + i), description: pdesc(L, p.id), brand: { "@type": "Brand", name: "Elira Living" }, category: t(L, "cat." + p.category), offers: { "@type": "Offer", url: BASE + url("product", L, p), priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "Elira Living" } } };
-  const agg = productAgg(p.id);
-  if (agg) {
-    obj.aggregateRating = { "@type": "AggregateRating", ratingValue: agg.avg.toFixed(1), reviewCount: agg.count, bestRating: 5, worstRating: 1 };
-    obj.review = agg.revs.map(r => ({ "@type": "Review", author: { "@type": "Person", name: r.name }, reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5, worstRating: 1 }, reviewBody: r.text }));
-  }
   return JSON.stringify(obj);
 }
 function ldBreadcrumb(L, p) {
@@ -362,34 +348,7 @@ function ldPostBreadcrumb(L, post, c) {
   ] });
 }
 
-/* ---- Reviews: 3D scroll-reveal social proof (home) --------------------- */
-function flagSVG(country) {
-  // Tiny, crisp SVG flags (emoji flags don't render on Windows) — 21x14, rounded.
-  if (country === "de") return `<svg class="r-flag" viewBox="0 0 5 3" width="21" height="13" aria-hidden="true"><rect width="5" height="3" fill="#000"/><rect width="5" height="2" y="1" fill="#D00"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>`;
-  return `<svg class="r-flag" viewBox="0 0 9 6" width="21" height="13" aria-hidden="true"><rect width="9" height="6" fill="#fff"/><rect width="9" height="2" fill="#AE1C28"/><rect width="9" height="2" y="4" fill="#21468B"/></svg>`;
-}
-function starsSVG(rating) {
-  const star = (on) => `<svg viewBox="0 0 24 24" width="16" height="16" class="r-star${on ? " on" : ""}" aria-hidden="true"><path d="M12 2.3l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.6l-5.8 3.07 1.1-6.47L2.6 9.6l6.5-.95z"/></svg>`;
-  let s = "";
-  for (let i = 1; i <= 5; i++) s += star(i <= rating);
-  return `<div class="r-stars" role="img" aria-label="${rating} / 5">${s}</div>`;
-}
-function reviewCard(L, r, i) {
-  const ui = REVIEW_UI[L];
-  const col = i % 3;            // depth tier for the 3D reveal (0|1|2)
-  return `<figure class="r-card" data-rcard data-col="${col}">
-    <span class="r-quote" aria-hidden="true">&ldquo;</span>
-    ${starsSVG(r.rating)}
-    <blockquote class="r-text">${esc(r.text)}</blockquote>
-    <figcaption class="r-meta">
-      <span class="r-avatar" aria-hidden="true">${esc(r.name.charAt(0))}</span>
-      <span class="r-who"><span class="r-name">${esc(r.name)}</span><span class="r-loc">${flagSVG(r.country)} ${esc(ui.country[r.country])}</span></span>
-      <span class="r-badge"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>${esc(ui.verified)}</span>
-    </figcaption>
-  </figure>`;
-}
-// Lifestyle "trust strip" — real people using the real products. Strong social
-// proof / trust signal placed just before the written reviews on the home page.
+/* ---- Lifestyle trust strip -------------------------------------------- */
 const TRUST_IMGS = [
   ["/assets/img/lifestyle/hold-serum-f.jpg", "A woman holding the Elira peptide serum"],
   ["/assets/img/lifestyle/hold-cleanser-f.jpg", "A woman with the Elira cleanser"],
@@ -406,47 +365,6 @@ function trustStrip(L) {
       <p class="muted reveal" style="margin-top:1rem">${T(L, "trust.lead")}</p>
     </div>
     <div class="trust-strip">${items}</div>
-  </section>`;
-}
-function reviewsSection(L) {
-  const ui = REVIEW_UI[L];
-  const n = REVIEWS.length;
-  const avg = REVIEWS.reduce((s, r) => s + r.rating, 0) / n;
-  const avgStr = avg.toFixed(1).replace(".", L === "en" ? "." : ",");
-  const cards = REVIEWS.map((r, i) => reviewCard(L, r, i)).join("\n");
-  return `<section class="reviews" data-reviews>
-    <div class="reviews__blob reviews__blob--a"></div>
-    <div class="reviews__blob reviews__blob--b"></div>
-    <div class="reviews__head">
-      <div class="kicker reveal" style="margin-bottom:.75rem">${esc(ui.kicker)}</div>
-      <h2 class="font-display reveal" style="font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.05">${esc(ui.title)}</h2>
-      <div class="reviews__agg reveal">
-        <span class="reviews__score font-display">${avgStr}</span>
-        ${starsSVG(Math.round(avg))}
-        <span class="reviews__count muted">${esc(ui.aggSuffix.replace("{n}", n))}</span>
-      </div>
-    </div>
-    <div class="reviews__grid" data-reviews-grid>${cards}</div>
-  </section>`;
-}
-
-// Visible per-product reviews on the PDP — Google requires the rating that the
-// schema declares to also be visible to users on the page.
-const PDP_REVIEWS_H = { en: "What buyers say", de: "Was Käufer:innen sagen", nl: "Wat kopers zeggen", fi: "Mitä ostajat sanovat" };
-function productReviewsSection(L, p) {
-  const agg = productAgg(p.id);
-  if (!agg) return "";
-  const ui = REVIEW_UI[L];
-  const avgStr = agg.avg.toFixed(1).replace(".", L === "en" ? "." : ",");
-  const cards = agg.revs.map((r, i) => reviewCard(L, r, i)).join("\n");
-  return `<section style="margin-top:5rem">
-    <h2 class="font-display reveal" style="font-size:clamp(1.8rem,4vw,2.5rem)">${esc(PDP_REVIEWS_H[L])}</h2>
-    <div class="reviews__agg reveal" style="margin-top:1rem;margin-bottom:2.5rem">
-      <span class="reviews__score font-display">${avgStr}</span>
-      ${starsSVG(Math.round(agg.avg))}
-      <span class="reviews__count muted">${esc(ui.aggSuffix.replace("{n}", agg.count))}</span>
-    </div>
-    <div class="reviews__grid">${cards}</div>
   </section>`;
 }
 
@@ -468,11 +386,11 @@ function renderHome(L) {
     <svg class="botanical" data-botanical style="top:62%;left:14%;width:48px" viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C20 18 12 30 12 42a20 20 0 0 0 40 0c0-12-8-24-20-38Z" opacity=".4"/></svg>
     <svg class="botanical" data-botanical style="top:26%;right:10%;width:56px" viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C20 18 12 30 12 42a20 20 0 0 0 40 0c0-12-8-24-20-38Z" opacity=".45"/></svg>
     <div class="hero__content container">
-      <div style="max-width:36rem" data-hero-text>
-        <div class="kicker" style="margin-bottom:1.25rem">${T(L, "hero.kicker")}</div>
+      <div class="hero__copy" data-hero-text>
+        <div class="kicker hero__kicker">${T(L, "hero.kicker")}</div>
         <h1 class="hero__title"><span style="display:block">${T(L, "hero.title1")}</span><span class="accent" style="display:block">${T(L, "hero.title2")}</span></h1>
-        <p class="muted" style="margin-top:1.5rem;font-size:1.125rem;line-height:1.7;max-width:30rem;color:var(--ink-soft)">${T(L, "hero.lead")}</p>
-        <div style="margin-top:2.25rem;display:flex;flex-wrap:wrap;gap:.75rem">
+        <p class="hero__lead">${T(L, "hero.lead")}</p>
+        <div class="hero__actions">
           <a href="${P}/shop.html" class="btn btn-primary">${T(L, "hero.cta")}</a>
           <a href="${P}/about.html" class="btn btn-outline">${T(L, "hero.cta2")}</a>
         </div>
@@ -550,8 +468,6 @@ function renderHome(L) {
   </section>
 
   ${trustStrip(L)}
-
-  ${reviewsSection(L)}
 
   ${POSTS.length ? `<section class="container" style="padding:6rem 1.25rem">
     <div style="text-align:center;max-width:36rem;margin:0 auto 3.5rem">
@@ -649,7 +565,6 @@ function renderProduct(L, p) {
       </div>
     </div>
   </div>
-  ${productReviewsSection(L, p)}
   <section style="margin-top:5rem;max-width:46rem">
     <h2 class="font-display" style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1.5rem">${FAQ_H[L]}</h2>
     <div>${faqs.map(f => `<details class="acc"><summary><span style="font-weight:500;color:var(--ink)">${esc(f.q)}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(f.a)}</p></details>`).join("\n")}</div>
@@ -1136,8 +1051,8 @@ function backfillLang(node, seen) {
   if (Object.prototype.hasOwnProperty.call(node, "en") && !Object.prototype.hasOwnProperty.call(node, "fi")) node.fi = node.en;
   for (const k of Object.keys(node)) backfillLang(node[k], seen);
 }
-[FAQ_H, USE_H, FREESHIP_H, TRUST, JOURNAL_H, PDP_REVIEWS_H, CERT_HERO, CERT_SEC, PROD_CERTS, MFG_CERTS,
- LEGAL, DISCLAIMER, USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE, BLOG_UI, REVIEWS, REVIEW_UI].forEach(o => backfillLang(o));
+[FAQ_H, USE_H, FREESHIP_H, TRUST, JOURNAL_H, CERT_HERO, CERT_SEC, PROD_CERTS, MFG_CERTS,
+ LEGAL, DISCLAIMER, USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE, BLOG_UI].forEach(o => backfillLang(o));
 // Backfill any content keys missing from fi.js with the English value (keys, not
 // whole sections — fi.js carries the real translations).
 ["ui", "features"].forEach(sec => { const en = CONTENT.en[sec] || {}, fi = CONTENT.fi[sec] || (CONTENT.fi[sec] = {}); for (const k in en) if (fi[k] == null) fi[k] = en[k]; });
