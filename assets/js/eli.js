@@ -23,6 +23,11 @@
   var LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE", fi: "fi-FI" };
   var fmt = function (c) { return new Intl.NumberFormat(LOCALES[LANG] || "en-IE", { style: "currency", currency: "EUR" }).format((c || 0) / 100); };
   var pname = function (id) { try { return C.products[id].name; } catch (e) { return id; } };
+  var pimg = function (id) {
+    if (CAT.productImage) return CAT.productImage(id, LANG);
+    var p = CAT.getProduct(id);
+    return p ? p.image : "";
+  };
 
   /* ---- Knowledge base (4 languages) ------------------------------------ */
   var I18N = {
@@ -330,7 +335,7 @@
     var p = CAT.getProduct(id); if (!p) return;
     var d = document.createElement("div");
     d.className = "eli-card";
-    d.innerHTML = '<img src="' + p.image + '" alt="' + esc(pname(id)) + '" loading="lazy">' +
+    d.innerHTML = '<img src="' + pimg(id) + '" alt="' + esc(pname(id)) + '" loading="lazy">' +
       '<div class="eli-card-b"><b>' + esc(pname(id)) + '</b><div class="p">' + fmt(p.price) + '</div>' +
       '<div class="w">' + esc(T.recWhy[id] || "") + '</div>' +
       '<a href="' + P + "/products/" + id + '.html">' + T.view + "</a></div>";

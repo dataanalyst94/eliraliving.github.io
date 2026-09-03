@@ -19,6 +19,23 @@
   };
 
   const CATEGORIES = ["skincare", "haircare"];
+  const LOCALIZED_IMAGE_IDS = [
+    "sensitive-moisturizing-cream",
+    "radiant-glow-cleanser",
+    "purifying-toner",
+    "sensitive-scalp-shampoo",
+    "retinol-alternative-serum",
+    "peptide-anti-aging-serum",
+    "anti-aging-duo"
+  ];
+
+  function imageGroup(lang) {
+    return lang === "fi" ? "fi" : "de";
+  }
+
+  function localizedImage(id, lang) {
+    return LOCALIZED_IMAGE_IDS.indexOf(id) >= 0 ? `/assets/img/products/${imageGroup(lang)}/${id}.jpg` : "";
+  }
 
   // price = EUR cents · image = primary · images = gallery (optional)
   // featureKeys resolve to localized labels in content[lang].features
@@ -133,6 +150,56 @@
     }
   ];
 
+  const DEFAULT_IMAGES = {};
+  PRODUCTS.forEach(p => {
+    DEFAULT_IMAGES[p.id] = {
+      image: p.image,
+      images: p.images && p.images.length ? p.images.slice() : [p.image]
+    };
+  });
+
+  function productImage(id, lang) {
+    return localizedImage(id, lang) || (DEFAULT_IMAGES[id] && DEFAULT_IMAGES[id].image) || "";
+  }
+
+  function productImages(id, lang) {
+    const primary = localizedImage(id, lang);
+    if (primary) {
+      if (id === "anti-aging-duo") {
+        return [
+          primary,
+          localizedImage("retinol-alternative-serum", lang),
+          localizedImage("peptide-anti-aging-serum", lang)
+        ];
+      }
+      return [primary];
+    }
+    return DEFAULT_IMAGES[id] ? DEFAULT_IMAGES[id].images.slice() : [];
+  }
+
+  function productImageMap(lang) {
+    const map = {};
+    PRODUCTS.forEach(p => {
+      const next = productImage(p.id, lang);
+      if (!next) return;
+      const oldSet = new Set((DEFAULT_IMAGES[p.id] && DEFAULT_IMAGES[p.id].images) || []);
+      oldSet.add(DEFAULT_IMAGES[p.id] && DEFAULT_IMAGES[p.id].image);
+      oldSet.forEach(src => {
+        if (src) map[src] = next;
+      });
+    });
+    return map;
+  }
+
+  function localizeProductImages(lang) {
+    PRODUCTS.forEach(p => {
+      p.image = productImage(p.id, lang);
+      p.images = productImages(p.id, lang);
+    });
+  }
+
+  if (typeof window !== "undefined") localizeProductImages(window.LANG || "de");
+
   // INCI ingredient lists are language-neutral (EU INCI nomenclature) → shared.
   const INCI = {
     "purifying-toner": "Aqua, Alcohol, Lavandula Angustifolia (Lavender) Flower Water*, Glycerin**, Betaine, Propanediol, Acorus Calamus (Sweet Flag) Root Extract*, Cucumis Sativus (Cucumber) Fruit Extract*, Salicylic Acid, Benzyl Alcohol, Sodium Benzoate, Potassium Sorbate, Rhamnose, Glucose, Glucuronic Acid.",
@@ -144,5 +211,5 @@
   function getProduct(id) { return PRODUCTS.find(p => p.id === id); }
   function getProducts(category) { return (!category || category === "all") ? PRODUCTS.slice() : PRODUCTS.filter(p => p.category === category); }
 
-  return { CONFIG, CATEGORIES, PRODUCTS, INCI, getProduct, getProducts };
+  return { CONFIG, CATEGORIES, PRODUCTS, INCI, getProduct, getProducts, productImage, productImages, productImageMap, localizeProductImages };
 });

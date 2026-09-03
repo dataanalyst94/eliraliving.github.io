@@ -10,7 +10,8 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const IMG = path.join(ROOT, "assets", "img");
 const GAL = path.join(IMG, "gallery");
-const TOP = ["cream", "cleanser", "toner", "shampoo", "serum", "peptide-serum", "anti-aging-duo", "hero"]; // deployed product + hero images
+const PRODUCTS = path.join(IMG, "products");
+const TOP = ["cream", "cleanser", "toner", "shampoo", "serum", "peptide-serum", "anti-aging-duo", "hero", "hero-fi", "hero-de"]; // deployed product + hero images
 const WIDTHS = [480, 960];
 const manifest = {};
 
@@ -35,6 +36,13 @@ async function process(file) {
 (async () => {
   for (const n of TOP) { const f = path.join(IMG, n + ".jpg"); if (fs.existsSync(f)) await process(f); }
   if (fs.existsSync(GAL)) for (const f of fs.readdirSync(GAL).filter(f => /\.jpg$/i.test(f) && !/-(480|960)\.jpg$/i.test(f))) await process(path.join(GAL, f));
+  if (fs.existsSync(PRODUCTS)) {
+    for (const lang of fs.readdirSync(PRODUCTS)) {
+      const dir = path.join(PRODUCTS, lang);
+      if (!fs.statSync(dir).isDirectory()) continue;
+      for (const f of fs.readdirSync(dir).filter(f => /\.jpg$/i.test(f) && !/-(480|960)\.jpg$/i.test(f))) await process(path.join(dir, f));
+    }
+  }
   fs.writeFileSync(path.join(ROOT, "assets", "data", "responsive-manifest.json"), JSON.stringify(manifest, null, 0) + "\n");
   console.log("\n✓ assets/data/responsive-manifest.json  (" + Object.keys(manifest).length + " images)");
 })().catch(e => { console.error(e); process.exit(1); });

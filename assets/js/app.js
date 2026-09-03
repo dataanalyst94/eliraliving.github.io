@@ -19,9 +19,67 @@
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmt = (c) => new Intl.NumberFormat(LOCALES[LANG] || "en-IE", { style: "currency", currency: "EUR" }).format((c || 0) / 100);
   const pname = (id) => (C.products[id] && C.products[id].name) || id;
-  const pImg = (id) => { const p = CAT.getProduct(id); return p ? p.image : ""; };
+  const pImg = (id) => {
+    if (CAT.productImage) return CAT.productImage(id, LANG);
+    const p = CAT.getProduct(id);
+    return p ? p.image : "";
+  };
+  const pImgs = (id) => {
+    if (CAT.productImages) return CAT.productImages(id, LANG).filter(Boolean);
+    const p = CAT.getProduct(id);
+    return p ? ((p.images && p.images.length) ? p.images : [p.image]) : [];
+  };
   const langPrefix = "/" + LANG;
   const switchLangPath = (to) => location.pathname.replace(/^\/(en|de|nl|fi)(\/|$)/, "/" + to + "$2") || "/" + to + "/";
+  const responsiveSet = (src, ext) => {
+    if (!/\.jpe?g$/i.test(src)) return "";
+    const base = src.replace(/\.jpe?g$/i, "");
+    return `${base}-480.${ext} 480w, ${base}-960.${ext} 960w, ${base}.${ext} 1000w`;
+  };
+  const productIdFromHref = (href) => {
+    const m = String(href || "").match(/\/products\/([^/?#]+)\.html(?:[?#]|$)/);
+    return m ? decodeURIComponent(m[1]) : "";
+  };
+  function setProductPicture(img, src) {
+    if (!img || !src) return;
+    img.setAttribute("src", src);
+    if (!/\.jpe?g$/i.test(src)) {
+      img.removeAttribute("srcset");
+      return;
+    }
+    const sizes = img.getAttribute("sizes") || "(min-width:880px) 24vw, (min-width:560px) 30vw, 45vw";
+    img.setAttribute("srcset", responsiveSet(src, "jpg"));
+    img.setAttribute("sizes", sizes);
+    const picture = img.closest("picture");
+    const source = picture && picture.querySelector("source");
+    if (source) {
+      source.setAttribute("type", "image/webp");
+      source.setAttribute("srcset", responsiveSet(src, "webp"));
+      source.setAttribute("sizes", source.getAttribute("sizes") || sizes);
+    }
+  }
+  function localizeRenderedProductImages() {
+    document.querySelectorAll('a[href*="/products/"] img').forEach(img => {
+      const link = img.closest('a[href*="/products/"]');
+      const src = pImg(productIdFromHref(link && link.getAttribute("href")));
+      if (src) setProductPicture(img, src);
+    });
+
+    const root = document.querySelector("[data-product]");
+    if (!root) return;
+    const id = root.getAttribute("data-product");
+    const imgs = pImgs(id);
+    const mainImg = root.querySelector("[data-gallery-img]");
+    if (mainImg && imgs[0]) setProductPicture(mainImg, imgs[0]);
+
+    const thumbsWrap = root.querySelector(".pdp-thumbs");
+    if (!thumbsWrap) return;
+    if (imgs.length <= 1) {
+      thumbsWrap.remove();
+      return;
+    }
+    thumbsWrap.innerHTML = imgs.map((src, i) => `<button class="pdp-thumb${i === 0 ? " active" : ""}" data-gallery-thumb="${esc(src)}" aria-label="View image ${i + 1} of ${imgs.length}"><img src="${esc(src)}" alt="" loading="lazy"></button>`).join("");
+  }
 
   /* ---- Toast ---------------------------------------------------------- */
   let toastTimer;
@@ -398,10 +456,7 @@
     thumbs.forEach(btn => btn.addEventListener("click", () => {
       if (!mainImg) return;
       const src = btn.getAttribute("data-gallery-thumb");
-      mainImg.setAttribute("src", src);
-      // keep the WebP <source> in sync so the picture shows the right image
-      const srcEl = mainImg.parentElement && mainImg.parentElement.querySelector("source");
-      if (srcEl) srcEl.setAttribute("srcset", src.replace(/\.jpe?g$/i, ".webp"));
+      setProductPicture(mainImg, src);
       thumbs.forEach(b => b.classList.toggle("active", b === btn));
     }));
     const mainBox = root.querySelector("[data-gallery-main]");
@@ -547,6 +602,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     wireShell();
+    localizeRenderedProductImages();
     Cart.renderAll();
     initReveal();
     initShop();

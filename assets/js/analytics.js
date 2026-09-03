@@ -100,6 +100,12 @@
   /* ---- item helpers --------------------------------------------------- */
   const product = (id) => CAT ? CAT.getProduct(id) : null;
   const pname = (id) => (C && C.products[id] && C.products[id].name) || id;
+  const pimg = (id) => {
+    const localized = CAT && CAT.productImage ? CAT.productImage(id, LANG) : "";
+    if (localized) return localized;
+    const p = product(id);
+    return p && p.image ? p.image : "";
+  };
   const catLabel = (p) => (C && C.ui["cat." + p.category]) || p.category;
   function item(id, qty) {
     const p = product(id); if (!p) return { item_id: id, quantity: qty || 1 };
@@ -173,13 +179,13 @@
   function klaviyoCartProps(cartItems, valueCents) {
     const origin = location.origin, v = +(valueCents / 100).toFixed(2);
     const items = (cartItems || []).map(i => {
-      const p = product(i.id) || {};
+      const image = pimg(i.id);
       return {
         product_name: i.name || pname(i.id),
         quantity: i.qty || 1,
         price: ((i.unitPrice || 0) / 100).toFixed(2),
         url: origin + "/" + LANG + "/products/" + i.id + ".html",
-        image_url: p.image ? origin + p.image : ""
+        image_url: image ? origin + image : ""
       };
     });
     return { "$value": v, value: v, CheckoutURL: origin + "/" + LANG + "/cart.html", ItemNames: items.map(i => i.product_name), items: items };

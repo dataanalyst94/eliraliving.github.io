@@ -86,6 +86,13 @@ function pic(src, imgAttrs = "", sizes = "100vw") {
   }
   return `<picture><source srcset="${webpOf(src)}" type="image/webp"><img src="${src}" ${imgAttrs}></picture>`;
 }
+function preloadResponsiveImage(src, sizes = "100vw") {
+  const tiers = RESP[src];
+  if (tiers && tiers.length) {
+    return `<link rel="preload" as="image" type="image/webp" imagesrcset="${tiers.map(t => `${t[1]} ${t[0]}w`).join(", ")}" imagesizes="${sizes}" fetchpriority="high">`;
+  }
+  return `<link rel="preload" as="image" href="${src}" fetchpriority="high">`;
+}
 const OGLOC = { en: "en_GB", de: "de_DE", nl: "nl_NL", fi: "fi_FI" };
 const LANGS = ["en", "de", "nl", "fi"];
 const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE", fi: "fi-FI" };
@@ -172,7 +179,7 @@ function head(L, o) {
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/brand/apple-touch-icon.png?v=${ASSET_V}">
   <meta name="theme-color" content="#0F120D">
   <link rel="manifest" href="/site.webmanifest">
-  ${o.home ? `<link rel="preload" as="image" type="image/webp" imagesrcset="${RESP["/assets/img/hero.jpg"].map(t => `${t[1]} ${t[0]}w`).join(", ")}" imagesizes="100vw" fetchpriority="high">
+  ${o.home ? `${preloadResponsiveImage("/assets/img/hero-fi.jpg")}
   <style>.pre-anim [data-hero-text]>*,.pre-anim [data-wordmark]{opacity:0}</style>
   <script>if(matchMedia("(min-width:760px)").matches&&!matchMedia("(prefers-reduced-motion:reduce)").matches){document.documentElement.className+=" pre-anim"}</script>` : ""}
   ${ld}
@@ -276,11 +283,21 @@ const BADGE_LABEL = {
 function priceWithTaxNote(L, cents, noteClass = "price-vat") {
   return `${fmt(L, cents)} <span class="${noteClass}">${T(L, "price.vatIncluded")}</span>`;
 }
+function productImage(L, p) {
+  return CAT.productImage ? CAT.productImage(p.id, L) : p.image;
+}
+function productImages(L, p) {
+  return CAT.productImages ? CAT.productImages(p.id, L) : ((p.images && p.images.length) ? p.images : [p.image]);
+}
+function localizedImage(L, src) {
+  const map = CAT.productImageMap ? CAT.productImageMap(L) : null;
+  return (map && map[src]) || src;
+}
 function card(L, p) {
   const badge = p.badge ? `<span class="tag" style="position:absolute;top:12px;left:12px;z-index:3">${esc((BADGE_LABEL[L] || BADGE_LABEL.en)[p.badge] || "Bestseller")}</span>` : "";
   return `<article class="card" data-cat="${p.category}" data-price="${p.price}" data-name="${escA(pname(L, p.id))}">
   <a href="${url("product", L, p)}" style="display:block">
-    <div class="media">${badge}${pic(p.image, `alt="${escA(pname(L, p.id))}" loading="lazy" decoding="async"`, "(min-width:880px) 24vw, (min-width:560px) 30vw, 45vw")}
+    <div class="media">${badge}${pic(productImage(L, p), `alt="${escA(pname(L, p.id))}" loading="lazy" decoding="async"`, "(min-width:880px) 24vw, (min-width:560px) 30vw, 45vw")}
       <button class="btn btn-primary quick" data-quick-add="${p.id}">${T(L, "pdp.add")}</button></div></a>
   <div class="meta"><div><a href="${url("product", L, p)}" class="name link-underline">${esc(pname(L, p.id))}</a><div class="desc">${esc(pdesc(L, p.id))}</div></div>
     <div class="price">${priceWithTaxNote(L, p.price)}</div></div>
@@ -316,7 +333,7 @@ function ldOrg() {
 }
 function ldWebsite(L) { return JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Elira Living", url: BASE + "/", inLanguage: L }); }
 function ldProduct(L, p) {
-  const obj = { "@context": "https://schema.org", "@type": "Product", name: pname(L, p.id), sku: p.sku, image: (p.images && p.images.length ? p.images : [p.image]).map(i => BASE + i), description: pdesc(L, p.id), brand: { "@type": "Brand", name: "Elira Living" }, category: t(L, "cat." + p.category), offers: { "@type": "Offer", url: BASE + url("product", L, p), priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "Elira Living" } } };
+  const obj = { "@context": "https://schema.org", "@type": "Product", name: pname(L, p.id), sku: p.sku, image: productImages(L, p).map(i => BASE + i), description: pdesc(L, p.id), brand: { "@type": "Brand", name: "Elira Living" }, category: t(L, "cat." + p.category), offers: { "@type": "Offer", url: BASE + url("product", L, p), priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "Elira Living" } } };
   return JSON.stringify(obj);
 }
 function ldBreadcrumb(L, p) {
@@ -333,7 +350,7 @@ function ldArticle(L, post, c) {
   return JSON.stringify({
     "@context": "https://schema.org", "@type": "BlogPosting",
     headline: c.title, description: c.description,
-    image: [BASE + post.image], inLanguage: L,
+    image: [BASE + localizedImage(L, post.image)], inLanguage: L,
     datePublished: post.date, dateModified: post.updated || post.date,
     author: { "@type": "Organization", name: "Elira Living", url: BASE + "/" },
     publisher: { "@type": "Organization", name: "Elira Living", logo: { "@type": "ImageObject", url: LOGO } },
@@ -380,7 +397,10 @@ function renderHome(L) {
   const WET = `<div class="cp-wet" aria-hidden="true"><svg class="beads" viewBox="0 0 234 1100" preserveAspectRatio="xMidYMid meet"><defs><radialGradient id="drp" cx="38%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffffff" stop-opacity=".95"/><stop offset="45%" stop-color="#dfe9df" stop-opacity=".35"/><stop offset="100%" stop-color="#a9bda0" stop-opacity="0"/></radialGradient></defs>${beads}</svg><span class="cp-drip d1"></span><span class="cp-drip d2"></span><span class="cp-drip d3"></span></div>`;
   const body = `<main>
   <section class="hero">
-    <div class="hero__bg" data-hero-bg>${pic("/assets/img/hero.jpg", `alt="${escA(t(L, "hero.lead"))}" fetchpriority="high" decoding="async"`, "100vw")}</div>
+    <div class="hero__bg" data-hero-bg aria-hidden="true">
+      <div class="hero__bg-slide hero__bg-slide--fi">${pic("/assets/img/hero-fi.jpg", `alt="" fetchpriority="high" decoding="async"`, "100vw")}</div>
+      <div class="hero__bg-slide hero__bg-slide--de">${pic("/assets/img/hero-de.jpg", `alt="" decoding="async"`, "100vw")}</div>
+    </div>
     <div class="hero__veil"></div>
     <svg class="botanical" data-botanical style="top:18%;left:8%;width:70px" viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C20 18 12 30 12 42a20 20 0 0 0 40 0c0-12-8-24-20-38Z" opacity=".5"/></svg>
     <svg class="botanical" data-botanical style="top:62%;left:14%;width:48px" viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C20 18 12 30 12 42a20 20 0 0 0 40 0c0-12-8-24-20-38Z" opacity=".4"/></svg>
@@ -536,13 +556,14 @@ function renderProduct(L, p) {
   const features = (CAT.getProduct(p.id).featureKeys || []).map(k => `<span class="tag">${esc(feat(L, k))}</span>`).join("");
   const faqs = (PRODUCT_FAQ[p.id] && (PRODUCT_FAQ[p.id][L] || PRODUCT_FAQ[p.id].en)) || [];
   const usage = (USAGE[p.id] && (USAGE[p.id][L] || USAGE[p.id].en)) || "";
-  const imgs = (p.images && p.images.length) ? p.images : [p.image];
+  const imgs = productImages(L, p);
+  const thumbs = imgs.length > 1 ? `
+      <div class="pdp-thumbs">${imgs.map((src, i) => `<button class="pdp-thumb${i === 0 ? " active" : ""}" data-gallery-thumb="${src}" aria-label="View image ${i + 1} of ${imgs.length}">${pic(src, `alt="" loading="lazy"`, "64px")}</button>`).join("")}</div>` : "";
   const body = `<main class="page-main" data-product="${p.id}"><div class="container" style="padding-bottom:6rem">
   <a href="${url("shop", L)}" class="link-underline muted" style="display:inline-block;font-size:.875rem;margin-bottom:2rem">← ${T(L, "pdp.back")}</a>
   <div class="pdp-grid">
     <div class="reveal in" data-gallery>
-      <div class="pdp-main" data-gallery-main tabindex="0" role="button" aria-label="${escA(pname(L, p.id))} — zoom">${pic(imgs[0], `alt="${escA(pname(L, p.id))}" fetchpriority="high" decoding="async" data-gallery-img`, "(min-width:880px) 46vw, 100vw")}</div>
-      ${imgs.length > 1 ? `<div class="pdp-thumbs">${imgs.map((src, i) => `<button class="pdp-thumb${i === 0 ? " active" : ""}" data-gallery-thumb="${src}" aria-label="View image ${i + 1} of ${imgs.length}">${pic(src, `alt="" loading="lazy"`, "64px")}</button>`).join("")}</div>` : ""}
+      <div class="pdp-main" data-gallery-main tabindex="0" role="button" aria-label="${escA(pname(L, p.id))} — zoom">${pic(imgs[0], `alt="${escA(pname(L, p.id))}" fetchpriority="high" decoding="async" data-gallery-img`, "(min-width:880px) 46vw, 100vw")}</div>${thumbs}
     </div>
     <div class="reveal in">
       <div class="kicker">${T(L, "cat." + p.category)}</div>
@@ -583,7 +604,7 @@ function renderProduct(L, p) {
   <button class="btn btn-primary" data-sticky-add style="flex:none">${T(L, "pdp.add")}</button>
 </div></div>
 </main>`;
-  return shell(L, { page: "product", p, bodyPage: "product", title, description, ogType: "product", image: BASE + p.image, inlineData: `window.ELIRA_PAGE={type:"product",id:${JSON.stringify(p.id)}};`, keywords: [pname(L, p.id), t(L, "cat." + p.category), "Elira Living", "vegan", "COSMOS", "ECOCERT"].join(", "), ld: [ldOrg(), ldProduct(L, p), ldBreadcrumb(L, p), ldFAQ(faqs)] }, body);
+  return shell(L, { page: "product", p, bodyPage: "product", title, description, ogType: "product", image: BASE + productImage(L, p), inlineData: `window.ELIRA_PAGE={type:"product",id:${JSON.stringify(p.id)}};`, keywords: [pname(L, p.id), t(L, "cat." + p.category), "Elira Living", "vegan", "COSMOS", "ECOCERT"].join(", "), ld: [ldOrg(), ldProduct(L, p), ldBreadcrumb(L, p), ldFAQ(faqs)] }, body);
 }
 
 /* ---- PAGE: ABOUT ------------------------------------------------------- */
@@ -908,7 +929,7 @@ function productCallout(L, id) {
   if (!p) return "";
   const purl = url("product", L, p);
   return `<aside class="blog-product" style="display:flex;gap:1.25rem;align-items:center;border:1px solid var(--line);background:var(--surface);padding:1.25rem;margin:2rem 0">
-  <a href="${purl}" style="flex:0 0 auto" aria-label="${escA(pname(L, p.id))}">${pic(p.image, `alt="${escA(pname(L, p.id))}" loading="lazy" style="width:84px;height:105px;object-fit:cover;border:1px solid var(--line)"`, "84px")}</a>
+  <a href="${purl}" style="flex:0 0 auto" aria-label="${escA(pname(L, p.id))}">${pic(productImage(L, p), `alt="${escA(pname(L, p.id))}" loading="lazy" style="width:84px;height:105px;object-fit:cover;border:1px solid var(--line)"`, "84px")}</a>
   <div style="flex:1;min-width:0">
     <div class="kicker" style="margin-bottom:.3rem">${T(L, "cat." + p.category)}</div>
     <a href="${purl}" class="font-display link-underline" style="font-size:1.15rem;display:inline-block;line-height:1.2">${esc(pname(L, p.id))}</a>
@@ -937,7 +958,7 @@ function blogCard(L, post) {
   const c = postContent(L, post);
   const purl = url("post", L, post);
   return `<article class="blog-card reveal" style="display:flex;flex-direction:column">
-  <a href="${purl}" aria-label="${escA(c.title)}"><div style="aspect-ratio:16/10;overflow:hidden;border:1px solid var(--line);background:var(--stone)">${pic(post.image, `alt="${escA(c.title)}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover"`, "(min-width:900px) 30vw, (min-width:560px) 45vw, 90vw")}</div></a>
+  <a href="${purl}" aria-label="${escA(c.title)}"><div style="aspect-ratio:16/10;overflow:hidden;border:1px solid var(--line);background:var(--stone)">${pic(localizedImage(L, post.image), `alt="${escA(c.title)}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover"`, "(min-width:900px) 30vw, (min-width:560px) 45vw, 90vw")}</div></a>
   <div style="padding-top:1.1rem;display:flex;flex-direction:column;flex:1">
     <div class="kicker" style="margin-bottom:.5rem">${T(L, "cat." + post.category)} · ${esc(blogDate(L, post.date))}</div>
     <a href="${purl}" class="font-display link-underline" style="font-size:1.35rem;line-height:1.2">${esc(c.title)}</a>
@@ -984,7 +1005,7 @@ function renderPost(L, post) {
     <h1 class="font-display" style="font-size:clamp(2.2rem,5.5vw,3.4rem);line-height:1.05">${esc(c.title)}</h1>
     ${metaLine}
   </div>
-  <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line);margin:2rem 0 2.5rem;max-width:60rem" class="reveal">${pic(post.image, `alt="${escA(c.title)}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover"`, "(min-width:1040px) 60rem, 100vw")}</div>
+  <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line);margin:2rem 0 2.5rem;max-width:60rem" class="reveal">${pic(localizedImage(L, post.image), `alt="${escA(c.title)}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover"`, "(min-width:1040px) 60rem, 100vw")}</div>
   <div class="blog-prose" style="max-width:44rem;font-size:1.05rem">
     ${renderBody(L, c.body)}
   </div>
@@ -994,7 +1015,7 @@ function renderPost(L, post) {
 </article></main>`;
   const ld = [ldOrg(), ldArticle(L, post, c), ldPostBreadcrumb(L, post, c)];
   if (faqs.length) ld.push(ldFAQ(faqs));
-  return shell(L, { page: "post", p: post, bodyPage: "blog", title, description: c.description, keywords: c.keywords, ogType: "article", image: BASE + post.image, ld }, body);
+  return shell(L, { page: "post", p: post, bodyPage: "blog", title, description: c.description, keywords: c.keywords, ogType: "article", image: BASE + localizedImage(L, post.image), ld }, body);
 }
 
 /* ---- PAGE: CART / SUCCESS / CANCEL ------------------------------------ */
@@ -1171,7 +1192,7 @@ function writeFeed() {
       <g:title>${esc(pname(L, p.id))}</g:title>
       <g:description>${esc(pdesc(L, p.id))}</g:description>
       <g:link>${BASE + url("product", L, p)}</g:link>
-      <g:image_link>${BASE + p.image}</g:image_link>
+      <g:image_link>${BASE + productImage(L, p)}</g:image_link>
       <g:availability>in_stock</g:availability>
       <g:price>${(p.price / 100).toFixed(2)} EUR</g:price>
       <g:brand>Elira Living</g:brand>
