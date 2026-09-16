@@ -509,11 +509,10 @@
   function initHomeMotion() {
     const isHome = document.body.getAttribute("data-page") === "home";
     if (!isHome) return;
-    // The heavy animation libs (~128KB) load on larger screens only. Phones and
-    // reduced-motion visitors get a lightweight static layout — far less
-    // main-thread work, much better mobile TBT/LCP.
-    const bigScreen = window.matchMedia("(min-width: 760px)").matches;
-    if (REDUCED || !bigScreen) { homeStaticFallback(); return; }
+    // Keep the same scroll-driven bottle rotation in narrow previews and on
+    // phones. Screen width must not silently replace it with a static bottle.
+    // Visitors requesting reduced motion still receive the static version.
+    if (REDUCED) { homeStaticFallback(); return; }
     const safety = setTimeout(() => document.documentElement.classList.remove("pre-anim"), 2500);
     loadMotionLibs().then(() => { clearTimeout(safety); runHomeMotion(); })
                     .catch(() => { clearTimeout(safety); homeStaticFallback(); });

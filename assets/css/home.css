@@ -95,14 +95,9 @@ html.lenis,html.lenis body{ height:auto; }
 .cp-drip.d2{ left:56%; top:34%; width:5px; height:8px; animation-duration:7s; animation-delay:2.1s; }
 .cp-drip.d3{ left:48%; top:46%; width:8px; height:13px; animation-duration:6.2s; animation-delay:3.6s; }
 @media (max-width:759px){ .cp-drip{ animation-duration:0s; } } /* mobile keeps it calm */
-/* MOBILE: the bottle stays upright & static (the wet droplets still animate).
-   We previously used a scroll-driven spin via `animation-timeline: view()`, but
-   on several mobile browsers the scroll timeline doesn't advance and the element
-   froze at its mid-keyframe — rendering the bottle upside-down and motionless.
-   A static, upright bottle is correct on every device; the scroll-spin remains
-   on desktop (GSAP-driven). */
+/* Use the same GSAP scroll rotation at every width. Flatten the mobile face
+   stack to avoid back-face rendering glitches without freezing the motion. */
 @media (max-width:759px){
-  .chapter__product{ animation:none !important; transform:none !important; }
   /* Bulletproofing: drop the whole 3D coin on mobile. The back face is
      rotateY(180deg); if a mobile browser mishandles backface-visibility it can
      surface that rotated face. Flattening the stack + hiding the back face

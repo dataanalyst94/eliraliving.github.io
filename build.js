@@ -493,7 +493,7 @@ function renderHome(L) {
   ${POSTS.length ? `<section class="container" style="padding:6rem 1.25rem">
     <div style="text-align:center;max-width:36rem;margin:0 auto 3.5rem">
       <div class="kicker reveal" style="margin-bottom:.75rem">${esc(BLOG_UI[L].kicker)}</div>
-      <h2 class="font-display reveal" style="font-size:clamp(2.2rem,5vw,3.5rem)">${esc(BLOG_UI[L].heading)}</h2>
+      <h2 class="font-display reveal" style="font-size:clamp(2.2rem,5vw,3.5rem)">${T(L, "journal.homeTitle")}</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2.75rem 2rem">${POSTS.slice(0, 3).map(p => blogCard(L, p)).join("\n")}</div>
     <div style="text-align:center;margin-top:3.5rem" class="reveal"><a href="${P}/blog/" class="btn btn-outline">${esc(BLOG_UI[L].back)}</a></div>
