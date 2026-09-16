@@ -67,14 +67,14 @@ jobs:
       # Keep the LIVE GitHub Pages repo (eliraliving.github.io) in sync with this
       # dev repo. Without this, commits here never reach the live domain and the
       # site silently freezes. Requires a one-time secret PAGES_SYNC_TOKEN
-      # (a PAT with 'repo' scope). If the secret is absent, this step no-ops.
+      # (a PAT with access to the live repo). A missing credential fails the release.
       - name: Forward built site to live Pages repo
         env:
           SYNC: ${{ secrets.PAGES_SYNC_TOKEN }}
         run: |
           if [ -z "$SYNC" ]; then
-            echo "::warning::PAGES_SYNC_TOKEN not set — live site (eliraliving.github.io) was NOT updated. Add the secret to enable auto-publish."
-            exit 0
+            echo "::error::PAGES_SYNC_TOKEN is missing. Live publication did not happen; restore the deployment credential and rerun this workflow."
+            exit 1
           fi
           # Force mirror: the live repo is a pure deploy target (built HTML only),
           # so its history should always equal this build. A plain push fails as
@@ -91,3 +91,4 @@ jobs:
           git -c "http.https://github.com/.extraheader=" push --force --no-thin \
             "https://x-access-token:$SYNC@github.com/dataanalyst94/eliraliving.github.io.git" HEAD:main
           echo "Forwarded (force-mirror) to live Pages repo."
+
