@@ -433,8 +433,8 @@ function renderHome(L) {
   <section class="chapter" data-chapter>
     <div class="chapter__stage"><div class="chapter__glow" data-chapter-glow></div>
       <div class="chapter__product" data-chapter-product><div class="cp-coin" data-chapter-coin>
-        <div class="cp-face cp-front"><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="${escA(pname(L, "sensitive-moisturizing-cream"))}" loading="lazy" decoding="async"></picture>${WET}</div>
-        <div class="cp-face cp-back" aria-hidden="true"><picture><source srcset="/assets/img/cream-hero.webp" type="image/webp"><img src="/assets/img/cream-hero.png" alt="" loading="lazy" decoding="async"></picture>${WET}</div>
+        <div class="cp-face cp-front"><picture><img src="/assets/img/peptide-hero-fi.svg" alt="${escA(pname(L, "peptide-anti-aging-serum"))}" loading="lazy" decoding="async"></picture>${WET}</div>
+        <div class="cp-face cp-back" aria-hidden="true"><picture><img src="/assets/img/peptide-hero-fi.svg" alt="" loading="lazy" decoding="async"></picture>${WET}</div>
       </div></div></div>
     <div class="chapter__headlines" data-chapter-headlines>
       <div class="kicker" style="margin-bottom:.75rem">${T(L, "chapter.kicker")}</div>
@@ -443,7 +443,7 @@ function renderHome(L) {
     <div class="ingredient" data-ingredient style="top:24%;left:8%"><div class="ln"></div><h4 class="font-display">${T(L, "ing.1.t")}</h4><p>${T(L, "ing.1.d")}</p></div>
     <div class="ingredient" data-ingredient style="top:54%;right:9%;text-align:right"><div class="ln" style="margin-left:auto"></div><h4 class="font-display">${T(L, "ing.2.t")}</h4><p>${T(L, "ing.2.d")}</p></div>
     <div class="ingredient" data-ingredient style="bottom:16%;left:12%"><div class="ln"></div><h4 class="font-display">${T(L, "ing.3.t")}</h4><p>${T(L, "ing.3.d")}</p></div>
-    <div style="position:absolute;bottom:7%;left:50%;transform:translateX(-50%);z-index:3"><a href="${url("product", L, { id: "sensitive-moisturizing-cream" })}" class="btn btn-primary">${T(L, "chapter.cta")}</a></div>
+    <div style="position:absolute;bottom:7%;left:50%;transform:translateX(-50%);z-index:3"><a href="${url("product", L, { id: "peptide-anti-aging-serum" })}" class="btn btn-primary">${T(L, "chapter.cta")}</a></div>
   </section>
 
   <section class="container" style="padding:6rem 1.25rem">
