@@ -142,6 +142,7 @@ function head(L, o) {
   return `<!DOCTYPE html>
 <html lang="${L}">
 <head>
+<meta name="p:domain_verify" content="9acb472ea82727f200f9fbcec3c87a79">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="${CSP}">
@@ -1140,7 +1141,8 @@ function writeManifest() {
 
 /* ---- branded 404 (GitHub Pages serves /404.html for any missing path) - */
 function write404() {
-  const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+  const html = `<!DOCTYPE html><html lang="en"><head>
+<meta name="p:domain_verify" content="9acb472ea82727f200f9fbcec3c87a79"><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page not found — Elira Living</title>
 <meta name="robots" content="noindex,follow">
@@ -1234,7 +1236,8 @@ function writeRoot() {
   const hm = meta("en").home; // keep the bare domain's snippet identical to /en/
   const title = hm.title, desc = hm.description;
   const links = LANGS.map(L => `<a href="/${L}/">${L.toUpperCase()}</a>`).join(" · ");
-  const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+  const html = `<!DOCTYPE html><html lang="en"><head>
+<meta name="p:domain_verify" content="9acb472ea82727f200f9fbcec3c87a79"><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${escA(title)}</title>
 <meta name="description" content="${escA(desc)}">
