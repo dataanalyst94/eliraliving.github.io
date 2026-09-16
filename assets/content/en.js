@@ -55,6 +55,14 @@
     }
   },
   "ui": {
+    "lifestyle.caption1": "The group chat can wait.",
+    "lifestyle.alt1": "Woman applying serum at her bedroom dresser",
+    "lifestyle.caption2": "Good skin day. Unmade bed.",
+    "lifestyle.alt2": "Woman applying moisturiser after a shower",
+    "lifestyle.caption3": "Yours. Until someone borrows it.",
+    "lifestyle.alt3": "Woman using peptide serum in her living room",
+    "lifestyle.caption4": "Moisturiser. Then the rest of life.",
+    "lifestyle.alt4": "Man applying moisturiser in his bathroom",
     "journal.homeTitle": "For the questions your shelf can’t answer.",
     "meta.langName": "English",
     "nav.shop": "Shop",

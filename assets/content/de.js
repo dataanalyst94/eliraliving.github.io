@@ -55,6 +55,14 @@
     }
   },
   "ui": {
+    "lifestyle.caption1": "Der Gruppenchat kann warten.",
+    "lifestyle.alt1": "Frau trägt Serum an ihrer Schlafzimmerkommode auf",
+    "lifestyle.caption2": "Guter Hauttag. Ungemachtes Bett.",
+    "lifestyle.alt2": "Frau trägt nach dem Duschen Feuchtigkeitscreme auf",
+    "lifestyle.caption3": "Deins. Bis es jemand ausleiht.",
+    "lifestyle.alt3": "Frau verwendet Peptidserum im Wohnzimmer",
+    "lifestyle.caption4": "Erst Feuchtigkeit. Dann der Rest.",
+    "lifestyle.alt4": "Mann trägt im Badezimmer Feuchtigkeitscreme auf",
     "journal.homeTitle": "Für Fragen, die dein Badregal nicht beantwortet.",
     "meta.langName": "Deutsch",
     "nav.shop": "Shop",

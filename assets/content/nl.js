@@ -55,6 +55,14 @@
     }
   },
   "ui": {
+    "lifestyle.caption1": "De groepschat kan wachten.",
+    "lifestyle.alt1": "Vrouw brengt serum aan bij haar slaapkamerkast",
+    "lifestyle.caption2": "Fijne huiddag. Ongemaakt bed.",
+    "lifestyle.alt2": "Vrouw brengt vochtinbrengende crème aan na het douchen",
+    "lifestyle.caption3": "Van jou. Tot iemand het leent.",
+    "lifestyle.alt3": "Vrouw gebruikt peptidenserum in haar woonkamer",
+    "lifestyle.caption4": "Eerst hydrateren. Dan de rest.",
+    "lifestyle.alt4": "Man brengt vochtinbrengende crème aan in de badkamer",
     "journal.homeTitle": "Voor vragen die je badkamerplank niet beantwoordt.",
     "meta.langName": "Nederlands",
     "nav.shop": "Shop",

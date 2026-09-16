@@ -154,9 +154,10 @@ h1,h2,h3,h4{ letter-spacing:-.01em; margin:0; }
 /* ===== Lifestyle trust strip (people + product) ======================== */
 .trust-strip{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
 @media(min-width:760px){ .trust-strip{ grid-template-columns:repeat(4,1fr); gap:1.25rem; } }
-.trust-strip__item{ position:relative; aspect-ratio:4/5; overflow:hidden; border:1px solid var(--line); border-radius:6px; }
-.trust-strip__item img{ width:100%; height:100%; object-fit:cover; transition:transform .9s var(--ease); }
-.trust-strip__item:hover img{ transform:scale(1.05); }
+.trust-strip__item{ position:relative; overflow:hidden; border:1px solid var(--line); border-radius:6px; }
+.trust-strip__item img{ display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; }
+.trust-strip__item figcaption{ padding:.85rem .75rem; font-size:.88rem; line-height:1.45; color:var(--muted); }
+
 
 /* ===== About Ingredients — ingredient cards with photos ================= */
 .ing-list{ display:flex; flex-direction:column; gap:1.25rem; }

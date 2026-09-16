@@ -56,6 +56,14 @@
     }
   },
   "ui": {
+    "lifestyle.caption1": "Ryhmäkeskustelu voi odottaa.",
+    "lifestyle.alt1": "Nainen levittää seerumia makuuhuoneen lipaston ääressä",
+    "lifestyle.caption2": "Hyvä ihopäivä. Petaamaton sänky.",
+    "lifestyle.alt2": "Nainen levittää kosteusvoidetta suihkun jälkeen",
+    "lifestyle.caption3": "Oma. Kunnes joku lainaa.",
+    "lifestyle.alt3": "Nainen käyttää peptidiseerumia olohuoneessaan",
+    "lifestyle.caption4": "Ensin kosteusvoide. Sitten muu elämä.",
+    "lifestyle.alt4": "Mies levittää kosteusvoidetta kylpyhuoneessa",
     "journal.homeTitle": "Kysymyksiin, joihin peilikaappi ei vastaa.",
     "meta.langName": "Suomi",
     "nav.shop": "Kauppa",

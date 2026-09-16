@@ -368,14 +368,14 @@ function ldPostBreadcrumb(L, post, c) {
 
 /* ---- Lifestyle trust strip -------------------------------------------- */
 const TRUST_IMGS = [
-  ["/assets/img/lifestyle/hold-serum-f.jpg", "A woman holding the Elira peptide serum"],
-  ["/assets/img/lifestyle/hold-cleanser-f.jpg", "A woman with the Elira cleanser"],
-  ["/assets/img/lifestyle/hold-shampoo-m.jpg", "A man holding the Elira shampoo"],
-  ["/assets/img/lifestyle/ritual.jpg", "A calm skincare ritual moment"],
+  "/assets/img/lifestyle/home-bedroom-serum.jpg",
+  "/assets/img/lifestyle/home-bathroom-cream.jpg",
+  "/assets/img/lifestyle/home-livingroom-serum.jpg",
+  "/assets/img/lifestyle/home-morning-cream.jpg"
 ];
 function trustStrip(L) {
-  const items = TRUST_IMGS.map(([src, alt]) =>
-    `<figure class="trust-strip__item reveal" style="margin:0">${pic(src, `alt="${escA(alt)}" loading="lazy" decoding="async"`, "(min-width:760px) 22vw, 45vw")}</figure>`).join("");
+  const items = TRUST_IMGS.map((src, i) =>
+    `<figure class="trust-strip__item reveal" style="margin:0">${pic(src, `alt="${escA(t(L, "lifestyle.alt" + (i+1)))}" loading="lazy" decoding="async" width="960" height="1280"`, "(min-width:760px) 22vw, 45vw")}<figcaption>${T(L, "lifestyle.caption" + (i+1))}</figcaption></figure>`).join("");
   return `<section class="container" style="padding:5rem 1.25rem 4rem">
     <div style="text-align:center;max-width:38rem;margin:0 auto 2.75rem">
       <div class="kicker reveal" style="margin-bottom:.75rem">${T(L, "trust.kicker")}</div>
@@ -472,7 +472,7 @@ function renderHome(L) {
   </section>
 
   <section class="split">
-    <div class="split-media" data-split>${pic("/assets/img/lifestyle/hold-cream-f.jpg", `alt="${escA(t(L, "story.title"))}" loading="lazy" decoding="async"`, "(min-width:880px) 50vw, 100vw")}</div>
+    <div class="split-media" data-split>${pic("/assets/img/lifestyle/home-bathroom-cream.jpg", `alt="${escA(t(L, "story.title"))}" loading="lazy" decoding="async"`, "(min-width:880px) 50vw, 100vw")}</div>
     <div style="display:flex;align-items:center;background:var(--bg2);padding:5rem 1.5rem">
       <div style="max-width:28rem">
         <div class="kicker reveal" style="margin-bottom:.75rem">${T(L, "story.kicker")}</div>
@@ -621,7 +621,7 @@ function renderAbout(L) {
 
   <section class="container" style="padding:1rem 1.25rem 1.5rem">
     <div class="about-split">
-      <div class="about-split__media reveal">${pic("/assets/img/lifestyle/calm.jpg", `alt="${escA(t(L, "about.storyTitle"))}" fetchpriority="high" decoding="async" ${imgStyle}`, "(min-width:880px) 40vw, 100vw")}</div>
+      <div class="about-split__media reveal">${pic("/assets/img/lifestyle/home-bedroom-serum.jpg", `alt="${escA(t(L, "about.storyTitle"))}" fetchpriority="high" decoding="async" ${imgStyle}`, "(min-width:880px) 40vw, 100vw")}</div>
       <div class="about-split__text">
         <div class="kicker reveal" style="margin-bottom:.75rem">${T(L, "about.storyKicker")}</div>
         <h2 class="font-display reveal" style="font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.12">${T(L, "about.storyTitle")}</h2>
