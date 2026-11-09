@@ -9,26 +9,37 @@
 const USAGE = {
   "sensitive-moisturizing-cream": {
     en: "Apply morning and evening to clean skin as the last step of your routine. Suitable for daily use on sensitive skin.",
+    fi: "Levitä puhtaalle iholle aamuin illoin ihonhoitorutiinin viimeisenä vaiheena. Sopii herkän ihon päivittäiseen hoitoon.",
     de: "Morgens und abends als letzten Schritt der Pflege auf die gereinigte Haut auftragen. Für die tägliche Anwendung bei empfindlicher Haut geeignet.",
     nl: "Breng ’s ochtends en ’s avonds aan op de gereinigde huid als laatste stap van je routine. Geschikt voor dagelijks gebruik bij de gevoelige huid." },
   "radiant-glow-cleanser": {
     en: "Massage a small amount onto damp skin morning and evening, then rinse with lukewarm water.",
+    fi: "Hiero pieni määrä kostealle iholle aamuin illoin ja huuhtele sitten haalealla vedellä.",
     de: "Eine kleine Menge morgens und abends auf die feuchte Haut einmassieren und mit lauwarmem Wasser abspülen.",
     nl: "Masseer ’s ochtends en ’s avonds een kleine hoeveelheid op de vochtige huid en spoel af met lauw water." },
   "purifying-toner": {
     en: "After cleansing, apply to the face with clean hands or a cotton pad, avoiding the eye area. Use morning and evening.",
+    fi: "Levitä puhdistuksen jälkeen kasvoille puhtain käsin tai vanulapulla. Vältä silmänympärysihoa. Käytä aamuin illoin.",
     de: "Nach der Reinigung mit sauberen Händen oder einem Wattepad auf das Gesicht auftragen, die Augenpartie aussparen. Morgens und abends anwenden.",
     nl: "Breng na het reinigen aan op het gezicht met schone handen of een wattenschijfje, vermijd de oogcontour. Gebruik ’s ochtends en ’s avonds." },
   "sensitive-scalp-shampoo": {
     en: "Massage into wet hair and scalp, lather, then rinse thoroughly. Gentle enough for frequent use.",
+    fi: "Hiero kosteisiin hiuksiin ja hiuspohjaan, vaahdota ja huuhtele huolellisesti. Sopii usein toistuvaan käyttöön.",
     de: "In das nasse Haar und die Kopfhaut einmassieren, aufschäumen und gründlich ausspülen. Mild genug für die häufige Anwendung.",
     nl: "Masseer in nat haar en op de hoofdhuid, laat schuimen en spoel grondig uit. Mild genoeg voor frequent gebruik." },
   "retinol-alternative-serum": {
     en: "Cleanse your face and pat dry. Apply a few drops to face and neck and massage in gently. Use morning and/or evening, before moisturiser; avoid the eye area.",
+    fi: "Puhdista kasvot ja taputtele iho kuivaksi. Levitä muutama tippa kasvoille ja kaulalle ja hiero hellävaraisesti. Käytä aamulla ja/tai illalla ennen kosteusvoidetta. Vältä silmänympärysihoa.",
     de: "Das Gesicht gründlich reinigen und leicht abtrocknen. Einige Tropfen auf Gesicht und Hals auftragen und sanft einmassieren. Morgens und/oder abends vor der Feuchtigkeitspflege anwenden; Augenkontakt vermeiden.",
     nl: "Reinig je gezicht en dep droog. Breng enkele druppels aan op gezicht en hals en masseer zachtjes in. Gebruik ’s ochtends en/of ’s avonds, vóór je moisturizer; vermijd de oogcontour." },
+  "peptide-anti-aging-serum": {
+    en: "Apply a few drops to clean skin and massage in gently. Use morning and/or evening before moisturiser. Avoid the eye area.",
+    fi: "Levitä muutama tippa puhtaalle iholle ja hiero hellävaraisesti. Käytä aamulla ja/tai illalla ennen kosteusvoidetta. Vältä silmänympärysihoa.",
+    de: "Einige Tropfen auf die gereinigte Haut auftragen und sanft einmassieren. Morgens und/oder abends vor der Feuchtigkeitspflege anwenden. Augenpartie aussparen.",
+    nl: "Breng enkele druppels aan op de gereinigde huid en masseer zachtjes in. Gebruik ’s ochtends en/of ’s avonds vóór je moisturizer. Vermijd de oogcontour." },
   "anti-aging-duo": {
     en: "Use the Retinol-Alternative Serum in the evening and the Peptide Anti-Aging Serum in the morning (or alternate evenings) — both go on clean, slightly damp skin before moisturiser. Patch test first if introducing both at once.",
+    fi: "Käytä Retinol Alternative -seerumia illalla ja Peptide Anti-Aging -seerumia aamulla tai vuorotellen iltaisin. Levitä seerumi puhtaalle, hieman kostealle iholle ennen kosteusvoidetta. Tee ensin paikallinen ihotesti, jos otat molemmat käyttöön samanaikaisesti.",
     de: "Verwende das Retinol Alternative Serum abends und das Peptide Anti-Aging Serum morgens (oder abwechselnd abends) — beide auf gereinigte, leicht feuchte Haut vor der Feuchtigkeitspflege auftragen. Bei gleichzeitigem Start mit beiden zuerst einen Verträglichkeitstest machen.",
     nl: "Gebruik het Retinol Alternatief Serum ’s avonds en het Peptide Anti-Aging Serum ’s ochtends (of afwisselend ’s avonds) — beide aanbrengen op een schone, licht vochtige huid vóór je moisturizer. Doe eerst een patchtest als je met beide tegelijk begint." }
 };
