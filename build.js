@@ -375,7 +375,7 @@ const TRUST_IMGS = [
 ];
 function trustStrip(L) {
   const items = TRUST_IMGS.map((src, i) =>
-    `<figure class="trust-strip__item reveal" style="margin:0">${pic(src, `alt="${escA(t(L, "lifestyle.alt" + (i+1)))}" loading="lazy" decoding="async" width="960" height="1280"`, "(min-width:760px) 22vw, 45vw")}<figcaption>${T(L, "lifestyle.caption" + (i+1))}</figcaption></figure>`).join("");
+    `<figure class="trust-strip__item reveal" style="margin:0">${pic(src, `alt="${escA(t(L, "lifestyle.alt" + (i+1)))}" loading="lazy" decoding="async" width="960" height="1280"`, "(min-width:760px) 22vw, 45vw")}</figure>`).join("");
   return `<section class="container" style="padding:5rem 1.25rem 4rem">
     <div style="text-align:center;max-width:38rem;margin:0 auto 2.75rem">
       <div class="kicker reveal" style="margin-bottom:.75rem">${T(L, "trust.kicker")}</div>
