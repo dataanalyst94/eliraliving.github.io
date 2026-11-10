@@ -1,0 +1,324 @@
+{
+  "name": "Elira — Instagram Reels to TikTok",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateId": "elira-instagram-reels-to-tiktok"
+  },
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "tt01-0000-0000-0000-000000000001",
+      "name": "Every 15 minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "url": "https://graph.instagram.com/v21.0/17841476184618645/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "fields",
+              "value": "id,caption,media_type,media_product_type,media_url,permalink,timestamp,username,thumbnail_url"
+            },
+            {
+              "name": "limit",
+              "value": "25"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "tt01-0000-0000-0000-000000000002",
+      "name": "Read recent Instagram media",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [240, 0],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "7MAxzdkUXpkRXCpo",
+          "name": "Instagram token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = Array.isArray($json.data) ? $json.data : [];\nconst reels = rows.filter((m) => m && m.id && m.media_url && (m.media_product_type === 'REELS' || m.media_type === 'VIDEO'));\nconst state = $getWorkflowStaticData('global');\nif (!Array.isArray(state.seenInstagramReels)) {\n  state.seenInstagramReels = reels.map((m) => String(m.id));\n  state.initializedAt = new Date().toISOString();\n  return [];\n}\nconst seen = new Set(state.seenInstagramReels.map(String));\nreturn reels\n  .filter((m) => !seen.has(String(m.id)))\n  .sort((a, b) => String(a.timestamp).localeCompare(String(b.timestamp)))\n  .map((m) => ({ json: {\n    instagramMediaId: String(m.id),\n    caption: String(m.caption || '').trim().slice(0, 2200),\n    mediaUrl: m.media_url,\n    instagramPermalink: m.permalink || '',\n    timestamp: m.timestamp || '',\n    username: m.username || 'eliralivingeu'\n  }}));"
+      },
+      "id": "tt01-0000-0000-0000-000000000003",
+      "name": "Select unseen Reels",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 0]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.mediaUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "data"
+            }
+          }
+        }
+      },
+      "id": "tt01-0000-0000-0000-000000000004",
+      "name": "Download original Reel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [720, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.tiktokapis.com/v2/post/publish/creator_info/query/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=UTF-8"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "tt01-0000-0000-0000-000000000005",
+      "name": "Read TikTok creator settings",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [960, 0],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "REPLACE_TIKTOK_OAUTH_CREDENTIAL_ID",
+          "name": "TikTok Content Posting"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.tiktokapis.com/v2/post/publish/video/init/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=UTF-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ post_info: { title: $('Select unseen Reels').item.json.caption || 'Elira Living', privacy_level: (($json.data && $json.data.privacy_level_options) || []).includes('PUBLIC_TO_EVERYONE') ? 'PUBLIC_TO_EVERYONE' : 'SELF_ONLY', disable_duet: false, disable_comment: false, disable_stitch: false, video_cover_timestamp_ms: 1000, brand_content_toggle: false, brand_organic_toggle: true }, source_info: { source: 'FILE_UPLOAD', video_size: Number($binary.data.fileSize), chunk_size: Number($binary.data.fileSize), total_chunk_count: 1 } }) }}",
+        "options": {}
+      },
+      "id": "tt01-0000-0000-0000-000000000006",
+      "name": "Initialize TikTok post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1200, 0],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "REPLACE_TIKTOK_OAUTH_CREDENTIAL_ID",
+          "name": "TikTok Content Posting"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{ $json.data.upload_url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "video/mp4"
+            },
+            {
+              "name": "Content-Length",
+              "value": "={{ String($binary.data.fileSize) }}"
+            },
+            {
+              "name": "Content-Range",
+              "value": "={{ 'bytes 0-' + (Number($binary.data.fileSize) - 1) + '/' + Number($binary.data.fileSize) }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "id": "tt01-0000-0000-0000-000000000007",
+      "name": "Upload Reel to TikTok",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1440, 0]
+    },
+    {
+      "parameters": {
+        "amount": 30,
+        "unit": "seconds"
+      },
+      "id": "tt01-0000-0000-0000-000000000008",
+      "name": "Wait for TikTok processing",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1680, 0],
+      "webhookId": "tt01-processing-wait"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.tiktokapis.com/v2/post/publish/status/fetch/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=UTF-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ publish_id: $('Initialize TikTok post').item.json.data.publish_id }) }}",
+        "options": {}
+      },
+      "id": "tt01-0000-0000-0000-000000000009",
+      "name": "Check TikTok post status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1920, 0],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "REPLACE_TIKTOK_OAUTH_CREDENTIAL_ID",
+          "name": "TikTok Content Posting"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "tt01-status-condition",
+              "leftValue": "={{ $json.data.status }}",
+              "rightValue": "PUBLISH_COMPLETE",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "tt01-0000-0000-0000-000000000010",
+      "name": "TikTok published?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [2160, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const state = $getWorkflowStaticData('global');\nconst id = String($('Select unseen Reels').item.json.instagramMediaId);\nconst seen = Array.isArray(state.seenInstagramReels) ? state.seenInstagramReels.map(String) : [];\nif (!seen.includes(id)) seen.push(id);\nstate.seenInstagramReels = seen.slice(-500);\nstate.lastSuccessfulTikTokPost = { instagramMediaId: id, publishId: $('Initialize TikTok post').item.json.data.publish_id, completedAt: new Date().toISOString() };\nreturn [{ json: state.lastSuccessfulTikTokPost }];"
+      },
+      "id": "tt01-0000-0000-0000-000000000011",
+      "name": "Record successful cross-post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2400, -100]
+    },
+    {
+      "parameters": {
+        "chatId": "5556844215",
+        "text": "=⚠️ ELIRA TIKTOK CROSS-POST NEEDS ATTENTION\n\nInstagram Reel: {{ $('Select unseen Reels').item.json.instagramPermalink }}\nTikTok status: {{ $json.data?.status || 'unknown' }}\nPublish ID: {{ $('Initialize TikTok post').item.json.data.publish_id }}\n\nThe Reel was not marked as processed and will be retried on the next run.",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "tt01-0000-0000-0000-000000000012",
+      "name": "Telegram only on failure",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [2400, 100],
+      "credentials": {
+        "telegramApi": {
+          "id": "aZQ6k3eWklXZaG5R",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every 15 minutes": {
+      "main": [[{"node":"Read recent Instagram media","type":"main","index":0}]]
+    },
+    "Read recent Instagram media": {
+      "main": [[{"node":"Select unseen Reels","type":"main","index":0}]]
+    },
+    "Select unseen Reels": {
+      "main": [[{"node":"Download original Reel","type":"main","index":0}]]
+    },
+    "Download original Reel": {
+      "main": [[{"node":"Read TikTok creator settings","type":"main","index":0}]]
+    },
+    "Read TikTok creator settings": {
+      "main": [[{"node":"Initialize TikTok post","type":"main","index":0}]]
+    },
+    "Initialize TikTok post": {
+      "main": [[{"node":"Upload Reel to TikTok","type":"main","index":0}]]
+    },
+    "Upload Reel to TikTok": {
+      "main": [[{"node":"Wait for TikTok processing","type":"main","index":0}]]
+    },
+    "Wait for TikTok processing": {
+      "main": [[{"node":"Check TikTok post status","type":"main","index":0}]]
+    },
+    "Check TikTok post status": {
+      "main": [[{"node":"TikTok published?","type":"main","index":0}]]
+    },
+    "TikTok published?": {
+      "main": [
+        [{"node":"Record successful cross-post","type":"main","index":0}],
+        [{"node":"Telegram only on failure","type":"main","index":0}]
+      ]
+    }
+  }
+}
