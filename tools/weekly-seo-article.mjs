@@ -103,7 +103,25 @@ async function googleAccessToken() {
   if (!response.ok) throw new Error(`Google OAuth failed (${response.status}): ${await response.text()}`);
   return (await response.json()).access_token;
 }
+async function querySeoDataGateway(source, payload = {}) {
+  const url = process.env.SEO_DATA_URL;
+  const gatewayToken = process.env.SEO_DATA_TOKEN;
+  if (!url) return null;
+  if (!gatewayToken) throw new Error("SEO_DATA_TOKEN is required when SEO_DATA_URL is configured.");
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Elira-SEO-Token": gatewayToken,
+    },
+    body: JSON.stringify({ source, ...payload }),
+  });
+  if (!response.ok) throw new Error(`SEO data gateway failed (${response.status}): ${await response.text()}`);
+  return response.json();
+}
 async function querySearchConsole(token, startDate, endDate) {
+  const gateway = await querySeoDataGateway("gsc", { startDate, endDate });
+  if (gateway) return gateway.rows || [];
   const endpoint = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(SITE_URL)}/searchAnalytics/query`;
   const response = await fetch(endpoint, {
     method: "POST",
@@ -123,6 +141,15 @@ async function querySearchConsole(token, startDate, endDate) {
 }
 
 async function queryGa4(token) {
+  const gateway = await querySeoDataGateway("ga4");
+  if (gateway) {
+    return (gateway.rows || []).map(row => ({
+      landingPage: row.dimensionValues?.[0]?.value || "",
+      sessions: Number(row.metricValues?.[0]?.value || 0),
+      engagedSessions: Number(row.metricValues?.[1]?.value || 0),
+      keyEvents: Number(row.metricValues?.[2]?.value || 0),
+    })).filter(row => row.landingPage);
+  }
   if (!process.env.GA4_PROPERTY_ID) return [];
   const property = String(process.env.GA4_PROPERTY_ID).replace(/^properties\//, "");
   const response = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${property}:runReport`, {
@@ -402,7 +429,7 @@ async function main() {
       current: { startDate: isoDate(currentStart), endDate: isoDate(currentEnd) },
       previous: { startDate: isoDate(previousStart), endDate: isoDate(previousEnd) },
     };
-    const token = await googleAccessToken();
+    const token = process.env.SEO_DATA_URL ? "" : await googleAccessToken();
     [currentRows, previousRows, ga4LandingPages] = await Promise.all([
       querySearchConsole(token, dateRange.current.startDate, dateRange.current.endDate),
       querySearchConsole(token, dateRange.previous.startDate, dateRange.previous.endDate),

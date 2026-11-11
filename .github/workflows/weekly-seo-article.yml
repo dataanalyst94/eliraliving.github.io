@@ -21,6 +21,8 @@ jobs:
     env:
       GSC_SITE_URL: sc-domain:eliraliving.com
       GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+      SEO_DATA_URL: ${{ secrets.SEO_DATA_URL }}
+      SEO_DATA_TOKEN: ${{ secrets.SEO_DATA_TOKEN }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
       GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}

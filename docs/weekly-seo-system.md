@@ -19,9 +19,17 @@ The workflow never publishes an article directly. Merging the pull request trigg
 
 ## One-time connections
 
+The preferred Google connection is the isolated n8n credential named `Google SEO Analytics`. It has only these scopes:
+
+- `https://www.googleapis.com/auth/webmasters.readonly`
+- `https://www.googleapis.com/auth/analytics.readonly`
+
+The token-protected n8n workflow `Elira - Weekly SEO data gateway` exposes only Search Console query rows and GA4 landing-page metrics to this repository. It cannot access Drive, Gmail, Sheets, bookkeeping, or customer data.
+
 Add these GitHub Actions secrets in **Settings > Secrets and variables > Actions**:
 
-- `GSC_SERVICE_ACCOUNT_JSON`: the complete Google service-account JSON, either raw or base64 encoded.
+- `SEO_DATA_URL`: production URL of the n8n SEO data gateway.
+- `SEO_DATA_TOKEN`: private shared token for that gateway.
 - `OPENROUTER_API_KEY`: the OpenRouter API key used for strategy, writing, and native localization.
 - `SERPER_API_KEY` (recommended): adds live related searches, People Also Ask questions, and competing-result context. Without it, the system still runs from Search Console and GA4.
 - `TELEGRAM_BOT_TOKEN`: the Elira Ops Bot token.
@@ -33,7 +41,7 @@ Optional repository variable:
 - `GA4_PROPERTY_ID`: the numeric Elira GA4 property id.
 - `SEO_AUTOMATION_ENABLED`: set to `true` only after the first successful manual test. Scheduled runs remain safely disabled until then.
 
-In Search Console, add the service account's `client_email` under **Settings > Users and permissions** with permission to read the `sc-domain:eliraliving.com` property. Add the same email as a Viewer on the Elira GA4 property. Enable both the Search Console API and Google Analytics Data API in that Google Cloud project.
+`GSC_SERVICE_ACCOUNT_JSON` remains supported as a fallback if n8n is ever retired. With that route, add the service account's `client_email` under Search Console **Settings > Users and permissions**, add it as a Viewer on the Elira GA4 property, and enable the Search Console API and Google Analytics Data API in its Google Cloud project.
 
 ## Safety and quality rules
 
