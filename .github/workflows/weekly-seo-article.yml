@@ -7,6 +7,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
@@ -60,6 +61,35 @@ jobs:
           git commit -m "Publish weekly SEO article: $ARTICLE_TITLE"
           git push origin HEAD:main
           echo "url=https://www.eliraliving.com/en/blog/${{ steps.article.outputs.slug }}.html" >> "$GITHUB_OUTPUT"
+
+      - name: Build and deploy live site
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          article_sha=$(git rev-parse HEAD)
+          gh workflow run build-site.yml --ref main
+
+          run_id=""
+          for attempt in {1..20}; do
+            run_id=$(gh run list \
+              --workflow build-site.yml \
+              --event workflow_dispatch \
+              --branch main \
+              --limit 10 \
+              --json databaseId,headSha \
+              --jq ".[] | select(.headSha == \"$article_sha\") | .databaseId" \
+              | head -n 1)
+            [ -n "$run_id" ] && break
+            sleep 3
+          done
+
+          if [ -z "$run_id" ]; then
+            echo "Could not find the triggered site deployment run."
+            exit 1
+          fi
+
+          gh run watch "$run_id" --exit-status
 
       - name: Telegram publication notice
         if: steps.publish.outputs.url != '' && env.TELEGRAM_BOT_TOKEN != '' && env.TELEGRAM_CHAT_ID != ''
