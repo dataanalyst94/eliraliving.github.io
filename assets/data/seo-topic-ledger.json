@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "date": "2026-11-11",
+    "slug": "shampoo-for-a-sensitive-scalp-what-to-look-for-and-what-to-avoid",
+    "primaryQuery": "shampoo für sensible kopfhaut",
+    "supportingQueries": [
+      "sensible kopfhaut shampoo",
+      "shampoo sensible kopfhaut",
+      "shampoo sensitiv",
+      "bio shampoo für empfindliche kopfhaut",
+      "recommend a realistic routine for hard water irritating the scalp."
+    ],
+    "rationale": "GSC shows meaningful demand for German non-brand scalp-shampoo queries but weak performance: “shampoo für sensible kopfhaut” has 61 impressions, 0% CTR, and very low average position (~58.3) landing on the product page (https://www.eliraliving.com/de/products/sensitive-scalp-shampoo.html), indicating a mismatch between query intent (guidance/comparison) and current result (product). Creating a dedicated informational article fills a clear content gap without rewriting existing posts: current haircare articles focus on sensitive/itchy scalp care, sulfates, hard-water irritation, and wash frequency—none directly answer the ‘which shampoo / what to look for’ shopping-intent query in German. The new article can internally link to the Sensitive Scalp Shampoo product and to relevant existing supporting articles (sulfates, hard water, itchy scalp) without cannibalizing them by targeting a distinct mid-funnel selection intent.",
+    "searchConsoleRange": {
+      "current": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-11-08"
+      },
+      "previous": {
+        "startDate": "2026-09-14",
+        "endDate": "2026-10-11"
+      }
+    },
+    "evidence": [
+      {
+        "query": "what face wash is gentle enough for daily use?",
+        "clicks": 0,
+        "impressions": 193,
+        "ctr": 0,
+        "position": 4.383419689119171,
+        "growth": 0.5
+      },
+      {
+        "query": "how to choose a facial cleanser",
+        "clicks": 0,
+        "impressions": 369,
+        "ctr": 0,
+        "position": 8.718157181571815,
+        "growth": 0.5
+      },
+      {
+        "query": "e-commerce solutions helsinki",
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 1,
+        "growth": 2.75
+      },
+      {
+        "query": "i am comparing gentle hydrating cleanser options for good value for repeat use. which ones are worth considering?",
+        "clicks": 0,
+        "impressions": 26,
+        "ctr": 0,
+        "position": 4.884615384615385,
+        "growth": 5.5
+      },
+      {
+        "query": "betaine",
+        "clicks": 0,
+        "impressions": 108,
+        "ctr": 0,
+        "position": 17.444444444444443,
+        "growth": 20.6
+      },
+      {
+        "query": "which gentle hydrating cleanser options should i compare if everyday use matters most to me?",
+        "clicks": 0,
+        "impressions": 18,
+        "ctr": 0,
+        "position": 3.611111111111111,
+        "growth": 5
+      },
+      {
+        "query": "retinol oder peptide",
+        "clicks": 0,
+        "impressions": 63,
+        "ctr": 0,
+        "position": 9.523809523809524,
+        "growth": 0.3125
+      },
+      {
+        "query": "peptidit anti-age",
+        "clicks": 0,
+        "impressions": 29,
+        "ctr": 0,
+        "position": 6.206896551724138,
+        "growth": 28
+      },
+      {
+        "query": "what gentle face wash products are best for everyday cleansing?",
+        "clicks": 0,
+        "impressions": 46,
+        "ctr": 0,
+        "position": 8.195652173913043,
+        "growth": 0.5
+      },
+      {
+        "query": "i am comparing gentle hydrating cleanser options for changing weather and seasons. which ones are worth considering?",
+        "clicks": 0,
+        "impressions": 26,
+        "ctr": 0,
+        "position": 8.884615384615385,
+        "growth": 4.2
+      }
+    ]
+  }
+]

@@ -1,0 +1,985 @@
+{
+  "slug": "shampoo-for-a-sensitive-scalp-what-to-look-for-and-what-to-avoid",
+  "category": "haircare",
+  "image": "/assets/img/shampoo.jpg",
+  "date": "2026-11-11",
+  "related": [
+    "sensitive-scalp-shampoo"
+  ],
+  "seoEvidence": {
+    "primaryQuery": "shampoo für sensible kopfhaut",
+    "sourceLanguage": "de",
+    "rationale": "GSC shows meaningful demand for German non-brand scalp-shampoo queries but weak performance: “shampoo für sensible kopfhaut” has 61 impressions, 0% CTR, and very low average position (~58.3) landing on the product page (https://www.eliraliving.com/de/products/sensitive-scalp-shampoo.html), indicating a mismatch between query intent (guidance/comparison) and current result (product). Creating a dedicated informational article fills a clear content gap without rewriting existing posts: current haircare articles focus on sensitive/itchy scalp care, sulfates, hard-water irritation, and wash frequency—none directly answer the ‘which shampoo / what to look for’ shopping-intent query in German. The new article can internally link to the Sensitive Scalp Shampoo product and to relevant existing supporting articles (sulfates, hard water, itchy scalp) without cannibalizing them by targeting a distinct mid-funnel selection intent."
+  },
+  "i18n": {
+    "en": {
+      "title": "Shampoo for a Sensitive Scalp: What to Look For (and What to Avoid)",
+      "description": "A practical buying guide for sensitive scalps: common irritants, how to read INCI, milder cleansers, hard-water tips, and a simple decision tree.",
+      "keywords": [
+        "shampoo für sensible kopfhaut",
+        "sensitive scalp shampoo",
+        "shampoo for sensitive scalp",
+        "fragrance free shampoo",
+        "INCI checklist sensitive scalp",
+        "mild surfactants shampoo",
+        "hard water scalp irritation",
+        "sulfate-free shampoo",
+        "shampoo sensitiv",
+        "sensible kopfhaut shampoo"
+      ],
+      "excerpt": "Choosing a shampoo for a sensitive scalp is mostly about reducing triggers: fragrance, harsh cleansing agents, and too many “active” extras. Here’s a calm checklist, plus a simple wash-day routine (including hard-water tips) and an easy decision tree.",
+      "readMins": 6,
+      "body": [
+        {
+          "type": "p",
+          "text": "If you’re searching for “shampoo für sensible kopfhaut”, you’re usually not looking for a miracle—just a shampoo that cleans without leaving your scalp tight, itchy, or reactive. The most helpful approach is to minimise potential irritants and keep your routine simple for a few weeks."
+        },
+        {
+          "type": "p",
+          "text": "Below is a practical checklist for choosing a gentle shampoo, how to read an INCI list, and how to wash (and rinse) in a way that’s kinder to sensitive scalps—especially if hard water makes everything feel worse."
+        },
+        {
+          "type": "h2",
+          "text": "What a “sensitive scalp” shampoo should do (and not do)"
+        },
+        {
+          "type": "p",
+          "text": "A good shampoo for sensitive, easily-irritated scalps should:"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Clean effectively at the scalp without aggressive stripping.",
+            "Rinse cleanly (residue can feel itchy or tight).",
+            "Avoid unnecessary “extras” (strong fragrance, lots of botanicals, intense cooling/tingling agents).",
+            "Support frequent washing if you need it—without leaving hair rough or scalp uncomfortable."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "What it should not do is “treat” medical conditions. If you have persistent, severe itch, thick scaling, weeping skin, pain, or hair loss, it’s worth checking in with a pharmacist or dermatologist rather than endlessly switching products."
+        },
+        {
+          "type": "h2",
+          "text": "Common shampoo triggers to watch for (especially if you react easily)"
+        },
+        {
+          "type": "p",
+          "text": "Sensitivity is individual, but these are frequent culprits in rinse-off haircare:"
+        },
+        {
+          "type": "h3",
+          "text": "1) Fragrance (including essential oils)"
+        },
+        {
+          "type": "p",
+          "text": "Fragrance is one of the most common sources of irritation in cosmetics. In INCI, it can appear as “Parfum/Fragrance” plus specific fragrance allergens (such as Limonene, Linalool, Citral, Geraniol, Eugenol, etc.). Essential oils can create the same problem: “natural” doesn’t automatically mean “gentle” for reactive skin."
+        },
+        {
+          "type": "h3",
+          "text": "2) Very strong cleansing systems"
+        },
+        {
+          "type": "p",
+          "text": "Some people tolerate many surfactants fine, but if your scalp feels tight or stings after washing, the cleansing system may be too harsh for you (or you may be over-washing). Classic “stronger-feeling” cleansers include SLS/Sodium Lauryl Sulfate and, for some, SLES/Sodium Laureth Sulfate—especially in combination with heavy fragrance or frequent washing."
+        },
+        {
+          "type": "h3",
+          "text": "3) Overloaded formulas (too many actives or botanicals)"
+        },
+        {
+          "type": "p",
+          "text": "Lots of plant extracts, strong “stimulating” ingredients, heavy menthol/camphor cooling sensations, or aggressive anti-dandruff-style actives can be a lot for a scalp that already feels reactive. Even when those ingredients are beneficial for some people, a sensitive scalp often does best with fewer variables—so you can tell what’s helping vs. what’s triggering."
+        },
+        {
+          "type": "h3",
+          "text": "4) Certain preservatives and leave-on residue"
+        },
+        {
+          "type": "p",
+          "text": "Preservatives are necessary for safety, but sensitivities can happen. Also, residue from rich conditioners, oils, dry shampoo, or styling products can build up and make a scalp feel itchy—especially in hard water. When in doubt, focus on rinse technique and product placement (see routine below)."
+        },
+        {
+          "type": "h2",
+          "text": "How to read an INCI list for a sensitive-scalp shampoo"
+        },
+        {
+          "type": "p",
+          "text": "You don’t need to memorise chemistry to shop well. Use this quick method:"
+        },
+        {
+          "type": "ol",
+          "items": [
+            "Start with fragrance: if “Parfum/Fragrance” is high on the list and you’re reactive, consider skipping it. If you prefer to play it safe, choose a fragrance-free option.",
+            "Scan the first 5–8 ingredients: these usually define the cleansing system and overall feel.",
+            "Look for “milder-feeling” cleansing agents: many gentle shampoos rely on coconut- or sugar-derived surfactants (for example, glucosides or other modern surfactants). No single ingredient guarantees gentleness, but these are commonly used in sensitive-scalp formulas.",
+            "Check how complicated the formula is: fewer “headline” extras can be easier on a reactive scalp.",
+            "Avoid buying based on marketing alone (“clean”, “natural”, “bio”)—use the INCI and your own trigger list."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Tip: if you’re troubleshooting irritation, keep a simple note of what you used and when symptoms appeared. Sensitivity can be delayed by a day or two, which makes “guessing” unreliable."
+        },
+        {
+          "type": "h2",
+          "text": "What cleansing agents tend to feel milder (and why texture matters)"
+        },
+        {
+          "type": "p",
+          "text": "In general cosmetic practice, shampoos formulated with modern, milder surfactants often feel less stripping than older, very strong systems. These gentler formulas may produce a softer foam and can require a slightly longer rinse—so the technique matters."
+        },
+        {
+          "type": "p",
+          "text": "Also remember: a shampoo can be sulfate-free and still feel too strong if it’s highly concentrated, used too often, or not rinsed well. Likewise, some people tolerate sulfates without issues. Your scalp comfort over 2–3 weeks is the best “test.”"
+        },
+        {
+          "type": "h2",
+          "text": "A practical wash-day routine for sensitive scalps (including hard-water tips)"
+        },
+        {
+          "type": "p",
+          "text": "A routine that reduces friction, residue, and “over-cleansing” usually makes the biggest difference. Try this for 2–3 weeks before making more changes:"
+        },
+        {
+          "type": "h3",
+          "text": "Step 1: Pre-rinse thoroughly"
+        },
+        {
+          "type": "p",
+          "text": "Rinse with lukewarm water for at least 30–60 seconds. This helps remove sweat and disperses product build-up so you need less shampoo (and less rubbing). Hot water can make scalps feel more reactive, so keep it comfortably warm rather than hot."
+        },
+        {
+          "type": "h3",
+          "text": "Step 2: Shampoo the scalp, not the lengths"
+        },
+        {
+          "type": "p",
+          "text": "Use a small amount, emulsify it between your hands, then apply to the scalp. Massage gently with fingertips (not nails) for about 20–30 seconds. Let the foam run down the lengths rather than scrubbing hair ends."
+        },
+        {
+          "type": "h3",
+          "text": "Step 3: Rinse longer than you think"
+        },
+        {
+          "type": "p",
+          "text": "Residue can mimic sensitivity: itch, tightness, and a “coated” feeling. Rinse until the hair feels squeaky-clean at the roots (without being rough) and water runs clear."
+        },
+        {
+          "type": "h3",
+          "text": "Step 4: Condition only mid-lengths to ends"
+        },
+        {
+          "type": "p",
+          "text": "If you use conditioner, keep it off the scalp while you’re troubleshooting. Scalp-adjacent conditioner residue is a common reason people think they’re reacting to shampoo."
+        },
+        {
+          "type": "h3",
+          "text": "Hard water: how to reduce irritation without over-complicating"
+        },
+        {
+          "type": "p",
+          "text": "Hard water (high mineral content) can make cleansing feel less effective and leave deposits that dull hair and can contribute to a tight, itchy sensation for some people. Practical steps:"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Rinse longer and more thoroughly—minerals + product residue is a common combo.",
+            "Use a little less product and focus it at the scalp; add more only if needed.",
+            "Consider an occasional clarifying/chelating wash if you have clear build-up (heavy feel at the roots, hair that won’t feel clean). If you do this, follow with conditioner on lengths only and return to your gentle shampoo next wash.",
+            "If you’re very sensitive, introduce changes one at a time (don’t add a new shampoo, clarifier, scalp serum, and mask all in the same week)."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "A gentle option to consider (when you want simple, everyday-friendly cleansing)"
+        },
+        {
+          "type": "p",
+          "text": "If your goal is an everyday shampoo that prioritises comfort, look for a sulfate-free formula built around mild, coconut-derived cleansers and a streamlined ingredient list—especially if fragrance tends to trigger you."
+        },
+        {
+          "type": "product",
+          "id": "sensitive-scalp-shampoo"
+        },
+        {
+          "type": "p",
+          "text": "Elira Living’s Sensitive Scalp Shampoo is positioned for sensitive, easily-irritated scalps with a sulfate-free cleansing base using mild coconut-derived cleansers. It includes plum extract and linden flower and is described as kind enough for everyday washing. It’s dermatologically tested, vegan, and COSMOS Natural, with 98% natural origin."
+        },
+        {
+          "type": "p",
+          "text": "As with any product, introduce it as your only “new” item if you’re currently reactive, and give your scalp a couple of weeks of consistent use before judging—unless you experience obvious stinging, burning, or worsening discomfort, in which case stop and seek professional advice."
+        },
+        {
+          "type": "h2",
+          "text": "Decision tree: choosing a shampoo for a sensitive scalp"
+        },
+        {
+          "type": "p",
+          "text": "Use this quick flow to narrow down choices:"
+        },
+        {
+          "type": "ol",
+          "items": [
+            "Your scalp reacts to many products or you’re currently flaring? Choose the simplest, gentlest option you can find (ideally fragrance-free), and avoid adding new scalp treatments at the same time.",
+            "Fragrance has triggered you before (headaches, itch, redness, “tight” scalp)? Prioritise fragrance-free or very low-fragrance formulas; be cautious with essential oils.",
+            "Your hair never feels clean in hard water? Focus on rinse time and technique first; if build-up persists, add an occasional clarifying/chelating step—but keep your main shampoo gentle.",
+            "You only get sensitivity when washing daily? Try a gentler shampoo and reduce scalp friction; if your scalp needs daily washing (sports, oily roots), pick an everyday-friendly formula rather than pushing longer gaps at the cost of discomfort."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Conclusion: the calm, effective way to shop"
+        },
+        {
+          "type": "p",
+          "text": "The best “shampoo für sensible kopfhaut” is usually the one that removes oil and residue without adding extra triggers. Start by avoiding fragrance if you’re prone to reactions, choose a mild (often sulfate-free) cleansing system, and simplify your routine so your scalp can settle. Pair that with a longer rinse—especially in hard water—and you’ll make a more meaningful difference than chasing highly active or heavily scented formulas."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Is sulfate-free shampoo always better for a sensitive scalp?",
+          "a": "Not always, but many people with reactive scalps find sulfate-free formulas feel less stripping. Technique (amount used, gentle massage, and thorough rinsing) often matters as much as the surfactant choice."
+        },
+        {
+          "q": "What ingredients should I avoid if my scalp gets irritated easily?",
+          "a": "Common triggers include fragrance (“Parfum/Fragrance”) and fragrance allergens (e.g., Limonene, Linalool), strong cooling agents (like menthol for some people), and very “busy” formulas with many botanicals or actives. Your personal trigger list is the most important guide."
+        },
+        {
+          "q": "How can hard water make my scalp feel worse, and what can I do?",
+          "a": "Hard water can leave mineral deposits that combine with product residue, making the scalp feel tight or itchy for some people. Rinse longer, keep conditioner off the scalp, and consider an occasional clarifying/chelating wash if you have obvious build-up."
+        },
+        {
+          "q": "When should I stop experimenting and ask a professional?",
+          "a": "If you have severe or persistent itch, pain, weeping skin, thick scaling, noticeable hair loss, or symptoms that don’t improve after simplifying your routine for a few weeks, consult a pharmacist or dermatologist for tailored advice."
+        }
+      ]
+    },
+    "de": {
+      "title": "Shampoo für sensible Kopfhaut: Worauf du achten solltest (und welche Inhaltsstoffe du besser meidest)",
+      "description": "Kaufguide für sensible Kopfhaut: typische Auslöser in Shampoo, INCI schnell lesen, milde Tenside erkennen, Routine & Tipps bei hartem Wasser.",
+      "keywords": [
+        "shampoo für sensible kopfhaut",
+        "shampoo für sensible kopfhaut (inhaltsstoffe, die du besser meidest)",
+        "sensible kopfhaut shampoo",
+        "shampoo sensitiv",
+        "duftstofffreies shampoo",
+        "INCI liste sensible kopfhaut",
+        "milde tenside shampoo",
+        "hartes wasser kopfhaut",
+        "sulfatfreies shampoo"
+      ],
+      "excerpt": "Ein Shampoo für sensible Kopfhaut muss selten „mehr können“ – meist reicht weniger: weniger Duft, mildere Reinigung und eine klare Routine. Hier findest du eine praktische INCI-Checkliste, typische Reiz-Auslöser und Tipps fürs Waschen (auch bei hartem Wasser).",
+      "readMins": 7,
+      "body": [
+        {
+          "type": "p",
+          "text": "Wenn du nach „shampoo für sensible kopfhaut (inhaltsstoffe, die du besser meidest)“ suchst, geht es meist nicht um ein Wundermittel – sondern um eine Reinigung, die gründlich ist, ohne dass sich die Kopfhaut danach gespannt, juckend oder „gereizt“ anfühlt. Am hilfreichsten ist oft: mögliche Auslöser reduzieren und die Routine für ein paar Wochen bewusst simpel halten."
+        },
+        {
+          "type": "p",
+          "text": "Unten findest du eine ruhige Checkliste: woran du ein mildes Shampoo erkennst, wie du eine INCI-Liste schnell einschätzt – und wie du beim Waschen und Ausspülen so vorgehst, dass eine empfindliche Kopfhaut weniger Stress hat (besonders, wenn hartes Wasser alles schlimmer macht)."
+        },
+        {
+          "type": "h2",
+          "text": "Was ein Shampoo für „sensible Kopfhaut“ leisten sollte (und was nicht)"
+        },
+        {
+          "type": "p",
+          "text": "Ein gutes Shampoo für empfindliche, schnell reagierende Kopfhaut sollte:"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Am Ansatz effektiv reinigen, ohne aggressiv zu entfetten.",
+            "Sich gut ausspülen lassen (Rückstände können Juckreiz oder Spannungsgefühl verstärken).",
+            "Unnötige „Extras“ vermeiden (starker Duft, sehr viele Pflanzenextrakte, stark kühlende/kribbelnde Zusätze).",
+            "Auch häufiges Waschen ermöglichen, wenn du es brauchst – ohne dass Haare strohig werden oder die Kopfhaut meckert."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Wichtig: Ein Shampoo sollte keine medizinischen Erkrankungen „behandeln“. Wenn du starken oder anhaltenden Juckreiz, dicke Schuppenkrusten, nässende Stellen, Schmerzen oder deutlichen Haarausfall bemerkst, ist eine Abklärung in Apotheke oder bei einer Dermatologin/einem Dermatologen sinnvoll – statt endlos Produkte zu wechseln."
+        },
+        {
+          "type": "h2",
+          "text": "Häufige Trigger im Shampoo (besonders, wenn du schnell reagierst)"
+        },
+        {
+          "type": "p",
+          "text": "Empfindlichkeit ist individuell – trotzdem gibt es ein paar typische Auslöser in Rinse-off-Haarpflege, auf die viele sensible Kopfhauttypen reagieren:"
+        },
+        {
+          "type": "h3",
+          "text": "1) Duftstoffe (inklusive ätherischer Öle)"
+        },
+        {
+          "type": "p",
+          "text": "Duftstoffe gehören zu den häufigsten Reizquellen in Kosmetik. In der INCI-Liste steht das oft als „Parfum/Fragrance“ – plus einzelne deklarationspflichtige Duftallergene wie z. B. Limonene, Linalool, Citral, Geraniol, Eugenol usw. Ätherische Öle können ein ähnliches Problem sein: „Natürlich“ ist nicht automatisch „sanft“, vor allem bei reaktiver Haut."
+        },
+        {
+          "type": "h3",
+          "text": "2) Sehr „starke“ Reinigungssysteme"
+        },
+        {
+          "type": "p",
+          "text": "Viele Menschen vertragen die meisten Tenside problemlos. Wenn deine Kopfhaut nach dem Waschen aber spannt, brennt oder sticht, kann das Reinigungssystem für dich zu kräftig sein – oder du wäschst (für deinen Zustand) zu häufig bzw. zu intensiv. Klassiker unter den „stärker“ empfundenen Tensiden sind SLS (Sodium Lauryl Sulfate) und – je nach Person – auch SLES (Sodium Laureth Sulfate), besonders in Kombination mit starkem Duft oder täglichem Waschen."
+        },
+        {
+          "type": "h3",
+          "text": "3) Überladene Formeln (zu viele „Wirkstoffe“ oder Botanicals)"
+        },
+        {
+          "type": "p",
+          "text": "Sehr viele Pflanzenextrakte, „stimulierende“ Zusätze, starkes Menthol-/Kampfer-Kühlgefühl oder sehr intensive Anti-Schuppen-ähnliche Wirkstoffkonzepte können für eine ohnehin gereizte Kopfhaut zu viel sein. Auch wenn solche Inhaltsstoffe für manche sinnvoll sind: Eine sensible Kopfhaut fährt oft besser mit wenigen Variablen – dann erkennst du eher, was hilft und was triggert."
+        },
+        {
+          "type": "h3",
+          "text": "4) Bestimmte Konservierungsstoffe und Rückstände wie Leave-on-Filme"
+        },
+        {
+          "type": "p",
+          "text": "Konservierungsstoffe sind für die Produktsicherheit notwendig, dennoch können einzelne Personen sensibel reagieren. Zusätzlich können Rückstände von reichhaltigen Conditionern, Ölen, Trockenshampoo oder Stylingprodukten auf der Kopfhaut liegen bleiben – und dann Juckreiz oder ein „belegtes“ Gefühl auslösen. Das fällt bei hartem Wasser oft stärker auf. Wenn du unsicher bist, setze zuerst bei Ausspültechnik und Produktplatzierung an (siehe Routine unten)."
+        },
+        {
+          "type": "h2",
+          "text": "INCI schnell lesen: So checkst du ein Shampoo für sensible Kopfhaut"
+        },
+        {
+          "type": "p",
+          "text": "Du musst keine Chemie auswendig lernen, um gut einzukaufen. Diese Methode reicht in der Praxis oft aus:"
+        },
+        {
+          "type": "ol",
+          "items": [
+            "Starte bei Duft: Steht „Parfum/Fragrance“ weit oben und du bist reaktiv, ist Weglassen oft die beste Abkürzung. Wenn du auf Nummer sicher gehen willst: duftstofffrei wählen.",
+            "Scanne die ersten 5–8 Inhaltsstoffe: Sie prägen meist Reinigung, Schaumgefühl und „Stärke“ des Shampoos.",
+            "Achte auf milder empfundene Tenside: Viele sanfte Shampoos arbeiten mit modernen, oft kokos- oder zuckerbasierten Tensiden (z. B. Glucoside und andere moderne Tenside). Kein einzelner Stoff garantiert Sanftheit – aber diese Gruppen werden häufig in sensiblen Formeln eingesetzt.",
+            "Schau auf die Komplexität: Weniger „Highlight“-Zusätze sind für reaktive Kopfhaut oft leichter zu vertragen.",
+            "Verlass dich nicht auf Marketingbegriffe wie „clean“, „natürlich“ oder „bio“ allein – entscheidend sind INCI und deine persönlichen Trigger."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Praxistipp: Wenn du gerade irritationsbedingt „Fehlersuche“ betreibst, notiere dir kurz, was du wann benutzt hast. Reaktionen können verzögert auftreten (manchmal erst nach 1–2 Tagen), was reines „Bauchgefühl“ unzuverlässig macht."
+        },
+        {
+          "type": "h2",
+          "text": "Welche Tenside oft milder wirken (und warum die Textur trotzdem zählt)"
+        },
+        {
+          "type": "p",
+          "text": "Aus der kosmetischen Formulierungspraxis gilt: Shampoos mit modernen, milderen Tensiden fühlen sich häufig weniger entfettend an als sehr „harte“ Systeme. Solche Formeln schäumen manchmal cremiger oder weniger „explosiv“ und brauchen gelegentlich etwas mehr Ausspülzeit – die Technik ist also Teil des Ergebnisses."
+        },
+        {
+          "type": "p",
+          "text": "Außerdem: Ein Shampoo kann sulfatfrei sein und sich trotzdem zu stark anfühlen – etwa wenn es hoch konzentriert ist, zu oft verwendet wird oder nicht gründlich genug ausgespült wird. Umgekehrt vertragen manche Menschen Sulfate ohne Probleme. Der beste Test ist deine Kopfhaut über 2–3 Wochen: Wird es insgesamt ruhiger, ohne dass du ständig nachfetten oder nachwaschen musst?"
+        },
+        {
+          "type": "h2",
+          "text": "Sanfte Waschroutine für sensible Kopfhaut (inklusive Tipps bei hartem Wasser)"
+        },
+        {
+          "type": "p",
+          "text": "Am meisten verändert oft nicht das nächste „Wunderprodukt“, sondern weniger Reibung, weniger Rückstände und weniger Über-Reinigung. Probier diese Routine 2–3 Wochen am Stück, bevor du wieder viel umstellst:"
+        },
+        {
+          "type": "h3",
+          "text": "Schritt 1: Gründlich vornässen"
+        },
+        {
+          "type": "p",
+          "text": "Spüle mit lauwarmem Wasser mindestens 30–60 Sekunden. Das löst Schweiß und verteilt Produktreste, sodass du weniger Shampoo brauchst (und weniger rubbeln musst). Zu heißes Wasser kann eine empfindliche Kopfhaut zusätzlich stressen – lauwarm ist meist die bessere Wahl."
+        },
+        {
+          "type": "h3",
+          "text": "Schritt 2: Shampoo auf die Kopfhaut – nicht in die Längen"
+        },
+        {
+          "type": "p",
+          "text": "Nimm eine kleine Menge, emulgiere sie in den Händen und verteile sie am Ansatz. Massiere sanft mit den Fingerkuppen (nicht mit den Nägeln) etwa 20–30 Sekunden. Den Schaum einfach durch die Längen laufen lassen, statt die Spitzen „sauber zu schrubben“."
+        },
+        {
+          "type": "h3",
+          "text": "Schritt 3: Länger ausspülen, als du denkst"
+        },
+        {
+          "type": "p",
+          "text": "Rückstände können sich wie Sensibilität anfühlen: Juckreiz, Spannen, „Film“. Spüle so lange, bis sich der Ansatz sauber anfühlt (nicht rau) und das Wasser klar abläuft."
+        },
+        {
+          "type": "h3",
+          "text": "Schritt 4: Conditioner nur in Längen und Spitzen"
+        },
+        {
+          "type": "p",
+          "text": "Wenn du Conditioner nutzt, halte ihn während der Troubleshooting-Phase konsequent von der Kopfhaut fern. Rückstände am Haaransatz sind ein häufiger Grund, warum Menschen denken, sie reagieren auf das Shampoo."
+        },
+        {
+          "type": "h3",
+          "text": "Hartes Wasser: So reduzierst du Irritation, ohne alles zu verkomplizieren"
+        },
+        {
+          "type": "p",
+          "text": "Hartes Wasser (hoher Mineralgehalt) kann das Reinigungsgefühl verändern und Ablagerungen begünstigen. Das kann Haare stumpfer wirken lassen und bei manchen ein straffes, juckendes Kopfhautgefühl verstärken. Praktische Schritte:"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Länger und gründlicher ausspülen – die Kombi aus Mineralien + Produktrückständen ist ein häufiger Stressfaktor.",
+            "Eher weniger Produkt nehmen und gezielt am Ansatz arbeiten; nur bei Bedarf nachdosieren.",
+            "Bei klaren Ablagerungen (Ansatz wirkt „schwer“, Haare werden nie richtig sauber) gelegentlich ein klärendes/chelatisierendes Shampoo nutzen. Danach Conditioner nur in die Längen und beim nächsten Waschen wieder zum milden Shampoo zurückkehren.",
+            "Wenn du sehr empfindlich bist: Änderungen einzeln einführen (nicht in derselben Woche neues Shampoo, Klärwäsche, Kopfhaut-Serum und Maske starten)."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Eine sanfte Option, wenn du eine einfache Alltagsreinigung suchst"
+        },
+        {
+          "type": "p",
+          "text": "Wenn dein Ziel ein alltagstaugliches Shampoo ist, das vor allem Komfort priorisiert, lohnt sich meist eine sulfatfreie Formel mit milden, kokosbasierten Tensiden und überschaubarer INCI – besonders, wenn Duft bei dir häufig auslösend wirkt."
+        },
+        {
+          "type": "product",
+          "id": "sensitive-scalp-shampoo"
+        },
+        {
+          "type": "p",
+          "text": "Elira Living’s Sensitive Scalp Shampoo ist für empfindliche, leicht irritierbare Kopfhaut positioniert und nutzt eine sulfatfreie Reinigungsbasis mit milden, kokosbasierten Tensiden. Es enthält Pflaumenextrakt sowie Lindenblüte und wird als sanft genug für die tägliche Haarwäsche beschrieben. Außerdem ist es dermatologisch getestet, vegan und COSMOS Natural, mit 98 % Inhaltsstoffen natürlichen Ursprungs."
+        },
+        {
+          "type": "p",
+          "text": "Wie bei jedem Produkt gilt: Wenn deine Kopfhaut gerade sehr reaktiv ist, führe es am besten als einzigen „Neuzugang“ ein und bleib ein paar Wochen konsequent dabei – außer du spürst deutliches Brennen, Stechen oder eine klare Verschlechterung. Dann absetzen und ärztlichen oder pharmazeutischen Rat einholen."
+        },
+        {
+          "type": "h2",
+          "text": "Entscheidungsbaum: So findest du dein Shampoo für sensible Kopfhaut"
+        },
+        {
+          "type": "p",
+          "text": "Mit diesem kurzen Ablauf kommst du meist schneller zu einer passenden Auswahl:"
+        },
+        {
+          "type": "ol",
+          "items": [
+            "Du reagierst auf vieles oder hast gerade eine sehr empfindliche Phase? Wähle die simpelste, mildeste Option, die du findest (idealerweise duftstofffrei) – und starte nicht parallel neue Kopfhaut-Treatments.",
+            "Duft hat dich schon öfter getriggert (Kopfjucken, Rötung, Spannungsgefühl, Kopfschmerzen)? Priorisiere duftstofffrei oder sehr dezente Formeln; sei vorsichtig mit ätherischen Ölen.",
+            "Deine Haare fühlen sich mit hartem Wasser nie richtig sauber an? Optimiere zuerst Ausspülzeit und Technik. Wenn Build-up bleibt, ergänze nur gelegentlich eine klärende/chelatisierende Wäsche – aber halte dein Hauptshampoo sanft.",
+            "Du bekommst Sensibilität nur bei täglichem Waschen? Wechsle zu einem milderen Shampoo und reduziere Reibung. Wenn du aus Sport-/Fettansatz-Gründen täglich waschen musst, ist ein alltagstaugliches, mildes Shampoo sinnvoller, als Waschabstände „zu erzwingen“ und Unwohlsein zu riskieren."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Fazit: Ruhig einkaufen – und der Kopfhaut Zeit geben"
+        },
+        {
+          "type": "p",
+          "text": "Das beste „shampoo für sensible kopfhaut“ ist meist das, das Talg und Rückstände zuverlässig entfernt, ohne neue Trigger obendrauf zu packen. Meide Duftstoffe, wenn du zu Reaktionen neigst, setze auf ein mildes (oft sulfatfreies) Reinigungssystem und halte die Routine für ein paar Wochen bewusst einfach. Kombiniert mit gründlichem Ausspülen – besonders bei hartem Wasser – bringt das oft mehr als stark parfümierte oder sehr „aktive“ Formeln."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Ist sulfatfreies Shampoo immer besser für sensible Kopfhaut?",
+          "a": "Nicht zwingend, aber viele Menschen mit empfindlicher Kopfhaut empfinden sulfatfreie Formeln als weniger entfettend. Ebenso wichtig sind Dosierung, sanfte Massage und gründliches Ausspülen."
+        },
+        {
+          "q": "Welche Inhaltsstoffe sollte ich bei leicht irritierter Kopfhaut eher meiden?",
+          "a": "Häufige Auslöser sind Duftstoffe („Parfum/Fragrance“) und deklarationspflichtige Duftallergene (z. B. Limonene, Linalool), stark kühlende Zusätze (Menthol ist für manche problematisch) sowie sehr „überladene“ Formeln mit vielen Botanicals oder intensiven Zusätzen. Deine persönliche Triggerliste ist entscheidend."
+        },
+        {
+          "q": "Warum kann hartes Wasser die Kopfhaut belasten – und was hilft praktisch?",
+          "a": "Hartes Wasser kann Mineralablagerungen fördern, die sich mit Produktrückständen verbinden. Das kann bei manchen zu Spannungsgefühl oder Juckreiz beitragen. Hilfreich sind längeres Ausspülen, Conditioner nicht auf die Kopfhaut und bei deutlichem Build-up gelegentlich eine klärende/chelatisierende Wäsche."
+        },
+        {
+          "q": "Wann sollte ich aufhören zu experimentieren und professionelle Hilfe holen?",
+          "a": "Bei starkem oder anhaltendem Juckreiz, Schmerzen, nässenden Stellen, dicken Schuppenkrusten, deutlichem Haarausfall oder wenn sich trotz vereinfachter Routine über einige Wochen nichts verbessert, ist eine Beratung in der Apotheke oder bei Dermatologie sinnvoll."
+        }
+      ]
+    },
+    "nl": {
+      "title": "Shampoo voor een gevoelige hoofdhuid: waar let je op (en wat vermijd je)?",
+      "description": "Praktische gids voor een gevoelige hoofdhuid: veelvoorkomende triggers, INCI-check, mildere reinigers, hardwater-tips en een eenvoudige keuzehulp.",
+      "keywords": [
+        "shampoo voor gevoelige hoofdhuid",
+        "shampoo voor gevoelige hoofdhuid waar moet je op letten",
+        "parfumvrije shampoo",
+        "milde shampoo",
+        "INCI lezen shampoo",
+        "milde surfactants shampoo",
+        "sulfaatvrije shampoo gevoelige hoofdhuid",
+        "hard water hoofdhuid irritatie",
+        "jeukende hoofdhuid shampoo"
+      ],
+      "excerpt": "Een shampoo kiezen voor een gevoelige hoofdhuid draait meestal om het verminderen van triggers: parfum, te agressieve reinigers en te veel ‘extra’s’. Met checklist, wasroutine (incl. hard water) en keuzehulp.",
+      "readMins": 7,
+      "body": [
+        {
+          "type": "p",
+          "text": "Als je zoekt naar “shampoo voor gevoelige hoofdhuid (waar moet je op letten?)”, zoek je meestal geen wondermiddel—maar gewoon een shampoo die wél schoonmaakt en je hoofdhuid daarna niet strak, jeukerig of prikkelbaar laat aanvoelen. De meest behulpzame aanpak is: mogelijke irriterende factoren minimaliseren en je routine een paar weken bewust simpel houden."
+        },
+        {
+          "type": "p",
+          "text": "Hieronder vind je een praktische checklist om een milde shampoo te kiezen, hoe je een INCI-ingrediëntenlijst snel kunt ‘scannen’, en hoe je wast (en vooral: uitspoelt) op een manier die vriendelijker is voor een gevoelige hoofdhuid—zeker als hard water alles lijkt te verergeren."
+        },
+        {
+          "type": "h2",
+          "text": "Wat een shampoo voor een gevoelige hoofdhuid wél (en níét) moet doen"
+        },
+        {
+          "type": "p",
+          "text": "Een goede shampoo voor een gevoelige, snel geïrriteerde hoofdhuid zou:"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "De hoofdhuid effectief reinigen zonder agressief te ontvetten.",
+            "Goed uitspoelen (restjes kunnen jeuk of een trekkerig gevoel geven).",
+            "Onnodige ‘extra’s’ vermijden (sterke geur, veel botanicals, intens koelende/tintelende ingrediënten).",
+            "Geschikt zijn voor vaker wassen als jij dat nodig hebt—zonder dat je haar ruw wordt of je hoofdhuid ongemakkelijk aanvoelt."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Wat een shampoo níét hoort te doen, is medische aandoeningen “behandelen”. Heb je aanhoudende of heftige jeuk, dikke schilfering, nattende huid, pijn of opvallende haaruitval, dan is het verstandig om advies te vragen bij een apotheker of dermatoloog in plaats van eindeloos te wisselen van producten."
+        },
+        {
+          "type": "h2",
+          "text": "Veelvoorkomende shampoo-triggers om op te letten (zeker als je snel reageert)"
+        },
+        {
+          "type": "p",
+          "text": "Gevoeligheid is persoonlijk, maar dit zijn bekende boosdoeners in uitspoelbare haarverzorging:"
+        },
+        {
+          "type": "h3",
+          "text": "1) Parfum (ook essentiële oliën)"
+        },
+        {
+          "type": "p",
+          "text": "Parfum is één van de meest voorkomende oorzaken van irritatie in cosmetica. Op een INCI-lijst kan het staan als “Parfum/Fragrance”, vaak gevolgd door afzonderlijke geurallergenen (zoals Limonene, Linalool, Citral, Geraniol, Eugenol, enz.). Essentiële oliën kunnen hetzelfde probleem geven: “natuurlijk” betekent niet automatisch “mild” voor een reactieve huid."
+        },
+        {
+          "type": "h3",
+          "text": "2) Heel sterke reinigingssystemen"
+        },
+        {
+          "type": "p",
+          "text": "Veel mensen verdragen allerlei surfactants prima, maar als je hoofdhuid na het wassen strak aanvoelt of prikt, kan het reinigingssysteem te ‘hard’ zijn voor jou (of was je simpelweg te vaak/te intens). Klassieke ‘sterker aanvoelende’ reinigers zijn bijvoorbeeld SLS/Sodium Lauryl Sulfate en, voor sommige mensen, SLES/Sodium Laureth Sulfate—zeker in combinatie met veel parfum of dagelijks wassen."
+        },
+        {
+          "type": "h3",
+          "text": "3) Overvolle formules (te veel actives of botanicals)"
+        },
+        {
+          "type": "p",
+          "text": "Veel plantenextracten, sterk “stimulerende” ingrediënten, heftige menthol/camfer-achtige koeling of agressieve anti-roos-achtige actives kunnen te veel zijn voor een hoofdhuid die al onrustig is. Ook als zulke ingrediënten voor anderen juist fijn zijn, doet een gevoelige hoofdhuid het vaak beter met minder variabelen—zodat je kunt achterhalen wat helpt en wat triggert."
+        },
+        {
+          "type": "h3",
+          "text": "4) Bepaalde conserveermiddelen en leave-on residu"
+        },
+        {
+          "type": "p",
+          "text": "Conserveermiddelen zijn nodig voor productveiligheid, maar gevoeligheden kúnnen voorkomen. Daarnaast kan residu van rijke conditioners, oliën, droogshampoo of stylingproducten zich ophopen en de hoofdhuid jeukerig maken—vooral bij hard water. Als je twijfelt, focus dan eerst op goed uitspoelen en slim aanbrengen (zie routine hieronder)."
+        },
+        {
+          "type": "h2",
+          "text": "Zo lees je een INCI-lijst voor een sensitive-scalp shampoo"
+        },
+        {
+          "type": "p",
+          "text": "Je hoeft geen scheikunde te studeren om goed te kunnen kiezen. Gebruik deze snelle methode:"
+        },
+        {
+          "type": "ol",
+          "items": [
+            "Begin bij parfum: staat “Parfum/Fragrance” hoog op de lijst en reageer je snel? Overweeg om ’m te laten liggen. Wil je het extra veilig houden, kies dan parfumvrij.",
+            "Scan de eerste 5–8 ingrediënten: die bepalen meestal het reinigingssysteem en het ‘gevoel’ van de shampoo.",
+            "Kijk naar ‘milder aanvoelende’ reinigers: veel zachte shampoos gebruiken kokos- of suiker-afgeleide surfactants (bijvoorbeeld glucosides of andere moderne reinigers). Geen enkel ingrediënt is een garantie, maar dit type komt vaak terug in formules voor de gevoelige hoofdhuid.",
+            "Check hoe complex de formule is: minder ‘headline’-extra’s is vaak prettiger voor een reactieve hoofdhuid.",
+            "Koop niet op marketingtermen alleen (“clean”, “natural”, “bio”), maar baseer je op de INCI en jouw persoonlijke triggerlijst."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Tip: als je irritatie probeert te achterhalen, noteer kort wat je wanneer gebruikte en wanneer klachten optraden. Gevoeligheidsreacties kunnen 1–2 dagen vertraagd zijn, waardoor ‘op gevoel gokken’ vaak misleidend is."
+        },
+        {
+          "type": "h2",
+          "text": "Welke reinigers voelen vaak milder (en waarom techniek toch belangrijk is)"
+        },
+        {
+          "type": "p",
+          "text": "Binnen de cosmetische praktijk geldt in het algemeen: shampoos met modernere, milde surfactants voelen vaak minder ontvettend dan oudere, zeer krachtige systemen. Zulke zachtere formules schuimen soms subtieler en vragen regelmatig om nét iets langer uitspoelen—en precies daar maakt je techniek een groot verschil."
+        },
+        {
+          "type": "p",
+          "text": "Onthoud ook: een shampoo kan sulfaatvrij zijn en tóch te sterk aanvoelen als hij erg geconcentreerd is, te vaak wordt gebruikt of niet goed wordt uitgespoeld. Andersom verdragen sommige mensen sulfaten zonder problemen. Je hoofdhuidcomfort over 2–3 weken is uiteindelijk de beste graadmeter."
+        },
+        {
+          "type": "h2",
+          "text": "Een praktische wasroutine voor een gevoelige hoofdhuid (inclusief hardwater-tips)"
+        },
+        {
+          "type": "p",
+          "text": "Een routine die wrijving, residu en ‘over-reinigen’ vermindert, maakt vaak het meeste verschil. Probeer dit 2–3 weken voordat je nóg meer verandert:"
+        },
+        {
+          "type": "h3",
+          "text": "Stap 1: Spoel vooraf goed uit"
+        },
+        {
+          "type": "p",
+          "text": "Spoel met lauw water minstens 30–60 seconden. Dat helpt zweet los te maken en productopbouw te verdelen, zodat je minder shampoo (en minder wrijven) nodig hebt. Heet water kan een gevoelige hoofdhuid sneller laten reageren; houd het dus aangenaam warm in plaats van heet."
+        },
+        {
+          "type": "h3",
+          "text": "Stap 2: Shampoo op de hoofdhuid, niet op de lengtes"
+        },
+        {
+          "type": "p",
+          "text": "Gebruik een kleine hoeveelheid, wrijf eerst tussen je handen (emulgeren) en breng dan aan op de hoofdhuid. Masseer zacht met je vingertoppen (niet met nagels) ongeveer 20–30 seconden. Laat het schuim langs de lengtes lopen in plaats van de haarpunten te schrobben."
+        },
+        {
+          "type": "h3",
+          "text": "Stap 3: Spoel langer uit dan je denkt"
+        },
+        {
+          "type": "p",
+          "text": "Residu kan aanvoelen als gevoeligheid: jeuk, trekkerigheid en een ‘coating’-gevoel. Spoel tot de aanzet schoon aanvoelt (zonder ruw te worden) en het water echt helder wegloopt."
+        },
+        {
+          "type": "h3",
+          "text": "Stap 4: Conditioner alleen in middenlengtes en punten"
+        },
+        {
+          "type": "p",
+          "text": "Gebruik je conditioner, houd die dan weg van de hoofdhuid zolang je aan het uitzoeken bent wat je triggert. Conditionerresidu dicht bij de aanzet is een veelvoorkomende reden waarom mensen denken dat ze ‘niet tegen shampoo kunnen’."
+        },
+        {
+          "type": "h3",
+          "text": "Hard water: irritatie verminderen zonder je routine ingewikkeld te maken"
+        },
+        {
+          "type": "p",
+          "text": "Hard water (met veel mineralen) kan reinigen lastiger maken en afzetting achterlaten die het haar dof maakt en bij sommige mensen bijdraagt aan een strak of jeukerig gevoel. Praktische stappen:"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Spoel langer en grondiger—mineralen + productresidu is een bekende combinatie.",
+            "Gebruik iets minder product en focus op de hoofdhuid; voeg alleen extra toe als het nodig is.",
+            "Overweeg af en toe een clarifying/chelating wasbeurt als je duidelijk build-up hebt (zware aanzet, haar dat niet schoon wil worden). Gebruik daarna conditioner alleen in de lengtes en ga bij de volgende wasbeurt terug naar je milde shampoo.",
+            "Ben je erg gevoelig, verander dan één ding tegelijk (dus niet in één week ook een nieuwe shampoo, clarifier, scalp serum én masker introduceren)."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Een milde optie om te overwegen (als je iets simpels zoekt voor elke dag)"
+        },
+        {
+          "type": "p",
+          "text": "Als je doel een dagelijkse shampoo is die vooral comfort prioriteert, zoek dan naar een sulfaatvrije formule op basis van milde, kokos-afgeleide reinigers en een overzichtelijke ingrediëntenlijst—zeker als parfum jou vaak triggert."
+        },
+        {
+          "type": "product",
+          "id": "sensitive-scalp-shampoo"
+        },
+        {
+          "type": "p",
+          "text": "Elira Living’s Sensitive Scalp Shampoo is gepositioneerd voor een gevoelige, snel geïrriteerde hoofdhuid met een sulfaatvrije reinigingsbasis op basis van milde, kokos-afgeleide reinigers. De formule bevat pruimenextract en lindebloesem en wordt omschreven als zacht genoeg voor dagelijks wassen. Daarnaast is hij dermatologisch getest, vegan en COSMOS Natural, met 98% van natuurlijke oorsprong."
+        },
+        {
+          "type": "p",
+          "text": "Zoals bij elk product: introduceer het bij voorkeur als je enige ‘nieuwe’ stap als je hoofdhuid nu reactief is, en geef je hoofdhuid een paar weken consistent gebruik voordat je oordeelt—tenzij je duidelijke prikkeling, branderigheid of verergerende klachten merkt; stop dan en vraag professioneel advies."
+        },
+        {
+          "type": "h2",
+          "text": "Keuzehulp: zo kies je een shampoo voor een gevoelige hoofdhuid"
+        },
+        {
+          "type": "p",
+          "text": "Gebruik deze korte flow om je keuze te versmallen:"
+        },
+        {
+          "type": "ol",
+          "items": [
+            "Reageert je hoofdhuid op veel producten of ben je nu in een ‘flare’? Kies de simpelste, mildste optie die je kunt vinden (bij voorkeur parfumvrij) en voeg niet tegelijk nieuwe scalp treatments toe.",
+            "Heeft parfum jou eerder getriggerd (hoofdpijn, jeuk, roodheid, ‘strakke’ hoofdhuid)? Kies parfumvrij of heel laag geparfumeerd; wees extra voorzichtig met essentiële oliën.",
+            "Voelt je haar nooit echt schoon met hard water? Focus eerst op uitspoeltijd en techniek; blijft build-up terugkomen, voeg dan af en toe een clarifying/chelating stap toe—maar houd je basis-shampoo mild.",
+            "Krijg je alleen klachten als je dagelijks wast? Kies een zachtere shampoo en verminder wrijving op de hoofdhuid; als jij dagelijks moet wassen (sporten, vette aanzet), kies dan bewust een ‘everyday-friendly’ formule in plaats van forceren op langere waspauzes ten koste van comfort."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Conclusie: rustig en effectief kiezen"
+        },
+        {
+          "type": "p",
+          "text": "De beste shampoo voor gevoelige hoofdhuid is meestal degene die talg en residu wegneemt zonder extra triggers toe te voegen. Begin met het vermijden van parfum als je daar gevoelig voor bent, kies een mild (vaak sulfaatvrij) reinigingssysteem en vereenvoudig je routine zodat je hoofdhuid kan kalmeren. Combineer dat met langer uitspoelen—zeker bij hard water—en je bereikt doorgaans meer dan met sterk geparfumeerde of ‘superactieve’ formules."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Is een sulfaatvrije shampoo altijd beter bij een gevoelige hoofdhuid?",
+          "a": "Niet altijd, maar veel mensen met een reactieve hoofdhuid ervaren sulfaatvrije formules als minder ontvettend. Ook je techniek (hoeveelheid, zacht masseren en goed uitspoelen) maakt vaak net zo veel verschil als de keuze van surfactants."
+        },
+        {
+          "q": "Welke ingrediënten kun je beter vermijden als je hoofdhuid snel geïrriteerd raakt?",
+          "a": "Veelvoorkomende triggers zijn parfum (“Parfum/Fragrance”) en geurallergenen (bijv. Limonene, Linalool), sterk koelende ingrediënten (zoals menthol voor sommige mensen) en heel ‘drukke’ formules met veel botanicals of actives. Jouw persoonlijke triggerlijst blijft het belangrijkst."
+        },
+        {
+          "q": "Waarom kan hard water mijn hoofdhuid verergeren, en wat kan ik doen?",
+          "a": "Hard water kan mineraalafzetting achterlaten die samen met productresidu een trekkerig of jeukerig gevoel kan geven. Spoel langer uit, houd conditioner weg van de hoofdhuid en overweeg af en toe een clarifying/chelating wasbeurt als je duidelijke build-up merkt."
+        },
+        {
+          "q": "Wanneer is het beter om te stoppen met uitproberen en een professional te raadplegen?",
+          "a": "Bij ernstige of aanhoudende jeuk, pijn, nattende huid, dikke schilfering, opvallende haaruitval of klachten die niet verbeteren nadat je je routine een paar weken hebt vereenvoudigd, is het verstandig om advies te vragen bij een apotheker of dermatoloog."
+        }
+      ]
+    },
+    "fi": {
+      "title": "Shampoo herkälle päänahalle: mitä etsiä (ja mitä ainesosia kannattaa välttää?)",
+      "description": "Käytännön opas herkälle päänahalle: tyypilliset ärsyttäjät, INCI-listan lukeminen, hellävaraiset pesuaineet ja kovan veden vinkit.",
+      "keywords": [
+        "shampoo herkälle päänahalle",
+        "herkkä päänahka shampoo",
+        "hajusteeton shampoo",
+        "INCI herkälle päänahalle",
+        "miedot tensidit shampoo",
+        "sulfaatiton shampoo",
+        "kova vesi päänahan ärsytys",
+        "päänahan kutina shampoo",
+        "shampoo sensitive scalp"
+      ],
+      "excerpt": "Shampoon valinta herkälle päänahalle on usein ärsyttäjien karsimista: hajusteet, liian vahvat pesevät aineet ja turhan “aktiivinen” koostumus. Tässä rauhallinen tarkistuslista, INCI-vinkit, pesupäivän rutiini (myös kovan veden varalle) ja helppo päätöspuu.",
+      "readMins": 6,
+      "body": [
+        {
+          "type": "p",
+          "text": "Kun etsit verkosta “shampoo herkälle päänahalle – mitä ainesosia kannattaa välttää?”, harvoin etsit ihmetuotetta. Useimmiten tavoitteena on shampoo, joka puhdistaa, mutta ei jätä päänahkaa kiristäväksi, kutisevaksi tai reagoivaksi."
+        },
+        {
+          "type": "p",
+          "text": "Käytännössä paras lähestymistapa on minimoida mahdolliset ärsyttäjät ja pitää rutiini mahdollisimman yksinkertaisena muutaman viikon ajan. Alta löydät ostajan tarkistuslistan, tavan lukea INCI-listaa ja pesutavan, joka on armollisempi herkälle päänahalle – erityisesti, jos kova vesi pahentaa oloasi."
+        },
+        {
+          "type": "h2",
+          "text": "Mitä “herkän päänahan” shampoon pitäisi tehdä (ja mitä ei)"
+        },
+        {
+          "type": "p",
+          "text": "Hyvän shampoon herkälle, helposti ärtyvälle päänahalle pitäisi:"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Puhdistaa tehokkaasti päänahasta ilman aggressiivista rasvanpoistoa.",
+            "Huuhtoutua puhtaaksi (jäämät voivat tuntua kutinana tai kiristyksenä).",
+            "Välttää turhia “ekstroja” (voimakas tuoksu, runsaat kasviuutteet, voimakkaasti viilentävät/kihelmöivät ainesosat).",
+            "Sopia tarvittaessa tiheäänkin pesuun ilman, että hius jää karheaksi tai päänahka epämukavaksi."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Sen ei kuitenkaan pidä luvata hoitavansa tai “parantavansa” lääketieteellisiä päänahan ongelmia. Jos sinulla on jatkuvaa tai voimakasta kutinaa, paksua hilseilyä/karstaa, märkimistä, kipua tai hiustenlähtöä, on järkevää keskustella apteekin henkilökunnan tai ihotautilääkärin kanssa sen sijaan, että vaihtaa tuotetta loputtomasti."
+        },
+        {
+          "type": "h2",
+          "text": "Yleiset shampoon aiheuttajat, joita kannattaa tarkkailla (varsinkin jos reagoit herkästi)"
+        },
+        {
+          "type": "p",
+          "text": "Herkkyys on yksilöllistä, mutta nämä ovat yleisiä ärsyttäjiä pois huuhdeltavissa hiustuotteissa:"
+        },
+        {
+          "type": "h3",
+          "text": "1) Hajusteet (myös eteeriset öljyt)"
+        },
+        {
+          "type": "p",
+          "text": "Hajusteet ovat yksi yleisimmistä kosmetiikan ärsytyksen aiheuttajista. INCI-listassa ne näkyvät usein muodossa “Parfum/Fragrance” ja lisäksi eriteltyinä hajusteallergeeneina (kuten Limonene, Linalool, Citral, Geraniol, Eugenol jne.). Myös eteeriset öljyt voivat aiheuttaa saman ongelman: “luonnollinen” ei automaattisesti tarkoita hellävaraista, jos iho on reaktiivinen."
+        },
+        {
+          "type": "h3",
+          "text": "2) Erittäin vahvat pesevät yhdistelmät"
+        },
+        {
+          "type": "p",
+          "text": "Monet sietävät useimpia tensidejä (pinta-aktiivisia aineita) hyvin, mutta jos päänahka kiristää, kuumottaa tai pistelee pesun jälkeen, pesupohja voi olla sinulle liian voimakas – tai saatat pestä liian usein/kovakouraisesti. Klassisia “vahvoiksi koettuja” peseviä aineita ovat SLS/Sodium Lauryl Sulfate ja joillekin myös SLES/Sodium Laureth Sulfate, erityisesti jos mukana on voimakas hajuste tai peset hyvin usein."
+        },
+        {
+          "type": "h3",
+          "text": "3) Ylikuormitetut koostumukset (liikaa aktiiveja tai kasviuutteita)"
+        },
+        {
+          "type": "p",
+          "text": "Runsaat kasviuutteet, voimakkaasti “stimuloivat” ainesosat, menthol-/kamferityyppinen selvä viilentävä tunne tai aggressiiviset hilseilyä kohdentavat aktiiviaineet voivat olla liikaa päänahalle, joka on jo valmiiksi ärtynyt. Vaikka osa näistä voi sopia monille, herkkä päänahka hyötyy usein vähäisemmistä muuttujista – silloin on helpompi huomata, mikä auttaa ja mikä laukaisee reaktion."
+        },
+        {
+          "type": "h3",
+          "text": "4) Tietyt säilöntäaineet ja hiuksiin jäävät jäämät"
+        },
+        {
+          "type": "p",
+          "text": "Säilöntäaineet ovat turvallisuuden kannalta välttämättömiä, mutta yksilöllisiä herkistymisiä voi esiintyä. Lisäksi hoitoaineiden, öljyjen, kuivashampoon ja muotoilutuotteiden jäämät voivat kertyä ja saada päänahan tuntumaan kutisevalta – etenkin, jos vesi on kovaa. Jos epäilet jäämiä, keskity ensiksi huuhtelutekniikkaan ja siihen, mihin levität tuotteita (katso rutiini alempaa)."
+        },
+        {
+          "type": "h2",
+          "text": "Näin luet INCI-listaa herkän päänahan shampoota etsiessä"
+        },
+        {
+          "type": "p",
+          "text": "Sinun ei tarvitse opetella kemiaa ulkoa ostoksia varten. Kokeile tätä nopeaa tapaa:"
+        },
+        {
+          "type": "ol",
+          "items": [
+            "Aloita hajusteista: jos “Parfum/Fragrance” on listassa korkealla ja reagoit herkästi, harkitse ohittamista. Jos haluat pelata varman päälle, valitse hajusteeton vaihtoehto.",
+            "Silmäile ensimmäiset 5–8 ainesosaa: ne kertovat yleensä pesupohjasta ja tuntumasta eniten.",
+            "Etsi “miedommiksi koettuja” peseviä aineita: monet hellävaraiset shampoot käyttävät kookos- tai sokeriperäisiä tensidejä (esimerkiksi glukosideja tai muita moderneja tensidejä). Yksittäinen ainesosa ei takaa hellävaraisuutta, mutta nämä ovat yleisiä herkän päänahan tuotteissa.",
+            "Arvioi, kuinka monimutkainen koostumus on: vähemmän näyttäviä “teho”-lisäyksiä voi olla helpompi reaktiiviselle päänahalle.",
+            "Älä osta vain markkinointisanojen perusteella (“clean”, “natural”, “bio”) – käytä INCIä ja omaa ärsyttäjälistaasi."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Vinkki: jos selvität ärsytystä, pidä yksinkertaista muistiinpanoa siitä, mitä käytit ja milloin oireet alkoivat. Herkistymisreaktio voi tulla viiveellä (jopa 1–2 päivää), jolloin pelkkä arvailu harvoin toimii."
+        },
+        {
+          "type": "h2",
+          "text": "Millaiset pesevät aineet tuntuvat usein miedommilta (ja miksi koostumus sekä huuhtelu merkitsevät)"
+        },
+        {
+          "type": "p",
+          "text": "Yleisen kosmetiikkakäytännön mukaan moderneilla, miedommiksi suunnitelluilla tensideillä formuloidut shampoot tuntuvat monilla vähemmän “riisuvilta” kuin vanhemmat, erittäin vahvat pesujärjestelmät. Nämä shampoot voivat vaahdota pehmeämmin ja vaatia hieman pidemmän huuhtelun – eli tekniikalla on oikeasti väliä."
+        },
+        {
+          "type": "p",
+          "text": "Muista myös: sulfaatiton shampoo voi silti tuntua liian vahvalta, jos se on hyvin tiivis, sitä käytetään liian usein tai sitä ei huuhdota huolellisesti. Ja toisaalta osa ihmisistä sietää sulfaatteja ilman mitään ongelmia. Paras “testi” on päänahan mukavuus 2–3 viikon johdonmukaisella käytöllä."
+        },
+        {
+          "type": "h2",
+          "text": "Käytännöllinen pesupäivän rutiini herkälle päänahalle (myös kovan veden vinkit)"
+        },
+        {
+          "type": "p",
+          "text": "Suurin ero syntyy usein rutiinista, joka vähentää hankausta, jäämiä ja ylipuhdistamista. Kokeile tätä 2–3 viikon ajan ennen kuin teet lisää muutoksia:"
+        },
+        {
+          "type": "h3",
+          "text": "Vaihe 1: Huuhtele ensin kunnolla"
+        },
+        {
+          "type": "p",
+          "text": "Huuhtele haalealla vedellä vähintään 30–60 sekuntia. Tämä auttaa irrottamaan hikeä ja levittämään mahdollisia tuotekertymiä, jolloin tarvitset vähemmän shampoota (ja vähemmän hieromista). Hyvin kuuma vesi voi saada päänahan tuntumaan reaktiivisemmalta, joten pidä lämpö miellyttävän lämpimänä, ei polttavana."
+        },
+        {
+          "type": "h3",
+          "text": "Vaihe 2: Shampoo päänahkaan, ei latvoihin"
+        },
+        {
+          "type": "p",
+          "text": "Ota pieni määrä, vaahdota se käsissä ja levitä päänahkaan. Hiero kevyesti sormenpäillä (ei kynsillä) noin 20–30 sekuntia. Anna vaahdon valua pituuksiin sen sijaan, että hankaisit latvoja."
+        },
+        {
+          "type": "h3",
+          "text": "Vaihe 3: Huuhtele pidempään kuin luulet"
+        },
+        {
+          "type": "p",
+          "text": "Jäämät voivat tuntua samalta kuin herkkyys: kutina, kiristys ja “pinnoittunut” tunne. Huuhtele, kunnes hiuspohja tuntuu puhtaalta (ei liukkaalta) ja vesi valuu kirkkaana."
+        },
+        {
+          "type": "h3",
+          "text": "Vaihe 4: Hoitoaine vain pituuksiin ja latvoihin"
+        },
+        {
+          "type": "p",
+          "text": "Jos käytät hoitoainetta, pidä se poissa päänahasta silloin, kun selvität herkkyyttä. Päänahan lähelle jäänyt hoitoaine on yleinen syy siihen, että shampooa epäillään turhaan."
+        },
+        {
+          "type": "h3",
+          "text": "Kova vesi: miten vähennät ärsytystä ilman että rutiini paisuu"
+        },
+        {
+          "type": "p",
+          "text": "Kova vesi (paljon mineraaleja) voi tehdä pesusta tehottomamman tuntuista ja jättää saostumia, jotka latistavat hiusta ja voivat joillakin lisätä kiristävää tai kutisevaa tunnetta. Käytännön keinot:"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Huuhtele pidempään ja huolellisemmin – mineraalit + tuotejäämät on yleinen yhdistelmä.",
+            "Käytä hieman vähemmän tuotetta ja kohdista se päänahkaan; lisää vain tarvittaessa.",
+            "Harkitse satunnaista syväpuhdistavaa/kelaatoivaa pesua, jos hiuspohjassa on selkeästi kertymää (juuret tuntuvat raskailta, hius ei tunnu puhdistuvan). Tee tämän jälkeen hoito pituuksiin ja palaa seuraavassa pesussa hellävaraiseen shampoohoon.",
+            "Jos olet hyvin herkkä, tee muutoksia yksi kerrallaan (älä ota samaan viikkoon uutta shampoota, syväpuhdistusta, päänahkaseerumia ja naamiota)."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Hellä vaihtoehto harkittavaksi (kun haluat yksinkertaisen, arkiystävällisen pesun)"
+        },
+        {
+          "type": "p",
+          "text": "Jos tavoitteesi on arkikäyttöön sopiva shampoo, joka painottaa mukavuutta, etsi sulfaatiton koostumus, joka rakentuu miedompien, kookosperäisten puhdistajien varaan ja jossa ainesosaluettelo on melko pelkistetty – etenkin, jos tuoksu on sinulle tyypillinen laukaiseva tekijä."
+        },
+        {
+          "type": "product",
+          "id": "sensitive-scalp-shampoo"
+        },
+        {
+          "type": "p",
+          "text": "Elira Livingin Sensitive Scalp Shampoo on suunnattu herkälle, helposti ärtyvälle päänahalle. Se on sulfaatiton ja sen puhdistuspohja perustuu miedompina pidettyihin, kookosperäisiin puhdistajiin. Koostumuksessa on luumu-uute sekä lehmuksen kukka, ja tuotetta kuvataan riittävän hellävaraiseksi päivittäiseen pesuun. Se on dermatologisesti testattu, vegaaninen ja COSMOS Natural -sertifioitu, ja sen kerrotaan olevan 98 % luonnollista alkuperää."
+        },
+        {
+          "type": "p",
+          "text": "Kuten minkä tahansa tuotteen kohdalla, jos päänahkasi on juuri nyt reaktiivinen, ota tämä ainoaksi uudeksi tuotteeksi rutiiniin. Anna parin viikon johdonmukainen käyttö ennen johtopäätöksiä – ellei ilmene selvää kirvelyä, polttelua tai pahenevaa epämukavuutta, jolloin käyttö kannattaa lopettaa ja hakea ammattilaisen neuvoa."
+        },
+        {
+          "type": "h2",
+          "text": "Päätöspuu: näin valitset shampoon herkälle päänahalle"
+        },
+        {
+          "type": "p",
+          "text": "Tämän nopean polun avulla kavennat vaihtoehtoja:"
+        },
+        {
+          "type": "ol",
+          "items": [
+            "Reagoit moniin tuotteisiin tai päänahka on nyt ärtynyt? Valitse mahdollisimman yksinkertainen ja hellä vaihtoehto (mieluiten hajusteeton) ja vältä uusien päänahkahoitojen lisäämistä samaan aikaan.",
+            "Onko tuoksu aiheuttanut aiemmin oireita (päänsärky, kutina, punoitus, “kiristävä” päänahka)? Priorisoi hajusteettomat tai hyvin miedosti hajustetut tuotteet; suhtaudu varoen eteerisiin öljyihin.",
+            "Tuntuuko, ettei hius puhdistu kovassa vedessä? Panosta ensin huuhteluaikaan ja tekniikkaan; jos kertymä jatkuu, lisää satunnainen syväpuhdistava/kelaatoiva vaihe – mutta pidä perusshampoo hellävaraisena.",
+            "Tuleeko herkkyyttä vain, kun peset päivittäin? Kokeile hellävaraisempaa shampooa ja vähennä päänahan hankausta. Jos tarvitset päivittäistä pesua (esim. urheilu, rasvoittuvat juuret), valitse arkeen sopiva shampoo mieluummin kuin venytät pesuvälejä epämukavuuden kustannuksella."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Yhteenveto: rauhallinen ja toimiva tapa ostaa"
+        },
+        {
+          "type": "p",
+          "text": "Paras shampoo herkälle päänahalle on yleensä se, joka poistaa rasvan ja jäämät lisäämättä turhia laukaisijoita. Aloita välttämällä hajusteita, jos olet herkästi reagoiva, valitse miedompi (usein sulfaatiton) pesupohja ja yksinkertaista rutiini niin, että päänahka saa rauhoittua. Yhdistä tähän erityisen huolellinen huuhtelu – varsinkin kovassa vedessä – ja pääset yleensä pidemmälle kuin jahtaamalla voimakkaasti aktivoivia tai vahvasti tuoksutettuja koostumuksia."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Onko sulfaatiton shampoo aina parempi herkälle päänahalle?",
+          "a": "Ei aina, mutta monet herkästi reagoivat kokevat sulfaatittomat koostumukset vähemmän kuivattavina. Myös käyttötapa (annostus, hellä hieronta ja huolellinen huuhtelu) vaikuttaa usein yhtä paljon kuin tensidin valinta."
+        },
+        {
+          "q": "Mitä ainesosia kannattaa välttää, jos päänahka ärtyy helposti?",
+          "a": "Tyypillisiä laukaisijoita ovat hajusteet (“Parfum/Fragrance”) ja hajusteallergeenit (esim. Limonene, Linalool), joillekin voimakkaasti viilentävät ainesosat (kuten mentoli) sekä hyvin “täyteen ladatut” koostumukset, joissa on paljon kasviuutteita tai aktiiveja. Tärkein ohjenuora on oma, toistuva ärsyttäjälistasi."
+        },
+        {
+          "q": "Miten kova vesi voi pahentaa päänahan tuntemuksia – ja mitä voin tehdä?",
+          "a": "Kova vesi voi jättää mineraalikertymiä, jotka yhdessä tuotejäämien kanssa voivat saada päänahan tuntumaan kiristävältä tai kutisevalta. Kokeile pidempää huuhtelua, pidä hoitoaine poissa päänahasta ja harkitse satunnaista syväpuhdistavaa/kelaatoivaa pesua, jos kertymä on selkeä."
+        },
+        {
+          "q": "Milloin kannattaa lopettaa kokeilu ja kysyä ammattilaiselta?",
+          "a": "Jos kutina on voimakasta tai pitkittyy, päänahka on kipeä, iho rikkoutuu/märkii, hilseily on paksua tai huomaat selkeää hiustenlähtöä – tai jos oireet eivät helpota rutiinin yksinkertaistamisesta huolimatta muutamassa viikossa – käänny apteekin henkilökunnan tai ihotautilääkärin puoleen."
+        }
+      ]
+    }
+  }
+}
