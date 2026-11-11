@@ -122,8 +122,9 @@ function validate(post, file) {
   post.image = post.image || "/assets/img/cream.jpg";
   post.date = post.date || "2026-01-01";
   post.related = Array.isArray(post.related) ? post.related : [];
-  // Backfill missing languages from English so a post is never half-rendered.
-  LANGS.forEach(L => { if (!post.i18n[L]) post.i18n[L] = post.i18n.en; });
+  // Only publish translations that actually exist. Falling back to English on
+  // localized URLs creates duplicate pages and misleading hreflang signals.
+  post.languages = LANGS.filter(L => Boolean(post.i18n[L]));
   return post;
 }
 

@@ -33,6 +33,7 @@ const TRUST_ICONS = {
 const trustRow = (L) => `<div class="pdp-trust">${(TRUST[L] || TRUST.en).map(([k, label]) =>
   `<div class="pdp-trust__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">${TRUST_ICONS[k]}</svg><span>${esc(label)}</span></div>`).join("")}</div>`;
 const JOURNAL_H = { en: "From the Journal", de: "Aus dem Journal", nl: "Uit het Journal", fi: "Journalista" };
+const RELATED_ARTICLES_H = { en: "Continue reading", de: "Weiterlesen", nl: "Lees verder", fi: "Lue seuraavaksi" };
 
 // Google Consent Mode v2 default (denied) + GTM loader — baked into every page.
 function gtmHead() {
@@ -96,6 +97,7 @@ function preloadResponsiveImage(src, sizes = "100vw") {
 const OGLOC = { en: "en_GB", de: "de_DE", nl: "nl_NL", fi: "fi_FI" };
 const LANGS = ["en", "de", "nl", "fi"];
 const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE", fi: "fi-FI" };
+const EU_COUNTRIES = ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE"];
 const ASSET_V = Date.now().toString(36); // cache-buster: changes every build
 
 const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -129,15 +131,18 @@ function url(page, L, p) {
     case "product": return P + "/products/" + p.id + ".html";
   }
 }
+function pageLanguages(page, p) {
+  return page === "post" && p ? LANGS.filter(L => p.i18n && p.i18n[L]) : LANGS;
+}
 function hreflangs(page, p) {
-  return LANGS.map(L => `<link rel="alternate" hreflang="${L}" href="${BASE + url(page, L, p)}">`).join("\n  ") +
+  return pageLanguages(page, p).map(L => `<link rel="alternate" hreflang="${L}" href="${BASE + url(page, L, p)}">`).join("\n  ") +
     `\n  <link rel="alternate" hreflang="x-default" href="${BASE + url(page, "en", p)}">`;
 }
 
 function head(L, o) {
   const canonical = BASE + url(o.page, L, o.p);
   const img = o.image || OG;
-  const altLoc = LANGS.filter(x => x !== L).map(x => `<meta property="og:locale:alternate" content="${OGLOC[x]}">`).join("\n  ");
+  const altLoc = pageLanguages(o.page, o.p).filter(x => x !== L).map(x => `<meta property="og:locale:alternate" content="${OGLOC[x]}">`).join("\n  ");
   const ld = (o.ld || []).map(j => `<script type="application/ld+json">${j}</script>`).join("\n  ");
   return `<!DOCTYPE html>
 <html lang="${L}">
@@ -330,11 +335,11 @@ const SOCIALS = [
   { name: "TikTok", url: "https://www.tiktok.com/@eliralivingeu", icon: '<path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.2v12.6a2.6 2.6 0 1 1-2.6-2.6c.27 0 .53.04.78.12v-3.3a5.9 5.9 0 1 0 5.02 5.84V9.01a7.5 7.5 0 0 0 4.36 1.4V7.2a4.28 4.28 0 0 1-3.3-1.38Z"/>' },
 ];
 function ldOrg() {
-  return JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Elira Living", url: BASE + "/", logo: LOGO, image: OG, email: "support@eliraliving.com", founder: { "@type": "Person", name: "Zeerak Ata" }, address: { "@type": "PostalAddress", streetAddress: "Lapinrinne 1b", postalCode: "00180", addressLocality: "Helsinki", addressCountry: "FI" }, areaServed: ["DE", "NL"], ...(SAMEAS.length ? { sameAs: SAMEAS } : {}) });
+  return JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Elira Living", url: BASE + "/", logo: LOGO, image: OG, email: "support@eliraliving.com", founder: { "@type": "Person", name: "Zeerak Ata" }, address: { "@type": "PostalAddress", streetAddress: "Lapinrinne 1b", postalCode: "00180", addressLocality: "Helsinki", addressCountry: "FI" }, areaServed: EU_COUNTRIES, ...(SAMEAS.length ? { sameAs: SAMEAS } : {}) });
 }
 function ldWebsite(L) { return JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Elira Living", url: BASE + "/", inLanguage: L }); }
 function ldProduct(L, p) {
-  const obj = { "@context": "https://schema.org", "@type": "Product", name: pname(L, p.id), sku: p.sku, image: productImages(L, p).map(i => BASE + i), description: pdesc(L, p.id), brand: { "@type": "Brand", name: "Elira Living" }, category: t(L, "cat." + p.category), offers: { "@type": "Offer", url: BASE + url("product", L, p), priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "Elira Living" } } };
+  const obj = { "@context": "https://schema.org", "@type": "Product", name: pname(L, p.id), sku: p.sku, image: productImages(L, p).map(i => BASE + i), description: pdesc(L, p.id), brand: { "@type": "Brand", name: "Elira Living" }, category: t(L, "cat." + p.category), offers: { "@type": "Offer", url: BASE + url("product", L, p), priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "Elira Living" }, shippingDetails: { "@type": "OfferShippingDetails", shippingRate: { "@type": "MonetaryAmount", value: "0.00", currency: "EUR" }, shippingDestination: { "@type": "DefinedRegion", addressCountry: EU_COUNTRIES } }, hasMerchantReturnPolicy: { "@type": "MerchantReturnPolicy", applicableCountry: EU_COUNTRIES, returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow", merchantReturnDays: 14, returnMethod: "https://schema.org/ReturnByMail" } } };
   return JSON.stringify(obj);
 }
 function ldBreadcrumb(L, p) {
@@ -350,7 +355,7 @@ function ldFAQ(faqs) {
 function ldArticle(L, post, c) {
   return JSON.stringify({
     "@context": "https://schema.org", "@type": "BlogPosting",
-    headline: c.title, description: c.description,
+    headline: cleanPostTitle(c.title), description: c.description,
     image: [BASE + localizedImage(L, post.image)], inLanguage: L,
     datePublished: post.date, dateModified: post.updated || post.date,
     author: { "@type": "Organization", name: "Elira Living", url: BASE + "/" },
@@ -362,7 +367,7 @@ function ldPostBreadcrumb(L, post, c) {
   return JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     { "@type": "ListItem", position: 1, name: BLOG_UI[L].crumbHome, item: BASE + url("home", L) },
     { "@type": "ListItem", position: 2, name: BLOG_UI[L].nav, item: BASE + url("blog", L) },
-    { "@type": "ListItem", position: 3, name: c.title, item: BASE + url("post", L, post) }
+    { "@type": "ListItem", position: 3, name: cleanPostTitle(c.title), item: BASE + url("post", L, post) }
   ] });
 }
 
@@ -490,12 +495,12 @@ function renderHome(L) {
 
   ${trustStrip(L)}
 
-  ${POSTS.length ? `<section class="container" style="padding:6rem 1.25rem">
+  ${postsForLocale(L).length ? `<section class="container" style="padding:6rem 1.25rem">
     <div style="text-align:center;max-width:36rem;margin:0 auto 3.5rem">
       <div class="kicker reveal" style="margin-bottom:.75rem">${esc(BLOG_UI[L].kicker)}</div>
       <h2 class="font-display reveal" style="font-size:clamp(2.2rem,5vw,3.5rem)">${T(L, "journal.homeTitle")}</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2.75rem 2rem">${POSTS.slice(0, 3).map(p => blogCard(L, p)).join("\n")}</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2.75rem 2rem">${postsForLocale(L).slice(0, 3).map(p => blogCard(L, p)).join("\n")}</div>
     <div style="text-align:center;margin-top:3.5rem" class="reveal"><a href="${P}/blog/" class="btn btn-outline">${esc(BLOG_UI[L].back)}</a></div>
   </section>` : ""}
 
@@ -553,7 +558,10 @@ function renderProduct(L, p) {
   const related = CAT.PRODUCTS.filter(x => x.id !== p.id).slice(0, 4);
   // Internal-link this product to the Journal articles that feature it (reverse
   // of each post's `related: [productId]`). Strong topical relevance for SEO + buyer education.
-  const guides = POSTS.filter(post => (post.related || []).includes(p.id)).slice(0, 3);
+  const guideProductIds = p.id === "anti-aging-duo"
+    ? new Set([p.id, "peptide-anti-aging-serum", "retinol-alternative-serum"])
+    : new Set([p.id]);
+  const guides = postsForLocale(L).filter(post => (post.related || []).some(id => guideProductIds.has(id))).slice(0, 4);
   const features = (CAT.getProduct(p.id).featureKeys || []).map(k => `<span class="tag">${esc(feat(L, k))}</span>`).join("");
   const faqs = (PRODUCT_FAQ[p.id] && (PRODUCT_FAQ[p.id][L] || PRODUCT_FAQ[p.id].en)) || [];
   const usage = (USAGE[p.id] && (USAGE[p.id][L] || USAGE[p.id].en)) || "";
@@ -593,7 +601,7 @@ function renderProduct(L, p) {
   </section>
   ${guides.length ? `<section style="margin-top:5rem;max-width:46rem">
     <h2 class="font-display" style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1.5rem">${JOURNAL_H[L]}</h2>
-    <div style="display:flex;flex-direction:column">${guides.map(g => { const gc = postContent(L, g); const gurl = url("post", L, g); return `<a href="${gurl}" class="pdp-guide"><div style="min-width:0"><div class="font-display" style="font-size:1.15rem;line-height:1.25">${esc(gc.title.split(" | ")[0])}</div><p class="muted" style="font-size:.85rem;margin:.35rem 0 0;line-height:1.55">${esc(gc.excerpt)}</p></div><span class="pdp-guide__arrow" aria-hidden="true">→</span></a>`; }).join("")}</div>
+    <div style="display:flex;flex-direction:column">${guides.map(g => { const gc = postContent(L, g); const gurl = url("post", L, g); return `<a href="${gurl}" class="pdp-guide"><div style="min-width:0"><div class="font-display" style="font-size:1.15rem;line-height:1.25">${esc(cleanPostTitle(gc.title))}</div><p class="muted" style="font-size:.85rem;margin:.35rem 0 0;line-height:1.55">${esc(gc.excerpt)}</p></div><span class="pdp-guide__arrow" aria-hidden="true">→</span></a>`; }).join("")}</div>
   </section>` : ""}
   <section style="margin-top:5rem">
     <h2 class="font-display reveal" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:2rem">${T(L, "pdp.related")}</h2>
@@ -923,7 +931,27 @@ function blogDate(L, iso) {
   if (isNaN(d)) return iso;
   return new Intl.DateTimeFormat(LOCALES[L], { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }).format(d);
 }
-function postContent(L, post) { return post.i18n[L] || post.i18n.en; }
+function hasPostLocale(post, L) { return Boolean(post && post.i18n && post.i18n[L]); }
+function postsForLocale(L) { return POSTS.filter(post => hasPostLocale(post, L)); }
+function postContent(L, post) { return post.i18n[L]; }
+function cleanPostTitle(title) {
+  return String(title || "").replace(/(?:\s*\|\s*Elira Living)+\s*$/i, "").trim();
+}
+function brandedPostTitle(title) { return cleanPostTitle(title) + " | Elira Living"; }
+
+function relatedPostsFor(L, post, limit = 3) {
+  const products = new Set(post.related || []);
+  return postsForLocale(L)
+    .filter(candidate => candidate.slug !== post.slug)
+    .map(candidate => {
+      const overlap = (candidate.related || []).filter(id => products.has(id)).length;
+      const category = candidate.category === post.category ? 1 : 0;
+      return { candidate, score: overlap * 10 + category };
+    })
+    .sort((a, b) => b.score - a.score || String(b.candidate.date).localeCompare(String(a.candidate.date)))
+    .slice(0, limit)
+    .map(entry => entry.candidate);
+}
 
 function productCallout(L, id) {
   const p = CAT.getProduct(id);
@@ -959,10 +987,10 @@ function blogCard(L, post) {
   const c = postContent(L, post);
   const purl = url("post", L, post);
   return `<article class="blog-card reveal" style="display:flex;flex-direction:column">
-  <a href="${purl}" aria-label="${escA(c.title)}"><div style="aspect-ratio:16/10;overflow:hidden;border:1px solid var(--line);background:var(--stone)">${pic(localizedImage(L, post.image), `alt="${escA(c.title)}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover"`, "(min-width:900px) 30vw, (min-width:560px) 45vw, 90vw")}</div></a>
+  <a href="${purl}" aria-label="${escA(cleanPostTitle(c.title))}"><div style="aspect-ratio:16/10;overflow:hidden;border:1px solid var(--line);background:var(--stone)">${pic(localizedImage(L, post.image), `alt="${escA(cleanPostTitle(c.title))}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover"`, "(min-width:900px) 30vw, (min-width:560px) 45vw, 90vw")}</div></a>
   <div style="padding-top:1.1rem;display:flex;flex-direction:column;flex:1">
     <div class="kicker" style="margin-bottom:.5rem">${T(L, "cat." + post.category)} · ${esc(blogDate(L, post.date))}</div>
-    <a href="${purl}" class="font-display link-underline" style="font-size:1.35rem;line-height:1.2">${esc(c.title)}</a>
+    <a href="${purl}" class="font-display link-underline" style="font-size:1.35rem;line-height:1.2">${esc(cleanPostTitle(c.title))}</a>
     <p class="muted" style="margin:.6rem 0 1rem;font-size:.9rem;line-height:1.6">${esc(c.excerpt)}</p>
     <a href="${purl}" class="link-underline" style="margin-top:auto;font-size:.85rem;color:var(--gold)">${esc(BLOG_UI[L].readMore)} →</a>
   </div>
@@ -970,10 +998,11 @@ function blogCard(L, post) {
 }
 function renderBlogIndex(L) {
   const ui = BLOG_UI[L];
-  const cards = POSTS.length
-    ? `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2.5rem 2rem;margin-top:3.5rem">${POSTS.map(p => blogCard(L, p)).join("\n")}</div>`
+  const posts = postsForLocale(L);
+  const cards = posts.length
+    ? `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2.5rem 2rem;margin-top:3.5rem">${posts.map(p => blogCard(L, p)).join("\n")}</div>`
     : `<p class="muted" style="margin-top:3rem">${esc(ui.empty)}</p>`;
-  const itemList = JSON.stringify({ "@context": "https://schema.org", "@type": "ItemList", itemListElement: POSTS.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: BASE + url("post", L, p), name: postContent(L, p).title })) });
+  const itemList = JSON.stringify({ "@context": "https://schema.org", "@type": "ItemList", itemListElement: posts.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: BASE + url("post", L, p), name: cleanPostTitle(postContent(L, p).title) })) });
   const body = `<main class="page-main"><div class="container" style="padding-bottom:6rem">
   <div style="max-width:42rem" class="reveal in">
     <div class="kicker" style="margin-bottom:.5rem">${esc(ui.kicker)}</div>
@@ -987,7 +1016,8 @@ function renderBlogIndex(L) {
 function renderPost(L, post) {
   const c = postContent(L, post);
   const ui = BLOG_UI[L];
-  const title = c.title + " | Elira Living";
+  const displayTitle = cleanPostTitle(c.title);
+  const title = brandedPostTitle(c.title);
   const faqs = c.faq || [];
   const related = (post.related || []).map(id => CAT.getProduct(id)).filter(Boolean);
   const crumbs = `<nav aria-label="Breadcrumb" class="muted" style="font-size:.8rem;margin-bottom:1.5rem"><a href="${url("home", L)}" class="link-underline">${esc(ui.crumbHome)}</a> / <a href="${url("blog", L)}" class="link-underline">${esc(ui.nav)}</a></nav>`;
@@ -1000,18 +1030,27 @@ function renderPost(L, post) {
     <h2 class="font-display reveal" style="font-size:clamp(1.5rem,3.5vw,2.1rem);margin-bottom:2rem">${esc(ui.related)}</h2>
     <div class="grid-products">${related.map(r => card(L, r)).join("\n")}</div>
   </section>` : "";
+  const relatedArticles = relatedPostsFor(L, post);
+  const relatedArticlesSection = relatedArticles.length ? `<section style="margin-top:4.5rem;max-width:46rem">
+    <h2 class="font-display" style="font-size:clamp(1.5rem,3.5vw,2.1rem);margin-bottom:1.25rem">${esc(RELATED_ARTICLES_H[L])}</h2>
+    <div style="display:flex;flex-direction:column">${relatedArticles.map(article => { const ac = postContent(L, article); return `<a href="${url("post", L, article)}" class="pdp-guide"><div style="min-width:0"><div class="font-display" style="font-size:1.15rem;line-height:1.25">${esc(cleanPostTitle(ac.title))}</div><p class="muted" style="font-size:.85rem;margin:.35rem 0 0;line-height:1.55">${esc(ac.excerpt)}</p></div><span class="pdp-guide__arrow" aria-hidden="true">→</span></a>`; }).join("")}</div>
+  </section>` : "";
+  const hasInlineProduct = (c.body || []).some(block => block.type === "product");
+  const primaryProduct = !hasInlineProduct && related[0] ? productCallout(L, related[0].id) : "";
   const body = `<main class="page-main"><article class="container" style="padding-bottom:6rem">
   <div style="max-width:44rem">
     ${crumbs}
-    <h1 class="font-display" style="font-size:clamp(2.2rem,5.5vw,3.4rem);line-height:1.05">${esc(c.title)}</h1>
+    <h1 class="font-display" style="font-size:clamp(2.2rem,5.5vw,3.4rem);line-height:1.05">${esc(displayTitle)}</h1>
     ${metaLine}
   </div>
-  <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line);margin:2rem 0 2.5rem;max-width:60rem" class="reveal">${pic(localizedImage(L, post.image), `alt="${escA(c.title)}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover"`, "(min-width:1040px) 60rem, 100vw")}</div>
+  <div style="aspect-ratio:16/8;overflow:hidden;border:1px solid var(--line);margin:2rem 0 2.5rem;max-width:60rem" class="reveal">${pic(localizedImage(L, post.image), `alt="${escA(displayTitle)}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover"`, "(min-width:1040px) 60rem, 100vw")}</div>
   <div class="blog-prose" style="max-width:44rem;font-size:1.05rem">
     ${renderBody(L, c.body)}
+    ${primaryProduct}
   </div>
   ${faqSection}
   ${relatedSection}
+  ${relatedArticlesSection}
   <div style="margin-top:3.5rem"><a href="${url("blog", L)}" class="link-underline" style="color:var(--gold)">← ${esc(ui.back)}</a></div>
 </article></main>`;
   const ld = [ldOrg(), ldArticle(L, post, c), ldPostBreadcrumb(L, post, c)];
@@ -1073,7 +1112,7 @@ function backfillLang(node, seen) {
   if (Object.prototype.hasOwnProperty.call(node, "en") && !Object.prototype.hasOwnProperty.call(node, "fi")) node.fi = node.en;
   for (const k of Object.keys(node)) backfillLang(node[k], seen);
 }
-[FAQ_H, USE_H, FREESHIP_H, TRUST, JOURNAL_H, CERT_HERO, CERT_SEC, PROD_CERTS, MFG_CERTS,
+[FAQ_H, USE_H, FREESHIP_H, TRUST, JOURNAL_H, RELATED_ARTICLES_H, CERT_HERO, CERT_SEC, PROD_CERTS, MFG_CERTS,
  LEGAL, DISCLAIMER, USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE, BLOG_UI].forEach(o => backfillLang(o));
 // Backfill any content keys missing from fi.js with the English value (keys, not
 // whole sections — fi.js carries the real translations).
@@ -1090,7 +1129,7 @@ function build() {
     write(`${L}/ingredients.html`, renderIngredients(L)); count++;
     write(`${L}/certifications.html`, renderCertifications(L)); count++;
     write(`${L}/blog/index.html`, renderBlogIndex(L)); count++;
-    POSTS.forEach(post => { write(`${L}/blog/${post.slug}.html`, renderPost(L, post)); count++; });
+    postsForLocale(L).forEach(post => { write(`${L}/blog/${post.slug}.html`, renderPost(L, post)); count++; });
     write(`${L}/cart.html`, renderCart(L)); count++;
     const okIcon = `<div style="width:4rem;height:4rem;margin:0 auto;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></svg></div>`;
     write(`${L}/success.html`, renderSimple(L, "success", "success.title", "success.lead", "success.cta", "/" + L + "/shop.html", okIcon)); count++;
@@ -1292,14 +1331,14 @@ function writeSitemap() {
       { page: "impressum", pr: "0.2" }, { page: "privacy", pr: "0.2" }, { page: "terms", pr: "0.2" }, { page: "withdrawal", pr: "0.2" }
     ];
     CAT.PRODUCTS.forEach(p => list.push({ page: "product", p, pr: "0.8" }));
-    POSTS.forEach(post => list.push({ page: "post", p: post, pr: "0.6" }));
+    postsForLocale(L).forEach(post => list.push({ page: "post", p: post, pr: "0.6" }));
     return list;
   };
   const lastmod = new Date().toISOString().slice(0, 10);
   let urls = "";
   LANGS.forEach(L => pagesFor(L).forEach(it => {
     const loc = BASE + url(it.page, L, it.p);
-    const alts = LANGS.map(x => `    <xhtml:link rel="alternate" hreflang="${x}" href="${BASE + url(it.page, x, it.p)}"/>`).join("\n") +
+    const alts = pageLanguages(it.page, it.p).map(x => `    <xhtml:link rel="alternate" hreflang="${x}" href="${BASE + url(it.page, x, it.p)}"/>`).join("\n") +
       `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE + url(it.page, "en", it.p)}"/>`;
     urls += `  <url>\n    <loc>${loc}</loc>\n${alts}\n    <lastmod>${lastmod}</lastmod>\n${it.cf ? `    <changefreq>${it.cf}</changefreq>\n` : ""}    <priority>${it.pr}</priority>\n  </url>\n`;
   }));
