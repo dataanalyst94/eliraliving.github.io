@@ -1,0 +1,17 @@
+{
+  "dateRange": {
+    "current": { "startDate": "2026-10-12", "endDate": "2026-11-08" },
+    "previous": { "startDate": "2026-09-14", "endDate": "2026-10-11" }
+  },
+  "current": [
+    { "keys": ["how to choose a facial cleanser", "https://www.eliraliving.com/en/blog/how-to-choose-a-gentle-facial-cleanser-for-everyday-use.html", "cze"], "clicks": 0, "impressions": 393, "ctr": 0, "position": 11.8 },
+    { "keys": ["peptide oder retinol", "https://www.eliraliving.com/de/blog/anti-aging-without-retinol-how-peptides-help.html", "deu"], "clicks": 1, "impressions": 156, "ctr": 0.0064, "position": 9.7 },
+    { "keys": ["what is a gentle cleanser", "https://www.eliraliving.com/en/blog/how-to-choose-a-gentle-facial-cleanser-for-everyday-use.html", "gbr"], "clicks": 0, "impressions": 74, "ctr": 0, "position": 17.2 },
+    { "keys": ["was sind peptide fur die haut", "https://www.eliraliving.com/de/blog/hexapeptide-11-the-gentle-peptide-for-firmer-looking-skin.html", "deu"], "clicks": 1, "impressions": 25, "ctr": 0.04, "position": 8.3 },
+    { "keys": ["betaine wirkung haut", "https://www.eliraliving.com/de/blog/betaine-for-dehydrated-sensitive-skin.html", "deu"], "clicks": 1, "impressions": 18, "ctr": 0.0556, "position": 6.9 }
+  ],
+  "previous": [
+    { "keys": ["how to choose a facial cleanser", "https://www.eliraliving.com/en/blog/how-to-choose-a-gentle-facial-cleanser-for-everyday-use.html", "cze"], "clicks": 0, "impressions": 210, "ctr": 0, "position": 14.2 },
+    { "keys": ["peptide oder retinol", "https://www.eliraliving.com/de/blog/anti-aging-without-retinol-how-peptides-help.html", "deu"], "clicks": 0, "impressions": 80, "ctr": 0, "position": 12.4 }
+  ]
+}

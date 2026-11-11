@@ -6,6 +6,8 @@
   "scripts": {
     "build": "node build.js",
     "gen:blog": "node tools/gen-blog.js",
+    "seo:weekly": "node tools/weekly-seo-article.mjs",
+    "seo:weekly:test": "node tools/weekly-seo-article.mjs --fixture tools/fixtures/gsc-sample.json --analyze-only",
     "serve": "npx --yes http-server . -p 8099 -c-1"
   },
   "dependencies": {
