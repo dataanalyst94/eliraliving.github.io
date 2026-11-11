@@ -1,4 +1,4 @@
-name: Weekly SEO article proposal
+name: Weekly SEO article publication
 
 on:
   schedule:
@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 concurrency:
   group: weekly-seo-article
@@ -40,57 +39,38 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Stop when an earlier weekly article still awaits review
-        id: pending
-        shell: bash
-        run: |
-          count=$(gh pr list --state open --json headRefName --jq '[.[] | select(.headRefName | startswith("seo/weekly-"))] | length')
-          if [ "$count" -gt 0 ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "A weekly SEO article PR is already open; skipping this run."
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Generate evidence-led article
-        if: steps.pending.outputs.skip != 'true'
         id: article
         env:
           SEO_SUMMARY_PATH: ${{ runner.temp }}/weekly-seo-summary.md
         run: node tools/weekly-seo-article.mjs
 
       - name: Validate site build
-        if: steps.pending.outputs.skip != 'true'
         run: node build.js
 
-      - name: Create review branch and pull request
-        if: steps.pending.outputs.skip != 'true'
-        id: pr
+      - name: Publish article to main
+        id: publish
         shell: bash
         env:
-          SUMMARY: ${{ runner.temp }}/weekly-seo-summary.md
           ARTICLE_TITLE: ${{ steps.article.outputs.title }}
         run: |
-          branch="seo/weekly-$(date -u +%F)-${{ steps.article.outputs.slug }}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b "$branch"
-          git add "assets/data/blog/${{ steps.article.outputs.slug }}.json" assets/data/seo-topic-ledger.json
-          git commit -m "Propose weekly SEO article: $ARTICLE_TITLE"
-          git push origin "$branch"
-          url=$(gh pr create --base main --head "$branch" --title "SEO article: $ARTICLE_TITLE" --body-file "$SUMMARY")
-          echo "url=$url" >> "$GITHUB_OUTPUT"
+          git add -A
+          git commit -m "Publish weekly SEO article: $ARTICLE_TITLE"
+          git push origin HEAD:main
+          echo "url=https://www.eliraliving.com/en/blog/${{ steps.article.outputs.slug }}.html" >> "$GITHUB_OUTPUT"
 
-      - name: Telegram review notice
-        if: steps.pr.outputs.url != '' && env.TELEGRAM_BOT_TOKEN != '' && env.TELEGRAM_CHAT_ID != ''
+      - name: Telegram publication notice
+        if: steps.publish.outputs.url != '' && env.TELEGRAM_BOT_TOKEN != '' && env.TELEGRAM_CHAT_ID != ''
         shell: bash
         env:
           ARTICLE_TITLE: ${{ steps.article.outputs.title }}
           ARTICLE_QUERY: ${{ steps.article.outputs.query }}
-          PR_URL: ${{ steps.pr.outputs.url }}
+          ARTICLE_URL: ${{ steps.publish.outputs.url }}
         run: |
-          text=$(printf 'ELIRA WEEKLY ARTICLE READY\n\nTitle: %s\nSearch query: %s\n\nReview and approve: %s' \
-            "$ARTICLE_TITLE" "$ARTICLE_QUERY" "$PR_URL")
+          text=$(printf 'ELIRA WEEKLY ARTICLE PUBLISHED\n\nTitle: %s\nSearch opportunity: %s\n\nArticle: %s' \
+            "$ARTICLE_TITLE" "$ARTICLE_QUERY" "$ARTICLE_URL")
           curl --fail --silent --show-error \
             --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" \
             --data-urlencode "text=$text" \
@@ -100,7 +80,7 @@ jobs:
         if: failure() && env.TELEGRAM_BOT_TOKEN != '' && env.TELEGRAM_CHAT_ID != ''
         shell: bash
         run: |
-          text='ELIRA WEEKLY ARTICLE FAILED. Open GitHub Actions to review the error.'
+          text='ELIRA WEEKLY ARTICLE FAILED. Nothing was published. Open GitHub Actions to review the error.'
           curl --fail --silent --show-error \
             --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" \
             --data-urlencode "text=$text" \

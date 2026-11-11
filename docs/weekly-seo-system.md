@@ -13,9 +13,9 @@ Every Monday, GitHub Actions:
 7. Creates native English, German, Dutch, and Finnish versions.
 8. Rejects short copy, duplicate titles, invalid products, unsupported block types, and obvious medical or unsupported claims.
 9. Builds the full site as a final validation.
-10. Opens a pull request and sends one readable Telegram message with the title, source query, and review link.
+10. Commits the validated article and rebuilt localized pages directly to `main`, then sends one readable Telegram publication message.
 
-The workflow never publishes an article directly. Merging the pull request triggers the existing site build and publication workflow.
+No manual approval or merge is required. A failed data pull, content validation, or site build stops publication and sends a Telegram failure alert.
 
 ## One-time connections
 
@@ -45,8 +45,8 @@ Optional repository variable:
 
 ## Safety and quality rules
 
-- No article is published without review.
-- An existing open weekly article PR blocks the next run, preventing a backlog and duplicate topic selection.
+- Publication is automatic only after every content and build validation passes.
+- The topic ledger prevents the next run from selecting an already-published search intent.
 - Search data informs the topic, but the article must solve a real reader problem.
 - The generator must not invent studies, statistics, customer experiences, prices, certifications, or clinical claims.
 - Each article has one contextual product link, 3-4 FAQs, Article/FAQ/Breadcrumb schema through the existing build, and automatic links to related articles.
@@ -60,4 +60,4 @@ Analyze the included Search Console fixture without using APIs:
 node tools/weekly-seo-article.mjs --fixture tools/fixtures/gsc-sample.json --analyze-only
 ```
 
-Run a full proposal manually from GitHub under **Actions > Weekly SEO article proposal > Run workflow** after all secrets are connected.
+Run one full publication manually from GitHub under **Actions > Weekly SEO article publication > Run workflow** after all secrets are connected, then set `SEO_AUTOMATION_ENABLED=true` for automatic Monday publication.
