@@ -103,5 +103,112 @@
         "growth": 4.2
       }
     ]
+  },
+  {
+    "date": "2026-11-16",
+    "slug": "peptidit-anti-age-mita-ne-ovat-mita-niilta-voi-odottaa-ja-miten-peptidis",
+    "primaryQuery": "peptidit anti-age",
+    "supportingQueries": [
+      "peptidi ihonhoito",
+      "peptidi seerumi",
+      "peptidiseerumi",
+      "peptidi seerumi aamu",
+      "peptidi seerumi ilta",
+      "peptidi seerumi voide",
+      "peptide serum"
+    ],
+    "rationale": "GSC shows clear Finnish demand for peptide anti-aging queries with weak CTR and mid/low rankings, and Google is often landing users directly on the Peptide Anti-Aging Serum product page (e.g., “peptidit anti-age” avg position ~7.8; “peptidi ihonhoito” avg position ~26.4; multiple “peptidi seerumi aamu/ilta/voide” variants). That pattern signals an intent mismatch: users want guidance (what peptides are + how to use them), not a product detail page. This is a distinct content gap that won’t cannibalize existing posts: current peptide articles focus on (1) peptides vs retinol and (2) Hexapeptide‑11 as an ingredient deep dive, while this new article targets a practical ‘how to use peptides/peptide serum’ intent (timing, routine fit, layering, expectations). It naturally supports one product (peptide-anti-aging-serum) via contextual internal linking and can also link out to existing peptide education articles for depth.",
+    "searchConsoleRange": {
+      "current": {
+        "startDate": "2026-10-17",
+        "endDate": "2026-11-13"
+      },
+      "previous": {
+        "startDate": "2026-09-19",
+        "endDate": "2026-10-16"
+      }
+    },
+    "evidence": [
+      {
+        "query": "what face wash is gentle enough for daily use?",
+        "clicks": 0,
+        "impressions": 249,
+        "ctr": 0,
+        "position": 4.578313253012048,
+        "growth": 248
+      },
+      {
+        "query": "how to choose a facial cleanser",
+        "clicks": 0,
+        "impressions": 393,
+        "ctr": 0,
+        "position": 8.844783715012722,
+        "growth": 0.5
+      },
+      {
+        "query": "e-commerce solutions helsinki",
+        "clicks": 0,
+        "impressions": 14,
+        "ctr": 0,
+        "position": 1,
+        "growth": 1.8
+      },
+      {
+        "query": "betaine",
+        "clicks": 0,
+        "impressions": 123,
+        "ctr": 0,
+        "position": 16.739837398373982,
+        "growth": 9.25
+      },
+      {
+        "query": "which gentle hydrating cleanser options should i compare if everyday use matters most to me?",
+        "clicks": 0,
+        "impressions": 21,
+        "ctr": 0,
+        "position": 4,
+        "growth": 3.2
+      },
+      {
+        "query": "what gentle face wash products are best for everyday cleansing?",
+        "clicks": 0,
+        "impressions": 58,
+        "ctr": 0,
+        "position": 8.155172413793103,
+        "growth": 0.5
+      },
+      {
+        "query": "retinol oder peptide",
+        "clicks": 0,
+        "impressions": 62,
+        "ctr": 0,
+        "position": 9.629032258064516,
+        "growth": 0.24
+      },
+      {
+        "query": "recommend a realistic routine for hard water irritating the scalp.",
+        "clicks": 0,
+        "impressions": 25,
+        "ctr": 0,
+        "position": 3.56,
+        "growth": 0.5
+      },
+      {
+        "query": "betain wirkung haut",
+        "clicks": 0,
+        "impressions": 29,
+        "ctr": 0,
+        "position": 8.379310344827587,
+        "growth": 3.142857142857143
+      },
+      {
+        "query": "i am comparing gentle hydrating cleanser options for good value for repeat use. which ones are worth considering?",
+        "clicks": 0,
+        "impressions": 28,
+        "ctr": 0,
+        "position": 5.25,
+        "growth": 2.111111111111111
+      }
+    ]
   }
 ]
