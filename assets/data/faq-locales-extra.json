@@ -1,0 +1,458 @@
+{
+  "fr": {
+    "usage": {
+      "sensitive-moisturizing-cream": "Appliquez matin et soir sur peau propre, en dernière étape de votre routine. Convient à un usage quotidien sur peau sensible.",
+      "radiant-glow-cleanser": "Massez une petite quantité sur peau humide matin et soir, puis rincez à l’eau tiède.",
+      "purifying-toner": "Après le nettoyage, appliquez sur le visage avec des mains propres ou un coton, en évitant le contour des yeux. Utilisez matin et soir.",
+      "sensitive-scalp-shampoo": "Massez sur cheveux et cuir chevelu mouillés, faites mousser, puis rincez abondamment. Assez doux pour un usage fréquent.",
+      "retinol-alternative-serum": "Nettoyez votre visage puis séchez en tapotant. Appliquez quelques gouttes sur le visage et le cou, puis massez délicatement. Utilisez matin et/ou soir, avant la crème hydratante ; évitez le contour des yeux.",
+      "peptide-anti-aging-serum": "Appliquez quelques gouttes sur peau propre puis massez délicatement. Utilisez matin et/ou soir avant la crème hydratante. Évitez le contour des yeux.",
+      "anti-aging-duo": "Utilisez le sérum alternative au rétinol le soir et le sérum aux peptides le matin (ou en alternant un soir sur deux) — les deux s’appliquent sur peau propre, légèrement humide, avant la crème hydratante. Faites un test cutané si vous les introduisez tous les deux en même temps."
+    },
+    "productFaq": {
+      "sensitive-moisturizing-cream": [
+        {
+          "q": "Ce soin hydratant convient-il aux peaux sensibles ou réactives ?",
+          "a": "Oui. Sans parfum, vegan et certifié ECOCERT COSMOS Organic, il est formulé pour apaiser et renforcer les peaux sensibles, facilement irritées."
+        },
+        {
+          "q": "Contient-il du parfum ou des huiles essentielles ?",
+          "a": "Non — il est totalement sans parfum, ce qui en fait un excellent choix pour les peaux réactives, sujettes aux allergies ou à l’eczéma."
+        },
+        {
+          "q": "Est-il vegan et cruelty-free ?",
+          "a": "Oui. Chaque produit Elira Living est 100% vegan, cruelty-free et fabriqué dans l’UE."
+        }
+      ],
+      "radiant-glow-cleanser": [
+        {
+          "q": "À quel type de peau ce nettoyant visage est-il destiné ?",
+          "a": "À tous les types de peau, y compris normales et grasses. Il élimine en douceur les impuretés et l’excès de sébum sans dessécher ni laisser la peau qui tiraille."
+        },
+        {
+          "q": "Est-ce un nettoyant naturel et vegan ?",
+          "a": "Oui — vegan et certifié ECOCERT COSMOS Natural, formulé avec des ingrédients soigneusement sélectionnés."
+        },
+        {
+          "q": "À quelle fréquence l’utiliser ?",
+          "a": "Chaque jour, matin et soir. Massez sur peau humide puis rincez."
+        }
+      ],
+      "purifying-toner": [
+        {
+          "q": "Cette lotion tonique aide-t-elle les peaux grasses ou à imperfections ?",
+          "a": "Oui. Elle aide à désincruster les pores de l’excès de sébum et des impuretés et à rééquilibrer les peaux grasses et mixtes, grâce à l’acide salicylique associé à de l’eau de lavande bio et du concombre."
+        },
+        {
+          "q": "La lotion tonique est-elle sans parfum ?",
+          "a": "Oui, aucun parfum n’est ajouté. Elle contient une petite quantité d’alcool typique des lotions purifiantes, équilibrée par la glycérine et le concombre pour garder la peau souple."
+        },
+        {
+          "q": "Comment utiliser une lotion tonique ?",
+          "a": "Après le nettoyage, appliquez sur le visage avec des mains propres ou un coton, en évitant les yeux, puis poursuivez avec votre crème hydratante."
+        }
+      ],
+      "sensitive-scalp-shampoo": [
+        {
+          "q": "Ce shampooing est-il adapté à un cuir chevelu sensible ou qui démange ?",
+          "a": "Oui. C’est une formule douce, testée dermatologiquement, conçue pour les cuirs chevelus délicats et facilement irrités, adaptée à tous les types de cheveux."
+        },
+        {
+          "q": "Est-il vegan et doux sans sulfates agressifs ?",
+          "a": "Oui — vegan, certifié ECOCERT COSMOS Natural, et formulé à partir d’agents lavants doux choisis pour les cuirs chevelus sensibles."
+        },
+        {
+          "q": "Puis-je l’utiliser tous les jours ?",
+          "a": "Oui, il est suffisamment doux pour un usage fréquent. Massez sur cheveux et cuir chevelu mouillés, faites mousser, puis rincez."
+        }
+      ],
+      "retinol-alternative-serum": [
+        {
+          "q": "Est-ce un vrai rétinol ?",
+          "a": "Non — c’est une alternative au rétinol peau sensible, douce et d’origine végétale, basée sur 2% de Bidens Pilosa, pour un effet lissant façon rétinol sans irritation, adaptée aux peaux sensibles comme à tous les types de peau."
+        },
+        {
+          "q": "Comment et quand utiliser le sérum ?",
+          "a": "Appliquez quelques gouttes sur peau propre matin et/ou soir, avant votre crème hydratante, puis massez délicatement. Évitez le contour des yeux."
+        },
+        {
+          "q": "Est-il vegan et certifié ?",
+          "a": "Oui — 100% vegan et certifié COSMOS Natural par ECOCERT Greenlife, avec 99% d’ingrédients d’origine naturelle et de l’acide hyaluronique pour l’hydratation."
+        }
+      ],
+      "anti-aging-duo": [
+        {
+          "q": "Que contient le Duo Anti-Âge ?",
+          "a": "Un sérum alternative au rétinol 30ml format standard et un sérum aux peptides anti-âge 30ml format standard — les mêmes produits vendus à l’unité, réunis avec 10% de réduction."
+        },
+        {
+          "q": "Puis-je utiliser les deux sérums ensemble ?",
+          "a": "Oui. Beaucoup de personnes utilisent le sérum alternative au rétinol le soir et le sérum aux peptides le matin, ou les alternent. Faites un test cutané si vous découvrez l’un ou l’autre."
+        },
+        {
+          "q": "Le coffret est-il vegan et certifié COSMOS ?",
+          "a": "Oui — les deux sérums sont 100% vegan et certifiés ECOCERT COSMOS Natural, fabriqués dans l’UE."
+        }
+      ]
+    },
+    "ingredients": [
+      {
+        "name": "Eau florale de lavande",
+        "inci": "Lavandula Angustifolia Flower Water",
+        "what": "Eau florale bio distillée à partir de lavande.",
+        "why": "Apaise et tonifie la peau et donne à notre lotion tonique sa base douce, d’origine naturelle."
+      },
+      {
+        "name": "Extrait de concombre",
+        "inci": "Cucumis Sativus Fruit Extract",
+        "what": "Extrait bio de fruit de concombre.",
+        "why": "Hydrate et rafraîchit, aidant à rééquilibrer les peaux grasses et mixtes."
+      },
+      {
+        "name": "Acide salicylique",
+        "inci": "Salicylic Acid",
+        "what": "Un acide bêta-hydroxylé (BHA).",
+        "why": "Aide en douceur à éliminer l’excès de sébum et à maintenir les pores nets, pour une peau visiblement plus fraîche et plus nette."
+      },
+      {
+        "name": "Glycérine",
+        "inci": "Glycerin",
+        "what": "Humectant d’origine végétale, fabriqué à partir d’ingrédients bio.",
+        "why": "Attire et retient l’hydratation pour une peau souple, sans sensation de tiraillement."
+      },
+      {
+        "name": "Bétaïne",
+        "inci": "Betaine",
+        "what": "Agent hydratant d’origine naturelle.",
+        "why": "Apporte une hydratation douce et améliore le confort de la peau sans effet lourd."
+      },
+      {
+        "name": "Extrait de prune",
+        "inci": "Prunus Domestica Fruit Extract",
+        "what": "Extrait bio de fruit de prune.",
+        "why": "Aide à conditionner les cheveux et le cuir chevelu dans notre shampooing cuir chevelu sensible."
+      },
+      {
+        "name": "Extrait de fleur de tilleul",
+        "inci": "Tilia Cordata Flower Extract",
+        "what": "Extrait bio de fleurs de tilleul (lime tree).",
+        "why": "Apaise le cuir chevelu et contribue à une sensation de confort et d’équilibre."
+      },
+      {
+        "name": "Coco-Glucoside",
+        "inci": "Coco-Glucoside",
+        "what": "Agent lavant doux dérivé de sucres et de coco.",
+        "why": "Nettoie en douceur — choisi pour les cuirs chevelus sensibles plutôt que des détergents agressifs."
+      }
+    ],
+    "ingredientsPage": {
+      "title": "À propos de nos ingrédients",
+      "lead": "Chaque formule Elira Living est vegan et certifiée ECOCERT COSMOS. Voici ce qu’elles contiennent — et pourquoi.",
+      "intro": "Nous pensons que vous devez savoir exactement ce que vous appliquez sur votre peau et vos cheveux. Ci-dessous, nous expliquons en termes simples les ingrédients clés de notre gamme. Les listes INCI complètes sont imprimées sur chaque produit."
+    }
+  },
+  "it": {
+    "usage": {
+      "sensitive-moisturizing-cream": "Applica mattina e sera sulla pelle detersa, come ultimo step della routine. Adatta all’uso quotidiano sulla pelle sensibile.",
+      "radiant-glow-cleanser": "Massaggia una piccola quantità sulla pelle umida mattina e sera, poi risciacqua con acqua tiepida.",
+      "purifying-toner": "Dopo la detersione, applica sul viso con le mani pulite o con un dischetto di cotone, evitando il contorno occhi. Usalo mattina e sera.",
+      "sensitive-scalp-shampoo": "Massaggia su capelli e cute bagnati, fai schiumare e poi risciacqua accuratamente. Delicato anche per un uso frequente.",
+      "retinol-alternative-serum": "Detergi il viso e tampona per asciugare. Applica poche gocce su viso e collo e massaggia delicatamente. Usa mattina e/o sera, prima della crema idratante; evita il contorno occhi.",
+      "peptide-anti-aging-serum": "Applica poche gocce sulla pelle detersa e massaggia delicatamente. Usa mattina e/o sera prima della crema idratante. Evita il contorno occhi.",
+      "anti-aging-duo": "Usa il Retinol-Alternative Serum la sera e il Peptide Anti-Aging Serum al mattino (oppure alterna le sere): entrambi si applicano su pelle pulita, leggermente umida, prima della crema idratante. Se li introduci insieme, esegui prima un patch test."
+    },
+    "productFaq": {
+      "sensitive-moisturizing-cream": [
+        {
+          "q": "Questa crema idratante è adatta alla pelle sensibile o reattiva?",
+          "a": "Sì. È senza profumo, vegana e certificata ECOCERT COSMOS Organic, formulata per lenire e rinforzare la pelle sensibile e facilmente irritabile."
+        },
+        {
+          "q": "Contiene profumo o oli essenziali?",
+          "a": "No: è completamente senza profumo, quindi è un’ottima scelta per pelle reattiva, soggetta ad allergie o con tendenza all’eczema."
+        },
+        {
+          "q": "È vegana e cruelty-free?",
+          "a": "Sì. Ogni prodotto Elira Living è 100% vegano, cruelty-free e realizzato nell’UE."
+        }
+      ],
+      "radiant-glow-cleanser": [
+        {
+          "q": "Per quale tipo di pelle è indicato questo detergente viso?",
+          "a": "Per tutti i tipi di pelle, incluse normale e grassa. Rimuove delicatamente impurità e sebo in eccesso senza seccare né lasciare la pelle che tira."
+        },
+        {
+          "q": "È un detergente naturale e vegano?",
+          "a": "Sì: vegano e certificato ECOCERT COSMOS Natural, formulato con ingredienti selezionati da filiere attente."
+        },
+        {
+          "q": "Con quale frequenza dovrei usarlo?",
+          "a": "Ogni giorno, mattina e sera. Massaggia sulla pelle umida e risciacqua."
+        }
+      ],
+      "purifying-toner": [
+        {
+          "q": "Questo tonico aiuta in caso di pelle grassa o a tendenza imperfezioni?",
+          "a": "Sì. Aiuta a liberare i pori da sebo in eccesso e impurità e contribuisce a riequilibrare la pelle grassa e mista, grazie all’acido salicilico con acqua di lavanda biologica e cetriolo."
+        },
+        {
+          "q": "Il tonico è senza profumo?",
+          "a": "Sì, non contiene profumo aggiunto. Contiene una piccola quantità di alcol tipica dei tonici purificanti, bilanciata con glicerina e cetriolo per mantenere la pelle morbida e confortevole."
+        },
+        {
+          "q": "Come si usa un tonico?",
+          "a": "Dopo la detersione, applicalo sul viso con le mani pulite o con un dischetto di cotone, evitando gli occhi, poi prosegui con la crema idratante."
+        }
+      ],
+      "sensitive-scalp-shampoo": [
+        {
+          "q": "Questo shampoo è indicato per cute sensibile o che prude?",
+          "a": "Sì. È una formula delicata, dermatologicamente testata, pensata per cute delicata e facilmente irritabile e adatta a tutti i tipi di capelli."
+        },
+        {
+          "q": "È vegano e delicato come tensioattivi?",
+          "a": "Sì: vegano, certificato ECOCERT COSMOS Natural e basato su detergenti delicati selezionati per le cute sensibili."
+        },
+        {
+          "q": "Posso usarlo tutti i giorni?",
+          "a": "Sì, è abbastanza delicato per un uso frequente. Massaggia su capelli e cute bagnati, fai schiumare e poi risciacqua."
+        }
+      ],
+      "retinol-alternative-serum": [
+        {
+          "q": "È un vero retinolo?",
+          "a": "No: è un’alternativa al retinolo pelle sensibile, delicata e di origine vegetale, basata su 2% Bidens Pilosa, per benefici leviganti simili al retinolo senza irritazione, quindi adatta a pelle sensibile e a tutti i tipi di pelle."
+        },
+        {
+          "q": "Come e quando si usa il siero?",
+          "a": "Applica poche gocce sulla pelle detersa mattina e/o sera, prima della crema idratante, e massaggia delicatamente. Evita il contorno occhi."
+        },
+        {
+          "q": "È vegano e certificato?",
+          "a": "Sì: 100% vegano e certificato COSMOS Natural da ECOCERT Greenlife, con il 99% di ingredienti di origine naturale e acido ialuronico per l’idratazione."
+        }
+      ],
+      "anti-aging-duo": [
+        {
+          "q": "Cosa include l’Anti-Aging Duo?",
+          "a": "Un Retinol-Alternative Serum formato pieno da 30ml e un Peptide Anti-Aging Serum formato pieno da 30ml: gli stessi prodotti venduti singolarmente, in bundle con il 10% di sconto."
+        },
+        {
+          "q": "Posso usare entrambi i sieri insieme?",
+          "a": "Sì. Molte persone usano il Retinol-Alternative Serum la sera e il siero ai peptidi Peptide Anti-Aging Serum al mattino, oppure li alternano. Se non hai mai usato uno dei due, fai prima un patch test."
+        },
+        {
+          "q": "Il bundle è vegano e certificato COSMOS?",
+          "a": "Sì: entrambi i sieri sono 100% vegani e certificati ECOCERT COSMOS Natural, realizzati nell’UE."
+        }
+      ]
+    },
+    "ingredients": [
+      {
+        "name": "Acqua di Fiori di Lavanda",
+        "inci": "Lavandula Angustifolia Flower Water",
+        "what": "Acqua floreale biologica distillata dalla lavanda.",
+        "why": "Lenisce e tonifica la pelle e dona al nostro tonico una base delicata di origine naturale."
+      },
+      {
+        "name": "Estratto di Cetriolo",
+        "inci": "Cucumis Sativus Fruit Extract",
+        "what": "Estratto biologico del frutto di cetriolo.",
+        "why": "Idrata e rinfresca, aiutando a riequilibrare la pelle grassa e mista."
+      },
+      {
+        "name": "Acido Salicilico",
+        "inci": "Salicylic Acid",
+        "what": "Un beta-idrossiacido (BHA).",
+        "why": "Aiuta a rimuovere delicatamente il sebo in eccesso e a mantenere i pori liberi, per una pelle dall’aspetto più fresco e pulito."
+      },
+      {
+        "name": "Glicerina",
+        "inci": "Glycerin",
+        "what": "Un umettante di origine vegetale, ottenuto utilizzando ingredienti biologici.",
+        "why": "Attira e trattiene l’idratazione per una pelle morbida ed elastica, senza sensazione di “pelle che tira”."
+      },
+      {
+        "name": "Betaina",
+        "inci": "Betaine",
+        "what": "Un agente idratante di origine naturale.",
+        "why": "Aggiunge un’idratazione delicata e migliora la sensorialità sulla pelle senza appesantire."
+      },
+      {
+        "name": "Estratto di Prugna",
+        "inci": "Prunus Domestica Fruit Extract",
+        "what": "Estratto biologico del frutto di prugna.",
+        "why": "Aiuta a prendersi cura di capelli e cute nel nostro shampoo cute sensibile."
+      },
+      {
+        "name": "Estratto di Fiori di Tiglio",
+        "inci": "Tilia Cordata Flower Extract",
+        "what": "Estratto biologico dei fiori di tiglio.",
+        "why": "Lenisce la cute, favorendo una sensazione di comfort ed equilibrio."
+      },
+      {
+        "name": "Coco-Glucoside",
+        "inci": "Coco-Glucoside",
+        "what": "Un detergente delicato derivato da zuccheri e cocco.",
+        "why": "Detergere con delicatezza: scelto per le cute sensibili al posto di detergenti aggressivi."
+      }
+    ],
+    "ingredientsPage": {
+      "title": "Scopri i nostri ingredienti",
+      "lead": "Ogni formula Elira Living è vegana e certificata ECOCERT COSMOS. Ecco cosa contiene — e perché.",
+      "intro": "Crediamo che tu debba sapere esattamente cosa applichi su pelle e capelli. Qui sotto spieghiamo, in modo semplice, gli ingredienti chiave della nostra gamma. Gli INCI completi sono stampati su ogni prodotto."
+    }
+  },
+  "cs": {
+    "usage": {
+      "sensitive-moisturizing-cream": "Nanášejte ráno i večer na čistou pleť jako poslední krok rutiny. Vhodné pro každodenní použití i na citlivou pleť.",
+      "radiant-glow-cleanser": "Malé množství vmasírujte ráno i večer do navlhčené pleti, poté opláchněte vlažnou vodou.",
+      "purifying-toner": "Po čištění naneste na pleť čistýma rukama nebo vatovým tamponkem, vyhněte se oblasti očí. Používejte ráno i večer.",
+      "sensitive-scalp-shampoo": "Vmasírujte do mokrých vlasů a pokožky hlavy, napěňte a poté důkladně opláchněte. Dostatečně jemný i pro časté mytí.",
+      "retinol-alternative-serum": "Očistěte pleť a jemně osušte. Naneste pár kapek na obličej a krk a šetrně vmasírujte. Používejte ráno a/nebo večer, před krémem; vyhněte se oblasti očí.",
+      "peptide-anti-aging-serum": "Naneste několik kapek na čistou pleť a jemně vmasírujte. Používejte ráno a/nebo večer před krémem. Vyhněte se oblasti očí.",
+      "anti-aging-duo": "Večer použijte Retinol-Alternative Serum a ráno Peptide Anti-Aging Serum (nebo je střídejte po večerech) — oba aplikujte na čistou, lehce navlhčenou pleť před krémem. Pokud je zařazujete oba najednou, nejprve proveďte patch test."
+    },
+    "productFaq": {
+      "sensitive-moisturizing-cream": [
+        {
+          "q": "Je tento hydratační krém vhodný pro citlivou nebo reaktivní pleť?",
+          "a": "Ano. Je bez parfemace, veganský a certifikovaný ECOCERT COSMOS Organic. Je vyvinutý tak, aby zklidňoval a posiloval citlivou pleť se sklonem k podráždění."
+        },
+        {
+          "q": "Obsahuje parfemaci nebo esenciální oleje?",
+          "a": "Ne — je zcela bez parfemace, takže je vhodnou volbou pro reaktivní pleť, pleť se sklonem k alergiím nebo k ekzému."
+        },
+        {
+          "q": "Je veganský a cruelty-free?",
+          "a": "Ano. Každý produkt Elira Living je 100% veganský, cruelty-free a vyrobený v EU."
+        }
+      ],
+      "radiant-glow-cleanser": [
+        {
+          "q": "Pro jaký typ pleti je tento čisticí gel na obličej určený?",
+          "a": "Pro všechny typy pleti, včetně normální a mastné. Šetrně odstraňuje nečistoty a přebytečný kožní maz bez vysušování a nepříjemného pnutí."
+        },
+        {
+          "q": "Je to přírodní, veganský čisticí produkt?",
+          "a": "Ano — veganský a certifikovaný ECOCERT COSMOS Natural, vyrobený z pečlivě získávaných ingrediencí."
+        },
+        {
+          "q": "Jak často ho mám používat?",
+          "a": "Každý den, ráno i večer. Vmasírujte do navlhčené pleti a opláchněte."
+        }
+      ],
+      "purifying-toner": [
+        {
+          "q": "Pomáhá toto tonikum mastné pleti nebo pleti se sklonem k nedokonalostem?",
+          "a": "Ano. Pomáhá čistit póry od přebytečného mazu a nečistot a podporuje rovnováhu mastné i smíšené pleti díky kyselině salicylové v kombinaci s bio levandulovou vodou a okurkou."
+        },
+        {
+          "q": "Je tonikum bez parfemace?",
+          "a": "Ano, neobsahuje přidanou parfemaci. Obsahuje malé množství alkoholu typické pro čisticí tonika, vyvážené glycerinem a okurkou, aby pleť zůstala jemná a komfortní."
+        },
+        {
+          "q": "Jak se tonikum používá?",
+          "a": "Po čištění naneste na pleť čistýma rukama nebo vatovým tamponkem, vyhněte se očím, a poté pokračujte hydratačním krémem."
+        }
+      ],
+      "sensitive-scalp-shampoo": [
+        {
+          "q": "Je tento šampon vhodný pro citlivou nebo svědivou pokožku hlavy?",
+          "a": "Ano. Jde o jemné, dermatologicky testované složení určené pro křehkou, snadno podrážděnou pokožku hlavy a vhodné pro všechny typy vlasů."
+        },
+        {
+          "q": "Je veganský a šetrný i bez agresivních sulfátů?",
+          "a": "Ano — veganský, certifikovaný ECOCERT COSMOS Natural a založený na jemných mycích látkách zvolených pro citlivou pokožku hlavy."
+        },
+        {
+          "q": "Mohu ho používat každý den?",
+          "a": "Ano, je dostatečně jemný i pro časté použití. Vmasírujte do mokrých vlasů a pokožky hlavy, napěňte a poté opláchněte."
+        }
+      ],
+      "retinol-alternative-serum": [
+        {
+          "q": "Je to skutečný retinol?",
+          "a": "Ne — je to jemná, rostlinná alternativa retinolu pro citlivou pleť i všechny typy pleti, založená na 2% Bidens Pilosa. Nabízí retinolu podobné vyhlazující účinky bez typického podráždění."
+        },
+        {
+          "q": "Jak a kdy sérum používat?",
+          "a": "Naneste několik kapek na čistou pleť ráno a/nebo večer, před hydratačním krémem, a jemně vmasírujte. Vyhněte se oblasti očí."
+        },
+        {
+          "q": "Je veganské a certifikované?",
+          "a": "Ano — 100% veganské a COSMOS Natural certifikované organizací ECOCERT Greenlife, s 99 % ingrediencí přírodního původu a kyselinou hyaluronovou pro hydrataci."
+        }
+      ],
+      "anti-aging-duo": [
+        {
+          "q": "Co obsahuje Anti-Aging Duo?",
+          "a": "Jedno plné balení 30 ml Retinol-Alternative Serum a jedno plné balení 30 ml Peptide Anti-Aging Serum — stejné produkty, které se prodávají i samostatně, v balíčku se slevou 10 %."
+        },
+        {
+          "q": "Mohu používat obě séra současně?",
+          "a": "Ano. Mnoho lidí používá Retinol-Alternative Serum večer a Peptide Anti-Aging Serum ráno, případně je střídá. Pokud s některým z nich teprve začínáte, nejprve proveďte patch test."
+        },
+        {
+          "q": "Je balíček veganský a COSMOS certifikovaný?",
+          "a": "Ano — obě séra jsou 100% veganská a certifikovaná ECOCERT COSMOS Natural, vyrobená v EU."
+        }
+      ]
+    },
+    "ingredients": [
+      {
+        "name": "Levandulová květová voda",
+        "inci": "Lavandula Angustifolia Flower Water",
+        "what": "Bio květová voda destilovaná z levandule.",
+        "why": "Zklidňuje a tonizuje pleť a tvoří jemný, přirozeně získaný základ našeho tonika."
+      },
+      {
+        "name": "Okurkový extrakt",
+        "inci": "Cucumis Sativus Fruit Extract",
+        "what": "Bio extrakt z plodu okurky.",
+        "why": "Hydratuje a osvěžuje a pomáhá vyrovnávat mastnou a smíšenou pleť."
+      },
+      {
+        "name": "Kyselina salicylová",
+        "inci": "Salicylic Acid",
+        "what": "Beta-hydroxykyselina (BHA).",
+        "why": "Šetrně odstraňuje přebytečný maz a pomáhá udržovat póry čisté pro svěžejší a jasnější vzhled pleti."
+      },
+      {
+        "name": "Glycerin",
+        "inci": "Glycerin",
+        "what": "Rostlinný humektant vyrobený z bio ingrediencí.",
+        "why": "Přitahuje a udržuje vlhkost, takže pleť zůstává vláčná a bez pocitu pnutí."
+      },
+      {
+        "name": "Betaine",
+        "inci": "Betaine",
+        "what": "Přirozeně získaná hydratační složka.",
+        "why": "Dodává jemnou hydrataci a zlepšuje pocit na pleti bez zatížení."
+      },
+      {
+        "name": "Švestkový extrakt",
+        "inci": "Prunus Domestica Fruit Extract",
+        "what": "Bio extrakt z plodu švestky.",
+        "why": "Pomáhá pečovat o vlasy i pokožku hlavy v našem šamponu pro citlivou pokožku hlavy."
+      },
+      {
+        "name": "Lípový květový extrakt",
+        "inci": "Tilia Cordata Flower Extract",
+        "what": "Bio extrakt z květu lípy.",
+        "why": "Zklidňuje pokožku hlavy a podporuje příjemný, vyrovnaný pocit."
+      },
+      {
+        "name": "Coco-Glucoside",
+        "inci": "Coco-Glucoside",
+        "what": "Jemná mycí složka z cukru a kokosu.",
+        "why": "Čistí šetrně — zvolená pro citlivou pokožku hlavy místo agresivních detergentů."
+      }
+    ],
+    "ingredientsPage": {
+      "title": "O našich ingrediencích",
+      "lead": "Každá receptura Elira Living je veganská a certifikovaná ECOCERT COSMOS. Tady najdete, co obsahuje — a proč.",
+      "intro": "Věříme, že byste měli přesně vědět, co dáváte na pleť a do vlasů. Níže srozumitelně vysvětlujeme klíčové ingredience napříč celou řadou. Kompletní INCI seznamy jsou uvedené na každém produktu."
+    }
+  }
+}
