@@ -51,26 +51,42 @@ Return JSON only, with exactly the same keys, nesting, and array shape as the su
 - Do not invent benefits, clinical evidence, delivery promises, discounts, prices, reviews, or certifications.
 - Keep meta titles concise and search-focused. Use these phrases naturally where relevant: ${market.seeds.join(", ")}.
 - Preserve placeholders such as {amount} exactly.`;
-  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-      "Content-Type": "application/json",
-      "HTTP-Referer": "https://www.eliraliving.com",
-      "X-Title": "Elira Living storefront localization",
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      temperature: 0.15,
-      max_tokens: 24000,
-      response_format: { type: "json_object" },
-      messages: [{ role: "system", content: system }, { role: "user", content: JSON.stringify(source) }],
-    }),
-  });
-  if (!response.ok) throw new Error(`${lang}: OpenRouter failed (${response.status}): ${await response.text()}`);
-  const body = await response.json();
-  const parsed = parseJson(body.choices?.[0]?.message?.content || "");
-  return parsed[label] || parsed;
+  const sourceJson = JSON.stringify(source);
+  const maxTokens = Math.min(12000, Math.max(4000, Math.ceil(sourceJson.length / 2)));
+  for (let attempt = 1; attempt <= 4; attempt += 1) {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://www.eliraliving.com",
+        "X-Title": "Elira Living storefront localization",
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        temperature: 0.15,
+        max_tokens: maxTokens,
+        response_format: { type: "json_object" },
+        messages: [{ role: "system", content: system }, { role: "user", content: sourceJson }],
+      }),
+    });
+    if (response.ok) {
+      const body = await response.json();
+      const parsed = parseJson(body.choices?.[0]?.message?.content || "");
+      return parsed[label] || parsed;
+    }
+    const errorText = await response.text();
+    const retryable = response.status === 429 || response.status >= 500 ||
+      (response.status === 402 && errorText.includes("in_flight_budget_exhausted"));
+    if (!retryable || attempt === 4) {
+      throw new Error(`${lang}: OpenRouter failed (${response.status}): ${errorText}`);
+    }
+    const retryAfter = Number(response.headers.get("retry-after")) || 120;
+    const waitMs = Math.max(5000, Math.min(retryAfter * 1000, 180000));
+    console.log(`${lang} ${label}: OpenRouter busy; retrying in ${Math.round(waitMs / 1000)}s (attempt ${attempt + 1}/4)`);
+    await new Promise(resolve => setTimeout(resolve, waitMs));
+  }
+  throw new Error(`${lang}: OpenRouter retry loop ended unexpectedly.`);
 }
 
 function leafPaths(value, prefix = "") {
