@@ -9,8 +9,10 @@ const require = createRequire(import.meta.url);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONTENT_DIR = path.join(ROOT, "assets", "content");
 const BLOG_UI_FILE = path.join(ROOT, "assets", "data", "blog-ui-extra.json");
+const FAQ_EXTRA_FILE = path.join(ROOT, "assets", "data", "faq-locales-extra.json");
 const EN = require(path.join(CONTENT_DIR, "en.js"));
 const { BLOG_UI } = require(path.join(ROOT, "assets", "data", "blog-content.js"));
+const { USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE } = require(path.join(ROOT, "assets", "data", "faq-content.js"));
 const MODEL = process.env.LOCALE_MODEL || process.env.SEO_MODEL || "openai/gpt-5.1";
 
 const TARGETS = {
@@ -38,19 +40,17 @@ function parseJson(raw) {
   }
 }
 
-async function localize(lang, market) {
+async function localizeObject(lang, market, label, source) {
   if (!process.env.OPENROUTER_API_KEY) throw new Error("OPENROUTER_API_KEY is not configured.");
-  const system = `You are Elira Living's senior ecommerce localization editor. Localize the supplied storefront JSON into ${market.name}.
+  const system = `You are Elira Living's senior ecommerce localization editor. Localize the supplied ${label} JSON into ${market.name}.
 
-Return JSON only with exactly two top-level keys: content and blogUi.
+Return JSON only, with exactly the same keys, nesting, and array shape as the supplied JSON. Do not add a wrapper object.
 - Preserve every object key, nesting level, array shape, product id, number, percentage, certification, placeholder, and factual claim.
 - Translate every customer-visible string. Never leave English except proper names, INCI ingredients, certification names, and unavoidable payment/product terms.
 - Write natural premium beauty ecommerce copy, not literal translation.
 - Do not invent benefits, clinical evidence, delivery promises, discounts, prices, reviews, or certifications.
 - Keep meta titles concise and search-focused. Use these phrases naturally where relevant: ${market.seeds.join(", ")}.
-- Preserve placeholders such as {amount} exactly.
-- content.lang must be ${lang}.`;
-  const payload = { content: EN, blogUi: BLOG_UI.en };
+- Preserve placeholders such as {amount} exactly.`;
   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -62,14 +62,15 @@ Return JSON only with exactly two top-level keys: content and blogUi.
     body: JSON.stringify({
       model: MODEL,
       temperature: 0.15,
-      max_tokens: 20000,
+      max_tokens: 24000,
       response_format: { type: "json_object" },
-      messages: [{ role: "system", content: system }, { role: "user", content: JSON.stringify(payload) }],
+      messages: [{ role: "system", content: system }, { role: "user", content: JSON.stringify(source) }],
     }),
   });
   if (!response.ok) throw new Error(`${lang}: OpenRouter failed (${response.status}): ${await response.text()}`);
   const body = await response.json();
-  return parseJson(body.choices?.[0]?.message?.content || "");
+  const parsed = parseJson(body.choices?.[0]?.message?.content || "");
+  return parsed[label] || parsed;
 }
 
 function leafPaths(value, prefix = "") {
@@ -105,15 +106,26 @@ function contentModule(content) {
 }
 
 const extraBlogUi = fs.existsSync(BLOG_UI_FILE) ? JSON.parse(fs.readFileSync(BLOG_UI_FILE, "utf8")) : {};
+const extraFaq = fs.existsSync(FAQ_EXTRA_FILE) ? JSON.parse(fs.readFileSync(FAQ_EXTRA_FILE, "utf8")) : {};
+const faqSource = {
+  usage: Object.fromEntries(Object.entries(USAGE).map(([id, value]) => [id, value.en])),
+  productFaq: Object.fromEntries(Object.entries(PRODUCT_FAQ).map(([id, value]) => [id, value.en])),
+  ingredients: INGREDIENTS.en,
+  ingredientsPage: INGREDIENTS_PAGE.en,
+};
 for (const [lang, market] of Object.entries(TARGETS)) {
-  const result = await localize(lang, market);
-  if (!result?.content || !result?.blogUi) throw new Error(`${lang}: response is missing content or blogUi.`);
-  result.content.lang = lang;
-  validateShape(EN, result.content, `${lang} content`);
-  validateShape(BLOG_UI.en, result.blogUi, `${lang} blogUi`);
-  fs.writeFileSync(path.join(CONTENT_DIR, `${lang}.js`), contentModule(result.content), "utf8");
-  extraBlogUi[lang] = result.blogUi;
+  const content = await localizeObject(lang, market, "content", EN);
+  const blogUi = await localizeObject(lang, market, "blogUi", BLOG_UI.en);
+  const faq = await localizeObject(lang, market, "faq", faqSource);
+  content.lang = lang;
+  validateShape(EN, content, `${lang} content`);
+  validateShape(BLOG_UI.en, blogUi, `${lang} blogUi`);
+  validateShape(faqSource, faq, `${lang} faq`);
+  fs.writeFileSync(path.join(CONTENT_DIR, `${lang}.js`), contentModule(content), "utf8");
+  extraBlogUi[lang] = blogUi;
+  extraFaq[lang] = faq;
   console.log(`${lang}: localized storefront source generated`);
 }
 fs.writeFileSync(BLOG_UI_FILE, JSON.stringify(extraBlogUi, null, 2) + "\n", "utf8");
+fs.writeFileSync(FAQ_EXTRA_FILE, JSON.stringify(extraFaq, null, 2) + "\n", "utf8");
 console.log("Storefront localization completed.");

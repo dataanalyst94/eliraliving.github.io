@@ -16,6 +16,7 @@ const TRACK = require("./assets/data/analytics-config.js");
 const { LEGAL, DISCLAIMER } = require("./assets/data/legal-content.js");
 const { USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE } = require("./assets/data/faq-content.js");
 const { BLOG_UI, POSTS } = require("./assets/data/blog-content.js");
+const ingredientPage = (L) => INGREDIENTS_PAGE[L] || INGREDIENTS_PAGE.en;
 const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen", fi: "Usein kysytyt kysymykset", fr: "Questions fréquentes", it: "Domande frequenti", cs: "Časté otázky" };
 const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik", fi: "Käyttöohjeet", fr: "Conseils d’utilisation", it: "Modo d’uso", cs: "Použití" };
 const FREESHIP_H = { en: "Free shipping on this item", de: "Kostenloser Versand für diesen Artikel", nl: "Gratis verzending voor dit artikel", fi: "Ilmainen toimitus tälle tuotteelle", fr: "Livraison gratuite pour cet article", it: "Spedizione gratuita per questo prodotto", cs: "Doprava tohoto produktu zdarma" };
@@ -27,6 +28,9 @@ const TRUST = {
   de: [["secure", "Sicherer Bezahlvorgang"], ["ship", "Versand aus der EU"], ["return", "14 Tage Widerrufsrecht"], ["cert", "Vegan · ECOCERT COSMOS"]],
   nl: [["secure", "Veilig afrekenen"], ["ship", "Verzending uit de EU"], ["return", "14 dagen retourrecht"], ["cert", "Vegan · ECOCERT COSMOS"]],
   fi: [["secure", "Turvallinen maksu"], ["ship", "Toimitus EU:sta"], ["return", "14 päivän palautusoikeus"], ["cert", "Vegaaninen · ECOCERT COSMOS"]],
+  fr: [["secure", "Paiement sécurisé"], ["ship", "Expédié depuis l’UE"], ["return", "Retours sous 14 jours"], ["cert", "Vegan · ECOCERT COSMOS"]],
+  it: [["secure", "Pagamento sicuro"], ["ship", "Spedito dall’UE"], ["return", "Reso entro 14 giorni"], ["cert", "Vegano · ECOCERT COSMOS"]],
+  cs: [["secure", "Bezpečná platba"], ["ship", "Odesíláme z EU"], ["return", "Vrácení do 14 dnů"], ["cert", "Veganské · ECOCERT COSMOS"]],
 };
 const TRUST_ICONS = {
   secure: '<rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
@@ -230,7 +234,7 @@ function footer(L) {
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.help")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
       ${li(P + "/withdrawal.html", T(L, "foot.shipping"))}${li(P + "/terms.html", T(L, "foot.faq"))}${li("mailto:support@eliraliving.com", T(L, "foot.contact"))}</ul></div>
     <div><h3 class="kicker" style="margin-bottom:1rem">${T(L, "foot.company")}</h3><ul style="display:flex;flex-direction:column;gap:.6rem;font-size:.875rem">
-      ${li(P + "/about.html", T(L, "foot.about"))}${li(P + "/blog/", esc(BLOG_UI[L].nav))}${li(P + "/ingredients.html", esc(INGREDIENTS_PAGE[L].title))}${li(P + "/certifications.html", T(L, "nav.certifications"))}${li(P + "/privacy.html", T(L, "foot.privacy"))}${li(P + "/impressum.html", T(L, "foot.imprint"))}</ul></div>
+      ${li(P + "/about.html", T(L, "foot.about"))}${li(P + "/blog/", esc(BLOG_UI[L].nav))}${li(P + "/ingredients.html", esc(ingredientPage(L).title))}${li(P + "/certifications.html", T(L, "nav.certifications"))}${li(P + "/privacy.html", T(L, "foot.privacy"))}${li(P + "/impressum.html", T(L, "foot.imprint"))}</ul></div>
   </div>
   <div style="margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;font-size:.75rem" class="muted">
     <div>© <span data-year></span> Elira Living · ${T(L, "foot.rights")} · ${T(L, "foot.businessId")}</div>
@@ -592,7 +596,7 @@ function renderProduct(L, p) {
       <button class="btn btn-outline btn-block" style="margin-top:.75rem" data-buy>${T(L, "pdp.buy")}</button>
       ${trustRow(L)}
       <div style="margin-top:2.25rem">
-        <details class="acc" open><summary><span class="kicker">${T(L, "pdp.ingredients")}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(ping(L, p.id))} <a href="${url("ingredients", L)}" ${'class="link-underline"'}>${esc(INGREDIENTS_PAGE[L].title)} →</a></p></details>
+        <details class="acc" open><summary><span class="kicker">${T(L, "pdp.ingredients")}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(ping(L, p.id))} <a href="${url("ingredients", L)}" ${'class="link-underline"'}>${esc(ingredientPage(L).title)} →</a></p></details>
         <details class="acc"><summary><span class="kicker">${USE_H[L]}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${esc(usage)}</p></details>
         <details class="acc"><summary><span class="kicker">${T(L, "pdp.shipping")}</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></summary><p>${T(L, "pdp.shippingText")}</p></details>
       </div>

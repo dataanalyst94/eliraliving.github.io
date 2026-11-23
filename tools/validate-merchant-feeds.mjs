@@ -5,7 +5,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const LANGS = ["en", "de", "nl", "fi"];
+const LANGS = ["en", "de", "nl", "fi", "fr", "it", "cs"]
+  .filter(lang => fs.existsSync(path.join(ROOT, "assets", "content", `${lang}.js`)));
 const REQUIRED_COUNTRIES = ["FI", "DE", "FR", "IT", "CZ"];
 const EXPECTED_PRODUCTS = 7;
 
