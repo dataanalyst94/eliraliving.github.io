@@ -37,6 +37,18 @@ jobs:
       - name: Generate and validate French, Italian and Czech source
         run: node tools/generate-storefront-locales.mjs
 
+      - name: Preserve localized source and sync with main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/content/fr.js assets/content/it.js assets/content/cs.js
+          git add assets/data/blog-ui-extra.json assets/data/faq-locales-extra.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate French, Italian and Czech storefront source"
+          fi
+          git fetch origin main
+          git rebase origin/main
+
       - name: Build localized site and Merchant feeds
         run: |
           node build.js
@@ -44,12 +56,8 @@ jobs:
 
       - name: Publish localized storefronts
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          if git diff --cached --quiet; then
-            echo "No localization changes to publish."
-          else
+          if ! git diff --cached --quiet; then
             git commit -m "Add French, Italian and Czech storefronts"
-            git push origin HEAD:main
           fi
+          git push origin HEAD:main
