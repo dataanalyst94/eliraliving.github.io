@@ -2,6 +2,10 @@ name: Generate EU storefront localizations
 
 on:
   workflow_dispatch: {}
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/localize-storefront.yml'
 
 permissions:
   contents: write
