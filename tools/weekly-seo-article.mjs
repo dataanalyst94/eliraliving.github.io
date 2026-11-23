@@ -11,19 +11,17 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const BLOG_DIR = path.join(ROOT, "assets", "data", "blog");
 const LEDGER_FILE = path.join(ROOT, "assets", "data", "seo-topic-ledger.json");
 const CAT = require(path.join(ROOT, "assets", "data", "catalog.js"));
-const CONTENT = {
-  en: require(path.join(ROOT, "assets", "content", "en.js")),
-  de: require(path.join(ROOT, "assets", "content", "de.js")),
-  nl: require(path.join(ROOT, "assets", "content", "nl.js")),
-  fi: require(path.join(ROOT, "assets", "content", "fi.js")),
-};
-
-const LANGS = ["en", "de", "nl", "fi"];
+const SUPPORTED_LANGS = ["en", "de", "nl", "fi", "fr", "it", "cs"];
+const LANGS = SUPPORTED_LANGS.filter(lang => fs.existsSync(path.join(ROOT, "assets", "content", `${lang}.js`)));
+const CONTENT = Object.fromEntries(LANGS.map(lang => [lang, require(path.join(ROOT, "assets", "content", `${lang}.js`))]));
 const LANGUAGE_NAMES = {
   en: "English for an EU audience",
   de: "native German for Germany",
   nl: "native Dutch for the Netherlands",
   fi: "native Finnish for Finland",
+  fr: "native French for France",
+  it: "native Italian for Italy",
+  cs: "native Czech for Czechia",
 };
 const MODEL = process.env.SEO_MODEL || "openai/gpt-5.1";
 const SITE_URL = process.env.GSC_SITE_URL || "sc-domain:eliraliving.com";
@@ -177,6 +175,9 @@ function serperLocale(countries) {
   if (country === "deu") return { gl: "de", hl: "de" };
   if (country === "nld") return { gl: "nl", hl: "nl" };
   if (country === "fin") return { gl: "fi", hl: "fi" };
+  if (country === "fra") return { gl: "fr", hl: "fr" };
+  if (country === "ita") return { gl: "it", hl: "it" };
+  if (country === "cze") return { gl: "cz", hl: "cs" };
   if (country === "gbr" || country === "irl") return { gl: country === "irl" ? "ie" : "uk", hl: "en" };
   return { gl: "de", hl: "en" };
 }
@@ -298,7 +299,7 @@ Rules:
 - Avoid medical/YMYL topics, diagnoses, treatment promises, invented studies, and unsupported efficacy claims.
 - Return JSON only with: primaryQuery, sourceLanguage, englishWorkingTitle, searchIntent, contentAngle, category, relatedProductIds, supportingQueries, localizedQueries, rationale.
 - category is skincare or haircare. relatedProductIds contains 1-2 exact product ids.
-- localizedQueries has en, de, nl and fi strings that sound natural, not literal translations.`;
+- localizedQueries has ${LANGS.join(", ")} strings that sound natural in each market, not literal translations.`;
 }
 async function chooseTopic(opportunities, inventory, ledger, ga4LandingPages, serpResearch) {
   const prompt = {

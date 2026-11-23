@@ -7,14 +7,18 @@ const fs = require("fs");
 const path = require("path");
 const ROOT = __dirname;
 const CAT = require("./assets/data/catalog.js");
-const CONTENT = { en: require("./assets/content/en.js"), de: require("./assets/content/de.js"), nl: require("./assets/content/nl.js"), fi: require("./assets/content/fi.js") };
+const SUPPORTED_LANGS = ["en", "de", "nl", "fi", "fr", "it", "cs"];
+const CONTENT = Object.fromEntries(SUPPORTED_LANGS
+  .filter(L => fs.existsSync(path.join(ROOT, "assets", "content", `${L}.js`)))
+  .map(L => [L, require(`./assets/content/${L}.js`)]));
+const LANGS = Object.keys(CONTENT);
 const TRACK = require("./assets/data/analytics-config.js");
 const { LEGAL, DISCLAIMER } = require("./assets/data/legal-content.js");
 const { USAGE, PRODUCT_FAQ, INGREDIENTS, INGREDIENTS_PAGE } = require("./assets/data/faq-content.js");
 const { BLOG_UI, POSTS } = require("./assets/data/blog-content.js");
-const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen", fi: "Usein kysytyt kysymykset" };
-const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik", fi: "Käyttöohjeet" };
-const FREESHIP_H = { en: "Free shipping on this item", de: "Kostenloser Versand für diesen Artikel", nl: "Gratis verzending voor dit artikel", fi: "Ilmainen toimitus tälle tuotteelle" };
+const FAQ_H = { en: "Frequently asked questions", de: "Häufige Fragen", nl: "Veelgestelde vragen", fi: "Usein kysytyt kysymykset", fr: "Questions fréquentes", it: "Domande frequenti", cs: "Časté otázky" };
+const USE_H = { en: "How to use", de: "Anwendung", nl: "Gebruik", fi: "Käyttöohjeet", fr: "Conseils d’utilisation", it: "Modo d’uso", cs: "Použití" };
+const FREESHIP_H = { en: "Free shipping on this item", de: "Kostenloser Versand für diesen Artikel", nl: "Gratis verzending voor dit artikel", fi: "Ilmainen toimitus tälle tuotteelle", fr: "Livraison gratuite pour cet article", it: "Spedizione gratuita per questo prodotto", cs: "Doprava tohoto produktu zdarma" };
 // Trust signals shown right under the add-to-cart on every product page.
 // EU-compliant, factual — no invented numbers or timeframes beyond the statutory
 // 14-day right of withdrawal.
@@ -32,8 +36,8 @@ const TRUST_ICONS = {
 };
 const trustRow = (L) => `<div class="pdp-trust">${(TRUST[L] || TRUST.en).map(([k, label]) =>
   `<div class="pdp-trust__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">${TRUST_ICONS[k]}</svg><span>${esc(label)}</span></div>`).join("")}</div>`;
-const JOURNAL_H = { en: "From the Journal", de: "Aus dem Journal", nl: "Uit het Journal", fi: "Journalista" };
-const RELATED_ARTICLES_H = { en: "Continue reading", de: "Weiterlesen", nl: "Lees verder", fi: "Lue seuraavaksi" };
+const JOURNAL_H = { en: "From the Journal", de: "Aus dem Journal", nl: "Uit het Journal", fi: "Journalista", fr: "Le Journal", it: "Dal Journal", cs: "Z magazínu" };
+const RELATED_ARTICLES_H = { en: "Continue reading", de: "Weiterlesen", nl: "Lees verder", fi: "Lue seuraavaksi", fr: "Continuer la lecture", it: "Continua a leggere", cs: "Další čtení" };
 
 // Google Consent Mode v2 default (denied) + GTM loader — baked into every page.
 function gtmHead() {
@@ -94,9 +98,8 @@ function preloadResponsiveImage(src, sizes = "100vw") {
   }
   return `<link rel="preload" as="image" href="${src}" fetchpriority="high">`;
 }
-const OGLOC = { en: "en_GB", de: "de_DE", nl: "nl_NL", fi: "fi_FI" };
-const LANGS = ["en", "de", "nl", "fi"];
-const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE", fi: "fi-FI" };
+const OGLOC = { en: "en_GB", de: "de_DE", nl: "nl_NL", fi: "fi_FI", fr: "fr_FR", it: "it_IT", cs: "cs_CZ" };
+const LOCALES = { de: "de-DE", nl: "nl-NL", en: "en-IE", fi: "fi-FI", fr: "fr-FR", it: "it-IT", cs: "cs-CZ" };
 const EU_COUNTRIES = ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE"];
 const ASSET_V = Date.now().toString(36); // cache-buster: changes every build
 
@@ -1214,46 +1217,69 @@ function write404() {
     <a class="btn" href="/en/shop.html">Shop</a>
     <a class="btn" href="/en/blog/">Journal</a>
   </div>
-  <div class="langs">Language: <a href="/en/">EN</a>·<a href="/de/">DE</a>·<a href="/nl/">NL</a></div>
+    <div class="langs">Language: ${LANGS.map(L => `<a href="/${L}/">${L.toUpperCase()}</a>`).join("·")}</div>
 </div>
-<script>try{var l=(navigator.language||'en').slice(0,2).toLowerCase();if(['de','nl'].indexOf(l)>-1){document.querySelectorAll('a.btn,.langs a').forEach(function(a){a.href=a.getAttribute('href').replace('/en/','/'+l+'/');});}}catch(e){}</script>
+<script>try{var l=(navigator.language||'en').slice(0,2).toLowerCase();if(${JSON.stringify(LANGS)}.indexOf(l)>-1){document.querySelectorAll('a.btn').forEach(function(a){a.href=a.getAttribute('href').replace('/en/','/'+l+'/');});}}catch(e){}</script>
 </body></html>`;
   write("404.html", html);
 }
 
-/* ---- Google Merchant product feed (feed.xml) -------------------------- */
-function writeFeed() {
+/* ---- Google Merchant localized product feeds -------------------------- */
+function merchantItemId(p, L) {
+  return `${p.sku}-${L.toUpperCase()}`;
+}
+
+function writeLocalizedFeed(L, filename) {
   const items = CAT.PRODUCTS.map(p => {
-    const L = "en";
     const gcat = p.category === "haircare"
       ? "Health &amp; Beauty &gt; Personal Care &gt; Hair Care"
       : "Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Skin Care";
+    const identifiers = p.gtin
+      ? `\n      <g:gtin>${esc(p.gtin)}</g:gtin>`
+      : p.mpn
+        ? `\n      <g:mpn>${esc(p.mpn)}</g:mpn>`
+        : `\n      <g:identifier_exists>no</g:identifier_exists>`;
+    const extraImages = productImages(L, p).slice(1, 11)
+      .map(src => `\n      <g:additional_image_link>${BASE + src}</g:additional_image_link>`).join("");
+    const shipping = CAT.CONFIG.markets
+      .map(country => `\n      <g:shipping><g:country>${country}</g:country><g:service>Standard</g:service><g:price>0.00 EUR</g:price></g:shipping>`)
+      .join("");
     return `    <item>
-      <g:id>${esc(p.sku)}</g:id>
+      <g:id>${esc(merchantItemId(p, L))}</g:id>
       <g:title>${esc(pname(L, p.id))}</g:title>
       <g:description>${esc(pdesc(L, p.id))}</g:description>
       <g:link>${BASE + url("product", L, p)}</g:link>
-      <g:image_link>${BASE + productImage(L, p)}</g:image_link>
+      <g:image_link>${BASE + productImage(L, p)}</g:image_link>${extraImages}
       <g:availability>in_stock</g:availability>
       <g:price>${(p.price / 100).toFixed(2)} EUR</g:price>
       <g:brand>Elira Living</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:google_product_category>${gcat}</g:google_product_category>
-      <g:shipping><g:country>DE</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
-      <g:shipping><g:country>NL</g:country><g:service>Standard</g:service><g:price>4.95 EUR</g:price></g:shipping>
+      <g:adult>no</g:adult>${identifiers}
+      <g:google_product_category>${gcat}</g:google_product_category>${shipping}
     </item>`;
   }).join("\n");
-  write("feed.xml", `<?xml version="1.0" encoding="UTF-8"?>
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
   <channel>
-    <title>Elira Living</title>
-    <link>${BASE}/</link>
-    <description>Vegan, ECOCERT COSMOS-certified natural skincare &amp; haircare. Made in the EU.</description>
+    <title>Elira Living (${L.toUpperCase()})</title>
+    <link>${BASE}/${L}/</link>
+    <description>${esc(meta(L).home.description)}</description>
 ${items}
   </channel>
 </rss>
-`);
+`;
+  write(filename, xml);
+  return xml;
+}
+
+function writeFeed() {
+  let englishFeed = "";
+  LANGS.forEach(L => {
+    const xml = writeLocalizedFeed(L, `feed-${L}.xml`);
+    if (L === "en") englishFeed = xml;
+  });
+  // Keep the original URL stable for the existing Merchant Center data source.
+  write("feed.xml", englishFeed);
 }
 
 /* ---- prices.json (single source of truth for the checkout worker) ------ */

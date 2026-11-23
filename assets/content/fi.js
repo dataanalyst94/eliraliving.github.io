@@ -18,9 +18,9 @@
       "keywords": "luonnollinen ihonhoito, vegaaninen ihonhoito, COSMOS-sertifioitu, luomu ihonhoito, luonnollinen hiustenhoito, eläinkokeeton kosmetiikka, puhdas kauneus, ECOCERT, valmistettu EU:ssa, vegaaninen shampoo, kasvovesi"
     },
     "shop": {
-      "title": "Osta luonnollista iho- ja hiustenhoitoa | Elira Living",
-      "description": "Tutustu Elira Livingin koko vegaaniseen, COSMOS-sertifioituun iho- ja hiustenhoitovalikoimaan. Puhdistusaineet, kasvovedet, kosteusvoiteet ja shampoo — eläinkokeeton ja valmistettu EU:ssa.",
-      "keywords": "osta luonnollista ihonhoitoa, vegaaninen ihonhoito, COSMOS-sertifioidut tuotteet, luonnollinen hiustenhoito, kasvojenpuhdistusaine, kasvovesi, kosteusvoide, herkän hiuspohjan shampoo, puhdas kauneus"
+      "title": "Vegaaninen ihonhoito & luonnonkosmetiikka verkkokauppa | Elira Living",
+      "description": "Osta vegaanista, COSMOS-sertifioitua luonnonkosmetiikkaa verkosta. Hellävarainen ihonhoito ja hiustenhoito herkälle iholle, toimitus kaikkialle EU:hun.",
+      "keywords": "vegaaninen ihonhoito, luonnonkosmetiikka verkkokauppa, COSMOS sertifioitu ihonhoito, luonnollinen hiustenhoito, herkän ihon tuotteet, peptidiseerumi, shampoo herkälle päänahalle"
     },
     "about": {
       "title": "Tietoa Elira Livingistä | Puhdas kauneus, valmistettu Euroopassa",
@@ -151,8 +151,8 @@
     "foot.imprint": "Impressum",
     "foot.rights": "Kaikki oikeudet pidätetään.",
     "foot.businessId": "Y-tunnus 3526013-6",
-    "shop.title": "Kauppa",
-    "shop.lead": "Valitse ihosi ja hiustesi tarpeisiin. Hyllylle saa jäädä tyhjää.",
+    "shop.title": "Vegaaninen ihonhoito & hiustenhoito",
+    "shop.lead": "COSMOS-sertifioitua luonnonkosmetiikkaa herkälle iholle ja hiuspohjalle.",
     "shop.all": "Kaikki",
     "shop.results": "tuotetta",
     "shop.sort.featured": "Suositellut",
@@ -253,8 +253,8 @@
       "ingredients": "Aqua, Alcohol, Lavandula Angustifolia (Lavender) Flower Water*, Glycerin**, Betaine, Propanediol, Acorus Calamus (Sweet Flag) Root Extract*, Cucumis Sativus (Cucumber) Fruit Extract*, Salicylic Acid, Benzyl Alcohol, Sodium Benzoate, Potassium Sorbate, Rhamnose, Glucose, Glucuronic Acid.  *luomuviljelystä  **valmistettu luomuainesosista · 99 % luonnollista alkuperää · ECOCERT COSMOS Natural."
     },
     "sensitive-scalp-shampoo": {
-      "name": "Herkän hiuspohjan shampoo",
-      "desc": "Hellävarainen, sulfaatiton shampoo, jossa mietoja kookospohjaisia puhdistusaineita, ravitsevaa luumu-uutetta ja rauhoittavaa lehmuksenkukkaa herkälle, helposti ärsyyntyvälle hiuspohjalle. Lievittää kutinaa ja kireyttä jättäen hiukset pehmeiksi, puhtaiksi ja helposti hallittaviksi — riittävän hellä päivittäiseen pesuun. Dermatologisesti testattu, 98 % luonnollista alkuperää, COSMOS Natural, vegaaninen, kaikille hiustyypeille.",
+      "name": "Shampoo herkälle päänahalle",
+      "desc": "Hellävarainen ja sulfaatiton shampoo herkälle päänahalle. Miedot kookospohjaiset puhdistusaineet, ravitseva luumu-uute ja rauhoittava lehmuksenkukka auttavat vähentämään kutinan ja kireyden tunnetta. Jättää hiukset pehmeiksi, puhtaiksi ja helposti käsiteltäviksi. Dermatologisesti testattu, 98 % luonnollista alkuperää, COSMOS Natural ja vegaaninen.",
       "ingredients": "Aqua, Sodium Coco-Sulfate, Cocamidopropyl Betaine, Coco-Glucoside, Betaine, Glyceryl Oleate, Prunus Domestica (Plum) Fruit Extract*, Sodium Chloride, Citric Acid, Parfum, Benzyl Alcohol, Hydrolyzed Wheat Protein, Tilia Cordata (Linden) Flower Extract*, Sodium Benzoate, Potassium Sorbate, Jasminum Officinale (Jasmin) Extract, Leuconostoc/Radish Root Ferment Filtrate.  *luomuviljelystä · 98 % luonnollista alkuperää · ECOCERT COSMOS Natural."
     },
     "retinol-alternative-serum": {
@@ -263,8 +263,8 @@
       "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin**, Simmondsia Chinensis (Jojoba) Seed Oil*, Pentylene Glycol, Polyglyceryl-6 Stearate, Cetearyl Alcohol, Propanediol, Dicaprylyl Carbonate, Astrocaryum Murumuru Seed Butter, Gossypium Herbaceum Seed Oil, Isoamyl Laurate, Bidens Pilosa Extract, Polyglyceryl-6 Behenate, Linum Usitatissimum Seed Oil, Parfum/Fragrance, Cellulose, Aqua/Water, Hippophae Rhamnoides (Sea Buckthorn) Fruit Extract*, Lactic Acid, Xanthan Gum, Rhodomyrtus Tomentosa (Rose Myrtle) Fruit Extract, Caprylic/Capric Triglyceride, Rosa Canina (Rosehip) Fruit Oil*, Mangifera Indica (Mango) Seed Butter*, Hydrolyzed Hyaluronic Acid, Sodium Hyaluronate, Sodium Phytate, Octyldodecanol, Tocopherol, Geraniol***, Citronellol***, Pelargonium Graveolens Flower Oil, Linalool***, Citral***.  *luomuviljelystä  **valmistettu luomuainesosista  ***luonnollisista eteerisistä öljyistä · 99 % luonnollista alkuperää · 24 % luomua · COSMOS Natural, sertifioinut ECOCERT Greenlife."
     },
     "peptide-anti-aging-serum": {
-      "name": "Peptidi anti-age -seerumi",
-      "desc": "Ylellinen silottava seerumi, jossa 2 % heksapeptidi-11:tä ja 1 % Ginkgo Bilobaa, sekä hyaluronihappoa ja antioksidanttipitoisia mustikan- ja mansikansiemenöljyjä. Pehmentää näkyvästi juonteita ja ryppyjä täyteläisemmän, kiinteämmän ja joustavamman ihon puolesta — herkän kukkaisella tuoksulla. COSMOS Natural, vegaaninen, normaalille ja kuivalle iholle.",
+      "name": "Peptidiseerumi juonteille",
+      "desc": "Silottava peptidiseerumi, jossa on 2 % heksapeptidi-11:tä, 1 % Ginkgo Bilobaa, hyaluronihappoa sekä antioksidanttipitoisia mustikan- ja mansikansiemenöljyjä. Auttaa vähentämään juonteiden näkyvyyttä ja tukee täyteläisemmän, kiinteämmän ja joustavamman näköistä ihoa. COSMOS Natural, vegaaninen, normaalille ja kuivalle iholle.",
       "ingredients": "Aloe Barbadensis (Aloe) Leaf Juice*, Glycerin, Simmondsia Chinensis (Jojoba) Seed Oil*, Aqua/Water, Pentylene Glycol, Cetearyl Alcohol, Sodium PCA, Isoamyl Laurate, Glyceryl Stearate Citrate, Dipalmitoyl Hydroxyproline, Propanediol, Parfum/Fragrance, Caprylic/Capric Triglyceride, Fragaria Ananassa (Strawberry) Seed Oil, Vaccinium Myrtillus (Blueberry) Seed Oil*, Xanthan Gum, Hexapeptide-11, Phytosterols, Ricinus Communis (Castor) Seed Oil*, Ascorbyl Palmitate, Hydrolyzed Hyaluronic Acid, Potassium Hydroxide, Sodium Hyaluronate, Sodium Phytate, Tocopherol, Leuconostoc/Radish Root Ferment Filtrate, Ginkgo Biloba Leaf Extract, CI 77491 (Iron Oxides), Citric Acid, Sodium Benzoate, Potassium Sorbate, Glycolipids, Linalool***, Geraniol***, Citronellol***.  *luomuviljelystä  ***luonnollisista eteerisistä öljyistä · 99 % luonnollista alkuperää · 20 % luomua · COSMOS Natural, sertifioinut ECOCERT Greenlife."
     }
   }

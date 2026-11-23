@@ -112,7 +112,13 @@ const BLOG_UI = {
   }
 };
 
-const LANGS = ["en", "de", "nl", "fi"];
+const extraUiFile = path.join(__dirname, "blog-ui-extra.json");
+if (fs.existsSync(extraUiFile)) {
+  const extraUi = JSON.parse(fs.readFileSync(extraUiFile, "utf8"));
+  Object.assign(BLOG_UI, extraUi);
+}
+
+const LANGS = ["en", "de", "nl", "fi", "fr", "it", "cs"].filter(L => BLOG_UI[L]);
 
 function validate(post, file) {
   if (!post || typeof post !== "object") throw new Error(`Blog post ${file}: not an object`);
