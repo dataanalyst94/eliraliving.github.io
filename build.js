@@ -712,7 +712,7 @@ function renderIngredients(L) {
   const meta = { en: "Vegan, ECOCERT COSMOS-certified ingredients — what's in Elira Living skincare & haircare and why.",
     de: "Vegane, ECOCERT COSMOS-zertifizierte Inhaltsstoffe — was in der Elira Living Haut- & Haarpflege steckt und warum.",
     nl: "Veganistische, ECOCERT COSMOS-gecertificeerde ingrediënten — wat er in Elira Living huid- & haarverzorging zit en waarom." };
-  return shell(L, { page: "ingredients", bodyPage: "legal", current: "ingredients", title: ip.title + " | Elira Living", description: meta[L], keywords: "ingredients, INCI, natural skincare ingredients, vegan, ECOCERT COSMOS, salicylic acid, lavender water, Elira Living", ld: [ldOrg(), ldWebsite(L)] }, body);
+  return shell(L, { page: "ingredients", bodyPage: "legal", current: "ingredients", title: ip.title + " | Elira Living", description: meta[L] || meta.en, keywords: "ingredients, INCI, natural skincare ingredients, vegan, ECOCERT COSMOS, salicylic acid, lavender water, Elira Living", ld: [ldOrg(), ldWebsite(L)] }, body);
 }
 
 /* ---- PAGE: CERTIFICATIONS --------------------------------------------- */
@@ -848,20 +848,23 @@ const MFG_CERTS = [
 ];
 
 function certCard(L, c, isMfg) {
-  const sec = CERT_SEC[L];
-  const body = typeof c.body === "object" ? c.body[L] : c.body;
+  const sec = CERT_SEC[L] || CERT_SEC.en;
+  const localized = value => value && typeof value === "object" ? (value[L] || value.en) : value;
+  const body = localized(c.body);
+  const prohibits = localized(c.prohibits);
+  const products = localized(c.products);
   const prohibitsList = c.prohibits
-    ? `<div class="cert-card__prohibits"><div class="kicker" style="font-size:.6rem;margin-bottom:.5rem">${esc(sec.prohibits)}</div><ul>${c.prohibits[L].map(p => `<li>${esc(p)}</li>`).join("")}</ul></div>`
+    ? `<div class="cert-card__prohibits"><div class="kicker" style="font-size:.6rem;margin-bottom:.5rem">${esc(sec.prohibits)}</div><ul>${prohibits.map(p => `<li>${esc(p)}</li>`).join("")}</ul></div>`
     : "";
   const productsPill = c.products
-    ? `<div class="cert-card__applies"><span class="kicker" style="font-size:.6rem">${esc(sec.applies)}:</span> <span>${esc(c.products[L])}</span></div>`
+    ? `<div class="cert-card__applies"><span class="kicker" style="font-size:.6rem">${esc(sec.applies)}:</span> <span>${esc(products)}</span></div>`
     : (isMfg ? `<div class="cert-card__applies"><span class="kicker" style="font-size:.6rem">${esc(sec.applies)}:</span> <span>${L === "de" ? "Alle Produkte" : L === "nl" ? "Alle producten" : "All products"}</span></div>` : "");
   return `<article class="cert-card reveal">
   <div class="cert-card__num">${c.num}</div>
   <div class="cert-card__badge">${esc(c.badge)}</div>
-  <h3 class="cert-card__name font-display">${esc(c.name[L])}</h3>
+  <h3 class="cert-card__name font-display">${esc(localized(c.name))}</h3>
   <div class="cert-card__body">${esc(body)}</div>
-  <p class="cert-card__desc">${esc(c.desc[L])}</p>
+  <p class="cert-card__desc">${esc(localized(c.desc))}</p>
   ${prohibitsList}
   ${productsPill}
 </article>`;
@@ -893,8 +896,8 @@ const COSMOS_SVG = `<svg class="cert-lockup__svg" viewBox="0 0 240 240" role="im
   <text x="120" y="180" text-anchor="middle" fill="#cfe3c4" font-family="Arial,sans-serif" font-size="13" font-weight="500" letter-spacing="3">&amp; NATURAL</text></svg>`;
 
 function renderCertifications(L) {
-  const h = CERT_HERO[L];
-  const sec = CERT_SEC[L];
+  const h = CERT_HERO[L] || CERT_HERO.en;
+  const sec = CERT_SEC[L] || CERT_SEC.en;
   const prodCards = PROD_CERTS.map(c => certCard(L, c, false)).join("\n");
   const mfgCards = MFG_CERTS.map(c => certCard(L, c, true)).join("\n");
   const m = meta(L).certifications;
