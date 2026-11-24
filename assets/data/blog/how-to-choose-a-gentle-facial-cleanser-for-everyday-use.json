@@ -546,6 +546,55 @@
           "a": "Ja, geurloze formules zijn zachter voor gevoelige of reactieve huid, omdat geur een veel voorkomend irritant is. Zelfs natuurlijke geuren kunnen gevoeligheid bij sommige mensen veroorzaken."
         }
       ]
+    },
+    "fi": {
+      "title": "Näin valitset kasvojenpuhdistusaineen ihotyypillesi",
+      "description": "Lue, miten valitset hellävaraisen kasvojenpuhdistusaineen kuivalle, rasvoittuvalle, sekaiholle tai herkälle iholle.",
+      "keywords": "kasvojenpuhdistusaine, hellävarainen puhdistusaine, puhdistusaine herkälle iholle, kasvojen puhdistus, luonnonkosmetiikka",
+      "excerpt": "Sopiva kasvojenpuhdistusaine puhdistaa ihon kuivattamatta sitä. Näillä vinkeillä löydät ihotyypillesi sopivan, hellävaraisen vaihtoehdon.",
+      "readMins": 7,
+      "body": [
+        {"type":"p","text":"Hyvä kasvojenpuhdistusaine poistaa iholta päivän aikana kertyneen lian, talin ja meikin. Liian voimakas puhdistus voi kuitenkin jättää ihon kuivan ja kiristävän tuntuiseksi. Kun tiedät, mitä tuotteelta etsit, hellävaraisen vaihtoehdon valitseminen on helpompaa."},
+        {"type":"p","text":"Tämä opas auttaa valitsemaan puhdistusaineen herkälle, sekaiholle, rasvoittuvalle tai normaalille iholle."},
+        {"type":"h2","text":"Mistä tunnistaa hellävaraisen puhdistusaineen?"},
+        {"type":"p","text":"Hellävarainen puhdistusaine poistaa epäpuhtauksia kuivattamatta ihoa tarpeettomasti. Jos iho tuntuu pesun jälkeen toistuvasti kireältä tai epämukavalta, tuote voi olla ihollesi liian voimakas. Myös ihonhoidon muut tuotteet ja sääolosuhteet vaikuttavat ihon tuntemuksiin."},
+        {"type":"p","text":"Hellävaraisessa puhdistusaineessa voit etsiä esimerkiksi näitä ominaisuuksia:"},
+        {"type":"ul","items":["mieto koostumus, joka ei jätä ihoa epämukavan kuivan tuntuiseksi","puhdistavat ainesosat, jotka sopivat tuotteen käyttötarkoitukseen","kosteuttavia tai hoitavia ainesosia, kuten glyseriiniä","yksinkertainen ainesosaluettelo, jos ihosi reagoi herkästi","ihollesi sopiva koostumus, kuten geeli, emulsio tai puhdistusmaito"]},
+        {"type":"p","text":"Puhdistuksen jälkeen ihon ei tarvitse tuntua natisevan puhtaalta. Tärkeintä on, että se tuntuu mukavalta."},
+        {"type":"h2","text":"Mitä ainesosia kannattaa tarkistaa?"},
+        {"type":"p","text":"Tutustu tuotteen ainesosaluetteloon ja valitse koostumus omien tarpeidesi mukaan. Yksittäinen ainesosa ei kuitenkaan yksin kerro, sopiiko koko tuote juuri sinun ihollesi."},
+        {"type":"h3","text":"Puhdistavat ainesosat"},
+        {"type":"p","text":"Puhdistavat ainesosat poistavat iholta likaa, talia ja meikkiä. Jos ihosi tuntuu puhdistuksen jälkeen kuivalta tai ärtyneeltä, kokeile miedompaa tuotetta ja vältä turhan voimakasta tai pitkää hankaamista."},
+        {"type":"h3","text":"Kosteuttavat ja hoitavat ainesosat"},
+        {"type":"p","text":"Esimerkiksi glyseriini auttaa sitomaan kosteutta iholle. Puhdistustuotteessa se voi tukea miellyttävämpää ihotuntumaa, mutta tuotteen sopivuus riippuu koko koostumuksesta."},
+        {"type":"h3","text":"Selkeä ainesosaluettelo"},
+        {"type":"p","text":"Jos tiedät ihosi reagoivan tiettyihin ainesosiin, tarkista luettelo ennen ostamista. Uutta tuotetta kannattaa kokeilla ensin pienelle ihoalueelle tuotteen ohjeiden mukaisesti."},
+        {"type":"h3","text":"Sertifikaatit ja tuotetiedot"},
+        {"type":"p","text":"Sertifikaatit voivat kertoa tuotteen valmistuksessa sovelletuista standardeista. Tarkista aina myös tuotteen käyttötarkoitus ja valmistajan ilmoittamat tiedot."},
+        {"type":"h2","text":"Valitse puhdistusaine ihotyyppisi mukaan"},
+        {"type":"h3","text":"Herkkä iho"},
+        {"type":"p","text":"Jos ihosi reagoi helposti, kokeile yksinkertaista ja hajusteetonta koostumusta, jos tiedät hajusteiden ärsyttävän ihoasi. Puhdista iho kevyesti ja lopeta tuotteen käyttö, jos saat siitä selvää ärsytystä."},
+        {"type":"product","id":"radiant-glow-cleanser"},
+        {"type":"h3","text":"Rasvoittuva tai sekaiho"},
+        {"type":"p","text":"Hellävarainen puhdistusaine voi sopia myös rasvoittuvalle iholle. Valitse omaan ihotuntumaasi sopiva koostumus ja vältä ihon voimakasta hankaamista, joka voi lisätä epämukavaa tunnetta."},
+        {"type":"h3","text":"Normaali iho"},
+        {"type":"p","text":"Normaalille iholle sopivia vaihtoehtoja on monia. Valitse tuote, joka puhdistaa ihon ja tuntuu käytössä miellyttävältä."},
+        {"type":"h2","text":"Näin käytät kasvojenpuhdistusainetta"},
+        {"type":"p","text":"Myös käyttötapa vaikuttaa siihen, miltä iho tuntuu puhdistuksen jälkeen:"},
+        {"type":"ul","items":["käytä haaleaa vettä","noudata tuotteen käyttöohjetta ja hiero kevyesti","huuhtele huolellisesti","taputtele iho kuivaksi puhtaalla pyyhkeellä","jatka ihollesi sopivalla kosteusvoiteella"]},
+        {"type":"h2","text":"Tarkkaile ihon tunnetta"},
+        {"type":"p","text":"Kiinnitä huomiota siihen, miltä iho tuntuu pesun jälkeen ja muun ihonhoitorutiinisi aikana. Puhdistusaineen pitäisi sopia omaan käyttöösi ilman jatkuvaa epämukavaa kuivuutta tai kiristystä."},
+        {"type":"ul","items":["tuntuuko iho puhtaalta mutta mukavalta?","ilmeneekö toistuvaa kuivuutta tai ärsytystä?","sopiiko tuote yhteen muun ihonhoitosi kanssa?"]},
+        {"type":"p","text":"Jos iho ärtyy tai oireet jatkuvat, lopeta tuotteen käyttö ja harkitse yhteydenottoa terveydenhuollon ammattilaiseen."},
+        {"type":"h2","text":"Hellävaraisempi puhdistusrutiini"},
+        {"type":"p","text":"Kun etsit uutta puhdistusainetta, aloita ihosi tarpeista ja kokeile yhtä uutta tuotetta kerrallaan. Näin sinun on helpompi huomata, miten se sopii omaan rutiiniisi."},
+        {"type":"p","text":"Sopiva kasvojenpuhdistusaine on sellainen, joka puhdistaa ihon ja tuntuu sinusta miellyttävältä. Yksinkertainen, säännöllinen rutiini on usein hyvä lähtökohta."}
+      ],
+      "faq": [
+        {"q":"Poistaako hellävarainen puhdistusaine meikin?","a":"Monet kasvojenpuhdistusaineet poistavat kevyen meikin. Tarkista tuotteen käyttöohje; vedenkestävän tai runsaan meikin poistoon voidaan tarvita erillinen tuote."},
+        {"q":"Kuinka usein kasvot kannattaa pestä?","a":"Sopiva pesutiheys riippuu ihosta ja arjesta. Monet pesevät kasvot illalla ja tarvittaessa aamulla. Jos iho kuivuu tai ärtyy, kokeile harvempaa pesua ja seuraa, miltä iho tuntuu."},
+        {"q":"Sopiiko hajusteeton puhdistusaine herkälle iholle?","a":"Hajusteeton vaihtoehto voi sopia, jos ihosi reagoi hajusteisiin, mutta se ei takaa tuotteen sopivuutta kaikille. Tarkista koko ainesosaluettelo ja kokeile uutta tuotetta ensin pienelle ihoalueelle."}
+      ]
     }
   }
 }
