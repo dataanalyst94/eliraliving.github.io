@@ -96,6 +96,13 @@ export default {
 
     try {
       const body = await request.json();
+      if (body.action === "google-reviews") {
+        if (!ALLOWED_ORIGINS.includes(request.headers.get("Origin"))) {
+          return json({ error: "Forbidden" }, 403, origin);
+        }
+        return await googleReviewsOrder(body.sessionId, env, origin);
+      }
+
       const items = Array.isArray(body.items) ? body.items : [];
       if (!items.length) return json({ error: "Empty cart" }, 400, origin);
       if (items.length > 50) return json({ error: "Too many items" }, 400, origin);
@@ -179,6 +186,53 @@ export default {
     }
   }
 };
+
+async function googleReviewsOrder(sessionId, env, origin) {
+  if (typeof sessionId !== "string" || !/^cs_live_[A-Za-z0-9]+$/.test(sessionId)) {
+    return json({ error: "Invalid checkout session" }, 400, origin);
+  }
+
+  const response = await fetch(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`, {
+    headers: { Authorization: "Bearer " + env.STRIPE_SECRET_KEY }
+  });
+  if (!response.ok) return json({ error: "Unable to verify checkout session" }, 502, origin);
+
+  const session = await response.json();
+  if (session.status !== "complete" || !["paid", "no_payment_required"].includes(session.payment_status)) {
+    return json({ error: "Order is not complete" }, 404, origin);
+  }
+
+  const email = session.customer_details?.email || session.customer_email;
+  const country = session.shipping_details?.address?.country || session.customer_details?.address?.country;
+  if (typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !/^[A-Z]{2}$/.test(country || "") || country === "ZZ") {
+    return json({ error: "Order details are incomplete" }, 422, origin);
+  }
+
+  return json({
+    orderId: session.id,
+    email,
+    deliveryCountry: country,
+    estimatedDeliveryDate: estimateDeliveryDate(session.created)
+  }, 200, origin);
+}
+
+function estimateDeliveryDate(created) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Helsinki",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(new Date(created * 1000));
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  const date = new Date(Date.UTC(Number(values.year), Number(values.month) - 1, Number(values.day)));
+  let workingDays = 0;
+  while (workingDays < 7) {
+    date.setUTCDate(date.getUTCDate() + 1);
+    const weekday = date.getUTCDay();
+    if (weekday !== 0 && weekday !== 6) workingDays += 1;
+  }
+  return date.toISOString().slice(0, 10);
+}
 
 function json(obj, status, origin) {
   return new Response(JSON.stringify(obj), {

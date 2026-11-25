@@ -70,12 +70,12 @@ const CSP = [
   "object-src 'none'",
   "frame-ancestors 'none'",
   "upgrade-insecure-requests",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.klaviyo.com https://js.stripe.com https://connect.facebook.net https://analytics.tiktok.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.klaviyo.com https://js.stripe.com https://connect.facebook.net https://analytics.tiktok.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://apis.google.com https://www.gstatic.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: https:",
-  "connect-src 'self' https://elira-checkout.elira-living.workers.dev https://elira-tracking.elira-living.workers.dev https://elira-chat.elira-living.workers.dev https://api.stripe.com https://a.klaviyo.com https://*.klaviyo.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://analytics.tiktok.com https://*.tiktok.com https://www.facebook.com https://connect.facebook.net https://www.googletagmanager.com https://googleads.g.doubleclick.net",
-  "frame-src https://js.stripe.com https://checkout.stripe.com https://hooks.stripe.com https://td.doubleclick.net https://www.googletagmanager.com https://bid.g.doubleclick.net",
+  "connect-src 'self' https://elira-checkout.elira-living.workers.dev https://elira-tracking.elira-living.workers.dev https://elira-chat.elira-living.workers.dev https://api.stripe.com https://a.klaviyo.com https://*.klaviyo.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://analytics.tiktok.com https://*.tiktok.com https://www.facebook.com https://connect.facebook.net https://www.googletagmanager.com https://googleads.g.doubleclick.net https://apis.google.com https://www.google.com",
+  "frame-src https://js.stripe.com https://checkout.stripe.com https://hooks.stripe.com https://td.doubleclick.net https://www.googletagmanager.com https://bid.g.doubleclick.net https://www.google.com",
   "form-action 'self' https://checkout.stripe.com"
 ].join("; ");
 
@@ -280,6 +280,7 @@ function scripts(L, o) {
 <script defer src="/assets/js/analytics.js${v}"></script>
 <script defer src="/assets/js/consent-banner.js${v}"></script>
 <script defer src="/assets/js/app.js${v}"></script>
+${o.bodyPage === "success" ? `<script defer src="/assets/js/google-reviews.js${v}"></script>` : ""}
 <script defer src="/assets/js/eli.js${v}"></script>`;
 }
 
